@@ -1,8 +1,116 @@
+import { useParams, Link } from 'react-router-dom'
+import { Calendar, ArrowLeft, ArrowRight } from 'lucide-react'
+import { useApp } from '../context/AppContext'
+import { useT } from '../i18n/useT'
+import SEO from '../components/SEO'
+
 export default function BlogPostPage() {
+  const { slug } = useParams()
+  const { blog, lang } = useApp()
+  const t = useT()
+  const blogT = t('blog')
+
+  const post = blog.find(p => p.slug === slug)
+  const published = blog.filter(p => p.published && p.slug !== slug)
+  const related = published.slice(0, 3)
+
+  if (!post) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+        <p className="text-5xl mb-4">📄</p>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">Статтю не знайдено</h2>
+        <Link to="/blog" className="btn-primary mt-4">{blogT.viewAll}</Link>
+      </div>
+    )
+  }
+
+  const title = (lang !== 'uk' && post[`title_${lang}`]) ? post[`title_${lang}`] : post.title
+  const content = (lang !== 'uk' && post[`content_${lang}`]) ? post[`content_${lang}`] : post.content
+  const excerpt = (lang !== 'uk' && post[`excerpt_${lang}`]) ? post[`excerpt_${lang}`] : post.excerpt
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="section-title">BlogPostPage</h1>
-      <p className="text-gray-500 mt-4">Сторінка в розробці...</p>
-    </div>
+    <>
+      <SEO title={title} description={excerpt} image={post.image} />
+
+      {/* Breadcrumb */}
+      <div className="border-b border-gray-100 bg-white">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-1.5 text-sm text-gray-500">
+          <Link to="/blog" className="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
+            <ArrowLeft size={13} /> {blogT.title}
+          </Link>
+          <span>/</span>
+          <span className="text-gray-700 truncate max-w-64">{title}</span>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 py-10">
+        {/* Header */}
+        <div className="mb-6">
+          <div className="flex items-center gap-3 mb-4">
+            {post.category && (
+              <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider bg-orange-50 px-3 py-1 rounded-full">
+                {post.category}
+              </span>
+            )}
+            {post.publishedAt && (
+              <span className="text-xs text-gray-400 flex items-center gap-1">
+                <Calendar size={11} /> {new Date(post.publishedAt).toLocaleDateString('uk-UA', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+            )}
+          </div>
+          <h1 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight font-['Montserrat',sans-serif]">{title}</h1>
+          {excerpt && <p className="text-gray-500 text-lg mt-3 leading-relaxed">{excerpt}</p>}
+        </div>
+
+        {/* Cover image */}
+        {post.image && (
+          <img src={post.image} alt={title} className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8" />
+        )}
+
+        {/* Content */}
+        <div className="card p-6 md:p-10">
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+            {content?.split('\n').map((para, i) => {
+              if (!para.trim()) return null
+              if (para.startsWith('**') && para.endsWith('**')) {
+                return <h3 key={i} className="text-xl font-bold text-gray-900 mt-6 mb-3">{para.slice(2, -2)}</h3>
+              }
+              const formatted = para.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+              return <p key={i} className="mb-4" dangerouslySetInnerHTML={{ __html: formatted }} />
+            })}
+          </div>
+        </div>
+
+        {/* Back + CTA */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-8">
+          <Link to="/blog" className="btn-secondary text-sm">
+            <ArrowLeft size={14} /> {blogT.viewAll}
+          </Link>
+          <Link to="/contacts" className="btn-primary text-sm">
+            Отримати консультацію <ArrowRight size={14} />
+          </Link>
+        </div>
+
+        {/* Related */}
+        {related.length > 0 && (
+          <div className="mt-12">
+            <h2 className="font-bold text-xl mb-5">Читайте також</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {related.map(p => {
+                const rTitle = (lang !== 'uk' && p[`title_${lang}`]) ? p[`title_${lang}`] : p.title
+                return (
+                  <Link key={p.id} to={`/blog/${p.slug}`} className="card card-hover block overflow-hidden">
+                    {p.image && <img src={p.image} alt={rTitle} className="w-full h-36 object-cover" />}
+                    <div className="p-4">
+                      <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">{rTitle}</h3>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
