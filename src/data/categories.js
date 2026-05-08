@@ -14,7 +14,7 @@ export const CATEGORIES = [
     icon: '📦',
     name: { uk: 'TERMOJET BOX', en: 'TERMOJET BOX', pl: 'TERMOJET BOX', fr: 'TERMOJET BOX', de: 'TERMOJET BOX' },
     desc: { uk: 'Компактні вузли обв\'язки котла', en: 'Compact boiler connection units', pl: 'Kompaktowe węzły przyłączeniowe kotłów', fr: 'Groupes de raccordement compacts pour chaudières', de: 'Kompakte Kesselanschlusssätze' },
-    count: 5,
+    count: 19,
     color: '#E85D04',
   },
   {
@@ -50,7 +50,7 @@ export const CATEGORIES = [
     icon: '🔩',
     name: { uk: 'Насосні групи', en: 'Pump Groups', pl: 'Grupy pompowe', fr: 'Groupes de pompes', de: 'Pumpengruppen' },
     desc: { uk: 'Готові насосні вузли з обв\'язкою', en: 'Ready-made pump units with connections', pl: 'Gotowe zestawy pompowe z przyłączami', fr: 'Groupes de pompes prêts à l\'emploi', de: 'Fertige Pumpenstationen mit Anschlüssen' },
-    count: 18,
+    count: 24,
     color: '#E85D04',
   },
   {
@@ -59,7 +59,7 @@ export const CATEGORIES = [
     icon: '🔀',
     name: { uk: 'Гідравлічні роздільники', en: 'Hydraulic Separators', pl: 'Rozdzielacze hydrauliczne', fr: 'Séparateurs hydrauliques', de: 'Hydraulische Weichen' },
     desc: { uk: 'Гідрострілки для котельних систем', en: 'Hydraulic arrows for boiler systems', pl: 'Rozdzielacze hydrauliczne do systemów kotłowych', fr: 'Séparateurs hydrauliques pour systèmes de chaudières', de: 'Hydraulische Weichen für Kesselsysteme' },
-    count: 5,
+    count: 9,
     color: '#2457a0',
   },
   {
@@ -77,7 +77,7 @@ export const CATEGORIES = [
     icon: '🌪️',
     name: { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren' },
     desc: { uk: 'Шламові та повітряні сепаратори', en: 'Sludge and air separators', pl: 'Separatory szlamu i powietrza', fr: 'Séparateurs de boues et d\'air', de: 'Schlamm- und Luftabscheider' },
-    count: 16,
+    count: 13,
     color: '#1B3F6B',
   },
   {
@@ -86,7 +86,7 @@ export const CATEGORIES = [
     icon: '🏭',
     name: { uk: 'TERMOJET Mega', en: 'TERMOJET Mega', pl: 'TERMOJET Mega', fr: 'TERMOJET Mega', de: 'TERMOJET Mega' },
     desc: { uk: 'Промислові системи до 2 МВт', en: 'Industrial systems up to 2 MW', pl: 'Systemy przemysłowe do 2 MW', fr: 'Systèmes industriels jusqu\'à 2 MW', de: 'Industriesysteme bis 2 MW' },
-    count: 24,
+    count: 4,
     color: '#E85D04',
   },
   {
@@ -95,7 +95,7 @@ export const CATEGORIES = [
     icon: '🏠',
     name: { uk: 'TERMOJET Mini', en: 'TERMOJET Mini', pl: 'TERMOJET Mini', fr: 'TERMOJET Mini', de: 'TERMOJET Mini' },
     desc: { uk: 'Компактні системи до 30 кВт', en: 'Compact systems up to 30 kW', pl: 'Systemy kompaktowe do 30 kW', fr: 'Systèmes compacts jusqu\'à 30 kW', de: 'Kompaktsysteme bis 30 kW' },
-    count: 12,
+    count: 24,
     color: '#2457a0',
   },
   {
@@ -113,7 +113,7 @@ export const CATEGORIES = [
     icon: '🛠️',
     name: { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung' },
     desc: { uk: 'Аксесуари і супутні товари', en: 'Accessories and related products', pl: 'Akcesoria i produkty pokrewne', fr: 'Accessoires et produits connexes', de: 'Zubehör und verwandte Produkte' },
-    count: 7,
+    count: 21,
     color: '#1B3F6B',
   },
 ]

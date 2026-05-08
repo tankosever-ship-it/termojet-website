@@ -42,9 +42,11 @@ export function AppProvider({ children }) {
   useEffect(() => { saveCart(cart) }, [cart])
 
   useEffect(() => {
+    // Products are embedded statically from WooCommerce export
+    // API call kept for future backend integration
     fetch(`${BASE}/api-products.php`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setProducts(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setProducts(data) })
       .catch(() => {})
 
     fetch(`${BASE}/api-state.php`)
