@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useRef, useEffect } from 'react'
-import { ArrowRight, Factory, Shield, Truck, Globe, Wrench, ChevronRight, Zap, Award, Clock } from 'lucide-react'
+import { useRef, useEffect, useState } from 'react'
+import { ArrowRight, Factory, Shield, Truck, Globe, Wrench, ChevronRight, Zap, Award, Play, X } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -35,6 +35,9 @@ const fadeUp = {
 }
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
+const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
+const YT_ID = 'UzEOVxcS4mw'
+
 export default function HomePage() {
   const { lang, blog, portfolio, reviews } = useApp()
   const t = useT()
@@ -46,6 +49,7 @@ export default function HomePage() {
   const seo = t('seo')
 
   const heroRef = useRef(null)
+  const [videoModalOpen, setVideoModalOpen] = useState(false)
 
   // Interactive gradient — tracks mouse position
   useEffect(() => {
@@ -62,6 +66,14 @@ export default function HomePage() {
     return () => el.removeEventListener('mousemove', handle)
   }, [])
 
+  // Close modal on Escape
+  useEffect(() => {
+    if (!videoModalOpen) return
+    const handler = (e) => { if (e.key === 'Escape') setVideoModalOpen(false) }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [videoModalOpen])
+
   const featuredCategories = CATEGORIES.slice(0, 6)
   const recentPosts = blog.filter(p => p.published).slice(0, 3)
   const recentPortfolio = portfolio.slice(0, 3)
@@ -70,21 +82,50 @@ export default function HomePage() {
     <>
       <SEO title={null} description={seo.homeDesc} />
 
+      {/* ─── VIDEO MODAL ─── */}
+      {videoModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          onClick={() => setVideoModalOpen(false)}>
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" />
+          <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
+            <iframe
+              className="w-full h-full rounded-2xl"
+              src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&rel=0&modestbranding=1`}
+              title="Termojet виробництво"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+            <button onClick={() => setVideoModalOpen(false)}
+              className="absolute -top-4 -right-4 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors backdrop-blur-sm">
+              <X size={18} />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* ─── HERO ─── */}
       <section
         ref={heroRef}
         className="hero-gradient hero-grain relative overflow-hidden text-white min-h-[88vh] flex items-center"
       >
-        {/* Floating orbs */}
-        <div className="orb orb-blue w-[500px] h-[500px] -top-32 -right-32 opacity-60" />
-        <div className="orb orb-orange w-[400px] h-[400px] bottom-0 right-1/4 opacity-70" />
-        <div className="orb orb-teal w-[300px] h-[300px] top-1/2 -left-20 opacity-50" />
+        {/* Background video — muted autoplay loop */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+          src={MP4_URL}
+          autoPlay muted loop playsInline
+          style={{ mixBlendMode: 'screen' }}
+        />
+
+        {/* Floating orbs — on top of video */}
+        <div className="orb orb-blue w-[600px] h-[600px] -top-32 -right-32 opacity-50" />
+        <div className="orb orb-orange w-[500px] h-[500px] bottom-0 right-1/4 opacity-80" />
+        <div className="orb orb-teal w-[300px] h-[300px] top-1/2 -left-20 opacity-40" />
 
         {/* Dot grid overlay */}
         <div className="absolute inset-0 bg-dots opacity-100 pointer-events-none" />
 
-        {/* Thin horizontal accent line */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(232,93,4,0.6)] to-transparent" />
+        {/* Top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.8)] to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 w-full">
           <div className="max-w-3xl">
@@ -126,12 +167,23 @@ export default function HomePage() {
               transition={{ delay: 0.3 }}
               className="flex flex-wrap gap-3"
             >
-              <Link to="/catalog" className="btn-primary text-base px-7 py-3.5 shadow-lg shadow-orange-900/20">
+              <Link to="/catalog" className="btn-primary text-base px-7 py-3.5 shadow-lg shadow-orange-900/30">
                 {hero.ctaCatalog} <ArrowRight size={16} />
               </Link>
               <Link to="/contacts" className="btn-outline-white text-base px-7 py-3.5">
                 {hero.ctaContact}
               </Link>
+              {/* Video button */}
+              <button
+                onClick={() => setVideoModalOpen(true)}
+                className="flex items-center gap-2.5 px-5 py-3.5 rounded-xl text-base font-semibold text-white transition-all hover:bg-white/10 border border-white/20 hover:border-white/40"
+              >
+                <span className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #FF5500, #FF9500)' }}>
+                  <Play size={14} fill="white" className="ml-0.5" />
+                </span>
+                Відео виробництва
+              </button>
             </motion.div>
 
             {/* Quick trust indicators */}
@@ -274,6 +326,107 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ─── PRODUCTION VIDEO SECTION ─── */}
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        {/* subtle gradient bg */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 60% 80% at 100% 50%, rgba(255,85,0,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 0% 50%, rgba(27,63,107,0.06) 0%, transparent 55%)' }} />
+
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left — video thumbnail with play button */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative group cursor-pointer"
+              onClick={() => setVideoModalOpen(true)}
+            >
+              {/* Thumbnail from YouTube */}
+              <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(27,63,107,0.2)]">
+                <img
+                  src={`https://img.youtube.com/vi/${YT_ID}/maxresdefault.jpg`}
+                  alt="Виробництво Termojet"
+                  className="w-full aspect-video object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                />
+                {/* dark overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+                {/* Play button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-[0_8px_32px_rgba(255,85,0,0.5)]"
+                    style={{ background: 'linear-gradient(135deg, #FF5500, #FF9500)' }}>
+                    <Play size={30} fill="white" className="ml-1.5" />
+                  </div>
+                </div>
+
+                {/* Bottom caption */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="text-xs text-white/60 mb-1 uppercase tracking-wider">Відео</div>
+                  <div className="text-white font-bold text-lg">Виробництво Termojet — зсередини</div>
+                </div>
+              </div>
+
+              {/* Decorative orange glow */}
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none opacity-30"
+                style={{ background: 'radial-gradient(circle, #FF5500, transparent)' }} />
+            </motion.div>
+
+            {/* Right — text + production facts */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <div className="label-accent mb-3">Власне виробництво</div>
+              <h2 className="section-title mb-5">
+                Робимо в Україні —<br />
+                <span style={{ background: 'linear-gradient(135deg, #FF5500, #FF9500)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                  від металу до готового вузла
+                </span>
+              </h2>
+              <p className="text-gray-500 leading-relaxed mb-8">
+                Завод площею 3 000 м² у Києві. Власне металообробне обладнання, відділ контролю якості та склад готової продукції 2 500 м². Понад 70 000 одиниць обладнання на рік.
+              </p>
+
+              {/* Production facts */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {[
+                  { icon: '🏭', val: '3 000 м²', label: 'площа заводу' },
+                  { icon: '⚙️', val: '70 000+', label: 'одиниць/рік' },
+                  { icon: '👷', val: '~100', label: 'працівників' },
+                  { icon: '📦', val: '2 500 м²', label: 'склад' },
+                ].map(f => (
+                  <div key={f.val} className="flex items-center gap-3 p-4 rounded-xl border border-[var(--border)] bg-white">
+                    <span className="text-2xl">{f.icon}</span>
+                    <div>
+                      <div className="font-black text-lg text-gray-900 font-['Montserrat',sans-serif]">{f.val}</div>
+                      <div className="text-xs text-gray-500">{f.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-3">
+                <Link to="/about" className="btn-secondary">
+                  Про компанію <ArrowRight size={15} />
+                </Link>
+                <button onClick={() => setVideoModalOpen(true)}
+                  className="btn-primary"
+                  style={{ background: 'linear-gradient(135deg, #FF5500, #c94d00)' }}>
+                  <Play size={15} fill="white" /> Дивитись відео
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <div className="gradient-divider mx-4" />
 
       {/* ─── PORTFOLIO ─── */}
       {recentPortfolio.length > 0 && (

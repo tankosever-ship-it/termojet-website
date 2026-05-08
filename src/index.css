@@ -19,6 +19,9 @@
     /* gradient orb positions — updated by JS on mousemove */
     --mx: 70%;
     --my: 80%;
+    /* vivid orange for gradient highlights */
+    --orange-vivid: #FF5500;
+    --orange-glow: rgba(255,85,0,0.45);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -166,14 +169,14 @@
   }
 
   /* ─── HERO GRADIENT ─── */
-  /* Deep navy base + dynamic orange glow from mouse position */
+  /* Deep navy base + vivid orange dynamic glow */
   .hero-gradient {
     background:
-      radial-gradient(ellipse 80% 60% at var(--mx) var(--my), rgba(232,93,4,0.22) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 80% at 10% 110%, rgba(232,93,4,0.12) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 90% -10%, rgba(36,87,160,0.35) 0%, transparent 60%),
-      linear-gradient(160deg, #0a1628 0%, #0f2040 45%, #0a1628 100%);
-    transition: background 0.15s ease;
+      radial-gradient(ellipse 70% 55% at var(--mx) var(--my), rgba(255,85,0,0.45) 0%, rgba(255,85,0,0.1) 45%, transparent 70%),
+      radial-gradient(ellipse 50% 70% at 5% 105%, rgba(255,120,0,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 92% -5%, rgba(36,87,160,0.5) 0%, transparent 55%),
+      linear-gradient(160deg, #080e1c 0%, #0d1c38 45%, #080e1c 100%);
+    transition: background 0.12s ease;
   }
 
   /* Grain / noise texture overlay */
@@ -202,7 +205,7 @@
   }
 
   .orb-orange {
-    background: radial-gradient(circle, rgba(232,93,4,0.35) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,85,0,0.55) 0%, rgba(255,120,0,0.2) 50%, transparent 70%);
     animation-duration: 10s;
     animation-delay: -4s;
   }
@@ -284,9 +287,9 @@
   /* ─── CTA dark gradient ─── */
   .cta-gradient {
     background:
-      radial-gradient(ellipse 70% 100% at 100% 100%, rgba(232,93,4,0.2) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 80% at 0% 0%, rgba(36,87,160,0.3) 0%, transparent 55%),
-      linear-gradient(135deg, #0f2040 0%, #1B3F6B 100%);
+      radial-gradient(ellipse 70% 100% at 100% 100%, rgba(255,85,0,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 80% at 0% 0%, rgba(36,87,160,0.4) 0%, transparent 50%),
+      linear-gradient(135deg, #080e1c 0%, #1B3F6B 100%);
   }
 
   /* ─── Marquee trust strip ─── */

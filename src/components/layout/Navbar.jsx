@@ -91,7 +91,7 @@ export default function Navbar() {
             <Link to="/" className="flex-shrink-0 flex items-center gap-2.5 group">
               <img src={assetPath('/logo.png')} alt="Termojet" className="h-9 w-auto" onError={e => { e.target.style.display='none' }} />
               <span className="font-black text-xl tracking-tight font-['Montserrat',sans-serif] hidden sm:block"
-                style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                style={{ background: 'linear-gradient(135deg, #FF5500 0%, #FF9500 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 TERMOJET
               </span>
             </Link>
