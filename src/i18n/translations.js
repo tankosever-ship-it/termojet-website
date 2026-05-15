@@ -179,6 +179,46 @@ export const T = {
       subtitle: 'Технічна документація, прайс-листи та каталоги для завантаження',
       download: 'Завантажити',
     },
+    servicePage: {
+      title: 'Сервіс і технічна підтримка',
+      subtitle: 'Власний сервісний відділ Termojet — допоможемо з підбором, монтажем та обслуговуванням обладнання',
+      services: [
+        { title: 'Технічна консультація', desc: 'Безкоштовна консультація з підбору обладнання для вашого проекту. Наші інженери допоможуть розрахувати систему і обрати оптимальне рішення.' },
+        { title: 'Підтримка монтажників', desc: 'Супровід монтажних організацій на всіх етапах — від проектування до пусконалагодження. Технічна документація та схеми підключення.' },
+        { title: 'Гарантійне обслуговування', desc: 'Гарантія на все обладнання Termojet. При виникненні питань — звертайтесь до нашого сервісного відділу для швидкого вирішення.' },
+        { title: 'Навчання та семінари', desc: 'Проводимо навчальні семінари для монтажних компаній та дилерів. Практичне навчання роботі з обладнанням Termojet.' },
+      ],
+      contact: {
+        title: 'Зв\'яжіться з сервісним відділом',
+        subtitle: 'Залиште заявку — ми зв\'яжемося з вами протягом 1 робочого дня',
+        phone: 'Телефон сервісного відділу',
+        email: 'Email сервісного відділу',
+        hours: 'Пн–Пт: 9:00–18:00',
+        form: { title: 'Залишити заявку', type: 'Тип запиту', types: ['Технічна консультація', 'Гарантійний випадок', 'Підбір обладнання', 'Інше'], message: 'Опишіть ваш запит', submit: 'Відправити заявку', success: 'Заявку прийнято! Сервісний відділ зв\'яжеться з вами.' },
+      },
+      warranty: { title: 'Гарантія', items: ['12 місяців на всю продукцію', 'Безкоштовна заміна при заводському дефекті', 'Сервісна мережа по всій Україні', 'Наявність запасних частин на складі'] },
+    },
+    deliveryPage: {
+      title: 'Доставка і оплата',
+      subtitle: 'Доставляємо по всій Україні та в країни ЄС. Більшість позицій — у наявності на складі в Києві.',
+      delivery: {
+        title: 'Способи доставки',
+        methods: [
+          { title: 'Нова Пошта', desc: 'Доставка по всій Україні через відділення або кур\'єром до дверей. Терміни: 1–3 робочих дні.', days: '1–3 дні' },
+          { title: 'Самовивіз зі складу', desc: 'Склад у Києві — вул. Гарматна. Можна забрати замовлення самостійно. Безкоштовно.', days: 'Сьогодні' },
+          { title: 'Вантажна доставка', desc: 'Для великогабаритних і оптових замовлень — вантажна доставка по Україні та в країни ЄС.', days: '3–7 днів' },
+        ],
+      },
+      payment: {
+        title: 'Способи оплати',
+        methods: [
+          { title: 'Безготівковий розрахунок', desc: 'Оплата за рахунком-фактурою для юридичних осіб та ФОП. ПДВ 20%.' },
+          { title: 'Оплата карткою', desc: 'Онлайн-оплата карткою Visa / Mastercard при оформленні замовлення.' },
+          { title: 'Готівкою при отриманні', desc: 'Оплата кур\'єру або при самовивозі зі складу в Києві.' },
+        ],
+      },
+      info: { title: 'Важлива інформація', items: ['Мінімальне замовлення — без обмежень', 'Велике замовлення — уточнюйте умови у менеджера', 'Відвантаження в день оплати (за наявністю на складі)', 'Повернення і обмін — протягом 14 днів при збереженні товарного вигляду', 'Міжнародна доставка в країни ЄС — за окремим погодженням'] },
+    },
     footer: {
       company: 'Виробник обладнання для котелень',
       catalog: 'Каталог',
@@ -356,6 +396,46 @@ export const T = {
       title: 'Documents & Catalogs',
       subtitle: 'Technical documentation, price lists and catalogs for download',
       download: 'Download',
+    },
+    servicePage: {
+      title: 'Service & Technical Support',
+      subtitle: 'Our own Termojet service department — we help with equipment selection, installation and maintenance',
+      services: [
+        { title: 'Technical Consultation', desc: 'Free consultation on equipment selection for your project. Our engineers will help calculate the system and choose the optimal solution.' },
+        { title: 'Installer Support', desc: 'Support for installation companies at all stages — from design to commissioning. Technical documentation and connection diagrams.' },
+        { title: 'Warranty Service', desc: 'Warranty on all Termojet equipment. If you have questions — contact our service department for a quick resolution.' },
+        { title: 'Training & Seminars', desc: 'We conduct training seminars for installation companies and dealers. Practical training on working with Termojet equipment.' },
+      ],
+      contact: {
+        title: 'Contact the Service Department',
+        subtitle: 'Leave a request — we will contact you within 1 business day',
+        phone: 'Service department phone',
+        email: 'Service department email',
+        hours: 'Mon–Fri: 9:00–18:00',
+        form: { title: 'Submit a Request', type: 'Request type', types: ['Technical Consultation', 'Warranty Case', 'Equipment Selection', 'Other'], message: 'Describe your request', submit: 'Send Request', success: 'Request submitted! The service department will contact you.' },
+      },
+      warranty: { title: 'Warranty', items: ['12 months on all products', 'Free replacement for manufacturing defects', 'Service network throughout Ukraine', 'Spare parts available in stock'] },
+    },
+    deliveryPage: {
+      title: 'Delivery & Payment',
+      subtitle: 'We deliver throughout Ukraine and to EU countries. Most items are in stock at our Kyiv warehouse.',
+      delivery: {
+        title: 'Delivery Methods',
+        methods: [
+          { title: 'Nova Poshta', desc: 'Delivery throughout Ukraine to branch offices or door-to-door. Timeframe: 1–3 business days.', days: '1–3 days' },
+          { title: 'Pickup from Warehouse', desc: 'Warehouse in Kyiv — Harmatna St. You can pick up your order yourself. Free of charge.', days: 'Today' },
+          { title: 'Freight Delivery', desc: 'For oversized and wholesale orders — freight delivery throughout Ukraine and to EU countries.', days: '3–7 days' },
+        ],
+      },
+      payment: {
+        title: 'Payment Methods',
+        methods: [
+          { title: 'Bank Transfer', desc: 'Payment by invoice for legal entities and sole proprietors. VAT 20%.' },
+          { title: 'Card Payment', desc: 'Online payment by Visa / Mastercard when placing an order.' },
+          { title: 'Cash on Delivery', desc: 'Payment to the courier or on pickup from the Kyiv warehouse.' },
+        ],
+      },
+      info: { title: 'Important Information', items: ['No minimum order', 'Large orders — please clarify terms with your manager', 'Dispatch on the day of payment (subject to availability)', 'Returns and exchanges within 14 days if the product is in original condition', 'International delivery to EU countries — upon separate agreement'] },
     },
     footer: {
       company: 'Boiler Room Equipment Manufacturer',
@@ -535,6 +615,46 @@ export const T = {
       subtitle: 'Dokumentacja techniczna, cenniki i katalogi do pobrania',
       download: 'Pobierz',
     },
+    servicePage: {
+      title: 'Serwis i wsparcie techniczne',
+      subtitle: 'Własny dział serwisowy Termojet — pomożemy w doborze, montażu i serwisowaniu urządzeń',
+      services: [
+        { title: 'Konsultacja techniczna', desc: 'Bezpłatna konsultacja w zakresie doboru urządzeń do projektu. Nasi inżynierowie pomogą obliczyć system i wybrać optymalne rozwiązanie.' },
+        { title: 'Wsparcie instalatorów', desc: 'Wsparcie firm instalacyjnych na wszystkich etapach — od projektu do uruchomienia. Dokumentacja techniczna i schematy podłączeń.' },
+        { title: 'Serwis gwarancyjny', desc: 'Gwarancja na wszystkie urządzenia Termojet. W razie pytań — kontaktuj się z naszym działem serwisowym.' },
+        { title: 'Szkolenia i seminaria', desc: 'Prowadzimy szkolenia dla firm instalacyjnych i dealerów. Praktyczne szkolenia z obsługi urządzeń Termojet.' },
+      ],
+      contact: {
+        title: 'Skontaktuj się z działem serwisowym',
+        subtitle: 'Zostaw zgłoszenie — skontaktujemy się w ciągu 1 dnia roboczego',
+        phone: 'Telefon działu serwisowego',
+        email: 'Email działu serwisowego',
+        hours: 'Pon–Pt: 9:00–18:00',
+        form: { title: 'Wyślij zgłoszenie', type: 'Rodzaj zapytania', types: ['Konsultacja techniczna', 'Przypadek gwarancyjny', 'Dobór urządzeń', 'Inne'], message: 'Opisz swoje zapytanie', submit: 'Wyślij zgłoszenie', success: 'Zgłoszenie przyjęte! Dział serwisowy skontaktuje się z Tobą.' },
+      },
+      warranty: { title: 'Gwarancja', items: ['12 miesięcy na wszystkie produkty', 'Bezpłatna wymiana w przypadku wady fabrycznej', 'Sieć serwisowa na terenie Ukrainy', 'Części zamienne dostępne w magazynie'] },
+    },
+    deliveryPage: {
+      title: 'Dostawa i płatność',
+      subtitle: 'Dostarczamy na terenie Ukrainy i do krajów UE. Większość pozycji dostępna w magazynie w Kijowie.',
+      delivery: {
+        title: 'Metody dostawy',
+        methods: [
+          { title: 'Nova Poshta', desc: 'Dostawa na terenie Ukrainy do oddziałów lub kurierem pod drzwi. Czas: 1–3 dni robocze.', days: '1–3 dni' },
+          { title: 'Odbiór z magazynu', desc: 'Magazyn w Kijowie — ul. Garmatna. Możliwość osobistego odbioru. Bezpłatnie.', days: 'Dzisiaj' },
+          { title: 'Dostawa towarowa', desc: 'Dla zamówień wielkogabarytowych i hurtowych — dostawa towarowa na Ukrainie i do krajów UE.', days: '3–7 dni' },
+        ],
+      },
+      payment: {
+        title: 'Metody płatności',
+        methods: [
+          { title: 'Przelew bankowy', desc: 'Płatność na podstawie faktury dla firm i przedsiębiorców. VAT 20%.' },
+          { title: 'Płatność kartą', desc: 'Płatność online kartą Visa / Mastercard przy składaniu zamówienia.' },
+          { title: 'Gotówka przy odbiorze', desc: 'Płatność kurierowi lub przy odbiorze osobistym z magazynu w Kijowie.' },
+        ],
+      },
+      info: { title: 'Ważne informacje', items: ['Brak minimalnego zamówienia', 'Duże zamówienia — warunki do uzgodnienia z opiekunem', 'Wysyłka w dniu płatności (przy dostępności w magazynie)', 'Zwroty i wymiana w ciągu 14 dni przy zachowaniu oryginalnego stanu', 'Dostawa międzynarodowa do krajów UE — po indywidualnym uzgodnieniu'] },
+    },
     footer: {
       company: 'Producent urządzeń do kotłowni',
       catalog: 'Katalog',
@@ -702,6 +822,46 @@ export const T = {
       subtitle: 'Documentation technique, tarifs et catalogues à télécharger',
       download: 'Télécharger',
     },
+    servicePage: {
+      title: 'Service et support technique',
+      subtitle: 'Notre propre département de service Termojet — nous aidons avec la sélection, l\'installation et la maintenance des équipements',
+      services: [
+        { title: 'Consultation technique', desc: 'Consultation gratuite sur la sélection des équipements pour votre projet. Nos ingénieurs vous aideront à calculer le système et à choisir la solution optimale.' },
+        { title: 'Soutien aux installateurs', desc: 'Accompagnement des entreprises d\'installation à toutes les étapes — de la conception à la mise en service. Documentation technique et schémas de raccordement.' },
+        { title: 'Service sous garantie', desc: 'Garantie sur tous les équipements Termojet. En cas de questions — contactez notre département de service.' },
+        { title: 'Formations et séminaires', desc: 'Nous organisons des séminaires de formation pour les entreprises d\'installation et les revendeurs. Formation pratique à l\'utilisation des équipements Termojet.' },
+      ],
+      contact: {
+        title: 'Contacter le département de service',
+        subtitle: 'Laissez une demande — nous vous contacterons dans un délai d\'1 jour ouvrable',
+        phone: 'Téléphone du service',
+        email: 'Email du service',
+        hours: 'Lun–Ven: 9:00–18:00',
+        form: { title: 'Soumettre une demande', type: 'Type de demande', types: ['Consultation technique', 'Cas de garantie', 'Sélection d\'équipements', 'Autre'], message: 'Décrivez votre demande', submit: 'Envoyer la demande', success: 'Demande soumise ! Le département de service vous contactera.' },
+      },
+      warranty: { title: 'Garantie', items: ['12 mois sur tous les produits', 'Remplacement gratuit pour défaut de fabrication', 'Réseau de service en Ukraine', 'Pièces de rechange disponibles en stock'] },
+    },
+    deliveryPage: {
+      title: 'Livraison et paiement',
+      subtitle: 'Nous livrons dans toute l\'Ukraine et dans les pays de l\'UE. La plupart des articles sont en stock dans notre entrepôt de Kyiv.',
+      delivery: {
+        title: 'Méthodes de livraison',
+        methods: [
+          { title: 'Nova Poshta', desc: 'Livraison dans toute l\'Ukraine en agence ou à domicile. Délai: 1–3 jours ouvrables.', days: '1–3 jours' },
+          { title: 'Enlèvement en entrepôt', desc: 'Entrepôt à Kyiv — rue Harmatna. Retrait personnel possible. Gratuit.', days: 'Aujourd\'hui' },
+          { title: 'Transport de fret', desc: 'Pour les commandes volumineuses et en gros — livraison par camion en Ukraine et dans les pays de l\'UE.', days: '3–7 jours' },
+        ],
+      },
+      payment: {
+        title: 'Méthodes de paiement',
+        methods: [
+          { title: 'Virement bancaire', desc: 'Paiement par facture pour les entreprises et les entrepreneurs. TVA 20%.' },
+          { title: 'Paiement par carte', desc: 'Paiement en ligne par carte Visa / Mastercard lors de la commande.' },
+          { title: 'Espèces à la livraison', desc: 'Paiement au livreur ou lors du retrait en entrepôt à Kyiv.' },
+        ],
+      },
+      info: { title: 'Informations importantes', items: ['Pas de commande minimum', 'Grandes commandes — conditions à clarifier avec votre responsable', 'Expédition le jour du paiement (selon disponibilité)', 'Retours et échanges sous 14 jours si le produit est en état d\'origine', 'Livraison internationale dans les pays de l\'UE — sur accord séparé'] },
+    },
     footer: {
       company: 'Fabricant d\'équipements pour chaufferies',
       catalog: 'Catalogue',
@@ -868,6 +1028,46 @@ export const T = {
       title: 'Dokumente & Kataloge',
       subtitle: 'Technische Dokumentation, Preislisten und Kataloge zum Download',
       download: 'Herunterladen',
+    },
+    servicePage: {
+      title: 'Service & technischer Support',
+      subtitle: 'Unser eigener Termojet-Servicedienst — wir helfen bei Auswahl, Installation und Wartung der Geräte',
+      services: [
+        { title: 'Technische Beratung', desc: 'Kostenlose Beratung zur Geräteauswahl für Ihr Projekt. Unsere Ingenieure helfen bei der Systemberechnung und der Auswahl der optimalen Lösung.' },
+        { title: 'Installateur-Support', desc: 'Begleitung von Installationsunternehmen in allen Phasen — von der Planung bis zur Inbetriebnahme. Technische Dokumentation und Anschlussschemas.' },
+        { title: 'Garantieservice', desc: 'Garantie auf alle Termojet-Geräte. Bei Fragen — wenden Sie sich an unseren Servicedienst.' },
+        { title: 'Schulungen & Seminare', desc: 'Wir führen Schulungsseminare für Installationsunternehmen und Händler durch. Praktisches Training zur Nutzung von Termojet-Geräten.' },
+      ],
+      contact: {
+        title: 'Servicedienst kontaktieren',
+        subtitle: 'Hinterlassen Sie eine Anfrage — wir melden uns innerhalb von 1 Werktag',
+        phone: 'Telefon des Servicedienstes',
+        email: 'E-Mail des Servicedienstes',
+        hours: 'Mo–Fr: 9:00–18:00',
+        form: { title: 'Anfrage senden', type: 'Anfragetyp', types: ['Technische Beratung', 'Garantiefall', 'Geräteauswahl', 'Sonstiges'], message: 'Beschreiben Sie Ihre Anfrage', submit: 'Anfrage senden', success: 'Anfrage eingegangen! Der Servicedienst wird sich bei Ihnen melden.' },
+      },
+      warranty: { title: 'Garantie', items: ['12 Monate auf alle Produkte', 'Kostenloser Ersatz bei Herstellungsfehlern', 'Servicenetzwerk in der Ukraine', 'Ersatzteile auf Lager'] },
+    },
+    deliveryPage: {
+      title: 'Lieferung & Zahlung',
+      subtitle: 'Wir liefern in der gesamten Ukraine und in EU-Länder. Die meisten Artikel sind in unserem Kyiver Lager vorrätig.',
+      delivery: {
+        title: 'Liefermethoden',
+        methods: [
+          { title: 'Nova Poshta', desc: 'Lieferung in der gesamten Ukraine an Filialen oder per Kurier. Laufzeit: 1–3 Werktage.', days: '1–3 Tage' },
+          { title: 'Abholung im Lager', desc: 'Lager in Kyiv — Harmatna-Str. Persönliche Abholung möglich. Kostenlos.', days: 'Heute' },
+          { title: 'Frachtlieferung', desc: 'Für sperrige und Großbestellungen — Frachtlieferung in der Ukraine und in EU-Länder.', days: '3–7 Tage' },
+        ],
+      },
+      payment: {
+        title: 'Zahlungsmethoden',
+        methods: [
+          { title: 'Banküberweisung', desc: 'Zahlung per Rechnung für Unternehmen und Unternehmer. MwSt. 20%.' },
+          { title: 'Kartenzahlung', desc: 'Online-Zahlung per Visa / Mastercard bei der Bestellung.' },
+          { title: 'Barzahlung bei Lieferung', desc: 'Zahlung an den Kurier oder bei Abholung im Kyiver Lager.' },
+        ],
+      },
+      info: { title: 'Wichtige Informationen', items: ['Kein Mindestbestellwert', 'Großbestellungen — Konditionen mit dem Betreuer klären', 'Versand am Zahlungstag (bei Lagerverfügbarkeit)', 'Rückgabe und Umtausch innerhalb von 14 Tagen im Originalzustand', 'Internationaler Versand in EU-Länder — nach gesonderter Vereinbarung'] },
     },
     footer: {
       company: 'Hersteller von Kesselraumausrüstungen',
