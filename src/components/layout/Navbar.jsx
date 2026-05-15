@@ -27,6 +27,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMenuOpen(false); setCatalogOpen(false) }, [location.pathname])
   useEffect(() => { if (searchOpen) searchRef.current?.focus() }, [searchOpen])
 
