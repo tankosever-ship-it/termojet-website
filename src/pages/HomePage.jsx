@@ -181,14 +181,6 @@ export default function HomePage() {
                 <PumpViewer3D />
               </div>
 
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-xl px-4 py-2.5 shadow-xl flex items-center gap-2.5 border border-[var(--ink-200)]">
-                <span className="text-2xl">🇺🇦</span>
-                <div>
-                  <div className="text-xs font-black text-gray-900 font-['Archivo',sans-serif]">MADE IN UKRAINE</div>
-                  <div className="text-[10px] text-gray-400">Власний завод у Києві</div>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
