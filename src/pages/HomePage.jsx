@@ -6,6 +6,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
+import PumpViewer3D from '../components/PumpViewer3D'
 
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
@@ -171,33 +172,13 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Right — video */}
+            {/* Right — 3D pump model */}
             <motion.div
               initial={{ opacity:0, x:40 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.7, delay:0.2 }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl"
-                style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)' }}>
-                <video
-                  autoPlay muted loop playsInline
-                  src={MP4_URL}
-                  className="w-full aspect-video object-cover"
-                />
-                {/* overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                {/* label */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between">
-                  <div>
-                    <div className="eyebrow-white mb-0.5">Власне виробництво</div>
-                    <div className="text-white font-semibold text-sm">м. Київ · виробничий цех · 3 000 м²</div>
-                  </div>
-                  <button
-                    onClick={() => setVideoOpen(true)}
-                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/15 border border-white/25 hover:bg-white/25 transition-colors backdrop-blur-sm"
-                  >
-                    <ArrowUpRight size={16} />
-                  </button>
-                </div>
+              <div className="aspect-video w-full">
+                <PumpViewer3D />
               </div>
 
               {/* Floating badge */}
