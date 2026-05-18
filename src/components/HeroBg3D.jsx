@@ -15,7 +15,7 @@ function SceneModel() {
     <group ref={spinRef} position={[3.5, 0, 0]}>
       <primitive
         object={scene}
-        scale={0.004}
+        scale={0.002}
         rotation={[Math.PI / 2, 0, Math.PI / 2]}
       />
     </group>
