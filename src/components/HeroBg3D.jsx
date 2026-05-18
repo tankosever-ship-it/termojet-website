@@ -16,8 +16,8 @@ function SceneModel() {
       ref={ref}
       object={scene}
       scale={0.012}
-      position={[4.5, -1.2, 0]}
-      rotation={[0.1, Math.PI / 2, 0]}
+      position={[3.5, 0, 0]}
+      rotation={[-Math.PI / 2, 0, Math.PI / 2]}
     />
   )
 }
@@ -25,14 +25,14 @@ function SceneModel() {
 export default function HeroBg3D() {
   return (
     <Canvas
-      camera={{ position: [0, 2, 9], fov: 50 }}
+      camera={{ position: [0, 0, 11], fov: 52 }}
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
       gl={{ alpha: true, antialias: true }}
     >
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[4, 8, 4]}  intensity={0.9} color="#ffffff" />
-      <directionalLight position={[-6, 2, -4]} intensity={0.5} color="#2457A0" />
-      <pointLight       position={[0, 4, 2]}   intensity={0.8} color="#FF5500" distance={18} />
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[5, 6, 4]}  intensity={1.0} color="#ffffff" />
+      <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#2457A0" />
+      <pointLight       position={[2, 3, 2]}   intensity={0.9} color="#FF5500" distance={20} />
 
       <Suspense fallback={null}>
         <SceneModel />
