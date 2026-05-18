@@ -47,7 +47,7 @@ export default function DealersPage() {
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-5">
               🤝 Партнерська програма
             </div>
-            <h1 className="text-4xl md:text-5xl font-black font-['Montserrat',sans-serif] mb-4">{dealersT.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-black font-['Archivo',sans-serif] mb-4">{dealersT.title}</h1>
             <p className="text-white/75 text-lg leading-relaxed">{dealersT.subtitle}</p>
           </div>
         </div>

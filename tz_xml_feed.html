@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТЗ на XML-фід — Sofievka</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--o:#E85D20;--op:#FEF0E8;--ob:#F9C9AE;--d:#141210;--d2:#1E1612;--m:#6B5A4E;--m2:#9A8880;--l:#F8F4F1;--w:#fff;--ln:#EDE4DC;--g:#1A8050;--gb:#EEFBF4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Manrope',sans-serif;background:var(--l);color:var(--d);font-size:15px;line-height:1.7;}
+.header{background:var(--d);}
+.header-stripe{background:var(--o);padding:10px 60px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.hs-label{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.75);}
+.hs-val{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;color:#fff;}
+.hs-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.4);}
+.header-body{padding:44px 60px 48px;position:relative;}
+.header-body::before{content:'';position:absolute;top:-80px;right:-80px;width:380px;height:380px;border-radius:50%;background:var(--o);opacity:0.07;pointer-events:none;}
+.h-eye{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#F47B3A;margin-bottom:16px;}
+.header h1{font-family:'Unbounded',sans-serif;font-size:26px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:14px;}
+.header h1 em{color:#F47B3A;font-style:normal;}
+.header-sub{color:#A09080;font-size:14px;line-height:1.8;max-width:620px;}
+.sb{padding:44px 60px 0;}
+.sec{font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--o);margin-bottom:20px;}
+.divider{height:1px;background:var(--ln);margin:0 60px;}
+.note{background:var(--op);border-left:3px solid var(--o);border-radius:0 10px 10px 0;padding:12px 16px;font-size:12.5px;color:var(--m);line-height:1.7;margin:14px 0;}
+.note strong{color:var(--d);}
+.note-g{background:var(--gb);border-left:3px solid var(--g);border-radius:0 10px 10px 0;padding:12px 16px;font-size:12.5px;color:var(--m);line-height:1.7;margin:14px 0;}
+.note-g strong{color:var(--g);}
+.tbl{width:100%;border-collapse:collapse;background:var(--w);border-radius:12px;overflow:hidden;border:1px solid var(--ln);font-size:12.5px;margin:14px 0;}
+.tbl th{background:var(--d);color:#fff;font-family:'Unbounded',sans-serif;font-size:8px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:10px 12px;text-align:left;}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--ln);color:var(--m);line-height:1.5;vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.td-k{color:var(--d);font-weight:700;font-family:'Manrope',sans-serif;white-space:nowrap;}
+.td-ex{background:var(--l);font-family:monospace;font-size:11px;word-break:break-all;}
+.td-p{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.td-crit{color:var(--o);}
+.td-rec{color:var(--m2);}
+h3{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;color:var(--d);margin:28px 0 10px;letter-spacing:0.5px;}
+p.d{font-size:13px;color:var(--m);line-height:1.65;margin-bottom:12px;}
+code{background:var(--l);padding:2px 6px;border-radius:4px;font-size:12px;color:var(--d);border:1px solid var(--ln);}
+.ex-block{background:var(--w);border:1px solid var(--ln);border-radius:10px;padding:16px 20px;margin:12px 0;font-size:13px;}
+.ex-block .ex-label{font-family:'Unbounded',sans-serif;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--m2);margin-bottom:8px;}
+.ex-block .ex-val{font-family:monospace;font-size:12px;color:var(--d);line-height:1.8;word-break:break-all;}
+.ex-block .ex-url{color:var(--o);text-decoration:underline;}
+.footer{background:var(--d);padding:24px 60px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:52px;}
+.fn{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;color:#fff;}
+.fr{font-size:12px;color:#5A4A42;margin-top:2px;}
+@media(max-width:680px){
+  .header-stripe,.header-body,.sb,.footer{padding-left:20px;padding-right:20px;}
+  .divider{margin:0 20px;}
+  .header h1{font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe">
+    <span class="hs-label">Технічне завдання</span>
+    <span class="hs-dot"></span>
+    <span class="hs-val">XML-фід для Google Merchant Center</span>
+    <span class="hs-dot"></span>
+    <span class="hs-label">sofievka.co.ua</span>
+  </div>
+  <div class="header-body">
+    <div class="h-eye">Sofievka · XML Product Feed</div>
+    <h1>ТЗ на автооновлюваний<br><em>XML-фід товарів</em></h1>
+    <p class="header-sub">Створити автоматично оновлюваний XML-фід товарів у форматі Google Merchant Center для sofievka.co.ua (WordPress + WooCommerce).</p>
+  </div>
+</div>
+
+<!-- ═══════ 1. АТРИБУТИ ═══════ -->
+<div class="sb">
+  <div class="sec">Атрибути фіду</div>
+
+  <table class="tbl">
+    <thead><tr><th>Атрибут</th><th>Пріоритет</th><th>Хто</th><th>Опис</th><th>Приклад</th></tr></thead>
+    <tbody>
+      <!-- id -->
+      <tr>
+        <td class="td-k">[id]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Унікальний ідентифікатор товару (SKU). У кожного товару свій. Використовувати артикул з WooCommerce.</td>
+        <td class="td-ex">3797</td>
+      </tr>
+      <!-- title -->
+      <tr>
+        <td class="td-k">[title]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Копірайтер + програміст</td>
+        <td>Назва товару. Найважливіший атрибут — система бере з нього ключові слова для показу реклами. Формула побудови — нижче в розділі «Скрипт для title».</td>
+        <td class="td-ex">Котел газовий настінний Protherm Пантера 25 KTV, 25 кВт, двоконтурний, турбований</td>
+      </tr>
+      <!-- description -->
+      <tr>
+        <td class="td-k">[description]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Копірайтер + програміст</td>
+        <td>Опис товару. Другий за важливістю атрибут — разом із title визначає за якими запитами показуватиметься реклама. Рекомендації — нижче в розділі «Скрипт для description».</td>
+        <td class="td-ex">Газовий котел Protherm (Протерм) Пантера 25 KTV — настінний двоконтурний котел з закритою камерою згоряння потужністю 25 кВт. Призначений для опалення та гарячого водопостачання приміщень площею до 250 м². ККД 92%. Електронне розпалювання. Вбудований розширювальний бак 8 л. Замовити котел Protherm Пантера можна в інтернет-магазині Sofievka.</td>
+      </tr>
+      <!-- link -->
+      <tr>
+        <td class="td-k">[link]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>URL картки товару. Унікальний для кожного товару. Можна додати UTM-мітки автоматично (не плутати з автопоміткою Google Ads).</td>
+        <td class="td-ex">https://sofievka.co.ua/product/kotel-protherm-pantera-25-ktv/<br><br>або з UTM:<br>https://sofievka.co.ua/product/kotel-protherm-pantera-25-ktv/?utm_source=google_merchant&amp;utm_medium=cpc&amp;utm_campaign=merchant&amp;variant_id=3797</td>
+      </tr>
+      <!-- image_link -->
+      <tr>
+        <td class="td-k">[image_link]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>URL основного фото товару. Фото високої якості, без написів «акція», «new». Бажано на білому або нейтральному фоні. Система може відхилити картку товару якщо розпізнає рекламний текст на фото.</td>
+        <td class="td-ex">https://sofievka.co.ua/wp-content/uploads/2025/protherm-pantera-25.jpg</td>
+      </tr>
+      <!-- additional_image_link -->
+      <tr>
+        <td class="td-k">[additional_image_link]</td>
+        <td class="td-p td-rec">Рекомендовано</td>
+        <td>Програміст</td>
+        <td>URL додаткових фото. Бажано 2–3 фото з різних ракурсів. Вимоги до якості такі ж як до основного фото.</td>
+        <td class="td-ex">https://sofievka.co.ua/wp-content/uploads/2025/protherm-pantera-25-side.jpg,https://sofievka.co.ua/wp-content/uploads/2025/protherm-pantera-25-panel.jpg</td>
+      </tr>
+      <!-- condition -->
+      <tr>
+        <td class="td-k">[condition]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Стан товару. Допустимі значення: <code>new</code>, <code>refurbished</code>, <code>used</code>. Для Sofievka — усі товари нові.</td>
+        <td class="td-ex">new</td>
+      </tr>
+      <!-- availability -->
+      <tr>
+        <td class="td-k">[availability]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Наявність. Допустимі значення: <code>in_stock</code>, <code>out_of_stock</code>, <code>preorder</code>, <code>backorder</code>. Тільки <code>in_stock</code> бере участь у рекламному аукціоні. Має оновлюватись автоматично при зміні залишків.</td>
+        <td class="td-ex">in_stock</td>
+      </tr>
+      <!-- price -->
+      <tr>
+        <td class="td-k">[price]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Основна ціна товару. Формат: число + валюта через пробіл. Має оновлюватись автоматично при зміні ціни на сайті.</td>
+        <td class="td-ex">18500.00 UAH</td>
+      </tr>
+      <!-- sale_price -->
+      <tr>
+        <td class="td-k">[sale_price]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Ціна зі знижкою. Відображається замість основної ціни в оголошенні з перекресленою старою ціною. Якщо знижки немає — атрибут не передається.</td>
+        <td class="td-ex">15725.00 UAH</td>
+      </tr>
+      <!-- sale_price_effective_date -->
+      <tr>
+        <td class="td-k">[sale_price_effective_date]</td>
+        <td class="td-p td-rec">Рекомендовано</td>
+        <td>Програміст</td>
+        <td>Термін дії знижки. Після закінчення ціна автоматично повертається до основної. Якщо не вказано — знижка діє завжди.</td>
+        <td class="td-ex">2026-09-01T00:00+0300/2026-09-30T23:59+0300</td>
+      </tr>
+      <!-- google_product_category -->
+      <tr>
+        <td class="td-k">[google_product_category]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Категорія товару за таксономією Google. Впливає на те в яку категорію Google розмістить товар. Вказується номер (ID) з офіційної таблиці Google.</td>
+        <td class="td-ex">2923 (для котлів)<br>2047 (для радіаторів)<br>1924 (для фільтрів води)</td>
+      </tr>
+      <!-- product_type -->
+      <tr>
+        <td class="td-k">[product_type]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Власна категорія товару. На відміну від google_product_category — вільний формат. Має повторювати вкладену структуру каталогу сайту. Розділяти символом <code>&gt;</code></td>
+        <td class="td-ex">Опалення&gt;Котли&gt;Газові настінні<br>Водопостачання&gt;Фільтри&gt;Ecosoft<br>Опалення&gt;Радіатори&gt;Сталеві</td>
+      </tr>
+      <!-- brand -->
+      <tr>
+        <td class="td-k">[brand]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Бренд виробника. Допомагає генерувати покази за брендовими запитами (наприклад, «котел Protherm купити»).</td>
+        <td class="td-ex">Protherm<br>Vaillant<br>Ecosoft<br>Termojet</td>
+      </tr>
+      <!-- gtin -->
+      <tr>
+        <td class="td-k">[gtin]</td>
+        <td class="td-p td-crit">Критично</td>
+        <td>Програміст</td>
+        <td>Глобальний код товару (EAN/UPC). За ним система визначає до якої категорії належить товар. Якщо коду GTIN немає — вказується [mpn] (код виробника).</td>
+        <td class="td-ex">4024074518120</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note"><strong>Автооновлення:</strong> Фід має генеруватись автоматично (cron або при збереженні товару) і бути доступний за постійною URL-адресою, наприклад: <code>https://sofievka.co.ua/feed/google-merchant.xml</code>. Дані (ціна, наявність, фото) підтягуються з бази WooCommerce в реальному часі.</div>
+</div>
+
+<div class="divider" style="margin-top:40px"></div>
+
+<!-- ═══════ 2. СКРИПТ TITLE ═══════ -->
+<div class="sb">
+  <div class="sec">Скрипт для title [назва]</div>
+
+  <p class="d">Назва товару має бути інформативною, точною і в правильній послідовності — найважливіше на початку. З назви та опису система визначає за якими пошуковими запитами показувати товарне оголошення.</p>
+
+  <div class="note-g"><strong>Формула:</strong> Тип товару + Бренд + Модель/Серія + Потужність/Розмір + Тип підключення + Особливості</div>
+
+  <h3>Розшифровка</h3>
+
+  <table class="tbl">
+    <thead><tr><th>Елемент</th><th>Пояснення</th><th>Приклад</th></tr></thead>
+    <tbody>
+      <tr><td class="td-k">1. Тип товару</td><td>Що це за товар? Ключове слово за яким шукають. Слова «купити», «ціна» — не пишемо.</td><td>Котел газовий настінний<br>Радіатор сталевий панельний<br>Фільтр зворотного осмосу</td></tr>
+      <tr><td class="td-k">2. Бренд</td><td>Завжди вказувати.</td><td>Protherm<br>Kermi<br>Ecosoft</td></tr>
+      <tr><td class="td-k">3. Модель/Серія</td><td>Конкретна модель або серія товару.</td><td>Пантера 25 KTV<br>FKO 22 500x1000<br>Standard 5-50</td></tr>
+      <tr><td class="td-k">4. Потужність/Розмір</td><td>Для котлів — кВт. Для радіаторів — мм. Для насосів — продуктивність. Для фільтрів — літраж.</td><td>25 кВт<br>500×1000 мм<br>5 ступенів очищення</td></tr>
+      <tr><td class="td-k">5. Тип підключення</td><td>Якщо важливо при виборі.</td><td>двоконтурний<br>бокове підключення<br>1/2" зовнішня різьба</td></tr>
+      <tr><td class="td-k">6. Особливості</td><td>Те що відрізняє від аналогів.</td><td>турбований<br>конденсаційний<br>з мінералізатором</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Приклади готових title</h3>
+
+  <div class="ex-block">
+    <div class="ex-label">Котел</div>
+    <div class="ex-val">Котел газовий настінний Protherm Пантера 25 KTV, 25 кВт, двоконтурний, турбований</div>
+  </div>
+  <div class="ex-block">
+    <div class="ex-label">Радіатор</div>
+    <div class="ex-val">Радіатор сталевий панельний Kermi FKO 22 500×1000 мм, бокове підключення</div>
+  </div>
+  <div class="ex-block">
+    <div class="ex-label">Фільтр</div>
+    <div class="ex-val">Фільтр зворотного осмосу Ecosoft Standard 5-50, 5 ступенів очищення, з мінералізатором</div>
+  </div>
+  <div class="ex-block">
+    <div class="ex-label">Насос</div>
+    <div class="ex-val">Насос циркуляційний Wilo Star-RS 25/6, для систем опалення, мокрий ротор</div>
+  </div>
+  <div class="ex-block">
+    <div class="ex-label">Клапан</div>
+    <div class="ex-val">3-ходовий зональний клапан Termojet 1" з приводом, 230V, 5 Нм</div>
+  </div>
+</div>
+
+<div class="divider" style="margin-top:40px"></div>
+
+<!-- ═══════ 3. СКРИПТ DESCRIPTION ═══════ -->
+<div class="sb" style="padding-bottom:12px;">
+  <div class="sec">Скрипт для description [опис]</div>
+
+  <p class="d">Така ж логіка як і з назвою, але розширено. З title та description система визначає за якими пошуковими запитами показуватиме товарні оголошення.</p>
+
+  <div class="note-g"><strong>Правила:</strong><br>
+  1. Найважливіша інформація — на початок.<br>
+  2. Дублювати назву бренду кирилицею в дужках: Protherm (Протерм).<br>
+  3. Включити: тип товару, бренд, модель, для чого призначений, розмір/потужність, матеріал, кількість, особливості, технічні характеристики.<br>
+  4. Лаконічно — корисна інформація для покупця, без «води».<br>
+  5. Завершувати фразою: «Замовити [назва] можна в інтернет-магазині Sofievka.»</div>
+
+  <h3>Приклад</h3>
+
+  <div class="ex-block">
+    <div class="ex-label">Котел — опис</div>
+    <div class="ex-val">Газовий котел Protherm (Протерм) Пантера 25 KTV — настінний двоконтурний котел з закритою камерою згоряння потужністю 25 кВт. Призначений для опалення та гарячого водопостачання приміщень площею до 250 м². ККД 92%. Електронне розпалювання. Вбудований розширювальний бак 8 л. Замовити котел Protherm Пантера можна в інтернет-магазині Sofievka.</div>
+  </div>
+
+  <div class="ex-block">
+    <div class="ex-label">Радіатор — опис</div>
+    <div class="ex-val">Сталевий панельний радіатор Kermi (Кермі) FKO тип 22, розмір 500×1000 мм. Бокове підключення. Теплова потужність 1808 Вт. Два ряди панелей, два конвектори. Робочий тиск до 10 бар. Максимальна температура 110°C. Білий RAL 9016. Замовити радіатор Kermi FKO можна в інтернет-магазині Sofievka.</div>
+  </div>
+
+  <div class="ex-block">
+    <div class="ex-label">Фільтр — опис</div>
+    <div class="ex-val">Фільтр зворотного осмосу Ecosoft (Екософт) Standard 5-50 — система очищення води з 5 ступенями фільтрації та мінералізатором. Продуктивність 190 л/добу. Видаляє 99,8% домішок, хлор, важкі метали. Бак на 12 л. Замінні картриджі доступні окремо. Замовити фільтр Ecosoft Standard можна в інтернет-магазині Sofievka.</div>
+  </div>
+
+  <div class="note"><strong>Важливо:</strong> саме з title та description система братиме інформацію для генерації показів за релевантними пошуковими запитами. Тобто, на їх основі система визначатиме, за якими пошуковими запитами показуватиме товарні оголошення.</div>
+</div>
+
+<div class="footer">
+  <div><div class="fn">Illia Maksymchuk</div><div class="fr">Digital Marketing</div></div>
+  <div style="font-size:12px;color:#4A3A32;">ТЗ XML-фід · Квітень 2026</div>
+</div>
+
+</body>
+</html>

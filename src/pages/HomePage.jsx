@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import {
-  ArrowRight, Factory, Shield, Truck, Globe, Wrench,
-  ChevronRight, Zap, Award, Play, X, Check, Star,
-  Package, Gauge, Settings2, Layers
-} from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Play, X, Check, Star, Smartphone } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -14,106 +10,77 @@ import SEO from '../components/SEO'
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
 
+const PROD_PHOTOS = [
+  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-38-1.jpg',
+  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-15.jpg',
+  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-22.jpg',
+  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-29.jpg',
+]
+
+const MARQUEE_ITEMS = ['ЕФЕКТИВНО', 'З ТЕПЛОІЗОЛЯЦІЄЮ', 'ВЛАСНЕ ВИРОБНИЦТВО', 'ШВИДКО', 'НАДІЙНО', 'MADE IN UKRAINE', 'З 2002 РОКУ', 'КИЇВ']
+
+const CONFIG_STEPS = [
+  { n: '01', title: 'Вибір потужності',  desc: 'Від 30 кВт до 2 МВт — система сама запропонує серію.' },
+  { n: '02', title: 'Контури системи',   desc: 'Радіатори, тепла підлога, бойлер ГВС, басейн.' },
+  { n: '03', title: 'Авто-підбір груп',  desc: '100+ моделей колекторів і насосних груп автоматично.' },
+  { n: '04', title: 'PDF та замовлення', desc: 'Експорт схеми, перелік обладнання, відправка менеджеру.' },
+]
+
 const STATS = [
-  { key: 'years',      value: '20+',      icon: '🏭' },
-  { key: 'objects',    value: '50 000+',  icon: '🔥' },
-  { key: 'production', value: '3 000 м²', icon: '📐' },
-  { key: 'countries',  value: '15',       icon: '🌍' },
-  { key: 'capacity',   value: '70 000+',  icon: '⚙️' },
-  { key: 'employees',  value: '~100',     icon: '👷' },
+  { ord: '01', num: '20', suffix: ' років', label: 'На ринку котельного обладнання' },
+  { ord: '02', num: '15', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
+  { ord: '03', num: '50 000', suffix: '', label: 'Укомплектованих котелень за 22 роки' },
+  { ord: '04', num: '70 000', suffix: '', label: 'Виробів на рік на власному заводі' },
 ]
 
-const ADVANTAGES = [
-  {
-    icon: Factory,
-    badge: 'icon-badge-glass-orange',
-    title: 'Власне виробництво',
-    desc: 'Завод 3 000 м² у Києві. Повний цикл від металу до готового вузла під власним контролем якості.',
-    key: 'own',
-  },
-  {
-    icon: Shield,
-    badge: 'icon-badge-glass-blue',
-    title: 'Гарантія якості',
-    desc: 'Кожна одиниця проходить вихідний контроль. Сертифікати ISO 9001:2015 та CE маркування.',
-    key: 'quality',
-  },
-  {
-    icon: Package,
-    badge: 'icon-badge-glass-orange',
-    title: 'Наявність на складі',
-    desc: 'Склад 2 500 м² з постійним запасом. Більшість позицій відвантажуємо наступного дня.',
-    key: 'stock',
-  },
-  {
-    icon: Globe,
-    badge: 'icon-badge-glass-blue',
-    title: 'Міжнародний досвід',
-    desc: 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року. Продукція відповідає стандартам ЄС.',
-    key: 'export',
-  },
-  {
-    icon: Wrench,
-    badge: 'icon-badge-glass-orange',
-    title: 'Технічна підтримка',
-    desc: 'Інженерна підтримка на всіх етапах. Підбір обладнання під ваш проект котельні.',
-    key: 'support',
-  },
-  {
-    icon: Zap,
-    badge: 'icon-badge-glass-blue',
-    title: 'Комплексні рішення',
-    desc: 'Від насосної групи до повного вузла обв\'язки. TERMOJET BOX, Mini, Mega — під будь-яку потужність.',
-    key: 'app',
-  },
-]
+const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
+const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
-const TRUST_ITEMS = [
-  '✅ Власне виробництво',
-  '🇺🇦 MADE IN UKRAINE',
-  '✅ Склад 2 500 м²',
-  '✅ ISO 9001:2015',
-  '✅ CE сертифікація',
-  '✅ 15 країн ЄС',
-  '⭐ 20+ років на ринку',
-  '✅ Технічна підтримка',
-]
-
-const fadeUp   = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
-const stagger  = { show: { transition: { staggerChildren: 0.08 } } }
-const stagger2 = { show: { transition: { staggerChildren: 0.1  } } }
+// Animated counter
+function CountUp({ end, suffix, duration = 1600 }) {
+  const [val, setVal] = useState(0)
+  const startRef = useRef(null)
+  const rafRef = useRef(null)
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(function tick(t) {
+      if (!startRef.current) startRef.current = t
+      const p = Math.min(1, (t - startRef.current) / duration)
+      const eased = 1 - Math.pow(1 - p, 3)
+      setVal(Math.round(end * eased))
+      if (p < 1) rafRef.current = requestAnimationFrame(tick)
+    })
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [end, duration])
+  return <>{val.toLocaleString('uk-UA')}{suffix && <span className="text-[var(--accent)]">{suffix}</span>}</>
+}
 
 export default function HomePage() {
   const { lang, blog, portfolio } = useApp()
   const t    = useT()
   const hero = t('hero')
-  const sts  = t('stats')
   const cats = t('categories')
-  const adv  = t('advantages')
-  const blogT= t('blog')
   const seo  = t('seo')
 
-  const heroRef = useRef(null)
   const [videoOpen, setVideoOpen] = useState(false)
-
-  useEffect(() => {
-    const el = heroRef.current
-    if (!el) return
-    const fn = (e) => {
-      const r = el.getBoundingClientRect()
-      el.style.setProperty('--mx', `${((e.clientX-r.left)/r.width*100).toFixed(1)}%`)
-      el.style.setProperty('--my', `${((e.clientY-r.top)/r.height*100).toFixed(1)}%`)
-    }
-    el.addEventListener('mousemove', fn, { passive:true })
-    return () => el.removeEventListener('mousemove', fn)
-  }, [])
+  const [statsVisible, setStatsVisible] = useState(false)
+  const statsRef = useRef(null)
 
   useEffect(() => {
     if (!videoOpen) return
-    const fn = (e) => { if (e.key==='Escape') setVideoOpen(false) }
+    const fn = (e) => { if (e.key === 'Escape') setVideoOpen(false) }
     window.addEventListener('keydown', fn)
     return () => window.removeEventListener('keydown', fn)
   }, [videoOpen])
+
+  useEffect(() => {
+    const el = statsRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setStatsVisible(true); obs.disconnect() }
+    }, { threshold: 0.3 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   const featuredCats  = CATEGORIES.slice(0, 6)
   const recentPosts   = blog.filter(p => p.published).slice(0, 3)
@@ -125,8 +92,7 @@ export default function HomePage() {
 
       {/* ─── VIDEO MODAL ─── */}
       {videoOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          onClick={() => setVideoOpen(false)}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
           <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
           <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
             <iframe className="w-full h-full rounded-2xl shadow-2xl"
@@ -135,7 +101,7 @@ export default function HomePage() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen />
             <button onClick={() => setVideoOpen(false)}
-              className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors backdrop-blur-sm">
+              className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
               <X size={18} />
             </button>
           </div>
@@ -143,102 +109,140 @@ export default function HomePage() {
       )}
 
       {/* ═══════════════════════════════════════════
-          HERO
+          HERO — 2 колонки: текст | відео
       ═══════════════════════════════════════════ */}
-      <section ref={heroRef}
-        className="hero-gradient grain relative overflow-hidden text-white min-h-[90vh] flex items-center">
-        {/* Background video */}
-        <video className="absolute inset-0 w-full h-full object-cover opacity-[0.18] pointer-events-none"
-          style={{ mixBlendMode:'screen' }}
-          src={MP4_URL} autoPlay muted loop playsInline />
-
-        {/* Orbs */}
-        <div className="orb orb-blue   w-[600px] h-[600px] -top-40  -right-20 opacity-50" />
-        <div className="orb orb-orange w-[500px] h-[500px]  bottom-0  right-1/3 opacity-75" />
-        <div className="orb orb-teal   w-[280px] h-[280px]  top-1/2  -left-16  opacity-40" />
-
+      <section className="hero-gradient grain relative overflow-hidden text-white">
+        <div className="orb orb-blue   w-[500px] h-[500px] -top-32 -right-20 opacity-50" />
+        <div className="orb orb-orange w-[400px] h-[400px]  bottom-0  left-1/4 opacity-40" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.8)] to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[var(--bg)] to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.7)] to-transparent" />
 
-        <div className="relative max-w-7xl mx-auto px-4 py-24 md:py-32 w-full">
-          <div className="max-w-3xl">
+        <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-            {/* Badges */}
-            <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}
-              className="flex flex-wrap items-center gap-2 mb-7">
-              <span className="inline-flex items-center gap-1.5 bg-white/8 border border-white/12 rounded-full px-4 py-1.5 text-sm font-semibold backdrop-blur-sm">
-                🇺🇦 <span style={{ background:'linear-gradient(90deg,#005BBB,#FFD500)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>MADE IN UKRAINE</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold"
-                style={{ background:'rgba(255,85,0,0.15)', border:'1px solid rgba(255,85,0,0.3)', color:'#FF8533' }}>
-                <Award size={12} /> {hero.badge}
-              </span>
+            {/* Left — text */}
+            <motion.div initial="hidden" animate="show" variants={stagger}>
+              <motion.div variants={fadeUp} className="eyebrow-white mb-6">
+                ● Системи швидкого монтажу · Виробництво з 2002
+              </motion.div>
+
+              <motion.h1 variants={fadeUp}
+                className="font-black leading-[0.92] font-['Archivo',sans-serif] mb-6"
+                style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
+                Котельня,<br />
+                зібрана за{' '}
+                <span className="text-gradient-orange">години</span>,<br />
+                <span className="text-outline-white">а не за тижні.</span>
+              </motion.h1>
+
+              <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8 max-w-lg">
+                {hero.subtitle}
+              </motion.p>
+
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+                <Link to="/catalog" className="btn-primary px-7 py-3.5 text-base">
+                  {hero.ctaCatalog} <ArrowRight size={16} />
+                </Link>
+                <Link to="/contacts" className="btn-outline-white px-7 py-3.5 text-base">
+                  {hero.ctaContact}
+                </Link>
+                <button onClick={() => setVideoOpen(true)}
+                  className="flex items-center gap-2.5 px-5 py-3.5 rounded-[0.875rem] text-sm font-semibold text-white border border-white/15 bg-white/5 hover:bg-white/10 transition-all">
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center animate-pulse-glow flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg,#FF5500,#FF9500)' }}>
+                    <Play size={13} fill="white" className="ml-0.5" />
+                  </span>
+                  Повне відео
+                </button>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-sm text-white/40">
+                {['Гарантія якості', 'Доставка по Україні', '50 000+ котелень', 'ISO 9001:2015'].map(item => (
+                  <span key={item} className="flex items-center gap-1.5">
+                    <Check size={13} className="text-[#FF8533]" /> {item}
+                  </span>
+                ))}
+              </motion.div>
             </motion.div>
 
-            {/* Heading */}
-            <motion.h1 initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] font-['Montserrat',sans-serif] mb-5">
-              {hero.title}
-            </motion.h1>
+            {/* Right — video */}
+            <motion.div
+              initial={{ opacity:0, x:40 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.7, delay:0.2 }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl"
+                style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)' }}>
+                <video
+                  autoPlay muted loop playsInline
+                  src={MP4_URL}
+                  className="w-full aspect-video object-cover"
+                />
+                {/* overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                {/* label */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between">
+                  <div>
+                    <div className="eyebrow-white mb-0.5">Власне виробництво</div>
+                    <div className="text-white font-semibold text-sm">м. Київ · виробничий цех · 3 000 м²</div>
+                  </div>
+                  <button
+                    onClick={() => setVideoOpen(true)}
+                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/15 border border-white/25 hover:bg-white/25 transition-colors backdrop-blur-sm"
+                  >
+                    <ArrowUpRight size={16} />
+                  </button>
+                </div>
+              </div>
 
-            <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}
-              className="text-lg text-white/65 leading-relaxed mb-9 max-w-2xl">
-              {hero.subtitle}
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.3 }}
-              className="flex flex-wrap gap-3">
-              <Link to="/catalog" className="btn-primary px-7 py-3.5 text-base">
-                {hero.ctaCatalog} <ArrowRight size={16} />
-              </Link>
-              <Link to="/contacts" className="btn-outline-white px-7 py-3.5 text-base">
-                {hero.ctaContact} <ArrowRight size={16} />
-              </Link>
-              <button onClick={() => setVideoOpen(true)}
-                className="flex items-center gap-2.5 px-5 py-3.5 rounded-[0.875rem] text-base font-semibold text-white border border-white/15 bg-white/5 hover:bg-white/10 transition-all backdrop-blur-sm">
-                <span className="w-8 h-8 rounded-full flex items-center justify-center animate-pulse-glow"
-                  style={{ background:'linear-gradient(135deg,#FF5500,#FF9500)' }}>
-                  <Play size={13} fill="white" className="ml-0.5" />
-                </span>
-                Відео виробництва
-              </button>
-            </motion.div>
-
-            {/* Mini trust */}
-            <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.5 }}
-              className="flex flex-wrap gap-x-5 gap-y-2 mt-9 text-sm text-white/40">
-              {['Гарантія якості', 'Доставка по Україні', 'Офіційний виробник', 'Технічна підтримка'].map(item => (
-                <span key={item} className="flex items-center gap-1.5">
-                  <Check size={13} className="text-[#FF8533]" /> {item}
-                </span>
-              ))}
+              {/* Floating badge */}
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-xl px-4 py-2.5 shadow-xl flex items-center gap-2.5 border border-[var(--ink-200)]">
+                <span className="text-2xl">🇺🇦</span>
+                <div>
+                  <div className="text-xs font-black text-gray-900 font-['Archivo',sans-serif]">MADE IN UKRAINE</div>
+                  <div className="text-[10px] text-gray-400">Власний завод у Києві</div>
+                </div>
+              </div>
             </motion.div>
           </div>
+        </div>
 
-          {/* Stats */}
-          <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.4 }}
-            className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {STATS.map(s => (
-              <div key={s.key} className="stat-card group">
-                <div className="text-2xl mb-1.5">{s.icon}</div>
-                <div className="text-xl font-black font-['Montserrat',sans-serif] group-hover:text-[#FF8533] transition-colors">
-                  {s.value}
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[var(--bg)] to-transparent pointer-events-none" />
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          STATS ROW — editorial style
+      ═══════════════════════════════════════════ */}
+      <section ref={statsRef} className="bg-[var(--bg)] border-b border-[var(--ink-200)]">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[var(--ink-200)]">
+            {STATS.map((s) => (
+              <div key={s.ord} className="stat-editorial">
+                <div className="eyebrow mb-3" style={{ color: 'var(--ink-200)' }}>{s.ord}</div>
+                <div className="font-black leading-none font-['Archivo',sans-serif] mb-2 text-[var(--text-primary)]"
+                  style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                  {statsVisible
+                    ? <CountUp end={parseInt(s.num.replace(/\s/g,''))} suffix={s.suffix} />
+                    : <>{s.num}<span className="text-[var(--accent)]">{s.suffix}</span></>
+                  }
                 </div>
-                <div className="text-[11px] text-white/45 mt-0.5 leading-tight">{sts[s.key]}</div>
+                <div className="text-sm text-[var(--text-secondary)] leading-snug">{s.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ─── TRUST MARQUEE ─── */}
-      <section className="trust-strip py-3 overflow-hidden">
-        <div className="flex">
-          <div className="flex gap-10 animate-marquee whitespace-nowrap px-5">
-            {[...TRUST_ITEMS, ...TRUST_ITEMS].map((item, i) => (
-              <span key={i} className="text-sm font-semibold text-gray-500 flex-shrink-0">{item}</span>
+      {/* ═══════════════════════════════════════════
+          DARK MARQUEE BAND
+      ═══════════════════════════════════════════ */}
+      <section className="bg-[#0C0B0A] py-3.5 overflow-hidden">
+        <div className="flex whitespace-nowrap">
+          <div className="flex gap-0 animate-marquee-slow flex-shrink-0">
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+              <span key={i} className="inline-flex items-center gap-3 px-4 text-sm font-bold tracking-widest uppercase text-white">
+                {item}
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] flex-shrink-0" />
+              </span>
             ))}
           </div>
         </div>
@@ -247,13 +251,19 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           CATEGORIES
       ═══════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 section-gradient-light">
+      <section className="py-16 md:py-20 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <div>
-              <motion.div variants={fadeUp} className="label-accent mb-2">{cats.title}</motion.div>
-              <motion.h2 variants={fadeUp} className="section-title">{cats.subtitle}</motion.h2>
+              <motion.div variants={fadeUp} className="eyebrow mb-3">
+                Каталог · {CATEGORIES.length} категорій · 242 SKU
+              </motion.div>
+              <motion.h2 variants={fadeUp}
+                className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
+                style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
+                Все для котельні —<br />в одному місці.
+              </motion.h2>
             </div>
             <motion.div variants={fadeUp}>
               <Link to="/catalog" className="btn-ghost">
@@ -266,12 +276,12 @@ export default function HomePage() {
             className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {featuredCats.map(cat => (
               <motion.div key={cat.id} variants={fadeUp}>
-                <Link to={`/catalog/${cat.slug}`} className="cat-card block p-5 h-full">
+                <Link to={`/catalog/${cat.slug}`} className="cat-card block p-5 h-full bg-white">
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-3xl">{cat.icon}</span>
-                    <span className="w-7 h-7 rounded-full flex items-center justify-center transition-all"
+                    <span className="w-7 h-7 rounded-full flex items-center justify-center"
                       style={{ background:'rgba(255,85,0,0.1)', border:'1px solid rgba(255,85,0,0.2)' }}>
-                      <ChevronRight size={13} style={{ color:'#FF5500' }} />
+                      <ArrowRight size={12} style={{ color:'#FF5500' }} />
                     </span>
                   </div>
                   <h3 className="font-bold text-gray-900 leading-tight mb-1.5">
@@ -286,143 +296,74 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="gradient-divider" />
-
       {/* ═══════════════════════════════════════════
-          ADVANTAGES — VIVID DARK GRADIENT (Zyforia style)
+          CONFIGURATOR — dark section
       ═══════════════════════════════════════════ */}
-      <section className="advantages-bg grain relative overflow-hidden py-20 md:py-28 text-white">
+      <section className="section-navy grain relative overflow-hidden py-20 md:py-28">
+        <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-30" />
+        <div className="orb orb-blue   w-[350px] h-[350px] -left-16  -top-16              opacity-25" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
-        {/* Orbs */}
-        <div className="orb orb-orange w-[500px] h-[500px] -right-32 top-1/2 -translate-y-1/2 opacity-50" />
-        <div className="orb orb-blue   w-[400px] h-[400px] -left-20  top-0          opacity-40" />
 
         <div className="relative max-w-7xl mx-auto px-4">
-          {/* Section heading */}
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
-            className="text-center mb-14">
-            <motion.div variants={fadeUp} className="label-white mb-3">Наші переваги</motion.div>
-            <motion.h2 variants={fadeUp} className="section-title-white max-w-2xl mx-auto">
-              Чому обирають{' '}
-              <span className="text-gradient-orange">Termojet</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-white/50 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
-              Понад 20 років виробляємо обладнання для котелень в Україні. Якість підтверджена тисячами об'єктів.
-            </motion.p>
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-          {/* Advantages grid — glass cards */}
-          <motion.div variants={stagger2} initial="hidden" whileInView="show" viewport={{ once:true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {ADVANTAGES.map((item, i) => {
-              const Icon = item.icon
-              const data = adv[item.key]
-              return (
-                <motion.div key={item.key} variants={fadeUp}
-                  className="glass-card p-6 flex flex-col gap-4 group">
-                  {/* Icon badge */}
-                  <div className={`icon-badge icon-badge-lg ${item.badge}`}>
-                    <Icon size={22} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white mb-2 text-base">
-                      {data?.title || item.title}
-                    </h3>
-                    <p className="text-white/55 text-sm leading-relaxed">
-                      {data?.desc || item.desc}
-                    </p>
-                  </div>
-                  {/* bottom accent line */}
-                  <div className="mt-auto pt-4 border-t border-white/8">
-                    <span className="text-xs font-semibold flex items-center gap-1.5"
-                      style={{ color: i % 2 === 0 ? '#FF8533' : '#6da4ff' }}>
-                      <Check size={12} /> Підтверджено досвідом
-                    </span>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-
-          {/* CTA under advantages */}
-          <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-            transition={{ delay:0.3 }}
-            className="text-center mt-12">
-            <Link to="/catalog" className="btn-primary px-8 py-3.5 text-base">
-              Переглянути продукцію <ArrowRight size={16} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          PRODUCTION VIDEO
-      ═══════════════════════════════════════════ */}
-      <section className="py-16 md:py-24 relative overflow-hidden section-gradient-light">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-            {/* Video thumbnail */}
-            <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }}
-              viewport={{ once:true }} transition={{ duration:0.6 }}
-              className="relative group cursor-pointer" onClick={() => setVideoOpen(true)}>
-              <div className="relative rounded-2xl overflow-hidden"
-                style={{ boxShadow:'0 24px 64px rgba(27,63,107,0.18)' }}>
-                <img src={`https://img.youtube.com/vi/${YT_ID}/maxresdefault.jpg`}
-                  alt="Виробництво Termojet"
-                  className="w-full aspect-video object-cover group-hover:scale-[1.03] transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                {/* Play button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                    style={{ background:'linear-gradient(135deg,#FF5500,#FF9500)', boxShadow:'0 8px 32px rgba(255,85,0,0.55)' }}>
-                    <Play size={30} fill="white" className="ml-1.5" />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="text-[11px] text-white/55 mb-1 uppercase tracking-wider">Відео виробництва</div>
-                  <div className="text-white font-bold text-base">Termojet — зсередини</div>
-                </div>
+            {/* Left — diagram */}
+            <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-8"
+                style={{ minHeight: 300 }}>
+                {/* Simple SVG diagram */}
+                <svg viewBox="0 0 320 200" className="w-full" fill="none">
+                  {/* Main pipe horizontal */}
+                  <line x1="40" y1="100" x2="280" y2="100" stroke="rgba(255,85,0,0.6)" strokeWidth="2" strokeDasharray="6,3" />
+                  {/* Vertical branches */}
+                  {[80, 140, 200, 260].map((x, i) => (
+                    <g key={x}>
+                      <line x1={x} y1="100" x2={x} y2="50" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                      <line x1={x} y1="100" x2={x} y2="150" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                      <circle cx={x} cy="50" r="8" fill="rgba(255,85,0,0.3)" stroke="rgba(255,85,0,0.8)" strokeWidth="1.5" />
+                      <circle cx={x} cy="150" r="8" fill="rgba(36,87,160,0.3)" stroke="rgba(36,87,160,0.8)" strokeWidth="1.5" />
+                      <text x={x} y="30" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="monospace">НГ{i+1}</text>
+                    </g>
+                  ))}
+                  {/* Collector box */}
+                  <rect x="110" y="82" width="100" height="36" rx="6" fill="rgba(255,85,0,0.15)" stroke="rgba(255,85,0,0.6)" strokeWidth="1.5" />
+                  <text x="160" y="97" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold" fontFamily="monospace">KOLEKTOR</text>
+                  <text x="160" y="111" textAnchor="middle" fill="rgba(255,85,0,0.9)" fontSize="10" fontWeight="bold" fontFamily="monospace">KGS22</text>
+                  {/* Labels */}
+                  <text x="10" y="104" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace">КОТЕЛ</text>
+                  <text x="258" y="170" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace">● CONFIG</text>
+                </svg>
+                <div className="eyebrow-white mt-2 text-center">Автоматичний підбір системи</div>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full blur-3xl pointer-events-none opacity-25"
-                style={{ background:'radial-gradient(circle,#FF5500,transparent)' }} />
             </motion.div>
 
-            {/* Text + facts */}
-            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }}
-              viewport={{ once:true }} transition={{ duration:0.6, delay:0.1 }}>
-              <div className="label-accent mb-3">Власне виробництво</div>
-              <h2 className="section-title mb-5">
-                Робимо в Україні —<br />
-                <span className="text-gradient-orange">від металу до готового вузла</span>
+            {/* Right — text + steps */}
+            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.1 }}>
+              <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
+              <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
+                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
+                Конфігуратор котельної системи — в одному додатку.
               </h2>
-              <p className="text-gray-500 leading-relaxed mb-8 text-sm">
-                Завод площею 3 000 м² у Києві. Власне металообробне обладнання, відділ контролю якості та склад готової продукції 2 500 м². Понад 70 000 одиниць обладнання на рік.
+              <p className="text-white/55 text-sm leading-relaxed mb-8">
+                Підберіть колектор, гідрострілку та насосні групи без помилок сумісності. Експорт схеми в PDF, відправка менеджеру в один клік.
               </p>
 
               <div className="grid grid-cols-2 gap-3 mb-8">
-                {[
-                  { icon: '🏭', val: '3 000 м²', label: 'площа заводу' },
-                  { icon: '⚙️', val: '70 000+',  label: 'одиниць/рік'  },
-                  { icon: '👷', val: '~100',      label: 'працівників'  },
-                  { icon: '📦', val: '2 500 м²',  label: 'склад'        },
-                ].map(f => (
-                  <div key={f.val} className="card p-4 flex items-center gap-3">
-                    <span className="text-2xl">{f.icon}</span>
-                    <div>
-                      <div className="font-black text-base text-gray-900 font-['Montserrat',sans-serif]">{f.val}</div>
-                      <div className="text-xs text-gray-400">{f.label}</div>
-                    </div>
+                {CONFIG_STEPS.map(step => (
+                  <div key={step.n} className="config-step">
+                    <div className="eyebrow mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>КРОК {step.n}</div>
+                    <h4 className="text-white font-bold text-sm mb-1">{step.title}</h4>
+                    <p className="text-white/45 text-xs leading-relaxed">{step.desc}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="flex gap-3">
-                <Link to="/about" className="btn-secondary">
-                  Про компанію <ArrowRight size={15} />
-                </Link>
-                <button onClick={() => setVideoOpen(true)} className="btn-primary">
-                  <Play size={14} fill="white" /> Дивитись відео
+              <div className="flex flex-wrap gap-3">
+                <button className="btn-app-store">
+                  <Smartphone size={16} /> App Store
+                </button>
+                <button className="btn-app-store">
+                  <Smartphone size={16} /> Google Play
                 </button>
               </div>
             </motion.div>
@@ -430,17 +371,113 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      {/* ═══════════════════════════════════════════
+          PRODUCTION PHOTOS — "Від листа сталі"
+      ═══════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-[var(--bg)]">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once:true }} variants={stagger}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <motion.h2 variants={fadeUp}
+              className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
+              Від листа сталі —<br />до готової котельні.
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-[var(--text-secondary)] max-w-xs text-sm leading-relaxed md:text-right">
+              Лазерні верстати, листогини, напівавтоматичне зварювання та власна лінія порошкового фарбування. 5 500 м² площ.
+            </motion.p>
+          </motion.div>
+
+          <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {PROD_PHOTOS.map((src, i) => (
+              <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
+                <img
+                  src={src}
+                  alt={`Виробництво Termojet ${i+1}`}
+                  onError={e => {
+                    e.target.style.display = 'none'
+                    e.target.parentElement.style.background = `hsl(${210 + i*15}, 30%, ${15 + i*5}%)`
+                  }}
+                />
+                {i === 0 && (
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <span className="text-xs text-white/70 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5 font-mono">
+                      ● Лазерне різання
+                    </span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ delay:0.3 }}
+            className="flex gap-3 mt-8">
+            <Link to="/about" className="btn-secondary">
+              Про виробництво <ArrowRight size={15} />
+            </Link>
+            <button onClick={() => setVideoOpen(true)} className="btn-primary">
+              <Play size={14} fill="white" /> Відео заводу
+            </button>
+          </motion.div>
+        </div>
+      </section>
 
       {/* ═══════════════════════════════════════════
-          PORTFOLIO
+          ADVANTAGES (зберігаємо існуючу секцію)
+      ═══════════════════════════════════════════ */}
+      <section className="advantages-bg grain relative overflow-hidden py-20 md:py-28 text-white">
+        <div className="absolute inset-0 bg-dots pointer-events-none" />
+        <div className="orb orb-orange w-[500px] h-[500px] -right-32 top-1/2 -translate-y-1/2 opacity-50" />
+        <div className="orb orb-blue   w-[400px] h-[400px] -left-20  top-0          opacity-40" />
+
+        <div className="relative max-w-7xl mx-auto px-4">
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="text-center mb-14">
+            <motion.div variants={fadeUp} className="eyebrow-white mb-3">Наші переваги</motion.div>
+            <motion.h2 variants={fadeUp}
+              className="font-black font-['Archivo',sans-serif] max-w-2xl mx-auto"
+              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
+              Чому обирають{' '}
+              <span className="text-gradient-orange">Termojet</span>
+            </motion.h2>
+          </motion.div>
+
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { icon: '🏭', title: 'Власне виробництво', desc: 'Завод 3 000 м² у Києві. Повний цикл від металу до готового вузла.' },
+              { icon: '🛡️', title: 'Гарантія якості',    desc: 'Кожна одиниця проходить вихідний контроль. ISO 9001:2015, CE.' },
+              { icon: '📦', title: 'Наявність на складі', desc: 'Склад 2 500 м². Більшість позицій відвантажуємо наступного дня.' },
+              { icon: '🌍', title: 'Міжнародний досвід', desc: 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року.' },
+              { icon: '🔧', title: 'Технічна підтримка', desc: 'Інженерна підтримка на всіх етапах. Підбір під ваш проект.' },
+              { icon: '⚡', title: 'Комплексні рішення', desc: 'TERMOJET BOX, Mini, Mega — від 30 кВт до 2 МВт.' },
+            ].map((item, i) => (
+              <motion.div key={i} variants={fadeUp} className="glass-card p-6 flex flex-col gap-4">
+                <div className="text-3xl">{item.icon}</div>
+                <div>
+                  <h3 className="font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="mt-auto pt-4 border-t border-white/8">
+                  <span className="text-xs font-semibold text-[#FF8533] flex items-center gap-1.5">
+                    <Check size={12} /> Підтверджено досвідом
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PORTFOLIO (якщо є дані)
       ═══════════════════════════════════════════ */}
       {recentPortfolio.length > 0 && (
-        <section className="py-16 md:py-20">
+        <section className="py-16 md:py-20 bg-[var(--bg)]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-end justify-between mb-10">
               <div>
-                <div className="label-accent mb-2">{t('portfolio').title}</div>
+                <div className="eyebrow mb-2">{t('portfolio').title}</div>
                 <h2 className="section-title">{t('portfolio').subtitle}</h2>
               </div>
               <Link to="/portfolio" className="btn-ghost hidden md:flex">
@@ -449,7 +486,7 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPortfolio.map(item => (
-                <div key={item.id} className="card card-hover overflow-hidden">
+                <div key={item.id} className="card card-hover overflow-hidden bg-white">
                   {item.image && <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />}
                   <div className="p-4">
                     <div className="text-xs text-gray-400 mb-1">{item.location || ''}</div>
@@ -464,35 +501,31 @@ export default function HomePage() {
       )}
 
       {/* ═══════════════════════════════════════════
-          BLOG
+          BLOG (якщо є дані)
       ═══════════════════════════════════════════ */}
       {recentPosts.length > 0 && (
-        <section className="py-16 md:py-20 bg-[var(--bg-subtle)]">
+        <section className="py-16 md:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-end justify-between mb-10">
               <div>
-                <div className="label-primary mb-2">{blogT.title}</div>
-                <h2 className="section-title">{blogT.subtitle}</h2>
+                <div className="eyebrow mb-2">{t('blog').title}</div>
+                <h2 className="section-title">{t('blog').subtitle}</h2>
               </div>
               <Link to="/blog" className="btn-ghost hidden md:flex">
-                {blogT.viewAll} <ArrowRight size={14} />
+                {t('blog').viewAll} <ArrowRight size={14} />
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPosts.map(post => (
-                <Link key={post.id} to={`/blog/${post.slug}`} className="card card-hover overflow-hidden block group">
+                <Link key={post.id} to={`/blog/${post.slug}`} className="card card-hover overflow-hidden block group bg-white">
                   {post.image && <img src={post.image} alt={post.title} className="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-300" />}
                   <div className="p-5">
-                    {post.category && <span className="text-xs font-bold uppercase tracking-wider" style={{ color:'#FF5500' }}>{post.category}</span>}
+                    {post.category && <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">{post.category}</span>}
                     <h3 className="font-semibold text-gray-900 mt-1 mb-2 line-clamp-2">
                       {lang !== 'uk' && post[`title_${lang}`] ? post[`title_${lang}`] : post.title}
                     </h3>
-                    <p className="text-sm text-gray-500 line-clamp-2">
-                      {lang !== 'uk' && post[`excerpt_${lang}`] ? post[`excerpt_${lang}`] : post.excerpt}
-                    </p>
-                    <div className="mt-3 text-sm font-semibold flex items-center gap-1 transition-all group-hover:gap-2"
-                      style={{ color:'#FF5500' }}>
-                      {blogT.readMore} <ArrowRight size={13} />
+                    <div className="mt-3 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all text-[var(--accent)]">
+                      {t('blog').readMore} <ArrowRight size={13} />
                     </div>
                   </div>
                 </Link>
@@ -503,15 +536,52 @@ export default function HomePage() {
       )}
 
       {/* ═══════════════════════════════════════════
+          EDITORIAL CTA — чорна секція
+      ═══════════════════════════════════════════ */}
+      <section className="bg-[#0C0B0A] py-24 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots pointer-events-none opacity-50" />
+        <div className="relative max-w-7xl mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
+
+            {/* Left — big text */}
+            <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
+              <h2 className="font-black font-['Archivo',sans-serif] text-white leading-[0.9]"
+                style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
+                Готові<br />
+                <span className="text-outline-white">проєктувати</span><br />
+                котельню?
+              </h2>
+            </motion.div>
+
+            {/* Right — description + buttons */}
+            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.15 }}
+              className="max-w-sm flex-shrink-0">
+              <p className="text-white/55 text-base leading-relaxed mb-8">
+                Завантажте додаток або відкрийте каталог. Наші менеджери допоможуть з підбором обладнання за 1 робочий день.
+              </p>
+              <div className="flex flex-col gap-3">
+                <Link to="/catalog" className="btn-primary text-base py-4 px-8 justify-center">
+                  Відкрити каталог <ArrowRight size={16} />
+                </Link>
+                <Link to="/contacts" className="btn-outline-white text-base py-4 px-8 justify-center">
+                  Замовити дзвінок
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
           DEALERS CTA
       ═══════════════════════════════════════════ */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="cta-gradient grain rounded-2xl p-8 md:p-14 text-white text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-dots pointer-events-none" />
             <div className="orb orb-orange w-64 h-64 -bottom-16 -right-8 opacity-35" />
             <div className="relative">
-              <div className="inline-flex items-center gap-2 bg-white/8 border border-white/12 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 bg-white/8 border border-white/12 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
                 🤝 Програма для партнерів
               </div>
               <h2 className="section-title-white mb-4 max-w-xl mx-auto">{t('dealers').title}</h2>

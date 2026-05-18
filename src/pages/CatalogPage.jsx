@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Search, ShoppingCart, ChevronRight, SlidersHorizontal, X } from 'lucide-react'
+import { Search, ShoppingCart, ChevronRight, X, Bookmark, ArrowUpRight, Plus } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -76,7 +76,7 @@ export default function CatalogPage() {
               {currentCategory && (
                 <span className="text-3xl block mb-2">{currentCategory.icon}</span>
               )}
-              <h1 className="text-3xl md:text-4xl font-black font-['Montserrat',sans-serif]">
+              <h1 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif]">
                 {currentCategory ? (currentCategory.name[lang] || currentCategory.name.uk) : cat.title}
               </h1>
               {currentCategory && (
@@ -84,7 +84,7 @@ export default function CatalogPage() {
               )}
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="text-3xl font-black font-['Montserrat',sans-serif]">{filtered.length}</div>
+              <div className="text-3xl font-black font-['Archivo',sans-serif]">{filtered.length}</div>
               <div className="text-white/50 text-xs">товарів</div>
             </div>
           </div>
@@ -158,57 +158,80 @@ export default function CatalogPage() {
             {filtered.map(product => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
               const price = parseFloat(product.price)
-              return (
-                <motion.div key={product.id} variants={fadeUp} className="group">
-                  <div className="card flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:shadow-[0_8px_32px_rgba(27,63,107,0.14)] hover:-translate-y-1 hover:border-[rgba(27,63,107,0.2)]">
-                    {/* gradient border on hover */}
-                    <div className="absolute inset-0 rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                      style={{ background: 'linear-gradient(135deg, rgba(27,63,107,0.06) 0%, rgba(232,93,4,0.04) 100%)' }} />
+              const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
+              const specEntries = product.specs ? Object.entries(product.specs).slice(0, 3) : []
 
-                    {/* Image */}
-                    <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`} className="relative block">
-                      {product.image ? (
-                        <img src={product.image} alt={name}
-                          className="w-full h-44 object-contain p-3 bg-gray-50/80 rounded-t-[1rem] group-hover:scale-[1.02] transition-transform duration-300" />
-                      ) : (
-                        <div className="w-full h-44 bg-gray-50 rounded-t-[1rem] flex items-center justify-center text-gray-300 text-5xl">⚙️</div>
-                      )}
-                      {/* Stock badge */}
-                      <span className={`absolute top-2 right-2 text-xs px-2 py-0.5 rounded-full font-semibold ${
-                        product.inStock
-                          ? 'bg-green-50 text-green-600 border border-green-100'
-                          : 'bg-gray-100 text-gray-500 border border-gray-200'
-                      }`}>
-                        {product.inStock ? '● В наявності' : '○ Під замовлення'}
-                      </span>
-                    </Link>
+              return (
+                <motion.div key={product.id} variants={fadeUp}>
+                  <div className="product-card-new group flex flex-col h-full">
+
+                    {/* Image area */}
+                    <div className="relative overflow-hidden h-44 bg-[var(--bg)]">
+                      <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}>
+                        {product.image ? (
+                          <img src={product.image} alt={name}
+                            className="w-full h-full object-contain p-3 group-hover:scale-[1.04] transition-transform duration-500" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-gray-300 text-5xl">⚙️</div>
+                        )}
+                      </Link>
+
+                      {/* NEW/HIT badge */}
+                      <div className="absolute top-2 left-2 flex gap-1">
+                        {!product.inStock && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 bg-gray-800 text-white rounded-full">Під замовлення</span>
+                        )}
+                      </div>
+
+                      {/* Quick-action bar */}
+                      <div className="quick-bar">
+                        <button
+                          onClick={() => addToCart(product)}
+                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 rounded-lg transition-colors"
+                          style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}
+                        >
+                          <Plus size={12} /> Швидка заявка
+                        </button>
+                        <Link
+                          to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}
+                          className="w-9 h-9 flex items-center justify-center border border-[var(--ink-200)] rounded-lg hover:border-gray-400 transition-colors text-gray-500 hover:text-gray-800"
+                        >
+                          <ArrowUpRight size={14} />
+                        </Link>
+                      </div>
+                    </div>
 
                     {/* Info */}
-                    <div className="p-4 flex flex-col flex-1 relative">
-                      {product.sku && (
-                        <div className="text-xs text-gray-400 mb-1 font-mono">{product.sku}</div>
+                    <div className="p-4 flex flex-col flex-1">
+                      {/* Category label */}
+                      {catObj && (
+                        <div className="eyebrow mb-1.5 truncate">
+                          {catObj.name[lang] || catObj.name.uk}
+                        </div>
                       )}
+
                       <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}>
-                        <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors line-clamp-2 mb-3 leading-snug">
+                        <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors line-clamp-2 mb-2.5 leading-snug">
                           {name}
                         </h3>
                       </Link>
 
-                      <div className="mt-auto">
-                        {price ? (
-                          <div className="text-lg font-black text-gray-900 mb-2">
-                            {price.toLocaleString('uk-UA')} <span className="text-sm font-medium text-gray-500">{t('common').uah}</span>
-                          </div>
-                        ) : (
-                          <div className="text-sm font-medium text-gray-400 mb-2">Ціна по запиту</div>
-                        )}
+                      {/* Spec pills */}
+                      {specEntries.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {specEntries.map(([, v]) => (
+                            <span key={v} className="spec-pill">{String(v).split(',')[0].trim()}</span>
+                          ))}
+                        </div>
+                      )}
 
-                        <button onClick={() => addToCart(product)}
-                          className="w-full flex items-center justify-center gap-2 text-white text-sm font-semibold py-2.5 rounded-xl transition-all duration-200 hover:shadow-[0_4px_14px_rgba(232,93,4,0.35)] active:scale-[0.97]"
-                          style={{ background: 'linear-gradient(135deg, var(--accent), #c94d00)' }}>
-                          <ShoppingCart size={14} />
-                          {cat.addToCart}
-                        </button>
+                      {/* Footer */}
+                      <div className="mt-auto flex items-center justify-between pt-2 border-t border-[var(--ink-200)]">
+                        <div className="text-[10px] font-mono text-gray-400 truncate">{product.sku || '—'}</div>
+                        <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
+                          {product.inStock ? 'В наявності' : 'Замовлення'}
+                        </div>
                       </div>
                     </div>
                   </div>

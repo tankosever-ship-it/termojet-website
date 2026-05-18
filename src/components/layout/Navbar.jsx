@@ -1,14 +1,115 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { ShoppingCart, Search, Menu, X, ChevronDown, Phone, Mail } from 'lucide-react'
+import { ShoppingCart, Search, Menu, X, ChevronDown, Phone, Mail, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
 import { LANGS } from '../../i18n/translations'
 import { CATEGORIES } from '../../data/categories'
 import { assetPath } from '../../utils/assetPath'
 
+// ─── Mega-menu (3 columns: categories | product previews | promo) ───
+function MegaMenu({ lang, products, onClose }) {
+  const [activeCatIdx, setActiveCatIdx] = useState(4) // насоси by default
+
+  const activeCat = CATEGORIES[activeCatIdx]
+  const catProducts = products
+    .filter(p => p.categorySlug === activeCat?.slug || p.categorySlug === activeCat?.id)
+    .slice(0, 6)
+
+  return (
+    <div className="mega-new" onMouseLeave={onClose}>
+      {/* Column 1 — categories */}
+      <div className="border-r border-[var(--ink-200)] py-3 px-3 overflow-y-auto max-h-[480px]">
+        <div className="eyebrow px-2 mb-3">Категорії · {CATEGORIES.length}</div>
+        {CATEGORIES.map((cat, i) => (
+          <div
+            key={cat.id}
+            className={`mega-cat-item ${i === activeCatIdx ? 'active' : ''}`}
+            onMouseEnter={() => setActiveCatIdx(i)}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="text-lg flex-shrink-0">{cat.icon}</span>
+              <span className="text-sm font-medium text-gray-800 leading-tight truncate">
+                {cat.name[lang] || cat.name.uk}
+              </span>
+            </div>
+            <span className="text-xs text-gray-400 flex-shrink-0">{cat.count}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Column 2 — product previews */}
+      <div className="py-3 px-3 border-r border-[var(--ink-200)]">
+        <div className="eyebrow px-2 mb-3">
+          {activeCat?.name[lang] || activeCat?.name.uk}
+        </div>
+        {catProducts.length > 0 ? (
+          <div className="grid grid-cols-2 gap-2">
+            {catProducts.map(p => {
+              const name = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
+              return (
+                <Link
+                  key={p.id}
+                  to={`/catalog/${p.categorySlug}/${p.slug || p.id}`}
+                  onClick={onClose}
+                  className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-colors group"
+                >
+                  <div className="w-11 h-11 rounded-lg bg-[var(--bg)] border border-[var(--ink-200)] flex-shrink-0 overflow-hidden">
+                    {p.image
+                      ? <img src={p.image} alt={name} className="w-full h-full object-contain p-1" />
+                      : <span className="flex items-center justify-center w-full h-full text-lg">{activeCat.icon}</span>
+                    }
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--primary)] transition-colors">
+                      {name}
+                    </div>
+                    {p.sku && <div className="text-[10px] text-gray-400 font-mono mt-0.5">{p.sku}</div>}
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-40 text-gray-300 text-sm">
+            Оберіть категорію
+          </div>
+        )}
+        <div className="mt-3 pt-3 border-t border-[var(--ink-200)]">
+          <Link
+            to={`/catalog/${activeCat?.slug}`}
+            onClick={onClose}
+            className="flex items-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:gap-2.5 transition-all"
+          >
+            Всі товари категорії <ArrowRight size={12} />
+          </Link>
+        </div>
+      </div>
+
+      {/* Column 3 — promo panel */}
+      <div className="section-navy p-5 flex flex-col gap-4">
+        <div className="eyebrow-white">Termojet App</div>
+        <h4 className="text-white font-black text-lg leading-tight font-['Archivo',sans-serif]">
+          Конфігуратор<br />котельної<br />системи
+        </h4>
+        <p className="text-white/55 text-xs leading-relaxed">
+          Підберіть колектор та насосні групи без помилок. Експорт PDF.
+        </p>
+        <button className="mt-auto flex items-center gap-2 text-xs font-bold text-white bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 hover:bg-white/20 transition-colors self-start">
+          Запустити <ArrowUpRight size={13} />
+        </button>
+        <div className="border-t border-white/10 pt-3">
+          <Link to="/catalog" onClick={onClose} className="btn-primary text-xs py-2 px-4 w-full justify-center">
+            Весь каталог →
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Navbar() {
-  const { lang, setLang, cartCount, siteSettings } = useApp()
+  const { lang, setLang, cartCount, siteSettings, products } = useApp()
   const t = useT()
   const nav = t('nav')
   const location = useLocation()
@@ -79,19 +180,19 @@ export default function Navbar() {
       {/* ─── Main navbar ─── */}
       <header className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-xl shadow-[0_2px_20px_rgba(27,63,107,0.12)] border-b border-[var(--border)]'
-          : 'bg-white border-b border-[var(--border)]'
+          ? 'bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_rgba(27,63,107,0.10)] border-b border-[var(--ink-200)]'
+          : 'bg-white border-b border-[var(--ink-200)]'
       }`}>
-        {/* gradient accent line at bottom of header */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(27,63,107,0.2)] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(27,63,107,0.15)] to-transparent" />
 
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-4 h-16">
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0 flex items-center gap-2.5 group">
-              <img src={assetPath('/logo.png')} alt="Termojet" className="h-9 w-auto" onError={e => { e.target.style.display='none' }} />
-              <span className="font-black text-xl tracking-tight font-['Montserrat',sans-serif] hidden sm:block"
+              <img src={assetPath('/logo.png')} alt="Termojet" className="h-9 w-auto"
+                onError={e => { e.target.style.display='none' }} />
+              <span className="font-black text-xl tracking-tight font-['Archivo',sans-serif] hidden sm:block"
                 style={{ background: 'linear-gradient(135deg, #FF5500 0%, #FF9500 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 TERMOJET
               </span>
@@ -99,9 +200,11 @@ export default function Navbar() {
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-0.5 flex-1 ml-4">
-              {/* Catalog mega-menu */}
+
+              {/* Catalog — mega-menu trigger */}
               <div className="relative" ref={catalogRef}>
                 <button
+                  onMouseEnter={() => setCatalogOpen(true)}
                   onClick={() => setCatalogOpen(v => !v)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
                     isActive('/catalog')
@@ -114,49 +217,20 @@ export default function Navbar() {
                 </button>
 
                 {catalogOpen && (
-                  <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl border border-[var(--border)] overflow-hidden z-50 w-[760px]"
-                    style={{ boxShadow: '0 20px 60px rgba(27,63,107,0.15), 0 4px 16px rgba(0,0,0,0.08)' }}>
-                    {/* Mega-menu header */}
-                    <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-between"
-                      style={{ background: 'linear-gradient(90deg, rgba(27,63,107,0.04), rgba(232,93,4,0.03))' }}>
-                      <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Каталог обладнання</span>
-                      <span className="text-xs text-gray-400">13 категорій • 242 товари</span>
-                    </div>
-                    {/* Categories grid */}
-                    <div className="p-4 grid grid-cols-3 gap-1">
-                      {CATEGORIES.map(cat => (
-                        <Link
-                          key={cat.id}
-                          to={`/catalog/${cat.slug}`}
-                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/60 transition-all group"
-                        >
-                          <span className="text-2xl mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform">{cat.icon}</span>
-                          <div>
-                            <div className="text-sm font-semibold text-gray-800 group-hover:text-[var(--primary)] transition-colors leading-tight">
-                              {cat.name[lang] || cat.name.uk}
-                            </div>
-                            <div className="text-xs text-gray-400 mt-0.5">{cat.count} товарів</div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                    {/* Footer */}
-                    <div className="px-5 py-3 border-t border-gray-100 flex items-center justify-between bg-gray-50/50">
-                      <span className="text-xs text-gray-400">Власне виробництво • MADE IN UKRAINE 🇺🇦</span>
-                      <Link to="/catalog" className="btn-primary text-xs py-1.5 px-4">
-                        Весь каталог →
-                      </Link>
-                    </div>
-                  </div>
+                  <MegaMenu
+                    lang={lang}
+                    products={products}
+                    onClose={() => setCatalogOpen(false)}
+                  />
                 )}
               </div>
 
               {[
-                { to: '/about', label: nav.about },
+                { to: '/about',     label: nav.about },
                 { to: '/portfolio', label: nav.portfolio },
-                { to: '/blog', label: nav.blog },
-                { to: '/dealers', label: nav.dealers },
-                { to: '/contacts', label: nav.contacts },
+                { to: '/blog',      label: nav.blog },
+                { to: '/dealers',   label: nav.dealers },
+                { to: '/contacts',  label: nav.contacts },
               ].map(({ to, label }) => (
                 <Link key={to} to={to}
                   className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -171,14 +245,12 @@ export default function Navbar() {
 
             {/* Right actions */}
             <div className="flex items-center gap-1">
-              {/* Search */}
               <button onClick={() => setSearchOpen(v => !v)}
                 className={`p-2 rounded-lg transition-all ${searchOpen ? 'bg-blue-50 text-[var(--primary)]' : 'text-gray-500 hover:bg-gray-100 hover:text-[var(--primary)]'}`}>
                 <Search size={18} />
               </button>
 
-              {/* Lang switcher */}
-              <div className="hidden md:flex items-center border border-gray-200 rounded-lg overflow-hidden ml-1">
+              <div className="hidden md:flex items-center border border-[var(--ink-200)] rounded-lg overflow-hidden ml-1">
                 {LANGS.map(l => (
                   <button key={l.code} onClick={() => setLang(l.code)}
                     className={`px-2 py-1.5 text-xs font-bold transition-colors ${
@@ -189,7 +261,6 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Cart */}
               <Link to="/cart" className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-[var(--primary)] transition-all ml-1">
                 <ShoppingCart size={18} />
                 {cartCount > 0 && (
@@ -200,7 +271,6 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* Burger */}
               <button onClick={() => setMenuOpen(v => !v)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors ml-1">
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -214,7 +284,7 @@ export default function Navbar() {
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input ref={searchRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                   placeholder={nav.search}
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[rgba(27,63,107,0.08)] text-sm bg-gray-50/80" />
+                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[var(--ink-200)] focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[rgba(27,63,107,0.08)] text-sm bg-[var(--bg)]" />
               </div>
             </form>
           )}
@@ -222,25 +292,25 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-gray-100 bg-white/95 backdrop-blur-xl">
+          <div className="lg:hidden border-t border-[var(--ink-200)] bg-white/98 backdrop-blur-xl">
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5">
               {[
-                { to: '/catalog', label: nav.catalog },
-                { to: '/about', label: nav.about },
+                { to: '/catalog',   label: nav.catalog },
+                { to: '/about',     label: nav.about },
                 { to: '/portfolio', label: nav.portfolio },
-                { to: '/blog', label: nav.blog },
-                { to: '/dealers', label: nav.dealers },
-                { to: '/contacts', label: nav.contacts },
+                { to: '/blog',      label: nav.blog },
+                { to: '/dealers',   label: nav.dealers },
+                { to: '/contacts',  label: nav.contacts },
               ].map(({ to, label }) => (
                 <Link key={to} to={to}
                   className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(to) ? 'bg-blue-50 text-[var(--primary)]' : 'text-gray-700 hover:bg-gray-50'}`}>
                   {label}
                 </Link>
               ))}
-              <div className="flex gap-1 pt-2 border-t border-gray-100 mt-1 flex-wrap">
+              <div className="flex gap-1 pt-2 border-t border-[var(--ink-200)] mt-1 flex-wrap">
                 {LANGS.map(l => (
                   <button key={l.code} onClick={() => setLang(l.code)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${lang === l.code ? 'bg-[var(--primary)] text-white' : 'text-gray-600 border border-gray-200'}`}>
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${lang === l.code ? 'bg-[var(--primary)] text-white' : 'text-gray-600 border border-[var(--ink-200)]'}`}>
                     {l.flag} {l.label}
                   </button>
                 ))}

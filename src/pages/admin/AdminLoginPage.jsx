@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
           <div className="w-14 h-14 bg-[var(--primary)] rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Lock size={24} className="text-white" />
           </div>
-          <h1 className="text-xl font-black font-['Montserrat',sans-serif] text-[var(--primary)]">TERMOJET</h1>
+          <h1 className="text-xl font-black font-['Archivo',sans-serif] text-[var(--primary)]">TERMOJET</h1>
           <p className="text-sm text-gray-500 mt-1">Адміністративна панель</p>
         </div>
 

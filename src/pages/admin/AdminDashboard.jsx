@@ -40,7 +40,7 @@ export default function AdminDashboard() {
       {/* Admin header */}
       <div className="bg-[var(--primary)] text-white px-6 py-4 flex items-center justify-between">
         <div>
-          <div className="font-black text-lg font-['Montserrat',sans-serif]">TERMOJET Admin</div>
+          <div className="font-black text-lg font-['Archivo',sans-serif]">TERMOJET Admin</div>
           <div className="text-white/60 text-xs">Адміністративна панель</div>
         </div>
         <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {stats.map(s => (
             <div key={s.label} className="card p-5 text-center">
-              <div className={`text-3xl font-black font-['Montserrat',sans-serif] ${s.color}`}>{s.value}</div>
+              <div className={`text-3xl font-black font-['Archivo',sans-serif] ${s.color}`}>{s.value}</div>
               <div className="text-xs text-gray-500 mt-1">{s.label}</div>
             </div>
           ))}

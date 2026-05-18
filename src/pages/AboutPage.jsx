@@ -67,7 +67,7 @@ export default function AboutPage() {
               🇺🇦 MADE IN UKRAINE &bull; з 2002 року
             </motion.div>
             <motion.h1 initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.1 }}
-              className="text-4xl md:text-5xl font-black font-['Montserrat',sans-serif] mb-5 leading-[1.1]">
+              className="text-4xl md:text-5xl font-black font-['Archivo',sans-serif] mb-5 leading-[1.1]">
               {about.title}
             </motion.h1>
             <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}
@@ -89,7 +89,7 @@ export default function AboutPage() {
             {STATS.map(s => (
               <motion.div key={s.label} variants={fadeUp} className="stat-card group text-center">
                 <div className="text-3xl mb-2">{s.icon}</div>
-                <div className="text-2xl font-black font-['Montserrat',sans-serif] group-hover:text-[#FF8533] transition-colors">{s.value}</div>
+                <div className="text-2xl font-black font-['Archivo',sans-serif] group-hover:text-[#FF8533] transition-colors">{s.value}</div>
                 <div className="text-xs text-white/45 mt-0.5">{s.label}</div>
               </motion.div>
             ))}
@@ -241,7 +241,7 @@ export default function AboutPage() {
                   <div className={`ml-14 md:ml-0 flex-1 ${i%2===0 ? 'md:pr-10' : 'md:pl-10'}`}>
                     <div className="card p-5 card-hover">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-2xl font-black font-['Montserrat',sans-serif] text-gradient-orange">
+                        <span className="text-2xl font-black font-['Archivo',sans-serif] text-gradient-orange">
                           {item.year}
                         </span>
                         <span className="font-bold text-gray-900 text-sm">{item.title}</span>

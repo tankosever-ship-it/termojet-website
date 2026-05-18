@@ -31,7 +31,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <div className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-1">Готові до співпраці?</div>
-            <div className="font-black text-2xl font-['Montserrat',sans-serif]">Підберемо рішення для вашого проекту</div>
+            <div className="font-black text-2xl font-['Archivo',sans-serif]">Підберемо рішення для вашого проекту</div>
             <div className="text-white/50 text-sm mt-1">Технічна консультація безкоштовно • Відповідь протягом 1 години</div>
           </div>
           <div className="flex gap-3 flex-shrink-0">
@@ -53,7 +53,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img src={assetPath('/logo.png')} alt="Termojet" className="h-8 w-auto brightness-0 invert" onError={e => { e.target.style.display='none' }} />
-              <span className="font-black text-xl font-['Montserrat',sans-serif]">TERMOJET</span>
+              <span className="font-black text-xl font-['Archivo',sans-serif]">TERMOJET</span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-5">{footer.company}</p>
 
@@ -71,7 +71,7 @@ export default function Footer() {
               ].map(s => (
                 <div key={s.val} className="rounded-lg p-2.5 text-center border border-white/8"
                   style={{ background: 'rgba(255,255,255,0.04)' }}>
-                  <div className="font-black text-lg font-['Montserrat',sans-serif] text-white">{s.val}</div>
+                  <div className="font-black text-lg font-['Archivo',sans-serif] text-white">{s.val}</div>
                   <div className="text-xs text-white/40">{s.label}</div>
                 </div>
               ))}

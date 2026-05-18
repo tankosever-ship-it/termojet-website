@@ -58,7 +58,7 @@ export default function BlogPostPage() {
               </span>
             )}
           </div>
-          <h1 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight font-['Montserrat',sans-serif]">{title}</h1>
+          <h1 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight font-['Archivo',sans-serif]">{title}</h1>
           {excerpt && <p className="text-gray-500 text-lg mt-3 leading-relaxed">{excerpt}</p>}
         </div>
 
