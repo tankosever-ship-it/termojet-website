@@ -6,7 +6,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
-import PumpViewer3D from '../components/PumpViewer3D'
+import HeroBg3D from '../components/HeroBg3D'
 
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
@@ -115,19 +115,33 @@ export default function HomePage() {
       )}
 
       {/* ═══════════════════════════════════════════
-          HERO — 2 колонки: текст | відео
+          HERO — 3D фон + текст поверх
       ═══════════════════════════════════════════ */}
-      <section className="hero-gradient grain relative overflow-hidden text-white">
-        <div className="orb orb-blue   w-[500px] h-[500px] -top-32 -right-20 opacity-50" />
-        <div className="orb orb-orange w-[400px] h-[400px]  bottom-0  left-1/4 opacity-40" />
-        <div className="absolute inset-0 bg-dots pointer-events-none" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.7)] to-transparent" />
+      <section className="relative overflow-hidden text-white" style={{ minHeight: '88vh' }}>
 
-        <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        {/* Base gradient background */}
+        <div className="absolute inset-0"
+          style={{ background: 'linear-gradient(135deg, #060d1a 0%, #0f2040 45%, #0a1628 100%)' }} />
 
-            {/* Left — text */}
+        {/* 3D scene — full background */}
+        <div className="absolute inset-0" style={{ opacity: 0.85 }}>
+          <HeroBg3D />
+        </div>
+
+        {/* Overlay gradients for text readability */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(90deg, rgba(6,13,26,0.82) 0%, rgba(6,13,26,0.5) 55%, rgba(6,13,26,0.1) 100%)' }} />
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(180deg, rgba(6,13,26,0.3) 0%, transparent 30%, transparent 70%, rgba(6,13,26,0.6) 100%)' }} />
+
+        {/* Orange top line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.7)] to-transparent pointer-events-none" />
+
+        {/* Text content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 flex items-center" style={{ minHeight: '88vh' }}>
+          <div className="max-w-xl py-24">
             <motion.div initial="hidden" animate="show" variants={stagger}>
+
               <motion.div variants={fadeUp} className="eyebrow-white mb-6" style={{ fontSize: '13px', letterSpacing: '0.1em' }}>
                 ● Системи швидкого монтажу · Виробництво з 2002
               </motion.div>
@@ -141,7 +155,7 @@ export default function HomePage() {
                 <span className="text-outline-white">а не за тижні.</span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8 max-w-lg">
+              <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8">
                 {hero.subtitle}
               </motion.p>
 
@@ -171,21 +185,12 @@ export default function HomePage() {
                 ))}
               </motion.div>
             </motion.div>
-
-            {/* Right — 3D pump model */}
-            <motion.div
-              initial={{ opacity:0, x:40 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.7, delay:0.2 }}
-              className="relative"
-            >
-              <div className="aspect-video w-full">
-                <PumpViewer3D />
-              </div>
-
-            </motion.div>
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[var(--bg)] to-transparent pointer-events-none" />
+        {/* Bottom fade into page */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, var(--bg), transparent)' }} />
       </section>
 
       {/* ═══════════════════════════════════════════
