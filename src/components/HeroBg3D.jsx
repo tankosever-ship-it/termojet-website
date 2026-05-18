@@ -12,7 +12,7 @@ function SceneModel() {
   })
 
   return (
-    <group ref={spinRef} position={[3.5, 0, 0]}>
+    <group ref={spinRef} position={[3.5, 1.2, 0]}>
       <Center>
         <primitive
           object={scene}
