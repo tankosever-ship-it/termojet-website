@@ -4,21 +4,21 @@ import { useGLTF, Environment } from '@react-three/drei'
 import { assetPath } from '../utils/assetPath'
 
 function SceneModel() {
-  const ref = useRef()
+  const spinRef = useRef()
   const { scene } = useGLTF(assetPath('/scene.glb'))
 
   useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += delta * 0.06
+    if (spinRef.current) spinRef.current.rotation.y += delta * 0.06
   })
 
   return (
-    <primitive
-      ref={ref}
-      object={scene}
-      scale={0.012}
-      position={[3.5, 0, 0]}
-      rotation={[-Math.PI / 2, 0, Math.PI / 2]}
-    />
+    <group ref={spinRef} position={[3.5, 0, 0]}>
+      <primitive
+        object={scene}
+        scale={0.008}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+      />
+    </group>
   )
 }
 
