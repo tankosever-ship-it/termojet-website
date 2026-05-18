@@ -6,3 +6,5 @@ dist
 *.STEP
 *.glb filter=lfs diff=lfs merge=lfs -text
 Знімок*
+*.glb
+.claude/worktrees/
