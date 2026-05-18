@@ -123,6 +123,17 @@ export default function HomePage() {
         <div className="absolute inset-0"
           style={{ background: 'linear-gradient(135deg, #060d1a 0%, #0f2040 45%, #0a1628 100%)' }} />
 
+        {/* Orange accent glow — bottom right */}
+        <div className="absolute pointer-events-none"
+          style={{ width: 600, height: 600, borderRadius: '50%', bottom: '-150px', right: '-100px',
+            background: 'radial-gradient(circle, rgba(255,85,0,0.22) 0%, rgba(255,85,0,0.06) 50%, transparent 70%)',
+            filter: 'blur(40px)' }} />
+        {/* Blue accent glow — top left */}
+        <div className="absolute pointer-events-none"
+          style={{ width: 500, height: 500, borderRadius: '50%', top: '-100px', left: '-80px',
+            background: 'radial-gradient(circle, rgba(36,87,160,0.28) 0%, rgba(36,87,160,0.08) 50%, transparent 70%)',
+            filter: 'blur(40px)' }} />
+
         {/* 3D scene — full background */}
         <div className="absolute inset-0" style={{ opacity: 0.85 }}>
           <HeroBg3D />
