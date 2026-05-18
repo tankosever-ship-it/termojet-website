@@ -1,6 +1,6 @@
 import { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, Environment } from '@react-three/drei'
+import { useGLTF, Environment, Center } from '@react-three/drei'
 import { assetPath } from '../utils/assetPath'
 
 function SceneModel() {
@@ -13,11 +13,13 @@ function SceneModel() {
 
   return (
     <group ref={spinRef} position={[3.5, 0, 0]}>
-      <primitive
-        object={scene}
-        scale={0.002}
-        rotation={[Math.PI / 2, 0, Math.PI / 2]}
-      />
+      <Center>
+        <primitive
+          object={scene}
+          scale={0.002}
+          rotation={[Math.PI / 2, 0, Math.PI / 2]}
+        />
+      </Center>
     </group>
   )
 }
