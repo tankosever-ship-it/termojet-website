@@ -14,7 +14,7 @@ function MegaMenu({ lang, products, onClose }) {
   const activeCat = CATEGORIES[activeCatIdx]
   const catProducts = products
     .filter(p => p.categorySlug === activeCat?.slug || p.categorySlug === activeCat?.id)
-    .slice(0, 6)
+    .slice(0, 9)
 
   return (
     <div className="mega-new" onMouseLeave={onClose}>
@@ -44,7 +44,7 @@ function MegaMenu({ lang, products, onClose }) {
           {activeCat?.name[lang] || activeCat?.name.uk}
         </div>
         {catProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {catProducts.map(p => {
               const name = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
               return (
@@ -52,11 +52,11 @@ function MegaMenu({ lang, products, onClose }) {
                   key={p.id}
                   to={`/catalog/${p.categorySlug}/${p.slug || p.id}`}
                   onClick={onClose}
-                  className="flex flex-col items-center gap-2 p-2.5 rounded-lg hover:bg-gray-50 transition-colors group text-center"
+                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-[var(--ink-200)] transition-all group text-center"
                 >
-                  <div className="w-16 h-16 rounded-xl bg-[var(--bg)] border border-[var(--ink-200)] flex-shrink-0 overflow-hidden">
+                  <div className="w-20 h-20 rounded-xl bg-[var(--bg)] border border-[var(--ink-200)] flex-shrink-0 overflow-hidden group-hover:border-[var(--primary)]/30 transition-colors">
                     {p.image
-                      ? <img src={p.image} alt={name} className="w-full h-full object-contain p-1.5" />
+                      ? <img src={p.image} alt={name} className="w-full h-full object-contain p-2" />
                       : <span className="flex items-center justify-center w-full h-full text-2xl">{activeCat.icon}</span>
                     }
                   </div>

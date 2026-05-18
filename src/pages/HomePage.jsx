@@ -59,7 +59,7 @@ function CountUp({ end, suffix, duration = 1600 }) {
 }
 
 export default function HomePage() {
-  const { lang, blog, portfolio } = useApp()
+  const { lang, blog, portfolio, products } = useApp()
   const t    = useT()
   const hero = t('hero')
   const cats = t('categories')
@@ -67,6 +67,7 @@ export default function HomePage() {
 
   const [videoOpen, setVideoOpen] = useState(false)
   const [statsVisible, setStatsVisible] = useState(false)
+  const [hoveredAdvantage, setHoveredAdvantage] = useState(null)
   const statsRef = useRef(null)
 
   useEffect(() => {
@@ -279,24 +280,36 @@ export default function HomePage() {
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {featuredCats.map(cat => (
-              <motion.div key={cat.id} variants={fadeUp}>
-                <Link to={`/catalog/${cat.slug}`} className="cat-card block p-5 h-full bg-white">
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-3xl">{cat.icon}</span>
-                    <span className="w-7 h-7 rounded-full flex items-center justify-center"
-                      style={{ background:'rgba(255,85,0,0.1)', border:'1px solid rgba(255,85,0,0.2)' }}>
-                      <ArrowRight size={12} style={{ color:'#FF5500' }} />
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-gray-900 leading-tight mb-1.5">
-                    {cat.name[lang] || cat.name.uk}
-                  </h3>
-                  <p className="text-xs text-gray-500 leading-relaxed mb-4">{cat.desc[lang] || cat.desc.uk}</p>
-                  <div className="text-xs font-semibold" style={{ color:'#FF5500' }}>{cat.count} товарів</div>
-                </Link>
-              </motion.div>
-            ))}
+            {featuredCats.map(cat => {
+              const catProduct = products.find(p => (p.categorySlug === cat.slug || p.categorySlug === cat.id) && p.image)
+              return (
+                <motion.div key={cat.id} variants={fadeUp}>
+                  <Link to={`/catalog/${cat.slug}`} className="cat-card block h-full bg-white overflow-hidden group">
+                    {/* Product photo */}
+                    <div className="h-40 bg-[var(--bg)] overflow-hidden relative">
+                      {catProduct?.image ? (
+                        <img src={catProduct.image} alt={cat.name[lang] || cat.name.uk}
+                          className="w-full h-full object-contain p-4 group-hover:scale-[1.05] transition-transform duration-500" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-4xl">{cat.icon}</div>
+                      )}
+                      <div className="absolute top-2 right-2">
+                        <span className="w-7 h-7 rounded-full flex items-center justify-center bg-white/80 backdrop-blur-sm border border-[var(--ink-200)] group-hover:bg-[var(--accent)] group-hover:border-transparent transition-all">
+                          <ArrowRight size={12} className="text-[var(--accent)] group-hover:text-white transition-colors" />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-gray-900 leading-tight mb-1 group-hover:text-[var(--primary)] transition-colors">
+                        {cat.name[lang] || cat.name.uk}
+                      </h3>
+                      <p className="text-xs text-gray-500 leading-relaxed mb-3">{cat.desc[lang] || cat.desc.uk}</p>
+                      <div className="text-xs font-semibold" style={{ color:'#FF5500' }}>{cat.count} товарів</div>
+                    </div>
+                  </Link>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </section>
@@ -323,26 +336,59 @@ export default function HomePage() {
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { icon: '🏭', title: 'Власне виробництво', desc: 'Завод 3 000 м² у Києві. Повний цикл від металу до готового вузла.' },
-              { icon: '🛡️', title: 'Гарантія якості',    desc: 'Кожна одиниця проходить вихідний контроль. ISO 9001:2015, CE.' },
-              { icon: '📦', title: 'Наявність на складі', desc: 'Склад 2 500 м². Більшість позицій відвантажуємо наступного дня.' },
-              { icon: '🌍', title: 'Міжнародний досвід', desc: 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року.' },
-              { icon: '🔧', title: 'Технічна підтримка', desc: 'Інженерна підтримка на всіх етапах. Підбір під ваш проект.' },
-              { icon: '⚡', title: 'Комплексні рішення', desc: 'TERMOJET BOX, Mini, Mega — від 30 кВт до 2 МВт.' },
-            ].map((item, i) => (
-              <motion.div key={i} variants={fadeUp} className="glass-card p-6 flex flex-col gap-4">
-                <div className="text-3xl">{item.icon}</div>
-                <div>
-                  <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-                <div className="mt-auto pt-4 border-t border-white/8">
-                  <span className="text-xs font-semibold text-[#FF8533] flex items-center gap-1.5">
-                    <Check size={12} /> Підтверджено досвідом
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+              { num: '01', title: 'Власне виробництво', desc: 'Завод 3 000 м² у Києві. Повний цикл від металу до готового вузла.' },
+              { num: '02', title: 'Гарантія якості',    desc: 'Кожна одиниця проходить вихідний контроль. ISO 9001:2015, CE.' },
+              { num: '03', title: 'Наявність на складі', desc: 'Склад 2 500 м². Більшість позицій відвантажуємо наступного дня.' },
+              { num: '04', title: 'Міжнародний досвід', desc: 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року.' },
+              { num: '05', title: 'Технічна підтримка', desc: 'Інженерна підтримка на всіх етапах. Підбір під ваш проект.' },
+              { num: '06', title: 'Комплексні рішення', desc: 'TERMOJET BOX, Mini, Mega — від 30 кВт до 2 МВт.' },
+            ].map((item, i) => {
+              const isHovered = hoveredAdvantage === i
+              return (
+                <motion.div key={i} variants={fadeUp}
+                  onMouseEnter={() => setHoveredAdvantage(i)}
+                  onMouseLeave={() => setHoveredAdvantage(null)}
+                  animate={{ scale: isHovered ? 1.02 : 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="relative p-6 flex flex-col gap-4 rounded-2xl cursor-default overflow-hidden"
+                  style={{
+                    background: isHovered
+                      ? 'linear-gradient(135deg, rgba(255,85,0,0.12), rgba(36,87,160,0.12))'
+                      : 'rgba(255,255,255,0.05)',
+                    border: isHovered
+                      ? '1px solid rgba(255,85,0,0.35)'
+                      : '1px solid rgba(255,255,255,0.08)',
+                    transition: 'background 0.25s ease, border-color 0.25s ease',
+                  }}>
+                  {/* Animated glow on hover */}
+                  {isHovered && (
+                    <div className="absolute inset-0 pointer-events-none rounded-2xl"
+                      style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,85,0,0.08), transparent 70%)' }} />
+                  )}
+                  <div className="relative flex items-start justify-between">
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.1em', color: isHovered ? 'var(--accent)' : 'rgba(255,255,255,0.25)', transition: 'color 0.25s' }}>
+                      {item.num}
+                    </span>
+                    <motion.div animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 4 }} transition={{ duration: 0.2 }}>
+                      <ArrowUpRight size={16} className="text-[var(--accent)]" />
+                    </motion.div>
+                  </div>
+                  <div className="relative">
+                    <h3 className="font-bold text-white mb-2 transition-colors" style={{ color: isHovered ? 'white' : 'rgba(255,255,255,0.85)' }}>
+                      {item.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: isHovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.45)', transition: 'color 0.25s' }}>
+                      {item.desc}
+                    </p>
+                  </div>
+                  <div className="relative mt-auto pt-4 border-t" style={{ borderColor: isHovered ? 'rgba(255,85,0,0.2)' : 'rgba(255,255,255,0.06)', transition: 'border-color 0.25s' }}>
+                    <span className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: isHovered ? '#FF8533' : 'rgba(255,255,255,0.25)', fontFamily: "'JetBrains Mono', monospace", transition: 'color 0.25s' }}>
+                      <Check size={12} /> Підтверджено досвідом
+                    </span>
+                  </div>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </section>
