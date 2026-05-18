@@ -29,7 +29,7 @@ function MegaMenu({ lang, products, onClose }) {
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <span className="text-lg flex-shrink-0">{cat.icon}</span>
-              <span className="text-sm font-medium text-gray-800 leading-tight truncate">
+              <span className="text-sm font-medium text-gray-800 leading-tight">
                 {cat.name[lang] || cat.name.uk}
               </span>
             </div>
@@ -52,15 +52,15 @@ function MegaMenu({ lang, products, onClose }) {
                   key={p.id}
                   to={`/catalog/${p.categorySlug}/${p.slug || p.id}`}
                   onClick={onClose}
-                  className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-colors group"
+                  className="flex flex-col items-center gap-2 p-2.5 rounded-lg hover:bg-gray-50 transition-colors group text-center"
                 >
-                  <div className="w-11 h-11 rounded-lg bg-[var(--bg)] border border-[var(--ink-200)] flex-shrink-0 overflow-hidden">
+                  <div className="w-16 h-16 rounded-xl bg-[var(--bg)] border border-[var(--ink-200)] flex-shrink-0 overflow-hidden">
                     {p.image
-                      ? <img src={p.image} alt={name} className="w-full h-full object-contain p-1" />
-                      : <span className="flex items-center justify-center w-full h-full text-lg">{activeCat.icon}</span>
+                      ? <img src={p.image} alt={name} className="w-full h-full object-contain p-1.5" />
+                      : <span className="flex items-center justify-center w-full h-full text-2xl">{activeCat.icon}</span>
                     }
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 w-full">
                     <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--primary)] transition-colors">
                       {name}
                     </div>
@@ -154,17 +154,23 @@ export default function Navbar() {
   return (
     <>
       {/* ─── Top bar ─── */}
-      <div className="hidden md:block text-white/80 text-xs py-1.5"
-        style={{ background: 'linear-gradient(90deg, #0a1628 0%, #1B3F6B 60%, #0a1628 100%)' }}>
+      <div className="hidden md:block text-white/70 py-2"
+        style={{ background: '#080f1c', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <span className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              🇺🇦 <span className="font-semibold text-white/90">Виробник обладнання для котелень з 2002 року</span>
+          <div className="flex items-center gap-5" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.04em' }}>
+            <span className="flex items-center gap-1.5 text-white/80">
+              <span className="text-[var(--accent)]">●</span> 20 років на ринку
             </span>
-            <span className="text-white/30">•</span>
-            <span>Київ, Україна</span>
-          </span>
-          <div className="flex items-center gap-4">
+            <span className="text-white/20">|</span>
+            <span className="flex items-center gap-1.5 text-white/80">
+              <span className="text-[var(--accent)]">●</span> Експорт у 15 країн
+            </span>
+            <span className="text-white/20">|</span>
+            <span className="flex items-center gap-1.5 text-white/80">
+              <span className="text-[var(--accent)]">●</span> Власне виробництво в Києві і Житомирі
+            </span>
+          </div>
+          <div className="flex items-center gap-4" style={{ fontSize: '11px' }}>
             <a href={`tel:${siteSettings.phone}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={11} className="text-[var(--accent-light)]" />
               {siteSettings.phone}

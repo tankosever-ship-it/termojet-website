@@ -26,25 +26,6 @@ export default function Footer() {
       {/* gradient top border */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(232,93,4,0.5)] to-transparent" />
 
-      {/* ─── CTA strip ─── */}
-      <div className="relative border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-[var(--accent-light)] mb-1">Готові до співпраці?</div>
-            <div className="font-black text-2xl font-['Archivo',sans-serif]">Підберемо рішення для вашого проекту</div>
-            <div className="text-white/50 text-sm mt-1">Технічна консультація безкоштовно • Відповідь протягом 1 години</div>
-          </div>
-          <div className="flex gap-3 flex-shrink-0">
-            <Link to="/contacts" className="btn-primary text-sm shadow-lg shadow-orange-900/20">
-              Отримати консультацію <ArrowRight size={14} />
-            </Link>
-            <Link to="/catalog" className="btn-outline-white text-sm">
-              Каталог
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* ─── Main footer content ─── */}
       <div className="relative max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">

@@ -11,10 +11,14 @@ const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973c
 const YT_ID   = 'UzEOVxcS4mw'
 
 const PROD_PHOTOS = [
-  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-38-1.jpg',
-  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-15.jpg',
-  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-22.jpg',
-  'https://termojet.com.ua/wp-content/uploads/2024/09/photo_2024-04-05_18-35-29.jpg',
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-09.jpg', label: '● Лазерне різання' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-12.jpg', label: '● Листогибне виробництво' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-22.jpg', label: '● Зварювання' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-32.jpg', label: '● Складання вузлів' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-38.jpg', label: '● Контроль якості' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-34.jpg', label: '● Готова продукція' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-33-55.jpg', label: '● Пакування' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-47.jpg', label: '● Склад відвантаження' },
 ]
 
 const MARQUEE_ITEMS = ['ЕФЕКТИВНО', 'З ТЕПЛОІЗОЛЯЦІЄЮ', 'ВЛАСНЕ ВИРОБНИЦТВО', 'ШВИДКО', 'НАДІЙНО', 'MADE IN UKRAINE', 'З 2002 РОКУ', 'КИЇВ']
@@ -122,7 +126,7 @@ export default function HomePage() {
 
             {/* Left — text */}
             <motion.div initial="hidden" animate="show" variants={stagger}>
-              <motion.div variants={fadeUp} className="eyebrow-white mb-6">
+              <motion.div variants={fadeUp} className="eyebrow-white mb-6" style={{ fontSize: '13px', letterSpacing: '0.1em' }}>
                 ● Системи швидкого монтажу · Виробництво з 2002
               </motion.div>
 
@@ -156,10 +160,11 @@ export default function HomePage() {
                 </button>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-sm text-white/40">
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-white/40"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.04em' }}>
                 {['Гарантія якості', 'Доставка по Україні', '50 000+ котелень', 'ISO 9001:2015'].map(item => (
                   <span key={item} className="flex items-center gap-1.5">
-                    <Check size={13} className="text-[#FF8533]" /> {item}
+                    <Check size={12} className="text-[#FF8533]" /> {item}
                   </span>
                 ))}
               </motion.div>
@@ -249,7 +254,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          CATEGORIES
+          CATEGORIES — Каталог · SKU
       ═══════════════════════════════════════════ */}
       <section className="py-16 md:py-20 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto px-4">
@@ -297,134 +302,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          CONFIGURATOR — dark section
-      ═══════════════════════════════════════════ */}
-      <section className="section-navy grain relative overflow-hidden py-20 md:py-28">
-        <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-30" />
-        <div className="orb orb-blue   w-[350px] h-[350px] -left-16  -top-16              opacity-25" />
-        <div className="absolute inset-0 bg-dots pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-
-            {/* Left — diagram */}
-            <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-8"
-                style={{ minHeight: 300 }}>
-                {/* Simple SVG diagram */}
-                <svg viewBox="0 0 320 200" className="w-full" fill="none">
-                  {/* Main pipe horizontal */}
-                  <line x1="40" y1="100" x2="280" y2="100" stroke="rgba(255,85,0,0.6)" strokeWidth="2" strokeDasharray="6,3" />
-                  {/* Vertical branches */}
-                  {[80, 140, 200, 260].map((x, i) => (
-                    <g key={x}>
-                      <line x1={x} y1="100" x2={x} y2="50" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
-                      <line x1={x} y1="100" x2={x} y2="150" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
-                      <circle cx={x} cy="50" r="8" fill="rgba(255,85,0,0.3)" stroke="rgba(255,85,0,0.8)" strokeWidth="1.5" />
-                      <circle cx={x} cy="150" r="8" fill="rgba(36,87,160,0.3)" stroke="rgba(36,87,160,0.8)" strokeWidth="1.5" />
-                      <text x={x} y="30" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="monospace">НГ{i+1}</text>
-                    </g>
-                  ))}
-                  {/* Collector box */}
-                  <rect x="110" y="82" width="100" height="36" rx="6" fill="rgba(255,85,0,0.15)" stroke="rgba(255,85,0,0.6)" strokeWidth="1.5" />
-                  <text x="160" y="97" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold" fontFamily="monospace">KOLEKTOR</text>
-                  <text x="160" y="111" textAnchor="middle" fill="rgba(255,85,0,0.9)" fontSize="10" fontWeight="bold" fontFamily="monospace">KGS22</text>
-                  {/* Labels */}
-                  <text x="10" y="104" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace">КОТЕЛ</text>
-                  <text x="258" y="170" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace">● CONFIG</text>
-                </svg>
-                <div className="eyebrow-white mt-2 text-center">Автоматичний підбір системи</div>
-              </div>
-            </motion.div>
-
-            {/* Right — text + steps */}
-            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.1 }}>
-              <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
-              <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
-                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
-                Конфігуратор котельної системи — в одному додатку.
-              </h2>
-              <p className="text-white/55 text-sm leading-relaxed mb-8">
-                Підберіть колектор, гідрострілку та насосні групи без помилок сумісності. Експорт схеми в PDF, відправка менеджеру в один клік.
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                {CONFIG_STEPS.map(step => (
-                  <div key={step.n} className="config-step">
-                    <div className="eyebrow mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>КРОК {step.n}</div>
-                    <h4 className="text-white font-bold text-sm mb-1">{step.title}</h4>
-                    <p className="text-white/45 text-xs leading-relaxed">{step.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <button className="btn-app-store">
-                  <Smartphone size={16} /> App Store
-                </button>
-                <button className="btn-app-store">
-                  <Smartphone size={16} /> Google Play
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          PRODUCTION PHOTOS — "Від листа сталі"
-      ═══════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[var(--bg)]">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once:true }} variants={stagger}
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <motion.h2 variants={fadeUp}
-              className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
-              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
-              Від листа сталі —<br />до готової котельні.
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-[var(--text-secondary)] max-w-xs text-sm leading-relaxed md:text-right">
-              Лазерні верстати, листогини, напівавтоматичне зварювання та власна лінія порошкового фарбування. 5 500 м² площ.
-            </motion.p>
-          </motion.div>
-
-          <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {PROD_PHOTOS.map((src, i) => (
-              <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
-                <img
-                  src={src}
-                  alt={`Виробництво Termojet ${i+1}`}
-                  onError={e => {
-                    e.target.style.display = 'none'
-                    e.target.parentElement.style.background = `hsl(${210 + i*15}, 30%, ${15 + i*5}%)`
-                  }}
-                />
-                {i === 0 && (
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <span className="text-xs text-white/70 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5 font-mono">
-                      ● Лазерне різання
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ delay:0.3 }}
-            className="flex gap-3 mt-8">
-            <Link to="/about" className="btn-secondary">
-              Про виробництво <ArrowRight size={15} />
-            </Link>
-            <button onClick={() => setVideoOpen(true)} className="btn-primary">
-              <Play size={14} fill="white" /> Відео заводу
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          ADVANTAGES (зберігаємо існуючу секцію)
+          ADVANTAGES — Наші переваги
       ═══════════════════════════════════════════ */}
       <section className="advantages-bg grain relative overflow-hidden py-20 md:py-28 text-white">
         <div className="absolute inset-0 bg-dots pointer-events-none" />
@@ -466,6 +344,127 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PRODUCTION PHOTOS — "Від листа сталі"
+      ═══════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-[var(--bg)]">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once:true }} variants={stagger}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <motion.h2 variants={fadeUp}
+              className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
+              Від листа сталі —<br />до готової котельні.
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-[var(--text-secondary)] max-w-xs text-sm leading-relaxed md:text-right">
+              Лазерні верстати, листогини, напівавтоматичне зварювання та власна лінія порошкового фарбування. 5 500 м² площ.
+            </motion.p>
+          </motion.div>
+
+          <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {PROD_PHOTOS.map((photo, i) => (
+              <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
+                <img
+                  src={photo.src}
+                  alt={`Виробництво Termojet ${i+1}`}
+                  onError={e => {
+                    e.target.style.display = 'none'
+                    e.target.parentElement.style.background = `hsl(${210 + i*15}, 30%, ${15 + i*5}%)`
+                  }}
+                />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <span className="text-white/70 bg-black/40 backdrop-blur-sm rounded-lg px-2.5 py-1 block truncate"
+                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px' }}>
+                    {photo.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ delay:0.3 }}
+            className="flex gap-3 mt-8">
+            <Link to="/about" className="btn-secondary">
+              Про виробництво <ArrowRight size={15} />
+            </Link>
+            <button onClick={() => setVideoOpen(true)} className="btn-primary">
+              <Play size={14} fill="white" /> Відео заводу
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          CONFIGURATOR — dark section
+      ═══════════════════════════════════════════ */}
+      <section className="section-navy grain relative overflow-hidden py-20 md:py-28">
+        <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-30" />
+        <div className="orb orb-blue   w-[350px] h-[350px] -left-16  -top-16              opacity-25" />
+        <div className="absolute inset-0 bg-dots pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+            {/* Left — diagram */}
+            <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-8"
+                style={{ minHeight: 300 }}>
+                <svg viewBox="0 0 320 200" className="w-full" fill="none">
+                  <line x1="40" y1="100" x2="280" y2="100" stroke="rgba(255,85,0,0.6)" strokeWidth="2" strokeDasharray="6,3" />
+                  {[80, 140, 200, 260].map((x, i) => (
+                    <g key={x}>
+                      <line x1={x} y1="100" x2={x} y2="50" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                      <line x1={x} y1="100" x2={x} y2="150" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                      <circle cx={x} cy="50" r="8" fill="rgba(255,85,0,0.3)" stroke="rgba(255,85,0,0.8)" strokeWidth="1.5" />
+                      <circle cx={x} cy="150" r="8" fill="rgba(36,87,160,0.3)" stroke="rgba(36,87,160,0.8)" strokeWidth="1.5" />
+                      <text x={x} y="30" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="monospace">НГ{i+1}</text>
+                    </g>
+                  ))}
+                  <rect x="110" y="82" width="100" height="36" rx="6" fill="rgba(255,85,0,0.15)" stroke="rgba(255,85,0,0.6)" strokeWidth="1.5" />
+                  <text x="160" y="97" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold" fontFamily="monospace">KOLEKTOR</text>
+                  <text x="160" y="111" textAnchor="middle" fill="rgba(255,85,0,0.9)" fontSize="10" fontWeight="bold" fontFamily="monospace">KGS22</text>
+                  <text x="10" y="104" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace">КОТЕЛ</text>
+                  <text x="258" y="170" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace">● CONFIG</text>
+                </svg>
+                <div className="eyebrow-white mt-2 text-center">Автоматичний підбір системи</div>
+              </div>
+            </motion.div>
+
+            {/* Right — text + steps */}
+            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.1 }}>
+              <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
+              <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
+                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
+                Конфігуратор котельної системи — в одному додатку.
+              </h2>
+              <p className="text-white/55 text-sm leading-relaxed mb-8">
+                Підберіть колектор, гідрострілку та насосні групи без помилок сумісності. Експорт схеми в PDF, відправка менеджеру в один клік.
+              </p>
+
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                {CONFIG_STEPS.map(step => (
+                  <div key={step.n} className="config-step">
+                    <div className="eyebrow mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>КРОК {step.n}</div>
+                    <h4 className="text-white font-bold text-sm mb-1">{step.title}</h4>
+                    <p className="text-white/45 text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <button className="btn-app-store">
+                  <Smartphone size={16} /> App Store
+                </button>
+                <button className="btn-app-store">
+                  <Smartphone size={16} /> Google Play
+                </button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
