@@ -22,6 +22,11 @@ import FaqPage from './pages/FaqPage'
 import DeliveryPage from './pages/DeliveryPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
+import OEMPage from './pages/OEMPage'
+import WarrantyPage from './pages/WarrantyPage'
+import TechSupportPage from './pages/TechSupportPage'
+import ReturnPage from './pages/ReturnPage'
+import PartnersPage from './pages/PartnersPage'
 
 import AdminLoginPage from './pages/admin/AdminLoginPage'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -67,6 +72,11 @@ function AppLayout() {
           <Route path="/delivery" element={<DeliveryPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/oem" element={<OEMPage />} />
+          <Route path="/warranty" element={<WarrantyPage />} />
+          <Route path="/support" element={<TechSupportPage />} />
+          <Route path="/returns" element={<ReturnPage />} />
+          <Route path="/partners" element={<PartnersPage />} />
 
           {/* Admin */}
           <Route path="/admin" element={<AdminLoginPage />} />
