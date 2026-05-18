@@ -16,8 +16,8 @@ function SceneModel() {
       ref={ref}
       object={scene}
       scale={0.012}
-      position={[1.5, -1.2, 0]}
-      rotation={[0.15, -0.4, 0]}
+      position={[4.5, -1.2, 0]}
+      rotation={[0.1, Math.PI / 2, 0]}
     />
   )
 }
