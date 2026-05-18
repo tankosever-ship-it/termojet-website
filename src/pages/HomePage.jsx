@@ -177,14 +177,6 @@ export default function HomePage() {
                 <Link to="/contacts" className="btn-outline-white px-7 py-3.5 text-base">
                   {hero.ctaContact}
                 </Link>
-                <button onClick={() => setVideoOpen(true)}
-                  className="flex items-center gap-2.5 px-5 py-3.5 rounded-[0.875rem] text-sm font-semibold text-white border border-white/15 bg-white/5 hover:bg-white/10 transition-all">
-                  <span className="w-8 h-8 rounded-full flex items-center justify-center animate-pulse-glow flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg,#FF5500,#FF9500)' }}>
-                    <Play size={13} fill="white" className="ml-0.5" />
-                  </span>
-                  Повне відео
-                </button>
               </motion.div>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-white/40"
