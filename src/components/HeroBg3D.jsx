@@ -31,10 +31,9 @@ export default function HeroBg3D() {
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
       gl={{ alpha: true, antialias: true }}
     >
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 6, 4]}  intensity={1.0} color="#ffffff" />
-      <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#2457A0" />
-      <pointLight       position={[2, 3, 2]}   intensity={0.9} color="#FF5500" distance={20} />
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[5, 6, 4]}  intensity={1.1} color="#ffffff" />
+      <directionalLight position={[-4, 2, -3]} intensity={0.4} color="#4477cc" />
 
       <Suspense fallback={null}>
         <SceneModel />
