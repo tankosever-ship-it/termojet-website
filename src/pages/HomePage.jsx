@@ -612,7 +612,7 @@ export default function HomePage() {
               </div>
               <h2 className="section-title-white mb-4 max-w-xl mx-auto">{t('dealers').title}</h2>
               <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">{t('dealers').subtitle}</p>
-              <Link to="/dealers" className="btn-primary px-8 py-4 text-base">
+              <Link to="/partners" className="btn-primary px-8 py-4 text-base">
                 {t('dealers').ctaBecome} <ArrowRight size={16} />
               </Link>
             </div>

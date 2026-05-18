@@ -1,5 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { PRODUCTS } from '../data/products'
+import { mergeWithEnriched } from '../data/mergeEnriched'
+
+const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
 const AppContext = createContext(null)
 
@@ -14,7 +17,7 @@ function saveCart(cart) {
 
 export function AppProvider({ children }) {
   const [lang, setLang] = useState(() => localStorage.getItem('tj2_lang') || 'uk')
-  const [products, setProducts] = useState(PRODUCTS)
+  const [products, setProducts] = useState(BASE_PRODUCTS)
   const [cart, setCart] = useState(loadCart)
   const [orders, setOrders] = useState([])
   const [consultations, setConsultations] = useState([])

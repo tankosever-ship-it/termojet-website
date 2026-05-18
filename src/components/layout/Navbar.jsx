@@ -7,73 +7,101 @@ import { LANGS } from '../../i18n/translations'
 import { CATEGORIES } from '../../data/categories'
 import { assetPath } from '../../utils/assetPath'
 
-// ─── Mega-menu каталог ───
+// ─── Mega-menu каталог (full-width) ───
 function MegaMenu({ lang, products, onClose }) {
   const [activeCatIdx, setActiveCatIdx] = useState(0)
   const activeCat = CATEGORIES[activeCatIdx]
   const catProducts = products
     .filter(p => p.categorySlug === activeCat?.slug || p.categorySlug === activeCat?.id)
-    .slice(0, 9)
+    .slice(0, 12)
 
   return (
-    <div className="mega-new" onMouseLeave={onClose}>
-      <div className="border-r border-[var(--ink-200)] py-3 px-3 overflow-y-auto max-h-[480px]">
-        <div className="eyebrow px-2 mb-3">Категорії · {CATEGORIES.length}</div>
-        {CATEGORIES.map((cat, i) => (
-          <div key={cat.id} className={`mega-cat-item ${i === activeCatIdx ? 'active' : ''}`} onMouseEnter={() => setActiveCatIdx(i)}>
-            <div className="flex items-center gap-2.5 min-w-0">
-              <span className="text-lg flex-shrink-0">{cat.icon}</span>
-              <span className="text-sm font-medium text-gray-800 leading-tight">{cat.name[lang] || cat.name.uk}</span>
+    <>
+      {/* Backdrop */}
+      <div className="mega-backdrop" onClick={onClose} />
+
+      {/* Panel */}
+      <div className="mega-full" onMouseLeave={onClose}>
+        <div className="mega-full-inner">
+
+          {/* ── Left: category list ── */}
+          <div className="border-r border-[var(--ink-200)] py-4 pr-3 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            <div className="eyebrow px-3 mb-3">Категорії · {CATEGORIES.length}</div>
+            {CATEGORIES.map((cat, i) => (
+              <Link
+                key={cat.id}
+                to={`/catalog/${cat.slug}`}
+                onClick={onClose}
+                onMouseEnter={() => setActiveCatIdx(i)}
+                className={`mega-cat-item ${i === activeCatIdx ? 'active' : ''}`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-base flex-shrink-0">{cat.icon}</span>
+                  <span className="text-sm font-medium text-gray-800 leading-snug">{cat.name[lang] || cat.name.uk}</span>
+                </div>
+                <span className="text-xs text-gray-400 flex-shrink-0 ml-2">{cat.count}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* ── Center: products grid ── */}
+          <div className="py-4 px-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            <div className="flex items-center justify-between mb-3">
+              <div className="eyebrow">{activeCat?.name[lang] || activeCat?.name.uk}</div>
+              <Link to={`/catalog/${activeCat?.slug}`} onClick={onClose}
+                className="text-xs font-semibold text-[var(--accent)] hover:underline flex items-center gap-1">
+                Всі товари <ArrowRight size={11} />
+              </Link>
             </div>
-            <span className="text-xs text-gray-400 flex-shrink-0">{cat.count}</span>
-          </div>
-        ))}
-      </div>
 
-      <div className="py-3 px-3 border-r border-[var(--ink-200)]">
-        <div className="eyebrow px-2 mb-3">{activeCat?.name[lang] || activeCat?.name.uk}</div>
-        {catProducts.length > 0 ? (
-          <div className="grid grid-cols-3 gap-2">
-            {catProducts.map(p => {
-              const name = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
-              return (
-                <Link key={p.id} to={`/catalog/${p.categorySlug}/${p.slug || p.id}`} onClick={onClose}
-                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-[var(--ink-200)] transition-all group text-center">
-                  <div className="w-20 h-20 rounded-xl bg-[var(--bg)] border border-[var(--ink-200)] flex-shrink-0 overflow-hidden group-hover:border-[var(--primary)]/30 transition-colors">
-                    {p.image ? <img src={p.image} alt={name} className="w-full h-full object-contain p-2" />
-                      : <span className="flex items-center justify-center w-full h-full text-2xl">{activeCat.icon}</span>}
-                  </div>
-                  <div className="min-w-0 w-full">
-                    <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--primary)] transition-colors">{name}</div>
-                    {p.sku && <div className="text-[10px] text-gray-400 font-mono mt-0.5">{p.sku}</div>}
-                  </div>
-                </Link>
-              )
-            })}
+            {catProducts.length > 0 ? (
+              <div className="grid grid-cols-4 gap-3">
+                {catProducts.map(p => {
+                  const name = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
+                  return (
+                    <Link key={p.id} to={`/catalog/${p.categorySlug}/${p.slug || p.id}`} onClick={onClose}
+                      className="flex flex-col gap-2 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-[var(--ink-200)] transition-all group">
+                      <div className="w-full aspect-square rounded-lg bg-[var(--bg)] border border-[var(--ink-200)] overflow-hidden group-hover:border-[var(--primary)]/30 transition-colors">
+                        {p.image
+                          ? <img src={p.image} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
+                          : <span className="flex items-center justify-center w-full h-full text-3xl">{activeCat.icon}</span>}
+                      </div>
+                      <div>
+                        <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--primary)] transition-colors">{name}</div>
+                        {p.sku && <div className="text-[10px] text-gray-400 font-mono mt-0.5">{p.sku}</div>}
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-40 text-gray-300 text-sm">Оберіть категорію</div>
+            )}
           </div>
-        ) : (
-          <div className="flex items-center justify-center h-40 text-gray-300 text-sm">Оберіть категорію</div>
-        )}
-        <div className="mt-3 pt-3 border-t border-[var(--ink-200)]">
-          <Link to={`/catalog/${activeCat?.slug}`} onClick={onClose}
-            className="flex items-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:gap-2.5 transition-all">
-            Всі товари категорії <ArrowRight size={12} />
-          </Link>
+
+          {/* ── Right: CTA ── */}
+          <div className="section-navy p-6 flex flex-col gap-4" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            <div className="eyebrow-white">Termojet App</div>
+            <h4 className="text-white font-black text-xl leading-tight font-['Archivo',sans-serif]">
+              Конфігуратор<br />котельної<br />системи
+            </h4>
+            <p className="text-white/55 text-xs leading-relaxed">
+              Підберіть колектор та насосні групи без помилок. Експорт PDF.
+            </p>
+            <button className="mt-auto flex items-center gap-2 text-xs font-bold text-white bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 hover:bg-white/20 transition-colors self-start">
+              Запустити <ArrowUpRight size={13} />
+            </button>
+            <div className="border-t border-white/10 pt-4">
+              <Link to="/catalog" onClick={onClose}
+                className="btn-primary text-xs py-2.5 px-4 w-full justify-center">
+                Весь каталог →
+              </Link>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <div className="section-navy p-5 flex flex-col gap-4">
-        <div className="eyebrow-white">Termojet App</div>
-        <h4 className="text-white font-black text-lg leading-tight font-['Archivo',sans-serif]">Конфігуратор<br />котельної<br />системи</h4>
-        <p className="text-white/55 text-xs leading-relaxed">Підберіть колектор та насосні групи без помилок. Експорт PDF.</p>
-        <button className="mt-auto flex items-center gap-2 text-xs font-bold text-white bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 hover:bg-white/20 transition-colors self-start">
-          Запустити <ArrowUpRight size={13} />
-        </button>
-        <div className="border-t border-white/10 pt-3">
-          <Link to="/catalog" onClick={onClose} className="btn-primary text-xs py-2 px-4 w-full justify-center">Весь каталог →</Link>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 
@@ -106,6 +134,7 @@ export default function Navbar() {
   const [catalogOpen, setCatalogOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
   const [clientOpen, setClientOpen] = useState(false)
+  const [langOpen, setLangOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -113,6 +142,7 @@ export default function Navbar() {
   const catalogRef = useRef(null)
   const aboutRef = useRef(null)
   const clientRef = useRef(null)
+  const langRef = useRef(null)
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
@@ -129,6 +159,7 @@ export default function Navbar() {
       if (catalogRef.current && !catalogRef.current.contains(e.target)) setCatalogOpen(false)
       if (aboutRef.current && !aboutRef.current.contains(e.target)) setAboutOpen(false)
       if (clientRef.current && !clientRef.current.contains(e.target)) setClientOpen(false)
+      if (langRef.current && !langRef.current.contains(e.target)) setLangOpen(false)
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -202,13 +233,13 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-0.5 flex-1 ml-2">
+            <nav className="hidden lg:flex items-center gap-0 ml-1 flex-shrink-0">
 
               {/* Каталог mega-menu */}
               <div className="relative" ref={catalogRef}>
                 <button onMouseEnter={() => setCatalogOpen(true)} onClick={() => setCatalogOpen(v => !v)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${isActive('/catalog') ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
-                  Каталог <ChevronDown size={14} className={`transition-transform duration-200 ${catalogOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/catalog') ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                  Каталог <ChevronDown size={13} className={`transition-transform duration-200 ${catalogOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
                 </button>
                 {catalogOpen && <MegaMenu lang={lang} products={products} onClose={() => setCatalogOpen(false)} />}
               </div>
@@ -216,8 +247,8 @@ export default function Navbar() {
               {/* Про Termojet */}
               <div className="relative" ref={aboutRef}>
                 <button onMouseEnter={() => setAboutOpen(true)} onClick={() => setAboutOpen(v => !v)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
-                  Про Termojet <ChevronDown size={14} className={`transition-transform duration-200 ${aboutOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                  Про Termojet <ChevronDown size={13} className={`transition-transform duration-200 ${aboutOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
                 </button>
                 {aboutOpen && <SimpleDropdown items={aboutItems} onClose={() => setAboutOpen(false)} />}
               </div>
@@ -225,33 +256,33 @@ export default function Navbar() {
               {/* Для клієнта */}
               <div className="relative" ref={clientRef}>
                 <button onMouseEnter={() => setClientOpen(true)} onClick={() => setClientOpen(v => !v)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
-                  Для клієнта <ChevronDown size={14} className={`transition-transform duration-200 ${clientOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                  Для клієнта <ChevronDown size={13} className={`transition-transform duration-200 ${clientOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
                 </button>
                 {clientOpen && <SimpleDropdown items={clientItems} onClose={() => setClientOpen(false)} />}
               </div>
 
               {/* Файли */}
               <Link to="/files"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${isActive('/files') ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                className={`px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/files') ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
                 Файли
               </Link>
 
               {/* Теплові насоси — external */}
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-all">
-                Теплові насоси <ExternalLink size={12} className="text-gray-400" />
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-all whitespace-nowrap">
+                Теплові насоси <ExternalLink size={11} className="text-gray-400" />
               </a>
 
               {/* Phone */}
               <a href="tel:+380507189165"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:text-[var(--primary)] transition-all ml-1"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px' }}>
-                <Phone size={13} className="text-[var(--accent)]" /> +380 50 718 91 65
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-semibold text-gray-700 hover:text-[var(--primary)] transition-all whitespace-nowrap"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px' }}>
+                <Phone size={12} className="text-[var(--accent)]" /> +380 50 718 91 65
               </a>
             </nav>
 
-            <div className="flex-1 lg:flex-none" />
+            <div className="flex-1" />
 
             {/* Right actions */}
             <div className="flex items-center gap-1.5">
@@ -261,14 +292,23 @@ export default function Navbar() {
                 <Search size={17} />
               </button>
 
-              {/* Lang switcher */}
-              <div className="hidden xl:flex items-center border border-[var(--ink-200)] rounded-lg overflow-hidden">
-                {LANGS.map(l => (
-                  <button key={l.code} onClick={() => setLang(l.code)}
-                    className={`px-2 py-1.5 text-xs font-bold transition-colors ${lang === l.code ? 'bg-[var(--primary)] text-white' : 'text-gray-500 hover:bg-gray-50'}`}>
-                    {l.label}
-                  </button>
-                ))}
+              {/* Lang switcher dropdown */}
+              <div className="relative hidden lg:block" ref={langRef}>
+                <button onClick={() => setLangOpen(v => !v)}
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold border border-[var(--ink-200)] text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all">
+                  {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
+                  <ChevronDown size={11} className={`transition-transform duration-150 ${langOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {langOpen && (
+                  <div className="absolute top-full right-0 mt-1.5 w-24 bg-white border border-[var(--ink-200)] rounded-xl shadow-xl overflow-hidden z-50 py-1">
+                    {LANGS.map(l => (
+                      <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false) }}
+                        className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-bold transition-colors ${lang === l.code ? 'bg-[var(--primary)] text-white' : 'text-gray-600 hover:bg-gray-50'}`}>
+                        <span>{l.flag}</span> {l.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Cart */}
@@ -283,11 +323,11 @@ export default function Navbar() {
               </Link>
 
               {/* CTA buttons */}
-              <Link to="/partners" className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90"
+              <Link to="/partners" className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 whitespace-nowrap"
                 style={{ background: 'linear-gradient(135deg, #FF5500, #FF8800)' }}>
                 Стати партнером
               </Link>
-              <Link to="/contacts" className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold transition-all border-2"
+              <Link to="/contacts" className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border-2 whitespace-nowrap"
                 style={{ borderColor: '#FF5500', color: '#FF5500', background: 'transparent' }}
                 onMouseEnter={e => { e.currentTarget.style.background='#FF5500'; e.currentTarget.style.color='white' }}
                 onMouseLeave={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.color='#FF5500' }}>

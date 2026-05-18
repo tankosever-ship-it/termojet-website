@@ -1,4 +1,4 @@
-import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { AppProvider } from './context/AppContext'
@@ -15,7 +15,6 @@ import ContactPage from './pages/ContactPage'
 import BlogPage from './pages/BlogPage'
 import BlogPostPage from './pages/BlogPostPage'
 import PortfolioPage from './pages/PortfolioPage'
-import DealersPage from './pages/DealersPage'
 import ServicePage from './pages/ServicePage'
 import FilesPage from './pages/FilesPage'
 import FaqPage from './pages/FaqPage'
@@ -65,7 +64,7 @@ function AppLayout() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/dealers" element={<DealersPage />} />
+          <Route path="/dealers" element={<Navigate to="/partners" replace />} />
           <Route path="/service" element={<ServicePage />} />
           <Route path="/files" element={<FilesPage />} />
           <Route path="/faq" element={<FaqPage />} />
