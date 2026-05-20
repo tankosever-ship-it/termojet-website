@@ -231,28 +231,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ─── Top bar ─── */}
-      <div className="hidden md:block text-white/70 py-2"
-        style={{ background: '#0A0A0A', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-5" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', letterSpacing: '0.06em' }}>
-            <span className="flex items-center gap-1.5 text-white/70"><span className="text-[var(--accent)]">●</span> 20 років на ринку</span>
-            <span className="text-white/15">|</span>
-            <span className="flex items-center gap-1.5 text-white/70"><span className="text-[var(--accent)]">●</span> Експорт у 15 країн</span>
-            <span className="text-white/15">|</span>
-            <span className="flex items-center gap-1.5 text-white/70"><span className="text-[var(--accent)]">●</span> Виробництво: Київ / Житомир</span>
-          </div>
-          <div className="flex items-center gap-4" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px' }}>
-            <a href="tel:+380507189165" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={10} className="text-[var(--accent)]" /> +380 50 718 91 65
-            </a>
-            <a href={`mailto:${siteSettings.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Mail size={10} className="text-[var(--accent)]" /> {siteSettings.email}
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* ─── Main navbar (glassmorphism) ─── */}
       <header className="sticky top-0 z-50 transition-all duration-300"
         style={{ background: navBg, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: navShadow, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
