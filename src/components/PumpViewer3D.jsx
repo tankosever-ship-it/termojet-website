@@ -28,7 +28,7 @@ export default function PumpViewer3D() {
 
       {/* Dark gradient bg */}
       <div className="absolute inset-0"
-        style={{ background: 'linear-gradient(135deg, #0a1628 0%, #1B3F6B 60%, #0a1628 100%)' }} />
+        style={{ background: 'linear-gradient(135deg, #080808 0%, #1A1A1A 60%, #080808 100%)' }} />
       <div className="absolute inset-0 bg-dots pointer-events-none opacity-30" />
 
       <Canvas

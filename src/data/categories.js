@@ -6,7 +6,7 @@ export const CATEGORIES = [
     name: { uk: 'Клапани і приводи', en: 'Valves & Actuators', pl: 'Zawory i siłowniki', fr: 'Vannes et actionneurs', de: 'Ventile & Stellantriebe' },
     desc: { uk: '3-ходові, 4-ходові клапани з сервоприводами', en: '3-way, 4-way valves with servo drives', pl: 'Zawory 3-drożne, 4-drożne z siłownikami', fr: 'Vannes 3 voies, 4 voies avec servomoteurs', de: '3-Wege-, 4-Wege-Ventile mit Stellantrieben' },
     count: 28,
-    color: '#1B3F6B',
+    color: '#0D0D0D',
   },
   {
     id: 'termojet-box',
@@ -24,7 +24,7 @@ export const CATEGORIES = [
     name: { uk: 'Автоматика котлів', en: 'Boiler Automation', pl: 'Automatyka kotłów', fr: 'Automatisation chaudières', de: 'Kesselautomatik' },
     desc: { uk: 'Контролери та системи управління котлами', en: 'Controllers and boiler management systems', pl: 'Sterowniki i systemy zarządzania kotłami', fr: 'Contrôleurs et systèmes de gestion chaudières', de: 'Steuerungen und Kesselmanagementsysteme' },
     count: 4,
-    color: '#2457a0',
+    color: '#333333',
   },
   {
     id: 'manifolds-floor',
@@ -42,7 +42,7 @@ export const CATEGORIES = [
     name: { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen' },
     desc: { uk: 'Циркуляційні насоси для систем опалення', en: 'Circulation pumps for heating systems', pl: 'Pompy obiegowe do systemów grzewczych', fr: 'Pompes de circulation pour systèmes de chauffage', de: 'Umwälzpumpen für Heizsysteme' },
     count: 37,
-    color: '#1B3F6B',
+    color: '#0D0D0D',
   },
   {
     id: 'pump-groups',
@@ -60,7 +60,7 @@ export const CATEGORIES = [
     name: { uk: 'Гідравлічні роздільники', en: 'Hydraulic Separators', pl: 'Rozdzielacze hydrauliczne', fr: 'Séparateurs hydrauliques', de: 'Hydraulische Weichen' },
     desc: { uk: 'Гідрострілки для котельних систем', en: 'Hydraulic arrows for boiler systems', pl: 'Rozdzielacze hydrauliczne do systemów kotłowych', fr: 'Séparateurs hydrauliques pour systèmes de chaudières', de: 'Hydraulische Weichen für Kesselsysteme' },
     count: 9,
-    color: '#2457a0',
+    color: '#333333',
   },
   {
     id: 'manifolds',
@@ -78,7 +78,7 @@ export const CATEGORIES = [
     name: { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren' },
     desc: { uk: 'Шламові та повітряні сепаратори', en: 'Sludge and air separators', pl: 'Separatory szlamu i powietrza', fr: 'Séparateurs de boues et d\'air', de: 'Schlamm- und Luftabscheider' },
     count: 13,
-    color: '#1B3F6B',
+    color: '#0D0D0D',
   },
   {
     id: 'mega',
@@ -96,7 +96,7 @@ export const CATEGORIES = [
     name: { uk: 'TERMOJET Mini', en: 'TERMOJET Mini', pl: 'TERMOJET Mini', fr: 'TERMOJET Mini', de: 'TERMOJET Mini' },
     desc: { uk: 'Компактні системи до 30 кВт', en: 'Compact systems up to 30 kW', pl: 'Systemy kompaktowe do 30 kW', fr: 'Systèmes compacts jusqu\'à 30 kW', de: 'Kompaktsysteme bis 30 kW' },
     count: 24,
-    color: '#2457a0',
+    color: '#333333',
   },
   {
     id: 'balancing',
@@ -114,7 +114,7 @@ export const CATEGORIES = [
     name: { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung' },
     desc: { uk: 'Аксесуари і супутні товари', en: 'Accessories and related products', pl: 'Akcesoria i produkty pokrewne', fr: 'Accessoires et produits connexes', de: 'Zubehör und verwandte Produkte' },
     count: 21,
-    color: '#1B3F6B',
+    color: '#0D0D0D',
   },
 ]
 

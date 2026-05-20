@@ -158,8 +158,8 @@ export default function CatalogPage() {
         style={{
           background: `
             radial-gradient(ellipse 70% 100% at 100% 100%, rgba(232,93,4,0.15), transparent 55%),
-            radial-gradient(ellipse 50% 80% at 0% 0%, rgba(36,87,160,0.2), transparent 50%),
-            linear-gradient(160deg, #0a1628, #1B3F6B)
+            radial-gradient(ellipse 50% 80% at 0% 0%, rgba(255,85,0,0.08), transparent 50%),
+            linear-gradient(160deg, #080808, #111111)
           `
         }}>
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(232,93,4,0.4)] to-transparent" />

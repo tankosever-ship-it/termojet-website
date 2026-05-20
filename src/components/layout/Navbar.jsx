@@ -80,7 +80,7 @@ function MegaMenu({ lang, products, onClose }) {
           </div>
 
           {/* ── Right: CTA ── */}
-          <div className="section-navy p-6 flex flex-col gap-4" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+          <div className="section-dark p-6 flex flex-col gap-4" style={{ maxHeight: 'calc(100vh - 64px)' }}>
             <div className="eyebrow-white">Termojet App</div>
             <h4 className="text-white font-black text-xl leading-tight font-['Archivo',sans-serif]">
               Конфігуратор<br />котельної<br />системи

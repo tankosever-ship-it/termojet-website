@@ -428,9 +428,9 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           CONFIGURATOR — dark section
       ═══════════════════════════════════════════ */}
-      <section className="section-navy grain relative overflow-hidden py-20 md:py-28">
+      <section className="section-dark grain relative overflow-hidden py-20 md:py-28">
         <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-30" />
-        <div className="orb orb-blue   w-[350px] h-[350px] -left-16  -top-16              opacity-25" />
+        <div className="orb orb-warm   w-[350px] h-[350px] -left-16  -top-16              opacity-20" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4">
