@@ -6,7 +6,6 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
-import HeroBg3D from '../components/HeroBg3D'
 
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
@@ -115,84 +114,96 @@ export default function HomePage() {
       )}
 
       {/* ═══════════════════════════════════════════
-          HERO — 3D фон + текст поверх
+          HERO — відео фон + центрований текст
       ═══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden text-white" style={{ minHeight: '88vh' }}>
+      <section className="relative overflow-hidden text-white" style={{ minHeight: '90vh' }}>
 
-        {/* Base dark background */}
-        <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, #080808 0%, #111111 45%, #080808 100%)' }} />
+        {/* Відео фон з blur */}
+        <video
+          autoPlay muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'blur(3px) brightness(0.35)', transform: 'scale(1.05)' }}>
+          <source src={MP4_URL} type="video/mp4" />
+        </video>
 
-        {/* Orange accent glow — bottom right */}
+        {/* Dark overlay для читабельності */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'rgba(0,0,0,0.55)' }} />
+
+        {/* Orange glow знизу по центру */}
         <div className="absolute pointer-events-none"
-          style={{ width: 600, height: 600, borderRadius: '50%', bottom: '-150px', right: '-100px',
-            background: 'radial-gradient(circle, rgba(255,85,0,0.25) 0%, rgba(255,85,0,0.06) 50%, transparent 70%)',
+          style={{ width: 800, height: 400, borderRadius: '50%', bottom: '-100px', left: '50%', transform: 'translateX(-50%)',
+            background: 'radial-gradient(ellipse, rgba(255,85,0,0.20) 0%, transparent 70%)',
             filter: 'blur(40px)' }} />
-        {/* Warm glow — top left */}
-        <div className="absolute pointer-events-none"
-          style={{ width: 500, height: 500, borderRadius: '50%', top: '-100px', left: '-80px',
-            background: 'radial-gradient(circle, rgba(255,160,0,0.12) 0%, transparent 70%)',
-            filter: 'blur(60px)' }} />
 
-        {/* 3D scene — full background */}
-        <div className="absolute inset-0" style={{ opacity: 0.85 }}>
-          <HeroBg3D />
-        </div>
+        {/* Оранжева лінія зверху */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--accent)] pointer-events-none" />
 
-        {/* Overlay gradients for text readability */}
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(90deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.5) 55%, rgba(8,8,8,0.1) 100%)' }} />
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(180deg, rgba(8,8,8,0.3) 0%, transparent 30%, transparent 70%, rgba(8,8,8,0.6) 100%)' }} />
+        {/* Контент — по центру */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4"
+          style={{ minHeight: '90vh' }}>
 
-        {/* Orange top line */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.7)] to-transparent pointer-events-none" />
+          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl w-full">
 
-        {/* Text content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 flex items-center" style={{ minHeight: '88vh' }}>
-          <div className="max-w-xl py-24">
-            <motion.div initial="hidden" animate="show" variants={stagger}>
-
-              <motion.div variants={fadeUp} className="eyebrow-white mb-6" style={{ fontSize: '13px', letterSpacing: '0.1em' }}>
-                ● Системи швидкого монтажу · Виробництво з 2002
-              </motion.div>
-
-              <motion.h1 variants={fadeUp}
-                className="font-black leading-[0.92] font-['Archivo',sans-serif] mb-6"
-                style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
-                Котельня,<br />
-                зібрана за{' '}
-                <span className="text-gradient-orange">години</span>,<br />
-                <span className="text-outline-white">а не за тижні.</span>
-              </motion.h1>
-
-              <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8">
-                {hero.subtitle}
-              </motion.p>
-
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                <Link to="/catalog" className="btn-primary px-7 py-3.5 text-base">
-                  {hero.ctaCatalog} <ArrowRight size={16} />
-                </Link>
-                <Link to="/contacts" className="btn-outline-white px-7 py-3.5 text-base">
-                  {hero.ctaContact}
-                </Link>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-white/40"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.04em' }}>
-                {['Гарантія якості', 'Доставка по Україні', '50 000+ котелень', 'ISO 9001:2015'].map(item => (
-                  <span key={item} className="flex items-center gap-1.5">
-                    <Check size={12} className="text-[#FF8533]" /> {item}
-                  </span>
-                ))}
-              </motion.div>
+            {/* Eyebrow */}
+            <motion.div variants={fadeUp}
+              className="eyebrow-white mb-8"
+              style={{ fontSize: '11px', letterSpacing: '0.2em' }}>
+              ● VIROBNYCTVO Z 2002 · ВЛАСНЕ ВИРОБНИЦТВО · КИЇВ / ЖИТОМИР
             </motion.div>
-          </div>
+
+            {/* Головний заголовок */}
+            <motion.h1 variants={fadeUp}
+              className="font-black font-['Archivo',sans-serif] mb-6 leading-[0.9]"
+              style={{ fontSize: 'clamp(3.2rem, 9vw, 7.5rem)', textTransform: 'uppercase' }}>
+              Обладнання<br />
+              для{' '}
+              <span style={{ color: 'var(--accent)' }}>котелень</span><br />
+              з{' '}
+              <span className="text-outline-white">України</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p variants={fadeUp}
+              className="text-white/60 mb-10 mx-auto leading-relaxed"
+              style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', maxWidth: '560px' }}>
+              {hero.subtitle}
+            </motion.p>
+
+            {/* CTA кнопки */}
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center mb-16">
+              <Link to="/catalog" className="btn-primary px-8 py-4">
+                {hero.ctaCatalog} <ArrowRight size={16} />
+              </Link>
+              <Link to="/contacts" className="btn-outline-white px-8 py-4">
+                {hero.ctaContact}
+              </Link>
+            </motion.div>
+
+            {/* Статистика знизу */}
+            <motion.div variants={fadeUp}
+              className="grid grid-cols-2 md:grid-cols-4 gap-px border border-white/10 bg-white/10 mx-auto"
+              style={{ maxWidth: '700px', backdropFilter: 'blur(12px)' }}>
+              {[
+                { num: '1800°C', label: 'MAX TEMP' },
+                { num: '20+', label: 'РОКІВ' },
+                { num: '15', label: 'КРАЇН EXP.' },
+                { num: '50K+', label: "OБ'ЄКТІВ" },
+              ].map(s => (
+                <div key={s.num} className="bg-black/30 px-4 py-4 text-center">
+                  <div className="font-black font-['Archivo',sans-serif] text-2xl text-white leading-none mb-1">
+                    {s.num}
+                  </div>
+                  <div className="mono-label-white" style={{ fontSize: '9px' }}>{s.label}</div>
+                </div>
+              ))}
+            </motion.div>
+
+          </motion.div>
         </div>
 
-        {/* Bottom fade into page */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
           style={{ background: 'linear-gradient(to top, var(--bg), transparent)' }} />
       </section>
 
