@@ -67,7 +67,7 @@ function MegaMenu({ lang, products, onClose }) {
                           : <span className="flex items-center justify-center w-full h-full text-3xl">{activeCat.icon}</span>}
                       </div>
                       <div>
-                        <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--primary)] transition-colors">{name}</div>
+                        <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors">{name}</div>
                         {p.sku && <div className="text-[10px] text-gray-400 font-mono mt-0.5">{p.sku}</div>}
                       </div>
                     </Link>
@@ -112,11 +112,11 @@ function SimpleDropdown({ items, onClose }) {
       {items.map(item => (
         item.external
           ? <a key={item.to} href={item.to} target="_blank" rel="noopener noreferrer" onClick={onClose}
-              className="flex items-center justify-between gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[var(--primary)] transition-colors">
+              className="flex items-center justify-between gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[var(--accent)] transition-colors">
               {item.label} <ExternalLink size={12} className="text-gray-400" />
             </a>
           : <Link key={item.to} to={item.to} onClick={onClose}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[var(--primary)] transition-colors">
+              className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[var(--accent)] transition-colors">
               {item.label}
             </Link>
       ))}
@@ -217,9 +217,9 @@ export default function Navbar() {
 
       {/* ─── Main navbar ─── */}
       <header className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_rgba(27,63,107,0.10)] border-b border-[var(--ink-200)]' : 'bg-white border-b border-[var(--ink-200)]'
+        scrolled ? 'bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_rgba(0,0,0,0.08)] border-b border-[var(--ink-200)]' : 'bg-white border-b border-[var(--ink-200)]'
       }`}>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(27,63,107,0.15)] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.15)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-3 h-16">
 
@@ -238,7 +238,7 @@ export default function Navbar() {
               {/* Каталог mega-menu */}
               <div className="relative" ref={catalogRef}>
                 <button onMouseEnter={() => setCatalogOpen(true)} onClick={() => setCatalogOpen(v => !v)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/catalog') ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/catalog') ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
                   Каталог <ChevronDown size={13} className={`transition-transform duration-200 ${catalogOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
                 </button>
                 {catalogOpen && <MegaMenu lang={lang} products={products} onClose={() => setCatalogOpen(false)} />}
@@ -247,7 +247,7 @@ export default function Navbar() {
               {/* Про Termojet */}
               <div className="relative" ref={aboutRef}>
                 <button onMouseEnter={() => setAboutOpen(true)} onClick={() => setAboutOpen(v => !v)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
                   Про Termojet <ChevronDown size={13} className={`transition-transform duration-200 ${aboutOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
                 </button>
                 {aboutOpen && <SimpleDropdown items={aboutItems} onClose={() => setAboutOpen(false)} />}
@@ -256,7 +256,7 @@ export default function Navbar() {
               {/* Для клієнта */}
               <div className="relative" ref={clientRef}>
                 <button onMouseEnter={() => setClientOpen(true)} onClick={() => setClientOpen(v => !v)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
                   Для клієнта <ChevronDown size={13} className={`transition-transform duration-200 ${clientOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
                 </button>
                 {clientOpen && <SimpleDropdown items={clientItems} onClose={() => setClientOpen(false)} />}
@@ -264,19 +264,19 @@ export default function Navbar() {
 
               {/* Файли */}
               <Link to="/files"
-                className={`px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/files') ? 'text-[var(--primary)] bg-blue-50' : 'text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50'}`}>
+                className={`px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/files') ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
                 Файли
               </Link>
 
               {/* Теплові насоси — external */}
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-all whitespace-nowrap">
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50 transition-all whitespace-nowrap">
                 Теплові насоси <ExternalLink size={11} className="text-gray-400" />
               </a>
 
               {/* Phone */}
               <a href="tel:+380507189165"
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-semibold text-gray-700 hover:text-[var(--primary)] transition-all whitespace-nowrap"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-semibold text-gray-700 hover:text-[var(--accent)] transition-all whitespace-nowrap"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px' }}>
                 <Phone size={12} className="text-[var(--accent)]" /> +380 50 718 91 65
               </a>
@@ -288,14 +288,14 @@ export default function Navbar() {
             <div className="flex items-center gap-1.5">
               {/* Search */}
               <button onClick={() => setSearchOpen(v => !v)}
-                className={`p-2 rounded-lg transition-all hidden md:flex ${searchOpen ? 'bg-blue-50 text-[var(--primary)]' : 'text-gray-500 hover:bg-gray-100 hover:text-[var(--primary)]'}`}>
+                className={`p-2 rounded-lg transition-all hidden md:flex ${searchOpen ? 'bg-orange-50 text-[var(--accent)]' : 'text-gray-500 hover:bg-gray-100 hover:text-[var(--accent)]'}`}>
                 <Search size={17} />
               </button>
 
               {/* Lang switcher dropdown */}
               <div className="relative hidden lg:block" ref={langRef}>
                 <button onClick={() => setLangOpen(v => !v)}
-                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold border border-[var(--ink-200)] text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all">
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold border border-[var(--ink-200)] text-gray-600 hover:border-[var(--primary)] hover:text-[var(--accent)] transition-all">
                   {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={11} className={`transition-transform duration-150 ${langOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -312,7 +312,7 @@ export default function Navbar() {
               </div>
 
               {/* Cart */}
-              <Link to="/cart" className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-[var(--primary)] transition-all">
+              <Link to="/cart" className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-[var(--accent)] transition-all">
                 <ShoppingCart size={17} />
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold"
@@ -348,7 +348,7 @@ export default function Navbar() {
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input ref={searchRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Пошук товарів..."
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[var(--ink-200)] focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[rgba(27,63,107,0.08)] text-sm bg-[var(--bg)]" />
+                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[var(--ink-200)] focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[rgba(255,85,0,0.08)] text-sm bg-[var(--bg)]" />
               </div>
             </form>
           )}
@@ -358,7 +358,7 @@ export default function Navbar() {
         {menuOpen && (
           <div className="lg:hidden border-t border-[var(--ink-200)] bg-white/98 backdrop-blur-xl">
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5">
-              <Link to="/catalog"   className={`px-3 py-2.5 rounded-lg text-sm font-medium ${isActive('/catalog')   ? 'bg-blue-50 text-[var(--primary)]' : 'text-gray-700 hover:bg-gray-50'}`}>Каталог</Link>
+              <Link to="/catalog"   className={`px-3 py-2.5 rounded-lg text-sm font-medium ${isActive('/catalog')   ? 'bg-orange-50 text-[var(--accent)]' : 'text-gray-700 hover:bg-gray-50'}`}>Каталог</Link>
               <div className="px-3 py-1.5 text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">Про Termojet</div>
               {aboutItems.map(i => <Link key={i.to} to={i.to} className="px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50">{i.label}</Link>)}
               <div className="px-3 py-1.5 text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">Для клієнта</div>

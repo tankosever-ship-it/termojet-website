@@ -34,8 +34,8 @@ const CERTS = [
 const FEATURES = [
   { icon: Factory, badge: 'icon-badge-orange', title: 'Власне виробництво',   desc: 'Повний цикл від металу до готового виробу' },
   { icon: Award,   badge: 'icon-badge-orange', title: 'Якість та надійність', desc: 'Гарантія, вихідний контроль на кожній позиції' },
-  { icon: Globe,   badge: 'icon-badge-blue',   title: 'Міжнародний досвід',   desc: '15 країн ЄС, філія в Польщі з 2018' },
-  { icon: Users,   badge: 'icon-badge-blue',   title: 'Команда фахівців',     desc: '~100 інженерів і виробничників' },
+  { icon: Globe,   badge: 'icon-badge-dark',   title: 'Міжнародний досвід',   desc: '15 країн ЄС, філія в Польщі з 2018' },
+  { icon: Users,   badge: 'icon-badge-dark',   title: 'Команда фахівців',     desc: '~100 інженерів і виробничників' },
 ]
 
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
@@ -55,7 +55,7 @@ export default function AboutPage() {
       ═══════════════════════════════════════════ */}
       <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
         <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-50" />
-        <div className="orb orb-blue   w-[300px] h-[300px] -left-16  -top-16              opacity-40" />
+        <div className="orb orb-warm   w-[300px] h-[300px] -left-16  -top-16              opacity-40" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.7)] to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[var(--bg)] to-transparent pointer-events-none" />
@@ -171,7 +171,7 @@ export default function AboutPage() {
               {/* Certs */}
               <div className="card p-6">
                 <h3 className="font-bold text-base mb-5 flex items-center gap-2">
-                  <div className="icon-badge icon-badge-sm icon-badge-blue">
+                  <div className="icon-badge icon-badge-sm icon-badge-dark">
                     <Award size={16} />
                   </div>
                   Сертифікати та дозволи
@@ -191,7 +191,7 @@ export default function AboutPage() {
 
               {/* CTA */}
               <div className="rounded-2xl p-5 relative overflow-hidden"
-                style={{ background:'linear-gradient(135deg, rgba(255,85,0,0.07) 0%, rgba(27,63,107,0.05) 100%)', border:'1px solid rgba(255,85,0,0.15)' }}>
+                style={{ background:'linear-gradient(135deg, rgba(255,85,0,0.07) 0%, rgba(255,120,0,0.03) 100%)', border:'1px solid rgba(255,85,0,0.15)' }}>
                 <div className="font-bold text-gray-900 mb-1.5">Хочете дізнатись більше?</div>
                 <p className="text-sm text-gray-500 mb-4">Зв'яжіться з нами — розкажемо про виробництво, підберемо обладнання для проекту.</p>
                 <Link to="/contacts" className="btn-primary text-sm py-2.5">
@@ -220,7 +220,7 @@ export default function AboutPage() {
           <div className="relative">
             {/* vertical line */}
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-px"
-              style={{ background:'linear-gradient(to bottom, transparent, rgba(255,85,0,0.3) 10%, rgba(27,63,107,0.2) 90%, transparent)' }} />
+              style={{ background:'linear-gradient(to bottom, transparent, rgba(255,85,0,0.3) 10%, rgba(255,85,0,0.1) 90%, transparent)' }} />
 
             <div className="space-y-8">
               {TIMELINE.map((item, i) => (

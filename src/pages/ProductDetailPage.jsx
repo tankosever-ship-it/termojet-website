@@ -93,7 +93,7 @@ export default function ProductDetailPage() {
               ) : (
                 <span className="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1 rounded-full">{cat.outOfStock}</span>
               )}
-              <span className="bg-blue-50 text-[var(--primary)] text-xs font-medium px-2.5 py-1 rounded-full">🇺🇦 Виробник: Termojet</span>
+              <span className="bg-orange-50 text-[var(--accent)] text-xs font-medium px-2.5 py-1 rounded-full">🇺🇦 Виробник: Termojet</span>
             </div>
 
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">{name}</h1>

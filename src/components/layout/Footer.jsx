@@ -14,9 +14,9 @@ export default function Footer() {
     <footer className="relative mt-auto overflow-hidden text-white"
       style={{
         background: `
-          radial-gradient(ellipse 80% 60% at 100% 100%, rgba(232,93,4,0.18) 0%, transparent 55%),
-          radial-gradient(ellipse 60% 80% at 0% 0%, rgba(36,87,160,0.25) 0%, transparent 50%),
-          linear-gradient(160deg, #070f1e 0%, #0f1f3a 50%, #070f1e 100%)
+          radial-gradient(ellipse 80% 60% at 100% 100%, rgba(255,85,0,0.20) 0%, transparent 55%),
+          radial-gradient(ellipse 50% 60% at 0% 0%, rgba(255,255,255,0.03) 0%, transparent 50%),
+          linear-gradient(160deg, #0A0A0A 0%, #111111 50%, #0A0A0A 100%)
         `
       }}>
       {/* subtle grain */}
@@ -93,7 +93,7 @@ export default function Footer() {
           {/* Info */}
           <div>
             <div className="font-semibold mb-5 text-white/90 flex items-center gap-2">
-              <span className="w-1 h-4 rounded bg-[var(--primary-light)] inline-block" />
+              <span className="w-1 h-4 rounded bg-[var(--accent)] inline-block" />
               {footer.info}
             </div>
             <ul className="space-y-2.5 text-sm">
@@ -108,7 +108,7 @@ export default function Footer() {
               ].map(([label, to]) => (
                 <li key={to}>
                   <Link to={to} className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5 group">
-                    <span className="w-0 group-hover:w-3 overflow-hidden transition-all text-[var(--primary-light)] flex-shrink-0">›</span>
+                    <span className="w-0 group-hover:w-3 overflow-hidden transition-all text-[var(--accent)] flex-shrink-0">›</span>
                     {label}
                   </Link>
                 </li>
@@ -119,7 +119,7 @@ export default function Footer() {
           {/* Contacts */}
           <div>
             <div className="font-semibold mb-5 text-white/90 flex items-center gap-2">
-              <span className="w-1 h-4 rounded bg-[#0891b2] inline-block" />
+              <span className="w-1 h-4 rounded bg-[var(--accent)] inline-block" />
               {footer.contacts}
             </div>
             <ul className="space-y-4 text-sm">
@@ -137,16 +137,16 @@ export default function Footer() {
                 <a href={`mailto:${siteSettings.email}`}
                   className="flex items-start gap-3 text-white/60 hover:text-white transition-colors group">
                   <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'rgba(36,87,160,0.2)' }}>
-                    <Mail size={14} className="text-blue-400" />
+                    style={{ background: 'rgba(255,85,0,0.12)' }}>
+                    <Mail size={14} className="text-[var(--accent-light)]" />
                   </span>
                   <span className="mt-1 break-all">{siteSettings.email}</span>
                 </a>
               </li>
               <li className="flex items-start gap-3 text-white/50">
                 <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(8,145,178,0.15)' }}>
-                  <MapPin size={14} className="text-cyan-400" />
+                  style={{ background: 'rgba(255,85,0,0.10)' }}>
+                  <MapPin size={14} className="text-[var(--accent-light)]" />
                 </span>
                 <span className="mt-1">{siteSettings.address}</span>
               </li>

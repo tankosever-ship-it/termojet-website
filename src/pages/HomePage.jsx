@@ -119,20 +119,20 @@ export default function HomePage() {
       ═══════════════════════════════════════════ */}
       <section className="relative overflow-hidden text-white" style={{ minHeight: '88vh' }}>
 
-        {/* Base gradient background */}
+        {/* Base dark background */}
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, #060d1a 0%, #0f2040 45%, #0a1628 100%)' }} />
+          style={{ background: 'linear-gradient(135deg, #080808 0%, #111111 45%, #080808 100%)' }} />
 
         {/* Orange accent glow — bottom right */}
         <div className="absolute pointer-events-none"
           style={{ width: 600, height: 600, borderRadius: '50%', bottom: '-150px', right: '-100px',
-            background: 'radial-gradient(circle, rgba(255,85,0,0.22) 0%, rgba(255,85,0,0.06) 50%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255,85,0,0.25) 0%, rgba(255,85,0,0.06) 50%, transparent 70%)',
             filter: 'blur(40px)' }} />
-        {/* Blue accent glow — top left */}
+        {/* Warm glow — top left */}
         <div className="absolute pointer-events-none"
           style={{ width: 500, height: 500, borderRadius: '50%', top: '-100px', left: '-80px',
-            background: 'radial-gradient(circle, rgba(36,87,160,0.28) 0%, rgba(36,87,160,0.08) 50%, transparent 70%)',
-            filter: 'blur(40px)' }} />
+            background: 'radial-gradient(circle, rgba(255,160,0,0.12) 0%, transparent 70%)',
+            filter: 'blur(60px)' }} />
 
         {/* 3D scene — full background */}
         <div className="absolute inset-0" style={{ opacity: 0.85 }}>
@@ -141,9 +141,9 @@ export default function HomePage() {
 
         {/* Overlay gradients for text readability */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(90deg, rgba(6,13,26,0.82) 0%, rgba(6,13,26,0.5) 55%, rgba(6,13,26,0.1) 100%)' }} />
+          style={{ background: 'linear-gradient(90deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.5) 55%, rgba(8,8,8,0.1) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(180deg, rgba(6,13,26,0.3) 0%, transparent 30%, transparent 70%, rgba(6,13,26,0.6) 100%)' }} />
+          style={{ background: 'linear-gradient(180deg, rgba(8,8,8,0.3) 0%, transparent 30%, transparent 70%, rgba(8,8,8,0.6) 100%)' }} />
 
         {/* Orange top line */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.7)] to-transparent pointer-events-none" />
@@ -301,7 +301,7 @@ export default function HomePage() {
       <section className="advantages-bg grain relative overflow-hidden py-20 md:py-28 text-white">
         <div className="absolute inset-0 bg-dots pointer-events-none" />
         <div className="orb orb-orange w-[500px] h-[500px] -right-32 top-1/2 -translate-y-1/2 opacity-50" />
-        <div className="orb orb-blue   w-[400px] h-[400px] -left-20  top-0          opacity-40" />
+        <div className="orb orb-warm   w-[400px] h-[400px] -left-20  top-0          opacity-40" />
 
         <div className="relative max-w-7xl mx-auto px-4">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="text-center mb-14">
@@ -334,7 +334,7 @@ export default function HomePage() {
                   className="relative p-6 flex flex-col gap-4 rounded-2xl cursor-default overflow-hidden"
                   style={{
                     background: isHovered
-                      ? 'linear-gradient(135deg, rgba(255,85,0,0.12), rgba(36,87,160,0.12))'
+                      ? 'linear-gradient(135deg, rgba(255,85,0,0.12), rgba(255,120,0,0.06))'
                       : 'rgba(255,255,255,0.05)',
                     border: isHovered
                       ? '1px solid rgba(255,85,0,0.35)'
@@ -447,7 +447,7 @@ export default function HomePage() {
                       <line x1={x} y1="100" x2={x} y2="50" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
                       <line x1={x} y1="100" x2={x} y2="150" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
                       <circle cx={x} cy="50" r="8" fill="rgba(255,85,0,0.3)" stroke="rgba(255,85,0,0.8)" strokeWidth="1.5" />
-                      <circle cx={x} cy="150" r="8" fill="rgba(36,87,160,0.3)" stroke="rgba(36,87,160,0.8)" strokeWidth="1.5" />
+                      <circle cx={x} cy="150" r="8" fill="rgba(255,85,0,0.15)" stroke="rgba(255,85,0,0.5)" strokeWidth="1.5" />
                       <text x={x} y="30" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="monospace">НГ{i+1}</text>
                     </g>
                   ))}

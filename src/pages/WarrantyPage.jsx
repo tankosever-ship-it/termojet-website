@@ -73,7 +73,7 @@ export default function WarrantyPage() {
       />
 
       <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
-        <div className="orb orb-blue   w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-40" />
+        <div className="orb orb-warm   w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-40" />
         <div className="orb orb-orange w-[280px] h-[280px] -left-16  -top-16              opacity-30" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.6)] to-transparent" />
@@ -104,7 +104,7 @@ export default function WarrantyPage() {
           {WARRANTY_BLOCKS.map(({ icon: Icon, badge, title, items, color }, i) => (
             <motion.div key={i} variants={fadeUp} className="card p-7 flex flex-col gap-5">
               <div className="flex items-start justify-between">
-                <div className="icon-badge-blue">
+                <div className="icon-badge-dark">
                   <Icon size={22} />
                 </div>
                 <span className="text-sm font-black px-4 py-1.5 rounded-full"
@@ -131,7 +131,7 @@ export default function WarrantyPage() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <div className="bg-[var(--primary)]/5 border border-[var(--primary)]/10 rounded-2xl p-8">
               <div className="flex items-center gap-3 mb-5">
-                <div className="icon-badge-blue"><ShieldCheck size={20} /></div>
+                <div className="icon-badge-dark"><ShieldCheck size={20} /></div>
                 <h2 className="font-bold text-xl text-[var(--text-primary)]">Вимоги для теплових насосів</h2>
               </div>
               <ul className="space-y-3">
