@@ -17,16 +17,15 @@ function MegaMenu({ lang, products, onClose }) {
 
   return (
     <>
-      {/* Backdrop */}
       <div className="mega-backdrop" onClick={onClose} />
-
-      {/* Panel */}
       <div className="mega-full" onMouseLeave={onClose}>
         <div className="mega-full-inner">
 
           {/* ── Left: category list ── */}
-          <div className="border-r border-[var(--ink-200)] py-4 pr-3 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)' }}>
-            <div className="eyebrow px-3 mb-3">Категорії · {CATEGORIES.length}</div>
+          <div className="border-r border-[var(--border)] py-4 pr-2 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)', background: '#0D0D0D' }}>
+            <div className="px-3 mb-4" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
+              Категорії · {CATEGORIES.length}
+            </div>
             {CATEGORIES.map((cat, i) => (
               <Link
                 key={cat.id}
@@ -34,41 +33,58 @@ function MegaMenu({ lang, products, onClose }) {
                 onClick={onClose}
                 onMouseEnter={() => setActiveCatIdx(i)}
                 className={`mega-cat-item ${i === activeCatIdx ? 'active' : ''}`}
+                style={{ color: i === activeCatIdx ? 'white' : 'rgba(255,255,255,0.55)', background: i === activeCatIdx ? 'rgba(255,85,0,0.12)' : 'transparent', borderLeftColor: i === activeCatIdx ? 'var(--accent)' : 'transparent' }}
               >
                 <div className="flex items-center gap-2.5">
                   <span className="text-base flex-shrink-0">{cat.icon}</span>
-                  <span className="text-sm font-medium text-gray-800 leading-snug">{cat.name[lang] || cat.name.uk}</span>
+                  <span style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '13px', fontWeight: 500, lineHeight: 1.3 }}>
+                    {cat.name[lang] || cat.name.uk}
+                  </span>
                 </div>
-                <span className="text-xs text-gray-400 flex-shrink-0 ml-2">{cat.count}</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.25)', flexShrink: 0 }}>
+                  {cat.count}
+                </span>
               </Link>
             ))}
           </div>
 
           {/* ── Center: products grid ── */}
-          <div className="py-4 px-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="eyebrow">{activeCat?.name[lang] || activeCat?.name.uk}</div>
+          <div className="py-4 px-4 overflow-y-auto bg-white" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            <div className="flex items-center justify-between mb-4">
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
+                {activeCat?.name[lang] || activeCat?.name.uk}
+              </div>
               <Link to={`/catalog/${activeCat?.slug}`} onClick={onClose}
-                className="text-xs font-semibold text-[var(--accent)] hover:underline flex items-center gap-1">
+                className="flex items-center gap-1 hover:gap-2 transition-all"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)' }}>
                 Всі товари <ArrowRight size={11} />
               </Link>
             </div>
 
             {catProducts.length > 0 ? (
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-4 gap-2">
                 {catProducts.map(p => {
                   const name = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
                   return (
                     <Link key={p.id} to={`/catalog/${p.categorySlug}/${p.slug || p.id}`} onClick={onClose}
-                      className="flex flex-col gap-2 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-[var(--ink-200)] transition-all group">
-                      <div className="w-full aspect-square rounded-lg bg-[var(--bg)] border border-[var(--ink-200)] overflow-hidden group-hover:border-[var(--primary)]/30 transition-colors">
+                      className="flex flex-col gap-2 p-2.5 border border-transparent hover:border-[var(--border)] hover:bg-[var(--bg-warm)] transition-all group"
+                      style={{ borderRadius: 0 }}>
+                      <div className="w-full aspect-square bg-[var(--bg-warm)] border border-[var(--border)] overflow-hidden group-hover:border-[var(--accent)] transition-colors"
+                        style={{ borderRadius: 0 }}>
                         {p.image
                           ? <img src={p.image} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
                           : <span className="flex items-center justify-center w-full h-full text-3xl">{activeCat.icon}</span>}
                       </div>
                       <div>
-                        <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors">{name}</div>
-                        {p.sku && <div className="text-[10px] text-gray-400 font-mono mt-0.5">{p.sku}</div>}
+                        <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors"
+                          style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                          {name}
+                        </div>
+                        {p.sku && (
+                          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: '#999', marginTop: 2 }}>
+                            {p.sku}
+                          </div>
+                        )}
                       </div>
                     </Link>
                   )
@@ -80,23 +96,24 @@ function MegaMenu({ lang, products, onClose }) {
           </div>
 
           {/* ── Right: CTA ── */}
-          <div className="section-dark p-6 flex flex-col gap-4" style={{ maxHeight: 'calc(100vh - 64px)' }}>
-            <div className="eyebrow-white">Termojet App</div>
+          <div className="section-dark p-6 flex flex-col gap-4 border-l border-white/5" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
+              Termojet App
+            </div>
             <h4 className="text-white font-black text-xl leading-tight font-['Archivo',sans-serif]">
               Конфігуратор<br />котельної<br />системи
             </h4>
-            <p className="text-white/55 text-xs leading-relaxed">
+            <p className="text-white/50 text-xs leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
               Підберіть колектор та насосні групи без помилок. Експорт PDF.
             </p>
-            <button className="mt-auto flex items-center gap-2 text-xs font-bold text-white bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 hover:bg-white/20 transition-colors self-start">
+            <div className="h-px bg-white/8 my-1" />
+            <button className="mt-auto flex items-center gap-2 text-white border border-white/20 px-4 py-2.5 hover:bg-white/10 transition-colors self-start"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: 0 }}>
               Запустити <ArrowUpRight size={13} />
             </button>
-            <div className="border-t border-white/10 pt-4">
-              <Link to="/catalog" onClick={onClose}
-                className="btn-primary text-xs py-2.5 px-4 w-full justify-center">
-                Весь каталог →
-              </Link>
-            </div>
+            <Link to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
+              Весь каталог →
+            </Link>
           </div>
 
         </div>
@@ -105,19 +122,31 @@ function MegaMenu({ lang, products, onClose }) {
   )
 }
 
-// ─── Простий дропдаун ───
-function SimpleDropdown({ items, onClose }) {
+// ─── Темний дропдаун у дизайн системі ───
+function DarkDropdown({ items, onClose }) {
   return (
-    <div className="absolute top-full left-0 mt-2 w-56 bg-white border border-[var(--ink-200)] rounded-2xl shadow-xl overflow-hidden z-50 py-1.5">
-      {items.map(item => (
+    <div className="absolute top-full left-0 mt-0 w-60 z-50 overflow-hidden"
+      style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: 0, boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }}>
+      {items.map((item, i) => (
         item.external
           ? <a key={item.to} href={item.to} target="_blank" rel="noopener noreferrer" onClick={onClose}
-              className="flex items-center justify-between gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[var(--accent)] transition-colors">
-              {item.label} <ExternalLink size={12} className="text-gray-400" />
+              className="flex items-center justify-between gap-2 px-4 py-3 transition-all group"
+              style={{ borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,85,0,0.10)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
+                {item.label}
+              </span>
+              <ExternalLink size={11} style={{ color: 'rgba(255,255,255,0.3)' }} />
             </a>
           : <Link key={item.to} to={item.to} onClick={onClose}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[var(--accent)] transition-colors">
-              {item.label}
+              className="flex items-center gap-3 px-4 py-3 transition-all group"
+              style={{ borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', borderLeft: '2px solid transparent' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,85,0,0.10)'; e.currentTarget.style.borderLeftColor = 'var(--accent)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderLeftColor = 'transparent' }}>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
+                {item.label}
+              </span>
             </Link>
       ))}
     </div>
@@ -150,7 +179,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMenuOpen(false); setCatalogOpen(false); setAboutOpen(false); setClientOpen(false) }, [location.pathname])
   useEffect(() => { if (searchOpen) searchRef.current?.focus() }, [searchOpen])
 
@@ -175,57 +203,70 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
 
+  // nav link стиль — JetBrains Mono
+  const navLinkStyle = { fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }
+
   const aboutItems = [
     { to: '/about',     label: 'Про нас' },
-    { to: '/portfolio', label: 'Реалізовані проекти' },
+    { to: '/portfolio', label: 'Проекти' },
     { to: '/blog',      label: 'Блог' },
     { to: '/contacts',  label: 'Контакти' },
   ]
-
   const clientItems = [
     { to: '/service',  label: 'Сервіс' },
     { to: '/delivery', label: 'Доставка і оплата' },
-    { to: '/returns',  label: 'Повернення та обмін' },
+    { to: '/returns',  label: 'Повернення' },
     { to: '/oem',      label: 'OEM виробництво' },
     { to: '/warranty', label: 'Гарантія' },
-    { to: '/support',  label: 'Технічна підтримка' },
+    { to: '/support',  label: 'Тех. підтримка' },
   ]
+
+  // glassmorphism: завжди white/85 + blur, на скролі трохи темніше + shadow
+  const navBg = scrolled
+    ? 'rgba(255,255,255,0.92)'
+    : 'rgba(255,255,255,0.82)'
+  const navShadow = scrolled
+    ? '0 2px 32px rgba(0,0,0,0.12)'
+    : '0 1px 0 rgba(0,0,0,0.06)'
 
   return (
     <>
       {/* ─── Top bar ─── */}
       <div className="hidden md:block text-white/70 py-2"
-        style={{ background: '#080f1c', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        style={{ background: '#0A0A0A', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-5" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.04em' }}>
-            <span className="flex items-center gap-1.5 text-white/80"><span className="text-[var(--accent)]">●</span> 20 років на ринку</span>
-            <span className="text-white/20">|</span>
-            <span className="flex items-center gap-1.5 text-white/80"><span className="text-[var(--accent)]">●</span> Експорт у 15 країн</span>
-            <span className="text-white/20">|</span>
-            <span className="flex items-center gap-1.5 text-white/80"><span className="text-[var(--accent)]">●</span> Власне виробництво в Києві і Житомирі</span>
+          <div className="flex items-center gap-5" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', letterSpacing: '0.06em' }}>
+            <span className="flex items-center gap-1.5 text-white/70"><span className="text-[var(--accent)]">●</span> 20 років на ринку</span>
+            <span className="text-white/15">|</span>
+            <span className="flex items-center gap-1.5 text-white/70"><span className="text-[var(--accent)]">●</span> Експорт у 15 країн</span>
+            <span className="text-white/15">|</span>
+            <span className="flex items-center gap-1.5 text-white/70"><span className="text-[var(--accent)]">●</span> Виробництво: Київ / Житомир</span>
           </div>
-          <div className="flex items-center gap-4" style={{ fontSize: '11px' }}>
+          <div className="flex items-center gap-4" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px' }}>
             <a href="tel:+380507189165" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} className="text-[var(--accent-light)]" /> +380 50 718 91 65
+              <Phone size={10} className="text-[var(--accent)]" /> +380 50 718 91 65
             </a>
             <a href={`mailto:${siteSettings.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Mail size={11} className="text-[var(--accent-light)]" /> {siteSettings.email}
+              <Mail size={10} className="text-[var(--accent)]" /> {siteSettings.email}
             </a>
           </div>
         </div>
       </div>
 
-      {/* ─── Main navbar ─── */}
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_rgba(0,0,0,0.08)] border-b border-[var(--ink-200)]' : 'bg-white border-b border-[var(--ink-200)]'
-      }`}>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.15)] to-transparent" />
+      {/* ─── Main navbar (glassmorphism) ─── */}
+      <header className="sticky top-0 z-50 transition-all duration-300"
+        style={{ background: navBg, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: navShadow, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+
+        {/* orange accent line bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1.5px]"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,85,0,0.4) 30%, rgba(255,85,0,0.4) 70%, transparent)' }} />
+
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-3 h-16">
+          <div className="flex items-center gap-3 h-[60px]">
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0 flex items-center gap-2.5 group">
-              <img src={assetPath('/logo.png')} alt="Termojet" className="h-9 w-auto" onError={e => { e.target.style.display='none' }} />
+              <img src={assetPath('/logo.png')} alt="Termojet" className="h-8 w-auto" onError={e => { e.target.style.display='none' }} />
               <span className="font-black text-xl tracking-tight font-['Archivo',sans-serif] hidden sm:block"
                 style={{ background: 'linear-gradient(135deg, #FF5500 0%, #FF9500 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 TERMOJET
@@ -233,13 +274,15 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-0 ml-1 flex-shrink-0">
+            <nav className="hidden lg:flex items-center ml-2 flex-shrink-0">
 
-              {/* Каталог mega-menu */}
+              {/* Каталог */}
               <div className="relative" ref={catalogRef}>
                 <button onMouseEnter={() => setCatalogOpen(true)} onClick={() => setCatalogOpen(v => !v)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/catalog') ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
-                  Каталог <ChevronDown size={13} className={`transition-transform duration-200 ${catalogOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
+                  className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap group"
+                  style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  Каталог
+                  <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: catalogOpen ? 'rotate(180deg)' : 'none', color: catalogOpen ? 'var(--accent)' : 'currentColor' }} />
                 </button>
                 {catalogOpen && <MegaMenu lang={lang} products={products} onClose={() => setCatalogOpen(false)} />}
               </div>
@@ -247,63 +290,73 @@ export default function Navbar() {
               {/* Про Termojet */}
               <div className="relative" ref={aboutRef}>
                 <button onMouseEnter={() => setAboutOpen(true)} onClick={() => setAboutOpen(v => !v)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
-                  Про Termojet <ChevronDown size={13} className={`transition-transform duration-200 ${aboutOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
+                  className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                  style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  Про Termojet
+                  <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: aboutOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
-                {aboutOpen && <SimpleDropdown items={aboutItems} onClose={() => setAboutOpen(false)} />}
+                {aboutOpen && <DarkDropdown items={aboutItems} onClose={() => setAboutOpen(false)} />}
               </div>
 
               {/* Для клієнта */}
               <div className="relative" ref={clientRef}>
                 <button onMouseEnter={() => setClientOpen(true)} onClick={() => setClientOpen(v => !v)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
-                  Для клієнта <ChevronDown size={13} className={`transition-transform duration-200 ${clientOpen ? 'rotate-180 text-[var(--accent)]' : ''}`} />
+                  className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                  style={{ ...navLinkStyle, color: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  Для клієнта
+                  <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: clientOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
-                {clientOpen && <SimpleDropdown items={clientItems} onClose={() => setClientOpen(false)} />}
+                {clientOpen && <DarkDropdown items={clientItems} onClose={() => setClientOpen(false)} />}
               </div>
 
               {/* Файли */}
               <Link to="/files"
-                className={`px-2.5 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap ${isActive('/files') ? 'text-[var(--accent)] bg-orange-50' : 'text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50'}`}>
+                className="px-3 py-2 transition-all whitespace-nowrap"
+                style={{ ...navLinkStyle, color: isActive('/files') ? 'var(--accent)' : '#333', borderBottom: isActive('/files') ? '2px solid var(--accent)' : '2px solid transparent' }}>
                 Файли
               </Link>
 
-              {/* Теплові насоси — external */}
+              {/* Теплові насоси */}
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[13px] font-medium text-gray-700 hover:text-[var(--accent)] hover:bg-gray-50 transition-all whitespace-nowrap">
-                Теплові насоси <ExternalLink size={11} className="text-gray-400" />
-              </a>
-
-              {/* Phone */}
-              <a href="tel:+380507189165"
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-semibold text-gray-700 hover:text-[var(--accent)] transition-all whitespace-nowrap"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px' }}>
-                <Phone size={12} className="text-[var(--accent)]" /> +380 50 718 91 65
+                className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                style={{ ...navLinkStyle, color: '#555', borderBottom: '2px solid transparent' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+                Теплові насоси <ExternalLink size={10} />
               </a>
             </nav>
 
             <div className="flex-1" />
 
             {/* Right actions */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
+
               {/* Search */}
               <button onClick={() => setSearchOpen(v => !v)}
-                className={`p-2 rounded-lg transition-all hidden md:flex ${searchOpen ? 'bg-orange-50 text-[var(--accent)]' : 'text-gray-500 hover:bg-gray-100 hover:text-[var(--accent)]'}`}>
+                className="p-2 hidden md:flex transition-all"
+                style={{ color: searchOpen ? 'var(--accent)' : '#666' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => { if (!searchOpen) e.currentTarget.style.color = '#666' }}>
                 <Search size={17} />
               </button>
 
-              {/* Lang switcher dropdown */}
+              {/* Lang switcher */}
               <div className="relative hidden lg:block" ref={langRef}>
                 <button onClick={() => setLangOpen(v => !v)}
-                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold border border-[var(--ink-200)] text-gray-600 hover:border-[var(--primary)] hover:text-[var(--accent)] transition-all">
+                  className="flex items-center gap-1 px-2.5 py-1.5 transition-all"
+                  style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', color: '#444', border: '1px solid rgba(0,0,0,0.12)', borderRadius: 0 }}>
                   {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
-                  <ChevronDown size={11} className={`transition-transform duration-150 ${langOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {langOpen && (
-                  <div className="absolute top-full right-0 mt-1.5 w-24 bg-white border border-[var(--ink-200)] rounded-xl shadow-xl overflow-hidden z-50 py-1">
+                  <div className="absolute top-full right-0 mt-0 w-24 z-50 overflow-hidden"
+                    style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: 0, boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
                     {LANGS.map(l => (
                       <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false) }}
-                        className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-bold transition-colors ${lang === l.code ? 'bg-[var(--primary)] text-white' : 'text-gray-600 hover:bg-gray-50'}`}>
+                        className="w-full flex items-center gap-2 px-3 py-2.5 transition-colors"
+                        style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', color: lang === l.code ? 'var(--accent)' : 'rgba(255,255,255,0.6)', background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,85,0,0.10)'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                         <span>{l.flag}</span> {l.label}
                       </button>
                     ))}
@@ -312,30 +365,35 @@ export default function Navbar() {
               </div>
 
               {/* Cart */}
-              <Link to="/cart" className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-[var(--accent)] transition-all">
+              <Link to="/cart" className="relative p-2 transition-all"
+                style={{ color: '#666' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.currentTarget.style.color = '#666'}>
                 <ShoppingCart size={17} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold"
-                    style={{ background: 'var(--accent)' }}>
+                  <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 flex items-center justify-center font-bold"
+                    style={{ background: 'var(--accent)', borderRadius: 0, fontFamily: "'JetBrains Mono', monospace", fontSize: '9px' }}>
                     {cartCount > 9 ? '9+' : cartCount}
                   </span>
                 )}
               </Link>
 
-              {/* CTA buttons */}
-              <Link to="/partners" className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 whitespace-nowrap"
-                style={{ background: 'linear-gradient(135deg, #FF5500, #FF8800)' }}>
+              {/* CTA */}
+              <Link to="/partners"
+                className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
+                style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}>
                 Стати партнером
               </Link>
-              <Link to="/contacts" className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border-2 whitespace-nowrap"
-                style={{ borderColor: '#FF5500', color: '#FF5500', background: 'transparent' }}
-                onMouseEnter={e => { e.currentTarget.style.background='#FF5500'; e.currentTarget.style.color='white' }}
-                onMouseLeave={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.color='#FF5500' }}>
+              <Link to="/contacts"
+                className="hidden xl:flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
                 Консультація
               </Link>
 
               {/* Mobile burger */}
-              <button onClick={() => setMenuOpen(v => !v)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <button onClick={() => setMenuOpen(v => !v)} className="lg:hidden p-2 transition-colors" style={{ color: '#444' }}>
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
@@ -345,10 +403,11 @@ export default function Navbar() {
           {searchOpen && (
             <form onSubmit={handleSearch} className="pb-3 pt-1">
               <div className="relative">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input ref={searchRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Пошук товарів..."
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[var(--ink-200)] focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[rgba(255,85,0,0.08)] text-sm bg-[var(--bg)]" />
+                  className="w-full pl-9 pr-4 py-2.5 text-sm bg-[var(--bg-warm)]"
+                  style={{ border: '1px solid var(--border)', borderBottom: '2px solid var(--accent)', borderRadius: 0, outline: 'none', fontFamily: "'IBM Plex Sans', sans-serif" }} />
               </div>
             </form>
           )}
@@ -356,28 +415,72 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-[var(--ink-200)] bg-white/98 backdrop-blur-xl">
+          <div className="lg:hidden border-t border-[var(--border)]"
+            style={{ background: 'rgba(255,255,255,0.96)', backdropFilter: 'blur(20px)' }}>
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5">
-              <Link to="/catalog"   className={`px-3 py-2.5 rounded-lg text-sm font-medium ${isActive('/catalog')   ? 'bg-orange-50 text-[var(--accent)]' : 'text-gray-700 hover:bg-gray-50'}`}>Каталог</Link>
-              <div className="px-3 py-1.5 text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">Про Termojet</div>
-              {aboutItems.map(i => <Link key={i.to} to={i.to} className="px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50">{i.label}</Link>)}
-              <div className="px-3 py-1.5 text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">Для клієнта</div>
-              {clientItems.map(i => <Link key={i.to} to={i.to} className="px-5 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50">{i.label}</Link>)}
-              <Link to="/files" className="px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-50 mt-1">Файли</Link>
-              <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
-                className="px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                Теплові насоси <ExternalLink size={12} />
-              </a>
-              <div className="flex gap-2 pt-3 border-t border-[var(--ink-200)] mt-2">
-                <Link to="/partners" className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white text-center"
-                  style={{ background: 'linear-gradient(135deg, #FF5500, #FF8800)' }}>Стати партнером</Link>
-                <Link to="/contacts" className="flex-1 py-2.5 rounded-xl text-sm font-bold text-center border-2"
-                  style={{ borderColor: '#FF5500', color: '#FF5500' }}>Консультація</Link>
+
+              <Link to="/catalog"
+                className="px-3 py-2.5 transition-colors"
+                style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderLeft: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                Каталог
+              </Link>
+
+              <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
+                Про Termojet
               </div>
+              {aboutItems.map(i => (
+                <Link key={i.to} to={i.to}
+                  className="px-5 py-2 transition-colors"
+                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+                  {i.label}
+                </Link>
+              ))}
+
+              <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
+                Для клієнта
+              </div>
+              {clientItems.map(i => (
+                <Link key={i.to} to={i.to}
+                  className="px-5 py-2 transition-colors"
+                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+                  {i.label}
+                </Link>
+              ))}
+
+              <Link to="/files"
+                className="px-3 py-2.5 mt-1 transition-colors"
+                style={{ ...navLinkStyle, color: '#444' }}>
+                Файли
+              </Link>
+
+              <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
+                className="px-3 py-2.5 flex items-center gap-2 transition-colors"
+                style={{ ...navLinkStyle, color: '#444' }}>
+                Теплові насоси <ExternalLink size={11} />
+              </a>
+
+              <div className="flex gap-2 pt-3 border-t border-[var(--border)] mt-2">
+                <Link to="/partners"
+                  className="flex-1 py-2.5 text-white text-center"
+                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}>
+                  Стати партнером
+                </Link>
+                <Link to="/contacts"
+                  className="flex-1 py-2.5 text-center"
+                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}>
+                  Консультація
+                </Link>
+              </div>
+
               <div className="flex gap-1 pt-2 flex-wrap">
                 {LANGS.map(l => (
                   <button key={l.code} onClick={() => setLang(l.code)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${lang === l.code ? 'bg-[var(--primary)] text-white' : 'text-gray-600 border border-[var(--ink-200)]'}`}>
+                    className="px-3 py-1.5 transition-colors"
+                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', borderRadius: 0, background: lang === l.code ? 'var(--accent)' : 'transparent', color: lang === l.code ? 'white' : '#555', border: lang === l.code ? 'none' : '1px solid var(--border)' }}>
                     {l.flag} {l.label}
                   </button>
                 ))}
