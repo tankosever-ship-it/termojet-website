@@ -139,67 +139,48 @@ export default function HomePage() {
         {/* Оранжева лінія зверху */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--accent)] pointer-events-none" />
 
-        {/* Контент — по центру */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4"
-          style={{ minHeight: '90vh' }}>
+        {/* Контент — зліва */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 flex items-center" style={{ minHeight: '90vh' }}>
+          <div className="max-w-xl py-24">
+            <motion.div initial="hidden" animate="show" variants={stagger}>
 
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl w-full">
+              <motion.div variants={fadeUp} className="eyebrow-white mb-6" style={{ fontSize: '13px', letterSpacing: '0.1em' }}>
+                ● Системи швидкого монтажу · Виробництво з 2002
+              </motion.div>
 
-            {/* Eyebrow */}
-            <motion.div variants={fadeUp}
-              className="eyebrow-white mb-8"
-              style={{ fontSize: '11px', letterSpacing: '0.2em' }}>
-              ● VIROBNYCTVO Z 2002 · ВЛАСНЕ ВИРОБНИЦТВО · КИЇВ / ЖИТОМИР
+              <motion.h1 variants={fadeUp}
+                className="font-black leading-[0.92] font-['Archivo',sans-serif] mb-6"
+                style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
+                Котельня,<br />
+                зібрана за{' '}
+                <span className="text-gradient-orange">години</span>,<br />
+                <span className="text-outline-white">а не за тижні.</span>
+              </motion.h1>
+
+              <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8">
+                {hero.subtitle}
+              </motion.p>
+
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+                <Link to="/catalog" className="btn-primary px-7 py-3.5 text-base">
+                  {hero.ctaCatalog} <ArrowRight size={16} />
+                </Link>
+                <Link to="/contacts" className="btn-outline-white px-7 py-3.5 text-base">
+                  {hero.ctaContact}
+                </Link>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-white/40"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.04em' }}>
+                {['Гарантія якості', 'Доставка по Україні', '50 000+ котелень', 'ISO 9001:2015'].map(item => (
+                  <span key={item} className="flex items-center gap-1.5">
+                    <Check size={12} className="text-[#FF8533]" /> {item}
+                  </span>
+                ))}
+              </motion.div>
+
             </motion.div>
-
-            {/* Головний заголовок */}
-            <motion.h1 variants={fadeUp}
-              className="font-black font-['Archivo',sans-serif] mb-6 leading-[0.9]"
-              style={{ fontSize: 'clamp(3.2rem, 9vw, 7.5rem)', textTransform: 'uppercase' }}>
-              Обладнання<br />
-              для{' '}
-              <span style={{ color: 'var(--accent)' }}>котелень</span><br />
-              з{' '}
-              <span className="text-outline-white">України</span>
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.p variants={fadeUp}
-              className="text-white/60 mb-10 mx-auto leading-relaxed"
-              style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', maxWidth: '560px' }}>
-              {hero.subtitle}
-            </motion.p>
-
-            {/* CTA кнопки */}
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center mb-16">
-              <Link to="/catalog" className="btn-primary px-8 py-4">
-                {hero.ctaCatalog} <ArrowRight size={16} />
-              </Link>
-              <Link to="/contacts" className="btn-outline-white px-8 py-4">
-                {hero.ctaContact}
-              </Link>
-            </motion.div>
-
-            {/* Статистика знизу */}
-            <motion.div variants={fadeUp}
-              className="grid grid-cols-2 md:grid-cols-4 gap-px border border-white/10 bg-white/10 mx-auto"
-              style={{ maxWidth: '700px', backdropFilter: 'blur(12px)' }}>
-              {[
-                { num: '1800°C', label: 'MAX TEMP' },
-                { num: '20+', label: 'РОКІВ' },
-                { num: '15', label: 'КРАЇН EXP.' },
-                { num: '50K+', label: "OБ'ЄКТІВ" },
-              ].map(s => (
-                <div key={s.num} className="bg-black/30 px-4 py-4 text-center">
-                  <div className="font-black font-['Archivo',sans-serif] text-2xl text-white leading-none mb-1">
-                    {s.num}
-                  </div>
-                  <div className="mono-label-white" style={{ fontSize: '9px' }}>{s.label}</div>
-                </div>
-              ))}
-            </motion.div>
-
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom fade */}
