@@ -243,12 +243,8 @@ export default function Navbar() {
           <div className="flex items-center gap-3 h-[60px]">
 
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0 flex items-center gap-2.5 group">
-              <img src={assetPath('/logo.png')} alt="Termojet" className="h-8 w-auto" onError={e => { e.target.style.display='none' }} />
-              <span className="font-black text-xl tracking-tight font-['Archivo',sans-serif] hidden sm:block"
-                style={{ background: 'linear-gradient(135deg, #FF5500 0%, #FF9500 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                TERMOJET
-              </span>
+            <Link to="/" className="flex-shrink-0">
+              <img src={assetPath('/logo-orange.png')} alt="Termojet" className="h-10 w-auto" />
             </Link>
 
             {/* Desktop nav */}

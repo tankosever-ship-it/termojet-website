@@ -32,9 +32,8 @@ export default function Footer() {
 
           {/* Brand column */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <img src={assetPath('/logo.png')} alt="Termojet" className="h-8 w-auto brightness-0 invert" onError={e => { e.target.style.display='none' }} />
-              <span className="font-black text-xl font-['Archivo',sans-serif]">TERMOJET</span>
+            <div className="mb-4">
+              <img src={assetPath('/logo-white.png')} alt="Termojet" className="h-12 w-auto" />
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-5">{footer.company}</p>
 
