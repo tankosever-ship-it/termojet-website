@@ -18,7 +18,7 @@ function MegaMenu({ lang, products, onClose }) {
   return (
     <>
       <div className="mega-backdrop" onClick={onClose} />
-      <div className="mega-full" onMouseLeave={onClose}>
+      <div className="mega-full">
         <div className="mega-full-inner">
 
           {/* ── Left: category list ── */}
@@ -251,7 +251,7 @@ export default function Navbar() {
 
               {/* Каталог */}
               <div className="relative" ref={catalogRef}>
-                <button onMouseEnter={() => { setCatalogOpen(true); setAboutOpen(false); setClientOpen(false) }} onClick={() => setCatalogOpen(v => !v)}
+                <button onClick={() => { setCatalogOpen(v => !v); setAboutOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap group"
                   style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Каталог
@@ -262,7 +262,7 @@ export default function Navbar() {
 
               {/* Про Termojet */}
               <div className="relative" ref={aboutRef}>
-                <button onMouseEnter={() => { setAboutOpen(true); setCatalogOpen(false); setClientOpen(false) }} onClick={() => setAboutOpen(v => !v)}
+                <button onClick={() => { setAboutOpen(v => !v); setCatalogOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Про Termojet
@@ -273,7 +273,7 @@ export default function Navbar() {
 
               {/* Для клієнта */}
               <div className="relative" ref={clientRef}>
-                <button onMouseEnter={() => { setClientOpen(true); setCatalogOpen(false); setAboutOpen(false) }} onClick={() => setClientOpen(v => !v)}
+                <button onClick={() => { setClientOpen(v => !v); setCatalogOpen(false); setAboutOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Для клієнта
