@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Search, ChevronRight, X, ArrowUpRight, Plus } from 'lucide-react'
 import { useApp } from '../context/AppContext'
+import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
@@ -456,7 +457,7 @@ export default function CatalogPage() {
                     <div className="relative overflow-hidden bg-[var(--bg)]" style={{ height: '200px' }}>
                       <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}>
                         {product.image ? (
-                          <img src={product.image} alt={name}
+                          <img src={imgUrl(product.image)} alt={name}
                             className="w-full h-full object-contain p-4 group-hover:scale-[1.06] transition-transform duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>

@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ShoppingCart, Search, Menu, X, ChevronDown, Phone, Mail, ArrowRight, ArrowUpRight, ExternalLink } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
+import { imgUrl } from '../../utils/imgUrl'
 import { LANGS } from '../../i18n/translations'
 import { CATEGORIES } from '../../data/categories'
 import { assetPath } from '../../utils/assetPath'
@@ -72,7 +73,7 @@ function MegaMenu({ lang, products, onClose }) {
                       <div className="w-full aspect-square bg-[var(--bg-warm)] border border-[var(--border)] overflow-hidden group-hover:border-[var(--accent)] transition-colors"
                         style={{ borderRadius: 0 }}>
                         {p.image
-                          ? <img src={p.image} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
+                          ? <img src={imgUrl(p.image)} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
                           : <span className="flex items-center justify-center w-full h-full text-3xl">{activeCat.icon}</span>}
                       </div>
                       <div>

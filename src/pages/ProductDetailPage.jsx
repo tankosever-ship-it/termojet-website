@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { ShoppingCart, Plus, Minus, ChevronRight, Download, Phone, Package, Play, FileText, Wrench, Image } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
+import { imgUrl } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
 import { trackViewItem, trackAddToCart } from '../utils/analytics'
@@ -138,12 +139,12 @@ export default function ProductDetailPage() {
   const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
   const desc = (lang !== 'uk' && product[`desc_${lang}`]) ? product[`desc_${lang}`] : (product.desc || product.description || '')
 
-  // Build images list (deduplicated)
+  // Build images list (deduplicated, with base path applied)
   const allImages = useMemo(() => {
     const seen = new Set()
     const result = []
     for (const img of [product.image, ...(product.images || [])]) {
-      if (img && !seen.has(img)) { seen.add(img); result.push(img) }
+      if (img && !seen.has(img)) { seen.add(img); result.push(imgUrl(img)) }
     }
     return result
   }, [product])
@@ -380,7 +381,7 @@ export default function ProductDetailPage() {
                     className="card card-hover p-4 flex flex-col"
                   >
                     {p.image ? (
-                      <img src={p.image} alt={pName} className="h-32 object-contain mb-3" />
+                      <img src={imgUrl(p.image)} alt={pName} className="h-32 object-contain mb-3" />
                     ) : (
                       <div className="h-32 flex items-center justify-center text-4xl text-gray-200 mb-3">⚙️</div>
                     )}
