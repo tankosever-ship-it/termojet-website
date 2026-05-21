@@ -10,6 +10,86 @@ import SEO from '../components/SEO'
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
 const stagger = { show: { transition: { staggerChildren: 0.04 } } }
 
+// ── Фільтри для кожної категорії ─────────────────────────────────────────────
+const CATEGORY_FILTERS = {
+  klapany: {
+    groups: [
+      {
+        key: 'type',
+        label: 'Тип',
+        options: [
+          { label: '3-ходові крани',    test: p => /триход|3-ход/i.test(p.name) && !/привід|приводом/i.test(p.name) && !/чотирьох/i.test(p.name) },
+          { label: '4-ходові крани',    test: p => /чотирьохход|4-ход/i.test(p.name) },
+          { label: 'Електроприводи',    test: p => /привід|servopryvod/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'thread',
+        label: 'Різьба',
+        options: [
+          { label: 'Внутрішня різьба', test: p => /внутрішн/i.test(p.name) },
+          { label: 'Зовнішня різьба',  test: p => /зовнішн|Зовн\./i.test(p.name) },
+        ],
+      },
+      {
+        key: 'subtype',
+        label: 'Вид',
+        options: [
+          { label: 'Термостатичні',    test: p => /термостат/i.test(p.name) },
+          { label: 'Зональні',         test: p => /зональн/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+}
+
+function FilterBar({ categorySlug, filters, setFilters }) {
+  const config = CATEGORY_FILTERS[categorySlug]
+  if (!config) return null
+
+  const hasAny = Object.values(filters).some(Boolean)
+
+  return (
+    <div className="mb-5 p-4 bg-white border border-[var(--ink-200)]">
+      <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+        {config.groups.map(group => (
+          <div key={group.key} className="flex items-center gap-2 flex-wrap">
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+              {group.label}:
+            </span>
+            {group.options.map(opt => {
+              const active = filters[group.key] === opt.label
+              return (
+                <button key={opt.label}
+                  onClick={() => setFilters(f => ({ ...f, [group.key]: active ? '' : opt.label }))}
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '10px', fontWeight: 700,
+                    textTransform: 'uppercase', letterSpacing: '0.06em',
+                    padding: '4px 10px',
+                    border: active ? '1px solid var(--accent)' : '1px solid var(--border)',
+                    background: active ? 'var(--accent)' : 'transparent',
+                    color: active ? 'white' : 'var(--text-secondary)',
+                    cursor: 'pointer', transition: 'all 0.15s',
+                  }}>
+                  {opt.label}
+                </button>
+              )
+            })}
+          </div>
+        ))}
+        {hasAny && (
+          <button onClick={() => setFilters({})}
+            className="flex items-center gap-1 ml-auto"
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
+            <X size={11} /> Скинути
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function extractBadges(product) {
   const badges = []
   const name = product.name || ''
@@ -57,8 +137,12 @@ export default function CatalogPage() {
   const [search, setSearch] = useState(searchParams.get('q') || '')
   const [inStockOnly, setInStockOnly] = useState(false)
   const [sort, setSort] = useState('default')
+  const [catFilters, setCatFilters] = useState({})
 
   const currentCategory = categorySlug ? CATEGORIES.find(c => c.slug === categorySlug) : null
+
+  // Скидаємо фільтри при зміні категорії
+  useMemo(() => { setCatFilters({}) }, [categorySlug])
 
   const catProducts = useMemo(() => {
     if (!currentCategory) return products
@@ -73,11 +157,23 @@ export default function CatalogPage() {
       return name.toLowerCase().includes(search.toLowerCase()) || (p.sku || '').toLowerCase().includes(search.toLowerCase())
     })
     if (inStockOnly) list = list.filter(p => p.inStock)
+
+    // Category-specific filters
+    const filterConfig = categorySlug ? CATEGORY_FILTERS[categorySlug] : null
+    if (filterConfig) {
+      filterConfig.groups.forEach(group => {
+        const activeLabel = catFilters[group.key]
+        if (!activeLabel) return
+        const opt = group.options.find(o => o.label === activeLabel)
+        if (opt) list = list.filter(opt.test)
+      })
+    }
+
     if (sort === 'priceAsc')  list = [...list].sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0))
     if (sort === 'priceDesc') list = [...list].sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0))
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
     return list
-  }, [catProducts, search, inStockOnly, sort, lang])
+  }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang])
 
   return (
     <>
@@ -156,6 +252,9 @@ export default function CatalogPage() {
             </Link>
           ))}
         </div>
+
+        {/* ── Category-specific filters ── */}
+        <FilterBar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters} />
 
         {/* ── Toolbar: search + sort ── */}
         <div className="flex flex-wrap gap-2 mb-6 p-3 bg-white border border-[var(--ink-200)]">
