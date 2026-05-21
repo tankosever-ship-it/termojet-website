@@ -18,9 +18,9 @@ const CATEGORY_FILTERS = {
         key: 'type',
         label: 'Тип',
         options: [
-          { label: '3-ходові крани',    test: p => /триход|3-ход/i.test(p.name) && !/привід|приводом/i.test(p.name) && !/чотирьох/i.test(p.name) },
-          { label: '4-ходові крани',    test: p => /чотирьохход|4-ход/i.test(p.name) },
-          { label: 'Електроприводи',    test: p => /привід|servopryvod/i.test(p.name) },
+          { label: '3-ходові крани',   test: p => /триход|3-ход/i.test(p.name) && !/привід|приводом/i.test(p.name) && !/чотирьох/i.test(p.name) },
+          { label: '4-ходові крани',   test: p => /чотирьохход|4-ход/i.test(p.name) },
+          { label: 'Електроприводи',   test: p => /привід|servopryvod/i.test(p.name) },
         ],
       },
       {
@@ -43,50 +43,69 @@ const CATEGORY_FILTERS = {
   },
 }
 
-function FilterBar({ categorySlug, filters, setFilters }) {
+function Sidebar({ categorySlug, filters, setFilters }) {
   const config = CATEGORY_FILTERS[categorySlug]
   if (!config) return null
 
   const hasAny = Object.values(filters).some(Boolean)
+  const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
   return (
-    <div className="mb-5 p-4 bg-white border border-[var(--ink-200)]">
-      <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-        {config.groups.map(group => (
-          <div key={group.key} className="flex items-center gap-2 flex-wrap">
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
-              {group.label}:
-            </span>
-            {group.options.map(opt => {
-              const active = filters[group.key] === opt.label
-              return (
-                <button key={opt.label}
-                  onClick={() => setFilters(f => ({ ...f, [group.key]: active ? '' : opt.label }))}
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: '10px', fontWeight: 700,
-                    textTransform: 'uppercase', letterSpacing: '0.06em',
-                    padding: '4px 10px',
-                    border: active ? '1px solid var(--accent)' : '1px solid var(--border)',
-                    background: active ? 'var(--accent)' : 'transparent',
-                    color: active ? 'white' : 'var(--text-secondary)',
-                    cursor: 'pointer', transition: 'all 0.15s',
-                  }}>
-                  {opt.label}
-                </button>
-              )
-            })}
-          </div>
-        ))}
-        {hasAny && (
-          <button onClick={() => setFilters({})}
-            className="flex items-center gap-1 ml-auto"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
-            <X size={11} /> Скинути
-          </button>
-        )}
+    <aside className="hidden lg:block w-52 flex-shrink-0">
+      <div className="bg-white border border-[var(--ink-200)] overflow-hidden sticky top-[72px]">
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--ink-200)]">
+          <span style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
+            Фільтри
+          </span>
+          {hasAny && (
+            <button onClick={() => setFilters({})}
+              className="flex items-center gap-1 transition-colors hover:text-[var(--accent)]"
+              style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
+              <X size={10} /> Скинути
+            </button>
+          )}
+        </div>
+
+        {/* Filter groups */}
+        <div className="p-3 space-y-5">
+          {config.groups.map(group => (
+            <div key={group.key}>
+              <div className="mb-2 px-1"
+                style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
+                {group.label}
+              </div>
+              <div className="flex flex-col gap-0.5">
+                {group.options.map(opt => {
+                  const active = filters[group.key] === opt.label
+                  return (
+                    <button key={opt.label}
+                      onClick={() => setFilters(f => ({ ...f, [group.key]: active ? '' : opt.label }))}
+                      className="flex items-center gap-2.5 w-full px-3 py-2 text-left transition-all"
+                      style={{
+                        background: active ? 'rgba(255,85,0,0.07)' : 'transparent',
+                        borderLeft: active ? '2px solid var(--accent)' : '2px solid transparent',
+                      }}>
+                      <span className="w-3.5 h-3.5 flex-shrink-0 flex items-center justify-center border transition-colors"
+                        style={{
+                          border: active ? '1px solid var(--accent)' : '1px solid #ccc',
+                          background: active ? 'var(--accent)' : 'transparent',
+                        }}>
+                        {active && <span style={{ color: 'white', fontSize: '9px', lineHeight: 1 }}>✓</span>}
+                      </span>
+                      <span style={{ ...mono, fontSize: '11px', fontWeight: active ? 700 : 500, color: active ? 'var(--accent)' : 'var(--text-secondary)', letterSpacing: '0.02em' }}>
+                        {opt.label}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </aside>
   )
 }
 
@@ -253,8 +272,12 @@ export default function CatalogPage() {
           ))}
         </div>
 
-        {/* ── Category-specific filters ── */}
-        <FilterBar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters} />
+        {/* ── Основний контент: сайдбар + товари ── */}
+        <div className="flex gap-6">
+
+        <Sidebar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters} />
+
+        <div className="flex-1 min-w-0">
 
         {/* ── Toolbar: search + sort ── */}
         <div className="flex flex-wrap gap-2 mb-6 p-3 bg-white border border-[var(--ink-200)]">
@@ -373,6 +396,10 @@ export default function CatalogPage() {
             })}
           </motion.div>
         )}
+
+        </div>{/* end flex-1 */}
+        </div>{/* end flex gap-6 */}
+
       </div>
     </>
   )
