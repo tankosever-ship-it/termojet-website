@@ -13,6 +13,7 @@ import SEO from '../components/SEO'
 
 const fadeUp  = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.1 } } }
+const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
 const TECH_SERVICES = [
   { icon: Headphones,    title: 'Консультація спеціалістів',  desc: 'Відповімо на технічні питання щодо підбору, монтажу та налаштування обладнання. Консультуємо телефоном та електронною поштою.' },
@@ -94,13 +95,25 @@ export default function ServicePage() {
 
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <motion.div initial="hidden" animate="show" variants={stagger}>
-            <motion.div variants={fadeUp} className="label-accent mb-4">Termojet</motion.div>
-            <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl font-black mb-4 leading-tight font-['Archivo',sans-serif]">
+            <motion.div variants={fadeUp}>
+              <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
+                СЕРВІС · ГАРАНТІЯ · ПІДТРИМКА
+              </span>
+            </motion.div>
+            <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl font-black mt-3 mb-4 leading-tight font-['Archivo',sans-serif]">
               Сервіс та підтримка
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-white/70 max-w-2xl mx-auto">
               Технічна підтримка, гарантія виробника та зворотній зв'язок — все в одному місці
             </motion.p>
+            <motion.div variants={fadeUp} className="flex justify-center flex-wrap gap-4 mt-8">
+              {[['ГАРАНТІЯ', '2–3 РОКИ'], ['ВІДПОВІДЬ', 'ДО 24 ГОДИН'], ['ІНЖЕНЕРИ', '~100 ФАХІВЦІВ']].map(([k, v]) => (
+                <div key={k} className="bg-white/8 border border-white/12 px-5 py-2.5 backdrop-blur-sm text-center">
+                  <div style={{ ...mono, fontSize: '18px', fontWeight: 900, color: 'var(--accent)' }}>{v}</div>
+                  <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.4)' }} className="uppercase">{k}</div>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -200,7 +213,12 @@ export default function ServicePage() {
           >
             {TECH_SERVICES.map(({ icon: Icon, title, desc }, i) => (
               <motion.div key={i} variants={fadeUp} className="card p-7 flex flex-col gap-4">
-                <div className="icon-badge-orange"><Icon size={22} /></div>
+                <div className="flex items-start justify-between">
+                  <div className="icon-badge-orange"><Icon size={22} /></div>
+                  <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
                 <div>
                   <h3 className="font-bold text-lg text-[var(--text-primary)] mb-2">{title}</h3>
                   <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{desc}</p>
@@ -253,8 +271,8 @@ export default function ServicePage() {
               <motion.div key={i} variants={fadeUp} className="card p-7 flex flex-col gap-5">
                 <div className="flex items-start justify-between">
                   <div className="icon-badge-dark"><Icon size={22} /></div>
-                  <span className="text-sm font-black px-4 py-1.5 rounded-full"
-                    style={{ color, background: `color-mix(in srgb, ${color} 12%, transparent)` }}>
+                  <span className="px-3 py-1 font-black"
+                    style={{ ...mono, fontSize: '13px', color, background: `color-mix(in srgb, ${color} 12%, transparent)`, border: `1px solid color-mix(in srgb, ${color} 30%, transparent)` }}>
                     {badge}
                   </span>
                 </div>
