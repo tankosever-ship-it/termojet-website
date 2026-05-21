@@ -53,8 +53,8 @@ function CategoryCard({ cat, lang }) {
       <div className="relative overflow-hidden" style={{ height: 160, background: '#141414' }}>
         {imgSrc ? (
           <img src={imgSrc} alt={cat.name[lang] || cat.name.uk}
-            className="w-full h-full object-cover transition-transform duration-500"
-            style={{ transform: hovered ? 'scale(1.08)' : 'scale(1)' }} />
+            className="w-full h-full object-contain transition-transform duration-500"
+            style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)', padding: '12px' }} />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl opacity-30">{cat.icon}</div>
         )}
