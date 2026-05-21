@@ -5740,7 +5740,7 @@ export const PRODUCTS = [
     "price": "3.8",
     "price_uah": "",
     "categorySlug": "zonalne-keruvannya",
-    "image": "/images/avtomatyka/NTC10KSN.jpg",
+    "image": "/images/avtomatyka/NTC10KSN-black.jpg",
     "images": [],
     "shortDesc": "",
     "description": "Датчик температури підлоги TERMOJET NTC10K — виносний сенсор для терморегуляторів систем теплої підлоги. Висока точність вимірювання забезпечує стабільну роботу системи опалення. Надійна ізоляція чорного кольору, зручна довжина кабелю для монтажу в гофротрубку.",
