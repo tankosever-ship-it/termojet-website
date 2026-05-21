@@ -1,6 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { PRODUCTS } from '../data/products'
 import { mergeWithEnriched } from '../data/mergeEnriched'
+import { BLOG_POSTS } from '../data/blog'
+import { PORTFOLIO } from '../data/portfolio'
+import { FILES } from '../data/files'
 
 const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
@@ -23,10 +26,10 @@ export function AppProvider({ children }) {
   const [consultations, setConsultations] = useState([])
   const [dealers, setDealers] = useState([])
   const [reviews, setReviews] = useState([])
-  const [blog, setBlog] = useState([])
-  const [portfolio, setPortfolio] = useState([])
+  const [blog, setBlog] = useState(BLOG_POSTS)
+  const [portfolio, setPortfolio] = useState(PORTFOLIO)
   const [faq, setFaq] = useState([])
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState(FILES)
   const [banners, setBanners] = useState([])
   const [clients, setClients] = useState([])
   const [isAdminAuth, setIsAdminAuth] = useState(() => sessionStorage.getItem('tj2_admin') === '1')

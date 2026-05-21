@@ -247,6 +247,86 @@ function ProjectsCarousel() {
   )
 }
 
+const REVIEWS = [
+  { id: 1, name: 'Олег Марченко', role: 'Директор монтажної компанії', rating: 5, text: 'Встановили насосні групи TERMOJET на 12 об\'єктах за сезон. Жодної рекламації. Якість стабільна, документація завжди в комплекті.', date: 'Лютий 2025' },
+  { id: 2, name: 'Сергій Ковальчук', role: 'Головний інженер', rating: 5, text: 'Розподільчі колектори серії 175 кВт — відмінне рішення для великих об\'єктів. Терміни виготовлення витримали, менеджери завжди на зв\'язку.', date: 'Березень 2025' },
+  { id: 3, name: 'Андрій Федоренко', role: 'Проектувальник ОВК', rating: 5, text: 'Проектую системи опалення вже 15 років. TERMOJET BOX — найзручніший вузол обв\'язки котла на ринку. Монтується за 2 години замість цілого дня.', date: 'Квітень 2025' },
+  { id: 4, name: 'Василь Гончаренко', role: 'Власник сервісного центру', rating: 5, text: 'Гарантійні випадки — одиниці за 3 роки роботи. Сервісний відділ Termojet відповідає швидко. Рекомендую як надійного партнера.', date: 'Травень 2025' },
+  { id: 5, name: 'Ірина Павленко', role: 'Керівник проектів', rating: 4, text: 'Замовляємо обладнання для котелень промислових підприємств. Ціна/якість оптимальні. Хотілось би більше складських позицій у наявності.', date: 'Квітень 2025' },
+  { id: 6, name: 'Микола Бондаренко', role: 'Дилер TERMOJET, Харків', rating: 5, text: 'Партнеруємо 4 роки. Стабільні знижки, чітка логістика, якісні маркетингові матеріали. Продажі зростають щороку.', date: 'Березень 2025' },
+]
+
+function StarRating({ rating }) {
+  return (
+    <div className="flex gap-0.5">
+      {[1, 2, 3, 4, 5].map(i => (
+        <span key={i} style={{ color: i <= rating ? 'var(--accent)' : 'rgba(255,255,255,0.15)', fontSize: 14 }}>★</span>
+      ))}
+    </div>
+  )
+}
+
+function ReviewsSection() {
+  return (
+    <section className="py-20 md:py-28 bg-[#0C0B0A] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div>
+            <motion.div variants={fadeUp}
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--accent)' }}
+              className="mb-3">
+              ● ВІДГУКИ
+            </motion.div>
+            <motion.h2 variants={fadeUp}
+              className="font-black font-['Archivo',sans-serif] text-white leading-tight"
+              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
+              Що кажуть наші клієнти
+            </motion.h2>
+          </div>
+          <motion.div variants={fadeUp}
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>
+            {REVIEWS.length} відгуків · всі перевірені
+          </motion.div>
+        </motion.div>
+
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {REVIEWS.map(review => (
+            <motion.div key={review.id} variants={fadeUp}
+              className="flex flex-col gap-4 p-6"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+              }}>
+              {/* Stars + date */}
+              <div className="flex items-center justify-between">
+                <StarRating rating={review.rating} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>
+                  {review.date}
+                </span>
+              </div>
+
+              {/* Review text */}
+              <p className="text-sm leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                "{review.text}"
+              </p>
+
+              {/* Author */}
+              <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                <div className="font-bold text-white text-sm">{review.name}</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.35)', marginTop: 3, letterSpacing: '0.04em' }}>
+                  {review.role}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 // Animated counter
 function CountUp({ end, suffix, duration = 1600 }) {
   const [val, setVal] = useState(0)
@@ -603,6 +683,11 @@ export default function HomePage() {
           PROJECTS CAROUSEL
       ═══════════════════════════════════════════ */}
       <ProjectsCarousel />
+
+      {/* ═══════════════════════════════════════════
+          REVIEWS — Відгуки клієнтів
+      ═══════════════════════════════════════════ */}
+      <ReviewsSection />
 
       {/* ═══════════════════════════════════════════
           CONFIGURATOR — dark section

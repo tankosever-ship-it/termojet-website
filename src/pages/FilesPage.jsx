@@ -11,8 +11,10 @@ const FILE_TYPES = {
   doc: { label: 'Word', color: 'bg-blue-50 text-blue-700' },
 }
 
-function getExt(url) {
-  return (url || '').split('.').pop()?.toLowerCase() || 'pdf'
+function getExt(file) {
+  // Prefer explicit format field, fall back to URL extension
+  if (file.format) return file.format.toLowerCase().split('/')[0]
+  return (file.url || '').split('.').pop()?.toLowerCase() || 'pdf'
 }
 
 export default function FilesPage() {
@@ -74,7 +76,7 @@ export default function FilesPage() {
         ) : (
           <div className="space-y-3">
             {filtered.map(file => {
-              const ext = getExt(file.url)
+              const ext = getExt(file)
               const typeInfo = FILE_TYPES[ext] || FILE_TYPES.pdf
               return (
                 <div key={file.id} className="card p-4 flex items-center gap-4 group">
@@ -84,30 +86,39 @@ export default function FilesPage() {
                   <div className="flex-1 min-w-0">
                     <div className="font-medium text-gray-900 truncate">{file.name}</div>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className={`text-xs px-2 py-0.5 rounded font-medium ${typeInfo.color}`}>{typeInfo.label.toUpperCase()}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded font-medium ${typeInfo.color}`}>{(file.format || typeInfo.label).toUpperCase()}</span>
                       {file.category && <span className="text-xs text-gray-400">{file.category}</span>}
                       {file.size && <span className="text-xs text-gray-400">{file.size}</span>}
                     </div>
+                    {file.desc && <p className="text-xs text-gray-400 mt-1 truncate">{file.desc}</p>}
                   </div>
-                  <a
-                    href={file.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
-                    className="flex items-center gap-2 btn-secondary text-sm py-2 px-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <Download size={14} />
-                    {filesT.download}
-                  </a>
-                  <a
-                    href={file.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
-                    className="sm:hidden flex items-center gap-2 text-[var(--primary)]"
-                  >
-                    <Download size={18} />
-                  </a>
+                  {file.url ? (
+                    <>
+                      <a
+                        href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        className="hidden sm:flex items-center gap-2 btn-secondary text-sm py-2 px-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <Download size={14} />
+                        {filesT.download}
+                      </a>
+                      <a
+                        href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        className="sm:hidden flex items-center gap-2 text-[var(--primary)]"
+                      >
+                        <Download size={18} />
+                      </a>
+                    </>
+                  ) : (
+                    <span className="text-xs text-gray-300 flex-shrink-0 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity">
+                      Незабаром
+                    </span>
+                  )}
                 </div>
               )
             })}

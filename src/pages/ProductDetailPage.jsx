@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ShoppingCart, Plus, Minus, ChevronRight, Download, Phone, Package, Play, FileText, Wrench, Image } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
+import { trackViewItem, trackAddToCart } from '../utils/analytics'
 
 function ImageGallery({ images, name }) {
   const [active, setActive] = useState(0)
@@ -96,9 +97,29 @@ export default function ProductDetailPage() {
     return list
   }, [product, pt])
 
+  // Track product view when product loads
+  useEffect(() => {
+    if (product) {
+      trackViewItem({
+        sku: product.sku,
+        id: product.id,
+        name,
+        price: product.price,
+        categorySlug,
+      })
+    }
+  }, [product?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+
   function handleAddToCart() {
     if (!product) return
     addToCart(product, qty)
+    trackAddToCart({
+      sku: product.sku,
+      id: product.id,
+      name,
+      price: product.price,
+      categorySlug,
+    }, qty)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }
@@ -136,7 +157,18 @@ export default function ProductDetailPage() {
 
   return (
     <>
-      <SEO title={name} description={desc?.slice(0, 160)} />
+      <SEO
+        title={name}
+        description={desc?.slice(0, 160)}
+        type="product"
+        product={{ name, description: desc, sku: product.sku, price: product.price, images: allImages }}
+        breadcrumbs={[
+          { name: 'Головна', url: 'https://termojet.com.ua/' },
+          { name: 'Каталог', url: 'https://termojet.com.ua/catalog' },
+          ...(category ? [{ name: category.name?.uk || category.name, url: `https://termojet.com.ua/catalog/${categorySlug}` }] : []),
+          { name, url: `https://termojet.com.ua/catalog/${categorySlug}/${productSlug}` },
+        ]}
+      />
 
       {/* Breadcrumb */}
       <div className="border-b border-gray-100 bg-white">

@@ -5,6 +5,7 @@ import { AppProvider } from './context/AppContext'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import FloatingActions from './components/FloatingActions'
+import MobileBottomNav from './components/layout/MobileBottomNav'
 
 import HomePage from './pages/HomePage'
 import CatalogPage from './pages/CatalogPage'
@@ -50,7 +51,7 @@ function AppLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-0">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
@@ -91,6 +92,7 @@ function AppLayout() {
       </main>
       <Footer />
       <FloatingActions />
+      <MobileBottomNav />
     </div>
   )
 }
