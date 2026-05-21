@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { ArrowRight, ArrowUpRight, Play, X, Check, Star, Smartphone } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Play, X, Check, Smartphone } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -39,6 +39,149 @@ const STATS = [
 
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
+
+const PROJECT_PHOTOS = [
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436260112_1028062199320076_3448976492944701510_n-1.jpg', label: 'Котельня промислова' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436346403_1028062205986742_1945016056577705001_n-1.jpg', label: 'Вузол підмішування' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441415989_1029207962538833_8255095048528061398_n-1.jpg', label: 'Насосна станція' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441923833_1036832648443031_6061180382749463508_n-1.jpg', label: 'Колекторний вузол' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443716920_1034298352029794_8241212954317908008_n-1.jpg', label: 'Котельня на підприємстві' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443717382_1035094698616826_2882206306103516977_n-1.jpg', label: 'Монтаж системи' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445077258_1032797785513184_3472109855078885848_n-1.jpg', label: 'Розподільний вузол' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445741031_1033532898773006_7539877099138788841_n-1.jpg', label: 'Готовий об\'єкт' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448770252_1054379716688324_6993680917338285497_n-1.jpg', label: 'Теплова станція' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448963173_1057194799740149_5056344012506323464_n-1.jpg', label: 'Насосна група в роботі' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448862036_1054379710021658_8530154308900725780_n-1.jpg', label: 'Підключення колекторів' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/449446624_1063156462477316_8539246227030569584_n-1.jpg', label: 'Промисловий об\'єкт' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450069451_1064322915694004_2995371254833168558_n-1.jpg', label: 'Готова котельня' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450567120_1070326941760268_5112914741981000641_n-1.jpg', label: 'Монтаж вузла' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/452863875_1078280964298199_2202968223287568557_n-1.jpg', label: 'Котельня ЖК' },
+]
+
+function ProjectsCarousel() {
+  const trackRef = useRef(null)
+  const isPausedRef = useRef(false)
+  const posRef = useRef(0)
+  const rafRef = useRef(null)
+  const [lightbox, setLightbox] = useState(null)
+  const SPEED = 0.5
+
+  const items = [...PROJECT_PHOTOS, ...PROJECT_PHOTOS]
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    const totalW = track.scrollWidth / 2
+
+    function tick() {
+      if (!isPausedRef.current) {
+        posRef.current += SPEED
+        if (posRef.current >= totalW) posRef.current = 0
+        track.style.transform = `translateX(-${posRef.current}px)`
+      }
+      rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [])
+
+  useEffect(() => {
+    if (!lightbox) return
+    const fn = (e) => { if (e.key === 'Escape') setLightbox(null) }
+    window.addEventListener('keydown', fn)
+    return () => window.removeEventListener('keydown', fn)
+  }, [lightbox])
+
+  return (
+    <>
+      {lightbox && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
+          <div className="relative z-10 max-w-4xl w-full" onClick={e => e.stopPropagation()}>
+            <img src={lightbox.src} alt={lightbox.label}
+              className="w-full max-h-[80vh] object-contain"
+              style={{ borderRadius: 0 }} />
+            <div className="mt-3 text-center"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              {lightbox.label}
+            </div>
+            <button onClick={() => setLightbox(null)}
+              className="absolute -top-10 right-0 text-white/60 hover:text-white transition-colors"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.08em' }}>
+              ESC · ЗАКРИТИ
+            </button>
+          </div>
+        </div>
+      )}
+
+      <section className="py-16 md:py-24 bg-[#0C0B0A] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 mb-10">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="flex items-end justify-between">
+            <div>
+              <motion.div variants={fadeUp} className="eyebrow mb-3" style={{ color: 'var(--accent)' }}>● Реалізовані проекти</motion.div>
+              <motion.h2 variants={fadeUp}
+                className="font-black font-['Archivo',sans-serif] text-white leading-tight"
+                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
+                50 000+ котелень оснащено<br />обладнанням Termojet
+              </motion.h2>
+            </div>
+            <motion.a variants={fadeUp} href="/portfolio"
+              className="hidden md:flex items-center gap-2 text-white/40 hover:text-white transition-colors"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              Всі проекти <ArrowRight size={13} />
+            </motion.a>
+          </motion.div>
+        </div>
+
+        <div className="relative"
+          onMouseEnter={() => { isPausedRef.current = true }}
+          onMouseLeave={() => { isPausedRef.current = false }}>
+          <div ref={trackRef} className="flex gap-4" style={{ willChange: 'transform', width: 'max-content' }}>
+            {items.map((photo, i) => (
+              <div key={i}
+                className="flex-shrink-0 relative overflow-hidden cursor-pointer group"
+                style={{ width: 280, height: 210 }}
+                onClick={() => setLightbox(photo)}>
+                <img
+                  src={photo.src}
+                  alt={photo.label}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  onError={e => { e.target.style.display = 'none'; e.target.parentElement.style.background = '#1a1a1a' }}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-10 h-10 border border-white/60 flex items-center justify-center">
+                    <ArrowUpRight size={18} className="text-white" />
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    {photo.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #0C0B0A, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-20 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, #0C0B0A, transparent)' }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 mt-6 text-right">
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.08em' }}>
+            Наведіть мишку — зупинити · Клік — збільшити
+          </span>
+        </div>
+      </section>
+    </>
+  )
+}
 
 // Animated counter
 function CountUp({ end, suffix, duration = 1600 }) {
@@ -376,7 +519,7 @@ export default function HomePage() {
             <motion.h2 variants={fadeUp}
               className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
               style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
-              Від листа сталі —<br />до готової котельні.
+              Від листа сталі —<br />до готового обладнання<br />для швидкого монтажу.
             </motion.h2>
             <motion.p variants={fadeUp} className="text-[var(--text-secondary)] max-w-xs text-sm leading-relaxed md:text-right">
               Лазерні верстати, листогини, напівавтоматичне зварювання та власна лінія порошкового фарбування. 5 500 м² площ.
@@ -416,6 +559,11 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════
+          PROJECTS CAROUSEL
+      ═══════════════════════════════════════════ */}
+      <ProjectsCarousel />
 
       {/* ═══════════════════════════════════════════
           CONFIGURATOR — dark section

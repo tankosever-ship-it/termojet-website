@@ -125,8 +125,8 @@ function MegaMenu({ lang, products, onClose }) {
 // ─── Темний дропдаун у дизайн системі ───
 function DarkDropdown({ items, onClose }) {
   return (
-    <div className="absolute top-full left-0 mt-0 w-60 z-50 overflow-hidden"
-      style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: 0, boxShadow: '0 16px 48px rgba(0,0,0,0.4)' }}>
+    <div className="absolute top-full left-0 mt-0 w-60 overflow-hidden"
+      style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: 0, boxShadow: '0 16px 48px rgba(0,0,0,0.4)', zIndex: 200 }}>
       {items.map((item, i) => (
         item.external
           ? <a key={item.to} href={item.to} target="_blank" rel="noopener noreferrer" onClick={onClose}
@@ -217,8 +217,7 @@ export default function Navbar() {
     { to: '/delivery', label: 'Доставка і оплата' },
     { to: '/returns',  label: 'Повернення' },
     { to: '/oem',      label: 'OEM виробництво' },
-    { to: '/warranty', label: 'Гарантія' },
-    { to: '/support',  label: 'Тех. підтримка' },
+    { to: '/files',    label: 'Файли' },
   ]
 
   // glassmorphism: завжди white/85 + blur, на скролі трохи темніше + shadow
@@ -252,7 +251,7 @@ export default function Navbar() {
 
               {/* Каталог */}
               <div className="relative" ref={catalogRef}>
-                <button onMouseEnter={() => setCatalogOpen(true)} onClick={() => setCatalogOpen(v => !v)}
+                <button onMouseEnter={() => { setCatalogOpen(true); setAboutOpen(false); setClientOpen(false) }} onClick={() => setCatalogOpen(v => !v)}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap group"
                   style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Каталог
@@ -263,7 +262,7 @@ export default function Navbar() {
 
               {/* Про Termojet */}
               <div className="relative" ref={aboutRef}>
-                <button onMouseEnter={() => setAboutOpen(true)} onClick={() => setAboutOpen(v => !v)}
+                <button onMouseEnter={() => { setAboutOpen(true); setCatalogOpen(false); setClientOpen(false) }} onClick={() => setAboutOpen(v => !v)}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Про Termojet
@@ -274,7 +273,7 @@ export default function Navbar() {
 
               {/* Для клієнта */}
               <div className="relative" ref={clientRef}>
-                <button onMouseEnter={() => setClientOpen(true)} onClick={() => setClientOpen(v => !v)}
+                <button onMouseEnter={() => { setClientOpen(true); setCatalogOpen(false); setAboutOpen(false) }} onClick={() => setClientOpen(v => !v)}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Для клієнта

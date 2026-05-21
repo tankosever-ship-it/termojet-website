@@ -22,8 +22,6 @@ import DeliveryPage from './pages/DeliveryPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 import OEMPage from './pages/OEMPage'
-import WarrantyPage from './pages/WarrantyPage'
-import TechSupportPage from './pages/TechSupportPage'
 import ReturnPage from './pages/ReturnPage'
 import PartnersPage from './pages/PartnersPage'
 
@@ -72,8 +70,8 @@ function AppLayout() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/oem" element={<OEMPage />} />
-          <Route path="/warranty" element={<WarrantyPage />} />
-          <Route path="/support" element={<TechSupportPage />} />
+          <Route path="/warranty" element={<Navigate to="/service" replace />} />
+          <Route path="/support" element={<Navigate to="/service" replace />} />
           <Route path="/returns" element={<ReturnPage />} />
           <Route path="/partners" element={<PartnersPage />} />
 
