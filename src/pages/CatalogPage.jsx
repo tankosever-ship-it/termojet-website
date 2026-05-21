@@ -41,6 +41,132 @@ const CATEGORY_FILTERS = {
       },
     ],
   },
+
+  'nasosni-hrupy': {
+    groups: [
+      {
+        key: 'type',
+        label: 'Тип',
+        options: [
+          { label: 'Без змішувача',  test: p => /без змішувача/i.test(p.name) && !/бойлер/i.test(p.name) },
+          { label: 'Зі змішувачем', test: p => /зі змішувачем/i.test(p.name) },
+          { label: 'З термокраном', test: p => /термокраном|термостатичним краном/i.test(p.name) },
+          { label: 'Бойлерна',      test: p => /бойлер/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'connection',
+        label: 'З\'єднання',
+        options: [
+          { label: '1"',      test: p => / 1\\/.test(p.name) && !/1 1\//.test(p.name) },
+          { label: '1 1/4"',  test: p => /1 1\/4\\/.test(p.name) },
+          { label: '1 1/2"',  test: p => /1 1\/2\\/.test(p.name) },
+          { label: '2" і більше', test: p => / 2\\/.test(p.name) || /2 1\/2\\/.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  nasosy: {
+    groups: [
+      {
+        key: 'brand',
+        label: 'Бренд',
+        options: [
+          { label: 'Termojet APM',  test: p => /\bAPM\b/.test(p.name) },
+          { label: 'Termojet APE/XPS', test: p => /\bAPE\b|\bXPS\b|\bSPE\b|\bHSB\b/.test(p.name) },
+          { label: 'Grundfos',      test: p => /grundfos/i.test(p.name) },
+          { label: 'WILO',          test: p => /\bwilo\b/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'pumptype',
+        label: 'Тип',
+        options: [
+          { label: 'Циркуляційний',      test: p => /циркуляційний/i.test(p.name) || /\bAPM\b|\bXPS\b/.test(p.name) || /grundfos|wilo/i.test(p.name) },
+          { label: 'Рециркуляційний ГВС', test: p => /рециркул|SPE|HSB/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'rozpodilchi-kolektory': {
+    groups: [
+      {
+        key: 'outlets',
+        label: 'Виходів',
+        options: [
+          { label: '2 виходи', test: p => /^К[Г]?[С]?2/.test(p.name) || /2\+1/.test(p.name) || /2 вгору|2 вниз/.test(p.name) },
+          { label: '3 виходи', test: p => /^К[Г]?[С]?3/.test(p.name) || /3\+1/.test(p.name) || /3 вгору/.test(p.name) },
+          { label: '4 виходи', test: p => /^К[Г]?[С]?4/.test(p.name) || /4\+1/.test(p.name) || /4 вгору/.test(p.name) },
+          { label: '5+ виходів', test: p => /^К[Г]?[С]?[5-9]/.test(p.name) || /[5-9]\+1/.test(p.name) || /[5-9] вгору/.test(p.name) },
+        ],
+      },
+      {
+        key: 'direction',
+        label: 'Підключення',
+        options: [
+          { label: 'Вгору',        test: p => /вгору/i.test(p.name) && !/вниз/i.test(p.name) },
+          { label: 'Вниз',         test: p => /вниз/i.test(p.name) && !/вгору/i.test(p.name) },
+          { label: 'Вгору+Вниз',   test: p => /вгору/i.test(p.name) && /вниз/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'series',
+        label: 'Серія',
+        options: [
+          { label: 'Стандарт DN125', test: p => /\.125\(2[024]0\)/.test(p.name) },
+          { label: 'Стандарт DN150', test: p => /\.150\(3[05]0\)/.test(p.name) },
+          { label: 'КГС Mega',       test: p => /^КГС/.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  separatory: {
+    groups: [
+      {
+        key: 'septype',
+        label: 'Тип',
+        options: [
+          { label: 'Сепаратор бруду',         test: p => /^Сепаратор бруду/i.test(p.name) },
+          { label: 'Повітряний сепаратор',     test: p => /^Повітряний сепаратор/i.test(p.name) },
+          { label: 'Комбінований (бруд+повітря)', test: p => /бруду та бруду|повітря та бруду|CAD/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'dn',
+        label: 'Діаметр',
+        options: [
+          { label: 'DN25',  test: p => /DN25/.test(p.name) },
+          { label: 'DN32',  test: p => /DN32/.test(p.name) },
+          { label: 'DN40',  test: p => /DN40/.test(p.name) },
+          { label: 'DN50',  test: p => /DN50/.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'hidravlichni-rozdilnyky': {
+    groups: [
+      {
+        key: 'series',
+        label: 'Серія',
+        options: [
+          { label: 'Стандарт (до 175 кВт)', test: p => /ГС-2[5-8]/.test(p.name) },
+          { label: 'Mega (від 250 кВт)',     test: p => /ГС-3[0-9]/.test(p.name) },
+        ],
+      },
+      {
+        key: 'connection',
+        label: 'З\'єднання',
+        options: [
+          { label: 'Різьбове',   test: p => /ГС-2[5-8]/.test(p.name) },
+          { label: 'Фланцеве',   test: p => /фланц/i.test(p.name) },
+        ],
+      },
+    ],
+  },
 }
 
 function Sidebar({ categorySlug, filters, setFilters }) {
