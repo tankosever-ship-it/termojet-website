@@ -40,8 +40,9 @@ const STATS = [
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
-function CategoryCard({ cat, lang, product }) {
+function CategoryCard({ cat, lang }) {
   const [hovered, setHovered] = useState(false)
+  const imgSrc = cat.image
   return (
     <Link to={`/catalog/${cat.slug}`}
       className="cat-card block h-full"
@@ -50,9 +51,9 @@ function CategoryCard({ cat, lang, product }) {
 
       {/* Фото */}
       <div className="relative overflow-hidden" style={{ height: 160, background: '#141414' }}>
-        {product?.image ? (
-          <img src={product.image} alt={cat.name[lang] || cat.name.uk}
-            className="w-full h-full object-contain p-4 transition-transform duration-500"
+        {imgSrc ? (
+          <img src={imgSrc} alt={cat.name[lang] || cat.name.uk}
+            className="w-full h-full object-cover transition-transform duration-500"
             style={{ transform: hovered ? 'scale(1.08)' : 'scale(1)' }} />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl opacity-30">{cat.icon}</div>
@@ -459,14 +460,11 @@ export default function HomePage() {
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {featuredCats.map(cat => {
-              const catProduct = products.find(p => (p.categorySlug === cat.slug || p.categorySlug === cat.id) && p.image)
-              return (
-                <motion.div key={cat.id} variants={fadeUp}>
-                  <CategoryCard cat={cat} lang={lang} product={catProduct} />
-                </motion.div>
-              )
-            })}
+            {featuredCats.map(cat => (
+              <motion.div key={cat.id} variants={fadeUp}>
+                <CategoryCard cat={cat} lang={lang} />
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
