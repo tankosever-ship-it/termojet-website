@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {
   Phone, Mail, Clock,
   Headphones, FileText, Settings, Car, LayoutTemplate, Flame,
-  ShieldCheck, AlertTriangle, CheckCircle, Thermometer, Zap,
+  ShieldCheck, AlertTriangle, CheckCircle, Thermometer, Zap, Wrench,
 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useApp } from '../context/AppContext'
@@ -130,6 +130,65 @@ export default function ServicePage() {
       {/* ── Tab 0: Технічна підтримка ── */}
       {activeTab === 0 && (
         <section className="max-w-7xl mx-auto px-4 py-16">
+
+          {/* Intro block */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="mb-16">
+            <motion.p variants={fadeUp} className="text-[var(--text-secondary)] text-base leading-relaxed max-w-4xl mb-10">
+              Компанія Termojet надає повний спектр сервісних послуг що стосуються обладнання Termojet — теплових насосів, насосів, автоматики для котельних, насосних груп, колекторів, гідрострілок. Одним із головних принципів нашої компанії є забезпечення клієнтів якісним сервісним обслуговуванням.
+            </motion.p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              {/* Виконуємо роботи */}
+              <motion.div variants={fadeUp}>
+                <div className="label-accent mb-4">Ми виконуємо</div>
+                <ul className="space-y-3">
+                  {[
+                    'Пуско-налагодження та введення в експлуатацію теплових насосів та автоматики для котельних Termojet',
+                    'Встановлення та налаштування автоматики Termojet Light та Termojet Profi Plus',
+                    'Гарантійне, післягарантійне та технічне обслуговування теплових насосів, котелень та систем швидкого монтажу',
+                    'Гарантійний та післягарантійний ремонт обладнання Termojet (насоси, теплові насоси, автоматика)',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-5 h-5 mt-0.5 flex items-center justify-center rounded-full"
+                        style={{ background: 'color-mix(in srgb, var(--accent) 12%, transparent)' }}>
+                        <Wrench size={11} style={{ color: 'var(--accent)' }} />
+                      </div>
+                      <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Переваги */}
+              <motion.div variants={fadeUp}>
+                <div className="label-accent mb-4">Переваги сервісного центру</div>
+                <ul className="space-y-3">
+                  {[
+                    'Договірні відносини з партнерами',
+                    'Подання заявки у телефонному режимі або у месенджер',
+                    'Наявність всіх запчастин на складі',
+                    'Приїзд інженера в найкоротший термін',
+                    'Кваліфікована консультація спеціаліста',
+                    'Спеціалізований інструмент з вимірюванням усіх параметрів обладнання',
+                    'Щорічне профілактичне обслуговування теплових насосів (спліт та моноблок) для стабільної роботи з максимальним COP',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle size={16} className="flex-shrink-0 mt-0.5" style={{ color: 'var(--accent)' }} />
+                      <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+
+            <motion.p variants={fadeUp} className="mt-8 text-[var(--text-secondary)] text-sm leading-relaxed max-w-4xl"
+              style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '16px' }}>
+              У сервісному відділі працюють фахівці високої кваліфікації, які пройшли повний курс навчання та оснащені сучасними приладами для діагностики, ремонтних робіт та обслуговування обладнання. Вас не залишать віч-на-віч з вашою проблемою і допоможуть попередити можливі проблеми в майбутньому.
+            </motion.p>
+          </motion.div>
+
+          <div className="h-px bg-[var(--border)] mb-16" />
+
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-10">
             <div className="label-accent mb-2">Послуги</div>
             <h2 className="section-title">Як ми допоможемо</h2>
