@@ -40,6 +40,69 @@ const STATS = [
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
+function CategoryCard({ cat, lang, product }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <Link to={`/catalog/${cat.slug}`}
+      className="cat-card block h-full"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
+
+      {/* Фото */}
+      <div className="relative overflow-hidden" style={{ height: 160, background: '#141414' }}>
+        {product?.image ? (
+          <img src={product.image} alt={cat.name[lang] || cat.name.uk}
+            className="w-full h-full object-contain p-4 transition-transform duration-500"
+            style={{ transform: hovered ? 'scale(1.08)' : 'scale(1)' }} />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-4xl opacity-30">{cat.icon}</div>
+        )}
+        <div className="absolute inset-0 transition-colors duration-300"
+          style={{ background: hovered ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.25)' }} />
+
+        <div className="absolute top-2.5 left-2.5">
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.35)', background: 'rgba(0,0,0,0.5)', padding: '3px 7px' }}>
+            {cat.count} SKU
+          </span>
+        </div>
+        <div className="absolute top-2.5 right-2.5 w-7 h-7 flex items-center justify-center transition-colors duration-200"
+          style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(0,0,0,0.4)' }}>
+          <ArrowRight size={12} style={{ color: hovered ? 'var(--accent)' : 'rgba(255,255,255,0.35)', transition: 'color 0.2s' }} />
+        </div>
+      </div>
+
+      {/* Текст */}
+      <div className="p-4">
+        <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: '14px', color: hovered ? '#fff' : 'rgba(255,255,255,0.85)', lineHeight: 1.25, marginBottom: 10, transition: 'color 0.2s' }}>
+          {cat.name[lang] || cat.name.uk}
+        </h3>
+
+        {/* Підкатегорії */}
+        <div style={{ overflow: 'hidden', maxHeight: hovered ? 120 : 0, transition: 'max-height 0.3s ease', marginBottom: hovered ? 8 : 0 }}>
+          <div className="flex flex-col gap-1.5 pb-1">
+            {(cat.subcategories || []).map((sub, i) => (
+              <span key={i} className="flex items-center gap-1.5"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.04em' }}>
+                <span style={{ color: 'var(--accent)', fontSize: '8px' }}>▸</span>
+                {sub}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)', opacity: hovered ? 1 : 0, transition: 'opacity 0.2s' }}>
+            Переглянути →
+          </span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.06em' }}>
+            {cat.count} товарів
+          </span>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
 const PROJECT_PHOTOS = [
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436260112_1028062199320076_3448976492944701510_n-1.jpg', label: 'Котельня промислова' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436346403_1028062205986742_1945016056577705001_n-1.jpg', label: 'Вузол підмішування' },
@@ -395,34 +458,12 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {featuredCats.map(cat => {
               const catProduct = products.find(p => (p.categorySlug === cat.slug || p.categorySlug === cat.id) && p.image)
               return (
                 <motion.div key={cat.id} variants={fadeUp}>
-                  <Link to={`/catalog/${cat.slug}`} className="cat-card block h-full bg-white overflow-hidden group">
-                    {/* Product photo */}
-                    <div className="h-40 bg-[var(--bg)] overflow-hidden relative">
-                      {catProduct?.image ? (
-                        <img src={catProduct.image} alt={cat.name[lang] || cat.name.uk}
-                          className="w-full h-full object-contain p-4 group-hover:scale-[1.05] transition-transform duration-500" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-4xl">{cat.icon}</div>
-                      )}
-                      <div className="absolute top-2 right-2">
-                        <span className="w-7 h-7 rounded-full flex items-center justify-center bg-white/80 backdrop-blur-sm border border-[var(--ink-200)] group-hover:bg-[var(--accent)] group-hover:border-transparent transition-all">
-                          <ArrowRight size={12} className="text-[var(--accent)] group-hover:text-white transition-colors" />
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold text-gray-900 leading-tight mb-1 group-hover:text-[var(--primary)] transition-colors">
-                        {cat.name[lang] || cat.name.uk}
-                      </h3>
-                      <p className="text-xs text-gray-500 leading-relaxed mb-3">{cat.desc[lang] || cat.desc.uk}</p>
-                      <div className="text-xs font-semibold" style={{ color:'#FF5500' }}>{cat.count} товарів</div>
-                    </div>
-                  </Link>
+                  <CategoryCard cat={cat} lang={lang} product={catProduct} />
                 </motion.div>
               )
             })}
