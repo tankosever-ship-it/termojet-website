@@ -282,13 +282,6 @@ export default function Navbar() {
                 {clientOpen && <DarkDropdown items={clientItems} onClose={() => setClientOpen(false)} />}
               </div>
 
-              {/* Файли */}
-              <Link to="/files"
-                className="px-3 py-2 transition-all whitespace-nowrap"
-                style={{ ...navLinkStyle, color: isActive('/files') ? 'var(--accent)' : '#333', borderBottom: isActive('/files') ? '2px solid var(--accent)' : '2px solid transparent' }}>
-                Файли
-              </Link>
-
               {/* Теплові насоси */}
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
@@ -423,12 +416,6 @@ export default function Navbar() {
                   {i.label}
                 </Link>
               ))}
-
-              <Link to="/files"
-                className="px-3 py-2.5 mt-1 transition-colors"
-                style={{ ...navLinkStyle, color: '#444' }}>
-                Файли
-              </Link>
 
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
                 className="px-3 py-2.5 flex items-center gap-2 transition-colors"
