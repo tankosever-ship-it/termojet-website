@@ -374,32 +374,40 @@ export default function CatalogPage() {
         {/* ── Category pills — завжди зверху ── */}
         <div className="flex flex-wrap gap-2 mb-5">
           <Link to="/catalog"
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium transition-all"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md transition-all"
             style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '11px', fontWeight: 700,
-              textTransform: 'uppercase', letterSpacing: '0.06em',
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: '13px', fontWeight: 500,
               background: !currentCategory ? 'var(--accent)' : 'transparent',
               color: !currentCategory ? 'white' : 'var(--text-secondary)',
               border: !currentCategory ? '1px solid var(--accent)' : '1px solid var(--border)',
             }}>
             Всі категорії
           </Link>
-          {CATEGORIES.map(c => (
-            <Link key={c.id} to={`/catalog/${c.slug}`}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm transition-all"
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '11px', fontWeight: 700,
-                textTransform: 'uppercase', letterSpacing: '0.06em',
-                background: currentCategory?.id === c.id ? 'var(--accent)' : 'transparent',
-                color: currentCategory?.id === c.id ? 'white' : 'var(--text-secondary)',
-                border: currentCategory?.id === c.id ? '1px solid var(--accent)' : '1px solid var(--border)',
-              }}>
-              <CategoryIcon name={c.icon} size={13} className="flex-shrink-0" /> {c.name[lang] || c.name.uk}
-              <span style={{ opacity: 0.6, fontSize: '10px' }}>({c.count})</span>
-            </Link>
-          ))}
+          {CATEGORIES.map(c => {
+            const isActive = currentCategory?.id === c.id
+            return (
+              <Link key={c.id} to={`/catalog/${c.slug}`}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-md transition-all hover:border-[var(--accent)]"
+                style={{
+                  fontFamily: "'IBM Plex Sans', sans-serif",
+                  fontSize: '13px', fontWeight: 500,
+                  background: isActive ? 'var(--accent)' : 'transparent',
+                  color: isActive ? 'white' : 'var(--text-secondary)',
+                  border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)',
+                }}>
+                <span className="flex items-center justify-center w-5 h-5 rounded flex-shrink-0"
+                  style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,107,0,0.1)' }}>
+                  <CategoryIcon name={c.icon} size={12}
+                    className={isActive ? 'text-white' : 'text-[var(--accent)]'} />
+                </span>
+                {c.name[lang] || c.name.uk}
+                <span style={{ opacity: 0.55, fontSize: '11px', fontFamily: "'JetBrains Mono', monospace" }}>
+                  {c.count}
+                </span>
+              </Link>
+            )
+          })}
         </div>
 
         {/* ── Основний контент: сайдбар + товари ── */}

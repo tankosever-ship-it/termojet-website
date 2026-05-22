@@ -4,7 +4,7 @@ export const CATEGORIES = [
   {
     id: 'pump-groups',
     slug: 'nasosni-hrupy',
-    icon: 'Workflow',
+    icon: 'Settings2',
     image: `${BASE}/2024/04/1713882023331300-800x800.jpg`,
     name: { uk: 'Насосні групи', en: 'Pump Groups', pl: 'Grupy pompowe', fr: 'Groupes de pompes', de: 'Pumpengruppen' },
     desc: { uk: 'Готові насосні вузли з обв\'язкою', en: 'Ready-made pump units with connections', pl: 'Gotowe zestawy pompowe z przyłączami', fr: 'Groupes de pompes prêts à l\'emploi', de: 'Fertige Pumpenstationen mit Anschlüssen' },
@@ -14,7 +14,7 @@ export const CATEGORIES = [
   {
     id: 'hydraulic',
     slug: 'hidravlichni-rozdilnyky',
-    icon: 'GitFork',
+    icon: 'GitBranch',
     image: `${BASE}/2024/04/1713954944505991-800x800.jpg`,
     name: { uk: 'Роздільники гідравлічні', en: 'Hydraulic Separators', pl: 'Rozdzielacze hydrauliczne', fr: 'Séparateurs hydrauliques', de: 'Hydraulische Weichen' },
     desc: { uk: 'Гідрострілки для котельних систем', en: 'Hydraulic arrows for boiler systems', pl: 'Rozdzielacze hydrauliczne do systemów kotłowych', fr: 'Séparateurs hydrauliques pour systèmes de chaudières', de: 'Hydraulische Weichen für Kesselsysteme' },
@@ -24,7 +24,7 @@ export const CATEGORIES = [
   {
     id: 'manifolds',
     slug: 'rozpodilchi-kolektory',
-    icon: 'GitMerge',
+    icon: 'Share2',
     image: `${BASE}/2024/06/img_1411-800x800.jpg`,
     name: { uk: 'Розподільчі колектори', en: 'Distribution Manifolds', pl: 'Kolektory rozdzielcze', fr: 'Collecteurs de distribution', de: 'Verteiler' },
     desc: { uk: 'По потужності 60/105/175 кВт', en: 'By capacity 60/105/175 kW', pl: 'Według mocy 60/105/175 kW', fr: 'Par puissance 60/105/175 kW', de: 'Nach Leistung 60/105/175 kW' },
@@ -44,7 +44,7 @@ export const CATEGORIES = [
   {
     id: 'termojet-box',
     slug: 'termojet-box',
-    icon: 'Package',
+    icon: 'Box',
     image: `${BASE}/2023/08/dsc_0549-800x532.jpg`,
     name: { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX' },
     desc: { uk: 'Компактні вузли обв\'язки котла', en: 'Compact boiler connection units', pl: 'Kompaktowe węzły przyłączeniowe kotłów', fr: 'Groupes de raccordement compacts pour chaudières', de: 'Kompakte Kesselanschlusssätze' },
@@ -54,7 +54,7 @@ export const CATEGORIES = [
   {
     id: 'mega',
     slug: 'termojet-mega',
-    icon: 'Factory',
+    icon: 'Building2',
     image: `${BASE}/2024/04/1713896213384769-800x800.jpg`,
     name: { uk: 'Серія Termojet Mega (до 2200 кВт)', en: 'Termojet Mega Series (up to 2200 kW)', pl: 'Seria Termojet Mega (do 2200 kW)', fr: 'Série Termojet Mega (jusqu\'à 2200 kW)', de: 'Serie Termojet Mega (bis 2200 kW)' },
     desc: { uk: 'Промислові системи до 2.2 МВт', en: 'Industrial systems up to 2.2 MW', pl: 'Systemy przemysłowe do 2,2 MW', fr: 'Systèmes industriels jusqu\'à 2,2 MW', de: 'Industriesysteme bis 2,2 MW' },
@@ -64,7 +64,7 @@ export const CATEGORIES = [
   {
     id: 'pumps',
     slug: 'nasosy',
-    icon: 'Droplets',
+    icon: 'Waves',
     image: `${BASE}/2024/04/1713896218178656-800x800.jpg`,
     name: { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen' },
     desc: { uk: 'Циркуляційні насоси для систем опалення', en: 'Circulation pumps for heating systems', pl: 'Pompy obiegowe do systemów grzewczych', fr: 'Pompes de circulation pour systèmes de chauffage', de: 'Umwälzpumpen für Heizsysteme' },
@@ -74,7 +74,7 @@ export const CATEGORIES = [
   {
     id: 'valves',
     slug: 'klapany',
-    icon: 'SlidersHorizontal',
+    icon: 'Sliders',
     image: `${BASE}/2024/04/photo_2024-04-23_21-17-36-800x800.jpg`,
     name: { uk: '3-х/4-х ходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile' },
     desc: { uk: '3-ходові, 4-ходові клапани та електричні сервоприводи', en: '3-way, 4-way valves and electric actuators', pl: 'Zawory 3-drożne, 4-drożne i siłowniki elektryczne', fr: 'Vannes 3 voies, 4 voies et servomoteurs électriques', de: '3-Wege-, 4-Wege-Ventile und elektrische Stellantriebe' },
@@ -114,7 +114,7 @@ export const CATEGORIES = [
   {
     id: 'manifolds-floor',
     slug: 'kolektory-pidloha',
-    icon: 'LayoutGrid',
+    icon: 'Grid3X3',
     image: `${BASE}/2024/04/1713881601309906-800x800.jpg`,
     name: { uk: 'Колектори теплої підлоги / радіаторного опалення', en: 'Underfloor / Radiator Heating Manifolds', pl: 'Kolektory ogrzewania podłogowego / grzejnikowego', fr: 'Collecteurs chauffage sol / radiateurs', de: 'Fußboden- / Heizkörperheizungsverteiler' },
     desc: { uk: 'Розподільчі гребінки для теплої підлоги та радіаторів', en: 'Distribution manifolds for underfloor and radiator heating', pl: 'Rozdzielacze dla ogrzewania podłogowego i grzejnikowego', fr: 'Collecteurs de distribution pour chauffage sol et radiateurs', de: 'Verteiler für Fußboden- und Heizkörperheizung' },
@@ -124,7 +124,7 @@ export const CATEGORIES = [
   {
     id: 'automation',
     slug: 'avtomatyka',
-    icon: 'Cpu',
+    icon: 'CircuitBoard',
     image: `${BASE}/2023/11/termojet-profi-plus-2-800x800.jpg`,
     name: { uk: 'Автоматика котельного обладнання', en: 'Boiler Equipment Automation', pl: 'Automatyka urządzeń kotłowych', fr: 'Automatisation des équipements de chaudière', de: 'Kesselautomatik' },
     desc: { uk: 'Контролери та системи управління котлами', en: 'Controllers and boiler management systems', pl: 'Sterowniki i systemy zarządzania kotłami', fr: 'Contrôleurs et systèmes de gestion chaudières', de: 'Steuerungen und Kesselmanagementsysteme' },
