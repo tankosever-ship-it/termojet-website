@@ -65,7 +65,7 @@
     background: white;
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    border-radius: 1.25rem;
+    border-radius: 0;
   }
   .card-hover { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
   .card-hover:hover {
@@ -575,9 +575,10 @@
     border-top: 2px solid transparent;
   }
   .product-card-new:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    box-shadow: 0 8px 32px rgba(255,107,0,0.10);
     transform: translateY(-2px);
     border-top-color: var(--accent);
+    background: rgba(255,107,0,0.03);
   }
 
   /* Quick-action bar */

@@ -38,10 +38,10 @@ function MegaMenu({ lang, products, onClose }) {
                 style={{ color: i === activeCatIdx ? 'white' : 'rgba(255,255,255,0.55)', background: i === activeCatIdx ? 'rgba(255,85,0,0.12)' : 'transparent', borderLeftColor: i === activeCatIdx ? 'var(--accent)' : 'transparent' }}
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="flex items-center justify-center w-6 h-6 rounded flex-shrink-0"
-                    style={{ background: i === activeCatIdx ? 'rgba(255,107,0,0.25)' : 'rgba(255,255,255,0.07)' }}>
+                  <span className="flex items-center justify-center w-6 h-6 flex-shrink-0"
+                    style={{ background: i === activeCatIdx ? 'rgba(255,107,0,0.25)' : 'rgba(255,107,0,0.08)' }}>
                     <CategoryIcon name={cat.icon} size={13}
-                      style={{ color: i === activeCatIdx ? '#FF6B00' : 'rgba(255,255,255,0.45)' }} />
+                      style={{ color: '#FF6B00' }} />
                   </span>
                   <span style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '13px', fontWeight: 500, lineHeight: 1.3 }}>
                     {cat.name[lang] || cat.name.uk}

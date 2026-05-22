@@ -374,7 +374,7 @@ export default function CatalogPage() {
         {/* ── Category pills — завжди зверху ── */}
         <div className="flex flex-wrap gap-2 mb-5">
           <Link to="/catalog"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-md transition-all"
+            className="flex items-center gap-2 px-3 py-1.5 transition-all"
             style={{
               fontFamily: "'IBM Plex Sans', sans-serif",
               fontSize: '13px', fontWeight: 500,
@@ -388,7 +388,7 @@ export default function CatalogPage() {
             const isActive = currentCategory?.id === c.id
             return (
               <Link key={c.id} to={`/catalog/${c.slug}`}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-md transition-all hover:border-[var(--accent)]"
+                className="flex items-center gap-2 px-3 py-1.5 transition-all hover:border-[var(--accent)]"
                 style={{
                   fontFamily: "'IBM Plex Sans', sans-serif",
                   fontSize: '13px', fontWeight: 500,
@@ -396,7 +396,7 @@ export default function CatalogPage() {
                   color: isActive ? 'white' : 'var(--text-secondary)',
                   border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)',
                 }}>
-                <span className="flex items-center justify-center w-5 h-5 rounded flex-shrink-0"
+                <span className="flex items-center justify-center w-5 h-5 flex-shrink-0"
                   style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,107,0,0.1)' }}>
                   <CategoryIcon name={c.icon} size={12}
                     className={isActive ? 'text-white' : 'text-[var(--accent)]'} />
@@ -482,12 +482,12 @@ export default function CatalogPage() {
 
                       <div className="quick-bar">
                         <button onClick={() => addToCart(product)}
-                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 rounded-lg transition-colors"
+                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 transition-colors"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <Plus size={12} /> Швидка заявка
                         </button>
                         <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}
-                          className="w-9 h-9 flex items-center justify-center border border-[var(--ink-200)] rounded-lg hover:border-gray-400 transition-colors text-gray-500 hover:text-gray-800">
+                          className="w-9 h-9 flex items-center justify-center border border-[var(--ink-200)] hover:border-gray-400 transition-colors text-gray-500 hover:text-gray-800">
                           <ArrowUpRight size={14} />
                         </Link>
                       </div>

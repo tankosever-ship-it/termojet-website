@@ -202,11 +202,11 @@ export default function ProductDetailPage() {
             {/* Badges */}
             <div className="flex flex-wrap gap-2 mb-3">
               {product.inStock ? (
-                <span className="bg-green-50 text-green-600 text-xs font-medium px-2.5 py-1 rounded-full">{pt.inStock}</span>
+                <span className="bg-green-50 text-green-600 text-xs font-medium px-2.5 py-1">{pt.inStock}</span>
               ) : (
-                <span className="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1 rounded-full">{cat.outOfStock}</span>
+                <span className="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1">{cat.outOfStock}</span>
               )}
-              <span className="bg-orange-50 text-[var(--accent)] text-xs font-medium px-2.5 py-1 rounded-full">🇺🇦 Виробник: Termojet</span>
+              <span className="bg-orange-50 text-[var(--accent)] text-xs font-medium px-2.5 py-1">🇺🇦 Виробник: Termojet</span>
             </div>
 
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">{name}</h1>
@@ -233,7 +233,7 @@ export default function ProductDetailPage() {
 
             {/* Quantity + Cart */}
             <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden">
+              <div className="flex items-center border border-gray-200 overflow-hidden">
                 <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600">
                   <Minus size={14} />
                 </button>
@@ -244,7 +244,7 @@ export default function ProductDetailPage() {
               </div>
               <button
                 onClick={handleAddToCart}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-semibold transition-all ${added ? 'bg-green-500 text-white' : 'bg-[var(--primary)] text-white hover:bg-[var(--primary-light)]'}`}
+                className={`flex-1 flex items-center justify-center gap-2 py-3 font-semibold transition-all ${added ? 'bg-green-500 text-white' : 'bg-[var(--primary)] text-white hover:bg-[var(--primary-light)]'}`}
               >
                 <ShoppingCart size={18} />
                 {added ? '✓ Додано!' : pt.addToCart}
