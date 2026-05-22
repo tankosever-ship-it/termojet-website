@@ -4,6 +4,7 @@ import { mergeWithEnriched } from '../data/mergeEnriched'
 import { BLOG_POSTS } from '../data/blog'
 import { PORTFOLIO } from '../data/portfolio'
 import { FILES } from '../data/files'
+import { fetchEurRate } from '../utils/currency'
 
 const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
@@ -33,6 +34,7 @@ export function AppProvider({ children }) {
   const [banners, setBanners] = useState([])
   const [clients, setClients] = useState([])
   const [isAdminAuth, setIsAdminAuth] = useState(() => sessionStorage.getItem('tj2_admin') === '1')
+  const [eurRate, setEurRate] = useState(null) // NBU EUR rate * 1.022
   const [siteSettings, setSiteSettings] = useState({
     phone: '+380 50 718 91 65',
     email: 'termojet@sofievka.kiev.ua',
@@ -46,6 +48,10 @@ export function AppProvider({ children }) {
 
   useEffect(() => { localStorage.setItem('tj2_lang', lang) }, [lang])
   useEffect(() => { saveCart(cart) }, [cart])
+
+  useEffect(() => {
+    fetchEurRate().then(rate => setEurRate(rate))
+  }, [])
 
   useEffect(() => {
     // Products are embedded statically from WooCommerce export
@@ -90,7 +96,12 @@ export function AppProvider({ children }) {
 
   function clearCart() { setCart([]) }
 
-  const cartTotal = cart.reduce((sum, i) => sum + (i.price || 0) * i.quantity, 0)
+  // cartTotal always in UAH: EUR items converted at current rate
+  const cartTotal = cart.reduce((sum, i) => {
+    const price = parseFloat(i.price) || 0
+    const inUah = i.currency === 'EUR' && eurRate ? price * eurRate : price
+    return sum + inUah * i.quantity
+  }, 0)
   const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0)
 
   // Admin
@@ -147,6 +158,7 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider value={{
       lang, setLang,
+      eurRate,
       products, setProducts,
       cart, addToCart, removeFromCart, updateCartQuantity, clearCart, cartTotal, cartCount,
       orders, setOrders,

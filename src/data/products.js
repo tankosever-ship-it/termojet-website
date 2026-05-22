@@ -1,5 +1,5 @@
 // Auto-generated — enriched with data from termojet.com.ua
-// 320 products
+// 242 products
 export const PRODUCTS = [
   {
     "id": "wp_20521",
@@ -7,7 +7,7 @@ export const PRODUCTS = [
     "name": "Насос циркуляційний Termojet AUTO енергозберігаючий APM 25/8/180 мм",
     "slug": "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-25-8-180-mm",
     "sku": "30401225",
-    "price": "204",
+    "price": "1108",
     "categorySlug": "nasosy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0471-scaled.jpg",
     "images": [
@@ -25,7 +25,8 @@ export const PRODUCTS = [
       "Hmax": "8 м",
       "Споживана потужність": "5-80 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20516",
@@ -51,7 +52,8 @@ export const PRODUCTS = [
       "Hmax": "12 м",
       "Споживана потужність": "5-180 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20510",
@@ -77,7 +79,8 @@ export const PRODUCTS = [
       "Hmax": "6 м",
       "Споживана потужність": "5-45 W"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "wp_20506",
@@ -85,7 +88,7 @@ export const PRODUCTS = [
     "name": "Енергозберігаючий рециркуляційний насос TERMOJET SPE12/1.4",
     "slug": "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4",
     "sku": "4535484",
-    "price": "",
+    "price": "126.41",
     "categorySlug": "nasosy",
     "image": "https://termojet.com.ua/wp-content/uploads/2025/04/spe12-1.4.png",
     "images": [
@@ -111,7 +114,8 @@ export const PRODUCTS = [
       "Робоче колесо": "полімерний матеріал ізмагнітним наповнювачем",
       "Габарити/вага": "16*11*11/ 1кг."
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20502",
@@ -119,7 +123,7 @@ export const PRODUCTS = [
     "name": "Енергозберігаючий рециркуляційний насос TERMOJET SPE12/1.4S з таймером та термостатом",
     "slug": "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s",
     "sku": "4535487",
-    "price": "",
+    "price": "150",
     "categorySlug": "nasosy",
     "image": "https://termojet.com.ua/wp-content/uploads/2025/04/spe12-1.4s.png",
     "images": [
@@ -145,7 +149,8 @@ export const PRODUCTS = [
       "Робоче колесо": "полімерний матеріал ізмагнітним наповнювачем",
       "Габарити/вага": "16*11*11/ 1кг."
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20495",
@@ -171,7 +176,8 @@ export const PRODUCTS = [
       "Hmax": "6 м",
       "Споживана потужність": "5-45 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20480",
@@ -204,7 +210,8 @@ export const PRODUCTS = [
       "Довжина кабелю": "євровилка – 1,5 м, датчик – 5 × 0,5 м (діаметр 4 мм)."
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_20456",
@@ -240,7 +247,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20450",
@@ -276,7 +284,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20442",
@@ -312,7 +321,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20434",
@@ -348,7 +358,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20422",
@@ -384,7 +395,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20414",
@@ -420,7 +432,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_20369",
@@ -456,7 +469,8 @@ export const PRODUCTS = [
       "Вимоги до перекачуваної рідини": "чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води",
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19359",
@@ -464,7 +478,7 @@ export const PRODUCTS = [
     "name": "Сепаратор повітря та бруду TJ-CAD-DN50M",
     "slug": "separator-povitrya-ta-brudu-tj-cad-dn50m",
     "sku": "44050332",
-    "price": "",
+    "price": "200",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1407.jpg",
     "images": [
@@ -484,7 +498,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "7.5",
       "Вага (Кг)": "6.0"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19358",
@@ -492,7 +507,7 @@ export const PRODUCTS = [
     "name": "Сепаратор повітря та бруду TJ-CAD-DN40",
     "slug": "separator-povitrya-ta-brudu-tj-cad-dn40",
     "sku": "44040265",
-    "price": "",
+    "price": "140",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1405.jpg",
     "images": [
@@ -512,7 +527,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "5.0",
       "Вага (Кг)": "2.2"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19356",
@@ -520,7 +536,7 @@ export const PRODUCTS = [
     "name": "Сепаратор повітря та бруду TJ-CAD-DN25",
     "slug": "separator-povitrya-ta-brudu-tj-cad-dn25",
     "sku": "44025265",
-    "price": "",
+    "price": "120",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1393.jpg",
     "images": [
@@ -540,7 +556,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "2.0",
       "Вага (Кг)": "1.9"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19345",
@@ -548,7 +565,7 @@ export const PRODUCTS = [
     "name": "Сепаратор бруду TJ-CD-DN50M",
     "slug": "separator-brudu-tj-cd-dn50m",
     "sku": "43050440",
-    "price": "",
+    "price": "190",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1408.jpg",
     "images": [
@@ -568,7 +585,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "7.5",
       "Вага (Кг)": "4.0"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19344",
@@ -576,7 +594,7 @@ export const PRODUCTS = [
     "name": "Сепаратор бруду TJ-CD-DN40",
     "slug": "separator-brudu-tj-cd-dn40",
     "sku": "43040197",
-    "price": "",
+    "price": "95",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1399.jpg",
     "images": [
@@ -596,7 +614,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "5.0",
       "Вага (Кг)": "1.8"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19343",
@@ -604,7 +623,7 @@ export const PRODUCTS = [
     "name": "Сепаратор бруду TJ-CD-DN32",
     "slug": "separator-brudu-tj-cd-dn32",
     "sku": "43032160",
-    "price": "",
+    "price": "80",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1401.jpg",
     "images": [
@@ -624,7 +643,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "3.7",
       "Вага (Кг)": "1.5"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19342",
@@ -632,7 +652,7 @@ export const PRODUCTS = [
     "name": "Сепаратор бруду TJ-CD-DN25",
     "slug": "separator-brudu-tj-cd-dn25",
     "sku": "43025145",
-    "price": "",
+    "price": "70",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1400.jpg",
     "images": [
@@ -652,7 +672,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "2.0",
       "Вага (Кг)": "1.3"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_19331",
@@ -660,7 +681,7 @@ export const PRODUCTS = [
     "name": "Повітряний сепаратор TJ-CA-DN50M",
     "slug": "povitryanyj-separator-tj-ca-dn50m",
     "sku": "42050246",
-    "price": "",
+    "price": "190",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1406.jpg",
     "images": [
@@ -678,7 +699,8 @@ export const PRODUCTS = [
       "Швидкість потоку (м3/год)": "7.5",
       "Вага (Кг)": "4.0"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_18514",
@@ -704,7 +726,8 @@ export const PRODUCTS = [
       "Hmax": "8 м",
       "Споживана потужність": "5-65 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_15483",
@@ -712,7 +735,7 @@ export const PRODUCTS = [
     "name": "ГС-30 Гідрострілка в теплоізоляції  ГС-219 фланцева з підставкою",
     "slug": "gidravlichnyj-rozdilyuvach-gs-28",
     "sku": "84040030",
-    "price": "",
+    "price": "24650",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/01/gs-30.jpg",
     "images": [
@@ -734,7 +757,8 @@ export const PRODUCTS = [
       "Об’єм": "35,78 л",
       "Об&#8217;єм": "35,78 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_9928",
@@ -742,7 +766,7 @@ export const PRODUCTS = [
     "name": "Електропривід  з трипозиційним управлінням \"TERMOJET\" 405N 230 V (60 сек.)",
     "slug": "silownik-termojet-aqua401-60-sek",
     "sku": "AQUAO405-3-230-060",
-    "price": "92.50",
+    "price": "92.5",
     "categorySlug": "klapany",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/1684839955239616.jpg",
     "images": [
@@ -762,7 +786,8 @@ export const PRODUCTS = [
       "Ручне управління": "Так"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9852",
@@ -770,7 +795,7 @@ export const PRODUCTS = [
     "name": "НГ-82.250 Насосна група зі змішувачем 2 1/2\" ВР в теплоізоляції без насоса",
     "slug": "grupa-pompowa-gp-72-2",
     "sku": "84030720 L",
-    "price": "",
+    "price": "50928.89",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/6272.png",
     "images": [
@@ -787,7 +812,8 @@ export const PRODUCTS = [
       "Висота": "873 мм",
       "Ширина": "496 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9820",
@@ -795,7 +821,7 @@ export const PRODUCTS = [
     "name": "Колектор СК-281.250  в теплоізоляції з комплектом гнучких муфт 8\"(200-219мм)",
     "slug": "kolektor-hydrauliczny-na-2-obwody-km281",
     "sku": "84040281250",
-    "price": "",
+    "price": "38002.56",
     "categorySlug": "termojet-mega",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/k271-951x800-2.png",
     "images": [
@@ -813,7 +839,8 @@ export const PRODUCTS = [
       "Висота з підставкою": "995 мм",
       "Довжина": "1135 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9818",
@@ -821,7 +848,7 @@ export const PRODUCTS = [
     "name": "Колектор СК-381.250  в теплоізоляції з комплектом гнучких муфт 8\"(200-219мм)",
     "slug": "kolektor-hydrauliczny-na-3-obwody-km381",
     "sku": "84040381250",
-    "price": "",
+    "price": "45439.44",
     "categorySlug": "termojet-mega",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/k371-800x470-1.png",
     "images": [
@@ -839,7 +866,8 @@ export const PRODUCTS = [
       "Висота з підставкою": "995 мм",
       "Довжина": "1634 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9663",
@@ -847,7 +875,7 @@ export const PRODUCTS = [
     "name": "К42ВН.125(200) Колектор в теплоізоляції 4+1 вгору+вниз",
     "slug": "k42gd125-200",
     "sku": "84040272",
-    "price": "",
+    "price": "10206.2",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0567-scaled.jpg",
     "images": [
@@ -866,7 +894,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_9319",
@@ -896,7 +925,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9316",
@@ -926,7 +956,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9302",
@@ -961,7 +992,8 @@ export const PRODUCTS = [
       "KVS": "1.6 м³/год"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9301",
@@ -996,7 +1028,8 @@ export const PRODUCTS = [
       "KVS": "1.6 м³/год"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9300",
@@ -1031,7 +1064,8 @@ export const PRODUCTS = [
       "KVS": "1.6 м³/год"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9299",
@@ -1066,7 +1100,8 @@ export const PRODUCTS = [
       "KVS": "2.5 м³/год"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9298",
@@ -1101,7 +1136,8 @@ export const PRODUCTS = [
       "KVS": "2.5 м³/год"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9295",
@@ -1136,7 +1172,8 @@ export const PRODUCTS = [
       "KVS": "1.6 м³/год"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9286",
@@ -1166,7 +1203,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9285",
@@ -1196,7 +1234,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9284",
@@ -1226,7 +1265,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9283",
@@ -1256,7 +1296,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9280",
@@ -1286,7 +1327,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9274",
@@ -1316,7 +1358,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9273",
@@ -1346,7 +1389,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9272",
@@ -1376,7 +1420,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9269",
@@ -1406,7 +1451,8 @@ export const PRODUCTS = [
       "11.": "Ущільнювальне кільце",
       "12.": "Гвинт для кришки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9193",
@@ -1427,7 +1473,8 @@ export const PRODUCTS = [
       "Артикула": "TJ-MU-40",
       "Температура": "25-55°C"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9192",
@@ -1435,7 +1482,7 @@ export const PRODUCTS = [
     "name": "TJ-MU-10B Змішувальний термостатичний вузел Termojet для колектора теплої підлоги",
     "slug": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b",
     "sku": "TJ-MU-10B",
-    "price": "115.50",
+    "price": "115.5",
     "categorySlug": "kolektory-pidloha",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0522-scaled.jpg",
     "images": [
@@ -1448,7 +1495,8 @@ export const PRODUCTS = [
       "Артикула": "TJ-MU-10B",
       "Температура": "20-43°C"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9181",
@@ -1469,7 +1517,8 @@ export const PRODUCTS = [
       "Артикул": "BVAL",
       "Діаметр": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9180",
@@ -1489,7 +1538,8 @@ export const PRODUCTS = [
       "Артикула": "Eurokonus",
       "Діаметр": "¾”x16 мм ВР"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9179",
@@ -1497,7 +1547,7 @@ export const PRODUCTS = [
     "name": "TJ-B-1 Байпас Termojet для колектора",
     "slug": "bajpas",
     "sku": "84040TJ-B-1",
-    "price": "30",
+    "price": "31.35",
     "categorySlug": "kolektory-pidloha",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0519-scaled.jpg",
     "images": [
@@ -1509,7 +1559,8 @@ export const PRODUCTS = [
     "specs": {
       "Артикул": "By-pass"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9178",
@@ -1530,7 +1581,8 @@ export const PRODUCTS = [
       "Артикула": "TJ-MU-25",
       "Температура": "20-60°C"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9168",
@@ -1538,7 +1590,7 @@ export const PRODUCTS = [
     "name": "ГС-31 Гідрострілка в теплоізоляції з підставкою  Termojet Mega",
     "slug": "gidrostrilka-gs-31",
     "sku": "84040031",
-    "price": "",
+    "price": "34050",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/gs-31-1019x2048-1.png",
     "images": [
@@ -1557,7 +1609,8 @@ export const PRODUCTS = [
       "Висота (з підставкою)": "1070 мм",
       "Ширина": "620 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9162",
@@ -1565,7 +1618,7 @@ export const PRODUCTS = [
     "name": "ГС-32 Гідрострілка в теплоізоляції з підставкою Termojet Mega",
     "slug": "gidrostrilka-gs-32",
     "sku": "84040032",
-    "price": "",
+    "price": "45796.22",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/gs-32-940x2048-1.png",
     "images": [
@@ -1583,7 +1636,8 @@ export const PRODUCTS = [
       "Висота (з підставкою)": "1570 мм",
       "Ширина": "675 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9161",
@@ -1591,7 +1645,7 @@ export const PRODUCTS = [
     "name": "ГС-33 Гідрострілка в теплоізоляції з підставкою Termojet Mega",
     "slug": "gidrostrilka-gs-33",
     "sku": "84040033",
-    "price": "",
+    "price": "55878.53",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/gs-33-957x2048-1.png",
     "images": [
@@ -1609,7 +1663,8 @@ export const PRODUCTS = [
       "Висота (з підставкою)": "1770 мм",
       "Ширина": "730 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9158",
@@ -1617,7 +1672,7 @@ export const PRODUCTS = [
     "name": "ГС-34 Гідрострілка в теплоізоляції з підставкою Termojet Mega",
     "slug": "gidrostrilka-gs-34",
     "sku": "84040034",
-    "price": "",
+    "price": "66177.64",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/gs-34-919x2048-1.png",
     "images": [
@@ -1635,7 +1690,8 @@ export const PRODUCTS = [
       "Висота (з підставкою)": "2080 мм",
       "Ширина": "930 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9155",
@@ -1643,7 +1699,7 @@ export const PRODUCTS = [
     "name": "Колектор СК-371.250  в теплоізоляції з комплектом гнучких муфт 6\"(150-159мм)",
     "slug": "kolektor-na-3-vyhoda",
     "sku": "84040371",
-    "price": "",
+    "price": "35713.94",
     "categorySlug": "termojet-mega",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/k371-1.png",
     "images": [
@@ -1661,7 +1717,8 @@ export const PRODUCTS = [
       "Висота з підставкою": "975 мм",
       "Довжина": "1634 мм"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_9152",
@@ -1669,7 +1726,7 @@ export const PRODUCTS = [
     "name": "Колектор СК-271.250  в теплоізоляції з комплектом гнучких муфт 6\"(150-159мм)",
     "slug": "kolektor-na-2-vyhoda",
     "sku": "84040271",
-    "price": "",
+    "price": "29952.63",
     "categorySlug": "termojet-mega",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/k271-951x800-3.png",
     "images": [
@@ -1687,7 +1744,8 @@ export const PRODUCTS = [
       "Висота з підставкою": "975 мм",
       "Довжина": "1135 мм"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_9145",
@@ -1695,7 +1753,7 @@ export const PRODUCTS = [
     "name": "НГ-61.250 Насосна група без змішувача 1 1/2\" ВР  в теплоізоляції без насоса",
     "slug": "ng-61-bez-zmishuvacha-1-1-2",
     "sku": "84030610",
-    "price": "",
+    "price": "23150.84",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/6171.png",
     "images": [
@@ -1712,7 +1770,8 @@ export const PRODUCTS = [
       "Висота": "873 мм",
       "Ширина": "496 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9144",
@@ -1720,7 +1779,7 @@ export const PRODUCTS = [
     "name": "НГ-62.250 Насосна група зі змішувачем 1 1/2\" ВР в теплоізоляції без насоса",
     "slug": "ng-62-zi-zmishuvachem-1-1-2",
     "sku": "84030620",
-    "price": "",
+    "price": "42960.63",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/6272.png",
     "images": [
@@ -1737,7 +1796,8 @@ export const PRODUCTS = [
       "Висота": "873 мм",
       "Ширина": "496 мм"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_9143",
@@ -1745,7 +1805,7 @@ export const PRODUCTS = [
     "name": "НГ-71.250 Насосна група без змішувача 2\" ВР в теплоізоляції без насоса",
     "slug": "ng-71-bez-zmishuvacha-2",
     "sku": "84030710",
-    "price": "",
+    "price": "26197.5",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/10/6171.png",
     "images": [
@@ -1762,7 +1822,8 @@ export const PRODUCTS = [
       "Висота": "873 мм",
       "Ширина": "496 мм"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_9067",
@@ -1788,7 +1849,8 @@ export const PRODUCTS = [
       "Hmax": "12 м",
       "Споживана потужність": "5-180 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9066",
@@ -1814,7 +1876,8 @@ export const PRODUCTS = [
       "Hmax": "10 м",
       "Споживана потужність": "5-120 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9065",
@@ -1840,7 +1903,8 @@ export const PRODUCTS = [
       "Hmax": "8 м",
       "Споживана потужність": "5-80 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9064",
@@ -1866,7 +1930,8 @@ export const PRODUCTS = [
       "Hmax": "8 м",
       "Споживана потужність": "5-65 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9063",
@@ -1892,7 +1957,8 @@ export const PRODUCTS = [
       "Hmax": "8 м",
       "Споживана потужність": "5-65 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9062",
@@ -1918,7 +1984,8 @@ export const PRODUCTS = [
       "Hmax": "6 м",
       "Споживана потужність": "5-45 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9060",
@@ -1944,7 +2011,8 @@ export const PRODUCTS = [
       "Hmax": "4 м",
       "Споживана потужність": "5-25 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9055",
@@ -1970,7 +2038,8 @@ export const PRODUCTS = [
       "Hmax": "4 м",
       "Споживана потужність": "5-25 W"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9042",
@@ -1978,7 +2047,7 @@ export const PRODUCTS = [
     "name": "ABF-ZV3-100 3-ходовий зональний клапан 1\" з приводом, 230V ac, 8s/60*, 5NM",
     "slug": "3-hodovyj-zonalnyj-klapan-1-z-pryvodom-230v-ac-8s-60-5nm-2",
     "sku": "47032230",
-    "price": "106",
+    "price": "118",
     "categorySlug": "klapany",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/12121321212-1.jpg",
     "images": [
@@ -1998,7 +2067,8 @@ export const PRODUCTS = [
       "Діаметр": "1°M"
     },
     "inStock": true,
-    "video": "https://youtu.be/Z9fwMM8Vn3g?si=hx7xEcCU6CRtGQFe"
+    "video": "https://youtu.be/Z9fwMM8Vn3g?si=hx7xEcCU6CRtGQFe",
+    "currency": "EUR"
   },
   {
     "id": "wp_9041",
@@ -2026,7 +2096,8 @@ export const PRODUCTS = [
       "Ручне управління": "Так"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9040",
@@ -2054,7 +2125,8 @@ export const PRODUCTS = [
       "Ручне управління": "Так"
     },
     "inStock": true,
-    "video": "https://youtu.be/Xw47947XGqE"
+    "video": "https://youtu.be/Xw47947XGqE",
+    "currency": "EUR"
   },
   {
     "id": "wp_9025",
@@ -2062,7 +2134,7 @@ export const PRODUCTS = [
     "name": "Автоматика котельні Termojet PROFI PLUS (3 контура + ГВС)",
     "slug": "avtomatyka-termojet-profi-plus",
     "sku": "903289 PR",
-    "price": "728.40",
+    "price": "728.4",
     "categorySlug": "avtomatyka",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0484-scaled.jpg",
     "images": [
@@ -2081,7 +2153,8 @@ export const PRODUCTS = [
       "Живлення": "230 В / 50 Гц",
       "Клас захисту": "IP30"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_9024",
@@ -2089,7 +2162,7 @@ export const PRODUCTS = [
     "name": "Автоматика котельні Termojet LIGHT (2 контура + ГВС)",
     "slug": "avtomatyka-termojet-light",
     "sku": "903289 LT",
-    "price": "576.00",
+    "price": "576",
     "categorySlug": "avtomatyka",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0484-scaled.jpg",
     "images": [
@@ -2107,7 +2180,8 @@ export const PRODUCTS = [
       "Живлення": "230 В / 50 Гц",
       "Клас захисту": "IP30"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "wp_8999",
@@ -2115,7 +2189,7 @@ export const PRODUCTS = [
     "name": "ГС-25 Гідрострілка в теплоізоляції 1\"",
     "slug": "gidrostrilka-gs-25-v-izolyacziyi",
     "sku": "84040025",
-    "price": "",
+    "price": "5296.7",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0569-scaled.jpg",
     "images": [
@@ -2137,7 +2211,8 @@ export const PRODUCTS = [
       "Об’єм": "1,83 л",
       "Об&#8217;єм": "1,83 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8998",
@@ -2145,7 +2220,7 @@ export const PRODUCTS = [
     "name": "ГС-26 Гідрострілка в теплоізоляції 1 1/4\"",
     "slug": "gidrostrilka-gs-26-v-izolyacziyi",
     "sku": "84040026",
-    "price": "",
+    "price": "6628.6",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0572-scaled.jpg",
     "images": [
@@ -2167,7 +2242,8 @@ export const PRODUCTS = [
       "Об’єм": "3,69 л",
       "Об&#8217;єм": "3,69 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8997",
@@ -2175,7 +2251,7 @@ export const PRODUCTS = [
     "name": "ГС-27 Гідрострілка в теплоізоляції 1 1/2\"",
     "slug": "gidrostrilka-gs-27-v-izolyacziyi",
     "sku": "84040027",
-    "price": "",
+    "price": "7662.9",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0571-scaled.jpg",
     "images": [
@@ -2197,7 +2273,8 @@ export const PRODUCTS = [
       "Об’єм": "6,22 л",
       "Об&#8217;єм": "6,22 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8993",
@@ -2205,7 +2282,7 @@ export const PRODUCTS = [
     "name": "ГС-28 Гідрострілка в теплоізоляції 2\"",
     "slug": "gidrostrilka-gs-28-v-izolyacziyi",
     "sku": "84040028",
-    "price": "",
+    "price": "13799.27",
     "categorySlug": "hidravlichni-rozdilnyky",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0573-scaled.jpg",
     "images": [
@@ -2227,7 +2304,8 @@ export const PRODUCTS = [
       "Об’єм": "13,30 л",
       "Об&#8217;єм": "13,30 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8942",
@@ -2235,7 +2313,7 @@ export const PRODUCTS = [
     "name": "К22Н.125(200) Колектор в теплоізоляції 2+1 вниз",
     "slug": "kolektor-k22n-125-240-2",
     "sku": "84040242",
-    "price": "",
+    "price": "9106.59",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0579-scaled.jpg",
     "images": [
@@ -2254,7 +2332,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8941",
@@ -2262,7 +2341,7 @@ export const PRODUCTS = [
     "name": "К22Н.125(240) Колектор в теплоізоляції 2+1 вниз",
     "slug": "kolektor-k22n-125-240",
     "sku": "84040262",
-    "price": "",
+    "price": "9664.14",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0579-scaled.jpg",
     "images": [
@@ -2281,7 +2360,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8940",
@@ -2289,7 +2369,7 @@ export const PRODUCTS = [
     "name": "К22Н.150(300) Колектор в теплоізоляції 2+1 вниз",
     "slug": "kolektor-k22n-150-300",
     "sku": "84040263",
-    "price": "",
+    "price": "13009.41",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0579-scaled.jpg",
     "images": [
@@ -2308,7 +2388,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8939",
@@ -2316,7 +2397,7 @@ export const PRODUCTS = [
     "name": "К32Н.125(200) Колектор в теплоізоляції 3+1 вниз",
     "slug": "kolektor-k32n-125-200",
     "sku": "84040342",
-    "price": "",
+    "price": "11104.46",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0589-scaled.jpg",
     "images": [
@@ -2335,7 +2416,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8938",
@@ -2343,7 +2425,7 @@ export const PRODUCTS = [
     "name": "К32Н.125(240) Колектор в теплоізоляції 3+1 вниз",
     "slug": "kolektor-k32n-125-240",
     "sku": "84040362",
-    "price": "",
+    "price": "11662",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0589-scaled.jpg",
     "images": [
@@ -2362,7 +2444,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8937",
@@ -2370,7 +2453,7 @@ export const PRODUCTS = [
     "name": "К32Н.150(300) Колектор в теплоізоляції 3+1 вниз",
     "slug": "kolektor-k32n-150-300",
     "sku": "84040363",
-    "price": "",
+    "price": "14914.36",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0589-scaled.jpg",
     "images": [
@@ -2389,7 +2472,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8919",
@@ -2397,7 +2481,7 @@ export const PRODUCTS = [
     "name": "К42Н.125(200) Колектор в теплоізоляції 4+1 вниз",
     "slug": "kolektor-k42n-125-200",
     "sku": "84040442",
-    "price": "",
+    "price": "12854.55",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0598-scaled.jpg",
     "images": [
@@ -2416,7 +2500,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8918",
@@ -2424,7 +2509,7 @@ export const PRODUCTS = [
     "name": "К42Н.125(240) Колектор в теплоізоляції 4+1 вниз",
     "slug": "kolektor-k42n-125-240",
     "sku": "84040462",
-    "price": "",
+    "price": "13474.04",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0598-scaled.jpg",
     "images": [
@@ -2443,7 +2528,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8916",
@@ -2451,7 +2537,7 @@ export const PRODUCTS = [
     "name": "К52Н.125(200) Колектор в теплоізоляції 5+1 вниз",
     "slug": "kolektor-k52n-125-200",
     "sku": "84040542",
-    "price": "",
+    "price": "16710.9",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0604-scaled.jpg",
     "images": [
@@ -2470,7 +2556,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8915",
@@ -2478,7 +2565,7 @@ export const PRODUCTS = [
     "name": "К52Н.125(240) Колектор в теплоізоляції 5+1 вниз",
     "slug": "kolektor-k52n-125-240",
     "sku": "84040562",
-    "price": "",
+    "price": "17361.37",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0604-scaled.jpg",
     "images": [
@@ -2497,7 +2584,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8894",
@@ -2505,7 +2593,7 @@ export const PRODUCTS = [
     "name": "К62ВН.125(200) Колектор в теплоізоляції 6+1 вгору+вниз",
     "slug": "kolektor-k62vn-125-200",
     "sku": "84040372",
-    "price": "",
+    "price": "14511.68",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0565-scaled.jpg",
     "images": [
@@ -2523,7 +2611,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8893",
@@ -2531,7 +2620,7 @@ export const PRODUCTS = [
     "name": "К42ВН.150(300) Колектор в теплоізоляції 4+1 вгору+вниз",
     "slug": "kolektor-k42vn-150-300",
     "sku": "84040273",
-    "price": "",
+    "price": "13226.25",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0567-scaled.jpg",
     "images": [
@@ -2550,7 +2639,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8892",
@@ -2558,7 +2648,7 @@ export const PRODUCTS = [
     "name": "К22ВН.150(300) Колектор в теплоізоляції 2+1 вгору+вниз",
     "slug": "kolektor-k22vn-150-300",
     "sku": "84040173",
-    "price": "",
+    "price": "11027.03",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0576-scaled.jpg",
     "images": [
@@ -2577,7 +2667,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8891",
@@ -2585,7 +2676,7 @@ export const PRODUCTS = [
     "name": "К22ВН.125(200) Колектор в теплоізоляції 2+1 вгору+вниз",
     "slug": "kolektor-k22vn-125-200",
     "sku": "84040172",
-    "price": "",
+    "price": "7697.23",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0576-scaled.jpg",
     "images": [
@@ -2604,7 +2695,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8890",
@@ -2612,7 +2704,7 @@ export const PRODUCTS = [
     "name": "К52Н.150(300) Колектор в теплоізоляції 5+1 вниз",
     "slug": "kolektor-k52n-150-300",
     "sku": "84040563",
-    "price": "",
+    "price": "18399.03",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0604-scaled.jpg",
     "images": [
@@ -2631,7 +2723,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8889",
@@ -2639,7 +2732,7 @@ export const PRODUCTS = [
     "name": "К62ВН.150(300) Колектор в теплоізоляції 6+1 вгору+вниз",
     "slug": "kolektor-k62vn-150-300",
     "sku": "84040373",
-    "price": "",
+    "price": "15332.53",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0565-scaled.jpg",
     "images": [
@@ -2658,7 +2751,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8888",
@@ -2666,7 +2760,7 @@ export const PRODUCTS = [
     "name": "К82ВН.125(200) Колектор в теплоізоляції 8+1 вгору+вниз",
     "slug": "kolektor-k82vn-125-200",
     "sku": "84040472",
-    "price": "",
+    "price": "16199.82",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0597-scaled.jpg",
     "images": [
@@ -2685,7 +2779,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8884",
@@ -2693,7 +2788,7 @@ export const PRODUCTS = [
     "name": "К82ВН.150(300) Колектор  в теплоізоляції 8+1 вгору+вниз",
     "slug": "kolektor-k82vn-150-300",
     "sku": "84040473",
-    "price": "",
+    "price": "17980.86",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0597-scaled.jpg",
     "images": [
@@ -2712,7 +2807,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8877",
@@ -2720,7 +2816,7 @@ export const PRODUCTS = [
     "name": "К31ВН.125(100) Колектор в теплоізоляції 2 вгору + 1 вниз",
     "slug": "kolektor-k21v-125",
     "sku": "84040392",
-    "price": "",
+    "price": "7315",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0563-scaled.jpg",
     "images": [
@@ -2739,7 +2835,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8876",
@@ -2747,7 +2844,7 @@ export const PRODUCTS = [
     "name": "К51ВН.125(100) Колектор в теплоізоляції 3 вгору + 2 вниз",
     "slug": "kolektor-k31v-125",
     "sku": "84040592",
-    "price": "",
+    "price": "8510",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0594-scaled.jpg",
     "images": [
@@ -2766,7 +2863,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8863",
@@ -2774,7 +2872,7 @@ export const PRODUCTS = [
     "name": "КГС42В.125(200) Колектор в теплоізоляції 4+1 вгору",
     "slug": "kolektor-kgs42v-125-200",
     "sku": "84040422",
-    "price": "",
+    "price": "16819.32",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/kgs42v125-200.png",
     "images": [
@@ -2792,7 +2890,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8862",
@@ -2800,7 +2899,7 @@ export const PRODUCTS = [
     "name": "КГС22В.125(200) Колектор  в теплоізоляції 2+1 вгору",
     "slug": "kollektor-kgs22v-125-200",
     "sku": "84040222",
-    "price": "",
+    "price": "11971.75",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0585-scaled.jpg",
     "images": [
@@ -2818,7 +2917,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8861",
@@ -2826,7 +2926,7 @@ export const PRODUCTS = [
     "name": "КГС32В.125(200) Колектор в теплоізоляції 3+1 вгору",
     "slug": "kollektor-kgs32v-125-200",
     "sku": "84040322",
-    "price": "",
+    "price": "13505.01",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0581-scaled.jpg",
     "images": [
@@ -2845,7 +2945,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8856",
@@ -2853,7 +2954,7 @@ export const PRODUCTS = [
     "name": "КГС52В.125(200)  Колектор в теплоізоляції 5+1 вгору",
     "slug": "kollektor-kgs52v-125-200",
     "sku": "84040522",
-    "price": "",
+    "price": "20567.26",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0605-scaled.jpg",
     "images": [
@@ -2872,7 +2973,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8846",
@@ -2880,7 +2982,7 @@ export const PRODUCTS = [
     "name": "КГС22Н.125(200) Колектор в теплоізоляції 2+1 вниз",
     "slug": "kolektor-kgs22n-125-200",
     "sku": "84040232",
-    "price": "",
+    "price": "11971.75",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0586-scaled.jpg",
     "images": [
@@ -2898,7 +3000,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8845",
@@ -2906,7 +3009,7 @@ export const PRODUCTS = [
     "name": "КГС32Н.125(200) Колектор в теплоізоляції 3+1 вниз",
     "slug": "kolektor-kgs32n-125-200",
     "sku": "84040332",
-    "price": "",
+    "price": "13505.01",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0591-scaled.jpg",
     "images": [
@@ -2925,7 +3028,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8844",
@@ -2933,7 +3037,7 @@ export const PRODUCTS = [
     "name": "КГС42Н.125(200) Колектор в теплоізоляції 4+1 вниз",
     "slug": "kolektor-kgs42n-125-200",
     "sku": "84040432",
-    "price": "",
+    "price": "16819.32",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0599-scaled.jpg",
     "images": [
@@ -2952,7 +3056,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8840",
@@ -2960,7 +3065,7 @@ export const PRODUCTS = [
     "name": "КГС52Н.125(200) Колектор в теплоізоляції 5+1 вниз",
     "slug": "kolektor-kgs52n-125-200",
     "sku": "84040532",
-    "price": "",
+    "price": "20567.26",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0603-scaled.jpg",
     "images": [
@@ -2979,7 +3084,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8830",
@@ -2987,7 +3093,7 @@ export const PRODUCTS = [
     "name": "КГС22ВН.125(200) Колектор в теплоізоляції 2+1 вгору+вниз",
     "slug": "kolektor-kgs22vn-125-200",
     "sku": "84040182",
-    "price": "",
+    "price": "10608.86",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0575-scaled.jpg",
     "images": [
@@ -3006,7 +3112,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8829",
@@ -3014,7 +3121,7 @@ export const PRODUCTS = [
     "name": "КГС42ВН.125(200) Колектор в теплоізоляції 4+1 вгору+вниз",
     "slug": "kolektor-kgs42vn-125-200",
     "sku": "84040282",
-    "price": "",
+    "price": "13102.34",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0584-scaled.jpg",
     "images": [
@@ -3033,7 +3140,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8828",
@@ -3041,7 +3149,7 @@ export const PRODUCTS = [
     "name": "КГС62ВН.125(200) Колектор в теплоізоляції 6+1 вгору+вниз",
     "slug": "kolektor-kgs62vn-125-200",
     "sku": "84040382",
-    "price": "",
+    "price": "15859.1",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0588-scaled.jpg",
     "images": [
@@ -3060,7 +3168,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8824",
@@ -3068,7 +3177,7 @@ export const PRODUCTS = [
     "name": "КГС82ВН.125(200) Колектор в теплоізоляції 8+1 вгору+вниз",
     "slug": "kolektor-kgs82vn-125-200",
     "sku": "84040482",
-    "price": "",
+    "price": "19281.8",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0601-scaled.jpg",
     "images": [
@@ -3087,7 +3196,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_8790",
@@ -3095,7 +3205,7 @@ export const PRODUCTS = [
     "name": "К32В.125(240) Колектор в теплоізоляції 3+1 вгору",
     "slug": "kolektor-k32v-125-240",
     "sku": "84040352",
-    "price": "",
+    "price": "11662",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0578-scaled.jpg",
     "images": [
@@ -3114,7 +3224,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8789",
@@ -3122,7 +3233,7 @@ export const PRODUCTS = [
     "name": "К32В.150(300) Колектор в теплоізоляції 3+1 вгору",
     "slug": "kolektor-k32v-150-300",
     "sku": "84040353",
-    "price": "",
+    "price": "14898.88",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0578-scaled.jpg",
     "images": [
@@ -3140,7 +3251,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8788",
@@ -3148,7 +3260,7 @@ export const PRODUCTS = [
     "name": "К32В.125(200) Колектор в теплоізоляції 3+1 вгору",
     "slug": "kolektor-k32v-125-200",
     "sku": "84040312",
-    "price": "",
+    "price": "11104.46",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0578-scaled.jpg",
     "images": [
@@ -3167,7 +3279,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8787",
@@ -3175,7 +3288,7 @@ export const PRODUCTS = [
     "name": "К22В.150(300) Колектор в теплоізоляції 2+1 вгору",
     "slug": "kolektor-k22v-150-300",
     "sku": "84040253",
-    "price": "",
+    "price": "13009.41",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0583-scaled.jpg",
     "images": [
@@ -3194,7 +3307,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8786",
@@ -3202,7 +3316,7 @@ export const PRODUCTS = [
     "name": "К22В.125(200) Колектор в теплоізоляції 2+1 вгору",
     "slug": "kolektor-k22v-125-200",
     "sku": "84040212",
-    "price": "",
+    "price": "9106.59",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0583-scaled.jpg",
     "images": [
@@ -3221,7 +3335,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8785",
@@ -3229,7 +3344,7 @@ export const PRODUCTS = [
     "name": "К22В.125(240) Колектор в теплоізоляції 2+1 вгору",
     "slug": "kolektor-k22v-125-240",
     "sku": "84040252",
-    "price": "",
+    "price": "9664.14",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0583-scaled.jpg",
     "images": [
@@ -3248,7 +3363,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_8784",
@@ -3256,7 +3372,7 @@ export const PRODUCTS = [
     "name": "К42В.125(200) Колектор в теплоізоляції 4+1 вгору",
     "slug": "kolektor-k42v-125-200",
     "sku": "84040412",
-    "price": "",
+    "price": "12854.55",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0600-scaled.jpg",
     "images": [
@@ -3275,7 +3391,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8783",
@@ -3283,7 +3400,7 @@ export const PRODUCTS = [
     "name": "К42В.125(240) Колектор в теплоізоляції 4+1 вгору",
     "slug": "kolektor-k42v-125-240",
     "sku": "84040452",
-    "price": "",
+    "price": "13458.54",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0600-scaled.jpg",
     "images": [
@@ -3302,7 +3419,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8782",
@@ -3310,7 +3428,7 @@ export const PRODUCTS = [
     "name": "К42В.150(300) Колектор в теплоізоляції 4+1 вгору",
     "slug": "kolektor-k42v-150-300",
     "sku": "84040453",
-    "price": "",
+    "price": "16695.42",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0600-scaled.jpg",
     "images": [
@@ -3329,7 +3447,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_8781",
@@ -3337,7 +3456,7 @@ export const PRODUCTS = [
     "name": "К52В.125(200) Колектор в теплоізоляції 5+1 вгору",
     "slug": "kolektor-k52v-125-200",
     "sku": "84040512",
-    "price": "",
+    "price": "16710.9",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0602-scaled.jpg",
     "images": [
@@ -3356,7 +3475,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ¼ “",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8780",
@@ -3364,7 +3484,7 @@ export const PRODUCTS = [
     "name": "К52В.125(240) Колектор в теплоізоляції 5+1 вгору",
     "slug": "kolektor-k52v-125-240",
     "sku": "84040552",
-    "price": "",
+    "price": "17361.37",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0602-scaled.jpg",
     "images": [
@@ -3382,7 +3502,8 @@ export const PRODUCTS = [
       "Підключення котла": "1 ½”",
       "Підключення контура опалення": "1″"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8775",
@@ -3390,7 +3511,7 @@ export const PRODUCTS = [
     "name": "К52В.150(300) Колектор в теплоізоляції 5+1 вгору",
     "slug": "kolektor-k52v-150-300",
     "sku": "84040553",
-    "price": "",
+    "price": "18399.03",
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0602-scaled.jpg",
     "images": [
@@ -3409,7 +3530,8 @@ export const PRODUCTS = [
       "Підключення котла": "2″",
       "Підключення контура опалення": "1 ¼”"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8741",
@@ -3417,7 +3539,7 @@ export const PRODUCTS = [
     "name": "НГ-46 (26) Л Насосна група з термокраном  25 - 55*  1\" ВР в теплоізоляції без насоса",
     "slug": "ng-46-z-termokranom-1",
     "sku": "84300460",
-    "price": "",
+    "price": "11797.18",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0532-scaled.jpg",
     "images": [
@@ -3442,7 +3564,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8740",
@@ -3450,7 +3573,7 @@ export const PRODUCTS = [
     "name": "НГ-48 (28) Л  Насосна група зі змішувачем 1\" ВР  в теплоізоляції без насосу",
     "slug": "ng-48-zi-zmishuvachem-1",
     "sku": "84320480",
-    "price": "",
+    "price": "13231.17",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0558-scaled.jpg",
     "images": [
@@ -3475,7 +3598,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8739",
@@ -3483,7 +3607,7 @@ export const PRODUCTS = [
     "name": "НГ-47 (27) Л Насосна група без змішувача 1\" ВР  в теплоізоляції без насоса",
     "slug": "ng-47-bez-zmishuvacha-1",
     "sku": "84300470",
-    "price": "",
+    "price": "7137.19",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0533-scaled.jpg",
     "images": [
@@ -3508,7 +3632,8 @@ export const PRODUCTS = [
       "Об’єм": "0,32 л",
       "Об&#8217;єм": "0,32 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8738",
@@ -3516,7 +3641,7 @@ export const PRODUCTS = [
     "name": "НГ-52.150 Л Насосна група зі змішувачем 1 1/4\" ВР в теплоізоляції без насоса",
     "slug": "ng-52-zi-zmishuvachem-1-1-4",
     "sku": "84312520",
-    "price": "",
+    "price": "18840",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0530-scaled.jpg",
     "images": [
@@ -3542,7 +3667,8 @@ export const PRODUCTS = [
       "Об’єм": "1,1 л",
       "Об&#8217;єм": "1,1 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8737",
@@ -3550,7 +3676,7 @@ export const PRODUCTS = [
     "name": "НГ-67.150 .Бойлер  Насосна група без змішувача 1\" ВР в теплоізоляції без насоса",
     "slug": "ng-67150-dlya-pidklyuchennya-bojlera-1",
     "sku": "84131670",
-    "price": "",
+    "price": "7150",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/67-scaled.jpg",
     "images": [
@@ -3576,7 +3702,8 @@ export const PRODUCTS = [
       "Об’єм": "0,32 л",
       "Об&#8217;єм": "0,32 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8736",
@@ -3584,7 +3711,7 @@ export const PRODUCTS = [
     "name": "НГ-51.150-Л Насосна група без змішувача1 1/4\" ВР в теплоізоляції без насоса",
     "slug": "ng-51-bez-zmishuvacha-1-1-4",
     "sku": "84300510",
-    "price": "",
+    "price": "10617.57",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0657-scaled.jpg",
     "images": [
@@ -3610,7 +3737,8 @@ export const PRODUCTS = [
       "Об’єм": "0,9 л",
       "Об&#8217;єм": "0,9 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8734",
@@ -3618,7 +3746,7 @@ export const PRODUCTS = [
     "name": "НГ-47 (27) Насосна група без змішувача 1\" ВР  в теплоізоляції без насоса",
     "slug": "ng-47p-bez-zmishuvacha-1",
     "sku": "84600470",
-    "price": "",
+    "price": "7137.19",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0536-scaled.jpg",
     "images": [
@@ -3644,7 +3772,8 @@ export const PRODUCTS = [
       "Об’єм": "0,32 л",
       "Об&#8217;єм": "0,32 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8711",
@@ -3652,7 +3781,7 @@ export const PRODUCTS = [
     "name": "НГ-48 (28)  Насосна група зі змішувачем 1\" ВР  в теплоізоляції без насосу",
     "slug": "ng-48p-zi-zmishuvachem-1",
     "sku": "84620480",
-    "price": "",
+    "price": "13231.17",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0540-scaled.jpg",
     "images": [
@@ -3678,7 +3807,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8709",
@@ -3686,7 +3816,7 @@ export const PRODUCTS = [
     "name": "НГ-51.150 Насосна група без змішувача 1 1/4\" ВР в теплоізоляції без насоса",
     "slug": "ng-51p-bez-zmishuvacha-1-1-4",
     "sku": "84600510",
-    "price": "",
+    "price": "10617.57",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0658-scaled.jpg",
     "images": [
@@ -3713,7 +3843,8 @@ export const PRODUCTS = [
       "Об’єм": "0,9 л",
       "Об&#8217;єм": "0,9 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8708",
@@ -3721,7 +3852,7 @@ export const PRODUCTS = [
     "name": "НГ-52.150 Насосна група зі змішувачем 1 1/4\" ВР в теплоізоляції без насоса",
     "slug": "ng-52p-zi-zmishuvachem-1-1-4",
     "sku": "84612520",
-    "price": "",
+    "price": "18840",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0530-scaled.jpg",
     "images": [
@@ -3748,7 +3879,8 @@ export const PRODUCTS = [
       "Об’єм": "1,1 л",
       "Об&#8217;єм": "1,1 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8707",
@@ -3756,7 +3888,7 @@ export const PRODUCTS = [
     "name": "НГ-46 (26) Насосна група з термокраном 25 - 55*  1\" ВР в теплоізоляції без насоса",
     "slug": "ng-46p-z-termokranom-1",
     "sku": "84600460",
-    "price": "",
+    "price": "11797.18",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0528-scaled.jpg",
     "images": [
@@ -3782,7 +3914,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8703",
@@ -3790,7 +3923,7 @@ export const PRODUCTS = [
     "name": "НГ-67.200 .Бойлер  Насосна група без змішувача 1\" ВР в теплоізоляції без насоса",
     "slug": "ng-67200-dlya-pidklyuchennya-bojlera-1",
     "sku": "84130670",
-    "price": "",
+    "price": "7150",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/67-scaled.jpg",
     "images": [
@@ -3813,7 +3946,8 @@ export const PRODUCTS = [
       "Об’єм": "0,32 л",
       "Об&#8217;єм": "0,32 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8694",
@@ -3821,7 +3955,7 @@ export const PRODUCTS = [
     "name": "НГ-46 Л Насосна група з термокраном 25-55 С 1\" ВР  в EPP BLACK теплоізоляції без насоса",
     "slug": "ng-49-z-termokranom-1epp",
     "sku": "84324480A",
-    "price": "",
+    "price": "18889.5",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0539-scaled.jpg",
     "images": [
@@ -3844,7 +3978,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "wp_8693",
@@ -3852,7 +3987,7 @@ export const PRODUCTS = [
     "name": "НГ-48 Насосна група зі змішувачем 1\" ВР  в EPP BLACK теплоізоляції без насоса",
     "slug": "ng-48p-zi-zmishuvachem-1epp",
     "sku": "84622480",
-    "price": "",
+    "price": "13230",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0534-scaled.jpg",
     "images": [
@@ -3875,7 +4010,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8685",
@@ -3883,7 +4019,7 @@ export const PRODUCTS = [
     "name": "НГ-48 Л Насосна група зі змішувачем 1\" ВР  в EPP BLACK теплоізоляції без насоса",
     "slug": "ng-48-zi-zmishuvachem-1epp",
     "sku": "84324480",
-    "price": "",
+    "price": "13230",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0535-scaled.jpg",
     "images": [
@@ -3906,7 +4042,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8683",
@@ -3914,7 +4051,7 @@ export const PRODUCTS = [
     "name": "НГ-47 Л Насосна група без змішувача 1\" ВР  в EPP BLACK теплоізоляції без насоса",
     "slug": "ng-47-bez-zmishuvacha-1-epp",
     "sku": "84310470",
-    "price": "",
+    "price": "7150.5",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0531-scaled.jpg",
     "images": [
@@ -3937,7 +4074,8 @@ export const PRODUCTS = [
       "Об’єм": "0,32 л",
       "Об&#8217;єм": "0,32 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8679",
@@ -3945,7 +4083,7 @@ export const PRODUCTS = [
     "name": "НГ-46 Насосна група з термокраном 25-55 С 1\" ВР  в EPP BLACK теплоізоляції без насоса",
     "slug": "ng-49p-z-termokranom-1epp",
     "sku": "84610490",
-    "price": "",
+    "price": "11802",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0555-scaled.jpg",
     "images": [
@@ -3968,7 +4106,8 @@ export const PRODUCTS = [
       "Об’єм": "0,34 л",
       "Об&#8217;єм": "0,34 л"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "wp_8619",
@@ -3990,7 +4129,8 @@ export const PRODUCTS = [
       "Призначення": "підставка для зовнішнього блоку теплового насосу",
       "Монтаж": "настінний/підлоговий"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_84040TJ_W_02",
@@ -4013,7 +4153,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_03",
@@ -4036,7 +4177,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_04",
@@ -4059,7 +4201,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_05",
@@ -4082,7 +4225,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_06",
@@ -4105,7 +4249,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_07",
@@ -4128,7 +4273,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_08",
@@ -4151,7 +4297,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_09",
@@ -4174,7 +4321,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_10",
@@ -4197,7 +4345,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_11",
@@ -4220,7 +4369,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_12",
@@ -4243,7 +4393,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_13",
@@ -4251,7 +4402,7 @@ export const PRODUCTS = [
     "name": "Колектор Termojet з витратомірами на 13 виходів з нерж. сталі",
     "slug": "84040tj-w-13",
     "sku": "84040TJ-W-13",
-    "price": "316.0",
+    "price": "316",
     "price_uah": "",
     "categorySlug": "kolektory-pidloha",
     "image": "/images/TJ-W.jpg",
@@ -4266,7 +4417,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_14",
@@ -4274,7 +4426,7 @@ export const PRODUCTS = [
     "name": "Колектор Termojet з витратомірами на 14 виходів з нерж. сталі",
     "slug": "84040tj-w-14",
     "sku": "84040TJ-W-14",
-    "price": "351.0",
+    "price": "351",
     "price_uah": "",
     "categorySlug": "kolektory-pidloha",
     "image": "/images/TJ-W.jpg",
@@ -4289,7 +4441,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_W_15",
@@ -4297,7 +4450,7 @@ export const PRODUCTS = [
     "name": "Колектор Termojet з витратомірами на 15 виходів з нерж. сталі",
     "slug": "84040tj-w-15",
     "sku": "84040TJ-W-15",
-    "price": "386.0",
+    "price": "386",
     "price_uah": "",
     "categorySlug": "kolektory-pidloha",
     "image": "/images/TJ-W.jpg",
@@ -4312,7 +4465,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_02",
@@ -4335,7 +4489,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_03",
@@ -4358,7 +4513,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_04",
@@ -4381,7 +4537,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_05",
@@ -4404,7 +4561,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_06",
@@ -4427,7 +4585,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_07",
@@ -4450,7 +4609,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_08",
@@ -4473,7 +4633,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_09",
@@ -4496,7 +4657,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_10",
@@ -4519,7 +4681,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_11",
@@ -4542,7 +4705,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_R_W_12",
@@ -4565,7 +4729,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040TJ_EC_202",
@@ -4588,7 +4753,8 @@ export const PRODUCTS = [
       "Матеріал": "Латунь",
       "Різьба": "3/4\""
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_84040492",
@@ -4596,7 +4762,7 @@ export const PRODUCTS = [
     "name": "К41ВН.125(100) Колектор в теплоізоляції 3 вгору + 1 вниз (старий арт.СК-492.125) НОВОГО ЗРАЗКУ",
     "slug": "84040492",
     "sku": "84040492",
-    "price": "",
+    "price": "8390",
     "price_uah": "8390.0",
     "categorySlug": "kolektory-pidloha",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0593-scaled.jpg",
@@ -4615,7 +4781,8 @@ export const PRODUCTS = [
       "Ізоляція": "XPE",
       "Гарантія": "3 роки"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_84142380A",
@@ -4623,7 +4790,7 @@ export const PRODUCTS = [
     "name": "НГ-38-А (зі змішувачем)",
     "slug": "84142380a",
     "sku": "84142380A",
-    "price": "",
+    "price": "17467.8",
     "price_uah": "17467.8",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/48-500x764-1.png",
@@ -4638,7 +4805,8 @@ export const PRODUCTS = [
       "Макс. тиск": "10 бар",
       "Макс. температура": "110°C"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_84312520A",
@@ -4646,7 +4814,7 @@ export const PRODUCTS = [
     "name": "НГ-52A.150 Л Насосна група з приводом - контроллером A-413 1 1/4\" ВР в теплоізоляції без насоса",
     "slug": "84312520a",
     "sku": "84312520A",
-    "price": "",
+    "price": "23810",
     "price_uah": "23810.0",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0530-scaled.jpg",
@@ -4665,7 +4833,8 @@ export const PRODUCTS = [
       "Контролер": "A-413",
       "Ізоляція": "XPE"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_84320480A",
@@ -4673,7 +4842,7 @@ export const PRODUCTS = [
     "name": "НГ-48A (28) Л Насосна група з приводом - контроллером A-413 1\" ВР  в теплоізоляції без насосу",
     "slug": "84320480a",
     "sku": "84320480A",
-    "price": "",
+    "price": "18890",
     "price_uah": "18890.0",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0558-scaled.jpg",
@@ -4692,7 +4861,8 @@ export const PRODUCTS = [
       "Контролер": "A-413",
       "Ізоляція": "XPE"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_84612520A",
@@ -4700,7 +4870,7 @@ export const PRODUCTS = [
     "name": "НГ-52A.150 Насосна група з приводом - контроллером A-413 1 1/4\" ВР в теплоізоляції без насоса",
     "slug": "84612520a",
     "sku": "84612520A",
-    "price": "",
+    "price": "23810",
     "price_uah": "23810.0",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0530-scaled.jpg",
@@ -4719,7 +4889,8 @@ export const PRODUCTS = [
       "Контролер": "A-413",
       "Ізоляція": "XPE"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "UAH"
   },
   {
     "id": "new_84620480A",
@@ -4727,7 +4898,7 @@ export const PRODUCTS = [
     "name": "НГ-48A (28)  Насосна група з приводом - контроллером A-413 1\" ВР  в теплоізоляції без насосу",
     "slug": "84620480a",
     "sku": "84620480A",
-    "price": "",
+    "price": "18890",
     "price_uah": "18890.0",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0540-scaled.jpg",
@@ -4746,7 +4917,8 @@ export const PRODUCTS = [
       "Контролер": "A-413",
       "Ізоляція": "XPE"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_84622480A",
@@ -4754,7 +4926,7 @@ export const PRODUCTS = [
     "name": "НГ-48A Насосна група з приводом - контроллером A-413 1\" ВР  в EPP BLACK теплоізоляції без насоса",
     "slug": "84622480a",
     "sku": "84622480A",
-    "price": "",
+    "price": "18889.5",
     "price_uah": "18889.5",
     "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0534-scaled.jpg",
@@ -4773,7 +4945,8 @@ export const PRODUCTS = [
       "Контролер": "A-413",
       "Ізоляція": "EPP BLACK"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "UAH"
   },
   {
     "id": "new_38241225",
@@ -4781,7 +4954,7 @@ export const PRODUCTS = [
     "name": "Насос рециркуляційний Termojet AUTO енергозберігаючий HBS 24-12",
     "slug": "38241225",
     "sku": "38241225",
-    "price": "159.0",
+    "price": "159",
     "price_uah": "",
     "categorySlug": "nasosni-hrupy",
     "image": "",
@@ -4799,7 +4972,8 @@ export const PRODUCTS = [
       "Макс. струм": "2,5 А",
       "Термостат": "38°C (вбудований)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_33250618",
@@ -4818,7 +4992,8 @@ export const PRODUCTS = [
       "Сумісність": "Насоси серії APE TERMOJET",
       "Тип": "Кабель живлення з вилкою"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_42020170",
@@ -4826,7 +5001,7 @@ export const PRODUCTS = [
     "name": "TJ-CA-DN20 Сепаратор повітря DN20 (3/4'') 110*C/10bar Termojet",
     "slug": "42020170",
     "sku": "42020170",
-    "price": "78.0",
+    "price": "78",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1398.jpg",
@@ -4846,7 +5021,8 @@ export const PRODUCTS = [
       "Макс. тиск": "10 бар",
       "Вага": "1,3 кг"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_42025185",
@@ -4854,7 +5030,7 @@ export const PRODUCTS = [
     "name": "TJ-CA-DN25 Сепаратор повітря DN25 (1'') 110*C/10bar Termojet",
     "slug": "42025185",
     "sku": "42025185",
-    "price": "82.0",
+    "price": "82",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1394.jpg",
@@ -4874,7 +5050,8 @@ export const PRODUCTS = [
       "Макс. тиск": "10 бар",
       "Вага": "1,5 кг"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_42032200",
@@ -4882,7 +5059,7 @@ export const PRODUCTS = [
     "name": "TJ-CA-DN32 Сепаратор повітря DN32 (1 1/4'') 110*C/10bar Termojet",
     "slug": "42032200",
     "sku": "42032200",
-    "price": "90.0",
+    "price": "90",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1396.jpg",
@@ -4902,7 +5079,8 @@ export const PRODUCTS = [
       "Макс. тиск": "10 бар",
       "Вага": "1,7 кг"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "new_42040240",
@@ -4910,7 +5088,7 @@ export const PRODUCTS = [
     "name": "TJ-CA-DN40 Сепаратор повітря DN40 (1 1/2'') 110*C/10bar Termojet",
     "slug": "42040240",
     "sku": "42040240",
-    "price": "105.0",
+    "price": "105",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1397.jpg",
@@ -4930,7 +5108,8 @@ export const PRODUCTS = [
       "Макс. тиск": "10 бар",
       "Вага": "2,0 кг"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_43020145",
@@ -4938,7 +5117,7 @@ export const PRODUCTS = [
     "name": "TJ-CD-DN20 Сепаратор бруду DN20 (3/4'') 110*C/10bar Termojet",
     "slug": "43020145",
     "sku": "43020145",
-    "price": "68.0",
+    "price": "68",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1395.jpg",
@@ -4957,7 +5136,8 @@ export const PRODUCTS = [
       "Макс. тиск": "10 бар",
       "Вага": "1,1 кг"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_43025155",
@@ -4965,7 +5145,7 @@ export const PRODUCTS = [
     "name": "TJ-MAG Магніт для сепаратора бруду Termojet",
     "slug": "43025155",
     "sku": "43025155",
-    "price": "16.0",
+    "price": "16",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1395.jpg",
@@ -4979,7 +5159,8 @@ export const PRODUCTS = [
       "Тип": "Знімне магнітне кільце",
       "Призначення": "Уловлювання магнітних частинок"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_44032265",
@@ -4987,7 +5168,7 @@ export const PRODUCTS = [
     "name": "TJ-CAD-DN32 Сепаратор повітря і бруду DN32 (1 1/4'') 110*C/10bar Termojet",
     "slug": "44032265",
     "sku": "44032265",
-    "price": "130.0",
+    "price": "130",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1396.jpg",
@@ -5005,7 +5186,8 @@ export const PRODUCTS = [
       "Макс. температура": "110°C",
       "Макс. тиск": "10 бар"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_41015110",
@@ -5013,7 +5195,7 @@ export const PRODUCTS = [
     "name": "TJDN15-0.6-110 Автоматичний повітровідвідник Air Vent-DN15 (1/2'') 110*C/10bar Termojet",
     "slug": "41015110",
     "sku": "41015110",
-    "price": "44.0",
+    "price": "44",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1404.jpg",
@@ -5029,7 +5211,8 @@ export const PRODUCTS = [
       "PN": "0,9 МПа",
       "Вага": "0,5 кг"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_41020110",
@@ -5037,7 +5220,7 @@ export const PRODUCTS = [
     "name": "TJDN20-0.6-110 Автоматичний повітровідвідник Air Vent-DN20 (3/4'') 110*C/10bar Termojet",
     "slug": "41020110",
     "sku": "41020110",
-    "price": "47.0",
+    "price": "47",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1403.jpg",
@@ -5053,7 +5236,8 @@ export const PRODUCTS = [
       "PN": "0,9 МПа",
       "Вага": "0,5 кг"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "new_41025110",
@@ -5061,7 +5245,7 @@ export const PRODUCTS = [
     "name": "TJDN25-0.6-110 Автоматичний повітровідвідник Air Vent-DN25 (1'') 110*C/10bar Termojet",
     "slug": "41025110",
     "sku": "41025110",
-    "price": "48.0",
+    "price": "48",
     "price_uah": "",
     "categorySlug": "separatory",
     "image": "https://termojet.com.ua/wp-content/uploads/2024/06/img_1392.jpg",
@@ -5077,7 +5261,8 @@ export const PRODUCTS = [
       "PN": "0,9 МПа",
       "Вага": "0,5 кг"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "new_920018TJ",
@@ -5103,7 +5288,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP54",
       "Артикул": "920018TJ"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_AQUAO910_3_230_060",
@@ -5124,7 +5310,8 @@ export const PRODUCTS = [
       "Час спрацювання": "60 сек",
       "Артикул": "412N"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000200",
@@ -5149,7 +5336,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000201",
@@ -5174,7 +5362,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000202",
@@ -5199,7 +5388,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000203",
@@ -5224,7 +5414,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000204",
@@ -5249,7 +5440,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000205",
@@ -5274,7 +5466,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ000206",
@@ -5299,7 +5492,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Внутрішній (у стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002000",
@@ -5322,7 +5516,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002001",
@@ -5345,7 +5540,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002002",
@@ -5368,7 +5564,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002003",
@@ -5391,7 +5588,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": false,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002004",
@@ -5414,7 +5612,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002005",
@@ -5437,7 +5636,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ002006",
@@ -5460,7 +5660,8 @@ export const PRODUCTS = [
       "Матеріал": "Метал",
       "Монтаж": "Зовнішній (на стіну)"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ03CWRD",
@@ -5468,7 +5669,7 @@ export const PRODUCTS = [
     "name": "Центр комутації дротовий Termojet  (8 зон, 19 приводів)  TJ03CWRD",
     "slug": "tj03cwrd",
     "sku": "TJ03CWRD",
-    "price": "80.0",
+    "price": "80",
     "price_uah": "",
     "categorySlug": "zonalne-keruvannya",
     "image": "/images/avtomatyka/TJ03CWRD.png",
@@ -5485,7 +5686,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP20",
       "Артикул": "TJ03CWRD"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TJ03RFWS",
@@ -5493,7 +5695,7 @@ export const PRODUCTS = [
     "name": "Центр комутації бездротовийTermojet  (8 зон,16 приводів)  TJ03RFWS",
     "slug": "tj03rfws",
     "sku": "TJ03RFWS",
-    "price": "154.0",
+    "price": "154",
     "price_uah": "",
     "categorySlug": "zonalne-keruvannya",
     "image": "/images/avtomatyka/TJ03RFWS.png",
@@ -5510,7 +5712,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP20",
       "Артикул": "TJ03RFWS"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_EGW100WF",
@@ -5518,7 +5721,7 @@ export const PRODUCTS = [
     "name": "Хаб інтернет-шлюз Termojet EGW100WF",
     "slug": "egw100wf",
     "sku": "EGW100WF",
-    "price": "74.0",
+    "price": "74",
     "price_uah": "",
     "categorySlug": "zonalne-keruvannya",
     "image": "/images/avtomatyka/EGW100WF.png",
@@ -5534,7 +5737,8 @@ export const PRODUCTS = [
       "Голосове керування": "Google Assistant / Amazon Alexa",
       "Артикул": "EGW100WF"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_HT102WRD",
@@ -5557,7 +5761,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP30",
       "Артикул": "HT102WRD"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_HT120BLK",
@@ -5582,7 +5787,8 @@ export const PRODUCTS = [
       "Датчик": "Вбудований + зовнішній NTC 10K, 2 м",
       "Артикул": "HT120BLK"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_HT120WHT",
@@ -5607,7 +5813,8 @@ export const PRODUCTS = [
       "Датчик": "Вбудований + зовнішній NTC 10K, 2 м",
       "Артикул": "HT120WHT"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_HT130BLK",
@@ -5632,7 +5839,8 @@ export const PRODUCTS = [
       "Датчик": "Вбудований + зовнішній NTC 10K, 2 м",
       "Артикул": "HT130BLK"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_HT130WHT",
@@ -5657,7 +5865,8 @@ export const PRODUCTS = [
       "Датчик": "Вбудований + зовнішній NTC 10K, 2 м",
       "Артикул": "HT130WHT"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_WT102WIF",
@@ -5681,7 +5890,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP30",
       "Артикул": "WT102WIF"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_WT150BLK",
@@ -5689,7 +5899,7 @@ export const PRODUCTS = [
     "name": "Бездротовий  програматор WT-150 Termojet WT150BLK (чорний)",
     "slug": "wt150blk",
     "sku": "WT150BLK",
-    "price": "75.0",
+    "price": "75",
     "price_uah": "",
     "categorySlug": "zonalne-keruvannya",
     "image": "/images/avtomatyka/WT150BLK.png",
@@ -5705,7 +5915,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP30",
       "Артикул": "WT150BLK"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_WT150WHT",
@@ -5713,7 +5924,7 @@ export const PRODUCTS = [
     "name": "Бездротовий  програматор WT-150 Termojet WT150WHT (білий)",
     "slug": "wt150wht",
     "sku": "WT150WHT",
-    "price": "75.0",
+    "price": "75",
     "price_uah": "",
     "categorySlug": "zonalne-keruvannya",
     "image": "/images/avtomatyka/WT150WHT.png",
@@ -5729,7 +5940,8 @@ export const PRODUCTS = [
       "Клас захисту": "IP30",
       "Артикул": "WT150WHT"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_NTC10KSN",
@@ -5751,7 +5963,8 @@ export const PRODUCTS = [
       "Призначення": "Контроль температури підлоги",
       "Артикул": "NTC10KSN"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_TRH10WIF",
@@ -5774,7 +5987,8 @@ export const PRODUCTS = [
       "Застосунок": "Tuya Smart / Smart Life",
       "Артикул": "TRH10WIF"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_RO6WIFIR",
@@ -5799,7 +6013,8 @@ export const PRODUCTS = [
       "Монтаж": "Накладний",
       "Артикул": "R06WIFIR"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_WT400A",
@@ -5825,7 +6040,8 @@ export const PRODUCTS = [
       "Вертикальна подача": "8 м",
       "Клас захисту": "IPX4"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_WT400B",
@@ -5851,7 +6067,8 @@ export const PRODUCTS = [
       "Вертикальна подача": "8 м",
       "Клас захисту": "IPX4"
     },
-    "inStock": true
+    "inStock": true,
+    "currency": "EUR"
   },
   {
     "id": "new_WT400C",
@@ -5877,6 +6094,367 @@ export const PRODUCTS = [
       "Вертикальна подача": "8 м",
       "Клас захисту": "IPX4"
     },
+    "inStock": true,
+    "currency": "EUR"
+  },
+  {
+    "id": "excel_84040181",
+    "name": "КГС22ВН.125(150) Колектор в теплоізоляції 1 вгору- вниз + 1 боковий (старий арт.СК-181.125) Mini",
+    "slug": "khs22vn-125150-kolektor-v-teploizolyatsiyi-1-vhoru-vnyz-1-bokovyy-staryy-art-sk-",
+    "sku": "84040181",
+    "price": "9695.11",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": false
+  },
+  {
+    "id": "excel_84040211",
+    "name": "К22В.125(150) Колектор в теплоізоляції 2 + 1 вгору (старий арт.СК-211.125) Mini",
+    "slug": "k22v-125150-kolektor-v-teploizolyatsiyi-2-1-vhoru-staryy-art-sk-211-125-mini",
+    "sku": "84040211",
+    "price": "8146.38",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": false
+  },
+  {
+    "id": "excel_84040221",
+    "name": "КГС22В.125(150) Колектор  в теплоізоляції 2 вгору + 1 боковий (старий арт.СК-221.125) Mini",
+    "slug": "khs22v-125150-kolektor-v-teploizolyatsiyi-2-vhoru-1-bokovyy-staryy-art-sk-221-12",
+    "sku": "84040221",
+    "price": "10438.51",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040231",
+    "name": "КГС22Н.125(150) Колектор в теплоізоляції 2 вниз + 1 боковий (старий арт.СК-231.125) Mini",
+    "slug": "khs22n-125150-kolektor-v-teploizolyatsiyi-2-vnyz-1-bokovyy-staryy-art-sk-231-125",
+    "sku": "84040231",
+    "price": "10438.51",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040281",
+    "name": "КГС42ВН.125(150) Колектор в теплоізоляції 4+1 вгору + вниз  (старий арт.СК-281.125) Mini",
+    "slug": "khs42vn-125150-kolektor-v-teploizolyatsiyi-4-1-vhoru-vnyz-staryy-art-sk-281-125-",
+    "sku": "84040281",
+    "price": "13200",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040291",
+    "name": "К21В.125(80) Колектор в теплоізоляції 2  вгору (старий арт.СК-291.125) Міні",
+    "slug": "k21v-12580-kolektor-v-teploizolyatsiyi-2-vhoru-staryy-art-sk-291-125-mini",
+    "sku": "84040291",
+    "price": "6370",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": false
+  },
+  {
+    "id": "excel_84040311",
+    "name": "К32В.125(150) Колектор в теплоізоляції 3 + 1 вгору (старий арт.СК-311.125) Mini",
+    "slug": "k32v-125150-kolektor-v-teploizolyatsiyi-3-1-vhoru-staryy-art-sk-311-125-mini",
+    "sku": "84040311",
+    "price": "10483",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040321",
+    "name": "КГС32В.125(150) Колектор  в теплоізоляції 3 вгору + 1 боковий (старий арт.СК-321.125) Mini",
+    "slug": "khs32v-125150-kolektor-v-teploizolyatsiyi-3-vhoru-1-bokovyy-staryy-art-sk-321-12",
+    "sku": "84040321",
+    "price": "12823.56",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040331",
+    "name": "КГС32Н.125(150) Колектор в теплоізоляції 3 вниз + 1 боковий (старий арт.СК-331.125) Mini",
+    "slug": "khs32n-125150-kolektor-v-teploizolyatsiyi-3-vnyz-1-bokovyy-staryy-art-sk-331-125",
+    "sku": "84040331",
+    "price": "12823.56",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040391",
+    "name": "К31В.125(80) Колектор в теплоізоляції 2  вгору + 1 вниз (старий арт.СК-391.125) Міні",
+    "slug": "k31v-12580-kolektor-v-teploizolyatsiyi-2-vhoru-1-vnyz-staryy-art-sk-391-125-mini",
+    "sku": "84040391",
+    "price": "6860",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040393",
+    "name": "КГС31ВН.125 Колектор в теплоізоляції 2 вгору + 1 вниз (старий арт.СК-393.125)",
+    "slug": "khs31vn-125-kolektor-v-teploizolyatsiyi-2-vhoru-1-vnyz-staryy-art-sk-393-125",
+    "sku": "84040393",
+    "price": "11140",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040491",
+    "name": "К41В.125(80) Колектор в теплоізоляції 3  вгору + 1 вниз (старий арт.СК-491.125) Міні",
+    "slug": "k41v-12580-kolektor-v-teploizolyatsiyi-3-vhoru-1-vnyz-staryy-art-sk-491-125-mini",
+    "sku": "84040491",
+    "price": "7380",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": false
+  },
+  {
+    "id": "excel_84040591",
+    "name": "К51В.125(80) Колектор в теплоізоляції 3  вгору + 2 вниз (старий арт.СК-591.125) Міні",
+    "slug": "k51v-12580-kolektor-v-teploizolyatsiyi-3-vhoru-2-vnyz-staryy-art-sk-591-125-mini",
+    "sku": "84040591",
+    "price": "7940",
+    "currency": "UAH",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040BOX2",
+    "name": "Модуль Termojet BOX2  в теплоізоляції (КМ2) UPS",
+    "slug": "modul-termojet-box2-v-teploizolyatsiyi-km2-ups",
+    "sku": "84040BOX2",
+    "price": "7945.04",
+    "currency": "UAH",
+    "categorySlug": "termojet-box",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84040BOX3",
+    "name": "Модуль Termojet BOX3  в теплоізоляції (КМ3) UPS",
+    "slug": "modul-termojet-box3-v-teploizolyatsiyi-km3-ups",
+    "sku": "84040BOX3",
+    "price": "10376.56",
+    "currency": "UAH",
+    "categorySlug": "termojet-box",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84030082",
+    "name": "НГ-82.250 Л Насосна група зі змішувачем 2 1/2\" ВР в теплоізоляції без насоса",
+    "slug": "nh-82-250-l-nasosna-hrupa-zi-zmishuvachem-2-1-2-vr-v-teploizolyatsiyi-bez-nasosa",
+    "sku": "84030082",
+    "price": "58381.3",
+    "currency": "UAH",
+    "categorySlug": "nasosni-hrupy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": false
+  },
+  {
+    "id": "excel_84130370",
+    "name": "НГ-37 (пряма)",
+    "slug": "nh-37-pryama",
+    "sku": "84130370",
+    "price": "5540",
+    "currency": "UAH",
+    "categorySlug": "nasosni-hrupy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84130390",
+    "name": "НГ-36 (з термостатичним краном)",
+    "slug": "nh-36-z-termostatychnym-kranom",
+    "sku": "84130390",
+    "price": "10470",
+    "currency": "UAH",
+    "categorySlug": "nasosni-hrupy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84142380",
+    "name": "НГ-38 (зі змішувачем)",
+    "slug": "nh-38-zi-zmishuvachem",
+    "sku": "84142380",
+    "price": "12380",
+    "currency": "UAH",
+    "categorySlug": "nasosni-hrupy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84310490",
+    "name": "НГ-46 Л Насосна група з термокраном 25-55 С 1\" ВР  в EPP BLACK теплоізоляції без насоса",
+    "slug": "nh-46-l-nasosna-hrupa-z-termokranom-25-55-s-1-vr-v-epp-black-teploizolyatsiyi-be",
+    "sku": "84310490",
+    "price": "11802",
+    "currency": "UAH",
+    "categorySlug": "nasosni-hrupy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_84610470",
+    "name": "НГ-47  Насосна група без змішувача 1\" ВР  в EPP BLACK теплоізоляції без насоса",
+    "slug": "nh-47-nasosna-hrupa-bez-zmishuvacha-1-vr-v-epp-black-teploizolyatsiyi-bez-nasosa",
+    "sku": "84610470",
+    "price": "7150.5",
+    "currency": "UAH",
+    "categorySlug": "nasosni-hrupy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_30250818",
+    "name": "Насос циркуляційний Termojet AUTO енергозберігаючий APM 25/8/180 мм",
+    "slug": "nasos-tsyrkulyatsiynyy-termojet-auto-enerhozberihayuchyy-apm-25-8-180-mm",
+    "sku": "30250818",
+    "price": "204",
+    "currency": "EUR",
+    "categorySlug": "nasosy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_30400822",
+    "name": "Насос циркуляційний Termojet AUTO енергозберігаючий APM 40/8F/220 мм",
+    "slug": "nasos-tsyrkulyatsiynyy-termojet-auto-enerhozberihayuchyy-apm-40-8f-220-mm",
+    "sku": "30400822",
+    "price": "462.85",
+    "currency": "EUR",
+    "categorySlug": "nasosy",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
+    "inStock": true
+  },
+  {
+    "id": "excel_47025230",
+    "name": "ABF-ZV3-100 3-ходовий зональний клапан 1\" з приводом, 230V ac, 8s/60*, 5NM",
+    "slug": "abf-zv3-100-3-khodovyy-zonalnyy-klapan-1-z-pryvodom-230v-ac-8s-60-5nm",
+    "sku": "47025230",
+    "price": "106",
+    "currency": "EUR",
+    "categorySlug": "zonalne-keruvannya",
+    "image": "",
+    "images": [],
+    "shortDesc": "",
+    "description": "",
+    "specs": {},
     "inStock": true
   }
 ]
