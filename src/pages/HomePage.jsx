@@ -438,10 +438,10 @@ export default function HomePage() {
               <motion.h1 variants={fadeUp}
                 className="font-black leading-[0.92] font-['Archivo',sans-serif] mb-6"
                 style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
-                Котельня,<br />
-                зібрана за{' '}
-                <span className="text-gradient-orange">години</span>,<br />
-                <span className="text-outline-white">а не за тижні.</span>
+                Виробник систем<br />
+                швидкого монтажу{' '}
+                <span className="text-gradient-orange">#1</span><br />
+                <span className="text-outline-white">в Україні.</span>
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8">
