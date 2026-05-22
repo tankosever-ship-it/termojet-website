@@ -7,9 +7,10 @@ import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import SEO from '../components/SEO'
+import { toUAH } from '../utils/currency'
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateCartQuantity, cartTotal, placeOrder } = useApp()
+  const { cart, removeFromCart, updateCartQuantity, cartTotal, placeOrder, eurRate } = useApp()
   const t = useT()
   const cartT = t('cart')
   const common = t('common')
@@ -73,7 +74,7 @@ export default function CartPage() {
                       </button>
                     </div>
                     <span className="font-bold text-gray-900">
-                      {((item.price || 0) * item.quantity).toLocaleString()} {common.uah}
+                      {Math.round((toUAH(item.price, item.currency, eurRate) || 0) * item.quantity).toLocaleString('uk-UA')} {common.uah}
                     </span>
                   </div>
                 </div>

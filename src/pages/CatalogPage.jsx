@@ -7,6 +7,7 @@ import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
+import { formatPrice, toUAH } from '../utils/currency'
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
 const stagger = { show: { transition: { staggerChildren: 0.04 } } }
@@ -276,7 +277,7 @@ function extractBadges(product) {
 export default function CatalogPage() {
   const { categorySlug } = useParams()
   const [searchParams] = useSearchParams()
-  const { products, lang, addToCart } = useApp()
+  const { products, lang, addToCart, eurRate } = useApp()
   const t = useT()
   const cat = t('catalog')
 
@@ -315,8 +316,9 @@ export default function CatalogPage() {
       })
     }
 
-    if (sort === 'priceAsc')  list = [...list].sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0))
-    if (sort === 'priceDesc') list = [...list].sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0))
+    const priceInUah = p => toUAH(p.price, p.currency, eurRate) || 0
+    if (sort === 'priceAsc')  list = [...list].sort((a, b) => priceInUah(a) - priceInUah(b))
+    if (sort === 'priceDesc') list = [...list].sort((a, b) => priceInUah(b) - priceInUah(a))
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
     return list
   }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang])
@@ -446,7 +448,6 @@ export default function CatalogPage() {
             className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
             {filtered.map(product => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-              const price = parseFloat(product.price)
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               const badges = extractBadges(product)
 
@@ -502,9 +503,9 @@ export default function CatalogPage() {
                         </div>
                       )}
 
-                      {price > 0 && (
+                      {product.price > 0 && (
                         <div className="text-sm font-bold text-[var(--primary)] mb-2">
-                          {price.toLocaleString('uk-UA')} ₴
+                          {formatPrice(product.price, product.currency, eurRate)}
                         </div>
                       )}
 

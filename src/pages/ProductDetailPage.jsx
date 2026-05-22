@@ -7,6 +7,7 @@ import { imgUrl } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
 import { trackViewItem, trackAddToCart } from '../utils/analytics'
+import { formatPrice, toUAH } from '../utils/currency'
 
 function ImageGallery({ images, name }) {
   const [active, setActive] = useState(0)
@@ -66,7 +67,7 @@ function ImageGallery({ images, name }) {
 
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams()
-  const { products, lang, addToCart, siteSettings } = useApp()
+  const { products, lang, addToCart, siteSettings, eurRate } = useApp()
   const t = useT()
   const pt = t('product')
   const cat = t('catalog')
@@ -223,7 +224,7 @@ export default function ProductDetailPage() {
             <div className="mb-6">
               {product.price ? (
                 <div className="text-3xl font-black text-gray-900">
-                  {(product.price * qty).toLocaleString()} <span className="text-lg text-gray-500">{common.uah}</span>
+                  {Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty).toLocaleString('uk-UA')} <span className="text-lg text-gray-500">{common.uah}</span>
                 </div>
               ) : (
                 <div className="text-lg text-gray-500">Ціна по запиту</div>
@@ -387,7 +388,7 @@ export default function ProductDetailPage() {
                     )}
                     <h3 className="text-xs font-medium text-gray-900 line-clamp-2">{pName}</h3>
                     {p.price && (
-                      <span className="text-sm font-bold text-gray-900 mt-1">{Number(p.price).toLocaleString()} {common.uah}</span>
+                      <span className="text-sm font-bold text-gray-900 mt-1">{formatPrice(p.price, p.currency, eurRate)}</span>
                     )}
                   </Link>
                 )
