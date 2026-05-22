@@ -7,6 +7,7 @@ import { imgUrl } from '../../utils/imgUrl'
 import { LANGS } from '../../i18n/translations'
 import { CATEGORIES } from '../../data/categories'
 import { assetPath } from '../../utils/assetPath'
+import CategoryIcon from '../CategoryIcon'
 
 // ─── Mega-menu каталог (full-width) ───
 function MegaMenu({ lang, products, onClose }) {
@@ -37,7 +38,7 @@ function MegaMenu({ lang, products, onClose }) {
                 style={{ color: i === activeCatIdx ? 'white' : 'rgba(255,255,255,0.55)', background: i === activeCatIdx ? 'rgba(255,85,0,0.12)' : 'transparent', borderLeftColor: i === activeCatIdx ? 'var(--accent)' : 'transparent' }}
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-base flex-shrink-0">{cat.icon}</span>
+                  <span className="flex-shrink-0 opacity-70"><CategoryIcon name={cat.icon} size={15} /></span>
                   <span style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '13px', fontWeight: 500, lineHeight: 1.3 }}>
                     {cat.name[lang] || cat.name.uk}
                   </span>
@@ -74,7 +75,7 @@ function MegaMenu({ lang, products, onClose }) {
                         style={{ borderRadius: 0 }}>
                         {p.image
                           ? <img src={imgUrl(p.image)} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
-                          : <span className="flex items-center justify-center w-full h-full text-3xl">{activeCat.icon}</span>}
+                          : <span className="flex items-center justify-center w-full h-full text-gray-200"><CategoryIcon name={activeCat.icon} size={40} /></span>}
                       </div>
                       <div>
                         <div className="text-xs font-medium text-gray-800 line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors"

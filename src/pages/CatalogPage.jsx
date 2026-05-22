@@ -8,6 +8,7 @@ import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
 import { formatPrice, toUAH } from '../utils/currency'
+import CategoryIcon from '../components/CategoryIcon'
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
 const stagger = { show: { transition: { staggerChildren: 0.04 } } }
@@ -395,7 +396,7 @@ export default function CatalogPage() {
                 color: currentCategory?.id === c.id ? 'white' : 'var(--text-secondary)',
                 border: currentCategory?.id === c.id ? '1px solid var(--accent)' : '1px solid var(--border)',
               }}>
-              {c.icon} {c.name[lang] || c.name.uk}
+              <CategoryIcon name={c.icon} size={13} className="flex-shrink-0" /> {c.name[lang] || c.name.uk}
               <span style={{ opacity: 0.6, fontSize: '10px' }}>({c.count})</span>
             </Link>
           ))}
