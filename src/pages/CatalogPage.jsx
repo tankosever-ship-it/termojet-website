@@ -371,19 +371,29 @@ export default function CatalogPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* ── Category pills — завжди зверху ── */}
-        <div className="flex flex-wrap gap-2 mb-5">
+        {/* ── Category nav ── */}
+        <div className="mb-5">
+          {/* "Всі категорії" — окремий рядок */}
           <Link to="/catalog"
-            className="flex items-center gap-2 px-3 py-1.5 transition-all"
+            className="flex items-center justify-between w-full px-4 py-2.5 mb-3 transition-all group"
             style={{
               fontFamily: "'IBM Plex Sans', sans-serif",
-              fontSize: '13px', fontWeight: 500,
-              background: !currentCategory ? 'var(--accent)' : 'transparent',
-              color: !currentCategory ? 'white' : 'var(--text-secondary)',
-              border: !currentCategory ? '1px solid var(--accent)' : '1px solid var(--border)',
+              fontSize: '14px', fontWeight: 600,
+              background: !currentCategory ? 'var(--accent)' : 'var(--primary)',
+              color: 'white',
+              border: 'none',
             }}>
-            Всі категорії
+            <span className="flex items-center gap-2.5">
+              <CategoryIcon name="LayoutGrid" size={15} className="opacity-80" />
+              Всі категорії
+            </span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', opacity: 0.6 }}>
+              {products.length}
+            </span>
           </Link>
+
+          {/* Категорії */}
+          <div className="flex flex-wrap gap-2">
           {CATEGORIES.map(c => {
             const isActive = currentCategory?.id === c.id
             return (
@@ -408,6 +418,7 @@ export default function CatalogPage() {
               </Link>
             )
           })}
+          </div>
         </div>
 
         {/* ── Основний контент: сайдбар + товари ── */}
