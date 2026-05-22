@@ -23,7 +23,7 @@ export async function fetchEurRate() {
   } catch {
     // fallback if NBU unreachable
   }
-  return _cached.rate || 45 * MARKUP // safe fallback
+  return _cached.rate || 51 * MARKUP // fallback if NBU unreachable
 }
 
 // Convert price to UAH. Returns number.
