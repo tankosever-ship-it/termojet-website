@@ -411,10 +411,10 @@ export default function HomePage() {
             style={{
               position: 'absolute',
               top: '50%', left: '50%',
-              transform: 'translate(-50%, -50%) scale(1.4)',
+              transform: 'translate(-50%, -50%)',
               width: '100vw',
               height: '56.25vw',
-              minHeight: '120vh',
+              minHeight: '100vh',
               minWidth: '177.78vh',
               border: 'none',
               pointerEvents: 'none',
