@@ -30,9 +30,9 @@ const CONFIG_STEPS = [
 ]
 
 const STATS = [
-  { ord: '01', num: '20', suffix: ' років', label: 'На ринку котельного обладнання' },
-  { ord: '02', num: '15', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
-  { ord: '03', num: '50 000', suffix: '', label: 'Укомплектованих котелень за 22 роки' },
+  { ord: '01', num: '23', suffix: ' роки', label: 'На ринку котельного обладнання' },
+  { ord: '02', num: '16', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
+  { ord: '03', num: '50 000', suffix: '', label: 'Проектів укомплектовано за 23 роки' },
   { ord: '04', num: '70 000', suffix: '', label: 'Виробів на рік на власному заводі' },
 ]
 
@@ -49,7 +49,7 @@ function CategoryCard({ cat, lang }) {
       onMouseLeave={() => setHovered(false)}>
 
       {/* Фото */}
-      <div className="relative overflow-hidden" style={{ height: 160, background: '#141414' }}>
+      <div className="relative overflow-hidden" style={{ height: 160, background: '#f0f0ef' }}>
         {imgSrc ? (
           <img src={imgSrc} alt={cat.name[lang] || cat.name.uk}
             className="w-full h-full object-contain transition-transform duration-500"
@@ -57,23 +57,21 @@ function CategoryCard({ cat, lang }) {
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl opacity-30">{cat.icon}</div>
         )}
-        <div className="absolute inset-0 transition-colors duration-300"
-          style={{ background: hovered ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.25)' }} />
 
         <div className="absolute top-2.5 left-2.5">
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.35)', background: 'rgba(0,0,0,0.5)', padding: '3px 7px' }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#666', background: 'rgba(255,255,255,0.8)', padding: '3px 7px' }}>
             {cat.count} SKU
           </span>
         </div>
         <div className="absolute top-2.5 right-2.5 w-7 h-7 flex items-center justify-center transition-colors duration-200"
-          style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(0,0,0,0.4)' }}>
-          <ArrowRight size={12} style={{ color: hovered ? 'var(--accent)' : 'rgba(255,255,255,0.35)', transition: 'color 0.2s' }} />
+          style={{ border: '1px solid rgba(0,0,0,0.1)', background: 'rgba(255,255,255,0.7)' }}>
+          <ArrowRight size={12} style={{ color: hovered ? 'var(--accent)' : '#999', transition: 'color 0.2s' }} />
         </div>
       </div>
 
       {/* Текст */}
-      <div className="p-4">
-        <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: '14px', color: hovered ? '#fff' : 'rgba(255,255,255,0.85)', lineHeight: 1.25, marginBottom: 10, transition: 'color 0.2s' }}>
+      <div className="p-4" style={{ background: '#f7f7f6' }}>
+        <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: '14px', color: hovered ? 'var(--accent)' : '#1a1a1a', lineHeight: 1.25, marginBottom: 10, transition: 'color 0.2s' }}>
           {cat.name[lang] || cat.name.uk}
         </h3>
 
@@ -82,7 +80,7 @@ function CategoryCard({ cat, lang }) {
           <div className="flex flex-col gap-1.5 pb-1">
             {(cat.subcategories || []).map((sub, i) => (
               <span key={i} className="flex items-center gap-1.5"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.04em' }}>
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#777', letterSpacing: '0.04em' }}>
                 <span style={{ color: 'var(--accent)', fontSize: '8px' }}>▸</span>
                 {sub}
               </span>
@@ -90,11 +88,11 @@ function CategoryCard({ cat, lang }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+        <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid #e0e0e0' }}>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)', opacity: hovered ? 1 : 0, transition: 'opacity 0.2s' }}>
             Переглянути →
           </span>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.06em' }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: '#aaa', letterSpacing: '0.06em' }}>
             {cat.count} товарів
           </span>
         </div>
@@ -435,7 +433,7 @@ export default function HomePage() {
 
         {/* Контент — зліва по центру */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 flex items-center" style={{ minHeight: '100vh' }}>
-          <div className="max-w-2xl py-32">
+          <div className="max-w-2xl pt-20 pb-12">
             <motion.div initial="hidden" animate="show" variants={stagger}>
 
               <motion.div variants={fadeUp}
@@ -447,7 +445,7 @@ export default function HomePage() {
 
               <motion.h1 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] mb-8"
-                style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', lineHeight: 0.95, letterSpacing: '-0.02em' }}>
+                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
                 Виробник систем<br />
                 швидкого монтажу{' '}
                 <span className="text-[var(--accent)]">#1</span><br />
