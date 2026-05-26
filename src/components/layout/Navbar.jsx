@@ -209,8 +209,7 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
 
-  // nav link стиль — JetBrains Mono
-  const navLinkStyle = { fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }
+  const navLinkStyle = { fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '13px', fontWeight: 600, letterSpacing: '0.03em' }
 
   const aboutItems = [
     { to: '/about',     label: 'Про нас' },

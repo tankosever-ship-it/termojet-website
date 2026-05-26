@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { ArrowRight, ArrowUpRight, Play, X, Check, Smartphone } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Check, Smartphone } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -21,7 +21,6 @@ const PROD_PHOTOS = [
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-47.jpg', label: '● Склад відвантаження' },
 ]
 
-const MARQUEE_ITEMS = ['ЕФЕКТИВНО', 'З ТЕПЛОІЗОЛЯЦІЄЮ', 'ВЛАСНЕ ВИРОБНИЦТВО', 'ШВИДКО', 'НАДІЙНО', 'MADE IN UKRAINE', 'З 2002 РОКУ', 'КИЇВ']
 
 const CONFIG_STEPS = [
   { n: '01', title: 'Вибір потужності',  desc: 'Від 30 кВт до 2 МВт — система сама запропонує серію.' },
@@ -352,17 +351,9 @@ export default function HomePage() {
   const cats = t('categories')
   const seo  = t('seo')
 
-  const [videoOpen, setVideoOpen] = useState(false)
   const [statsVisible, setStatsVisible] = useState(false)
   const [hoveredAdvantage, setHoveredAdvantage] = useState(null)
   const statsRef = useRef(null)
-
-  useEffect(() => {
-    if (!videoOpen) return
-    const fn = (e) => { if (e.key === 'Escape') setVideoOpen(false) }
-    window.addEventListener('keydown', fn)
-    return () => window.removeEventListener('keydown', fn)
-  }, [videoOpen])
 
   useEffect(() => {
     const el = statsRef.current
@@ -382,97 +373,81 @@ export default function HomePage() {
     <>
       <SEO title={null} description={seo.homeDesc} />
 
-      {/* ─── VIDEO MODAL ─── */}
-      {videoOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
-          <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
-            <iframe className="w-full h-full rounded-2xl shadow-2xl"
-              src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&rel=0&modestbranding=1`}
-              title="Termojet виробництво"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen />
-            <button onClick={() => setVideoOpen(false)}
-              className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-              <X size={18} />
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* ═══════════════════════════════════════════
-          HERO — відео фон + центрований текст
+          HERO — YouTube відеофон · іммерсивний
       ═══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden text-white" style={{ minHeight: '90vh' }}>
+      <section className="relative overflow-hidden text-white" style={{ minHeight: '100vh' }}>
 
-        {/* Відео фон з blur */}
-        <video
-          autoPlay muted loop playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'blur(3px) brightness(0.35)', transform: 'scale(1.05)' }}>
-          <source src={MP4_URL} type="video/mp4" />
-        </video>
+        {/* YouTube iframe — повний фон без звуку */}
+        <div className="absolute inset-0 pointer-events-none" style={{ overflow: 'hidden' }}>
+          <iframe
+            src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3`}
+            title="Termojet background"
+            allow="autoplay; encrypted-media"
+            style={{
+              position: 'absolute',
+              top: '50%', left: '50%',
+              transform: 'translate(-50%, -50%) scale(1.15)',
+              width: '100vw',
+              height: '56.25vw',
+              minHeight: '100vh',
+              minWidth: '177.78vh',
+              border: 'none',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
 
-        {/* Dark overlay для читабельності */}
+        {/* Overlay: градієнт зліва для читабельності + загальне затемнення */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'rgba(0,0,0,0.55)' }} />
-
-        {/* Orange glow знизу по центру */}
-        <div className="absolute pointer-events-none"
-          style={{ width: 800, height: 400, borderRadius: '50%', bottom: '-100px', left: '50%', transform: 'translateX(-50%)',
-            background: 'radial-gradient(ellipse, rgba(255,85,0,0.20) 0%, transparent 70%)',
-            filter: 'blur(40px)' }} />
+          style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%)' }} />
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)' }} />
 
         {/* Оранжева лінія зверху */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--accent)] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-[var(--accent)] pointer-events-none" />
 
-        {/* Контент — зліва */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 flex items-center" style={{ minHeight: '90vh' }}>
-          <div className="max-w-xl py-24">
+        {/* Контент — зліва по центру */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 flex items-center" style={{ minHeight: '100vh' }}>
+          <div className="max-w-2xl py-32">
             <motion.div initial="hidden" animate="show" variants={stagger}>
 
-              <motion.div variants={fadeUp} className="eyebrow-white mb-6" style={{ fontSize: '13px', letterSpacing: '0.1em' }}>
-                ● Системи швидкого монтажу · Виробництво з 2002
+              <motion.div variants={fadeUp}
+                className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-white/20 text-white/70"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.12em', backdropFilter: 'blur(8px)', background: 'rgba(255,255,255,0.05)' }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+                ВИРОБНИЦТВО З 2002 · КИЇВ, УКРАЇНА
               </motion.div>
 
               <motion.h1 variants={fadeUp}
-                className="font-black leading-[0.92] font-['Archivo',sans-serif] mb-6"
-                style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
+                className="font-black font-['Archivo',sans-serif] mb-8"
+                style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', lineHeight: 0.95, letterSpacing: '-0.02em' }}>
                 Виробник систем<br />
                 швидкого монтажу{' '}
-                <span className="text-gradient-orange">#1</span><br />
-                <span className="text-outline-white">в Україні.</span>
+                <span className="text-[var(--accent)]">#1</span><br />
+                в Україні.
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-white/65 text-lg leading-relaxed mb-8">
-                {hero.subtitle}
-              </motion.p>
-
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                <Link to="/catalog" className="btn-primary px-7 py-3.5 text-base">
-                  {hero.ctaCatalog} <ArrowRight size={16} />
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+                <Link to="/catalog"
+                  className="inline-flex items-center gap-2 font-semibold rounded-none transition-all duration-200 hover:opacity-90"
+                  style={{ background: 'var(--accent)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                  Переглянути каталог <ArrowRight size={18} />
                 </Link>
-                <Link to="/contacts" className="btn-outline-white px-7 py-3.5 text-base">
-                  {hero.ctaContact}
+                <Link to="/contacts"
+                  className="inline-flex items-center gap-2 font-semibold rounded-none transition-all duration-200 hover:bg-white/10"
+                  style={{ border: '2px solid rgba(255,255,255,0.6)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                  Отримати консультацію
                 </Link>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-white/40"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.04em' }}>
-                {['Гарантія якості', 'Доставка по Україні', '50 000+ котелень', 'ISO 9001:2015'].map(item => (
-                  <span key={item} className="flex items-center gap-1.5">
-                    <Check size={12} className="text-[#FF8533]" /> {item}
-                  </span>
-                ))}
               </motion.div>
 
             </motion.div>
           </div>
         </div>
 
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, var(--bg), transparent)' }} />
+        {/* Bottom fade до секції нижче */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }} />
       </section>
 
       {/* ═══════════════════════════════════════════
@@ -499,40 +474,24 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          DARK MARQUEE BAND
-      ═══════════════════════════════════════════ */}
-      <section className="bg-[#0C0B0A] py-3.5 overflow-hidden">
-        <div className="flex whitespace-nowrap">
-          <div className="flex gap-0 animate-marquee-slow flex-shrink-0">
-            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-              <span key={i} className="inline-flex items-center gap-3 px-4 text-sm font-bold tracking-widest uppercase text-white">
-                {item}
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] flex-shrink-0" />
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
           CATEGORIES — Каталог · SKU
       ═══════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 bg-[var(--bg)]">
+      <section className="py-16 md:py-20 bg-[#2C2C2C]">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <div>
-              <motion.div variants={fadeUp} className="eyebrow mb-3">
+              <motion.div variants={fadeUp} className="eyebrow-white mb-3">
                 Каталог · {CATEGORIES.length} категорій · 242 SKU
               </motion.div>
               <motion.h2 variants={fadeUp}
-                className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
+                className="font-black font-['Archivo',sans-serif] leading-tight text-white"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
                 Все для котельні —<br />в одному місці.
               </motion.h2>
             </div>
             <motion.div variants={fadeUp}>
-              <Link to="/catalog" className="btn-ghost">
+              <Link to="/catalog" className="btn-primary">
                 {cats.viewAll} <ArrowRight size={15} />
               </Link>
             </motion.div>
