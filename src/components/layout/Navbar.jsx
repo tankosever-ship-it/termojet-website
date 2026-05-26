@@ -315,7 +315,7 @@ export default function Navbar() {
               <div className="relative hidden lg:block" ref={langRef}>
                 <button onClick={() => setLangOpen(v => !v)}
                   className="flex items-center gap-1 px-2.5 py-1.5 transition-all"
-                  style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', color: '#444', border: '1px solid rgba(0,0,0,0.12)', borderRadius: 0 }}>
+                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: '#444', border: '1px solid rgba(0,0,0,0.12)', borderRadius: 0 }}>
                   {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
@@ -352,12 +352,12 @@ export default function Navbar() {
               {/* CTA */}
               <Link to="/partners"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
-                style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}>
+                style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: 0 }}>
                 Стати партнером
               </Link>
               <Link to="/contacts"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}
+                style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: 0 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
                 Консультація
