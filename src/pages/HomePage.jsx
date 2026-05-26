@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { ArrowRight, ArrowUpRight, Check, Smartphone } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Check, Smartphone, Play, X } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -351,9 +351,17 @@ export default function HomePage() {
   const cats = t('categories')
   const seo  = t('seo')
 
+  const [videoOpen, setVideoOpen] = useState(false)
   const [statsVisible, setStatsVisible] = useState(false)
   const [hoveredAdvantage, setHoveredAdvantage] = useState(null)
   const statsRef = useRef(null)
+
+  useEffect(() => {
+    if (!videoOpen) return
+    const fn = (e) => { if (e.key === 'Escape') setVideoOpen(false) }
+    window.addEventListener('keydown', fn)
+    return () => window.removeEventListener('keydown', fn)
+  }, [videoOpen])
 
   useEffect(() => {
     const el = statsRef.current
@@ -372,6 +380,24 @@ export default function HomePage() {
   return (
     <>
       <SEO title={null} description={seo.homeDesc} />
+
+      {/* ─── VIDEO MODAL ─── */}
+      {videoOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
+          <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
+            <iframe className="w-full h-full rounded-2xl shadow-2xl"
+              src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&rel=0&modestbranding=1`}
+              title="Termojet виробництво"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen />
+            <button onClick={() => setVideoOpen(false)}
+              className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+              <X size={18} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ═══════════════════════════════════════════
           HERO — YouTube відеофон · іммерсивний
