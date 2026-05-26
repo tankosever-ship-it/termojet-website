@@ -209,7 +209,7 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
 
-  const navLinkStyle = { fontFamily: "'IBM Plex Sans', sans-serif", fontSize: '13px', fontWeight: 600, letterSpacing: '0.03em' }
+  const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.01em' }
 
   const aboutItems = [
     { to: '/about',     label: 'Про нас' },

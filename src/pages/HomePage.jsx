@@ -32,8 +32,8 @@ const CONFIG_STEPS = [
 const STATS = [
   { ord: '01', num: '23', suffix: ' роки', label: 'На ринку котельного обладнання' },
   { ord: '02', num: '16', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
-  { ord: '03', num: '50', suffix: 'к', label: 'Проектів укомплектовано за 23 роки' },
-  { ord: '04', num: '70', suffix: 'к', label: 'Виробів на рік на власному заводі' },
+  { ord: '03', num: '50', suffix: 'к проектів', label: 'Укомплектовано за 23 роки' },
+  { ord: '04', num: '70', suffix: 'к виробів', label: 'На рік на власному заводі' },
 ]
 
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
@@ -265,7 +265,7 @@ function StarRating({ rating }) {
 
 function ReviewsSection() {
   return (
-    <section className="py-20 md:py-28 bg-[#0C0B0A] overflow-hidden">
+    <section className="py-20 md:py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
@@ -276,13 +276,13 @@ function ReviewsSection() {
               ● ВІДГУКИ
             </motion.div>
             <motion.h2 variants={fadeUp}
-              className="font-black font-['Archivo',sans-serif] text-white leading-tight"
+              className="font-black font-['Archivo',sans-serif] text-[#1a1a1a] leading-tight"
               style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
               Що кажуть наші клієнти
             </motion.h2>
           </div>
           <motion.div variants={fadeUp}
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: '#aaa', letterSpacing: '0.06em' }}>
             {REVIEWS.length} відгуків · всі перевірені
           </motion.div>
         </motion.div>
@@ -293,26 +293,26 @@ function ReviewsSection() {
             <motion.div key={review.id} variants={fadeUp}
               className="flex flex-col gap-4 p-6"
               style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: '#f7f7f6',
+                border: '1px solid #e8e8e8',
               }}>
               {/* Stars + date */}
               <div className="flex items-center justify-between">
                 <StarRating rating={review.rating} />
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#bbb', letterSpacing: '0.06em' }}>
                   {review.date}
                 </span>
               </div>
 
               {/* Review text */}
-              <p className="text-sm leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              <p className="text-sm leading-relaxed flex-1" style={{ color: '#444' }}>
                 "{review.text}"
               </p>
 
               {/* Author */}
-              <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                <div className="font-bold text-white text-sm">{review.name}</div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.35)', marginTop: 3, letterSpacing: '0.04em' }}>
+              <div className="pt-4" style={{ borderTop: '1px solid #e0e0e0' }}>
+                <div className="font-bold text-[#1a1a1a] text-sm">{review.name}</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#888', marginTop: 3, letterSpacing: '0.04em' }}>
                   {review.role}
                 </div>
               </div>
@@ -405,16 +405,16 @@ export default function HomePage() {
         {/* YouTube iframe — повний фон без звуку */}
         <div className="absolute inset-0 pointer-events-none" style={{ overflow: 'hidden' }}>
           <iframe
-            src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3`}
+            src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&start=0`}
             title="Termojet background"
             allow="autoplay; encrypted-media"
             style={{
               position: 'absolute',
               top: '50%', left: '50%',
-              transform: 'translate(-50%, -50%) scale(1.15)',
+              transform: 'translate(-50%, -50%) scale(1.4)',
               width: '100vw',
               height: '56.25vw',
-              minHeight: '100vh',
+              minHeight: '120vh',
               minWidth: '177.78vh',
               border: 'none',
               pointerEvents: 'none',
@@ -432,8 +432,8 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-[var(--accent)] pointer-events-none" />
 
         {/* Контент — зліва вгорі */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 flex items-start" style={{ minHeight: '100vh' }}>
-          <div className="max-w-2xl pt-28 pb-12">
+        <div className="relative z-10 w-full px-6 flex items-start" style={{ minHeight: '100vh' }}>
+          <div className="max-w-xl pt-28 pb-12 ml-8">
             <motion.div initial="hidden" animate="show" variants={stagger}>
 
               <motion.div variants={fadeUp}
@@ -447,8 +447,8 @@ export default function HomePage() {
                 className="font-black font-['Archivo',sans-serif] mb-8"
                 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
                 Виробник систем<br />
-                швидкого монтажу{' '}
-                <span className="text-[var(--accent)]">#1</span><br />
+                швидкого монтажу <span className="text-[var(--accent)]">#1</span><br />
+                для котелень<br />
                 в Україні.
               </motion.h1>
 
