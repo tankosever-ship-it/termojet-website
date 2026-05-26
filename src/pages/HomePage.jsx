@@ -32,8 +32,8 @@ const CONFIG_STEPS = [
 const STATS = [
   { ord: '01', num: '23', suffix: ' роки', label: 'На ринку котельного обладнання' },
   { ord: '02', num: '16', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
-  { ord: '03', num: '50 000', suffix: '', label: 'Проектів укомплектовано за 23 роки' },
-  { ord: '04', num: '70 000', suffix: '', label: 'Виробів на рік на власному заводі' },
+  { ord: '03', num: '50', suffix: 'к', label: 'Проектів укомплектовано за 23 роки' },
+  { ord: '04', num: '70', suffix: 'к', label: 'Виробів на рік на власному заводі' },
 ]
 
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
@@ -53,7 +53,7 @@ function CategoryCard({ cat, lang }) {
         {imgSrc ? (
           <img src={imgSrc} alt={cat.name[lang] || cat.name.uk}
             className="w-full h-full object-contain transition-transform duration-500"
-            style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)', padding: '12px' }} />
+            style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)', padding: '12px', mixBlendMode: 'multiply' }} />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl opacity-30">{cat.icon}</div>
         )}
@@ -431,9 +431,9 @@ export default function HomePage() {
         {/* Оранжева лінія зверху */}
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-[var(--accent)] pointer-events-none" />
 
-        {/* Контент — зліва по центру */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 flex items-center" style={{ minHeight: '100vh' }}>
-          <div className="max-w-2xl pt-20 pb-12">
+        {/* Контент — зліва вгорі */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 flex items-start" style={{ minHeight: '100vh' }}>
+          <div className="max-w-2xl pt-28 pb-12">
             <motion.div initial="hidden" animate="show" variants={stagger}>
 
               <motion.div variants={fadeUp}
@@ -535,10 +535,15 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           ADVANTAGES — Наші переваги
       ═══════════════════════════════════════════ */}
-      <section className="advantages-bg grain relative overflow-hidden py-20 md:py-28 text-white">
-        <div className="absolute inset-0 bg-dots pointer-events-none" />
-        <div className="orb orb-orange w-[500px] h-[500px] -right-32 top-1/2 -translate-y-1/2 opacity-50" />
-        <div className="orb orb-warm   w-[400px] h-[400px] -left-20  top-0          opacity-40" />
+      <section className="relative overflow-hidden py-20 md:py-28 text-white">
+        <img
+          src="https://termojet.com.ua/wp-content/uploads/2025/09/img_4674.jpg"
+          alt="Виробництво Termojet"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'brightness(0.3)' }}
+        />
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(135deg, rgba(10,20,40,0.7) 0%, rgba(0,0,0,0.5) 100%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="text-center mb-14">
