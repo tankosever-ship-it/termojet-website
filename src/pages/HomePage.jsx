@@ -705,66 +705,128 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           CONFIGURATOR — dark section
       ═══════════════════════════════════════════ */}
-      <section className="section-dark grain relative overflow-hidden py-20 md:py-28">
-        <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-30" />
-        <div className="orb orb-warm   w-[350px] h-[350px] -left-16  -top-16              opacity-20" />
+      <section className="relative overflow-hidden py-20 md:py-32" style={{ background: '#080808' }}>
+
+        {/* Engineering grid bg */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
+          backgroundSize: '48px 48px'
+        }} />
+
+        {/* Orange glow behind phones */}
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 65%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4">
 
-          {/* Promo image — full width */}
-          <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
-            className="mb-14">
-            <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img src="/termojet-website/app-promo.jpg" alt="Конструктор Termojet App"
-                className="w-full block" />
-            </div>
+          {/* Section header */}
+          <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
+            className="text-center mb-14">
+            <div className="eyebrow mb-3" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
+            <h2 className="font-black font-['Archivo',sans-serif] leading-tight"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', background: 'linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.65))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              Конструктор котельної<br />системи — в одному додатку
+            </h2>
           </motion.div>
 
-          {/* Text + benefits */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <motion.div initial={{ opacity:0, x:-24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.55 }}>
-              <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
-              <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
-                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)' }}>
-                Конструктор котельної системи — в одному додатку.
-              </h2>
-              <div className="flex flex-wrap gap-3 mt-8">
-                <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
-                  className="btn-primary flex items-center gap-2">
-                  Запустити онлайн <ArrowUpRight size={16} />
-                </a>
-                <button className="btn-app-store">
-                  <Smartphone size={15} /> App Store
-                </button>
-                <button className="btn-app-store">
-                  <Smartphone size={15} /> Google Play
-                </button>
-              </div>
-            </motion.div>
+          {/* Main: phones (left) + benefits (right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center mb-14">
 
-            <motion.div initial={{ opacity:0, x:24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.55, delay:0.1 }}>
-              <p className="text-white/60 text-sm mb-5" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                З цим додатком ви отримаєте:
-              </p>
-              <ul className="flex flex-col gap-3.5">
-                {[
-                  'Повний каталог продукції Termojet завжди під рукою.',
-                  'Зручний конструктор систем швидкого монтажу з більш ніж 100 моделями колекторів та насосних груп.',
-                  'Мінімізація шансу на помилку при комплектації — автоматичний підбір груп і неможливість поєднати несумісне обладнання.',
-                  'Швидкий підбір обладнання саме для вашої котельні.',
-                  'Експорт схеми у PDF зі списком обладнання та даними про об\'єкт — надішліть менеджеру або клієнту в один клік.',
-                ].map((text, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center rounded-full text-white text-xs font-bold"
-                      style={{ background: 'var(--accent)', fontSize: '11px' }}>✓</span>
-                    <span className="text-white/75 text-sm leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                      {text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            {/* ── Phones: floating + glow + shimmer ── */}
+            <div className="relative flex justify-center items-center">
+              {/* Pulsing glow */}
+              <motion.div
+                animate={{ opacity: [0.25, 0.55, 0.25], scale: [1, 1.08, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 65%, rgba(255,85,0,0.22), transparent 70%)' }}
+              />
+
+              {/* Floating phones */}
+              <motion.div
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                className="relative z-10 w-full max-w-md overflow-hidden">
+
+                {/* Shimmer sweep */}
+                <motion.div
+                  animate={{ x: ['-120%', '220%'] }}
+                  transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 5, ease: 'easeInOut' }}
+                  className="absolute inset-y-0 w-1/3 pointer-events-none z-20"
+                  style={{ background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%)' }}
+                />
+
+                <img src="/termojet-website/app-promo-nobg.png" alt="Termojet App"
+                  className="w-full block drop-shadow-2xl" style={{ filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }} />
+              </motion.div>
+            </div>
+
+            {/* ── Benefits cards ── */}
+            <div className="flex flex-col gap-2.5">
+              {[
+                { icon: '📋', title: 'Повний каталог',       desc: 'Вся продукція Termojet завжди під рукою.' },
+                { icon: '⚙️', title: '100+ моделей',          desc: 'Конструктор з колекторів та насосних груп.' },
+                { icon: '🛡️', title: 'Без помилок',           desc: 'Автоматичний підбір — несумісне поєднати неможливо.' },
+                { icon: '⚡', title: 'Швидкий підбір',        desc: 'Підберіть систему саме для вашої котельні.' },
+                { icon: '📄', title: 'Експорт PDF',           desc: 'Схема + список обладнання — одразу клієнту.' },
+              ].map((item, i) => (
+                <motion.div key={i}
+                  initial={{ opacity:0, x:30 }}
+                  whileInView={{ opacity:1, x:0 }}
+                  viewport={{ once:true }}
+                  transition={{ delay: i * 0.07, duration: 0.4 }}
+                  whileHover={{ y: -2 }}
+                  className="flex items-start gap-4 p-4 cursor-default group"
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.06)',
+                    borderRadius: 0,
+                    transition: 'border-color 0.2s, background 0.2s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,85,0,0.35)'; e.currentTarget.style.background = 'rgba(255,85,0,0.04)' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)' }}>
+                  <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
+                  <div>
+                    <div className="text-white font-semibold text-sm mb-0.5" style={{ fontFamily: "'Archivo', sans-serif" }}>
+                      {item.title}
+                    </div>
+                    <div className="text-white/50 text-xs leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                      {item.desc}
+                    </div>
+                  </div>
+                  <motion.div
+                    animate={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className="ml-auto self-center flex-shrink-0">
+                    <ArrowUpRight size={14} style={{ color: 'var(--accent)' }} />
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* ── Bottom CTAs ── */}
+          <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
+            className="flex flex-wrap items-center justify-center gap-4 pt-8"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
+              className="btn-primary flex items-center gap-2 text-sm px-6 py-3">
+              Запустити у браузері <ArrowUpRight size={16} />
+            </a>
+            <a href="https://apps.apple.com/" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-5 py-3 text-white text-sm transition-all hover:bg-white/8"
+              style={{ border: '1px solid rgba(255,255,255,0.18)', fontFamily: "'IBM Plex Sans', sans-serif" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              App Store
+            </a>
+            <a href="https://play.google.com/" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-5 py-3 text-white text-sm transition-all hover:bg-white/8"
+              style={{ border: '1px solid rgba(255,255,255,0.18)', fontFamily: "'IBM Plex Sans', sans-serif" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.98.07l13.12-7.37-2.83-2.83-11.27 10.13zm-1.76-20.1A1.99 1.99 0 001 5.14v13.72c0 .72.39 1.35.96 1.69l.09.05 7.68-7.68v-.18L1.42 3.66zm17.8 8.22L16.67 9.6l-3.04 3.04 3.04 3.04 2.57-1.44c.73-.41.73-1.36-.02-1.76zM4.14.26L17.26 7.6l-2.83 2.83L4.16.91c.33-.19.72-.2.98-.65z"/></svg>
+              Google Play
+            </a>
+          </motion.div>
+
         </div>
       </section>
 
