@@ -140,7 +140,7 @@ function DarkDropdown({ items, onClose }) {
               style={{ borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}
               onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,85,0,0.10)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
+              <span style={{ fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 400, color: 'rgba(255,255,255,0.8)' }}>
                 {item.label}
               </span>
               <ExternalLink size={11} style={{ color: 'rgba(255,255,255,0.3)' }} />
@@ -150,7 +150,7 @@ function DarkDropdown({ items, onClose }) {
               style={{ borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', borderLeft: '2px solid transparent' }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,85,0,0.10)'; e.currentTarget.style.borderLeftColor = 'var(--accent)' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderLeftColor = 'transparent' }}>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.7)' }}>
+              <span style={{ fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 400, color: 'rgba(255,255,255,0.8)' }}>
                 {item.label}
               </span>
             </Link>
@@ -209,7 +209,7 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
 
-  const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.01em', transition: 'color 0.3s' }
+  const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '15px', fontWeight: 500, letterSpacing: '0.01em', transition: 'color 0.3s' }
 
   const aboutItems = [
     { to: '/about',     label: 'Про нас' },
@@ -297,6 +297,15 @@ export default function Navbar() {
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
                 Теплові насоси <ExternalLink size={10} />
+              </a>
+
+              {/* Конструктор */}
+              <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                style={{ ...navLinkStyle, color: 'var(--accent)', borderBottom: '2px solid transparent', fontWeight: 600 }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'white'; e.currentTarget.style.background = 'var(--accent)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.background = 'transparent' }}>
+                Конструктор <ExternalLink size={10} />
               </a>
             </nav>
 

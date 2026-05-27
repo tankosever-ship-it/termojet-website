@@ -30,10 +30,10 @@ const CONFIG_STEPS = [
 ]
 
 const STATS = [
-  { ord: '01', num: '23', suffix: ' роки', label: 'На ринку котельного обладнання' },
+  { ord: '01', num: '23', suffix: ' роки',  label: 'На ринку котельного обладнання' },
   { ord: '02', num: '16', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
-  { ord: '03', num: '50', suffix: 'к проектів', label: 'Укомплектовано за 23 роки' },
-  { ord: '04', num: '70', suffix: 'к виробів', label: 'На рік на власному заводі' },
+  { ord: '03', num: '50', thousands: true,  label: 'Проектів укомплектовано' },
+  { ord: '04', num: '70', thousands: true,  label: 'Виробів на рік на заводі' },
 ]
 
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
@@ -350,6 +350,23 @@ function CountUp({ end, suffix, duration = 1600 }) {
   return <>{val.toLocaleString('uk-UA')}{suffix && <span className="text-[var(--accent)]">{suffix}</span>}</>
 }
 
+function CountUpThousands({ end, duration = 1600 }) {
+  const [val, setVal] = useState(0)
+  const startRef = useRef(null)
+  const rafRef = useRef(null)
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(function tick(t) {
+      if (!startRef.current) startRef.current = t
+      const p = Math.min(1, (t - startRef.current) / duration)
+      const eased = 1 - Math.pow(1 - p, 3)
+      setVal(Math.round(end * eased))
+      if (p < 1) rafRef.current = requestAnimationFrame(tick)
+    })
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [end, duration])
+  return <>{val} <span className="text-[var(--accent)]">000</span></>
+}
+
 export default function HomePage() {
   const { lang, blog, portfolio, products } = useApp()
   const t    = useT()
@@ -493,10 +510,15 @@ export default function HomePage() {
                 <div className="eyebrow mb-3" style={{ color: 'var(--ink-200)' }}>{s.ord}</div>
                 <div className="font-black leading-none font-['Archivo',sans-serif] mb-2 text-[var(--text-primary)] whitespace-nowrap"
                   style={{ fontSize: 'clamp(1.6rem, 3.5vw, 3rem)' }}>
-                  {statsVisible
-                    ? <CountUp end={parseInt(s.num.replace(/\s/g,''))} suffix={s.suffix} />
-                    : <>{s.num}<span className="text-[var(--accent)]">{s.suffix}</span></>
-                  }
+                  {s.thousands ? (
+                    statsVisible
+                      ? <CountUpThousands end={parseInt(s.num)} />
+                      : <>{s.num} <span className="text-[var(--accent)]">000</span></>
+                  ) : (
+                    statsVisible
+                      ? <CountUp end={parseInt(s.num.replace(/\s/g,''))} suffix={s.suffix} />
+                      : <>{s.num}<span className="text-[var(--accent)]">{s.suffix}</span></>
+                  )}
                 </div>
                 <div className="text-sm text-[var(--text-secondary)] leading-snug">{s.label}</div>
               </div>
