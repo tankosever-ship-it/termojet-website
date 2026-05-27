@@ -102,11 +102,12 @@ function MegaMenu({ lang, products, onClose }) {
           </div>
 
           {/* ── Right: CTA ── */}
-          <div className="section-dark flex flex-col border-l border-white/5 overflow-hidden" style={{ maxHeight: 'calc(100vh - 64px)' }}>
-            {/* App screenshot */}
-            <div className="flex-shrink-0 overflow-hidden" style={{ height: 200 }}>
-              <img src="/termojet-website/app-screen-menu.jpg" alt="Конструктор Termojet"
-                className="w-full h-full object-cover" style={{ objectPosition: 'top center' }} />
+          <div className="flex flex-col border-l border-white/5 overflow-hidden" style={{ maxHeight: 'calc(100vh - 64px)', background: '#0a0a0a' }}>
+            {/* Phones image on dark bg */}
+            <div className="flex-shrink-0 flex items-center justify-center px-4 pt-5 pb-2 relative"
+              style={{ background: 'radial-gradient(ellipse 120% 80% at 50% 100%, rgba(255,85,0,0.18), transparent 70%)' }}>
+              <img src="/termojet-website/app-promo-nobg.png" alt="Конструктор Termojet"
+                className="w-full block" style={{ maxHeight: 180, objectFit: 'contain' }} />
             </div>
             <div className="p-5 flex flex-col gap-3 flex-1">
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>

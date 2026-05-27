@@ -717,15 +717,15 @@ export default function HomePage() {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 65%)' }} />
 
-        <div className="relative max-w-7xl mx-auto px-4">
+        <div className="relative max-w-5xl mx-auto px-4">
 
           {/* Section header */}
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-            className="text-center mb-14">
+            className="text-center mb-12">
             <div className="eyebrow mb-3" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
             <h2 className="font-black font-['Archivo',sans-serif] leading-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', background: 'linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.65))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Конструктор котельної<br />системи — в одному додатку
+              style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', background: 'linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.65))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              Конструктор котельної системи — в одному додатку
             </h2>
           </motion.div>
 
@@ -787,10 +787,10 @@ export default function HomePage() {
                   onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)' }}>
                   <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
                   <div>
-                    <div className="text-white font-semibold text-sm mb-0.5" style={{ fontFamily: "'Archivo', sans-serif" }}>
+                    <div className="text-white font-semibold text-base mb-1" style={{ fontFamily: "'Archivo', sans-serif" }}>
                       {item.title}
                     </div>
-                    <div className="text-white/50 text-xs leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                    <div className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                       {item.desc}
                     </div>
                   </div>
