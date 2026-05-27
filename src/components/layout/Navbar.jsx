@@ -104,9 +104,9 @@ function MegaMenu({ lang, products, onClose }) {
           {/* ── Right: CTA ── */}
           <div className="section-dark flex flex-col border-l border-white/5 overflow-hidden" style={{ maxHeight: 'calc(100vh - 64px)' }}>
             {/* App screenshot */}
-            <div className="flex-shrink-0 overflow-hidden" style={{ height: 180 }}>
+            <div className="flex-shrink-0 overflow-hidden" style={{ height: 200 }}>
               <img src="/termojet-website/app-screen-menu.jpg" alt="Конструктор Termojet"
-                className="w-full h-full object-cover" />
+                className="w-full h-full object-cover" style={{ objectPosition: 'top center' }} />
             </div>
             <div className="p-5 flex flex-col gap-3 flex-1">
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>

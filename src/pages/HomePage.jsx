@@ -708,49 +708,61 @@ export default function HomePage() {
       <section className="section-dark grain relative overflow-hidden py-20 md:py-28">
         <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-30" />
         <div className="orb orb-warm   w-[350px] h-[350px] -left-16  -top-16              opacity-20" />
-        <div className="absolute inset-0 bg-dots pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-            {/* Left — app screenshot */}
-            <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
-              <div className="relative rounded-2xl overflow-hidden border border-white/10"
-                style={{ minHeight: 300 }}>
-                <img src="/termojet-website/app-screen-home.jpg" alt="Конструктор Termojet"
-                  className="w-full h-full object-cover" style={{ display: 'block' }} />
+          {/* Promo image — full width */}
+          <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
+            className="mb-14">
+            <div className="rounded-2xl overflow-hidden border border-white/10">
+              <img src="/termojet-website/app-promo.jpg" alt="Конструктор Termojet App"
+                className="w-full block" />
+            </div>
+          </motion.div>
+
+          {/* Text + benefits */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <motion.div initial={{ opacity:0, x:-24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.55 }}>
+              <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
+              <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
+                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)' }}>
+                Конструктор котельної системи — в одному додатку.
+              </h2>
+              <div className="flex flex-wrap gap-3 mt-8">
+                <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
+                  className="btn-primary flex items-center gap-2">
+                  Запустити онлайн <ArrowUpRight size={16} />
+                </a>
+                <button className="btn-app-store">
+                  <Smartphone size={15} /> App Store
+                </button>
+                <button className="btn-app-store">
+                  <Smartphone size={15} /> Google Play
+                </button>
               </div>
             </motion.div>
 
-            {/* Right — text + steps */}
-            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.1 }}>
-              <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
-              <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
-                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
-                Конструктор котельної системи — в одному додатку.
-              </h2>
-              <p className="text-white/55 text-sm leading-relaxed mb-8">
-                Підберіть колектор, гідрострілку та насосні групи без помилок сумісності. Експорт схеми в PDF, відправка менеджеру в один клік.
+            <motion.div initial={{ opacity:0, x:24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.55, delay:0.1 }}>
+              <p className="text-white/60 text-sm mb-5" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                З цим додатком ви отримаєте:
               </p>
-
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                {CONFIG_STEPS.map(step => (
-                  <div key={step.n} className="config-step">
-                    <div className="eyebrow mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>КРОК {step.n}</div>
-                    <h4 className="text-white font-bold text-sm mb-1">{step.title}</h4>
-                    <p className="text-white/45 text-xs leading-relaxed">{step.desc}</p>
-                  </div>
+              <ul className="flex flex-col gap-3.5">
+                {[
+                  'Повний каталог продукції Termojet завжди під рукою.',
+                  'Зручний конструктор систем швидкого монтажу з більш ніж 100 моделями колекторів та насосних груп.',
+                  'Мінімізація шансу на помилку при комплектації — автоматичний підбір груп і неможливість поєднати несумісне обладнання.',
+                  'Швидкий підбір обладнання саме для вашої котельні.',
+                  'Експорт схеми у PDF зі списком обладнання та даними про об\'єкт — надішліть менеджеру або клієнту в один клік.',
+                ].map((text, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="flex-shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center rounded-full text-white text-xs font-bold"
+                      style={{ background: 'var(--accent)', fontSize: '11px' }}>✓</span>
+                    <span className="text-white/75 text-sm leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                      {text}
+                    </span>
+                  </li>
                 ))}
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <button className="btn-app-store">
-                  <Smartphone size={16} /> App Store
-                </button>
-                <button className="btn-app-store">
-                  <Smartphone size={16} /> Google Play
-                </button>
-              </div>
+              </ul>
             </motion.div>
           </div>
         </div>
