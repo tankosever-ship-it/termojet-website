@@ -713,28 +713,12 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-            {/* Left — diagram */}
+            {/* Left — app screenshot */}
             <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-8"
+              <div className="relative rounded-2xl overflow-hidden border border-white/10"
                 style={{ minHeight: 300 }}>
-                <svg viewBox="0 0 320 200" className="w-full" fill="none">
-                  <line x1="40" y1="100" x2="280" y2="100" stroke="rgba(255,85,0,0.6)" strokeWidth="2" strokeDasharray="6,3" />
-                  {[80, 140, 200, 260].map((x, i) => (
-                    <g key={x}>
-                      <line x1={x} y1="100" x2={x} y2="50" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
-                      <line x1={x} y1="100" x2={x} y2="150" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
-                      <circle cx={x} cy="50" r="8" fill="rgba(255,85,0,0.3)" stroke="rgba(255,85,0,0.8)" strokeWidth="1.5" />
-                      <circle cx={x} cy="150" r="8" fill="rgba(255,85,0,0.15)" stroke="rgba(255,85,0,0.5)" strokeWidth="1.5" />
-                      <text x={x} y="30" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="monospace">НГ{i+1}</text>
-                    </g>
-                  ))}
-                  <rect x="110" y="82" width="100" height="36" rx="6" fill="rgba(255,85,0,0.15)" stroke="rgba(255,85,0,0.6)" strokeWidth="1.5" />
-                  <text x="160" y="97" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold" fontFamily="monospace">KOLEKTOR</text>
-                  <text x="160" y="111" textAnchor="middle" fill="rgba(255,85,0,0.9)" fontSize="10" fontWeight="bold" fontFamily="monospace">KGS22</text>
-                  <text x="10" y="104" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace">КОТЕЛ</text>
-                  <text x="258" y="170" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace">● CONFIG</text>
-                </svg>
-                <div className="eyebrow-white mt-2 text-center">Автоматичний підбір системи</div>
+                <img src="/termojet-website/app-screen-home.jpg" alt="Конструктор Termojet"
+                  className="w-full h-full object-cover" style={{ display: 'block' }} />
               </div>
             </motion.div>
 
@@ -743,7 +727,7 @@ export default function HomePage() {
               <div className="eyebrow mb-4" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
               <h2 className="text-white font-black font-['Archivo',sans-serif] leading-tight mb-4"
                 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
-                Конфігуратор котельної системи — в одному додатку.
+                Конструктор котельної системи — в одному додатку.
               </h2>
               <p className="text-white/55 text-sm leading-relaxed mb-8">
                 Підберіть колектор, гідрострілку та насосні групи без помилок сумісності. Експорт схеми в PDF, відправка менеджеру в один клік.

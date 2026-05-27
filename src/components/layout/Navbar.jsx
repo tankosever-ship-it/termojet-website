@@ -102,24 +102,32 @@ function MegaMenu({ lang, products, onClose }) {
           </div>
 
           {/* ── Right: CTA ── */}
-          <div className="section-dark p-6 flex flex-col gap-4 border-l border-white/5" style={{ maxHeight: 'calc(100vh - 64px)' }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
-              Termojet App
+          <div className="section-dark flex flex-col border-l border-white/5 overflow-hidden" style={{ maxHeight: 'calc(100vh - 64px)' }}>
+            {/* App screenshot */}
+            <div className="flex-shrink-0 overflow-hidden" style={{ height: 180 }}>
+              <img src="/termojet-website/app-screen-menu.jpg" alt="Конструктор Termojet"
+                className="w-full h-full object-cover" />
             </div>
-            <h4 className="text-white font-black text-xl leading-tight font-['Archivo',sans-serif]">
-              Конфігуратор<br />котельної<br />системи
-            </h4>
-            <p className="text-white/50 text-xs leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-              Підберіть колектор та насосні групи без помилок. Експорт PDF.
-            </p>
-            <div className="h-px bg-white/8 my-1" />
-            <button className="mt-auto flex items-center gap-2 text-white border border-white/20 px-4 py-2.5 hover:bg-white/10 transition-colors self-start"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: 0 }}>
-              Запустити <ArrowUpRight size={13} />
-            </button>
-            <Link to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
-              Весь каталог →
-            </Link>
+            <div className="p-5 flex flex-col gap-3 flex-1">
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
+                Termojet App
+              </div>
+              <h4 className="text-white font-black text-lg leading-tight font-['Archivo',sans-serif]">
+                Конструктор<br />котельної<br />системи
+              </h4>
+              <p className="text-white/50 text-xs leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                Підберіть колектор та насосні групи без помилок. Експорт PDF.
+              </p>
+              <div className="h-px bg-white/8 my-1" />
+              <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
+                className="mt-auto flex items-center gap-2 text-white border border-white/20 px-4 py-2.5 hover:bg-white/10 transition-colors self-start"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: 0 }}>
+                Запустити <ArrowUpRight size={13} />
+              </a>
+              <Link to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
+                Весь каталог →
+              </Link>
+            </div>
           </div>
 
         </div>
