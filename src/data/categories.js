@@ -8,7 +8,7 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/1713882023331300-800x800.jpg`,
     name: { uk: 'Насосні групи', en: 'Pump Groups', pl: 'Grupy pompowe', fr: 'Groupes de pompes', de: 'Pumpengruppen' },
     desc: { uk: 'Готові насосні вузли з обв\'язкою', en: 'Ready-made pump units with connections', pl: 'Gotowe zestawy pompowe z przyłączami', fr: 'Groupes de pompes prêts à l\'emploi', de: 'Fertige Pumpenstationen mit Anschlüssen' },
-    subcategories: ['З байпасом', 'З термостатичним клапаном', 'З теплоізоляцією EPP', 'Без теплоізоляції'],
+    subcategories: ['З термостатичним клапаном', 'З теплоізоляцією EPP', 'Без теплоізоляції'],
     color: '#E85D04',
   },
   {

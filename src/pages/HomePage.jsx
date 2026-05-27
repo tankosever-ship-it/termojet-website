@@ -15,8 +15,8 @@ const PROD_PHOTOS = [
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-12.jpg', label: '● Листогибне виробництво' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-22.jpg', label: '● Зварювання' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-32.jpg', label: '● Складання вузлів' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-38.jpg', label: '● Контроль якості' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-34.jpg', label: '● Готова продукція' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-41.jpg', label: '● Контроль якості' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-44.jpg', label: '● Готова продукція' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-33-55.jpg', label: '● Пакування' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-47.jpg', label: '● Склад відвантаження' },
 ]
@@ -89,11 +89,19 @@ function CategoryCard({ cat, lang }) {
         </div>
 
         <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid #e0e0e0' }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)', opacity: hovered ? 1 : 0, transition: 'opacity 0.2s' }}>
+          <span style={{
+            fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700,
+            textTransform: 'uppercase', letterSpacing: '0.1em',
+            color: hovered ? 'white' : 'var(--accent)',
+            background: hovered ? 'var(--accent)' : 'transparent',
+            border: '1px solid var(--accent)',
+            padding: '3px 8px',
+            transition: 'all 0.2s'
+          }}>
             Переглянути →
           </span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: '#aaa', letterSpacing: '0.06em' }}>
-            {cat.count} товарів
+            {cat.count} SKU
           </span>
         </div>
       </div>
@@ -447,8 +455,8 @@ export default function HomePage() {
                 className="font-black font-['Archivo',sans-serif] mb-8"
                 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
                 Виробник систем<br />
-                швидкого монтажу <span className="text-[var(--accent)]">#1</span><br />
-                для котелень<br />
+                швидкого монтажу<br />
+                для котелень <span className="text-[var(--accent)]">#1</span><br />
                 в Україні.
               </motion.h1>
 
@@ -483,8 +491,8 @@ export default function HomePage() {
             {STATS.map((s) => (
               <div key={s.ord} className="stat-editorial">
                 <div className="eyebrow mb-3" style={{ color: 'var(--ink-200)' }}>{s.ord}</div>
-                <div className="font-black leading-none font-['Archivo',sans-serif] mb-2 text-[var(--text-primary)]"
-                  style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                <div className="font-black leading-none font-['Archivo',sans-serif] mb-2 text-[var(--text-primary)] whitespace-nowrap"
+                  style={{ fontSize: 'clamp(1.6rem, 3.5vw, 3rem)' }}>
                   {statsVisible
                     ? <CountUp end={parseInt(s.num.replace(/\s/g,''))} suffix={s.suffix} />
                     : <>{s.num}<span className="text-[var(--accent)]">{s.suffix}</span></>
@@ -506,7 +514,7 @@ export default function HomePage() {
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <div>
               <motion.div variants={fadeUp} className="eyebrow-white mb-3">
-                Каталог · {CATEGORIES.length} категорій · 242 SKU
+                Каталог
               </motion.div>
               <motion.h2 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] leading-tight text-white"
@@ -603,11 +611,6 @@ export default function HomePage() {
                     <p className="text-sm leading-relaxed" style={{ color: isHovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.45)', transition: 'color 0.25s' }}>
                       {item.desc}
                     </p>
-                  </div>
-                  <div className="relative mt-auto pt-4 border-t" style={{ borderColor: isHovered ? 'rgba(255,85,0,0.2)' : 'rgba(255,255,255,0.06)', transition: 'border-color 0.25s' }}>
-                    <span className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: isHovered ? '#FF8533' : 'rgba(255,255,255,0.25)', fontFamily: "'JetBrains Mono', monospace", transition: 'color 0.25s' }}>
-                      <Check size={12} /> Підтверджено досвідом
-                    </span>
                   </div>
                 </motion.div>
               )

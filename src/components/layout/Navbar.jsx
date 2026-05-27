@@ -209,7 +209,7 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
 
-  const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.01em' }
+  const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.01em', transition: 'color 0.3s' }
 
   const aboutItems = [
     { to: '/about',     label: 'Про нас' },
@@ -225,23 +225,24 @@ export default function Navbar() {
     { to: '/files',    label: 'Файли' },
   ]
 
-  // glassmorphism: завжди white/85 + blur, на скролі трохи темніше + shadow
-  const navBg = scrolled
-    ? 'rgba(255,255,255,0.92)'
-    : 'rgba(255,255,255,0.82)'
-  const navShadow = scrolled
-    ? '0 2px 32px rgba(0,0,0,0.12)'
-    : '0 1px 0 rgba(0,0,0,0.06)'
+  // transparent at top → glassmorphism on scroll (like tjheatpump.com.ua)
+  const navBg = scrolled ? 'rgba(255,255,255,0.88)' : 'transparent'
+  const navBackdrop = scrolled ? 'blur(20px)' : 'none'
+  const navShadow = scrolled ? '0 2px 32px rgba(0,0,0,0.12)' : 'none'
+  const navBorderB = scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent'
+  // text color: white on transparent hero, dark on scrolled white bg
+  const linkCol = scrolled ? '#333' : 'rgba(255,255,255,0.92)'
+  const linkColMuted = scrolled ? '#555' : 'rgba(255,255,255,0.65)'
 
   return (
     <>
-      {/* ─── Main navbar (glassmorphism) ─── */}
-      <header className="sticky top-0 z-50 transition-all duration-300"
-        style={{ background: navBg, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: navShadow, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+      {/* ─── Main navbar ─── */}
+      <header className="sticky top-0 z-50 transition-all duration-500"
+        style={{ background: navBg, backdropFilter: navBackdrop, WebkitBackdropFilter: navBackdrop, boxShadow: navShadow, borderBottom: navBorderB }}>
 
-        {/* orange accent line bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1.5px]"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,85,0,0.4) 30%, rgba(255,85,0,0.4) 70%, transparent)' }} />
+        {/* orange accent line bottom — only when scrolled */}
+        {scrolled && <div className="absolute bottom-0 left-0 right-0 h-[1.5px]"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,85,0,0.4) 30%, rgba(255,85,0,0.4) 70%, transparent)' }} />}
 
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-3 h-[60px]">
@@ -258,7 +259,7 @@ export default function Navbar() {
               <div className="relative" ref={catalogRef}>
                 <button onClick={() => { setCatalogOpen(v => !v); setAboutOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap group"
-                  style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : linkCol, borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Каталог
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: catalogOpen ? 'rotate(180deg)' : 'none', color: catalogOpen ? 'var(--accent)' : 'currentColor' }} />
                 </button>
@@ -269,7 +270,7 @@ export default function Navbar() {
               <div className="relative" ref={aboutRef}>
                 <button onClick={() => { setAboutOpen(v => !v); setCatalogOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                  style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Про Termojet
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: aboutOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
@@ -280,7 +281,7 @@ export default function Navbar() {
               <div className="relative" ref={clientRef}>
                 <button onClick={() => { setClientOpen(v => !v); setCatalogOpen(false); setAboutOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                  style={{ ...navLinkStyle, color: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : '#333', borderBottom: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  style={{ ...navLinkStyle, color: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Для клієнта
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: clientOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
@@ -290,9 +291,9 @@ export default function Navbar() {
               {/* Теплові насоси */}
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                style={{ ...navLinkStyle, color: '#555', borderBottom: '2px solid transparent' }}
+                style={{ ...navLinkStyle, color: linkColMuted, borderBottom: '2px solid transparent' }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-                onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+                onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
                 Теплові насоси <ExternalLink size={10} />
               </a>
             </nav>
@@ -305,9 +306,9 @@ export default function Navbar() {
               {/* Search */}
               <button onClick={() => setSearchOpen(v => !v)}
                 className="p-2 hidden md:flex transition-all"
-                style={{ color: searchOpen ? 'var(--accent)' : '#666' }}
+                style={{ color: searchOpen ? 'var(--accent)' : linkColMuted }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-                onMouseLeave={e => { if (!searchOpen) e.currentTarget.style.color = '#666' }}>
+                onMouseLeave={e => { if (!searchOpen) e.currentTarget.style.color = linkColMuted }}>
                 <Search size={17} />
               </button>
 
@@ -315,7 +316,7 @@ export default function Navbar() {
               <div className="relative hidden lg:block" ref={langRef}>
                 <button onClick={() => setLangOpen(v => !v)}
                   className="flex items-center gap-1 px-2.5 py-1.5 transition-all"
-                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: '#444', border: '1px solid rgba(0,0,0,0.12)', borderRadius: 0 }}>
+                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: linkCol, border: scrolled ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: 0, transition: 'all 0.3s' }}>
                   {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
@@ -337,9 +338,9 @@ export default function Navbar() {
 
               {/* Cart */}
               <Link to="/cart" className="relative p-2 transition-all"
-                style={{ color: '#666' }}
+                style={{ color: linkColMuted }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-                onMouseLeave={e => e.currentTarget.style.color = '#666'}>
+                onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
                 <ShoppingCart size={17} />
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 flex items-center justify-center font-bold"
@@ -364,7 +365,7 @@ export default function Navbar() {
               </Link>
 
               {/* Mobile burger */}
-              <button onClick={() => setMenuOpen(v => !v)} className="lg:hidden p-2 transition-colors" style={{ color: '#444' }}>
+              <button onClick={() => setMenuOpen(v => !v)} className="lg:hidden p-2 transition-colors" style={{ color: linkCol }}>
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
