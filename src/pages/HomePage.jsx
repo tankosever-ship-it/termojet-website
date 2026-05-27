@@ -408,7 +408,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           HERO — YouTube відеофон · іммерсивний
       ═══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden text-white" style={{ minHeight: '100vh' }}>
+      <section className="relative overflow-hidden text-white" style={{ minHeight: '100vh', marginTop: '-60px' }}>
 
         {/* YouTube iframe — повний фон без звуку */}
         <div className="absolute inset-0 pointer-events-none" style={{ overflow: 'hidden' }}>

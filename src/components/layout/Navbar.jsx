@@ -225,19 +225,21 @@ export default function Navbar() {
     { to: '/files',    label: 'Файли' },
   ]
 
-  // transparent at top → glassmorphism on scroll (like tjheatpump.com.ua)
-  const navBg = scrolled ? 'rgba(255,255,255,0.88)' : 'transparent'
+  // transparent at top → glassmorphism on scroll
+  const navBg = scrolled
+    ? 'rgba(255,255,255,0.88)'
+    : 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
   const navBackdrop = scrolled ? 'blur(20px)' : 'none'
   const navShadow = scrolled ? '0 2px 32px rgba(0,0,0,0.12)' : 'none'
   const navBorderB = scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent'
-  // text color: white on transparent hero, dark on scrolled white bg
-  const linkCol = scrolled ? '#333' : 'rgba(255,255,255,0.92)'
-  const linkColMuted = scrolled ? '#555' : 'rgba(255,255,255,0.65)'
+  // text: white on dark hero, dark on white glassmorphism
+  const linkCol = scrolled ? '#1a1a1a' : 'rgba(255,255,255,0.95)'
+  const linkColMuted = scrolled ? '#555' : 'rgba(255,255,255,0.75)'
 
   return (
     <>
       {/* ─── Main navbar ─── */}
-      <header className="sticky top-0 z-50 transition-all duration-500"
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{ background: navBg, backdropFilter: navBackdrop, WebkitBackdropFilter: navBackdrop, boxShadow: navShadow, borderBottom: navBorderB }}>
 
         {/* orange accent line bottom — only when scrolled */}
