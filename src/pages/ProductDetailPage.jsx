@@ -1,6 +1,10 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, Download, Phone, Package, Play, FileText, Wrench, Image, X, ZoomIn } from 'lucide-react'
+import {
+  ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
+  Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
+  Truck, CreditCard, ShieldCheck, Factory, Headphones, MapPin, Banknote
+} from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { imgUrl } from '../utils/imgUrl'
@@ -9,11 +13,38 @@ import SEO from '../components/SEO'
 import { trackViewItem, trackAddToCart } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
 
+// ── Accordion ──────────────────────────────────────────────────────────────────
+function Accordion({ icon, title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen)
+  return (
+    <div className="border border-gray-200 rounded-lg overflow-hidden">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors"
+      >
+        <span className="text-[var(--primary)] flex-shrink-0">{icon}</span>
+        <span className="font-semibold text-sm text-gray-800 flex-1">{title}</span>
+        <ChevronDown
+          size={15}
+          className={`text-gray-400 transition-transform duration-200 flex-shrink-0 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+      {open && (
+        <div className="px-4 pb-4 pt-2 text-sm text-gray-600 border-t border-gray-100 space-y-2">
+          {children}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── ImageGallery ───────────────────────────────────────────────────────────────
 function ImageGallery({ images, name }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const touchStart = useRef(null)
   const thumbsRef = useRef(null)
+  const vThumbsRef = useRef(null)
 
   const all = images?.length > 0 ? images : []
   const main = all[active] || null
@@ -22,7 +53,6 @@ function ImageGallery({ images, name }) {
   const prev = useCallback(() => setActive(i => (i - 1 + total) % total), [total])
   const next = useCallback(() => setActive(i => (i + 1) % total), [total])
 
-  // Keyboard navigation
   useEffect(() => {
     if (!lightbox) return
     const onKey = e => {
@@ -34,14 +64,15 @@ function ImageGallery({ images, name }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [lightbox, prev, next])
 
-  // Scroll active thumb into view
+  // Scroll active thumb into view (both refs)
   useEffect(() => {
-    if (!thumbsRef.current) return
-    const btn = thumbsRef.current.children[active]
-    btn?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    ;[thumbsRef, vThumbsRef].forEach(ref => {
+      if (!ref.current) return
+      const btn = ref.current.children[active]
+      btn?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    })
   }, [active])
 
-  // Touch/swipe handlers (main image + lightbox)
   const onTouchStart = e => { touchStart.current = e.touches[0].clientX }
   const onTouchEnd = e => {
     if (touchStart.current === null) return
@@ -50,76 +81,91 @@ function ImageGallery({ images, name }) {
     touchStart.current = null
   }
 
+  const ThumbButton = ({ img, i, size = 'md' }) => (
+    <button
+      onClick={() => setActive(i)}
+      className={`flex-shrink-0 border-2 rounded overflow-hidden transition-all hover:scale-105 bg-white
+        ${size === 'sm' ? 'w-14 h-14' : 'w-[66px] h-[66px]'}`}
+      style={{ borderColor: active === i ? 'var(--accent)' : '#e5e7eb' }}
+    >
+      <img src={img} alt={`фото ${i + 1}`} className="w-full h-full object-contain p-0.5" />
+    </button>
+  )
+
   return (
     <div className="card overflow-hidden">
-      {/* Main image area */}
-      <div
-        className="relative flex items-center justify-center bg-gray-50 select-none"
-        style={{ minHeight: 340 }}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        {main ? (
-          <img
-            src={main} alt={name}
-            className="max-h-80 max-w-full object-contain p-6 cursor-zoom-in"
-            onClick={() => setLightbox(true)}
-            draggable={false}
-          />
-        ) : (
-          <div className="text-gray-200 text-8xl select-none">⚙️</div>
-        )}
-
-        {/* Zoom hint */}
-        {main && (
-          <button
-            onClick={() => setLightbox(true)}
-            className="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-all"
-            title="Збільшити"
+      {/* Desktop: thumbnails LEFT + main image RIGHT */}
+      <div className="flex">
+        {total > 1 && (
+          <div
+            ref={vThumbsRef}
+            className="hidden md:flex flex-col gap-2 p-3 border-r border-gray-100 overflow-y-auto flex-shrink-0"
+            style={{ width: 90, maxHeight: 420 }}
           >
-            <ZoomIn size={14} />
-          </button>
+            {all.map((img, i) => <ThumbButton key={i} img={img} i={i} />)}
+          </div>
         )}
 
-        {/* Prev / Next arrows */}
-        {total > 1 && (
-          <>
-            <button
-              onClick={prev}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all hover:scale-110"
-            >
-              <ChevronLeft size={18} className="text-gray-700" />
-            </button>
-            <button
-              onClick={next}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all hover:scale-110"
-            >
-              <ChevronRight size={18} className="text-gray-700" />
-            </button>
-          </>
-        )}
+        {/* Main image */}
+        <div
+          className="relative flex items-center justify-center bg-gray-50 flex-1 select-none"
+          style={{ minHeight: 340 }}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          {main ? (
+            <img
+              src={main} alt={name}
+              className="max-h-80 max-w-full object-contain p-6 cursor-zoom-in"
+              onClick={() => setLightbox(true)}
+              draggable={false}
+            />
+          ) : (
+            <div className="text-gray-200 text-8xl">⚙️</div>
+          )}
 
-        {/* Counter */}
-        {total > 1 && (
-          <span className="absolute bottom-3 right-3 bg-black/40 text-white text-xs px-2 py-1 rounded font-mono">
-            {active + 1}/{total}
-          </span>
-        )}
+          {main && (
+            <button
+              onClick={() => setLightbox(true)}
+              className="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-all"
+              title="Збільшити"
+            >
+              <ZoomIn size={14} />
+            </button>
+          )}
+
+          {total > 1 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all hover:scale-110"
+              >
+                <ChevronLeft size={18} className="text-gray-700" />
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all hover:scale-110"
+              >
+                <ChevronRight size={18} className="text-gray-700" />
+              </button>
+            </>
+          )}
+
+          {total > 1 && (
+            <span className="absolute bottom-3 right-3 bg-black/40 text-white text-xs px-2 py-1 rounded font-mono">
+              {active + 1}/{total}
+            </span>
+          )}
+        </div>
       </div>
 
-      {/* Thumbnails */}
+      {/* Mobile: thumbnails BELOW */}
       {total > 1 && (
-        <div ref={thumbsRef} className="flex gap-2 p-3 border-t border-gray-100 overflow-x-auto scrollbar-thin">
-          {all.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className="flex-shrink-0 w-16 h-16 border-2 rounded transition-all overflow-hidden hover:scale-105"
-              style={{ borderColor: active === i ? 'var(--accent)' : '#e5e7eb' }}
-            >
-              <img src={img} alt={`${i + 1}`} className="w-full h-full object-contain" />
-            </button>
-          ))}
+        <div
+          ref={thumbsRef}
+          className="flex md:hidden gap-2 p-3 border-t border-gray-100 overflow-x-auto"
+        >
+          {all.map((img, i) => <ThumbButton key={i} img={img} i={i} size="sm" />)}
         </div>
       )}
 
@@ -131,22 +177,17 @@ function ImageGallery({ images, name }) {
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {/* Close */}
           <button
             className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-10"
             onClick={() => setLightbox(false)}
           >
             <X size={22} />
           </button>
-
-          {/* Counter */}
           {total > 1 && (
             <span className="absolute top-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
               {active + 1} / {total}
             </span>
           )}
-
-          {/* Prev */}
           {total > 1 && (
             <button
               className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
@@ -155,16 +196,12 @@ function ImageGallery({ images, name }) {
               <ChevronLeft size={26} />
             </button>
           )}
-
-          {/* Image */}
           <img
             src={main} alt={name}
-            className="max-h-[88vh] max-w-[88vw] object-contain"
+            className="max-h-[82vh] max-w-[82vw] object-contain"
             onClick={e => e.stopPropagation()}
             draggable={false}
           />
-
-          {/* Next */}
           {total > 1 && (
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
@@ -173,8 +210,6 @@ function ImageGallery({ images, name }) {
               <ChevronRight size={26} />
             </button>
           )}
-
-          {/* Thumbnail strip in lightbox */}
           {total > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 overflow-x-auto max-w-[80vw] px-2">
               {all.map((img, i) => (
@@ -195,6 +230,7 @@ function ImageGallery({ images, name }) {
   )
 }
 
+// ── Main component ─────────────────────────────────────────────────────────────
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams()
   const { products, lang, addToCart, siteSettings, eurRate } = useApp()
@@ -229,29 +265,16 @@ export default function ProductDetailPage() {
     return list
   }, [product, pt])
 
-  // Track product view when product loads
   useEffect(() => {
     if (product) {
-      trackViewItem({
-        sku: product.sku,
-        id: product.id,
-        name,
-        price: product.price,
-        categorySlug,
-      })
+      trackViewItem({ sku: product.sku, id: product.id, name, price: product.price, categorySlug })
     }
   }, [product?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleAddToCart() {
     if (!product) return
     addToCart(product, qty)
-    trackAddToCart({
-      sku: product.sku,
-      id: product.id,
-      name,
-      price: product.price,
-      categorySlug,
-    }, qty)
+    trackAddToCart({ sku: product.sku, id: product.id, name, price: product.price, categorySlug }, qty)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }
@@ -270,7 +293,6 @@ export default function ProductDetailPage() {
   const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
   const desc = (lang !== 'uk' && product[`desc_${lang}`]) ? product[`desc_${lang}`] : (product.desc || product.description || '')
 
-  // Build images list (deduplicated, with base path applied)
   const allImages = useMemo(() => {
     const seen = new Set()
     const result = []
@@ -280,12 +302,23 @@ export default function ProductDetailPage() {
     return result
   }, [product])
 
-  // Extract YouTube ID from video URL
   const ytId = product.video ? (
     product.video.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/\s]{11})/)?.[1]
   ) : null
 
   const activeTab = tabs.find(t => t.key === tab) ? tab : tabs[0]?.key
+
+  // Key specs for pills (skip Артикул, take up to 4)
+  const specPills = useMemo(() => {
+    if (!product.specs) return []
+    return Object.entries(product.specs)
+      .filter(([k]) => !['Артикул', 'Назва'].includes(k))
+      .slice(0, 4)
+  }, [product.specs])
+
+  const priceUAH = product.price
+    ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
+    : null
 
   return (
     <>
@@ -324,103 +357,235 @@ export default function ProductDetailPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
 
-          {/* Gallery */}
+          {/* Gallery — vertical thumbs on desktop */}
           <ImageGallery images={allImages} name={name} />
 
-          {/* Info */}
+          {/* ── Right column ── */}
           <div>
-            {/* Badges */}
+            {/* Status badges */}
             <div className="flex flex-wrap gap-2 mb-3">
               {product.inStock ? (
-                <span className="bg-green-50 text-green-600 text-xs font-medium px-2.5 py-1">{pt.inStock}</span>
+                <span className="bg-green-50 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-green-100">
+                  ✓ {pt.inStock || 'В наявності'}
+                </span>
               ) : (
-                <span className="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1">{cat.outOfStock}</span>
+                <span className="bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  {cat.outOfStock || 'Під замовлення'}
+                </span>
               )}
-              <span className="bg-orange-50 text-[var(--accent)] text-xs font-medium px-2.5 py-1">🇺🇦 Виробник: Termojet</span>
+              <span className="bg-orange-50 text-[var(--accent)] text-xs font-semibold px-2.5 py-1 rounded-full border border-orange-100">
+                🇺🇦 Виробник: Termojet
+              </span>
             </div>
 
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">{name}</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-2">{name}</h1>
 
             {product.sku && (
-              <p className="text-sm text-gray-400 mb-4">{pt.sku}: <span className="font-mono text-gray-600">{product.sku}</span></p>
+              <p className="text-sm text-gray-400 mb-4">
+                {pt.sku || 'Артикул'}: <span className="font-mono text-gray-600">{product.sku}</span>
+              </p>
             )}
 
-            {/* Short desc preview */}
+            {/* Spec pills */}
+            {specPills.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {specPills.map(([k, v]) => (
+                  <span
+                    key={k}
+                    className="inline-flex items-center gap-1 bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-full font-medium"
+                  >
+                    <span className="text-gray-400">{k}:</span> {v}
+                  </span>
+                ))}
+                {Object.keys(product.specs || {}).length > 4 && (
+                  <button
+                    onClick={() => setTab('specs')}
+                    className="text-xs text-[var(--primary)] hover:underline px-1 py-1.5"
+                  >
+                    всі характеристики →
+                  </button>
+                )}
+              </div>
+            )}
+
+            {/* Short desc */}
             {desc && (
               <p className="text-sm text-gray-500 leading-relaxed mb-5 line-clamp-3">{desc}</p>
             )}
 
             {/* Price */}
-            <div className="mb-6">
-              {product.price ? (
-                <div className="text-3xl font-black text-gray-900">
-                  {Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty).toLocaleString('uk-UA')} <span className="text-lg text-gray-500">{common.uah}</span>
+            <div className="mb-4">
+              {priceUAH ? (
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-gray-900">
+                    {priceUAH.toLocaleString('uk-UA')}
+                  </span>
+                  <span className="text-lg text-gray-500">{common.uah || 'грн'}</span>
+                  {qty > 1 && (
+                    <span className="text-sm text-gray-400 ml-1">
+                      ({Math.round(priceUAH / qty).toLocaleString('uk-UA')} / шт.)
+                    </span>
+                  )}
                 </div>
               ) : (
-                <div className="text-lg text-gray-500">Ціна по запиту</div>
+                <div className="text-lg text-gray-500 font-medium">Ціна по запиту</div>
               )}
             </div>
 
-            {/* Quantity + Cart */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center border border-gray-200 overflow-hidden">
-                <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600">
+            {/* Trust row */}
+            <div className="grid grid-cols-2 gap-2 mb-5 p-3 bg-gray-50 rounded-xl">
+              {[
+                { icon: <Factory size={14} />, text: 'Власне виробництво' },
+                { icon: <ShieldCheck size={14} />, text: 'Гарантія 2 роки' },
+                { icon: <Truck size={14} />, text: 'Доставка по Україні' },
+                { icon: <Headphones size={14} />, text: 'Технічна підтримка' },
+              ].map(({ icon, text }) => (
+                <div key={text} className="flex items-center gap-2 text-xs text-gray-600">
+                  <span className="text-[var(--primary)]">{icon}</span>
+                  {text}
+                </div>
+              ))}
+            </div>
+
+            {/* Qty + Cart */}
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center border border-gray-200 rounded overflow-hidden">
+                <button
+                  onClick={() => setQty(q => Math.max(1, q - 1))}
+                  className="w-10 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600"
+                >
                   <Minus size={14} />
                 </button>
-                <span className="w-10 text-center font-semibold">{qty}</span>
-                <button onClick={() => setQty(q => q + 1)} className="w-10 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600">
+                <span className="w-10 text-center font-semibold text-sm">{qty}</span>
+                <button
+                  onClick={() => setQty(q => q + 1)}
+                  className="w-10 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600"
+                >
                   <Plus size={14} />
                 </button>
               </div>
               <button
                 onClick={handleAddToCart}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 font-semibold transition-all ${added ? 'bg-green-500 text-white' : 'bg-[var(--primary)] text-white hover:bg-[var(--primary-light)]'}`}
+                className={`flex-1 flex items-center justify-center gap-2 py-3 font-semibold rounded transition-all ${
+                  added
+                    ? 'bg-green-500 text-white'
+                    : 'bg-[var(--primary)] text-white hover:bg-[var(--primary-light)]'
+                }`}
               >
                 <ShoppingCart size={18} />
-                {added ? '✓ Додано!' : pt.addToCart}
+                {added ? '✓ Додано!' : pt.addToCart || 'Додати в кошик'}
               </button>
             </div>
 
             <a
               href={`tel:${siteSettings.phone}`}
-              className="btn-secondary w-full justify-center py-3 mb-5"
+              className="btn-secondary w-full justify-center py-3 mb-5 rounded"
             >
               <Phone size={16} />
-              {pt.askConsult}
+              {pt.askConsult || 'Замовити консультацію'}
             </a>
 
-            {/* Meta */}
-            <div className="border-t border-gray-100 pt-5 space-y-2 text-sm">
-              {category && (
-                <div className="flex items-center justify-between text-gray-500">
-                  <span>{pt.category}:</span>
-                  <Link to={`/catalog/${categorySlug}`} className="font-medium text-[var(--primary)] hover:underline">
-                    {category.name[lang] || category.name.uk}
+            {/* ── Accordion sections ── */}
+            <div className="space-y-2">
+              <Accordion icon={<Truck size={16} />} title="Доставка">
+                <div className="space-y-2.5">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-base mt-0.5">📦</span>
+                    <div>
+                      <p className="font-medium text-gray-800">Нова Пошта</p>
+                      <p className="text-gray-500 text-xs mt-0.5">По всій Україні — до відділення або кур'єром</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-base mt-0.5">🚚</span>
+                    <div>
+                      <p className="font-medium text-gray-800">Власна доставка</p>
+                      <p className="text-gray-500 text-xs mt-0.5">Київ, Житомир та прилеглі регіони</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <MapPin size={15} className="text-gray-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-gray-800">Самовивіз</p>
+                      <p className="text-gray-500 text-xs mt-0.5">Офіси в Києві та Житомирі</p>
+                    </div>
+                  </div>
+                </div>
+              </Accordion>
+
+              <Accordion icon={<CreditCard size={16} />} title="Оплата">
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <Banknote size={15} className="text-gray-400 flex-shrink-0" />
+                    <span className="text-gray-700">Готівка при отриманні</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CreditCard size={15} className="text-gray-400 flex-shrink-0" />
+                    <span className="text-gray-700">Онлайн-оплата (Visa / Mastercard)</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-gray-400 text-xs font-bold mt-0.5 flex-shrink-0">₴</span>
+                    <div>
+                      <p className="text-gray-700">Безготівковий розрахунок з ПДВ</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-gray-400 text-xs font-bold mt-0.5 flex-shrink-0">₴</span>
+                    <div>
+                      <p className="text-gray-700">Безготівковий розрахунок без ПДВ</p>
+                    </div>
+                  </div>
+                </div>
+              </Accordion>
+
+              <Accordion icon={<ShieldCheck size={16} />} title="Гарантія та сервіс">
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base">🛡️</span>
+                    <span className="text-gray-700">Гарантія <strong>2 роки</strong> на все обладнання</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base">🔧</span>
+                    <span className="text-gray-700">Гарантійний та постгарантійний сервіс</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base">📞</span>
+                    <span className="text-gray-700">Технічна підтримка та консультації</span>
+                  </div>
+                  <Link
+                    to="/warranty"
+                    className="inline-block text-xs text-[var(--primary)] hover:underline mt-1"
+                  >
+                    Детальні умови гарантії →
                   </Link>
                 </div>
-              )}
-              <div className="flex items-center justify-between text-gray-500">
-                <span>Виробник:</span>
-                <span className="font-medium text-gray-900">Termojet (Україна) 🇺🇦</span>
-              </div>
-              {allImages.length > 0 && (
-                <div className="flex items-center justify-between text-gray-500">
-                  <span className="flex items-center gap-1"><Image size={13} /> Фото:</span>
-                  <span className="font-medium text-gray-900">{allImages.length} шт.</span>
-                </div>
-              )}
+              </Accordion>
             </div>
+
+            {/* Category meta */}
+            {category && (
+              <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+                <span>Категорія:</span>
+                <Link to={`/catalog/${categorySlug}`} className="font-medium text-[var(--primary)] hover:underline">
+                  {category.name[lang] || category.name.uk}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Tabs */}
+        {/* ── Tabs ── */}
         <div className="card overflow-hidden mb-10">
           <div className="flex border-b border-gray-100 overflow-x-auto">
             {tabs.map(({ key, label, icon: Icon }) => (
               <button
                 key={key}
                 onClick={() => setTab(key)}
-                className={`flex items-center gap-1.5 px-5 py-4 text-sm font-medium transition-colors border-b-2 -mb-px whitespace-nowrap flex-shrink-0 ${activeTab === key ? 'border-[var(--primary)] text-[var(--primary)]' : 'border-transparent text-gray-500 hover:text-gray-900'}`}
+                className={`flex items-center gap-1.5 px-5 py-4 text-sm font-medium transition-colors border-b-2 -mb-px whitespace-nowrap flex-shrink-0 ${
+                  activeTab === key
+                    ? 'border-[var(--primary)] text-[var(--primary)]'
+                    : 'border-transparent text-gray-500 hover:text-gray-900'
+                }`}
               >
                 <Icon size={14} />
                 {label}
@@ -498,10 +663,10 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Related */}
+        {/* Related products */}
         {related.length > 0 && (
           <div>
-            <h2 className="font-bold text-xl mb-5">{pt.related}</h2>
+            <h2 className="font-bold text-xl mb-5">{pt.related || 'Схожі товари'}</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {related.map(p => {
                 const pName = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
@@ -509,16 +674,21 @@ export default function ProductDetailPage() {
                   <Link
                     key={p.id}
                     to={`/catalog/${categorySlug}/${p.slug || p.id}`}
-                    className="card card-hover p-4 flex flex-col"
+                    className="card card-hover p-4 flex flex-col group"
                   >
                     {p.image ? (
-                      <img src={imgUrl(p.image)} alt={pName} className="h-32 object-contain mb-3" />
+                      <img
+                        src={imgUrl(p.image)} alt={pName}
+                        className="h-32 object-contain mb-3 transition-transform group-hover:scale-105"
+                      />
                     ) : (
                       <div className="h-32 flex items-center justify-center text-4xl text-gray-200 mb-3">⚙️</div>
                     )}
-                    <h3 className="text-xs font-medium text-gray-900 line-clamp-2">{pName}</h3>
+                    <h3 className="text-xs font-medium text-gray-900 line-clamp-2 flex-1">{pName}</h3>
                     {p.price && (
-                      <span className="text-sm font-bold text-gray-900 mt-1">{formatPrice(p.price, p.currency, eurRate)}</span>
+                      <span className="text-sm font-bold text-gray-900 mt-2">
+                        {formatPrice(p.price, p.currency, eurRate)}
+                      </span>
                     )}
                   </Link>
                 )
