@@ -1785,8 +1785,10 @@ export const PRODUCTS = [
     "price": "10483",
     "currency": "UAH",
     "categorySlug": "rozpodilchi-kolektory",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0578-scaled.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0578-scaled.jpg"
+    ],
     "shortDesc": "Розподільчий колектор К32В.125(150) в теплоізоляції. 3 виходи вгору + 1 вгору бічний. Міжосьова відстань 125 мм. Кронштейни в комплекті.",
     "description": "Розподільчий колектор К32В.125(150) в теплоізоляції. 3 виходи вгору + 1 вгору бічний. Міжосьова відстань 125 мм. Кронштейни в комплекті.",
     "specs": {
