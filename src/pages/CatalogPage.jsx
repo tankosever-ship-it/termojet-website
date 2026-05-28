@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Search, ChevronRight, X, ArrowUpRight, Plus } from 'lucide-react'
+import { Search, ChevronRight, X, ArrowUpRight, Plus, ShoppingCart } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
@@ -459,7 +459,7 @@ export default function CatalogPage() {
           </div>
         ) : (
           <motion.div variants={stagger} initial="hidden" animate="show"
-            className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map(product => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
@@ -489,7 +489,7 @@ export default function CatalogPage() {
                         <button onClick={() => addToCart(product)}
                           className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 transition-colors"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
-                          <Plus size={12} /> Швидка заявка
+                          <ShoppingCart size={12} /> Купити в 1 клік
                         </button>
                         <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}
                           className="w-9 h-9 flex items-center justify-center border border-[var(--ink-200)] hover:border-gray-400 transition-colors text-gray-500 hover:text-gray-800">
@@ -504,7 +504,7 @@ export default function CatalogPage() {
                       )}
 
                       <Link to={`/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`}>
-                        <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors line-clamp-2 mb-3 leading-snug">
+                        <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors mb-3 leading-snug">
                           {name}
                         </h3>
                       </Link>
