@@ -116,9 +116,9 @@ export const CATEGORIES = [
     slug: 'kolektory-pidloha',
     icon: 'Grid3X3',
     image: `${BASE}/2024/04/1713881601309906-800x800.jpg`,
-    name: { uk: 'Колектори теплої підлоги / радіаторного опалення', en: 'Underfloor / Radiator Heating Manifolds', pl: 'Kolektory ogrzewania podłogowego / grzejnikowego', fr: 'Collecteurs chauffage sol / radiateurs', de: 'Fußboden- / Heizkörperheizungsverteiler' },
-    desc: { uk: 'Розподільчі гребінки для теплої підлоги та радіаторів', en: 'Distribution manifolds for underfloor and radiator heating', pl: 'Rozdzielacze dla ogrzewania podłogowego i grzejnikowego', fr: 'Collecteurs de distribution pour chauffage sol et radiateurs', de: 'Verteiler für Fußboden- und Heizkörperheizung' },
-    subcategories: ['Розподільчі гребінки', 'З витратомірами', 'Змішувальні вузли'],
+    name: { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem' },
+    desc: { uk: 'Колектори, змішувальні вузли та шафи для теплої підлоги', en: 'Manifolds, mixing units and cabinets for underfloor heating', pl: 'Kolektory, węzły mieszające i szafy dla ogrzewania podłogowego', fr: 'Collecteurs, nœuds de mélange et armoires pour chauffage sol', de: 'Verteiler, Mischeinheiten und Schränke für Fußbodenheizung' },
+    subcategories: ['Розподільчі гребінки', 'З витратомірами', 'Змішувальні вузли', 'Шафи колекторні'],
     color: '#0891b2',
   },
   {
