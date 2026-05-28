@@ -14,32 +14,64 @@ const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transi
 const stagger = { show: { transition: { staggerChildren: 0.04 } } }
 
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
+const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
+
 const CATEGORY_FILTERS = {
   klapany: {
     groups: [
       {
         key: 'type',
-        label: 'Тип',
+        label: 'Тип клапана',
         options: [
-          { label: '3-ходові крани',   test: p => /триход|3-ход/i.test(p.name) && !/привід|приводом/i.test(p.name) && !/чотирьох/i.test(p.name) },
-          { label: '4-ходові крани',   test: p => /чотирьохход|4-ход/i.test(p.name) },
-          { label: 'Електроприводи',   test: p => /привід|servopryvod/i.test(p.name) },
+          { label: '3-ходові',        test: p => /триход|3-ход/i.test(p.name) && !/чотирьох/i.test(p.name) && !/електропривід/i.test(p.name) },
+          { label: '4-ходові',        test: p => /чотирьохход|4-ход/i.test(p.name) },
+          { label: 'Зональний клапан',test: p => /зональн/i.test(p.name) },
+          { label: 'Електропривід',   test: p => /електропривід/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'thermostat',
+        label: 'Вид',
+        options: [
+          { label: 'Термостатичний',    test: p => /термостат/i.test(p.name) },
+          { label: 'Нетермостатичний',  test: p => !/термостат/i.test(p.name) && !/електропривід/i.test(p.name) },
         ],
       },
       {
         key: 'thread',
         label: 'Різьба',
         options: [
-          { label: 'Внутрішня різьба', test: p => /внутрішн/i.test(p.name) },
-          { label: 'Зовнішня різьба',  test: p => /зовнішн|Зовн\./i.test(p.name) },
+          { label: 'Внутрішня', test: p => /внутрішн/i.test(p.name) },
+          { label: 'Зовнішня',  test: p => /зовнішн|Зовн\./i.test(p.name) },
         ],
       },
       {
-        key: 'subtype',
-        label: 'Вид',
+        key: 'dn',
+        label: 'Діаметр',
         options: [
-          { label: 'Термостатичні',    test: p => /термостат/i.test(p.name) },
-          { label: 'Зональні',         test: p => /зональн/i.test(p.name) },
+          { label: 'DN20 / 3/4"', test: p => /DN20/i.test(p.name) || /3\/4"/.test(p.name) },
+          { label: 'DN25 / 1"',   test: p => /DN25/i.test(p.name) || (/\b1"/.test(p.name) && !/1 1\//.test(p.name) && !/DN20/.test(p.name)) },
+          { label: 'DN32 / 1¼"',  test: p => /DN32/i.test(p.name) || /1 1\/4"/.test(p.name) },
+          { label: 'DN40 / 1½"',  test: p => /DN40/i.test(p.name) || /1 1\/2"/.test(p.name) },
+          { label: 'DN50 / 2"',   test: p => /DN50/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'kvs',
+        label: 'KVS, м³/год',
+        options: [
+          { label: 'до 3',   test: p => { const v = kvsNum(p); return v !== null && v <= 3 } },
+          { label: '3–10',   test: p => { const v = kvsNum(p); return v !== null && v > 3 && v <= 10 } },
+          { label: '10–20',  test: p => { const v = kvsNum(p); return v !== null && v > 10 && v <= 20 } },
+          { label: '20+',    test: p => { const v = kvsNum(p); return v !== null && v > 20 } },
+        ],
+      },
+      {
+        key: 'temprange',
+        label: 'Діапазон темп.',
+        options: [
+          { label: '20–45°C (санітарна)', test: p => /20-4[35]/i.test(p.name) },
+          { label: '35–60°C (опалення)',  test: p => /35-60/i.test(p.name) },
         ],
       },
     ],
@@ -51,20 +83,36 @@ const CATEGORY_FILTERS = {
         key: 'type',
         label: 'Тип',
         options: [
-          { label: 'Без змішувача',  test: p => /без змішувача/i.test(p.name) && !/бойлер/i.test(p.name) },
-          { label: 'Зі змішувачем', test: p => /зі змішувачем/i.test(p.name) },
-          { label: 'З термокраном', test: p => /термокраном|термостатичним краном/i.test(p.name) },
-          { label: 'Бойлерна',      test: p => /бойлер/i.test(p.name) },
+          { label: 'Без змішувача',       test: p => /без змішувача/i.test(p.name) && !/бойлер/i.test(p.name) },
+          { label: 'Зі змішувачем',       test: p => /зі змішувачем/i.test(p.name) },
+          { label: 'З термокраном',       test: p => /термокраном|термостатичним краном/i.test(p.name) },
+          { label: 'З приводом A-413',    test: p => /A-413|A413/i.test(p.name) },
+          { label: 'Бойлерна',            test: p => /бойлер/i.test(p.name) },
         ],
       },
       {
         key: 'connection',
         label: 'З\'єднання',
         options: [
-          { label: '1"',      test: p => / 1"/.test(p.name) && !/1 1\//.test(p.name) },
-          { label: '1 1/4"',  test: p => /1 1\/4"/.test(p.name) },
-          { label: '1 1/2"',  test: p => /1 1\/2"/.test(p.name) },
-          { label: '2" і більше', test: p => / 2"/.test(p.name) || /2 1\/2"/.test(p.name) },
+          { label: '1"',     test: p => / 1"/.test(p.name) && !/1 1\//.test(p.name) },
+          { label: '1 1/4"', test: p => /1 1\/4"/.test(p.name) },
+        ],
+      },
+      {
+        key: 'purpose',
+        label: 'Призначення',
+        options: [
+          { label: 'Тепла підлога', test: p => /підлог/i.test(p.description || '') },
+          { label: 'Радіатори',     test: p => /радіатор/i.test(p.description || '') },
+          { label: 'ГВС та бойлер', test: p => /бойлер|ГВС/i.test((p.description || '') + p.name) },
+        ],
+      },
+      {
+        key: 'side',
+        label: 'Сторона подачі',
+        options: [
+          { label: 'Права', test: p => !/ Л /.test(p.name) && !/ Л$/.test(p.name) && !/\(.*Л\)/.test(p.name) },
+          { label: 'Ліва',  test: p => / Л /.test(p.name) || / Л$/.test(p.name) || /\.150-Л/.test(p.name) },
         ],
       },
     ],
@@ -73,21 +121,34 @@ const CATEGORY_FILTERS = {
   nasosy: {
     groups: [
       {
-        key: 'brand',
-        label: 'Бренд',
+        key: 'seriya',
+        label: 'Серія',
         options: [
-          { label: 'Termojet APM',  test: p => /\bAPM\b/.test(p.name) },
-          { label: 'Termojet APE/XPS', test: p => /\bAPE\b|\bXPS\b|\bSPE\b|\bHSB\b/.test(p.name) },
-          { label: 'Grundfos',      test: p => /grundfos/i.test(p.name) },
-          { label: 'WILO',          test: p => /\bwilo\b/i.test(p.name) },
+          { label: 'APE',  test: p => /\bAPE\b/.test(p.name) },
+          { label: 'APM',  test: p => /\bAPM\b/.test(p.name) && !/APM-F/.test(p.name) },
+          { label: 'APM-F',test: p => /\bAPM-F\b/.test(p.name) },
+          { label: 'SPE',  test: p => /\bSPE\b/.test(p.name) },
+          { label: 'HBS',  test: p => /\bHBS\b/.test(p.name) },
+          { label: 'WT',   test: p => /\bWT\b/.test(p.name) },
         ],
       },
       {
         key: 'pumptype',
         label: 'Тип',
         options: [
-          { label: 'Циркуляційний',      test: p => /циркуляційний/i.test(p.name) || /\bAPM\b|\bXPS\b/.test(p.name) || /grundfos|wilo/i.test(p.name) },
-          { label: 'Рециркуляційний ГВС', test: p => /рециркул|SPE|HSB/i.test(p.name) },
+          { label: 'Циркуляційний',        test: p => /циркуляційний/i.test(p.name) },
+          { label: 'Рециркуляційний ГВС',  test: p => /рециркул/i.test(p.name) },
+          { label: 'Каналізаційна установка', test: p => /каналізац/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'mountlen',
+        label: 'Монтажна довжина',
+        options: [
+          { label: '130 мм',     test: p => /\/130\b/.test(p.name) },
+          { label: '180 мм',     test: p => /\/180\b/.test(p.name) },
+          { label: '220–250 мм', test: p => /\/220\b|[-\/]250\b/.test(p.name) },
+          { label: '280–340 мм', test: p => /[-\/]280\b|[-\/]340\b/.test(p.name) },
         ],
       },
     ],
@@ -99,19 +160,19 @@ const CATEGORY_FILTERS = {
         key: 'outlets',
         label: 'Виходів',
         options: [
-          { label: '2 виходи', test: p => /^К[Г]?[С]?2/.test(p.name) || /2\+1/.test(p.name) || /2 вгору|2 вниз/.test(p.name) },
-          { label: '3 виходи', test: p => /^К[Г]?[С]?3/.test(p.name) || /3\+1/.test(p.name) || /3 вгору/.test(p.name) },
-          { label: '4 виходи', test: p => /^К[Г]?[С]?4/.test(p.name) || /4\+1/.test(p.name) || /4 вгору/.test(p.name) },
-          { label: '5+ виходів', test: p => /^К[Г]?[С]?[5-9]/.test(p.name) || /[5-9]\+1/.test(p.name) || /[5-9] вгору/.test(p.name) },
+          { label: '2 виходи',  test: p => /^К[Г]?[С]?2/.test(p.name) || /2\+1/.test(p.name) || /2 вгору|2 вниз/.test(p.name) },
+          { label: '3 виходи',  test: p => /^К[Г]?[С]?3/.test(p.name) || /3\+1/.test(p.name) || /3 вгору/.test(p.name) },
+          { label: '4 виходи',  test: p => /^К[Г]?[С]?4/.test(p.name) || /4\+1/.test(p.name) || /4 вгору/.test(p.name) },
+          { label: '5+ виходів',test: p => /^К[Г]?[С]?[5-9]/.test(p.name) || /[5-9]\+1/.test(p.name) || /[5-9] вгору/.test(p.name) },
         ],
       },
       {
         key: 'direction',
-        label: 'Підключення',
+        label: 'Напрямок виходів',
         options: [
-          { label: 'Вгору',        test: p => /вгору/i.test(p.name) && !/вниз/i.test(p.name) },
-          { label: 'Вниз',         test: p => /вниз/i.test(p.name) && !/вгору/i.test(p.name) },
-          { label: 'Вгору+Вниз',   test: p => /вгору/i.test(p.name) && /вниз/i.test(p.name) },
+          { label: 'Вгору',      test: p => /вгору/i.test(p.name) && !/вниз/i.test(p.name) },
+          { label: 'Вниз',       test: p => /вниз/i.test(p.name) && !/вгору/i.test(p.name) },
+          { label: 'Вгору+Вниз', test: p => /вгору/i.test(p.name) && /вниз/i.test(p.name) },
         ],
       },
       {
@@ -120,7 +181,39 @@ const CATEGORY_FILTERS = {
         options: [
           { label: 'Стандарт DN125', test: p => /\.125\(2[024]0\)/.test(p.name) },
           { label: 'Стандарт DN150', test: p => /\.150\(3[05]0\)/.test(p.name) },
-          { label: 'КГС Mega',       test: p => /^КГС/.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'kolektory-z-hidrostrilkoyu': {
+    groups: [
+      {
+        key: 'outlets',
+        label: 'Виходів',
+        options: [
+          { label: '2 виходи',  test: p => /^КГС2/.test(p.name) || /2\+1/.test(p.name) },
+          { label: '3 виходи',  test: p => /^КГС3/.test(p.name) || /3\+1/.test(p.name) },
+          { label: '4 виходи',  test: p => /^КГС4/.test(p.name) || /4\+1/.test(p.name) },
+          { label: '5+ виходів',test: p => /^КГС[5-9]/.test(p.name) || /[5-9]\+1/.test(p.name) },
+        ],
+      },
+      {
+        key: 'direction',
+        label: 'Напрямок виходів',
+        options: [
+          { label: 'Вгору',      test: p => /вгору/i.test(p.name) && !/вниз/i.test(p.name) && !/боков/i.test(p.name) },
+          { label: 'Вниз',       test: p => /вниз/i.test(p.name) && !/вгору/i.test(p.name) && !/боков/i.test(p.name) },
+          { label: 'Вгору+Вниз', test: p => /вгору/i.test(p.name) && /вниз/i.test(p.name) },
+          { label: 'Боковий',    test: p => /боков/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'interaxis',
+        label: 'Міжосьова відстань',
+        options: [
+          { label: '150 мм', test: p => /\.125\(150\)/.test(p.name) },
+          { label: '200 мм', test: p => /\.125\(200\)/.test(p.name) },
         ],
       },
     ],
@@ -132,19 +225,19 @@ const CATEGORY_FILTERS = {
         key: 'septype',
         label: 'Тип',
         options: [
-          { label: 'Сепаратор бруду',         test: p => /^Сепаратор бруду/i.test(p.name) },
-          { label: 'Повітряний сепаратор',     test: p => /^Повітряний сепаратор/i.test(p.name) },
-          { label: 'Комбінований (бруд+повітря)', test: p => /бруду та бруду|повітря та бруду|CAD/i.test(p.name) },
+          { label: 'Сепаратор бруду',              test: p => /^Сепаратор бруду/i.test(p.name) },
+          { label: 'Повітряний сепаратор',          test: p => /^Повітряний сепаратор/i.test(p.name) },
+          { label: 'Комбінований (бруд+повітря)',   test: p => /бруду та бруду|повітря та бруду|CAD/i.test(p.name) },
         ],
       },
       {
         key: 'dn',
         label: 'Діаметр',
         options: [
-          { label: 'DN25',  test: p => /DN25/.test(p.name) },
-          { label: 'DN32',  test: p => /DN32/.test(p.name) },
-          { label: 'DN40',  test: p => /DN40/.test(p.name) },
-          { label: 'DN50',  test: p => /DN50/.test(p.name) },
+          { label: 'DN25', test: p => /DN25/.test(p.name) },
+          { label: 'DN32', test: p => /DN32/.test(p.name) },
+          { label: 'DN40', test: p => /DN40/.test(p.name) },
+          { label: 'DN50', test: p => /DN50/.test(p.name) },
         ],
       },
     ],
@@ -153,19 +246,116 @@ const CATEGORY_FILTERS = {
   'hidravlichni-rozdilnyky': {
     groups: [
       {
-        key: 'series',
-        label: 'Серія',
+        key: 'dn',
+        label: 'Діаметр',
         options: [
-          { label: 'Стандарт (до 175 кВт)', test: p => /ГС-2[5-8]/.test(p.name) },
-          { label: 'Mega (від 250 кВт)',     test: p => /ГС-3[0-9]/.test(p.name) },
+          { label: '1"',     test: p => /ГС-25/.test(p.name) },
+          { label: '1 1/4"', test: p => /ГС-26/.test(p.name) },
+          { label: '1 1/2"', test: p => /ГС-27/.test(p.name) },
+          { label: '2"',     test: p => /ГС-28/.test(p.name) },
+          { label: '2 1/2"', test: p => /ГС-30/.test(p.name) },
+        ],
+      },
+      {
+        key: 'power',
+        label: 'Потужність (ΔT=10°C)',
+        options: [
+          { label: 'до 30 кВт',   test: p => /ГС-25/.test(p.name) },
+          { label: 'до 60 кВт',   test: p => /ГС-26/.test(p.name) },
+          { label: 'до 100 кВт',  test: p => /ГС-27/.test(p.name) },
+          { label: 'до 150 кВт',  test: p => /ГС-28/.test(p.name) },
+          { label: '250+ кВт',    test: p => /ГС-30/.test(p.name) },
+        ],
+      },
+      {
+        key: 'gmax',
+        label: 'Gmax',
+        options: [
+          { label: 'до 5 м³/год',  test: p => /ГС-25/.test(p.name) },
+          { label: '5–10 м³/год',  test: p => /ГС-26/.test(p.name) },
+          { label: '10–15 м³/год', test: p => /ГС-27/.test(p.name) },
+          { label: '15+ м³/год',   test: p => /ГС-28|ГС-30/.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'balansuval-klapany': {
+    groups: [
+      {
+        key: 'dn',
+        label: 'Діаметр',
+        options: [
+          { label: 'DN15 (1/2")', test: p => /DN15/.test(p.name) },
+          { label: 'DN20 (3/4")', test: p => /DN20/.test(p.name) },
+          { label: 'DN25 (1")',   test: p => /DN25/.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'zonalne-keruvannya': {
+    groups: [
+      {
+        key: 'devtype',
+        label: 'Тип пристрою',
+        options: [
+          { label: 'Термостат дротовий',    test: p => /HT102|HT120|HT130|Програматор дротовий/i.test(p.name) },
+          { label: 'Термостат бездротовий', test: p => /WT102|WT-150|WT150|Програматор бездротовий/i.test(p.name) },
+          { label: 'Термоголовка',          test: p => /Термоголовка|TRH/i.test(p.name) },
+          { label: 'Сервопривід',           test: p => /Термоелектричний привід|M30x1/i.test(p.name) },
+          { label: 'Зональний клапан',      test: p => /зональний клапан|ABF-ZV/i.test(p.name) },
+          { label: 'Центр комутації',       test: p => /Центр комутації|TJ03/i.test(p.name) },
+          { label: 'Хаб / шлюз',           test: p => /Хаб|EGW/i.test(p.name) },
+          { label: 'Датчик / приймач',      test: p => /Датчик|NTC|RO6WIF/i.test(p.name) },
         ],
       },
       {
         key: 'connection',
-        label: 'З\'єднання',
+        label: 'Підключення',
         options: [
-          { label: 'Різьбове',   test: p => /ГС-2[5-8]/.test(p.name) },
-          { label: 'Фланцеве',   test: p => /фланц/i.test(p.name) },
+          { label: 'Дротовий',    test: p => /дротовий|HT102|HT120|HT130|TJ03CW|M30x1/i.test(p.name) && !/бездрот/i.test(p.name) },
+          { label: 'Бездротовий', test: p => /бездрот|WT102|WT-150|WT150|TJ03RF/i.test(p.name) },
+          { label: 'WiFi',        test: p => /EGW|RO6WIF/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'kolektory-pidloha': {
+    groups: [
+      {
+        key: 'prodtype',
+        label: 'Тип обладнання',
+        options: [
+          { label: 'Колектор з витратомірами', test: p => /витратомірами/i.test(p.name) },
+          { label: 'Колектор з кранами',       test: p => /кранами/i.test(p.name) },
+          { label: 'Змішувальний вузол',       test: p => /TJ-MU|Змішувальний вузел|Змішувальний термостат/i.test(p.name) },
+          { label: 'Шафа колекторна',          test: p => /Шафа/i.test(p.name) },
+          { label: 'Комплектуючі',             test: p => /Байпас|Євроконус|кріплення|накидн|Труба|Скоба|Плівка/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'cabinettype',
+        label: 'Тип шафи',
+        options: [
+          { label: 'Внутрішня (вбудована)', test: p => /Шафа колекторна внутрішня/i.test(p.name) },
+          { label: 'Зовнішня (накладна)',   test: p => /Шафа колекторна зовнішня/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  dodatkove: {
+    groups: [
+      {
+        key: 'eqtype',
+        label: 'Тип обладнання',
+        options: [
+          { label: 'Кріплення радіаторів', test: p => /КРН|кріплення радіатор/i.test(p.name) },
+          { label: 'Аноди для бойлерів',   test: p => /анод|TI400/i.test(p.name) },
+          { label: 'Обладнання для ТН',    test: p => /Підставка|теплового насос/i.test(p.name) },
+          { label: 'Кріплення та монтаж',  test: p => /СК-56|Такер/i.test(p.name) },
         ],
       },
     ],
