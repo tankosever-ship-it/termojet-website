@@ -160,10 +160,10 @@ const CATEGORY_FILTERS = {
         key: 'outlets',
         label: 'Виходів',
         options: [
-          { label: '2 виходи',  test: p => /^К[Г]?[С]?2/.test(p.name) || /2\+1/.test(p.name) || /2 вгору|2 вниз/.test(p.name) },
-          { label: '3 виходи',  test: p => /^К[Г]?[С]?3/.test(p.name) || /3\+1/.test(p.name) || /3 вгору/.test(p.name) },
-          { label: '4 виходи',  test: p => /^К[Г]?[С]?4/.test(p.name) || /4\+1/.test(p.name) || /4 вгору/.test(p.name) },
-          { label: '5+ виходів',test: p => /^К[Г]?[С]?[5-9]/.test(p.name) || /[5-9]\+1/.test(p.name) || /[5-9] вгору/.test(p.name) },
+          { label: '2 виходи',  test: p => /^К[^Г]?[^С]?2|^К2/.test(p.name) || (/^К/.test(p.name) && /2\+1/.test(p.name)) },
+          { label: '3 виходи',  test: p => /^К3/.test(p.name) || (/^К/.test(p.name) && /3\+1/.test(p.name)) },
+          { label: '4 виходи',  test: p => /^К4/.test(p.name) || (/^К/.test(p.name) && /4\+1/.test(p.name)) },
+          { label: '5+ виходів',test: p => /^К[5-9]/.test(p.name) || (/^К/.test(p.name) && /[5-9]\+1/.test(p.name)) },
         ],
       },
       {
@@ -176,11 +176,39 @@ const CATEGORY_FILTERS = {
         ],
       },
       {
-        key: 'series',
-        label: 'Серія',
+        key: 'ng_interaxis',
+        label: 'Міжосьова для НГ',
         options: [
-          { label: 'Стандарт DN125', test: p => /\.125\(2[024]0\)/.test(p.name) },
-          { label: 'Стандарт DN150', test: p => /\.150\(3[05]0\)/.test(p.name) },
+          { label: '125 мм', test: p => /\.125\(/.test(p.name) },
+          { label: '150 мм', test: p => /\.150\(/.test(p.name) },
+        ],
+      },
+      {
+        key: 'side_interaxis',
+        label: 'Міжосьова бокових виходів',
+        options: [
+          { label: '150 мм', test: p => /\.125\(150\)/.test(p.name) },
+          { label: '200 мм', test: p => /\.125\(200\)/.test(p.name) },
+          { label: '240 мм', test: p => /\.125\(240\)/.test(p.name) },
+          { label: '300 мм', test: p => /\.150\(300\)/.test(p.name) },
+        ],
+      },
+      {
+        key: 'balka',
+        label: 'Ширина балки',
+        options: [
+          { label: '80 мм',  test: p => /\.125\(80\)/.test(p.name) },
+          { label: '100 мм', test: p => /\.125\(100\)/.test(p.name) },
+        ],
+      },
+      {
+        key: 'power',
+        label: 'Потужність (ΔT=10°C)',
+        options: [
+          { label: 'до 30 кВт',  test: p => { const v = p.specs?.['Qmax: △Т=10°С'] || p.specs?.['Потужність макс. ΔT=10°C'] || ''; return /^(25|30)\s*кВт/.test(v) } },
+          { label: 'до 75 кВт',  test: p => { const v = p.specs?.['Qmax: △Т=10°С'] || ''; return /^72\s*кВт/.test(v) } },
+          { label: 'до 110 кВт', test: p => { const v = p.specs?.['Qmax: △Т=10°С'] || ''; return /^105\s*кВт/.test(v) } },
+          { label: '175+ кВт',   test: p => { const v = p.specs?.['Qmax: △Т=10°С'] || ''; return /^175\s*кВт/.test(v) } },
         ],
       },
     ],
@@ -192,9 +220,9 @@ const CATEGORY_FILTERS = {
         key: 'outlets',
         label: 'Виходів',
         options: [
-          { label: '2 виходи',  test: p => /^КГС2/.test(p.name) || /2\+1/.test(p.name) },
-          { label: '3 виходи',  test: p => /^КГС3/.test(p.name) || /3\+1/.test(p.name) },
-          { label: '4 виходи',  test: p => /^КГС4/.test(p.name) || /4\+1/.test(p.name) },
+          { label: '2 виходи',  test: p => /^КГС2/.test(p.name) || /2\+1/.test(p.name) || /2 вгору/.test(p.name) },
+          { label: '3 виходи',  test: p => /^КГС3/.test(p.name) || /3\+1/.test(p.name) || /3 вгору/.test(p.name) },
+          { label: '4 виходи',  test: p => /^КГС4/.test(p.name) || /4\+1/.test(p.name) || /4 вгору/.test(p.name) },
           { label: '5+ виходів',test: p => /^КГС[5-9]/.test(p.name) || /[5-9]\+1/.test(p.name) },
         ],
       },
@@ -209,11 +237,19 @@ const CATEGORY_FILTERS = {
         ],
       },
       {
-        key: 'interaxis',
-        label: 'Міжосьова відстань',
+        key: 'side_interaxis',
+        label: 'Міжосьова бокових виходів',
         options: [
           { label: '150 мм', test: p => /\.125\(150\)/.test(p.name) },
           { label: '200 мм', test: p => /\.125\(200\)/.test(p.name) },
+        ],
+      },
+      {
+        key: 'power',
+        label: 'Потужність (ΔT=10°C)',
+        options: [
+          { label: 'до 30 кВт', test: p => { const v = p.specs?.['Qmax: △Т=10°С'] || p.specs?.['Потужність макс. ΔT=10°C'] || ''; return /^(25|30)\s*кВт/.test(v) } },
+          { label: 'до 65 кВт', test: p => { const v = p.specs?.['Qmax: △Т=10°С'] || ''; return /^60\s*кВт/.test(v) } },
         ],
       },
     ],
