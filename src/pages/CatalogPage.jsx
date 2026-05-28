@@ -489,18 +489,20 @@ export default function CatalogPage() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map(product => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-              const shortDesc = product.shortDesc || product.description || ''
+              // 2. Strip leading "Опис " prefix from shortDesc
+              const rawDesc = product.shortDesc || product.description || ''
+              const shortDesc = rawDesc.replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '')
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               const badges = extractBadges(product)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
-                <motion.div key={product.id} variants={fadeUp}>
-                  <div className="product-card-new group flex flex-col h-full">
+                <motion.div key={product.id} variants={fadeUp} className="h-full">
+                  {/* 1. Фіксована висота фото: overflow-hidden + height строго 240px */}
+                  <div className="product-card-new group flex flex-col" style={{ height: '100%' }}>
 
-                    {/* A: Photo 240px */}
-                    <div className="relative overflow-hidden bg-[var(--bg)]" style={{ height: '240px' }}>
-                      <Link to={href}>
+                    <div className="relative flex-shrink-0 overflow-hidden bg-[var(--bg)]" style={{ height: '240px' }}>
+                      <Link to={href} className="block w-full h-full">
                         {product.image ? (
                           <img src={imgUrl(product.image)} alt={name}
                             className="w-full h-full object-contain p-4 group-hover:scale-[1.06] transition-transform duration-500" />
@@ -521,7 +523,6 @@ export default function CatalogPage() {
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <ShoppingCart size={12} /> Купити в 1 клік
                         </button>
-                        {/* D: Детальніше замість іконки */}
                         <Link to={href}
                           className="flex items-center gap-1 px-3 h-9 border-l border-[var(--ink-200)] hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
                           Детальніше <ArrowRight size={11} />
@@ -529,46 +530,51 @@ export default function CatalogPage() {
                       </div>
                     </div>
 
+                    {/* Content area: flex-col з фіксованим низом */}
                     <div className="p-4 flex flex-col flex-1">
-                      {catObj && (
-                        <div className="eyebrow mb-1.5 truncate">{catObj.name[lang] || catObj.name.uk}</div>
-                      )}
 
-                      <Link to={href}>
-                        <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors mb-2 leading-snug">
-                          {name}
-                        </h3>
-                      </Link>
-
-                      {/* B: Short desc */}
-                      {shortDesc && (
-                        <p className="text-xs text-gray-400 leading-relaxed mb-2.5 line-clamp-2">{shortDesc}</p>
-                      )}
-
-                      {/* C: More badges */}
-                      {badges.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mb-3">
-                          {badges.map((b, i) => (
-                            <span key={i} className={`spec-badge spec-badge-${b.type}`}>{b.label}</span>
-                          ))}
-                        </div>
-                      )}
-
-                      {product.price > 0 && (
-                        <div className="text-sm font-bold text-[var(--primary)] mb-2">
-                          {formatPrice(product.price, product.currency, eurRate)}
-                        </div>
-                      )}
-
-                      <div className="mt-auto flex items-center justify-between pt-2.5 border-t border-[var(--ink-200)]">
-                        <div className="text-[10px] font-mono text-gray-400 truncate max-w-[60%]">{product.sku || '—'}</div>
-                        <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
-                          {product.inStock ? 'В наявності' : 'Замовлення'}
-                        </div>
+                      {/* Верхній блок: назва + опис + badges */}
+                      <div className="flex-1">
+                        {catObj && (
+                          <div className="eyebrow mb-1.5 truncate">{catObj.name[lang] || catObj.name.uk}</div>
+                        )}
+                        <Link to={href}>
+                          <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors mb-2 leading-snug">
+                            {name}
+                          </h3>
+                        </Link>
+                        {/* 2. Опис без слова "Опис" */}
+                        {shortDesc && (
+                          <p className="text-xs text-gray-400 leading-relaxed mb-2.5 line-clamp-2">{shortDesc}</p>
+                        )}
+                        {badges.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5">
+                            {badges.map((b, i) => (
+                              <span key={i} className={`spec-badge spec-badge-${b.type}`}>{b.label}</span>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    </div>
 
+                      {/* 3. Ціна — завжди на одному рівні (прибита до низу) */}
+                      <div className="mt-4 pt-3 border-t border-[var(--ink-200)]">
+                        <div className="flex items-center justify-between mb-1.5">
+                          {product.price > 0 ? (
+                            <span className="text-base font-bold text-[var(--primary)]">
+                              {formatPrice(product.price, product.currency, eurRate)}
+                            </span>
+                          ) : (
+                            <span className="text-xs text-gray-400 italic">Ціна по запиту</span>
+                          )}
+                          <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
+                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
+                            {product.inStock ? 'В наявності' : 'Замовлення'}
+                          </div>
+                        </div>
+                        <div className="text-[10px] font-mono text-gray-300">{product.sku || ''}</div>
+                      </div>
+
+                    </div>
                   </div>
                 </motion.div>
               )
@@ -579,7 +585,8 @@ export default function CatalogPage() {
           <motion.div variants={stagger} initial="hidden" animate="show" className="flex flex-col gap-3">
             {filtered.map(product => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-              const shortDesc = product.shortDesc || product.description || ''
+              const rawDesc2 = product.shortDesc || product.description || ''
+              const shortDesc = rawDesc2.replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '')
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               const badges = extractBadges(product)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
