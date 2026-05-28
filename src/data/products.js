@@ -4638,9 +4638,9 @@ export const PRODUCTS = [
     "price": "",
     "currency": "EUR",
     "categorySlug": "balansuval-klapany",
-    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/krn-5001-1-1000x1000-1-800x800.jpg",
+    "image": "/images/sbv-klapan.png",
     "images": [
-      "https://termojet.com.ua/wp-content/uploads/2023/11/krn-5001-1-1000x1000-1-800x800.jpg"
+      "/images/sbv-klapan.png"
     ],
     "shortDesc": "Статичний балансувальний клапан DN15 для систем опалення та охолодження. Функції: балансування, налаштування, вимірювання, перекривання.",
     "description": "Статичний балансувальний клапан SBV-012 Termojet DN15 призначений для балансування систем опалення, охолодження та водопостачання. Виконує функції балансування, попереднього налаштування, вимірювання витрат та перекривання. Матеріал: латунь CW617N, ущільнення EPDM. KVS (4 оберти): 2,56 м³/год.",
@@ -4665,9 +4665,9 @@ export const PRODUCTS = [
     "price": "",
     "currency": "EUR",
     "categorySlug": "balansuval-klapany",
-    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/krn-5001-1-1000x1000-1-800x800.jpg",
+    "image": "/images/sbv-klapan.png",
     "images": [
-      "https://termojet.com.ua/wp-content/uploads/2023/11/krn-5001-1-1000x1000-1-800x800.jpg"
+      "/images/sbv-klapan.png"
     ],
     "shortDesc": "Статичний балансувальний клапан DN20 для систем опалення та охолодження. KVS 5,39 м³/год.",
     "description": "Статичний балансувальний клапан SBV-034 Termojet DN20 для балансування систем опалення та охолодження. KVS (4 оберти): 5,39 м³/год. Матеріал: латунь CW617N, ущільнення EPDM.",
@@ -4692,9 +4692,9 @@ export const PRODUCTS = [
     "price": "",
     "currency": "EUR",
     "categorySlug": "balansuval-klapany",
-    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/krn-5001-1-1000x1000-1-800x800.jpg",
+    "image": "/images/sbv-klapan.png",
     "images": [
-      "https://termojet.com.ua/wp-content/uploads/2023/11/krn-5001-1-1000x1000-1-800x800.jpg"
+      "/images/sbv-klapan.png"
     ],
     "shortDesc": "Статичний балансувальний клапан DN25 для систем опалення та охолодження. KVS 8,59 м³/год.",
     "description": "Статичний балансувальний клапан SBV-100 Termojet DN25 для балансування систем опалення та охолодження. KVS (4 оберти): 8,59 м³/год. Матеріал: латунь CW617N, ущільнення EPDM.",
