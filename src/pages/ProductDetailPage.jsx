@@ -84,39 +84,43 @@ function ImageGallery({ images, name }) {
   const ThumbButton = ({ img, i, size = 'md' }) => (
     <button
       onClick={() => setActive(i)}
-      className={`flex-shrink-0 border-2 rounded overflow-hidden transition-all hover:scale-105 bg-white
-        ${size === 'sm' ? 'w-14 h-14' : 'w-[66px] h-[66px]'}`}
-      style={{ borderColor: active === i ? 'var(--accent)' : '#e5e7eb' }}
+      className={`flex-shrink-0 border-2 rounded overflow-hidden transition-all hover:opacity-90 bg-white
+        ${size === 'sm' ? 'w-14 h-14' : 'w-[60px] h-[60px]'}`}
+      style={{
+        borderColor: active === i ? 'var(--accent)' : '#e5e7eb',
+        boxShadow: active === i ? '0 0 0 1px var(--accent)' : 'none',
+      }}
     >
-      <img src={img} alt={`фото ${i + 1}`} className="w-full h-full object-contain p-0.5" />
+      <img src={img} alt={`фото ${i + 1}`} className="w-full h-full object-contain p-1" />
     </button>
   )
 
   return (
     <div className="card overflow-hidden">
-      {/* Desktop: thumbnails LEFT + main image RIGHT */}
-      <div className="flex">
+      {/* Desktop: thumbnails LEFT + main image RIGHT — fixed height */}
+      <div className="flex" style={{ height: 420 }}>
+
+        {/* Vertical thumbnails column */}
         {total > 1 && (
           <div
             ref={vThumbsRef}
-            className="hidden md:flex flex-col gap-2 p-3 border-r border-gray-100 overflow-y-auto flex-shrink-0"
-            style={{ width: 90, maxHeight: 420 }}
+            className="hidden md:flex flex-col gap-1.5 p-2 border-r border-gray-100 overflow-y-auto flex-shrink-0 scrollbar-thin"
+            style={{ width: 76 }}
           >
             {all.map((img, i) => <ThumbButton key={i} img={img} i={i} />)}
           </div>
         )}
 
-        {/* Main image */}
+        {/* Main image — fills full height */}
         <div
-          className="relative flex items-center justify-center bg-gray-50 flex-1 select-none"
-          style={{ minHeight: 340 }}
+          className="relative flex items-center justify-center bg-gray-50 flex-1 h-full select-none overflow-hidden"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
           {main ? (
             <img
               src={main} alt={name}
-              className="max-h-80 max-w-full object-contain p-6 cursor-zoom-in"
+              className="w-full h-full object-contain p-6 cursor-zoom-in"
               onClick={() => setLightbox(true)}
               draggable={false}
             />
