@@ -3807,8 +3807,10 @@ export const PRODUCTS = [
     "price": "3.5",
     "price_uah": "",
     "categorySlug": "nasosy",
-    "image": "",
-    "images": [],
+    "image": "/images/kabel-ape.jpg",
+    "images": [
+      "/images/kabel-ape.jpg"
+    ],
     "shortDesc": "",
     "description": "Кабель живлення з вилкою для насосів APE TERMOJET. Забезпечує надійне підключення циркуляційних насосів серії APE до мережі живлення. Якісна ізоляція, стандартна вилка Euro.",
     "specs": {
@@ -7428,8 +7430,10 @@ export const PRODUCTS = [
     "sku": "21500168",
     "price": "120",
     "categorySlug": "dodatkove",
-    "image": "",
-    "images": [],
+    "image": "/images/anod-ti400.png",
+    "images": [
+      "/images/anod-ti400.png"
+    ],
     "shortDesc": "Титановий активний анод Termojet з блоком живлення для емальованих бойлерів TI 400 G3/4\".",
     "description": "Титановий активний анод Termojet з блоком живлення для емальованих бойлерів TI 400 G3/4\".",
     "specs": {
@@ -7446,8 +7450,10 @@ export const PRODUCTS = [
     "sku": "21500169",
     "price": "120",
     "categorySlug": "dodatkove",
-    "image": "",
-    "images": [],
+    "image": "/images/anod-ti400.png",
+    "images": [
+      "/images/anod-ti400.png"
+    ],
     "shortDesc": "Титановий активний анод Termojet з блоком живлення для нержавіючих бойлерів TI 400 G3/4\".",
     "description": "Титановий активний анод Termojet з блоком живлення для нержавіючих бойлерів TI 400 G3/4\".",
     "specs": {
@@ -7567,8 +7573,10 @@ export const PRODUCTS = [
     "sku": "",
     "price": "52.47",
     "categorySlug": "kolektory-pidloha",
-    "image": "",
-    "images": [],
+    "image": "/images/truba-pert-16x2.png",
+    "images": [
+      "/images/truba-pert-16x2.png"
+    ],
     "shortDesc": "Труба Termojet PE-RT 16×2, P=6 бар, T=70°C (500 м), з антидифузійним захистом EVOH.",
     "description": "Труба Termojet PE-RT 16×2, P=6 бар, T=70°C (500 м), з антидифузійним захистом EVOH.",
     "specs": {
@@ -7588,8 +7596,10 @@ export const PRODUCTS = [
     "sku": "",
     "price": "330",
     "categorySlug": "kolektory-pidloha",
-    "image": "",
-    "images": [],
+    "image": "/images/skoba-45mm.png",
+    "images": [
+      "/images/skoba-45mm.png"
+    ],
     "shortDesc": "Скоба до такера 45 мм. Пачка 300 штук. Для кріплення труб теплої підлоги.",
     "description": "Скоба до такера 45 мм. Пачка 300 штук. Для кріплення труб теплої підлоги.",
     "specs": {
