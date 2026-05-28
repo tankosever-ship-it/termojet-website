@@ -547,9 +547,12 @@ export default function ProductDetailPage() {
 
             {/* Documents block */}
             {productDocs.length > 0 && (
-              <div className="mb-5">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Документи</p>
-                <div className="space-y-1">
+              <div className="mb-5 rounded-xl overflow-hidden border border-orange-200 bg-orange-50">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-[var(--primary)] text-white">
+                  <FileDown size={15} />
+                  <span className="text-sm font-bold tracking-wide">Документи для завантаження</span>
+                </div>
+                <div className="divide-y divide-orange-100">
                   {productDocs.map(doc => (
                     <a
                       key={doc.id}
@@ -557,18 +560,21 @@ export default function ProductDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       download
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 hover:border-[var(--primary)] hover:bg-orange-50 transition-all group"
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-orange-100 transition-colors group"
                     >
-                      <span className="flex-shrink-0 w-8 h-8 bg-red-50 rounded-md flex items-center justify-center">
-                        <FileDown size={15} className="text-red-500" />
+                      <span className="flex-shrink-0 w-9 h-9 bg-white rounded-lg shadow-sm flex items-center justify-center border border-orange-200">
+                        <FileDown size={16} className="text-red-500" />
                       </span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-gray-800 truncate group-hover:text-[var(--primary)]">
-                          {doc.name}
+                        <p className="text-sm font-semibold text-gray-800 leading-tight group-hover:text-[var(--primary)]">
+                          {doc.name.replace(/^(Інструкція|Брошура)\s*—\s*/i, '')}
                         </p>
-                        <p className="text-xs text-gray-400">{doc.format} · {doc.year}</p>
+                        <p className="text-xs text-orange-600 font-medium mt-0.5">{doc.category} · {doc.format} · {doc.year}</p>
                       </div>
-                      <Download size={13} className="text-gray-300 group-hover:text-[var(--primary)] flex-shrink-0" />
+                      <span className="flex-shrink-0 flex items-center gap-1 bg-white border border-orange-300 text-[var(--primary)] text-xs font-bold px-2.5 py-1.5 rounded-lg group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                        <Download size={12} />
+                        PDF
+                      </span>
                     </a>
                   ))}
                 </div>
