@@ -1,5 +1,5 @@
 // Auto-generated — enriched with data from termojet.com.ua
-// 245 products
+// 284 products
 export const PRODUCTS = [
   {
     "id": "wp_8707",
@@ -6596,6 +6596,714 @@ export const PRODUCTS = [
       "Матеріал": "сталь",
       "Призначення": "підставка для зовнішнього блоку теплового насосу",
       "Монтаж": "настінний/підлоговий"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050103",
+    "name": "Підключення до ГС-31",
+    "slug": "pidklccennh-do-gs-31",
+    "sku": "84050103",
+    "price": "12450",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 80",
+    "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 80",
+    "specs": {
+      "Підключення до гідрострілки": "ДУ 80",
+      "Підключення до колектора": "ДУ 150"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050104",
+    "name": "Підключення до ГС-32",
+    "slug": "pidklccennh-do-gs-32",
+    "sku": "84050104",
+    "price": "13710",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 100",
+    "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 100",
+    "specs": {
+      "Підключення до гідрострілки": "ДУ 100",
+      "Підключення до колектора": "ДУ 150"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050105",
+    "name": "Підключення до ГС-33",
+    "slug": "pidklccennh-do-gs-33",
+    "sku": "84050105",
+    "price": "14990",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 125",
+    "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 125",
+    "specs": {
+      "Підключення до гідрострілки": "ДУ 125",
+      "Підключення до колектора": "ДУ 150"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050106",
+    "name": "Підключення до ГС-34",
+    "slug": "pidklccennh-do-gs-34",
+    "sku": "84050106",
+    "price": "16400",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 150",
+    "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 150",
+    "specs": {
+      "Підключення до гідрострілки": "ДУ 150",
+      "Підключення до колектора": "ДУ 150"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050107",
+    "name": "Перехід фланцевий 80/80",
+    "slug": "perehid-flanceviy-80-80",
+    "sku": "84050107",
+    "price": "3660",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 80/ДУ 80",
+    "description": "Комплект переходів для фланцевого приєднання. ДУ 80/ДУ 80",
+    "specs": {
+      "Підключення Grinnell": "ДУ 80",
+      "Підключення фланця": "ДУ 80"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050108",
+    "name": "Перехід фланцевий 100/100",
+    "slug": "perehid-flanceviy-100-100",
+    "sku": "84050108",
+    "price": "5030",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 100/ДУ 100",
+    "description": "Комплект переходів для фланцевого приєднання. ДУ 100/ДУ 100",
+    "specs": {
+      "Підключення Grinnell": "ДУ 100",
+      "Підключення фланця": "ДУ 100"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050109",
+    "name": "Перехід фланцевий 125/125",
+    "slug": "perehid-flanceviy-125-125",
+    "sku": "84050109",
+    "price": "8680",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 125/ДУ 125",
+    "description": "Комплект переходів для фланцевого приєднання. ДУ 125/ДУ 125",
+    "specs": {
+      "Підключення Grinnell": "ДУ 125",
+      "Підключення фланця": "ДУ 125"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050110",
+    "name": "Перехід фланцевий 150/150",
+    "slug": "perehid-flanceviy-150-150",
+    "sku": "84050110",
+    "price": "11680",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 150/ДУ 150",
+    "description": "Комплект переходів для фланцевого приєднання. ДУ 150/ДУ 150",
+    "specs": {
+      "Підключення Grinnell": "ДУ 150",
+      "Підключення фланця": "ДУ 150"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050121",
+    "name": "Перехід під сварку 40/40",
+    "slug": "perehid-pid-svarku-40-40",
+    "sku": "84050121",
+    "price": "1100",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 40/ДУ 40",
+    "description": "Комплект переходів для приєднання під сварку. ДУ 40/ДУ 40",
+    "specs": {
+      "Підключення Grinnell": "ДУ 40",
+      "Підключення під сварку": "ДУ 40"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050122",
+    "name": "Перехід під сварку 50/50",
+    "slug": "perehid-pid-svarku-50-50",
+    "sku": "84050122",
+    "price": "1250",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 50/ДУ 50",
+    "description": "Комплект переходів для приєднання під сварку. ДУ 50/ДУ 50",
+    "specs": {
+      "Підключення Grinnell": "ДУ 50",
+      "Підключення під сварку": "ДУ 50"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050111",
+    "name": "Перехід під сварку 80/80",
+    "slug": "perehid-pid-svarku-80-80",
+    "sku": "84050111",
+    "price": "1190",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 80/ДУ 80",
+    "description": "Комплект переходів для приєднання під сварку. ДУ 80/ДУ 80",
+    "specs": {
+      "Підключення Grinnell": "ДУ 80",
+      "Підключення під сварку": "ДУ 80"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050112",
+    "name": "Перехід під сварку 100/100",
+    "slug": "perehid-pid-svarku-100-100",
+    "sku": "84050112",
+    "price": "1290",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 100/ДУ 100",
+    "description": "Комплект переходів для приєднання під сварку. ДУ 100/ДУ 100",
+    "specs": {
+      "Підключення Grinnell": "ДУ 100",
+      "Підключення під сварку": "ДУ 100"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050113",
+    "name": "Перехід під сварку 125/125",
+    "slug": "perehid-pid-svarku-125-125",
+    "sku": "84050113",
+    "price": "1430",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 125/ДУ 125",
+    "description": "Комплект переходів для приєднання під сварку. ДУ 125/ДУ 125",
+    "specs": {
+      "Підключення Grinnell": "ДУ 125",
+      "Підключення під сварку": "ДУ 125"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050114",
+    "name": "Перехід під сварку 150/150",
+    "slug": "perehid-pid-svarku-150-150",
+    "sku": "84050114",
+    "price": "1600",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 150/ДУ 150",
+    "description": "Комплект переходів для приєднання під сварку. ДУ 150/ДУ 150",
+    "specs": {
+      "Підключення Grinnell": "ДУ 150",
+      "Підключення під сварку": "ДУ 150"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050124",
+    "name": "Перехід під різьбу 40/40",
+    "slug": "perehid-pid-rizsbu-40-40",
+    "sku": "84050124",
+    "price": "1440",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1\"",
+    "description": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1\"",
+    "specs": {
+      "Підключення Grinnell": "ДУ 40",
+      "Підключення різьбове": "1\""
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050125",
+    "name": "Перехід під різьбу 50/50",
+    "slug": "perehid-pid-rizsbu-50-50",
+    "sku": "84050125",
+    "price": "1760",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1 1/4\"",
+    "description": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1 1/4\"",
+    "specs": {
+      "Підключення Grinnell": "ДУ 50",
+      "Підключення різьбове": "1 1/4\""
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050115",
+    "name": "Перехід під насосну групу 1\"",
+    "slug": "perehid-pid-nasosnu-grupu-1",
+    "sku": "84050115",
+    "price": "5520",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1\"",
+    "description": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1\"",
+    "specs": {
+      "Підключення колектора": "ДУ 50",
+      "Підключення різьбове": "1\""
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_84050116",
+    "name": "Перехід під насосну групу 1 1/4\"",
+    "slug": "perehid-pid-nasosnu-grupu-1-1-4",
+    "sku": "84050116",
+    "price": "5890",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1 1/4\"",
+    "description": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1 1/4\"",
+    "specs": {
+      "Підключення колектора": "ДУ 50",
+      "Підключення різьбове": "1 1/4\""
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307114",
+    "name": "Муфта Termojet DN32",
+    "slug": "mufta-termojet-dn32",
+    "sku": "7307114",
+    "price": "730",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 1 1/4\" 32мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 1 1/4\" 32мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN32",
+      "Розмір": "1 1/4\" 32мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307112",
+    "name": "Муфта Termojet DN40",
+    "slug": "mufta-termojet-dn40",
+    "sku": "7307112",
+    "price": "798",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 1 1/2\" 40мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 1 1/2\" 40мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN40",
+      "Розмір": "1 1/2\" 40мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307002",
+    "name": "Муфта Termojet DN50",
+    "slug": "mufta-termojet-dn50",
+    "sku": "7307002",
+    "price": "813",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 2\"/60,3мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 2\"/60,3мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN50",
+      "Розмір": "2\"/60,3мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307212",
+    "name": "Муфта Termojet DN65",
+    "slug": "mufta-termojet-dn65",
+    "sku": "7307212",
+    "price": "930",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 2 1/2\"/65-76,3мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 2 1/2\"/65-76,3мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN65",
+      "Розмір": "2 1/2\"/65-76,3мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307003",
+    "name": "Муфта Termojet DN80",
+    "slug": "mufta-termojet-dn80",
+    "sku": "7307003",
+    "price": "980",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 3\"/80-88,9мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 3\"/80-88,9мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN80",
+      "Розмір": "3\"/80-88,9мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307004",
+    "name": "Муфта Termojet DN100",
+    "slug": "mufta-termojet-dn100",
+    "sku": "7307004",
+    "price": "1246",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 4\"/100-108мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 4\"/100-108мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN100",
+      "Розмір": "4\"/100-108мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307005",
+    "name": "Муфта Termojet DN125",
+    "slug": "mufta-termojet-dn125",
+    "sku": "7307005",
+    "price": "1745",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 5\"/125-139,7мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 5\"/125-139,7мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN125",
+      "Розмір": "5\"/125-139,7мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307006",
+    "name": "Муфта Termojet DN150",
+    "slug": "mufta-termojet-dn150",
+    "sku": "7307006",
+    "price": "2144",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 6\"/150-159мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 6\"/150-159мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN150",
+      "Розмір": "6\"/150-159мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_7307008",
+    "name": "Муфта Termojet DN200",
+    "slug": "mufta-termojet-dn200",
+    "sku": "7307008",
+    "price": "3990",
+    "categorySlug": "termojet-mega",
+    "image": "",
+    "images": [],
+    "shortDesc": "Муфта гнучка Termojet 8\"/200-219мм. Зажимна муфта для з'єднання трубопроводів.",
+    "description": "Муфта гнучка Termojet 8\"/200-219мм. Зажимна муфта для з'єднання трубопроводів.",
+    "specs": {
+      "DN": "DN200",
+      "Розмір": "8\"/200-219мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_RMV04100-034",
+    "name": "4-ходовий клапан RMV04 DN20 kvs-12",
+    "slug": "4-hodoviy-klapan-rmv04-dn20-kvs-12",
+    "sku": "RMV04100-034",
+    "price": "66",
+    "categorySlug": "klapany",
+    "image": "",
+    "images": [],
+    "shortDesc": "4-ходовий клапан з внутрішньою різьбою (kvs 12). DN25, RP1.",
+    "description": "4-ходовий клапан з внутрішньою різьбою (kvs 12). DN25, RP1.",
+    "specs": {
+      "DN": "DN25",
+      "kvs": "12",
+      "Різьба": "RP1",
+      "Тип": "4-ходовий"
+    },
+    "inStock": true,
+    "currency": "EUR"
+  },
+  {
+    "id": "new_RMV04100-100",
+    "name": "4-ходовий клапан RMV04 DN25 kvs-18",
+    "slug": "4-hodoviy-klapan-rmv04-dn25-kvs-18",
+    "sku": "RMV04100-100",
+    "price": "75",
+    "categorySlug": "klapany",
+    "image": "",
+    "images": [],
+    "shortDesc": "4-ходовий клапан з внутрішньою різьбою (kvs 18). DN32, RP 1 1/4.",
+    "description": "4-ходовий клапан з внутрішньою різьбою (kvs 18). DN32, RP 1 1/4.",
+    "specs": {
+      "DN": "DN32",
+      "kvs": "18",
+      "Різьба": "RP 1 1/4",
+      "Тип": "4-ходовий"
+    },
+    "inStock": true,
+    "currency": "EUR"
+  },
+  {
+    "id": "new_21500168",
+    "name": "Титановий анод TI400 для емальованих бойлерів G3/4\"",
+    "slug": "titanoviy-anod-ti400-dlh-emalsovanih-boyleriv-g3-4",
+    "sku": "21500168",
+    "price": "120",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Титановий активний анод Termojet з блоком живлення для емальованих бойлерів TI 400 G3/4\".",
+    "description": "Титановий активний анод Termojet з блоком живлення для емальованих бойлерів TI 400 G3/4\".",
+    "specs": {
+      "Підключення": "G3/4\"",
+      "Тип бойлера": "Емальований"
+    },
+    "inStock": true,
+    "currency": "EUR"
+  },
+  {
+    "id": "new_21500169",
+    "name": "Титановий анод TI400 для нержавіючих бойлерів G3/4\"",
+    "slug": "titanoviy-anod-ti400-dlh-nerjaviccih-boyleriv-g3-4",
+    "sku": "21500169",
+    "price": "120",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Титановий активний анод Termojet з блоком живлення для нержавіючих бойлерів TI 400 G3/4\".",
+    "description": "Титановий активний анод Termojet з блоком живлення для нержавіючих бойлерів TI 400 G3/4\".",
+    "specs": {
+      "Підключення": "G3/4\"",
+      "Тип бойлера": "Нержавіючий"
+    },
+    "inStock": true,
+    "currency": "EUR"
+  },
+  {
+    "id": "new_pidlogove-kriplennh-radiatoriv-krn-200",
+    "name": "Підлогове кріплення радіаторів КРН-200",
+    "slug": "pidlogove-kriplennh-radiatoriv-krn-200",
+    "sku": "",
+    "price": "410",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Універсальне підлогове кріплення для сталевих радіаторів висотою 200 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
+    "description": "Універсальне підлогове кріплення для сталевих радіаторів висотою 200 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
+    "specs": {
+      "Висота радіатора": "200 мм",
+      "Тип підключення": "нижнє/бокове"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_pidlogove-kriplennh-radiatoriv-krn-300",
+    "name": "Підлогове кріплення радіаторів КРН-300",
+    "slug": "pidlogove-kriplennh-radiatoriv-krn-300",
+    "sku": "",
+    "price": "410",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Універсальне підлогове кріплення для сталевих радіаторів висотою 300 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
+    "description": "Універсальне підлогове кріплення для сталевих радіаторів висотою 300 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
+    "specs": {
+      "Висота радіатора": "300 мм",
+      "Тип підключення": "нижнє/бокове"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_pidlogove-kriplennh-radiatoriv-krn-500",
+    "name": "Підлогове кріплення радіаторів КРН-500",
+    "slug": "pidlogove-kriplennh-radiatoriv-krn-500",
+    "sku": "",
+    "price": "410",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Універсальне підлогове кріплення для сталевих радіаторів висотою 500 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
+    "description": "Універсальне підлогове кріплення для сталевих радіаторів висотою 500 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
+    "specs": {
+      "Висота радіатора": "500 мм",
+      "Тип підключення": "нижнє/бокове"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_kriplennh-rozsircvalsnogo-baku-sk-56",
+    "name": "Кріплення розширювального баку СК-56",
+    "slug": "kriplennh-rozsircvalsnogo-baku-sk-56",
+    "sku": "",
+    "price": "280",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Настінне кріплення для розширювальних бачків 5-35 л. Підключення 3/4\" ВР.",
+    "description": "Настінне кріплення для розширювальних бачків 5-35 л. Підключення 3/4\" ВР.",
+    "specs": {
+      "Об'єм бачка": "5-35 л",
+      "Підключення": "3/4\" ВР"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_taker-termojet-dlh-skob-40-60-mm",
+    "name": "Такер TERMOJET для скоб 40-60 мм",
+    "slug": "taker-termojet-dlh-skob-40-60-mm",
+    "sku": "",
+    "price": "3830",
+    "categorySlug": "dodatkove",
+    "image": "",
+    "images": [],
+    "shortDesc": "Такер TERMOJET для монтажу труб теплої підлоги. Скоби 40-60 мм.",
+    "description": "Такер TERMOJET для монтажу труб теплої підлоги. Скоби 40-60 мм.",
+    "specs": {
+      "Скоби": "40-60 мм"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_truba-termojet-pe-rt-16-2-6-bar-70-c-500m",
+    "name": "Труба Termojet PE-RT 16×2, 6 бар, 70°C (500м)",
+    "slug": "truba-termojet-pe-rt-16-2-6-bar-70-c-500m",
+    "sku": "",
+    "price": "52.47",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "Труба Termojet PE-RT 16×2, P=6 бар, T=70°C (500 м), з антидифузійним захистом EVOH.",
+    "description": "Труба Termojet PE-RT 16×2, P=6 бар, T=70°C (500 м), з антидифузійним захистом EVOH.",
+    "specs": {
+      "Діаметр": "16×2 мм",
+      "Тиск": "6 бар",
+      "Температура": "70°C",
+      "Довжина бухти": "500 м",
+      "Захист": "EVOH"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_skoba-do-takera-45-mm-300-st",
+    "name": "Скоба до такера 45 мм (300 шт.)",
+    "slug": "skoba-do-takera-45-mm-300-st",
+    "sku": "",
+    "price": "330",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "Скоба до такера 45 мм. Пачка 300 штук. Для кріплення труб теплої підлоги.",
+    "description": "Скоба до такера 45 мм. Пачка 300 штук. Для кріплення труб теплої підлоги.",
+    "specs": {
+      "Розмір": "45 мм",
+      "Кількість": "300 шт/упак"
+    },
+    "inStock": true,
+    "currency": "UAH"
+  },
+  {
+    "id": "new_folsgovana-plivka-z-rozmitkoc",
+    "name": "Фольгована плівка з розміткою",
+    "slug": "folsgovana-plivka-z-rozmitkoc",
+    "sku": "",
+    "price": "26.40",
+    "categorySlug": "kolektory-pidloha",
+    "image": "",
+    "images": [],
+    "shortDesc": "Фольгована Termojet плівка з розміткою для теплої підлоги.",
+    "description": "Фольгована Termojet плівка з розміткою для теплої підлоги.",
+    "specs": {
+      "Призначення": "Тепла підлога",
+      "Тип": "Фольгована з розміткою"
     },
     "inStock": true,
     "currency": "UAH"
