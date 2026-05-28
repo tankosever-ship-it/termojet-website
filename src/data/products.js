@@ -5322,12 +5322,8 @@ export const PRODUCTS = [
     "price": "34.96",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №00 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5348,12 +5344,8 @@ export const PRODUCTS = [
     "price": "40.41",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №01 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5374,12 +5366,8 @@ export const PRODUCTS = [
     "price": "47.62",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №02 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5400,12 +5388,8 @@ export const PRODUCTS = [
     "price": "56.2",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №03 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5426,12 +5410,8 @@ export const PRODUCTS = [
     "price": "60.72",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №04 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5452,12 +5432,8 @@ export const PRODUCTS = [
     "price": "68.52",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №05 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5478,12 +5454,8 @@ export const PRODUCTS = [
     "price": "77.92",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752100968873.jpg",
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101186000.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна внутрішня TERMOJET №06 призначена для прихованого монтажу колекторів теплої підлоги у стіну. Забезпечує акуратний та естетичний вигляд, надійно захищає обладнання та забезпечує зручний доступ для обслуговування.",
     "specs": {
@@ -5504,10 +5476,8 @@ export const PRODUCTS = [
     "price": "35.97",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №00 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -5528,10 +5498,8 @@ export const PRODUCTS = [
     "price": "40.9",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №01 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -5552,10 +5520,8 @@ export const PRODUCTS = [
     "price": "46.39",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №02 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -5576,10 +5542,8 @@ export const PRODUCTS = [
     "price": "56.83",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №03 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -5600,10 +5564,8 @@ export const PRODUCTS = [
     "price": "62.54",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №04 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -5624,10 +5586,8 @@ export const PRODUCTS = [
     "price": "74.02",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №05 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -5648,10 +5608,8 @@ export const PRODUCTS = [
     "price": "81.67",
     "price_uah": "",
     "categorySlug": "dodatkove",
-    "image": "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg",
-    "images": [
-      "https://termojet.com.ua/wp-content/uploads/2026/04/1776752101785993.jpg"
-    ],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "",
     "description": "Шафа колекторна зовнішня TERMOJET №06 призначена для відкритого монтажу колекторів теплої підлоги на стіну. Металевий корпус надійно захищає обладнання та забезпечує зручний доступ для обслуговування. Більша глибина порівняно з внутрішньою шафою.",
     "specs": {
@@ -6647,8 +6605,8 @@ export const PRODUCTS = [
     "price": "34.96",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 2-4 виходів. Розміри: 335×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №00 призначена для прихованого монтажу колектора теплої підлоги на 2-4 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6668,8 +6626,8 @@ export const PRODUCTS = [
     "price": "40.41",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 4-6 виходів. Розміри: 435×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №01 призначена для прихованого монтажу колектора теплої підлоги на 4-6 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6689,8 +6647,8 @@ export const PRODUCTS = [
     "price": "47.62",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 6-8 виходів. Розміри: 565×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №02 призначена для прихованого монтажу колектора теплої підлоги на 6-8 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6710,8 +6668,8 @@ export const PRODUCTS = [
     "price": "56.20",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 8-10 виходів. Розміри: 715×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №03 призначена для прихованого монтажу колектора теплої підлоги на 8-10 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6731,8 +6689,8 @@ export const PRODUCTS = [
     "price": "60.72",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 10-12 виходів. Розміри: 795×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №04 призначена для прихованого монтажу колектора теплої підлоги на 10-12 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6752,8 +6710,8 @@ export const PRODUCTS = [
     "price": "68.52",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 12-14 виходів. Розміри: 965×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №05 призначена для прихованого монтажу колектора теплої підлоги на 12-14 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6773,8 +6731,8 @@ export const PRODUCTS = [
     "price": "77.92",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-int-1.jpg",
+    "images": ["/images/cabinets/cabinet-int-1.jpg", "/images/cabinets/cabinet-int-2.jpg", "/images/cabinets/cabinet-int-3.jpg", "/images/cabinets/cabinet-int-4.jpg", "/images/cabinets/cabinet-int-5.jpg", "/images/cabinets/cabinet-int-6.jpg"],
     "shortDesc": "Шафа колекторна внутрішня для 14-16 виходів. Розміри: 1130×575×110 мм.",
     "description": "Шафа колекторна внутрішня TERMOJET №06 призначена для прихованого монтажу колектора теплої підлоги на 14-16 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6794,8 +6752,8 @@ export const PRODUCTS = [
     "price": "35.97",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 2-4 виходів. Розміри: 335×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №00 для накладного монтажу колектора теплої підлоги на 2-4 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6815,8 +6773,8 @@ export const PRODUCTS = [
     "price": "40.90",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 4-6 виходів. Розміри: 435×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №01 для накладного монтажу колектора теплої підлоги на 4-6 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6836,8 +6794,8 @@ export const PRODUCTS = [
     "price": "46.39",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 6-8 виходів. Розміри: 565×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №02 для накладного монтажу колектора теплої підлоги на 6-8 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6857,8 +6815,8 @@ export const PRODUCTS = [
     "price": "56.83",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 8-10 виходів. Розміри: 715×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №03 для накладного монтажу колектора теплої підлоги на 8-10 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6878,8 +6836,8 @@ export const PRODUCTS = [
     "price": "62.54",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 10-12 виходів. Розміри: 795×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №04 для накладного монтажу колектора теплої підлоги на 10-12 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6899,8 +6857,8 @@ export const PRODUCTS = [
     "price": "74.02",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 12-14 виходів. Розміри: 965×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №05 для накладного монтажу колектора теплої підлоги на 12-14 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {
@@ -6920,8 +6878,8 @@ export const PRODUCTS = [
     "price": "81.67",
     "currency": "EUR",
     "categorySlug": "kolektory-pidloha",
-    "image": "https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg",
-    "images": ["https://termojet.com.ua/wp-content/uploads/2024/04/1713881601309906-800x800.jpg"],
+    "image": "/images/cabinets/cabinet-ext-1.jpg",
+    "images": ["/images/cabinets/cabinet-ext-1.jpg", "/images/cabinets/cabinet-ext-2.jpg", "/images/cabinets/cabinet-ext-3.jpg", "/images/cabinets/cabinet-ext-4.jpg", "/images/cabinets/cabinet-ext-5.jpg", "/images/cabinets/cabinet-ext-6.jpg"],
     "shortDesc": "Шафа колекторна зовнішня для 14-16 виходів. Розміри: 1130×600×125 мм.",
     "description": "Шафа колекторна зовнішня TERMOJET №06 для накладного монтажу колектора теплої підлоги на 14-16 виходів. Виготовлена з оцинкованої сталі з декоративними дверцятами.",
     "specs": {

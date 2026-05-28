@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ShoppingCart, Plus, Minus, ChevronRight, Download, Phone, Package, Play, FileText, Wrench, Image } from 'lucide-react'
+import { ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, Download, Phone, Package, Play, FileText, Wrench, Image, X, ZoomIn } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { imgUrl } from '../utils/imgUrl'
@@ -12,41 +12,112 @@ import { formatPrice, toUAH } from '../utils/currency'
 function ImageGallery({ images, name }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
+  const touchStart = useRef(null)
+  const thumbsRef = useRef(null)
 
   const all = images?.length > 0 ? images : []
   const main = all[active] || null
+  const total = all.length
+
+  const prev = useCallback(() => setActive(i => (i - 1 + total) % total), [total])
+  const next = useCallback(() => setActive(i => (i + 1) % total), [total])
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = e => {
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+      if (e.key === 'Escape') setLightbox(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [lightbox, prev, next])
+
+  // Scroll active thumb into view
+  useEffect(() => {
+    if (!thumbsRef.current) return
+    const btn = thumbsRef.current.children[active]
+    btn?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+  }, [active])
+
+  // Touch/swipe handlers (main image + lightbox)
+  const onTouchStart = e => { touchStart.current = e.touches[0].clientX }
+  const onTouchEnd = e => {
+    if (touchStart.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStart.current
+    if (Math.abs(dx) > 40) dx < 0 ? next() : prev()
+    touchStart.current = null
+  }
 
   return (
     <div className="card overflow-hidden">
-      {/* Main image */}
+      {/* Main image area */}
       <div
-        className="relative flex items-center justify-center bg-gray-50 cursor-zoom-in"
+        className="relative flex items-center justify-center bg-gray-50 select-none"
         style={{ minHeight: 340 }}
-        onClick={() => main && setLightbox(true)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         {main ? (
-          <img src={main} alt={name} className="max-h-80 max-w-full object-contain p-6" />
+          <img
+            src={main} alt={name}
+            className="max-h-80 max-w-full object-contain p-6 cursor-zoom-in"
+            onClick={() => setLightbox(true)}
+            draggable={false}
+          />
         ) : (
-          <div className="text-gray-200 text-8xl">⚙️</div>
+          <div className="text-gray-200 text-8xl select-none">⚙️</div>
         )}
-        {all.length > 1 && (
+
+        {/* Zoom hint */}
+        {main && (
+          <button
+            onClick={() => setLightbox(true)}
+            className="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-all"
+            title="Збільшити"
+          >
+            <ZoomIn size={14} />
+          </button>
+        )}
+
+        {/* Prev / Next arrows */}
+        {total > 1 && (
+          <>
+            <button
+              onClick={prev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all hover:scale-110"
+            >
+              <ChevronLeft size={18} className="text-gray-700" />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all hover:scale-110"
+            >
+              <ChevronRight size={18} className="text-gray-700" />
+            </button>
+          </>
+        )}
+
+        {/* Counter */}
+        {total > 1 && (
           <span className="absolute bottom-3 right-3 bg-black/40 text-white text-xs px-2 py-1 rounded font-mono">
-            {active + 1}/{all.length}
+            {active + 1}/{total}
           </span>
         )}
       </div>
 
       {/* Thumbnails */}
-      {all.length > 1 && (
-        <div className="flex gap-2 p-3 border-t border-gray-100 overflow-x-auto">
+      {total > 1 && (
+        <div ref={thumbsRef} className="flex gap-2 p-3 border-t border-gray-100 overflow-x-auto scrollbar-thin">
           {all.map((img, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className="flex-shrink-0 w-16 h-16 border-2 transition-all overflow-hidden"
-              style={{ borderColor: active === i ? 'var(--accent)' : 'transparent' }}
+              className="flex-shrink-0 w-16 h-16 border-2 rounded transition-all overflow-hidden hover:scale-105"
+              style={{ borderColor: active === i ? 'var(--accent)' : '#e5e7eb' }}
             >
-              <img src={img} alt="" className="w-full h-full object-contain" />
+              <img src={img} alt={`${i + 1}`} className="w-full h-full object-contain" />
             </button>
           ))}
         </div>
@@ -55,10 +126,69 @@ function ImageGallery({ images, name }) {
       {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-[300] flex items-center justify-center bg-black/90"
+          className="fixed inset-0 z-[300] flex items-center justify-center bg-black/95"
           onClick={() => setLightbox(false)}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
-          <img src={main} alt={name} className="max-h-[90vh] max-w-[90vw] object-contain" />
+          {/* Close */}
+          <button
+            className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-10"
+            onClick={() => setLightbox(false)}
+          >
+            <X size={22} />
+          </button>
+
+          {/* Counter */}
+          {total > 1 && (
+            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
+              {active + 1} / {total}
+            </span>
+          )}
+
+          {/* Prev */}
+          {total > 1 && (
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
+              onClick={e => { e.stopPropagation(); prev() }}
+            >
+              <ChevronLeft size={26} />
+            </button>
+          )}
+
+          {/* Image */}
+          <img
+            src={main} alt={name}
+            className="max-h-[88vh] max-w-[88vw] object-contain"
+            onClick={e => e.stopPropagation()}
+            draggable={false}
+          />
+
+          {/* Next */}
+          {total > 1 && (
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
+              onClick={e => { e.stopPropagation(); next() }}
+            >
+              <ChevronRight size={26} />
+            </button>
+          )}
+
+          {/* Thumbnail strip in lightbox */}
+          {total > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 overflow-x-auto max-w-[80vw] px-2">
+              {all.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={e => { e.stopPropagation(); setActive(i) }}
+                  className="flex-shrink-0 w-12 h-12 border-2 rounded overflow-hidden transition-all"
+                  style={{ borderColor: active === i ? 'var(--accent)' : 'rgba(255,255,255,0.3)' }}
+                >
+                  <img src={img} alt="" className="w-full h-full object-contain bg-white/10" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
