@@ -2606,7 +2606,7 @@ export const PRODUCTS = [
     "slug": "ng-67150-dlya-pidklyuchennya-bojlera-1",
     "sku": "84131670",
     "price": "7150",
-    "categorySlug": "termojet-mega",
+    "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/67-scaled.jpg",
     "images": [
       "https://termojet.com.ua/wp-content/uploads/2023/08/67-scaled.jpg",
@@ -2641,7 +2641,7 @@ export const PRODUCTS = [
     "slug": "ng-67200-dlya-pidklyuchennya-bojlera-1",
     "sku": "84130670",
     "price": "7150",
-    "categorySlug": "termojet-mega",
+    "categorySlug": "nasosni-hrupy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/67-scaled.jpg",
     "images": [
       "https://termojet.com.ua/wp-content/uploads/2023/08/67-scaled.jpg",
