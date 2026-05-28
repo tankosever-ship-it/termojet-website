@@ -3,12 +3,15 @@ import { useParams, Link } from 'react-router-dom'
 import {
   ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
   Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
-  Truck, CreditCard, ShieldCheck, Factory, Headphones, MapPin, Banknote
+  Truck, CreditCard, ShieldCheck, Factory, Headphones, MapPin, Banknote,
+  FileDown
 } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { imgUrl } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
+import { FILES } from '../data/files'
+import { getDocsForProduct } from '../data/docsMapping'
 import SEO from '../components/SEO'
 import { trackViewItem, trackAddToCart } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
@@ -320,6 +323,15 @@ export default function ProductDetailPage() {
       .slice(0, 4)
   }, [product.specs])
 
+  // Documents for this product (brochures + instructions)
+  const productDocs = useMemo(() => {
+    const ids = getDocsForProduct(categorySlug, name)
+    return ids
+      .map(id => FILES.find(f => f.id === id))
+      .filter(Boolean)
+      .filter(f => ['Інструкції', 'Брошури'].includes(f.category))
+  }, [categorySlug, name])
+
   const priceUAH = product.price
     ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
     : null
@@ -532,6 +544,36 @@ export default function ProductDetailPage() {
                 </div>
               ))}
             </div>
+
+            {/* Documents block */}
+            {productDocs.length > 0 && (
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Документи</p>
+                <div className="space-y-1">
+                  {productDocs.map(doc => (
+                    <a
+                      key={doc.id}
+                      href={doc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 hover:border-[var(--primary)] hover:bg-orange-50 transition-all group"
+                    >
+                      <span className="flex-shrink-0 w-8 h-8 bg-red-50 rounded-md flex items-center justify-center">
+                        <FileDown size={15} className="text-red-500" />
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-gray-800 truncate group-hover:text-[var(--primary)]">
+                          {doc.name}
+                        </p>
+                        <p className="text-xs text-gray-400">{doc.format} · {doc.year}</p>
+                      </div>
+                      <Download size={13} className="text-gray-300 group-hover:text-[var(--primary)] flex-shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Qty + Cart */}
             <div className="flex items-center gap-3 mb-3">
