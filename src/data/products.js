@@ -142,11 +142,22 @@ export const PRODUCTS = [
     "price": "11802",
     "currency": "UAH",
     "categorySlug": "nasosni-hrupy",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0539-800x1202.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0539-800x1202.jpg"
+    ],
+    "shortDesc": "Насосна група НГ-46Л з термостатичним краном 25–55°C в теплоізоляції EPP BLACK без насоса. Лінія подачі зліва. Для контурів, де потрібне регулювання температури теплоносія.",
+    "description": "Насосна група НГ-46Л з термостатичним краном 25–55°C в теплоізоляції EPP BLACK без насоса. Лінія подачі зліва. Для контурів, де потрібне регулювання температури теплоносія.",
+    "specs": {
+      "Підключення": "1\" ВР",
+      "Потужність макс. ΔT=10°C": "15 кВт",
+      "Потужність макс. ΔT=20°C": "30 кВт",
+      "Довжина насоса": "180 мм",
+      "KVS": "3.5 м³/год",
+      "Тиск": "до 6 бар",
+      "Ізоляція": "EPP BLACK",
+      "Термокран": "25–55°C"
+    },
     "inStock": true
   },
   {
@@ -226,11 +237,22 @@ export const PRODUCTS = [
     "price": "7150.5",
     "currency": "UAH",
     "categorySlug": "nasosni-hrupy",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0556-800x1202.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0556-800x1202.jpg"
+    ],
+    "shortDesc": "Насосна група НГ-47 без змішувача в теплоізоляції EPP BLACK без насоса. Для контурів, де не потрібне керування температурою теплоносія. Міжосьова відстань 125 мм.",
+    "description": "Насосна група НГ-47 без змішувача в теплоізоляції EPP BLACK без насоса. Для контурів, де не потрібне керування температурою теплоносія. Міжосьова відстань 125 мм.",
+    "specs": {
+      "Підключення": "1\" ВР",
+      "Міжосьова відстань": "125 мм",
+      "Потужність макс. ΔT=10°C": "20 кВт",
+      "Потужність макс. ΔT=20°C": "40 кВт",
+      "Довжина насоса": "180 мм",
+      "KVS": "10.2 м³/год",
+      "Тиск": "до 6 бар",
+      "Ізоляція": "EPP BLACK"
+    },
     "inStock": true
   },
   {
@@ -2347,11 +2369,22 @@ export const PRODUCTS = [
     "price": "10470",
     "currency": "UAH",
     "categorySlug": "termojet-box",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/46-500x712-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/46-500x712-1.png"
+    ],
+    "shortDesc": "Насосна група НГ-36 з термостатичним краном для контурів опалення, що потребують керування температурою теплоносія без автоматики котла. Підходить для теплої підлоги та радіаторного опалення. Міжосьова відстань 100 мм.",
+    "description": "Насосна група НГ-36 з термостатичним краном для контурів опалення, що потребують керування температурою теплоносія без автоматики котла. Підходить для теплої підлоги та радіаторного опалення. Міжосьова відстань 100 мм.",
+    "specs": {
+      "Підключення": "1\" ВР",
+      "DN": "25 мм",
+      "Потужність макс. ΔT=10°C": "20 кВт",
+      "Потужність макс. ΔT=20°C": "40 кВт",
+      "Довжина насоса": "130 мм",
+      "KVS": "2.5 м³/год",
+      "Тиск": "до 10 бар",
+      "Температура макс.": "110°C"
+    },
     "inStock": true
   },
   {
@@ -2362,11 +2395,22 @@ export const PRODUCTS = [
     "price": "5540",
     "currency": "UAH",
     "categorySlug": "termojet-box",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/47-500x712-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/47-500x712-1.png"
+    ],
+    "shortDesc": "Насосна група НГ-37 без змішувача для контурів опалення, що не потребують керування температурою теплоносія. Підходить для радіаторного опалення, нагріву басейнів та ГВП. Міжосьова відстань 100 мм.",
+    "description": "Насосна група НГ-37 без змішувача для контурів опалення, що не потребують керування температурою теплоносія. Підходить для радіаторного опалення, нагріву басейнів та ГВП. Міжосьова відстань 100 мм.",
+    "specs": {
+      "Підключення": "1\" ВР",
+      "DN": "25 мм",
+      "Потужність макс. ΔT=10°C": "20 кВт",
+      "Потужність макс. ΔT=20°C": "40 кВт",
+      "Довжина насоса": "130 мм",
+      "KVS": "10.2 м³/год",
+      "Тиск": "до 10 бар",
+      "Температура макс.": "110°C"
+    },
     "inStock": true
   },
   {
@@ -2377,11 +2421,22 @@ export const PRODUCTS = [
     "price": "12380",
     "currency": "UAH",
     "categorySlug": "termojet-box",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/48-500x764-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/48-500x764-1.png"
+    ],
+    "shortDesc": "Насосна група НГ-38 зі змішувальним вузлом для контурів, що потребують регулювання температури теплоносія. Підходить для теплої підлоги та радіаторного опалення. Міжосьова відстань 100 мм.",
+    "description": "Насосна група НГ-38 зі змішувальним вузлом для контурів, що потребують регулювання температури теплоносія. Підходить для теплої підлоги та радіаторного опалення. Міжосьова відстань 100 мм.",
+    "specs": {
+      "Підключення": "1\" ВР",
+      "DN": "25 мм",
+      "Потужність макс. ΔT=10°C": "20 кВт",
+      "Потужність макс. ΔT=20°C": "40 кВт",
+      "Довжина насоса": "130 мм",
+      "KVS": "6.3 м³/год",
+      "Тиск": "до 10 бар",
+      "Температура макс.": "110°C"
+    },
     "inStock": true
   },
   {
@@ -2416,11 +2471,23 @@ export const PRODUCTS = [
     "price": "7945.04",
     "currency": "UAH",
     "categorySlug": "termojet-box",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0544-scaled.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0544-scaled.jpg"
+    ],
+    "shortDesc": "Модуль Termojet BOX2 — колектор з функцією гідравлічного розділювача на 2 контури. Комплектується будь-якою насосною групою TERMOJET. Теплоізоляційний кожух XPE.",
+    "description": "Модуль Termojet BOX2 — колектор з функцією гідравлічного розділювача на 2 контури. Комплектується будь-якою насосною групою TERMOJET. Теплоізоляційний кожух XPE.",
+    "specs": {
+      "Контури": "2",
+      "Потужність макс. ΔT=10°C": "20 кВт",
+      "Потужність макс. ΔT=20°C": "30 кВт",
+      "Підключення котла": "1\"",
+      "Підключення контурів": "1½\" швидкороз'єм",
+      "Висота": "500 мм",
+      "Довжина": "400 мм",
+      "Ізоляція": "XPE",
+      "Тиск": "до 10 бар"
+    },
     "inStock": true
   },
   {
@@ -2431,11 +2498,23 @@ export const PRODUCTS = [
     "price": "10376.56",
     "currency": "UAH",
     "categorySlug": "termojet-box",
-    "image": "",
-    "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0552-scaled.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0552-scaled.jpg"
+    ],
+    "shortDesc": "Модуль Termojet BOX3 — колектор з функцією гідравлічного розділювача на 3 контури. Комплектується будь-якою насосною групою TERMOJET. Теплоізоляційний кожух XPE.",
+    "description": "Модуль Termojet BOX3 — колектор з функцією гідравлічного розділювача на 3 контури. Комплектується будь-якою насосною групою TERMOJET. Теплоізоляційний кожух XPE.",
+    "specs": {
+      "Контури": "3",
+      "Потужність макс. ΔT=10°C": "20 кВт",
+      "Потужність макс. ΔT=20°C": "30 кВт",
+      "Підключення котла": "1\"",
+      "Підключення контурів": "1½\" швидкороз'єм",
+      "Висота": "500 мм",
+      "Довжина": "600 мм",
+      "Ізоляція": "XPE",
+      "Тиск": "до 10 бар"
+    },
     "inStock": true
   },
   {
@@ -5371,9 +5450,17 @@ export const PRODUCTS = [
     "categorySlug": "zonalne-keruvannya",
     "image": "",
     "images": [],
-    "shortDesc": "",
-    "description": "",
-    "specs": {},
+    "shortDesc": "Триходовий зональний клапан ABF-ZV3-100 1\" з електроприводом 230V AC для зонального керування системами опалення. Момент 6 Нм, час повороту 85 с/60°.",
+    "description": "Триходовий зональний клапан ABF-ZV3-100 1\" з електроприводом 230V AC для зонального керування системами опалення. Момент 6 Нм, час повороту 85 с/60°.",
+    "specs": {
+      "DN": "20",
+      "Різьба": "1\"М",
+      "kvs": "8 м³/год",
+      "Момент": "6 Нм",
+      "Напруга": "230V AC",
+      "Час повороту": "85 с/60°",
+      "Керування": "2P SPST"
+    },
     "inStock": true
   },
   {
@@ -6607,8 +6694,10 @@ export const PRODUCTS = [
     "sku": "84050103",
     "price": "12450",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg"
+    ],
     "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 80",
     "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 80",
     "specs": {
@@ -6625,8 +6714,10 @@ export const PRODUCTS = [
     "sku": "84050104",
     "price": "13710",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg"
+    ],
     "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 100",
     "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 100",
     "specs": {
@@ -6643,8 +6734,10 @@ export const PRODUCTS = [
     "sku": "84050105",
     "price": "14990",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg"
+    ],
     "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 125",
     "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 125",
     "specs": {
@@ -6661,8 +6754,10 @@ export const PRODUCTS = [
     "sku": "84050106",
     "price": "16400",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/spr-kol-1.jpg"
+    ],
     "shortDesc": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 150",
     "description": "Комплект підключення гідрострілки до колектора серії Mega. Підключення: ДУ 150",
     "specs": {
@@ -6679,8 +6774,10 @@ export const PRODUCTS = [
     "sku": "84050107",
     "price": "3660",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png"
+    ],
     "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 80/ДУ 80",
     "description": "Комплект переходів для фланцевого приєднання. ДУ 80/ДУ 80",
     "specs": {
@@ -6697,8 +6794,10 @@ export const PRODUCTS = [
     "sku": "84050108",
     "price": "5030",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png"
+    ],
     "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 100/ДУ 100",
     "description": "Комплект переходів для фланцевого приєднання. ДУ 100/ДУ 100",
     "specs": {
@@ -6715,8 +6814,10 @@ export const PRODUCTS = [
     "sku": "84050109",
     "price": "8680",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png"
+    ],
     "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 125/ДУ 125",
     "description": "Комплект переходів для фланцевого приєднання. ДУ 125/ДУ 125",
     "specs": {
@@ -6733,8 +6834,10 @@ export const PRODUCTS = [
     "sku": "84050110",
     "price": "11680",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_30_3-1.png"
+    ],
     "shortDesc": "Комплект переходів для фланцевого приєднання. ДУ 150/ДУ 150",
     "description": "Комплект переходів для фланцевого приєднання. ДУ 150/ДУ 150",
     "specs": {
@@ -6751,8 +6854,10 @@ export const PRODUCTS = [
     "sku": "84050121",
     "price": "1100",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png"
+    ],
     "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 40/ДУ 40",
     "description": "Комплект переходів для приєднання під сварку. ДУ 40/ДУ 40",
     "specs": {
@@ -6769,8 +6874,10 @@ export const PRODUCTS = [
     "sku": "84050122",
     "price": "1250",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png"
+    ],
     "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 50/ДУ 50",
     "description": "Комплект переходів для приєднання під сварку. ДУ 50/ДУ 50",
     "specs": {
@@ -6787,8 +6894,10 @@ export const PRODUCTS = [
     "sku": "84050111",
     "price": "1190",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png"
+    ],
     "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 80/ДУ 80",
     "description": "Комплект переходів для приєднання під сварку. ДУ 80/ДУ 80",
     "specs": {
@@ -6805,8 +6914,10 @@ export const PRODUCTS = [
     "sku": "84050112",
     "price": "1290",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png"
+    ],
     "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 100/ДУ 100",
     "description": "Комплект переходів для приєднання під сварку. ДУ 100/ДУ 100",
     "specs": {
@@ -6823,8 +6934,10 @@ export const PRODUCTS = [
     "sku": "84050113",
     "price": "1430",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png"
+    ],
     "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 125/ДУ 125",
     "description": "Комплект переходів для приєднання під сварку. ДУ 125/ДУ 125",
     "specs": {
@@ -6841,8 +6954,10 @@ export const PRODUCTS = [
     "sku": "84050114",
     "price": "1600",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/image_28_2-1.png"
+    ],
     "shortDesc": "Комплект переходів для приєднання під сварку. ДУ 150/ДУ 150",
     "description": "Комплект переходів для приєднання під сварку. ДУ 150/ДУ 150",
     "specs": {
@@ -6859,8 +6974,10 @@ export const PRODUCTS = [
     "sku": "84050124",
     "price": "1440",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/qw.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/qw.jpg"
+    ],
     "shortDesc": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1\"",
     "description": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1\"",
     "specs": {
@@ -6877,8 +6994,10 @@ export const PRODUCTS = [
     "sku": "84050125",
     "price": "1760",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/qw.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/qw.jpg"
+    ],
     "shortDesc": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1 1/4\"",
     "description": "Комплект закінчень для насосних груп різьбовий. Підключення різьбове: 1 1/4\"",
     "specs": {
@@ -6895,8 +7014,10 @@ export const PRODUCTS = [
     "sku": "84050115",
     "price": "5520",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/gh-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/gh-1.jpg"
+    ],
     "shortDesc": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1\"",
     "description": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1\"",
     "specs": {
@@ -6913,8 +7034,10 @@ export const PRODUCTS = [
     "sku": "84050116",
     "price": "5890",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/gh-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/gh-1.jpg"
+    ],
     "shortDesc": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1 1/4\"",
     "description": "Перехід для приєднання різьбових насосних груп. Підключення колектора: ДУ50, різьба: 1 1/4\"",
     "specs": {
@@ -6931,8 +7054,10 @@ export const PRODUCTS = [
     "sku": "7307114",
     "price": "730",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 1 1/4\" 32мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 1 1/4\" 32мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -6949,8 +7074,10 @@ export const PRODUCTS = [
     "sku": "7307112",
     "price": "798",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 1 1/2\" 40мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 1 1/2\" 40мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -6967,8 +7094,10 @@ export const PRODUCTS = [
     "sku": "7307002",
     "price": "813",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 2\"/60,3мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 2\"/60,3мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -6985,8 +7114,10 @@ export const PRODUCTS = [
     "sku": "7307212",
     "price": "930",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 2 1/2\"/65-76,3мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 2 1/2\"/65-76,3мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -7003,8 +7134,10 @@ export const PRODUCTS = [
     "sku": "7307003",
     "price": "980",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 3\"/80-88,9мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 3\"/80-88,9мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -7021,8 +7154,10 @@ export const PRODUCTS = [
     "sku": "7307004",
     "price": "1246",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 4\"/100-108мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 4\"/100-108мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -7039,8 +7174,10 @@ export const PRODUCTS = [
     "sku": "7307005",
     "price": "1745",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 5\"/125-139,7мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 5\"/125-139,7мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -7057,8 +7194,10 @@ export const PRODUCTS = [
     "sku": "7307006",
     "price": "2144",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 6\"/150-159мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 6\"/150-159мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -7075,8 +7214,10 @@ export const PRODUCTS = [
     "sku": "7307008",
     "price": "3990",
     "categorySlug": "termojet-mega",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/q-1.jpg"
+    ],
     "shortDesc": "Муфта гнучка Termojet 8\"/200-219мм. Зажимна муфта для з'єднання трубопроводів.",
     "description": "Муфта гнучка Termojet 8\"/200-219мм. Зажимна муфта для з'єднання трубопроводів.",
     "specs": {
@@ -7093,8 +7234,10 @@ export const PRODUCTS = [
     "sku": "RMV04100-034",
     "price": "66",
     "categorySlug": "klapany",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0496-scaled.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0496-scaled.jpg"
+    ],
     "shortDesc": "4-ходовий клапан з внутрішньою різьбою (kvs 12). DN25, RP1.",
     "description": "4-ходовий клапан з внутрішньою різьбою (kvs 12). DN25, RP1.",
     "specs": {
@@ -7113,8 +7256,10 @@ export const PRODUCTS = [
     "sku": "RMV04100-100",
     "price": "75",
     "categorySlug": "klapany",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0496-scaled.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0496-scaled.jpg"
+    ],
     "shortDesc": "4-ходовий клапан з внутрішньою різьбою (kvs 18). DN32, RP 1 1/4.",
     "description": "4-ходовий клапан з внутрішньою різьбою (kvs 18). DN32, RP 1 1/4.",
     "specs": {
@@ -7169,8 +7314,10 @@ export const PRODUCTS = [
     "sku": "",
     "price": "410",
     "categorySlug": "dodatkove",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/krn-200.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/krn-200.jpg"
+    ],
     "shortDesc": "Універсальне підлогове кріплення для сталевих радіаторів висотою 200 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
     "description": "Універсальне підлогове кріплення для сталевих радіаторів висотою 200 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
     "specs": {
@@ -7187,8 +7334,10 @@ export const PRODUCTS = [
     "sku": "",
     "price": "410",
     "categorySlug": "dodatkove",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/krn-300.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/krn-300.jpg"
+    ],
     "shortDesc": "Універсальне підлогове кріплення для сталевих радіаторів висотою 300 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
     "description": "Універсальне підлогове кріплення для сталевих радіаторів висотою 300 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
     "specs": {
@@ -7205,8 +7354,10 @@ export const PRODUCTS = [
     "sku": "",
     "price": "410",
     "categorySlug": "dodatkove",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/krn-5001-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/krn-5001-1.jpg"
+    ],
     "shortDesc": "Універсальне підлогове кріплення для сталевих радіаторів висотою 500 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
     "description": "Універсальне підлогове кріплення для сталевих радіаторів висотою 500 мм. Тип підключення: нижнє/бокове 11, 21, 22, 33.",
     "specs": {
@@ -7223,8 +7374,10 @@ export const PRODUCTS = [
     "sku": "",
     "price": "280",
     "categorySlug": "dodatkove",
-    "image": "",
-    "images": [],
+    "image": "https://termojet.com.ua/wp-content/uploads/2023/08/img_40882-1.jpg",
+    "images": [
+      "https://termojet.com.ua/wp-content/uploads/2023/08/img_40882-1.jpg"
+    ],
     "shortDesc": "Настінне кріплення для розширювальних бачків 5-35 л. Підключення 3/4\" ВР.",
     "description": "Настінне кріплення для розширювальних бачків 5-35 л. Підключення 3/4\" ВР.",
     "specs": {
