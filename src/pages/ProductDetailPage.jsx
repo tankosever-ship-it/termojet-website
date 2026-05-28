@@ -361,8 +361,90 @@ export default function ProductDetailPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
 
-          {/* Gallery — vertical thumbs on desktop */}
-          <ImageGallery images={allImages} name={name} />
+          {/* LEFT: gallery + accordions + category */}
+          <div className="flex flex-col gap-4">
+            <ImageGallery images={allImages} name={name} />
+
+            {/* Accordion sections */}
+            <div className="space-y-2">
+              <Accordion icon={<Truck size={16} />} title="Доставка">
+                <div className="space-y-2.5">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-base mt-0.5">📦</span>
+                    <div>
+                      <p className="font-medium text-gray-800">Нова Пошта</p>
+                      <p className="text-gray-500 text-xs mt-0.5">По всій Україні — до відділення або кур'єром</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-base mt-0.5">🚚</span>
+                    <div>
+                      <p className="font-medium text-gray-800">Власна доставка</p>
+                      <p className="text-gray-500 text-xs mt-0.5">Київ, Житомир та прилеглі регіони</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <MapPin size={15} className="text-gray-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-gray-800">Самовивіз</p>
+                      <p className="text-gray-500 text-xs mt-0.5">Офіси в Києві та Житомирі</p>
+                    </div>
+                  </div>
+                </div>
+              </Accordion>
+
+              <Accordion icon={<CreditCard size={16} />} title="Оплата">
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <Banknote size={15} className="text-gray-400 flex-shrink-0" />
+                    <span className="text-gray-700">Готівка при отриманні</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CreditCard size={15} className="text-gray-400 flex-shrink-0" />
+                    <span className="text-gray-700">Онлайн-оплата (Visa / Mastercard)</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-gray-400 text-xs font-bold flex-shrink-0">₴</span>
+                    <span className="text-gray-700">Безготівковий розрахунок з ПДВ</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-gray-400 text-xs font-bold flex-shrink-0">₴</span>
+                    <span className="text-gray-700">Безготівковий розрахунок без ПДВ</span>
+                  </div>
+                </div>
+              </Accordion>
+
+              <Accordion icon={<ShieldCheck size={16} />} title="Гарантія та сервіс">
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base">🛡️</span>
+                    <span className="text-gray-700">Гарантія <strong>2 роки</strong> на все обладнання</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base">🔧</span>
+                    <span className="text-gray-700">Гарантійний та постгарантійний сервіс</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base">📞</span>
+                    <span className="text-gray-700">Технічна підтримка та консультації</span>
+                  </div>
+                  <Link to="/warranty" className="inline-block text-xs text-[var(--primary)] hover:underline mt-1">
+                    Детальні умови гарантії →
+                  </Link>
+                </div>
+              </Accordion>
+            </div>
+
+            {/* Category meta */}
+            {category && (
+              <div className="flex items-center justify-between text-sm text-gray-500 px-1">
+                <span>Категорія:</span>
+                <Link to={`/catalog/${categorySlug}`} className="font-medium text-[var(--primary)] hover:underline">
+                  {category.name[lang] || category.name.uk}
+                </Link>
+              </div>
+            )}
+          </div>
 
           {/* ── Right column ── */}
           <div>
@@ -489,92 +571,6 @@ export default function ProductDetailPage() {
               {pt.askConsult || 'Замовити консультацію'}
             </a>
 
-            {/* ── Accordion sections ── */}
-            <div className="space-y-2">
-              <Accordion icon={<Truck size={16} />} title="Доставка">
-                <div className="space-y-2.5">
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-base mt-0.5">📦</span>
-                    <div>
-                      <p className="font-medium text-gray-800">Нова Пошта</p>
-                      <p className="text-gray-500 text-xs mt-0.5">По всій Україні — до відділення або кур'єром</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-base mt-0.5">🚚</span>
-                    <div>
-                      <p className="font-medium text-gray-800">Власна доставка</p>
-                      <p className="text-gray-500 text-xs mt-0.5">Київ, Житомир та прилеглі регіони</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <MapPin size={15} className="text-gray-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium text-gray-800">Самовивіз</p>
-                      <p className="text-gray-500 text-xs mt-0.5">Офіси в Києві та Житомирі</p>
-                    </div>
-                  </div>
-                </div>
-              </Accordion>
-
-              <Accordion icon={<CreditCard size={16} />} title="Оплата">
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2.5">
-                    <Banknote size={15} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-gray-700">Готівка при отриманні</span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <CreditCard size={15} className="text-gray-400 flex-shrink-0" />
-                    <span className="text-gray-700">Онлайн-оплата (Visa / Mastercard)</span>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-gray-400 text-xs font-bold mt-0.5 flex-shrink-0">₴</span>
-                    <div>
-                      <p className="text-gray-700">Безготівковий розрахунок з ПДВ</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-gray-400 text-xs font-bold mt-0.5 flex-shrink-0">₴</span>
-                    <div>
-                      <p className="text-gray-700">Безготівковий розрахунок без ПДВ</p>
-                    </div>
-                  </div>
-                </div>
-              </Accordion>
-
-              <Accordion icon={<ShieldCheck size={16} />} title="Гарантія та сервіс">
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-base">🛡️</span>
-                    <span className="text-gray-700">Гарантія <strong>2 роки</strong> на все обладнання</span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-base">🔧</span>
-                    <span className="text-gray-700">Гарантійний та постгарантійний сервіс</span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-base">📞</span>
-                    <span className="text-gray-700">Технічна підтримка та консультації</span>
-                  </div>
-                  <Link
-                    to="/warranty"
-                    className="inline-block text-xs text-[var(--primary)] hover:underline mt-1"
-                  >
-                    Детальні умови гарантії →
-                  </Link>
-                </div>
-              </Accordion>
-            </div>
-
-            {/* Category meta */}
-            {category && (
-              <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-                <span>Категорія:</span>
-                <Link to={`/catalog/${categorySlug}`} className="font-medium text-[var(--primary)] hover:underline">
-                  {category.name[lang] || category.name.uk}
-                </Link>
-              </div>
-            )}
           </div>
         </div>
 
