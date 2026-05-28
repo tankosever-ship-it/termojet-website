@@ -96,7 +96,7 @@ function ImageGallery({ images, name }) {
   )
 
   return (
-    <div className="card overflow-hidden">
+    <div className="card overflow-hidden self-start">
       {/* Desktop: thumbnails LEFT + main image RIGHT — fixed height */}
       <div className="flex" style={{ height: 420 }}>
 
