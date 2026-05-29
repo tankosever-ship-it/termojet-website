@@ -377,7 +377,6 @@ export default function HomePage() {
   const [videoOpen, setVideoOpen] = useState(false)
   const [statsVisible, setStatsVisible] = useState(false)
   const [hoveredAdvantage, setHoveredAdvantage] = useState(null)
-  const statsRef = useRef(null)
 
   useEffect(() => {
     if (!videoOpen) return
@@ -386,14 +385,10 @@ export default function HomePage() {
     return () => window.removeEventListener('keydown', fn)
   }, [videoOpen])
 
+  // stats visible on load after short delay
   useEffect(() => {
-    const el = statsRef.current
-    if (!el) return
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setStatsVisible(true); obs.disconnect() }
-    }, { threshold: 0.3 })
-    obs.observe(el)
-    return () => obs.disconnect()
+    const t = setTimeout(() => setStatsVisible(true), 800)
+    return () => clearTimeout(t)
   }, [])
 
   const featuredCats  = CATEGORIES.slice(0, 6)
@@ -479,12 +474,12 @@ export default function HomePage() {
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
                 <Link to="/catalog"
-                  className="inline-flex items-center gap-2 font-semibold rounded-none transition-all duration-200 hover:opacity-90"
+                  className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:opacity-90"
                   style={{ background: 'var(--accent)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   Переглянути каталог <ArrowRight size={18} />
                 </Link>
                 <Link to="/contacts"
-                  className="inline-flex items-center gap-2 font-semibold rounded-none transition-all duration-200 hover:bg-white/10"
+                  className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:bg-white/10"
                   style={{ border: '2px solid rgba(255,255,255,0.6)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   Отримати консультацію
                 </Link>
@@ -494,35 +489,30 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Bottom fade до секції нижче */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }} />
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          STATS ROW — editorial style
-      ═══════════════════════════════════════════ */}
-      <section ref={statsRef} className="bg-[var(--bg)] border-b border-[var(--ink-200)]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[var(--ink-200)]">
-            {STATS.map((s) => (
-              <div key={s.ord} className="stat-editorial">
-                <div className="eyebrow mb-3" style={{ color: 'var(--ink-200)' }}>{s.ord}</div>
-                <div className="font-black leading-none font-['Archivo',sans-serif] mb-2 text-[var(--text-primary)] whitespace-nowrap"
-                  style={{ fontSize: 'clamp(1.6rem, 3.5vw, 3rem)' }}>
-                  {s.thousands ? (
-                    statsVisible
-                      ? <CountUpThousands end={parseInt(s.num)} />
-                      : <>{s.num} <span className="text-[var(--accent)]">000</span></>
-                  ) : (
-                    statsVisible
-                      ? <CountUp end={parseInt(s.num.replace(/\s/g,''))} suffix={s.suffix} />
-                      : <>{s.num}<span className="text-[var(--accent)]">{s.suffix}</span></>
-                  )}
+        {/* Stats bar — overlay bottom of video */}
+        <div className="absolute bottom-0 left-0 right-0 z-20"
+          style={{ background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(12px)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+              {STATS.map((s) => (
+                <div key={s.ord} className="px-6 py-5">
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 6 }}>{s.ord}</div>
+                  <div className="font-black leading-none font-['Archivo',sans-serif] text-white whitespace-nowrap mb-1"
+                    style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)' }}>
+                    {s.thousands ? (
+                      statsVisible
+                        ? <CountUpThousands end={parseInt(s.num)} />
+                        : <>{s.num} <span className="text-[var(--accent)]">000</span></>
+                    ) : (
+                      statsVisible
+                        ? <CountUp end={parseInt(s.num.replace(/\s/g,''))} suffix={s.suffix} />
+                        : <>{s.num}<span className="text-[var(--accent)]">{s.suffix}</span></>
+                    )}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.35 }}>{s.label}</div>
                 </div>
-                <div className="text-sm text-[var(--text-secondary)] leading-snug">{s.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
