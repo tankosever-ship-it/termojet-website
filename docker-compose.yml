@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "8080:3000"
     volumes:
       # persist database and uploads between restarts
       - ./data:/app/backend/data
