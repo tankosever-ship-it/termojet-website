@@ -8,15 +8,25 @@ import { fetchEurRate } from '../utils/currency'
 
 const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
-const AppContext = createContext(null)
+// On GitHub Pages use static data; on real server use /api
+const IS_GITHUB_PAGES = import.meta.env.VITE_BASE_URL !== '/'
+const API = IS_GITHUB_PAGES ? null : '/api'
 
-const ADMIN_PASSWORD = 'termojet2024'
+const AppContext = createContext(null)
 
 function loadCart() {
   try { return JSON.parse(localStorage.getItem('tj2_cart') || '[]') } catch { return [] }
 }
 function saveCart(cart) {
   localStorage.setItem('tj2_cart', JSON.stringify(cart))
+}
+
+function loadAdminToken() {
+  return sessionStorage.getItem('tj2_admin_token') || null
+}
+function saveAdminToken(token) {
+  if (token) sessionStorage.setItem('tj2_admin_token', token)
+  else sessionStorage.removeItem('tj2_admin_token')
 }
 
 export function AppProvider({ children }) {
@@ -33,50 +43,62 @@ export function AppProvider({ children }) {
   const [files, setFiles] = useState(FILES)
   const [banners, setBanners] = useState([])
   const [clients, setClients] = useState([])
-  const [isAdminAuth, setIsAdminAuth] = useState(() => sessionStorage.getItem('tj2_admin') === '1')
-  const [eurRate, setEurRate] = useState(null) // NBU EUR rate * 1.022
+  const [isAdminAuth, setIsAdminAuth] = useState(() => !!loadAdminToken())
+  const [adminToken, setAdminToken] = useState(loadAdminToken)
+  const [eurRate, setEurRate] = useState(null)
   const [siteSettings, setSiteSettings] = useState({
     phone: '+380 50 718 91 65',
     email: 'termojet@sofievka.kiev.ua',
     address: 'м. Київ, вул. Виробнича, 1',
     workHours: 'Пн-Пт 9:00–18:00',
     telegram: '',
-    adminPassword: ADMIN_PASSWORD,
   })
-
-  const BASE = import.meta.env.VITE_BASE_URL === '/' ? '' : ''
 
   useEffect(() => { localStorage.setItem('tj2_lang', lang) }, [lang])
   useEffect(() => { saveCart(cart) }, [cart])
+  useEffect(() => { fetchEurRate().then(rate => setEurRate(rate)) }, [])
 
+  // load from API if available
   useEffect(() => {
-    fetchEurRate().then(rate => setEurRate(rate))
-  }, [])
+    if (!API) return
 
-  useEffect(() => {
-    // Products are embedded statically from WooCommerce export
-    // API call kept for future backend integration
-    fetch(`${BASE}/api-products.php`)
+    fetch(`${API}/products?limit=500`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data) && data.length > 0) setProducts(data) })
+      .then(data => { if (data.products?.length > 0) setProducts(data.products) })
       .catch(() => {})
 
-    fetch(`${BASE}/api-state.php`)
+    fetch(`${API}/blog`)
       .then(r => r.json())
-      .then(data => {
-        if (data.reviews) setReviews(data.reviews)
-        if (data.blog) setBlog(data.blog)
-        if (data.portfolio) setPortfolio(data.portfolio)
-        if (data.faq) setFaq(data.faq)
-        if (data.files) setFiles(data.files)
-        if (data.banners) setBanners(data.banners)
-        if (data.clients) setClients(data.clients)
-        if (data.siteSettings) setSiteSettings(s => ({ ...s, ...data.siteSettings }))
-      })
+      .then(data => { if (Array.isArray(data)) setBlog(data) })
+      .catch(() => {})
+
+    fetch(`${API}/portfolio`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setPortfolio(data) })
+      .catch(() => {})
+
+    fetch(`${API}/reviews`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setReviews(data) })
+      .catch(() => {})
+
+    fetch(`${API}/files`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setFiles(data) })
+      .catch(() => {})
+
+    fetch(`${API}/settings`)
+      .then(r => r.json())
+      .then(data => { if (data) setSiteSettings(s => ({ ...s, ...data })) })
       .catch(() => {})
   }, [])
 
-  // Cart operations
+  // helper for admin API calls
+  function authHeaders() {
+    return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }
+  }
+
+  // Cart
   function addToCart(product, quantity = 1) {
     setCart(prev => {
       const existing = prev.find(i => i.id === product.id)
@@ -84,19 +106,13 @@ export function AppProvider({ children }) {
       return [...prev, { ...product, quantity }]
     })
   }
-
-  function removeFromCart(id) {
-    setCart(prev => prev.filter(i => i.id !== id))
-  }
-
+  function removeFromCart(id) { setCart(prev => prev.filter(i => i.id !== id)) }
   function updateCartQuantity(id, quantity) {
     if (quantity <= 0) { removeFromCart(id); return }
     setCart(prev => prev.map(i => i.id === id ? { ...i, quantity } : i))
   }
-
   function clearCart() { setCart([]) }
 
-  // cartTotal always in UAH: EUR items converted at current rate
   const cartTotal = cart.reduce((sum, i) => {
     const price = parseFloat(i.price) || 0
     const inUah = i.currency === 'EUR' && eurRate ? price * eurRate : price
@@ -104,55 +120,95 @@ export function AppProvider({ children }) {
   }, 0)
   const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0)
 
-  // Admin
-  function adminLogin(password) {
-    if (password === (siteSettings.adminPassword || ADMIN_PASSWORD)) {
-      sessionStorage.setItem('tj2_admin', '1')
+  // Admin auth
+  async function adminLogin(password) {
+    if (!API) {
+      // GitHub Pages fallback
+      if (password === 'termojet2024') {
+        sessionStorage.setItem('tj2_admin', '1')
+        setIsAdminAuth(true)
+        return true
+      }
+      return false
+    }
+    try {
+      const res = await fetch(`${API}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      if (!res.ok) return false
+      const { token } = await res.json()
+      saveAdminToken(token)
+      setAdminToken(token)
       setIsAdminAuth(true)
       return true
+    } catch {
+      return false
     }
-    return false
   }
 
   function adminLogout() {
+    saveAdminToken(null)
+    setAdminToken(null)
     sessionStorage.removeItem('tj2_admin')
     setIsAdminAuth(false)
   }
 
+  // load admin data after auth
+  useEffect(() => {
+    if (!API || !isAdminAuth || !adminToken) return
+    const h = authHeaders()
+
+    fetch(`${API}/orders`, { headers: h }).then(r => r.json()).then(setOrders).catch(() => {})
+    fetch(`${API}/consultations`, { headers: h }).then(r => r.json()).then(setConsultations).catch(() => {})
+    fetch(`${API}/dealers`, { headers: h }).then(r => r.json()).then(setDealers).catch(() => {})
+    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(setBlog).catch(() => {})
+    fetch(`${API}/reviews?admin=1`, { headers: h }).then(r => r.json()).then(setReviews).catch(() => {})
+  }, [isAdminAuth, adminToken])
+
   // Orders
   async function placeOrder(orderData) {
-    const order = { ...orderData, id: Date.now().toString(), createdAt: new Date().toISOString(), status: 'new', items: cart }
-    try {
-      await fetch(`${BASE}/api-orders.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(order),
-      })
-    } catch {}
-    setOrders(prev => [order, ...prev])
+    const order = { ...orderData, items: cart, total: cartTotal }
+    if (API) {
+      try {
+        const res = await fetch(`${API}/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order),
+        })
+        const data = await res.json()
+        order.id = data.id
+      } catch {}
+    }
+    setOrders(prev => [{ ...order, id: order.id || Date.now() }, ...prev])
     clearCart()
     return order
   }
 
   async function sendConsultation(data) {
-    try {
-      await fetch(`${BASE}/api-consultations.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, createdAt: new Date().toISOString() }),
-      })
-    } catch {}
+    if (API) {
+      try {
+        await fetch(`${API}/consultations`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+      } catch {}
+    }
   }
 
   async function sendDealerRequest(data) {
-    try {
-      await fetch(`${BASE}/api-dealers.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, createdAt: new Date().toISOString() }),
-      })
-    } catch {}
-    setDealers(prev => [{ ...data, id: Date.now().toString() }, ...prev])
+    if (API) {
+      try {
+        await fetch(`${API}/dealers`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+      } catch {}
+    }
+    setDealers(prev => [{ ...data, id: Date.now() }, ...prev])
   }
 
   return (
@@ -173,7 +229,9 @@ export function AppProvider({ children }) {
       clients, setClients,
       siteSettings, setSiteSettings,
       isAdminAuth, adminLogin, adminLogout,
+      adminToken, authHeaders,
       placeOrder, sendConsultation, sendDealerRequest,
+      API,
     }}>
       {children}
     </AppContext.Provider>

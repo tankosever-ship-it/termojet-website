@@ -8,3 +8,9 @@ dist
 Знімок*
 *.glb
 .claude/worktrees/
+
+# backend runtime
+backend/data/
+backend/uploads/
+data/
+uploads/

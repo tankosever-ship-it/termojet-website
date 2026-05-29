@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      # persist database and uploads between restarts
+      - ./data:/app/backend/data
+      - ./uploads:/app/backend/uploads
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - JWT_SECRET=${JWT_SECRET:-termojet-jwt-secret-change-me}
+    restart: unless-stopped
