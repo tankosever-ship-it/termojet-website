@@ -20,13 +20,19 @@
 ### Сторінка About
 - У банер шапки додано фонове фото `public/about-hero.png` (`object-cover`, `objectPosition: center right`) + градієнтне затемнення зліва під текст. Після відгуку освітлено (оверлей зліва `0.94→0.70`, справа `0.55→0.18`).
 
+### Банери категорій каталогу
+- У шапку сторінки категорії додано **фонові фото** через мапу `CATEGORY_BANNERS` (slug → `public/banner-*.png`) зі світлим затемненням (як на About): `klapany`, `termojet-mega`, `nasosni-hrupy`. Інші категорії — без змін (градієнт). Додавати нові: кинути файл у `public/` + рядок у мапу.
+
+### Прозорий навбар на каталозі
+- Темна шапка каталогу отримала `marginTop: -60px` + компенсуючий `paddingTop`, щоб заходити **під фіксований навбар** (як hero на головній). Навбар прозорий зверху (білий текст на темному фоні), світліє при скролі. Логіка навбара глобальна (`scrolled` при `scrollY>20`) — змін у Navbar не було.
+
 ### Інфраструктура / деплой (для наступних сесій)
 - **Hetzner**: сервер `49.13.154.30` (hostname `Termojet-CRM`), сайт на `http://49.13.154.30:8080` (контейнер `termojet-website-app-1`, `8080:3000`).
 - Проєкт на сервері: **`/home/tankoseva/termojet-website`** (НЕ `/root/...`, як у DEPLOY.md). Власник `tankoseva`.
 - SSH-аліас `hetzner` (ключ `~/.ssh/id_ed25519` або `~/.ssh/hetzner_key`).
 - **Деплой**: `ssh hetzner 'cd /home/tankoseva/termojet-website && sudo -u tankoseva git pull --ff-only && docker compose up -d --build'`.
 - Docker білдить з `VITE_BASE_URL=/ npm run build:prod` (база `/`), тоді як GitHub Pages — з `/termojet-website/`. Тому `assetPath()` обов'язковий.
-- Коміти сесії: `6a4d9f2`, `726be6d`, `ef022d3`, `5784ace`, `9cb1678`.
+- Коміти сесії: `6a4d9f2`, `726be6d`, `ef022d3`, `5784ace`, `9cb1678`, `a6a85c5`, `3d4f4ac`, `6064f0b`.
 
 ---
 
