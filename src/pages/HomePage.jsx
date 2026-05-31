@@ -59,12 +59,12 @@ function CategoryCard({ cat, lang }) {
         )}
 
         <div className="absolute top-2.5 left-2.5">
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#666', background: 'rgba(255,255,255,0.8)', padding: '3px 7px' }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#666', background: 'rgba(255,255,255,0.8)', padding: '3px 7px', borderRadius: '0.25rem' }}>
             {cat.count} SKU
           </span>
         </div>
         <div className="absolute top-2.5 right-2.5 w-7 h-7 flex items-center justify-center transition-colors duration-200"
-          style={{ border: '1px solid rgba(0,0,0,0.1)', background: 'rgba(255,255,255,0.7)' }}>
+          style={{ border: '1px solid rgba(0,0,0,0.1)', background: 'rgba(255,255,255,0.7)', borderRadius: '0.375rem' }}>
           <ArrowRight size={12} style={{ color: hovered ? 'var(--accent)' : '#999', transition: 'color 0.2s' }} />
         </div>
       </div>
@@ -96,6 +96,7 @@ function CategoryCard({ cat, lang }) {
             background: hovered ? 'var(--accent)' : 'transparent',
             border: '1px solid var(--accent)',
             padding: '3px 8px',
+            borderRadius: '0.375rem',
             transition: 'all 0.2s'
           }}>
             Переглянути →

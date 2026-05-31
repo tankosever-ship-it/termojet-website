@@ -745,12 +745,12 @@ export default function CatalogPage() {
 
                       <div className="quick-bar">
                         <button onClick={() => addToCart(product)}
-                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 transition-colors"
+                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 rounded-lg transition-colors"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <ShoppingCart size={12} /> Купити в 1 клік
                         </button>
                         <Link to={href}
-                          className="flex items-center gap-1 px-3 h-9 border-l border-[var(--ink-200)] hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
+                          className="flex items-center gap-1 px-3 h-9 border border-[var(--ink-200)] rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
                           Детальніше <ArrowRight size={11} />
                         </Link>
                       </div>
@@ -876,12 +876,12 @@ export default function CatalogPage() {
                       </div>
                       <div className="flex flex-col gap-1.5 w-full mt-3">
                         <button onClick={() => addToCart(product)}
-                          className="flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 px-3 w-full transition-colors"
+                          className="flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 px-3 w-full rounded-lg transition-colors"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <ShoppingCart size={12} /> В кошик
                         </button>
                         <Link to={href}
-                          className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 hover:border-[var(--primary)] text-gray-600 hover:text-[var(--primary)] text-xs font-semibold transition-colors w-full">
+                          className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg hover:border-[var(--primary)] text-gray-600 hover:text-[var(--primary)] text-xs font-semibold transition-colors w-full">
                           Детальніше <ArrowRight size={11} />
                         </Link>
                       </div>
