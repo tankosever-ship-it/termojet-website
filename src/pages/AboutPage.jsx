@@ -139,7 +139,7 @@ export default function AboutPage() {
           style={{ objectPosition: 'center right' }} />
         {/* Затемнення — сильніше зліва, де текст */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, rgba(8,7,6,0.94) 0%, rgba(8,7,6,0.82) 42%, rgba(8,7,6,0.55) 100%)' }} />
+          style={{ background: 'linear-gradient(to right, rgba(8,7,6,0.70) 0%, rgba(8,7,6,0.48) 45%, rgba(8,7,6,0.18) 100%)' }} />
         <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-50" />
         <div className="orb orb-warm   w-[300px] h-[300px] -left-16  -top-16 opacity-40" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
