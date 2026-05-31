@@ -106,7 +106,7 @@ function MegaMenu({ lang, products, onClose }) {
             {/* Phones image on dark bg */}
             <div className="flex-shrink-0 flex items-center justify-center px-4 pt-5 pb-2 relative"
               style={{ background: 'radial-gradient(ellipse 120% 80% at 50% 100%, rgba(255,85,0,0.18), transparent 70%)' }}>
-              <img src="/termojet-website/app-promo-nobg.png" alt="Конструктор Termojet"
+              <img src={assetPath('/app-promo-nobg.png')} alt="Конструктор Termojet"
                 className="w-full block" style={{ maxHeight: 180, objectFit: 'contain' }} />
             </div>
             <div className="p-5 flex flex-col gap-3 flex-1">

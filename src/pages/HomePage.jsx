@@ -6,6 +6,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
+import { assetPath } from '../utils/assetPath'
 
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
@@ -423,23 +424,17 @@ export default function HomePage() {
       ═══════════════════════════════════════════ */}
       <section className="relative overflow-hidden text-white" style={{ minHeight: '100vh', marginTop: '-60px' }}>
 
-        {/* YouTube iframe — повний фон без звуку */}
+        {/* Локальне відео — повний фон, без звуку, по колу */}
         <div className="absolute inset-0 pointer-events-none" style={{ overflow: 'hidden' }}>
-          <iframe
-            src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&start=0`}
-            title="Termojet background"
-            allow="autoplay; encrypted-media"
-            style={{
-              position: 'absolute',
-              top: '50%', left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '100vw',
-              height: '56.25vw',
-              minHeight: '100vh',
-              minWidth: '177.78vh',
-              border: 'none',
-              pointerEvents: 'none',
-            }}
+          <video
+            src={assetPath('/hero.mp4')}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ pointerEvents: 'none' }}
           />
         </div>
 
@@ -747,7 +742,7 @@ export default function HomePage() {
                   style={{ background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%)' }}
                 />
 
-                <img src="/termojet-website/app-promo-nobg.png" alt="Termojet App"
+                <img src={assetPath('/app-promo-nobg.png')} alt="Termojet App"
                   className="w-full block drop-shadow-2xl" style={{ filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }} />
               </motion.div>
             </div>
