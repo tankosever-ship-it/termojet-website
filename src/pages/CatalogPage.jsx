@@ -563,9 +563,11 @@ export default function CatalogPage() {
     <>
       <SEO title={currentCategory ? (currentCategory.name[lang] || currentCategory.name.uk) : cat.title} />
 
-      {/* ── Page header ── */}
-      <div className="relative overflow-hidden text-white py-8"
+      {/* ── Page header (заходить під прозорий навбар, як hero на головній) ── */}
+      <div className="relative overflow-hidden text-white pb-8"
         style={{
+          marginTop: '-60px',
+          paddingTop: 'calc(2rem + 60px)',
           background: `
             radial-gradient(ellipse 70% 100% at 100% 100%, rgba(232,93,4,0.15), transparent 55%),
             radial-gradient(ellipse 50% 80% at 0% 0%, rgba(255,85,0,0.08), transparent 50%),
