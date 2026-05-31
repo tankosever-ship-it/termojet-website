@@ -4,6 +4,7 @@ import { Factory, Globe, Award, ArrowRight, Check, X, ChevronLeft, ChevronRight 
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import { useT } from '../i18n/useT'
+import { assetPath } from '../utils/assetPath'
 
 const BASE = 'https://termojet.com.ua/wp-content/uploads'
 
@@ -132,6 +133,13 @@ export default function AboutPage() {
 
       {/* ═══ HERO ══════════════════════════════════════════════════════ */}
       <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
+        {/* Фонове фото котельні */}
+        <img src={assetPath('/about-hero.png')} alt="" aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: 'center right' }} />
+        {/* Затемнення — сильніше зліва, де текст */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(to right, rgba(8,7,6,0.94) 0%, rgba(8,7,6,0.82) 42%, rgba(8,7,6,0.55) 100%)' }} />
         <div className="orb orb-orange w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-50" />
         <div className="orb orb-warm   w-[300px] h-[300px] -left-16  -top-16 opacity-40" />
         <div className="absolute inset-0 bg-dots pointer-events-none" />
