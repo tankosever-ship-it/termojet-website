@@ -74,9 +74,9 @@ function MegaMenu({ lang, products, onClose }) {
                   return (
                     <Link key={p.id} to={`/catalog/${p.categorySlug}/${p.slug || p.id}`} onClick={onClose}
                       className="flex flex-col gap-2 p-2.5 border border-transparent hover:border-[var(--border)] hover:bg-[var(--bg-warm)] transition-all group"
-                      style={{ borderRadius: 0 }}>
+                      style={{ borderRadius: '0.5rem' }}>
                       <div className="w-full aspect-square bg-[var(--bg-warm)] border border-[var(--border)] overflow-hidden group-hover:border-[var(--accent)] transition-colors"
-                        style={{ borderRadius: 0 }}>
+                        style={{ borderRadius: '0.5rem' }}>
                         {p.image
                           ? <img src={imgUrl(p.image)} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
                           : <span className="flex items-center justify-center w-full h-full text-gray-200"><CategoryIcon name={activeCat.icon} size={40} /></span>}
@@ -122,7 +122,7 @@ function MegaMenu({ lang, products, onClose }) {
               <div className="h-px bg-white/8 my-1" />
               <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
                 className="mt-auto flex items-center gap-2 text-white border border-white/20 px-4 py-2.5 hover:bg-white/10 transition-colors self-start"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: 0 }}>
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: '0.5rem' }}>
                 Запустити <ArrowUpRight size={13} />
               </a>
               <Link to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
@@ -141,7 +141,7 @@ function MegaMenu({ lang, products, onClose }) {
 function DarkDropdown({ items, onClose }) {
   return (
     <div className="absolute top-full left-0 mt-0 w-60 overflow-hidden"
-      style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: 0, boxShadow: '0 16px 48px rgba(0,0,0,0.4)', zIndex: 200 }}>
+      style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 48px rgba(0,0,0,0.4)', zIndex: 200 }}>
       {items.map((item, i) => (
         item.external
           ? <a key={item.to} href={item.to} target="_blank" rel="noopener noreferrer" onClick={onClose}
@@ -336,13 +336,13 @@ export default function Navbar() {
               <div className="relative hidden lg:block" ref={langRef}>
                 <button onClick={() => setLangOpen(v => !v)}
                   className="flex items-center gap-1 px-2.5 py-1.5 transition-all"
-                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: linkCol, border: scrolled ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: 0, transition: 'all 0.3s' }}>
+                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: linkCol, border: scrolled ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: '0.5rem', transition: 'all 0.3s' }}>
                   {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {langOpen && (
                   <div className="absolute top-full right-0 mt-0 w-24 z-50 overflow-hidden"
-                    style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: 0, boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
+                    style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
                     {LANGS.map(l => (
                       <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false) }}
                         className="w-full flex items-center gap-2 px-3 py-2.5 transition-colors"
@@ -364,7 +364,7 @@ export default function Navbar() {
                 <ShoppingCart size={17} />
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 text-white text-xs w-5 h-5 flex items-center justify-center font-bold"
-                    style={{ background: 'var(--accent)', borderRadius: 0, fontFamily: "'JetBrains Mono', monospace", fontSize: '9px' }}>
+                    style={{ background: 'var(--accent)', borderRadius: '0.5rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '9px' }}>
                     {cartCount > 9 ? '9+' : cartCount}
                   </span>
                 )}
@@ -373,12 +373,12 @@ export default function Navbar() {
               {/* CTA */}
               <Link to="/partners"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
-                style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: 0 }}>
+                style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
                 Стати партнером
               </Link>
               <Link to="/contacts"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: 0 }}
+                style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
                 Консультація
@@ -399,7 +399,7 @@ export default function Navbar() {
                 <input ref={searchRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Пошук товарів..."
                   className="w-full pl-9 pr-4 py-2.5 text-sm bg-[var(--bg-warm)]"
-                  style={{ border: '1px solid var(--border)', borderBottom: '2px solid var(--accent)', borderRadius: 0, outline: 'none', fontFamily: "'IBM Plex Sans', sans-serif" }} />
+                  style={{ border: '1px solid var(--border)', borderBottom: '2px solid var(--accent)', borderRadius: '0.5rem', outline: 'none', fontFamily: "'IBM Plex Sans', sans-serif" }} />
               </div>
             </form>
           )}
@@ -452,12 +452,12 @@ export default function Navbar() {
               <div className="flex gap-2 pt-3 border-t border-[var(--border)] mt-2">
                 <Link to="/partners"
                   className="flex-1 py-2.5 text-white text-center"
-                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}>
+                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
                   Стати партнером
                 </Link>
                 <Link to="/contacts"
                   className="flex-1 py-2.5 text-center"
-                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: 0 }}>
+                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
                   Консультація
                 </Link>
               </div>
@@ -466,7 +466,7 @@ export default function Navbar() {
                 {LANGS.map(l => (
                   <button key={l.code} onClick={() => setLang(l.code)}
                     className="px-3 py-1.5 transition-colors"
-                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', borderRadius: 0, background: lang === l.code ? 'var(--accent)' : 'transparent', color: lang === l.code ? 'white' : '#555', border: lang === l.code ? 'none' : '1px solid var(--border)' }}>
+                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', borderRadius: '0.5rem', background: lang === l.code ? 'var(--accent)' : 'transparent', color: lang === l.code ? 'white' : '#555', border: lang === l.code ? 'none' : '1px solid var(--border)' }}>
                     {l.flag} {l.label}
                   </button>
                 ))}

@@ -47,12 +47,12 @@ export default function BlogPage() {
           {categories.length > 0 && (
             <div className="flex gap-2 flex-wrap">
               <button onClick={() => setCategory('')}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${!category ? 'bg-[var(--primary)] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-[var(--primary)]'}`}>
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${!category ? 'bg-[var(--primary)] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-[var(--primary)]'}`}>
                 Всі
               </button>
               {categories.map(c => (
                 <button key={c} onClick={() => setCategory(c === category ? '' : c)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${category === c ? 'bg-[var(--primary)] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-[var(--primary)]'}`}>
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${category === c ? 'bg-[var(--primary)] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-[var(--primary)]'}`}>
                   {c}
                 </button>
               ))}

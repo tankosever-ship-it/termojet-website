@@ -142,7 +142,7 @@ function PartnerForm() {
 
       <ConsentCheckbox />
       <button type="submit"
-        className="w-full py-3 rounded-xl text-white font-semibold text-sm transition-all hover:opacity-90"
+        className="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all hover:opacity-90"
         style={{ background: 'var(--accent)' }}>
         Надіслати заявку на партнерство
       </button>

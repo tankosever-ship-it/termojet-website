@@ -177,10 +177,10 @@ export default function ReturnPage() {
           <h2 className="text-2xl font-black mb-3 font-['Archivo',sans-serif]">Маєте питання щодо повернення?</h2>
           <p className="text-white/70 mb-8">Звертайтеся до нашого відділу з роботи з клієнтами</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+380507189165" className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-colors">
+            <a href="tel:+380507189165" className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-lg transition-colors">
               <Phone size={18} /> +380 50 718 91 65
             </a>
-            <a href="mailto:termojet@sofievka.kiev.ua" className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-colors">
+            <a href="mailto:termojet@sofievka.kiev.ua" className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-lg transition-colors">
               <Mail size={18} /> termojet@sofievka.kiev.ua
             </a>
           </div>
