@@ -9,6 +9,14 @@ import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
 import { formatPrice, toUAH } from '../utils/currency'
 import CategoryIcon from '../components/CategoryIcon'
+import { assetPath } from '../utils/assetPath'
+
+// Фонові банери для окремих категорій (slug → файл у public/)
+const CATEGORY_BANNERS = {
+  'klapany': '/banner-klapany.png',
+  'termojet-mega': '/banner-termojet-mega.png',
+  'nasosni-hrupy': '/banner-nasosni-hrupy.png',
+}
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
 const stagger = { show: { transition: { staggerChildren: 0.04 } } }
@@ -564,8 +572,17 @@ export default function CatalogPage() {
             linear-gradient(160deg, #080808, #111111)
           `
         }}>
+        {currentCategory && CATEGORY_BANNERS[currentCategory.slug] && (
+          <>
+            <img src={assetPath(CATEGORY_BANNERS[currentCategory.slug])} alt="" aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              style={{ objectPosition: 'center right' }} />
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: 'linear-gradient(to right, rgba(8,7,6,0.70) 0%, rgba(8,7,6,0.48) 45%, rgba(8,7,6,0.18) 100%)' }} />
+          </>
+        )}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(232,93,4,0.4)] to-transparent" />
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="relative max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-2 text-xs text-white/40 mb-3">
             <Link to="/" className="hover:text-white/70 transition-colors">Головна</Link>
             <ChevronRight size={12} />
