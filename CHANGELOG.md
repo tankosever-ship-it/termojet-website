@@ -1,5 +1,35 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-05-30 / 31
+
+### Скруглення (уніфікація під hero-кнопки = 8px)
+- **Navbar** — усі квадратні елементи `borderRadius: 0 → 0.5rem`: CTA «Стати партнером» / «Консультація» (десктоп + мобільні), тайли мега-меню + їх фото, темний dropdown, перемикач мови (кнопка + меню + мобільні), поле пошуку, CTA «Запустити», бейдж кошика.
+- **Кнопки/CTA сторінок** `rounded-xl → rounded-lg`: фільтри блогу (`BlogPage`), сабміт форми (`PartnersPage`), CTA «зателефонувати/email» (`ReturnPage`).
+- **Картки** `border-radius: 0 → 0.75rem` (12px): `.cat-card` і `.product-card-new` (`index.css`).
+- **Картки категорій** (HomePage `CategoryCard`): бейдж «Переглянути →», SKU-бейдж і стрілка ↗ скруглені.
+- **Картки товарів** (`CatalogPage`): кнопки «Купити в 1 клік», «Детальніше», «В кошик» → `rounded-lg`; «Детальніше» отримала повну рамку замість `border-l`.
+- Форми та адмінка лишені на `rounded-xl` (за рішенням замовника).
+
+### Hero-секція (головна)
+- YouTube-iframe фон замінено на **локальне відео** `public/hero.mp4` (`autoplay muted loop playsInline`, `object-cover`) — без звуку, по колу. Джерело: `IMG_8377.MP4`.
+- Модалка «Відео заводу» лишилась на YouTube (`YT_ID`) — окремий промо-ролик.
+
+### Фікс шляхів до зображень (баг на Hetzner)
+- Фото конструктора (`app-promo-nobg.png`) у Navbar mega-menu та блоці App на головній мали **хардкод** `/termojet-website/...` → 404 на Hetzner (база `/`). Виправлено на `assetPath('/...')`. **Правило: ассети з `public/` підключати лише через `assetPath()`**, ніколи не хардкодити базовий префікс.
+
+### Сторінка About
+- У банер шапки додано фонове фото `public/about-hero.png` (`object-cover`, `objectPosition: center right`) + градієнтне затемнення зліва під текст. Після відгуку освітлено (оверлей зліва `0.94→0.70`, справа `0.55→0.18`).
+
+### Інфраструктура / деплой (для наступних сесій)
+- **Hetzner**: сервер `49.13.154.30` (hostname `Termojet-CRM`), сайт на `http://49.13.154.30:8080` (контейнер `termojet-website-app-1`, `8080:3000`).
+- Проєкт на сервері: **`/home/tankoseva/termojet-website`** (НЕ `/root/...`, як у DEPLOY.md). Власник `tankoseva`.
+- SSH-аліас `hetzner` (ключ `~/.ssh/id_ed25519` або `~/.ssh/hetzner_key`).
+- **Деплой**: `ssh hetzner 'cd /home/tankoseva/termojet-website && sudo -u tankoseva git pull --ff-only && docker compose up -d --build'`.
+- Docker білдить з `VITE_BASE_URL=/ npm run build:prod` (база `/`), тоді як GitHub Pages — з `/termojet-website/`. Тому `assetPath()` обов'язковий.
+- Коміти сесії: `6a4d9f2`, `726be6d`, `ef022d3`, `5784ace`, `9cb1678`.
+
+---
+
 ## Сесія 2026-05-18 / 19
 
 ---
