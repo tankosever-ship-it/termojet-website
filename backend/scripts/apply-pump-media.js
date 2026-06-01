@@ -1,0 +1,183 @@
+/*
+ * apply-pump-media.js — ідемпотентне застосування фото та графіків продуктивності
+ * до насосів APM-F / APM / APE та каналізаційних установок WT.
+ *
+ * Прив'язка до id товару (стабільно, не залежить від артикулів).
+ * Оновлює backend/seed-products.json (джерело правди для нової БД)
+ * і, якщо існує, живу базу backend/data/termojet.db.
+ *
+ * Запуск:  node backend/scripts/apply-pump-media.js
+ * У контейнері: docker compose exec app node backend/scripts/apply-pump-media.js
+ */
+const path = require('path')
+const fs = require('fs')
+
+const P = '/images/nasosy/'
+const SEED = path.join(__dirname, '..', 'seed-products.json')
+const DBP = path.join(__dirname, '..', 'data', 'termojet.db')
+
+// --- ПОВНА ЗАМІНА фото+галереї (image + images) за id ---
+// APM-F: одне фото apm-f.png для всіх + графік останнім; WT: головне з коробкою, чисте другим
+const REPLACE = {
+  'excel_30400822': ['apm-f.png', ['apm-f.png', 'graph-apm-40-8.png']],   // APM-F 40/8
+  'wp_20414':       ['apm-f.png', ['apm-f.png', 'graph-apm-40-15.png']],  // APM-F 40/15
+  'wp_20422':       ['apm-f.png', ['apm-f.png', 'graph-apm-40-18.png']],  // APM-F 40/18
+  'wp_20369':       ['apm-f.png', ['apm-f.png', 'graph-apm-50-10.png']],  // APM-F 50/10
+  'wp_20434':       ['apm-f.png', ['apm-f.png', 'graph-apm-50-12.png']],  // APM-F 50/12
+  'wp_20442':       ['apm-f.png', ['apm-f.png', 'graph-apm-65-10.png']],  // APM-F 65/10
+  'wp_20450':       ['apm-f.png', ['apm-f.png', 'graph-apm-65-12.png']],  // APM-F 65/12
+  'wp_20456':       ['apm-f.png', ['apm-f.png', 'graph-apm-65-15.png']],  // APM-F 65/15
+  'new_WT400A':     ['wt400a-box.jpg', ['wt400a-box.jpg', 'wt400a.jpg']], // WT 400-A
+  'new_WT400B':     ['wt400b-box.jpg', ['wt400b-box.jpg', 'wt400b.jpg']], // WT 400-B
+  'new_WT400C':     ['wt400c-box.jpg', ['wt400c-box.jpg', 'wt400c.jpg']], // WT 400-C
+}
+
+// --- ДОДАТИ графік останнім у галерею (image лишається) за id ---
+const APPEND = {
+  'wp_20521': 'graph-apm-25-8-32-8.png',    // APM 25/8
+  'wp_20516': 'graph-apm-25-12-32-12.png',  // APM 25/12
+  'wp_9065':  'graph-apm-25-8-32-8.png',    // APM 32/8
+  'wp_9066':  'graph-apm-25-10-32-10.png',  // APM 32/10
+  'wp_9067':  'graph-apm-25-12-32-12.png',  // APM 32/12
+  'wp_20510': 'graph-ape-6.png',            // APE 20/60/130
+  'wp_9060':  'graph-ape-4.png',            // APE 25/40/180
+  'wp_9055':  'graph-ape-4.png',            // APE 25/40/130
+  'wp_20495': 'graph-ape-6.png',            // APE 25/60/180
+  'wp_9062':  'graph-ape-6.png',            // APE 25/60/130
+  'wp_9064':  'graph-ape-8.png',            // APE 25/80/130
+  'wp_9063':  'graph-ape-8.png',            // APE 25/80/180
+  'wp_18514': 'graph-ape-8.png',            // APE 32/80/180
+}
+
+// --- НОВИЙ товар APM-F 40/12-250 (за зразком 40/15) ---
+// ⚠️ sku 30401225 та price 1180 — ТИМЧАСОВІ, уточнити в адмінці.
+const NEW_PRODUCT = {
+  id: 'excel_30401225',
+  wpId: null,
+  name: 'Насос циркуляційний Termojet AUTO енергозберігаючий APM-F 40/12-250 мм',
+  slug: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-12f-250-mm',
+  sku: '30401225',
+  price: '1180',
+  currency: 'EUR',
+  categorySlug: 'nasosy',
+  subcategory: '',
+  image: P + 'apm-f.png',
+  images: [P + 'apm-f.png', P + 'graph-apm-40-12.png'],
+  shortDesc: 'Опис моделі Висока енергоефективність, коефіцієнт енергоефективності (EEI) < 0. 21. Електрофоретичне покриття корпусу насоса для запобігання корозі. Надійні ущільнення з EPDM-гуми, не потребують об',
+  description: 'моделі Висока енергоефективність, коефіцієнт енергоефективності (EEI) < 0. 21. Електрофоретичне покриття корпусу насоса для запобігання корозі. Надійні ущільнення з EPDM-гуми, не потребують обслуговування. Додаткові фланці з різьбою, що полегшую встановлення насоса. Компактний дизайн, що дозволяє економити місце. Захищений двигун, водяне охолодження, рівень шуму роботи до 50 дБ Високоміцний, зносостійкий підшипник забезпечує довгий термін служби. Застосування Системи опалення та охолодження, а також – циркуляція теплоносія в системах сонячної енергії та гарячого водопостачання.',
+  specs: {
+    'Назва': 'APM-F 40/12',
+    'Діаметр': 'Dn 40 фланець',
+    'Довжина насоса': '250 мм',
+    'Qmax': '24 м³/год',
+    'Hmax': '12 м',
+    'Споживана потужність': '25-670 W',
+    'I max': '3.5 А',
+    'Розмір': '415*335*250мм',
+    'Маса': '22кг',
+    'Температура рідини': '0°C ~ 110°C',
+    'Зовнішня температура': '0°C ~ 40°C',
+    'Максимальний тиск у системі': '1,0 МПа',
+    'Рівень захисту': 'IP44',
+    'Напруга': '230 В ± 10% / 50 Гц',
+    'Тепловий клас': 'F',
+    'Вимоги до перекачуваної рідини': 'чиста, без твердих часток і мінеральних олій, нетоксична, хімічно нейтральна, близька за характеристиками до води',
+    'Встановлення': 'вал двигуна повинен знаходитися в горизонтальному положенні',
+  },
+  inStock: true,
+  features: [],
+}
+
+function abs(name) { return name.startsWith('/') ? name : P + name }
+
+// застосувати зміни до одного товару-обʼєкта (camelCase, як у seed та API)
+function applyToObj(p) {
+  if (REPLACE[p.id]) {
+    const [img, gallery] = REPLACE[p.id]
+    p.image = abs(img)
+    p.images = gallery.map(abs)
+    return true
+  }
+  if (APPEND[p.id]) {
+    const g = abs(APPEND[p.id])
+    let imgs = Array.isArray(p.images) ? p.images.slice() : []
+    if (p.image && !imgs.includes(p.image)) imgs.unshift(p.image)
+    if (!imgs.includes(g)) imgs.push(g)
+    p.images = imgs
+    return true
+  }
+  return false
+}
+
+let changed = 0, appended = 0, replaced = 0
+
+// ---------- 1. seed-products.json ----------
+const raw = JSON.parse(fs.readFileSync(SEED, 'utf8'))
+const arr = Array.isArray(raw) ? raw : raw.products
+const byId = new Map(arr.map(p => [p.id, p]))
+
+for (const p of arr) {
+  if (REPLACE[p.id]) { applyToObj(p); replaced++; changed++ }
+  else if (APPEND[p.id]) { applyToObj(p); appended++; changed++ }
+}
+// новий товар
+if (!byId.has(NEW_PRODUCT.id)) {
+  arr.push({ ...NEW_PRODUCT })
+  console.log('  + додано новий товар:', NEW_PRODUCT.name)
+} else {
+  const ex = byId.get(NEW_PRODUCT.id)
+  Object.assign(ex, NEW_PRODUCT) // оновити (ідемпотентно)
+  console.log('  ~ новий товар вже існував — оновлено')
+}
+fs.writeFileSync(SEED, JSON.stringify(Array.isArray(raw) ? arr : raw, null, 2) + '\n')
+console.log(`seed-products.json: замінено ${replaced}, додано графік ${appended}.`)
+
+// ---------- 2. жива БД (якщо є) ----------
+if (!fs.existsSync(DBP)) {
+  console.log('БД', DBP, 'не знайдено — пропускаю (оновиться при сидуванні порожньої БД).')
+  process.exit(0)
+}
+const Database = require('better-sqlite3')
+const db = new Database(DBP)
+const ids = [...Object.keys(REPLACE), ...Object.keys(APPEND)]
+const getRow = db.prepare('SELECT id, image, images FROM products WHERE id = ?')
+const upd = db.prepare('UPDATE products SET image=@image, images=@images WHERE id=@id')
+
+let dbChanged = 0
+const tx = db.transaction(() => {
+  for (const id of ids) {
+    const row = getRow.get(id)
+    if (!row) { console.warn('  ! у БД немає товару', id); continue }
+    const p = { id, image: row.image, images: JSON.parse(row.images || '[]') }
+    applyToObj(p)
+    upd.run({ id, image: p.image, images: JSON.stringify(p.images) })
+    dbChanged++
+  }
+  // новий товар
+  const exists = db.prepare('SELECT id FROM products WHERE id=?').get(NEW_PRODUCT.id)
+  const np = NEW_PRODUCT
+  const payload = {
+    id: np.id, wp_id: np.wpId, name: np.name, slug: np.slug, sku: np.sku,
+    price: parseFloat(np.price) || 0, category_slug: np.categorySlug, subcategory: np.subcategory || '',
+    image: np.image, images: JSON.stringify(np.images), short_desc: np.shortDesc,
+    description: np.description, specs: JSON.stringify(np.specs), features: JSON.stringify(np.features || []),
+    in_stock: np.inStock ? 1 : 0, is_visible: 1,
+  }
+  if (exists) {
+    db.prepare(`UPDATE products SET name=@name, slug=@slug, sku=@sku, price=@price,
+      category_slug=@category_slug, subcategory=@subcategory, image=@image, images=@images,
+      short_desc=@short_desc, description=@description, specs=@specs, features=@features,
+      in_stock=@in_stock, is_visible=@is_visible WHERE id=@id`).run(payload)
+    console.log('  ~ новий товар у БД оновлено')
+  } else {
+    db.prepare(`INSERT INTO products (id, wp_id, name, slug, sku, price, category_slug, subcategory,
+      image, images, short_desc, description, specs, features, in_stock, is_visible)
+      VALUES (@id,@wp_id,@name,@slug,@sku,@price,@category_slug,@subcategory,@image,@images,
+      @short_desc,@description,@specs,@features,@in_stock,@is_visible)`).run(payload)
+    console.log('  + новий товар у БД додано')
+  }
+})
+tx()
+db.close()
+console.log(`БД termojet.db: оновлено ${dbChanged} товарів + новий.`)
+console.log('Готово.')
