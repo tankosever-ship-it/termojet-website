@@ -35,6 +35,15 @@ const stagger = { show: { transition: { staggerChildren: 0.04 } } }
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
 const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
 
+// Тип приєднання насоса (з назви + полів specs про зʼєднання/діаметр/вихід)
+const pumpConnHay = p => {
+  const s = p.specs || {}
+  return [p.name, s['Зʼєднання'], s["З'єднання"], s['Діаметр'], s['Діаметр підключення'], s['Розмір підключення'], s['Вихід']]
+    .filter(Boolean).join(' ')
+}
+const isFlangePump = p => /фланець|\bDN\s?\d|\bDn\s?\d/i.test(pumpConnHay(p))
+const isThreadPump = p => !isFlangePump(p) && /різьб|\bRP\b|\bRp\b|\bG\s?\d|["″'']|XPS|SPE/i.test(pumpConnHay(p))
+
 const CATEGORY_FILTERS = {
   klapany: {
     groups: [
@@ -163,6 +172,14 @@ const CATEGORY_FILTERS = {
           { label: 'Рециркуляційний ГВС',     test: p => /рециркул/i.test(p.name) },
           { label: 'Станція підвищення тиску',test: p => /підвищувальн/i.test(p.name) },
           { label: 'Каналізаційна установка', test: p => /каналізац/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'connection',
+        label: 'Зʼєднання',
+        options: [
+          { label: 'Фланцеві', test: isFlangePump },
+          { label: 'Різьбові', test: isThreadPump },
         ],
       },
       {
