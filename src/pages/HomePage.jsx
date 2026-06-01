@@ -449,7 +449,7 @@ export default function HomePage() {
 
         {/* Контент — зліва вгорі */}
         <div className="relative z-10 w-full px-6 flex items-start" style={{ minHeight: '100vh' }}>
-          <div className="max-w-xl pt-28 pb-12 ml-8">
+          <div className="max-w-xl pt-28 pb-12">
             <motion.div initial="hidden" animate="show" variants={stagger}>
 
               <motion.div variants={fadeUp}
@@ -468,7 +468,7 @@ export default function HomePage() {
                 в Україні.
               </motion.h1>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4" style={{ marginLeft: '-2rem' }}>
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
                 <Link to="/catalog"
                   className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:opacity-90"
                   style={{ background: 'var(--accent)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
