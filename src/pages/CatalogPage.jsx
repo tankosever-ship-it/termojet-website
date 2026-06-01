@@ -159,10 +159,26 @@ const CATEGORY_FILTERS = {
         key: 'pumptype',
         label: 'Тип',
         options: [
-          { label: 'Циркуляційний',        test: p => /циркуляційний/i.test(p.name) },
-          { label: 'Рециркуляційний ГВС',  test: p => /рециркул/i.test(p.name) },
-          { label: 'Підвищувальний',       test: p => /підвищувальн/i.test(p.name) },
-          { label: 'Каналізаційна станція', test: p => /каналізац/i.test(p.name) },
+          { label: 'Циркуляційний насос',     test: p => /циркуляційний/i.test(p.name) },
+          { label: 'Рециркуляційний ГВС',     test: p => /рециркул/i.test(p.name) },
+          { label: 'Станція підвищення тиску',test: p => /підвищувальн/i.test(p.name) },
+          { label: 'Каналізаційна установка', test: p => /каналізац/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'power_supply',
+        label: 'Живлення',
+        options: [
+          { label: '1-фазне (220–230 В)', test: p => /1×|230|220 В|160|180/.test(p.specs?.['Напруга'] || '') },
+          { label: '3-фазне (380 В)',     test: p => /380/.test(p.specs?.['Напруга'] || '') },
+        ],
+      },
+      {
+        key: 'execution',
+        label: 'Виконання',
+        options: [
+          { label: 'Одинарна станція',   test: p => /GRANDLIFT/i.test(p.name) && !/двонасосна/i.test(p.name) },
+          { label: 'Двонасосна станція', test: p => /двонасосна/i.test(p.name) },
         ],
       },
       {
