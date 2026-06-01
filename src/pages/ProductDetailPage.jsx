@@ -4,7 +4,7 @@ import {
   ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
   Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
   Truck, CreditCard, ShieldCheck, Factory, Headphones, MapPin, Banknote,
-  FileDown
+  FileDown, Box
 } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -12,6 +12,7 @@ import { imgUrl } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
 import { FILES } from '../data/files'
 import { getDocsForProduct } from '../data/docsMapping'
+import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
 import { trackViewItem, trackAddToCart } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
@@ -332,6 +333,9 @@ export default function ProductDetailPage() {
       .filter(f => ['Інструкції', 'Брошури'].includes(f.category))
   }, [categorySlug, name])
 
+  // 3D-моделі (STEP) для цього товару — за slug
+  const productModels = useMemo(() => getModels3D(product.slug), [product.slug])
+
   const priceUAH = product.price
     ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
     : null
@@ -574,6 +578,40 @@ export default function ProductDetailPage() {
                       <span className="flex-shrink-0 flex items-center gap-1 bg-white border border-orange-300 text-[var(--primary)] text-xs font-bold px-2.5 py-1.5 rounded-lg group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                         <Download size={12} />
                         PDF
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 3D models block */}
+            {productModels.length > 0 && (
+              <div className="mb-5 rounded-xl overflow-hidden border border-sky-200 bg-sky-50">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-sky-600 text-white">
+                  <Box size={15} />
+                  <span className="text-sm font-bold tracking-wide">3D-модель (STEP)</span>
+                </div>
+                <div className="divide-y divide-sky-100">
+                  {productModels.map(m => (
+                    <a
+                      key={m.file}
+                      href={`/uploads/3d/${m.file}`}
+                      download={m.name}
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-sky-100 transition-colors group"
+                    >
+                      <span className="flex-shrink-0 w-9 h-9 bg-white rounded-lg shadow-sm flex items-center justify-center border border-sky-200">
+                        <Box size={16} className="text-sky-600" />
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-800 leading-tight group-hover:text-sky-700 truncate">
+                          {m.name}
+                        </p>
+                        <p className="text-xs text-sky-600 font-medium mt-0.5">3D-модель · STEP · {m.size}</p>
+                      </div>
+                      <span className="flex-shrink-0 flex items-center gap-1 bg-white border border-sky-300 text-sky-700 text-xs font-bold px-2.5 py-1.5 rounded-lg group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                        <Download size={12} />
+                        STEP
                       </span>
                     </a>
                   ))}
