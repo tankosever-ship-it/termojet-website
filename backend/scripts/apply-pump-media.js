@@ -49,6 +49,12 @@ const APPEND = {
   'wp_18514': 'graph-ape-8.png',            // APE 32/80/180
 }
 
+// --- ВИПРАВЛЕННЯ артикулів за id ---
+// APM 25/8/180 мав помилковий 30401225 (copy-paste коду APM-F 40/12-250) → правильний 30250818
+const SKU_FIX = {
+  'wp_20521': '30250818',
+}
+
 // --- НОВИЙ товар APM-F 40/12-250 (за зразком 40/15) ---
 // ⚠️ sku 30401225 та price 1180 — ТИМЧАСОВІ, уточнити в адмінці.
 const NEW_PRODUCT = {
@@ -117,6 +123,10 @@ const arr = Array.isArray(raw) ? raw : raw.products
 const byId = new Map(arr.map(p => [p.id, p]))
 
 for (const p of arr) {
+  if (SKU_FIX[p.id] && p.sku !== SKU_FIX[p.id]) {
+    console.log(`  ~ артикул ${p.id}: ${p.sku} → ${SKU_FIX[p.id]}`)
+    p.sku = SKU_FIX[p.id]
+  }
   if (REPLACE[p.id]) { applyToObj(p); replaced++; changed++ }
   else if (APPEND[p.id]) { applyToObj(p); appended++; changed++ }
 }
@@ -152,6 +162,10 @@ const tx = db.transaction(() => {
     applyToObj(p)
     upd.run({ id, image: p.image, images: JSON.stringify(p.images) })
     dbChanged++
+  }
+  // виправлення артикулів
+  for (const [id, sku] of Object.entries(SKU_FIX)) {
+    db.prepare('UPDATE products SET sku=? WHERE id=?').run(sku, id)
   }
   // новий товар
   const exists = db.prepare('SELECT id FROM products WHERE id=?').get(NEW_PRODUCT.id)
