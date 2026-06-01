@@ -481,10 +481,10 @@ function Sidebar({ categorySlug, filters, setFilters }) {
 
   return (
     <aside className="hidden lg:block w-52 flex-shrink-0">
-      <div className="bg-white border border-[var(--ink-200)] overflow-hidden sticky top-[72px]">
+      <div className="bg-white border border-[var(--ink-200)] sticky top-[72px] max-h-[calc(100vh-88px)] flex flex-col">
 
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--ink-200)]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--ink-200)] flex-shrink-0">
           <span style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
             Фільтри
           </span>
@@ -498,7 +498,7 @@ function Sidebar({ categorySlug, filters, setFilters }) {
         </div>
 
         {/* Filter groups */}
-        <div className="p-3 space-y-5">
+        <div className="p-3 space-y-5 overflow-y-auto overscroll-contain flex-1">
           {config.groups.map(group => (
             <div key={group.key}>
               <div className="mb-2 px-1"
