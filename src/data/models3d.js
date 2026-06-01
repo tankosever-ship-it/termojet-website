@@ -9,7 +9,7 @@ export const MODELS_BY_SLUG = {
   "84040492": [{ file: '84040492.step', name: 'К41ВН.125(100).step', size: '11 МБ' }],
   "elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400": [{ file: 'elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400.step', name: 'TJ413.step', size: '7 МБ' }],
   "gidravlichnyj-rozdilyuvach-gs-28": [{ file: 'gidravlichnyj-rozdilyuvach-gs-28.step', name: 'ГС-30 (1).step', size: '17 МБ' }, { file: 'gidravlichnyj-rozdilyuvach-gs-28-2.step', name: 'ГС-30 (2).step', size: '18 МБ' }],
-  "gidrostrilka-gs-25-v-izolyacziyi": [{ file: 'gidrostrilka-gs-25-v-izolyacziyi.step', name: 'ГС-25.step', size: '9 МБ' }],
+  "gidrostrilka-gs-25-v-izolyacziyi": [{ file: 'gidrostrilka-gs-25-v-izolyacziyi.step', name: 'ГС-25.step', size: '9 МБ', glb: '/uploads/3d/gidrostrilka-gs-25.glb' }],
   "gidrostrilka-gs-26-v-izolyacziyi": [{ file: 'gidrostrilka-gs-26-v-izolyacziyi.step', name: 'ГС-26.step', size: '9 МБ' }],
   "gidrostrilka-gs-27-v-izolyacziyi": [{ file: 'gidrostrilka-gs-27-v-izolyacziyi.step', name: 'ГС-27.step', size: '9 МБ' }],
   "gidrostrilka-gs-28-v-izolyacziyi": [{ file: 'gidrostrilka-gs-28-v-izolyacziyi.step', name: 'ГС-28.step', size: '8 МБ' }],

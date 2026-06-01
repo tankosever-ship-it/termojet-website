@@ -43,16 +43,24 @@ function Accordion({ icon, title, children, defaultOpen = false }) {
 }
 
 // ── ImageGallery ───────────────────────────────────────────────────────────────
-function ImageGallery({ images, name }) {
+function ImageGallery({ images, name, model3d }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const touchStart = useRef(null)
   const thumbsRef = useRef(null)
   const vThumbsRef = useRef(null)
 
-  const all = images?.length > 0 ? images : []
-  const main = all[active] || null
-  const total = all.length
+  const slides = useMemo(() => {
+    const s = (images?.length > 0 ? images : []).map(src => ({ type: 'img', src }))
+    if (model3d) s.push({ type: '3d', src: model3d })
+    return s
+  }, [images, model3d])
+  const total = slides.length
+  const current = slides[active] || null
+  const main = current?.type === 'img' ? current.src : null
+
+  // ледаче довантаження web-компонента <model-viewer> лише за наявності 3D-моделі
+  useEffect(() => { if (model3d) import('@google/model-viewer') }, [model3d])
 
   const prev = useCallback(() => setActive(i => (i - 1 + total) % total), [total])
   const next = useCallback(() => setActive(i => (i + 1) % total), [total])
@@ -85,7 +93,7 @@ function ImageGallery({ images, name }) {
     touchStart.current = null
   }
 
-  const ThumbButton = ({ img, i, size = 'md' }) => (
+  const ThumbButton = ({ slide, i, size = 'md' }) => (
     <button
       onClick={() => setActive(i)}
       className={`flex-shrink-0 border-2 rounded overflow-hidden transition-all hover:opacity-90 bg-white
@@ -95,7 +103,14 @@ function ImageGallery({ images, name }) {
         boxShadow: active === i ? '0 0 0 1px var(--accent)' : 'none',
       }}
     >
-      <img src={img} alt={`фото ${i + 1}`} className="w-full h-full object-contain p-1" />
+      {slide.type === '3d' ? (
+        <span className="w-full h-full flex flex-col items-center justify-center gap-0.5 text-sky-600 bg-sky-50">
+          <Box size={size === 'sm' ? 18 : 20} />
+          <span className="text-[8px] font-bold leading-none">3D</span>
+        </span>
+      ) : (
+        <img src={slide.src} alt={`фото ${i + 1}`} className="w-full h-full object-contain p-1" />
+      )}
     </button>
   )
 
@@ -111,7 +126,7 @@ function ImageGallery({ images, name }) {
             className="hidden md:flex flex-col gap-1.5 p-2 border-r border-gray-100 overflow-y-auto flex-shrink-0 scrollbar-thin"
             style={{ width: 76 }}
           >
-            {all.map((img, i) => <ThumbButton key={i} img={img} i={i} />)}
+            {slides.map((s, i) => <ThumbButton key={i} slide={s} i={i} />)}
           </div>
         )}
 
@@ -121,7 +136,18 @@ function ImageGallery({ images, name }) {
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {main ? (
+          {current?.type === '3d' ? (
+            <model-viewer
+              src={current.src}
+              camera-controls=""
+              auto-rotate=""
+              autoplay=""
+              shadow-intensity="1"
+              exposure="1.1"
+              interaction-prompt="none"
+              style={{ width: '100%', height: '100%', backgroundColor: '#f9fafb' }}
+            />
+          ) : main ? (
             <img
               src={main} alt={name}
               className="w-full h-full object-contain p-6 cursor-zoom-in"
@@ -130,6 +156,12 @@ function ImageGallery({ images, name }) {
             />
           ) : (
             <div className="text-gray-200 text-8xl">⚙️</div>
+          )}
+
+          {current?.type === '3d' && (
+            <span className="absolute top-3 left-3 flex items-center gap-1 bg-sky-600 text-white text-[11px] font-bold px-2 py-1 rounded-full pointer-events-none">
+              <Box size={12} /> 3D · обертайте мишею
+            </span>
           )}
 
           {main && (
@@ -173,7 +205,7 @@ function ImageGallery({ images, name }) {
           ref={thumbsRef}
           className="flex md:hidden gap-2 p-3 border-t border-gray-100 overflow-x-auto"
         >
-          {all.map((img, i) => <ThumbButton key={i} img={img} i={i} size="sm" />)}
+          {slides.map((s, i) => <ThumbButton key={i} slide={s} i={i} size="sm" />)}
         </div>
       )}
 
@@ -204,12 +236,22 @@ function ImageGallery({ images, name }) {
               <ChevronLeft size={26} />
             </button>
           )}
-          <img
-            src={main} alt={name}
-            className="max-h-[82vh] max-w-[82vw] object-contain"
-            onClick={e => e.stopPropagation()}
-            draggable={false}
-          />
+          {main ? (
+            <img
+              src={main} alt={name}
+              className="max-h-[82vh] max-w-[82vw] object-contain"
+              onClick={e => e.stopPropagation()}
+              draggable={false}
+            />
+          ) : current?.type === '3d' ? (
+            <model-viewer
+              src={current.src}
+              camera-controls=""
+              auto-rotate=""
+              style={{ width: '82vw', height: '82vh' }}
+              onClick={e => e.stopPropagation()}
+            />
+          ) : null}
           {total > 1 && (
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
@@ -220,14 +262,18 @@ function ImageGallery({ images, name }) {
           )}
           {total > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 overflow-x-auto max-w-[80vw] px-2">
-              {all.map((img, i) => (
+              {slides.map((s, i) => (
                 <button
                   key={i}
                   onClick={e => { e.stopPropagation(); setActive(i) }}
                   className="flex-shrink-0 w-12 h-12 border-2 rounded overflow-hidden transition-all"
                   style={{ borderColor: active === i ? 'var(--accent)' : 'rgba(255,255,255,0.3)' }}
                 >
-                  <img src={img} alt="" className="w-full h-full object-contain bg-white/10" />
+                  {s.type === '3d' ? (
+                    <span className="w-full h-full flex items-center justify-center text-sky-300 bg-white/10"><Box size={16} /></span>
+                  ) : (
+                    <img src={s.src} alt="" className="w-full h-full object-contain bg-white/10" />
+                  )}
                 </button>
               ))}
             </div>
@@ -335,6 +381,8 @@ export default function ProductDetailPage() {
 
   // 3D-моделі (STEP) для цього товару — за slug
   const productModels = useMemo(() => getModels3D(product.slug), [product.slug])
+  // GLB для інтерактивного перегляду в галереї (якщо є)
+  const model3dUrl = useMemo(() => productModels.find(m => m.glb)?.glb || null, [productModels])
 
   const priceUAH = product.price
     ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
@@ -379,7 +427,7 @@ export default function ProductDetailPage() {
 
           {/* LEFT: gallery + accordions + category */}
           <div className="flex flex-col gap-4">
-            <ImageGallery images={allImages} name={name} />
+            <ImageGallery images={allImages} name={name} model3d={model3dUrl} />
 
             {/* Accordion sections */}
             <div className="space-y-2">
