@@ -1,13 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Grid, ShoppingCart, Wrench, Phone } from 'lucide-react'
+import { Home, Grid, ShoppingCart, Blocks, Phone } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 const TABS = [
-  { label: 'Головна',  icon: Home,         path: '/' },
-  { label: 'Каталог',  icon: Grid,         path: '/catalog' },
-  { label: 'Кошик',    icon: ShoppingCart, path: '/cart' },
-  { label: 'Сервіс',   icon: Wrench,       path: '/service' },
-  { label: 'Контакти', icon: Phone,        path: '/contacts' },
+  { label: 'Головна',     icon: Home,         path: '/' },
+  { label: 'Каталог',     icon: Grid,         path: '/catalog' },
+  { label: 'Кошик',       icon: ShoppingCart, path: '/cart' },
+  { label: 'Конструктор', icon: Blocks,       href: 'https://app.termojet.com.ua/', external: true },
+  { label: 'Контакти',    icon: Phone,        path: '/contacts' },
 ]
 
 export default function MobileBottomNav() {
@@ -26,18 +26,15 @@ export default function MobileBottomNav() {
         borderTop: '1px solid rgba(255,255,255,0.08)',
       }}
     >
-      {TABS.map(({ label, icon: Icon, path }) => {
-        const isActive = path === '/'
+      {TABS.map(({ label, icon: Icon, path, href, external }) => {
+        const isActive = !external && (path === '/'
           ? location.pathname === '/'
-          : location.pathname.startsWith(path)
+          : location.pathname.startsWith(path))
 
-        return (
-          <Link
-            key={path}
-            to={path}
-            className="flex flex-col items-center justify-center gap-1 flex-1 h-full relative"
-            style={{ textDecoration: 'none' }}
-          >
+        const cls = 'flex flex-col items-center justify-center gap-1 flex-1 h-full relative'
+
+        const inner = (
+          <>
             {/* Cart badge */}
             {path === '/cart' && cartCount > 0 && (
               <span
@@ -72,6 +69,16 @@ export default function MobileBottomNav() {
             >
               {label}
             </span>
+          </>
+        )
+
+        return external ? (
+          <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={cls} style={{ textDecoration: 'none' }}>
+            {inner}
+          </a>
+        ) : (
+          <Link key={path} to={path} className={cls} style={{ textDecoration: 'none' }}>
+            {inner}
           </Link>
         )
       })}

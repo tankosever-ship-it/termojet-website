@@ -55,9 +55,14 @@ const SKU_FIX = {
   'wp_20521': '30250818',
 }
 
+// --- ПЕРЕМІЩЕННЯ між категоріями за id ---
+const CATEGORY_FIX = {
+  'new_38241225': 'nasosy', // HBS 24-12: з насосних груп → у насоси
+}
+
 // --- НОВИЙ товар APM-F 40/12-250 (за зразком 40/15) ---
 // ⚠️ sku 30401225 та price 1180 — ТИМЧАСОВІ, уточнити в адмінці.
-const NEW_PRODUCT = {
+const NEW_PRODUCTS = [{
   id: 'excel_30401225',
   wpId: null,
   name: 'Насос циркуляційний Termojet AUTO енергозберігаючий APM-F 40/12-250 мм',
@@ -92,7 +97,81 @@ const NEW_PRODUCT = {
   },
   inStock: true,
   features: [],
-}
+}, {
+  // ⚠️ price 0 і sku порожній — на старому сайті не вказані. Уточнити в адмінці.
+  id: 'xps_25_6_130',
+  wpId: null,
+  name: 'Насос циркуляційний Termojet XPS 25-6-130',
+  slug: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-130',
+  sku: '',
+  price: '0',
+  currency: 'EUR',
+  categorySlug: 'nasosy',
+  subcategory: '',
+  image: P + 'xps-25-6-130.jpg',
+  images: [P + 'xps-25-6-130.jpg'],
+  shortDesc: 'Циркуляційні насоси серії XPS призначені для примусового руху теплоносія в системах опалення та теплої підлоги, охолоджуючого агента в системах кондиціювання.',
+  description: 'Циркуляційні насоси серії XPS призначені для примусового руху теплоносія в системах опалення та теплої підлоги, охолоджуючого агента в системах кондиціювання. Насос дозволяє значно збільшити перенесення тепла та підвищити у кілька разів ефективність системи.',
+  specs: {
+    'Тип насоса': 'Циркуляційний',
+    'Міжосьова відстань': '130 мм',
+    'Діаметр підключення': '1½″',
+    'Тип підключення': 'Конектор',
+    'Макс. напір': '6 м',
+    'Макс. продуктивність': '3 м³/год',
+    'Макс. потужність': '100 Вт',
+    'Живлення': '220В / 50 Гц',
+    'Макс. температура рідини': '110°C',
+    'Рівень захисту': 'IP42',
+    'Матеріал корпусу': 'Чавун',
+    'Робоче колесо': 'Технополімер',
+    'Вал двигуна': 'Кераміка',
+    'Обмотка статора двигуна': 'Мідь',
+    'Довжина кабелю': '1.3 м',
+    'Маса': '3 кг',
+    'Гарантія': '2 роки',
+    'Виробник': 'TERMOJET',
+  },
+  inStock: true,
+  features: [],
+}, {
+  // ⚠️ price 0 і sku порожній — на старому сайті не вказані. Уточнити в адмінці.
+  id: 'xps_25_6_180b',
+  wpId: null,
+  name: 'Насос циркуляційний Termojet XPS 25-6-180B',
+  slug: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b',
+  sku: '',
+  price: '0',
+  currency: 'EUR',
+  categorySlug: 'nasosy',
+  subcategory: '',
+  image: P + 'xps-25-6-180b.jpg',
+  images: [P + 'xps-25-6-180b.jpg'],
+  shortDesc: 'Циркуляційні насоси серії XPS призначені для примусового руху теплоносія в системах опалення та теплої підлоги, охолоджуючого агента в системах кондиціювання.',
+  description: 'Циркуляційні насоси серії XPS призначені для примусового руху теплоносія в системах опалення та теплої підлоги, охолоджуючого агента в системах кондиціювання. Насос дозволяє значно збільшити перенесення тепла та підвищити у кілька разів ефективність системи.',
+  specs: {
+    'Тип насоса': 'Циркуляційний',
+    'Міжосьова відстань': '180 мм',
+    'Діаметр підключення': '1½″',
+    'Тип підключення': 'Ніпель',
+    'Макс. напір': '6 м',
+    'Макс. продуктивність': '3 м³/год',
+    'Макс. потужність': '100 Вт',
+    'Живлення': '220В / 50 Гц',
+    'Макс. температура рідини': '110°C',
+    'Рівень захисту': 'IP42',
+    'Матеріал корпусу': 'Чавун',
+    'Робоче колесо': 'Технополімер',
+    'Вал двигуна': 'Кераміка',
+    'Обмотка статора двигуна': 'Мідь',
+    'Довжина кабелю': '1.3 м',
+    'Маса': '3.2 кг',
+    'Гарантія': '2 роки',
+    'Виробник': 'TERMOJET',
+  },
+  inStock: true,
+  features: [],
+}]
 
 function abs(name) { return name.startsWith('/') ? name : P + name }
 
@@ -127,17 +206,22 @@ for (const p of arr) {
     console.log(`  ~ артикул ${p.id}: ${p.sku} → ${SKU_FIX[p.id]}`)
     p.sku = SKU_FIX[p.id]
   }
+  if (CATEGORY_FIX[p.id] && p.categorySlug !== CATEGORY_FIX[p.id]) {
+    console.log(`  ~ категорія ${p.id}: ${p.categorySlug} → ${CATEGORY_FIX[p.id]}`)
+    p.categorySlug = CATEGORY_FIX[p.id]
+  }
   if (REPLACE[p.id]) { applyToObj(p); replaced++; changed++ }
   else if (APPEND[p.id]) { applyToObj(p); appended++; changed++ }
 }
-// новий товар
-if (!byId.has(NEW_PRODUCT.id)) {
-  arr.push({ ...NEW_PRODUCT })
-  console.log('  + додано новий товар:', NEW_PRODUCT.name)
-} else {
-  const ex = byId.get(NEW_PRODUCT.id)
-  Object.assign(ex, NEW_PRODUCT) // оновити (ідемпотентно)
-  console.log('  ~ новий товар вже існував — оновлено')
+// нові товари (ідемпотентно)
+for (const NP of NEW_PRODUCTS) {
+  if (!byId.has(NP.id)) {
+    arr.push({ ...NP })
+    console.log('  + додано новий товар:', NP.name)
+  } else {
+    Object.assign(byId.get(NP.id), NP)
+    console.log('  ~ товар оновлено:', NP.name)
+  }
 }
 fs.writeFileSync(SEED, JSON.stringify(Array.isArray(raw) ? arr : raw, null, 2) + '\n')
 console.log(`seed-products.json: замінено ${replaced}, додано графік ${appended}.`)
@@ -167,31 +251,36 @@ const tx = db.transaction(() => {
   for (const [id, sku] of Object.entries(SKU_FIX)) {
     db.prepare('UPDATE products SET sku=? WHERE id=?').run(sku, id)
   }
-  // новий товар
-  const exists = db.prepare('SELECT id FROM products WHERE id=?').get(NEW_PRODUCT.id)
-  const np = NEW_PRODUCT
-  const payload = {
-    id: np.id, wp_id: np.wpId, name: np.name, slug: np.slug, sku: np.sku,
-    price: parseFloat(np.price) || 0, category_slug: np.categorySlug, subcategory: np.subcategory || '',
-    image: np.image, images: JSON.stringify(np.images), short_desc: np.shortDesc,
-    description: np.description, specs: JSON.stringify(np.specs), features: JSON.stringify(np.features || []),
-    in_stock: np.inStock ? 1 : 0, is_visible: 1,
+  // переміщення категорій
+  for (const [id, cat] of Object.entries(CATEGORY_FIX)) {
+    db.prepare('UPDATE products SET category_slug=? WHERE id=?').run(cat, id)
   }
-  if (exists) {
-    db.prepare(`UPDATE products SET name=@name, slug=@slug, sku=@sku, price=@price,
-      category_slug=@category_slug, subcategory=@subcategory, image=@image, images=@images,
-      short_desc=@short_desc, description=@description, specs=@specs, features=@features,
-      in_stock=@in_stock, is_visible=@is_visible WHERE id=@id`).run(payload)
-    console.log('  ~ новий товар у БД оновлено')
-  } else {
-    db.prepare(`INSERT INTO products (id, wp_id, name, slug, sku, price, category_slug, subcategory,
-      image, images, short_desc, description, specs, features, in_stock, is_visible)
-      VALUES (@id,@wp_id,@name,@slug,@sku,@price,@category_slug,@subcategory,@image,@images,
-      @short_desc,@description,@specs,@features,@in_stock,@is_visible)`).run(payload)
-    console.log('  + новий товар у БД додано')
+  // нові товари
+  for (const np of NEW_PRODUCTS) {
+    const exists = db.prepare('SELECT id FROM products WHERE id=?').get(np.id)
+    const payload = {
+      id: np.id, wp_id: np.wpId, name: np.name, slug: np.slug, sku: np.sku,
+      price: parseFloat(np.price) || 0, category_slug: np.categorySlug, subcategory: np.subcategory || '',
+      image: np.image, images: JSON.stringify(np.images), short_desc: np.shortDesc,
+      description: np.description, specs: JSON.stringify(np.specs), features: JSON.stringify(np.features || []),
+      in_stock: np.inStock ? 1 : 0, is_visible: 1,
+    }
+    if (exists) {
+      db.prepare(`UPDATE products SET name=@name, slug=@slug, sku=@sku, price=@price,
+        category_slug=@category_slug, subcategory=@subcategory, image=@image, images=@images,
+        short_desc=@short_desc, description=@description, specs=@specs, features=@features,
+        in_stock=@in_stock, is_visible=@is_visible WHERE id=@id`).run(payload)
+      console.log('  ~ товар у БД оновлено:', np.name)
+    } else {
+      db.prepare(`INSERT INTO products (id, wp_id, name, slug, sku, price, category_slug, subcategory,
+        image, images, short_desc, description, specs, features, in_stock, is_visible)
+        VALUES (@id,@wp_id,@name,@slug,@sku,@price,@category_slug,@subcategory,@image,@images,
+        @short_desc,@description,@specs,@features,@in_stock,@is_visible)`).run(payload)
+      console.log('  + товар у БД додано:', np.name)
+    }
   }
 })
 tx()
 db.close()
-console.log(`БД termojet.db: оновлено ${dbChanged} товарів + новий.`)
+console.log(`БД termojet.db: оновлено ${dbChanged} товарів + ${NEW_PRODUCTS.length} нових/категорії.`)
 console.log('Готово.')
