@@ -8,7 +8,7 @@ export const DOCS_BY_CATEGORY = {
   'nasosni-hrupy':            [12, 13],       // НГ-47/48/46/67 + НГ-51/52
   'nasosy':                   [],             // документи — лише за серією (див. DOCS_BY_NAME)
   'klapany':                  [18, 31],       // 3-х ходові + брошура сервопривід
-  'zonalne-keruvannya':       [18],           // 3-х ходові та сервоприводи
+  'zonalne-keruvannya':       [119],          // брошура зонального керування (інструкції — за моделлю)
   'rozpodilchi-kolektory':    [14],           // Колектори розподільчі
   'kolektory-z-hidrostrilkoyu': [15],         // КГС
   'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
@@ -24,10 +24,24 @@ export const DOCS_BY_NAME = [
   { match: /НГ-4[678]|НГ-67/i,         ids: [12] },
   { match: /НГ-5[12]/i,                 ids: [13] },
   { match: /APE/i,                      ids: [19, 32] },
-  { match: /APM-F/i,                    ids: [20, 33] }, // APM-F (окремого файлу немає — поки APM-документація)
-  { match: /\bAPM\b/i,                  ids: [20, 33] }, // APM різьбові
+  { match: /APM-F/i,                    ids: [100, 101] }, // APM-F власні інструкція + брошура
+  { match: /\bAPM\b(?!-F)/i,            ids: [20, 33] },   // APM різьбові (не APM-F)
   { match: /XPS|BPS/i,                  ids: [21] },
-  { match: /SPE|HBS/i,                  ids: [17] },     // рециркуляційні насоси
+  { match: /WT\s?400|каналіз/i,         ids: [102] },      // каналізаційна станція WT 400
+  { match: /SPE/i,                      ids: [103, 104] }, // SPE12 інструкція + тех.лист
+  { match: /HBS/i,                      ids: [17] },       // рециркуляційний (загальна)
+  // Зональне керування — за моделлю
+  { match: /HT102/i,                    ids: [110] },
+  { match: /HT120/i,                    ids: [111] },
+  { match: /HT130/i,                    ids: [112] },
+  { match: /WT102/i,                    ids: [113] },
+  { match: /WT150/i,                    ids: [114] },
+  { match: /R06|RO6/i,                  ids: [115] },
+  { match: /TRH10/i,                    ids: [116] },
+  { match: /TJ03C/i,                    ids: [117] },
+  { match: /TJ03RF/i,                   ids: [118] },
+  { match: /зональн.{0,12}клапан|ABF-ZV/i, ids: [18] },    // 3-ходовий зональний клапан
+  { match: /413/,                       ids: [120, 121] }, // контролер/привід AQUA 413 (НГ-48A/52A + TJ413)
   { match: /PROFI\s*PLUS/i,            ids: [22] },
   { match: /LIGHT/i,                    ids: [23] },
   { match: /BOX/i,                      ids: [10] },

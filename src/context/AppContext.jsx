@@ -84,7 +84,7 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/files`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setFiles(data) })
+      .then(data => { if (Array.isArray(data) && data.length) setFiles(data) })
       .catch(() => {})
 
     fetch(`${API}/settings`)

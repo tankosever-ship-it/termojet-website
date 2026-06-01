@@ -30,6 +30,7 @@ const REPLACE = {
   'new_WT400A':     ['wt400a-box.jpg', ['wt400a-box.jpg', 'wt400a.jpg']], // WT 400-A
   'new_WT400B':     ['wt400b-box.jpg', ['wt400b-box.jpg', 'wt400b.jpg']], // WT 400-B
   'new_WT400C':     ['wt400c-box.jpg', ['wt400c-box.jpg', 'wt400c.jpg']], // WT 400-C
+  'wp_8619':        ['pidstavka-tn.jpg', ['pidstavka-tn.jpg']],           // Підставка під тепловий насос
 }
 
 // --- ДОДАТИ графік останнім у галерею (image лишається) за id ---

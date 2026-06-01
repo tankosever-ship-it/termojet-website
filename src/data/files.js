@@ -499,4 +499,23 @@ export const FILES = [
     year: 2024,
     desc: 'Висновок щодо відповідності нормам CE',
   },
+
+  // ── Нові документи (локальні, public/files) ──
+  { id: 100, name: 'Інструкція — Насоси APM-F', category: 'Інструкції', format: 'PDF', url: '/files/apm-f-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Монтаж та експлуатація фланцевих циркуляційних насосів APM-F' },
+  { id: 101, name: 'Брошура — Насоси APM-F', category: 'Брошури', format: 'PDF', url: '/files/apm-f-broshura.pdf', lang: 'uk', year: 2025, desc: 'Лінійка фланцевих насосів APM-F — характеристики та підбір' },
+  { id: 102, name: 'Інструкція — Каналізаційна станція WT 400 (Sololift)', category: 'Інструкції', format: 'PDF', url: '/files/wt400-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Встановлення та обслуговування каналізаційних установок WT 400' },
+  { id: 103, name: 'Інструкція — Насоси SPE12', category: 'Інструкції', format: 'PDF', url: '/files/spe12-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Встановлення рециркуляційних насосів SPE12-1.4 / 1.4S' },
+  { id: 104, name: 'Технічний лист — Насоси SPE12', category: 'Інструкції', format: 'PDF', url: '/files/spe12-tech.pdf', lang: 'uk', year: 2025, desc: 'Технічні характеристики насосів SPE12' },
+  { id: 110, name: 'Інструкція — Програматор HT-102', category: 'Інструкції', format: 'PDF', url: '/files/ht102-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Дротовий програматор HT-102' },
+  { id: 111, name: 'Інструкція — Програматор HT-120', category: 'Інструкції', format: 'PDF', url: '/files/ht120-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Дротовий програматор у підрозетник HT-120' },
+  { id: 112, name: 'Інструкція — Програматор HT-130', category: 'Інструкції', format: 'PDF', url: '/files/ht130-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Дротовий програматор у рамку підрозетника HT-130' },
+  { id: 113, name: 'Інструкція — Програматор WT-102 (+ R06)', category: 'Інструкції', format: 'PDF', url: '/files/wt102-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Бездротовий WiFi програматор WT-102 з приймачем R06' },
+  { id: 114, name: 'Інструкція — Програматор WT-150', category: 'Інструкції', format: 'PDF', url: '/files/wt150-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Бездротовий програматор WT-150' },
+  { id: 115, name: 'Інструкція — WiFi-приймач R06', category: 'Інструкції', format: 'PDF', url: '/files/r06-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Бездротовий WiFi-приймач R06' },
+  { id: 116, name: 'Інструкція — Термоголовка TRH-10', category: 'Інструкції', format: 'PDF', url: '/files/trh10-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'WiFi термоголовка TRH-10' },
+  { id: 117, name: 'Інструкція — Центр комутації TJ-03-C (дротовий)', category: 'Інструкції', format: 'PDF', url: '/files/tj03c-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Дротовий центр комутації 8 зон TJ-03-C' },
+  { id: 118, name: 'Інструкція — Центр комутації TJ-03-RF (бездротовий)', category: 'Інструкції', format: 'PDF', url: '/files/tj03rf-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Бездротовий центр комутації 8 зон TJ-03-RF' },
+  { id: 119, name: 'Брошура — Термостати та зональне керування', category: 'Брошури', format: 'PDF', url: '/files/zonalne-broshura.pdf', lang: 'uk', year: 2025, desc: 'Огляд лінійки термостатів та зонального керування' },
+  { id: 120, name: 'Інструкція — Контролер AQUA 413', category: 'Інструкції', format: 'PDF', url: '/files/aqua413-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Електропривід з інтегрованим контролером і датчиком TERMOJET 413' },
+  { id: 121, name: 'Технічний лист — Контролер AQUA 413', category: 'Інструкції', format: 'PDF', url: '/files/aqua413-tech.pdf', lang: 'uk', year: 2025, desc: 'Технічні характеристики контролера-приводу AQUA 413' },
 ]
