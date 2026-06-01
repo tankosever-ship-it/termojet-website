@@ -325,7 +325,7 @@ export default function ProductDetailPage() {
 
   // Documents for this product (brochures + instructions)
   const productDocs = useMemo(() => {
-    const ids = getDocsForProduct(categorySlug, name)
+    const ids = getDocsForProduct(categorySlug, name, product.sku)
     return ids
       .map(id => FILES.find(f => f.id === id))
       .filter(Boolean)

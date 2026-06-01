@@ -41,16 +41,26 @@ export const DOCS_BY_NAME = [
   { match: /TJ03RF/i,                   ids: [118] },
   { match: /зональн.{0,12}клапан|ABF-ZV/i, ids: [18] },    // 3-ходовий зональний клапан
   { match: /413/,                       ids: [120, 121] }, // контролер/привід AQUA 413 (НГ-48A/52A + TJ413)
+  // Сепаратори — інструкції за артикулом
+  { match: /TJ4F/i,                     ids: [130] },      // повітряний клапан
+  { match: /TJVT6G/i,                   ids: [134] },      // повітря+бруду
+  { match: /TJV6G/i,                    ids: [133] },      // повітря (найближча — swivel)
+  { match: /TJV7G/i,                    ids: [133] },      // поворотний повітря
+  { match: /TJT6G/i,                    ids: [131] },      // бруд
+  { match: /TJT7G/i,                    ids: [132] },      // поворотний бруд
+  { match: /TJ7575/i,                   ids: [135] },      // для теплових насосів
+  { match: /TJ7590/i,                   ids: [136] },      // антифризний клапан
   { match: /PROFI\s*PLUS/i,            ids: [22] },
   { match: /LIGHT/i,                    ids: [23] },
   { match: /BOX/i,                      ids: [10] },
 ]
 
 // Returns deduplicated list of file IDs for a product
-export function getDocsForProduct(categorySlug, productName = '') {
+export function getDocsForProduct(categorySlug, productName = '', sku = '') {
+  const hay = `${productName} ${sku}`
   const ids = new Set(DOCS_BY_CATEGORY[categorySlug] || [])
   for (const { match, ids: extraIds } of DOCS_BY_NAME) {
-    if (match.test(productName)) extraIds.forEach(id => ids.add(id))
+    if (match.test(hay)) extraIds.forEach(id => ids.add(id))
   }
   return [...ids]
 }

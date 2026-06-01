@@ -518,4 +518,13 @@ export const FILES = [
   { id: 119, name: 'Брошура — Термостати та зональне керування', category: 'Брошури', format: 'PDF', url: '/files/zonalne-broshura.pdf', lang: 'uk', year: 2025, desc: 'Огляд лінійки термостатів та зонального керування' },
   { id: 120, name: 'Інструкція — Контролер AQUA 413', category: 'Інструкції', format: 'PDF', url: '/files/aqua413-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Електропривід з інтегрованим контролером і датчиком TERMOJET 413' },
   { id: 121, name: 'Технічний лист — Контролер AQUA 413', category: 'Інструкції', format: 'PDF', url: '/files/aqua413-tech.pdf', lang: 'uk', year: 2025, desc: 'Технічні характеристики контролера-приводу AQUA 413' },
+
+  // ── Інструкції на сепаратори (з instructions.pdf) ──
+  { id: 130, name: 'Інструкція — Автоматичний повітряний клапан', category: 'Інструкції', format: 'PDF', url: '/files/sep-air-vent-instr.pdf', lang: 'uk', year: 2025, desc: 'Монтаж та експлуатація повітряних клапанів TJ4F' },
+  { id: 131, name: 'Інструкція — Сепаратор бруду', category: 'Інструкції', format: 'PDF', url: '/files/sep-dirt-instr.pdf', lang: 'uk', year: 2025, desc: 'Магнітний сепаратор бруду TJT6G' },
+  { id: 132, name: 'Інструкція — Поворотний сепаратор бруду', category: 'Інструкції', format: 'PDF', url: '/files/sep-dirt-swivel-instr.pdf', lang: 'uk', year: 2025, desc: 'Поворотний магнітний сепаратор бруду TJT7G' },
+  { id: 133, name: 'Інструкція — Сепаратор повітря', category: 'Інструкції', format: 'PDF', url: '/files/sep-air-swivel-instr.pdf', lang: 'uk', year: 2025, desc: 'Сепаратор повітря TJV6G / поворотний TJV7G' },
+  { id: 134, name: 'Інструкція — Сепаратор повітря та бруду', category: 'Інструкції', format: 'PDF', url: '/files/sep-combined-instr.pdf', lang: 'uk', year: 2025, desc: 'Деаератор і сепаратор бруду TJVT6G' },
+  { id: 135, name: 'Інструкція — Сепаратор бруду для теплових насосів', category: 'Інструкції', format: 'PDF', url: '/files/sep-heatpump-instr.pdf', lang: 'uk', year: 2025, desc: 'Магнітний сепаратор бруду TJ7575 для систем із тепловими насосами' },
+  { id: 136, name: 'Інструкція — Антифризний клапан', category: 'Інструкції', format: 'PDF', url: '/files/antifreeze-instr.pdf', lang: 'uk', year: 2025, desc: 'Встановлення антифризного клапана TJ7590' },
 ]
