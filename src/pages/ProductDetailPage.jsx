@@ -408,6 +408,8 @@ export default function ProductDetailPage() {
   const priceUAH = product.price
     ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
     : null
+  // ціна за одиницю в ₴ для schema/SEO (узгоджено з тим, що бачить користувач)
+  const priceUAHunit = toUAH(product.price, product.currency, eurRate) || null
 
   return (
     <>
@@ -415,7 +417,8 @@ export default function ProductDetailPage() {
         title={name}
         description={desc?.slice(0, 160)}
         type="product"
-        product={{ name, description: desc, sku: product.sku, price: product.price, images: allImages }}
+        image={allImages[0]}
+        product={{ name, description: desc, sku: product.sku, price: priceUAHunit, images: allImages }}
         breadcrumbs={[
           { name: 'Головна', url: 'https://termojet.com.ua/' },
           { name: 'Каталог', url: 'https://termojet.com.ua/catalog' },
@@ -833,7 +836,7 @@ export default function ProductDetailPage() {
                   >
                     {p.image ? (
                       <img
-                        src={imgUrl(p.image)} alt={pName}
+                        src={imgUrl(p.image)} alt={pName} loading="lazy" decoding="async"
                         className="h-32 object-contain mb-3 transition-transform group-hover:scale-105"
                       />
                     ) : (

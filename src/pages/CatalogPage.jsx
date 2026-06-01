@@ -871,7 +871,7 @@ export default function CatalogPage() {
                     <div className="relative flex-shrink-0 overflow-hidden bg-[var(--bg)]" style={{ height: '240px' }}>
                       <Link to={href} className="block w-full h-full">
                         {product.image ? (
-                          <img src={imgUrl(product.image)} alt={name}
+                          <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
                             className="w-full h-full object-contain p-4 group-hover:scale-[1.06] transition-transform duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>
@@ -966,7 +966,7 @@ export default function CatalogPage() {
                     <Link to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden"
                       style={{ width: 140, minHeight: 120 }}>
                       {product.image ? (
-                        <img src={imgUrl(product.image)} alt={name}
+                        <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
                           className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300" />
                       ) : (
                         <div className="text-gray-200 text-5xl">⚙️</div>

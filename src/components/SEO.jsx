@@ -15,7 +15,7 @@ const ORGANIZATION_SCHEMA = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+380-44-XXX-XX-XX',
+    telephone: '+380-50-718-91-65',
     contactType: 'customer service',
     availableLanguage: ['Ukrainian', 'English', 'Polish'],
   },
@@ -67,14 +67,27 @@ export default function SEO({ title, description, image, canonical, type = 'webs
     schemas.push(buildBreadcrumbSchema(breadcrumbs))
   }
 
+  // origin для абсолютних URL (працює на будь-якому домені; SSR-безпечно)
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://termojet.com.ua'
+  const pageUrl = canonical || (typeof window !== 'undefined' ? origin + window.location.pathname : origin)
+  const toAbs = (u) => (!u ? u : /^https?:\/\//.test(u) ? u : origin + (u.startsWith('/') ? u : '/' + u))
+  const ogImage = toAbs(image || '/about-hero.png')
+
   return (
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
+      <link rel="canonical" href={pageUrl} />
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content="Termojet" />
+      <meta property="og:url" content={pageUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
-      {image && <meta property="og:image" content={image} />}
-      {canonical && <link rel="canonical" href={canonical} />}
+      <meta property="og:image" content={ogImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={desc} />
+      <meta name="twitter:image" content={ogImage} />
       {schemas.map((schema, i) => (
         <script key={i} type="application/ld+json">
           {JSON.stringify(schema)}

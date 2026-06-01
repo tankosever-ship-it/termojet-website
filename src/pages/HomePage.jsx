@@ -52,7 +52,7 @@ function CategoryCard({ cat, lang }) {
       {/* Фото */}
       <div className="relative overflow-hidden" style={{ height: 160, background: '#f0f0ef' }}>
         {imgSrc ? (
-          <img src={imgSrc} alt={cat.name[lang] || cat.name.uk}
+          <img src={imgSrc} alt={cat.name[lang] || cat.name.uk} loading="lazy" decoding="async"
             className="w-full h-full object-contain transition-transform duration-500"
             style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)', padding: '12px', mixBlendMode: 'multiply' }} />
         ) : (
@@ -462,9 +462,9 @@ export default function HomePage() {
               <motion.h1 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] mb-8"
                 style={{ fontSize: 'clamp(1.8rem, 4.05vw, 3.15rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
-                Виробник систем<br />
-                швидкого монтажу<br />
-                для котелень <span className="text-[var(--accent)]">#1</span><br />
+                Виробник систем{' '}<br />
+                швидкого монтажу{' '}<br />
+                для котелень <span className="text-[var(--accent)]">#1</span>{' '}<br />
                 в Україні.
               </motion.h1>
 
@@ -834,7 +834,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPortfolio.map(item => (
                 <div key={item.id} className="card card-hover overflow-hidden bg-white">
-                  {item.image && <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />}
+                  {item.image && <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover" />}
                   <div className="p-4">
                     <div className="text-xs text-gray-400 mb-1">{item.location || ''}</div>
                     <h3 className="font-semibold text-gray-900">{item.title}</h3>
@@ -865,7 +865,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPosts.map(post => (
                 <Link key={post.id} to={`/blog/${post.slug}`} className="card card-hover overflow-hidden block group bg-white">
-                  {post.image && <img src={post.image} alt={post.title} className="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-300" />}
+                  {post.image && <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-300" />}
                   <div className="p-5">
                     {post.category && <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">{post.category}</span>}
                     <h3 className="font-semibold text-gray-900 mt-1 mb-2 line-clamp-2">

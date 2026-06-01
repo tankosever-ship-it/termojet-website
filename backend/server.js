@@ -1,16 +1,28 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
+const compression = require('compression')
 
 const app = express()
 const PORT = process.env.PORT || 3000
+
+// gzip-стиснення всіх відповідей (−~75% ваги JS/HTML/JSON)
+app.use(compression())
+
+// легкі security-заголовки (без CSP, щоб нічого не зламати)
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
+  next()
+})
 
 app.use(cors({ origin: true, credentials: true }))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
-// static uploads
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+// static uploads (3D-моделі, документи) — кеш на 7 днів
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }))
 
 // API routes
 const { router: authRouter } = require('./routes/auth')
@@ -28,8 +40,19 @@ app.use('/api/upload', require('./routes/upload'))
 
 // serve React build
 const DIST = path.join(__dirname, '..', 'dist')
-app.use(express.static(DIST))
+app.use(express.static(DIST, {
+  setHeaders: (res, filePath) => {
+    // хешовані ассети (vite кладе контент-хеш у назву) — кеш на рік, immutable
+    if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+    } else {
+      // index.html та інші кореневі файли — завжди свіжі
+      res.setHeader('Cache-Control', 'no-cache')
+    }
+  },
+}))
 app.get('*', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache')
   res.sendFile(path.join(DIST, 'index.html'))
 })
 
