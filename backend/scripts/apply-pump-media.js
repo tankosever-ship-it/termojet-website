@@ -98,13 +98,12 @@ const NEW_PRODUCTS = [{
   inStock: true,
   features: [],
 }, {
-  // ⚠️ price 0 і sku порожній — на старому сайті не вказані. Уточнити в адмінці.
   id: 'xps_25_6_130',
   wpId: null,
-  name: 'Насос циркуляційний Termojet XPS 25-6-130',
+  name: 'Насос циркуляційний Termojet XPS 25/6/130 мм',
   slug: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-130',
-  sku: '',
-  price: '0',
+  sku: '33250613',
+  price: '60',
   currency: 'EUR',
   categorySlug: 'nasosy',
   subcategory: '',
@@ -135,13 +134,12 @@ const NEW_PRODUCTS = [{
   inStock: true,
   features: [],
 }, {
-  // ⚠️ price 0 і sku порожній — на старому сайті не вказані. Уточнити в адмінці.
   id: 'xps_25_6_180b',
   wpId: null,
-  name: 'Насос циркуляційний Termojet XPS 25-6-180B',
+  name: 'Насос циркуляційний Termojet XPS 25/6/180 мм',
   slug: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b',
-  sku: '',
-  price: '0',
+  sku: '33250618',
+  price: '61.5',
   currency: 'EUR',
   categorySlug: 'nasosy',
   subcategory: '',
