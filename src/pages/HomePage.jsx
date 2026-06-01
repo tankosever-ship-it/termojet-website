@@ -461,14 +461,14 @@ export default function HomePage() {
 
               <motion.h1 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] mb-8"
-                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
+                style={{ fontSize: 'clamp(1.8rem, 4.05vw, 3.15rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
                 Виробник систем<br />
                 швидкого монтажу<br />
                 для котелень <span className="text-[var(--accent)]">#1</span><br />
                 в Україні.
               </motion.h1>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-4" style={{ marginLeft: '-2rem' }}>
                 <Link to="/catalog"
                   className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:opacity-90"
                   style={{ background: 'var(--accent)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
