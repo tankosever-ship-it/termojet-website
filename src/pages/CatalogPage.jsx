@@ -281,19 +281,21 @@ const CATEGORY_FILTERS = {
         key: 'septype',
         label: 'Тип',
         options: [
-          { label: 'Сепаратор бруду',              test: p => /^Сепаратор бруду/i.test(p.name) },
-          { label: 'Повітряний сепаратор',          test: p => /^Повітряний сепаратор/i.test(p.name) },
-          { label: 'Комбінований (бруд+повітря)',   test: p => /бруду та бруду|повітря та бруду|CAD/i.test(p.name) },
+          { label: 'Сепаратори повітря',     test: p => /повітря/i.test(p.name) && !/та бруду/i.test(p.name) },
+          { label: 'Повітря + бруду',        test: p => /повітря та бруду/i.test(p.name) },
+          { label: 'Сепаратори бруду',       test: p => /Сепаратор бруду/i.test(p.name) },
         ],
       },
       {
         key: 'dn',
         label: 'Діаметр',
         options: [
-          { label: 'DN25', test: p => /DN25/.test(p.name) },
-          { label: 'DN32', test: p => /DN32/.test(p.name) },
-          { label: 'DN40', test: p => /DN40/.test(p.name) },
-          { label: 'DN50', test: p => /DN50/.test(p.name) },
+          { label: 'DN15', test: p => /Dn\s?15\b/i.test(p.name) },
+          { label: 'DN20', test: p => /Dn\s?20\b/i.test(p.name) },
+          { label: 'DN25', test: p => /Dn\s?25\b/i.test(p.name) },
+          { label: 'DN32', test: p => /Dn\s?32\b/i.test(p.name) },
+          { label: 'DN40', test: p => /Dn\s?40\b/i.test(p.name) },
+          { label: 'DN50', test: p => /Dn\s?50\b/i.test(p.name) },
         ],
       },
     ],
@@ -569,6 +571,25 @@ function kpRank(p) {
   return 4000                                     // інше
 }
 
+// Порядок у «Сепаратори»: повітря → повітря+бруду → бруду → інше; усередині — за серією і DN
+function sepRank(p) {
+  const n = p.name || '', sku = p.sku || '', sub = p.subcategory || ''
+  const dn = parseInt((n.match(/Dn\s?(\d+)/i) || [])[1] || '99')
+  let g = 4
+  if (/повітря та бруду/i.test(sub) || /повітря та бруду/i.test(n)) g = 2
+  else if (/Сепаратори повітря/i.test(sub) || (/повітря/i.test(n) && !/та бруду/i.test(n))) g = 1
+  else if (/Сепаратори бруду/i.test(sub) || /Сепаратор бруду/i.test(n)) g = 3
+  let pr = 5
+  if (/^TJ4F/.test(sku)) pr = 0
+  else if (/^TJV6G/.test(sku)) pr = 1
+  else if (/^TJV7G/.test(sku)) pr = 2
+  else if (/^TJVT6G/.test(sku)) pr = 0
+  else if (/^TJT6G/.test(sku)) pr = 0
+  else if (/^TJT7G/.test(sku)) pr = 1
+  else if (/^TJ7575/.test(sku)) pr = 2
+  return g * 10000 + pr * 1000 + dn
+}
+
 export default function CatalogPage() {
   const { categorySlug } = useParams()
   const [searchParams] = useSearchParams()
@@ -618,6 +639,8 @@ export default function CatalogPage() {
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
     if (sort === 'default' && categorySlug === 'kolektory-pidloha')
       list = [...list].sort((a, b) => kpRank(a) - kpRank(b))
+    if (sort === 'default' && categorySlug === 'separatory')
+      list = [...list].sort((a, b) => sepRank(a) - sepRank(b))
     return list
   }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang])
 
