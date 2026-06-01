@@ -46,6 +46,7 @@ function Accordion({ icon, title, children, defaultOpen = false }) {
 function ImageGallery({ images, name, model3d }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
+  const [mv3dReady, setMv3dReady] = useState(false)
   const touchStart = useRef(null)
   const thumbsRef = useRef(null)
   const vThumbsRef = useRef(null)
@@ -59,8 +60,19 @@ function ImageGallery({ images, name, model3d }) {
   const current = slides[active] || null
   const main = current?.type === 'img' ? current.src : null
 
-  // ледаче довантаження web-компонента <model-viewer> лише за наявності 3D-моделі
-  useEffect(() => { if (model3d) import('@google/model-viewer') }, [model3d])
+  // Ледаче довантаження <model-viewer> із самодостатнього бандла (власний three.js,
+  // повз Vite — інакше конфлікт three@0.184 ламає рендер). Рендеримо елемент ЛИШЕ
+  // після реєстрації custom element (whenDefined), бо React виставляє src до upgrade.
+  useEffect(() => {
+    if (!model3d) return
+    if (window.customElements?.get('model-viewer')) { setMv3dReady(true); return }
+    if (!document.getElementById('model-viewer-js')) {
+      const s = document.createElement('script')
+      s.id = 'model-viewer-js'; s.type = 'module'; s.src = '/vendor/model-viewer.min.js'
+      document.head.appendChild(s)
+    }
+    window.customElements?.whenDefined('model-viewer').then(() => setMv3dReady(true))
+  }, [model3d])
 
   const prev = useCallback(() => setActive(i => (i - 1 + total) % total), [total])
   const next = useCallback(() => setActive(i => (i + 1) % total), [total])
@@ -115,7 +127,7 @@ function ImageGallery({ images, name, model3d }) {
   )
 
   return (
-    <div className="card overflow-hidden self-start">
+    <div className="card overflow-hidden self-start w-full">
       {/* Desktop: thumbnails LEFT + main image RIGHT — fixed height */}
       <div className="flex" style={{ height: 420 }}>
 
@@ -137,16 +149,24 @@ function ImageGallery({ images, name, model3d }) {
           onTouchEnd={onTouchEnd}
         >
           {current?.type === '3d' ? (
-            <model-viewer
-              src={current.src}
-              camera-controls=""
-              auto-rotate=""
-              autoplay=""
-              shadow-intensity="1"
-              exposure="1.1"
-              interaction-prompt="none"
-              style={{ width: '100%', height: '100%', backgroundColor: '#f9fafb' }}
-            />
+            mv3dReady ? (
+              <model-viewer
+                src={current.src}
+                camera-controls=""
+                auto-rotate=""
+                autoplay=""
+                shadow-intensity="1"
+                exposure="1.1"
+                interaction-prompt="none"
+                loading="eager"
+                style={{ width: '100%', height: '100%', display: 'block', backgroundColor: '#f9fafb' }}
+              />
+            ) : (
+              <div className="flex flex-col items-center gap-2 text-sky-600">
+                <Box size={32} className="animate-pulse" />
+                <span className="text-xs font-medium">Завантаження 3D…</span>
+              </div>
+            )
           ) : main ? (
             <img
               src={main} alt={name}
@@ -243,7 +263,7 @@ function ImageGallery({ images, name, model3d }) {
               onClick={e => e.stopPropagation()}
               draggable={false}
             />
-          ) : current?.type === '3d' ? (
+          ) : current?.type === '3d' && mv3dReady ? (
             <model-viewer
               src={current.src}
               camera-controls=""
