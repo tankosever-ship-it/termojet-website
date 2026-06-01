@@ -150,6 +150,9 @@ const CATEGORY_FILTERS = {
           { label: 'SPE',  test: p => /SPE/i.test(p.name) },
           { label: 'HBS',  test: p => /\bHBS\b/.test(p.name) },
           { label: 'WT',   test: p => /\bWT\b/.test(p.name) },
+          { label: 'GRANDLIFT', test: p => /\bGRANDLIFT\b/i.test(p.name) },
+          { label: 'MEGA',      test: p => /\bMEGA\b/i.test(p.name) },
+          { label: 'SILENCER',  test: p => /\bSILENCER\b/i.test(p.name) },
         ],
       },
       {
@@ -158,7 +161,8 @@ const CATEGORY_FILTERS = {
         options: [
           { label: 'Циркуляційний',        test: p => /циркуляційний/i.test(p.name) },
           { label: 'Рециркуляційний ГВС',  test: p => /рециркул/i.test(p.name) },
-          { label: 'Каналізаційна установка', test: p => /каналізац/i.test(p.name) },
+          { label: 'Підвищувальний',       test: p => /підвищувальн/i.test(p.name) },
+          { label: 'Каналізаційна станція', test: p => /каналізац/i.test(p.name) },
         ],
       },
       {
