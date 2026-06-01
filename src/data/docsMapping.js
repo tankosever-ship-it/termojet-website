@@ -6,7 +6,7 @@ export const DOCS_BY_CATEGORY = {
   'hidravlichni-rozdilnyky':  [11],           // Інструкція ГС
   'termojet-mega':            [11],           // Інструкція ГС (для ГС-31-34 та НГ-серії)
   'nasosni-hrupy':            [12, 13],       // НГ-47/48/46/67 + НГ-51/52
-  'nasosy':                   [19, 20, 21, 32, 33], // APE, APM, XPS + брошури
+  'nasosy':                   [],             // документи — лише за серією (див. DOCS_BY_NAME)
   'klapany':                  [18, 31],       // 3-х ходові + брошура сервопривід
   'zonalne-keruvannya':       [18],           // 3-х ходові та сервоприводи
   'rozpodilchi-kolektory':    [14],           // Колектори розподільчі
@@ -24,8 +24,10 @@ export const DOCS_BY_NAME = [
   { match: /НГ-4[678]|НГ-67/i,         ids: [12] },
   { match: /НГ-5[12]/i,                 ids: [13] },
   { match: /APE/i,                      ids: [19, 32] },
-  { match: /APM/i,                      ids: [20, 33] },
-  { match: /XPS|BPS|XP/i,              ids: [21] },
+  { match: /APM-F/i,                    ids: [20, 33] }, // APM-F (окремого файлу немає — поки APM-документація)
+  { match: /\bAPM\b/i,                  ids: [20, 33] }, // APM різьбові
+  { match: /XPS|BPS/i,                  ids: [21] },
+  { match: /SPE|HBS/i,                  ids: [17] },     // рециркуляційні насоси
   { match: /PROFI\s*PLUS/i,            ids: [22] },
   { match: /LIGHT/i,                    ids: [23] },
   { match: /BOX/i,                      ids: [10] },

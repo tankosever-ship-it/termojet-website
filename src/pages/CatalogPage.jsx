@@ -135,7 +135,8 @@ const CATEGORY_FILTERS = {
           { label: 'APE',  test: p => /\bAPE\b/.test(p.name) },
           { label: 'APM',  test: p => /\bAPM\b/.test(p.name) && !/APM-F/.test(p.name) },
           { label: 'APM-F',test: p => /\bAPM-F\b/.test(p.name) },
-          { label: 'SPE',  test: p => /\bSPE\b/.test(p.name) },
+          { label: 'XPS',  test: p => /\bXPS\b/i.test(p.name) },
+          { label: 'SPE',  test: p => /SPE/i.test(p.name) },
           { label: 'HBS',  test: p => /\bHBS\b/.test(p.name) },
           { label: 'WT',   test: p => /\bWT\b/.test(p.name) },
         ],
@@ -385,6 +386,38 @@ const CATEGORY_FILTERS = {
         options: [
           { label: 'Внутрішня (вбудована)', test: p => /Шафа колекторна внутрішня/i.test(p.name) },
           { label: 'Зовнішня (накладна)',   test: p => /Шафа колекторна зовнішня/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+
+  'termojet-mega': {
+    groups: [
+      {
+        key: 'mega_type',
+        label: 'Тип обладнання',
+        options: [
+          { label: 'Гідрострілка',  test: p => /^ГС-3/.test(p.name) },
+          { label: 'Насосна група', test: p => /^НГ-/.test(p.name) },
+          { label: 'Колектор',      test: p => /^Колектор/i.test(p.name) },
+          { label: 'Перехід',       test: p => /^Перехід/i.test(p.name) },
+          { label: 'Муфта',         test: p => /^Муфта/i.test(p.name) },
+          { label: 'Підключення',   test: p => /^Підключення/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'mega_dn',
+        label: 'Розмір (DN)',
+        options: [
+          { label: 'DN32',  test: p => /DN32\b/.test(p.name) },
+          { label: 'DN40',  test: p => /DN40\b|\b40\/40\b/.test(p.name) },
+          { label: 'DN50',  test: p => /DN50\b|\b50\/50\b/.test(p.name) },
+          { label: 'DN65',  test: p => /DN65\b|ДУ65/.test(p.name) },
+          { label: 'DN80',  test: p => /DN80\b|\b80\/80\b/.test(p.name) },
+          { label: 'DN100', test: p => /DN100\b|\b100\/100\b/.test(p.name) },
+          { label: 'DN125', test: p => /DN125\b|\b125\/125\b/.test(p.name) },
+          { label: 'DN150', test: p => /DN150\b|\b150\/150\b/.test(p.name) },
+          { label: 'DN200', test: p => /DN200\b/.test(p.name) },
         ],
       },
     ],
