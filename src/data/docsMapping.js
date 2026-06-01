@@ -14,7 +14,6 @@ export const DOCS_BY_CATEGORY = {
   'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
   'separatory':               [],
   'avtomatyka':               [22, 23],       // Profi Plus + Light
-  'stijky-kaskady':           [14],
   'balancing':                [],
   'dodatkove':                [],
 }

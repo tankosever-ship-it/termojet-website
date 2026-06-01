@@ -132,16 +132,6 @@ export const CATEGORIES = [
     color: '#333333',
   },
   {
-    id: 'cascade-racks',
-    slug: 'stijky-kaskady',
-    icon: 'Server',
-    image: `${BASE}/2024/04/1713896213384769-800x800.jpg`,
-    name: { uk: 'Стійки та колектори для каскадів котлів', en: 'Boiler Cascade Racks & Manifolds', pl: 'Stojaki i kolektory do kaskad kotłów', fr: 'Racks et collecteurs pour cascades de chaudières', de: 'Gestelle und Verteiler für Kesselkaskaden' },
-    desc: { uk: 'Колекторні стійки для каскадних котельних систем', en: 'Manifold racks for cascade boiler systems', pl: 'Stojaki kolektorowe do kaskadowych systemów kotłowych', fr: 'Racks collecteurs pour systèmes chaudières en cascade', de: 'Verteilergestelle für Kaskadenkessel' },
-    subcategories: ['6" стійки', '8" стійки'],
-    color: '#333333',
-  },
-  {
     id: 'accessories',
     slug: 'dodatkove',
     icon: 'Wrench',

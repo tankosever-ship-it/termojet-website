@@ -16,6 +16,13 @@ const CATEGORY_BANNERS = {
   'klapany': '/banner-klapany.png',
   'termojet-mega': '/banner-termojet-mega.png',
   'nasosni-hrupy': '/banner-nasosni-hrupy.png',
+  'kolektory-pidloha': '/banner-kolektory-pidloha.png',
+  'nasosy': '/banner-nasosy.png',
+  'balansuval-klapany': '/banner-balansuval-klapany.png',
+  'separatory': '/banner-separatory.png',
+  'hidravlichni-rozdilnyky': '/banner-hidravlichni-rozdilnyky.png',
+  'avtomatyka': '/banner-avtomatyka.png',
+  'dodatkove': '/banner-dodatkove.png',
 }
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
