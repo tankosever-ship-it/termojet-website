@@ -17,6 +17,7 @@ function setup() {
       slug        TEXT UNIQUE NOT NULL,
       sku         TEXT,
       price       REAL,
+      currency    TEXT DEFAULT 'UAH',
       category_slug TEXT,
       subcategory TEXT,
       image       TEXT,
@@ -136,10 +137,10 @@ function seedProducts() {
   const products = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
   const insert = db.prepare(`
     INSERT OR IGNORE INTO products
-      (id, wp_id, name, slug, sku, price, category_slug, subcategory,
+      (id, wp_id, name, slug, sku, price, currency, category_slug, subcategory,
        image, images, short_desc, description, specs, features, in_stock)
     VALUES
-      (@id, @wp_id, @name, @slug, @sku, @price, @category_slug, @subcategory,
+      (@id, @wp_id, @name, @slug, @sku, @price, @currency, @category_slug, @subcategory,
        @image, @images, @short_desc, @description, @specs, @features, @in_stock)
   `)
 
@@ -152,6 +153,7 @@ function seedProducts() {
         slug:          p.slug || '',
         sku:           p.sku || '',
         price:         parseFloat(p.price) || 0,
+        currency:      p.currency || 'UAH',
         category_slug: p.categorySlug || '',
         subcategory:   p.subcategory || '',
         image:         p.image || '',
@@ -169,7 +171,28 @@ function seedProducts() {
   console.log(`Seeded ${products.length} products into SQLite`)
 }
 
+// Міграція: для вже засіяної живої БД додати колонку currency і заповнити з seed.
+// Ідемпотентно — виконується щостарту (CREATE TABLE IF NOT EXISTS не додає колонок).
+function migrateCurrency() {
+  const cols = db.prepare('PRAGMA table_info(products)').all().map(c => c.name)
+  if (!cols.includes('currency')) {
+    // без DEFAULT — інакше всі наявні рядки одразу стануть 'UAH' і backfill їх не зачепить
+    db.exec('ALTER TABLE products ADD COLUMN currency TEXT')
+  }
+  const seedPath = path.join(__dirname, '..', 'seed-products.json')
+  if (fs.existsSync(seedPath)) {
+    const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+    // безумовно проставляємо валюту з seed (джерело істини) — самовиправляється щостарту
+    const upd = db.prepare('UPDATE products SET currency = ? WHERE id = ?')
+    const tx = db.transaction(rows => { for (const p of rows) upd.run(p.currency || 'UAH', p.id) })
+    tx(seed)
+  }
+  // будь-що без валюти → 'UAH' (за замовчуванням)
+  db.prepare("UPDATE products SET currency = 'UAH' WHERE currency IS NULL OR currency = ''").run()
+}
+
 setup()
 seedProducts()
+migrateCurrency()
 
 module.exports = db

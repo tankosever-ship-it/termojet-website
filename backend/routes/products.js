@@ -13,6 +13,7 @@ function parseProduct(row) {
     slug:         row.slug,
     sku:          row.sku,
     price:        row.price,
+    currency:     row.currency || 'UAH',
     categorySlug: row.category_slug,
     subcategory:  row.subcategory,
     image:        row.image,
