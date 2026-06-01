@@ -35,6 +35,20 @@ const REPLACE = {
                      ['https://termojet.com.ua/wp-content/uploads/2023/08/6d9236fe06f7eef5aaa080381f4685e6_1.jpg', 'pidstavka-tn.jpg']],
 }
 
+// Колектори теплої підлоги — головне фото за кількістю виходів
+const KP = '/images/kolektory/'
+for (let n = 2; n <= 15; n++) {                 // з витратомірами (В): TJ-W-02..15 → kolektor-v-NN
+  const nn = String(n).padStart(2, '0')
+  REPLACE['new_84040TJ_W_' + nn] = [KP + 'kolektor-v-' + nn + '.jpg', [KP + 'kolektor-v-' + nn + '.jpg']]
+}
+for (let n = 2; n <= 10; n++) {                 // з кранами (К): TJ-R-W-02..10 → kolektor-k-NN
+  const nn = String(n).padStart(2, '0')
+  REPLACE['new_84040TJ_R_W_' + nn] = [KP + 'kolektor-k-' + nn + '.jpg', [KP + 'kolektor-k-' + nn + '.jpg']]
+}
+// К на 11 і 12 виходів — фото К10 (окремих немає)
+REPLACE['new_84040TJ_R_W_11'] = [KP + 'kolektor-k-10.jpg', [KP + 'kolektor-k-10.jpg']]
+REPLACE['new_84040TJ_R_W_12'] = [KP + 'kolektor-k-10.jpg', [KP + 'kolektor-k-10.jpg']]
+
 // --- ДОДАТИ графік останнім у галерею (image лишається) за id ---
 const APPEND = {
   'wp_20521': 'graph-apm-25-8-32-8.png',    // APM 25/8
