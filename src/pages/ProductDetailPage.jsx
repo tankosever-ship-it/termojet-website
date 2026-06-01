@@ -53,7 +53,8 @@ function ImageGallery({ images, name, model3d }) {
 
   const slides = useMemo(() => {
     const s = (images?.length > 0 ? images : []).map(src => ({ type: 'img', src }))
-    if (model3d) s.push({ type: '3d', src: model3d })
+    // 3D — другим слайдом (одразу після головного фото)
+    if (model3d) s.splice(s.length > 0 ? 1 : 0, 0, { type: '3d', src: model3d })
     return s
   }, [images, model3d])
   const total = slides.length
