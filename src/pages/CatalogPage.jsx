@@ -23,6 +23,10 @@ const CATEGORY_BANNERS = {
   'hidravlichni-rozdilnyky': '/banner-hidravlichni-rozdilnyky.png',
   'avtomatyka': '/banner-avtomatyka.png',
   'dodatkove': '/banner-dodatkove.png',
+  'rozpodilchi-kolektory': '/banner-rozpodilchi-kolektory.png',
+  'termojet-box': '/banner-termojet-box.png',
+  'kolektory-z-hidrostrilkoyu': '/banner-kolektory-z-hidrostrilkoyu.png',
+  'zonalne-keruvannya': '/banner-zonalne-keruvannya.png',
 }
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
