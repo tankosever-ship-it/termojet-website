@@ -30,7 +30,9 @@ const REPLACE = {
   'new_WT400A':     ['wt400a-box.jpg', ['wt400a-box.jpg', 'wt400a.jpg']], // WT 400-A
   'new_WT400B':     ['wt400b-box.jpg', ['wt400b-box.jpg', 'wt400b.jpg']], // WT 400-B
   'new_WT400C':     ['wt400c-box.jpg', ['wt400c-box.jpg', 'wt400c.jpg']], // WT 400-C
-  'wp_8619':        ['pidstavka-tn.jpg', ['pidstavka-tn.jpg']],           // Підставка під тепловий насос
+  // Підставка під ТН: оригінальне фото — головне, нове — другим
+  'wp_8619':        ['https://termojet.com.ua/wp-content/uploads/2023/08/6d9236fe06f7eef5aaa080381f4685e6_1.jpg',
+                     ['https://termojet.com.ua/wp-content/uploads/2023/08/6d9236fe06f7eef5aaa080381f4685e6_1.jpg', 'pidstavka-tn.jpg']],
 }
 
 // --- ДОДАТИ графік останнім у галерею (image лишається) за id ---
@@ -172,7 +174,7 @@ const NEW_PRODUCTS = [{
   features: [],
 }]
 
-function abs(name) { return name.startsWith('/') ? name : P + name }
+function abs(name) { return (name.startsWith('/') || name.includes('://')) ? name : P + name }
 
 // застосувати зміни до одного товару-обʼєкта (camelCase, як у seed та API)
 function applyToObj(p) {
