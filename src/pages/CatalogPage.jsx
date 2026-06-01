@@ -542,6 +542,22 @@ function extractBadges(product) {
   return badges.slice(0, 5)
 }
 
+// Порядок товарів у «Колектори теплої підлоги» (за замовчуванням):
+// змішувальні вузли → колектори з витратомірами (2→15) → з кранами (2→12) → шафи → інше
+function kpRank(p) {
+  const n = p.name || '', sku = p.sku || ''
+  if (/TJ-MU/i.test(sku) || /змішу/i.test(n)) return 1000
+  let m = sku.match(/TJ-R-W-(\d+)/)
+  if (m) return 2100 + parseInt(m[1])            // з кранами
+  m = sku.match(/TJ-W-(\d+)/)
+  if (m) return 2000 + parseInt(m[1])            // з витратомірами
+  if (/Шафа колекторна/i.test(n)) {
+    const num = parseInt((n.match(/№\s*0*(\d+)/) || [])[1] || '99')
+    return 3000 + (/зовнішня/i.test(n) ? 50 : 0) + num
+  }
+  return 4000                                     // інше
+}
+
 export default function CatalogPage() {
   const { categorySlug } = useParams()
   const [searchParams] = useSearchParams()
@@ -589,6 +605,8 @@ export default function CatalogPage() {
     if (sort === 'priceAsc')  list = [...list].sort((a, b) => priceInUah(a) - priceInUah(b))
     if (sort === 'priceDesc') list = [...list].sort((a, b) => priceInUah(b) - priceInUah(a))
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+    if (sort === 'default' && categorySlug === 'kolektory-pidloha')
+      list = [...list].sort((a, b) => kpRank(a) - kpRank(b))
     return list
   }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang])
 
