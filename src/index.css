@@ -60,6 +60,13 @@
 
 @layer utilities {
 
+  /* ─── Смужка плиток-категорій: тонкий скролбар ─── */
+  .cat-strip { scrollbar-width: thin; scrollbar-color: #d1d1d1 transparent; }
+  .cat-strip::-webkit-scrollbar { height: 6px; }
+  .cat-strip::-webkit-scrollbar-track { background: transparent; }
+  .cat-strip::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 3px; }
+  .cat-strip::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+
   /* ─── BASE CARDS ─── */
   .card {
     background: white;

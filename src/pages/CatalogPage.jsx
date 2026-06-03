@@ -831,6 +831,15 @@ export default function CatalogPage() {
     return products.filter(p => p.categorySlug === currentCategory.id || p.categorySlug === currentCategory.slug)
   }, [products, currentCategory])
 
+  // Кількість товарів у кожній категорії (для плиток-категорій)
+  const catCounts = useMemo(() => {
+    const m = {}
+    for (const c of CATEGORIES) {
+      m[c.id] = products.filter(p => p.categorySlug === c.id || p.categorySlug === c.slug).length
+    }
+    return m
+  }, [products])
+
   // Межі ціни (#5) — у ₴, по поточній категорії
   const priceBounds = useMemo(() => {
     const vals = catProducts.map(p => toUAH(p.price, p.currency, eurRate) || 0).filter(v => v > 0)
@@ -938,47 +947,57 @@ export default function CatalogPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* ── Category nav ── */}
-        <div className="mb-5">
-          <div className="flex flex-wrap gap-2">
-          {/* "Всі категорії" — виділена, але компактна */}
-          <Link to="/catalog"
-            className="flex items-center gap-2 px-4 py-1.5 transition-all"
-            style={{
-              fontFamily: "'IBM Plex Sans', sans-serif",
-              fontSize: '13px', fontWeight: 600,
-              background: !currentCategory ? 'var(--accent)' : 'var(--primary)',
-              color: 'white',
-              border: 'none',
-            }}>
-            <CategoryIcon name="LayoutGrid" size={13} className="opacity-80" />
-            Всі категорії
-          </Link>
+        {/* ── Смужка плиток-категорій (стиль Prom) ── */}
+        <div className="mb-6 -mx-4 px-4">
+          <div className="flex gap-3 overflow-x-auto pb-3 cat-strip snap-x">
+            {/* Плитка "Всі категорії" */}
+            <Link to="/catalog"
+              className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${!currentCategory ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
+              <div className="h-[96px] flex items-center justify-center pt-3">
+                <span className="flex items-center justify-center w-14 h-14 rounded-full"
+                  style={{ background: !currentCategory ? 'var(--accent)' : 'rgba(255,107,0,0.1)' }}>
+                  <CategoryIcon name="LayoutGrid" size={26}
+                    className={!currentCategory ? 'text-white' : 'text-[var(--accent)]'} />
+                </span>
+              </div>
+              <div className="px-2 pb-3 pt-2 text-center">
+                <div className="text-[11.5px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
+                  Всі категорії
+                </div>
+                <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
+                  {products.length}
+                </div>
+              </div>
+            </Link>
 
-          {CATEGORIES.map(c => {
-            const isActive = currentCategory?.id === c.id
-            return (
-              <Link key={c.id} to={`/catalog/${c.slug}`}
-                className="flex items-center gap-2 px-3 py-1.5 transition-all hover:border-[var(--accent)]"
-                style={{
-                  fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '13px', fontWeight: 500,
-                  background: isActive ? 'var(--accent)' : 'transparent',
-                  color: isActive ? 'white' : 'var(--text-secondary)',
-                  border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)',
-                }}>
-                <span className="flex items-center justify-center w-5 h-5 flex-shrink-0"
-                  style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,107,0,0.1)' }}>
-                  <CategoryIcon name={c.icon} size={12}
-                    className={isActive ? 'text-white' : 'text-[var(--accent)]'} />
-                </span>
-                {c.name[lang] || c.name.uk}
-                <span style={{ opacity: 0.55, fontSize: '11px', fontFamily: "'JetBrains Mono', monospace" }}>
-                  {c.count}
-                </span>
-              </Link>
-            )
-          })}
+            {CATEGORIES.map(c => {
+              const isActive = currentCategory?.id === c.id
+              const n = catCounts[c.id] || 0
+              const src = (c.image || '').startsWith('/') ? assetPath(c.image) : c.image
+              return (
+                <Link key={c.id} to={`/catalog/${c.slug}`}
+                  className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${isActive ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
+                  <div className="h-[96px] flex items-center justify-center p-2 overflow-hidden bg-white">
+                    {src ? (
+                      <img src={src} alt={c.name[lang] || c.name.uk} loading="lazy"
+                        className="max-w-full max-h-full object-contain transition-transform group-hover:scale-105"
+                        onError={e => { e.currentTarget.style.display = 'none' }} />
+                    ) : (
+                      <CategoryIcon name={c.icon} size={30} className="text-[var(--accent)]" />
+                    )}
+                  </div>
+                  <div className="px-2 pb-3 pt-1.5 text-center">
+                    <div className="text-[11.5px] font-semibold leading-tight line-clamp-3 min-h-[42px] flex items-center justify-center"
+                      style={{ color: isActive ? 'var(--accent)' : 'var(--text-primary)' }}>
+                      {c.name[lang] || c.name.uk}
+                    </div>
+                    <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
+                      {n}
+                    </div>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
 
