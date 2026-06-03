@@ -25,7 +25,7 @@ export const CATEGORIES = [
     id: 'manifolds',
     slug: 'rozpodilchi-kolektory',
     icon: 'Share2',
-    image: `${BASE}/2024/04/1713954944505991-800x800.jpg`,
+    image: `${BASE}/2024/04/1714128425361220-800x800.jpg`,
     name: { uk: 'Розподільчі колектори', en: 'Distribution Manifolds', pl: 'Kolektory rozdzielcze', fr: 'Collecteurs de distribution', de: 'Verteiler' },
     desc: { uk: 'По потужності 60/105/175 кВт', en: 'By capacity 60/105/175 kW', pl: 'Według mocy 60/105/175 kW', fr: 'Par puissance 60/105/175 kW', de: 'Nach Leistung 60/105/175 kW' },
     subcategories: ['Серія 60 кВт', 'Серія 105 кВт', 'Серія 175 кВт', 'Серія Mega'],
