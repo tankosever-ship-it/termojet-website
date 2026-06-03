@@ -326,6 +326,9 @@ export default function ProductDetailPage() {
   const category = CATEGORIES.find(c => c.slug === categorySlug)
   const related = products.filter(p => p.categorySlug === categorySlug && p.id !== product?.id).slice(0, 4)
 
+  const name = (lang !== 'uk' && product?.[`name_${lang}`]) ? product[`name_${lang}`] : (product?.name || '')
+  const desc = (lang !== 'uk' && product?.[`desc_${lang}`]) ? product[`desc_${lang}`] : (product?.desc || product?.description || '')
+
   const tabs = useMemo(() => {
     if (!product) return []
     const list = [{ key: 'description', label: pt.description || 'Опис', icon: FileText }]
@@ -354,6 +357,40 @@ export default function ProductDetailPage() {
     setTimeout(() => setAdded(false), 2000)
   }
 
+  const allImages = useMemo(() => {
+    const seen = new Set()
+    const result = []
+    for (const img of [product?.image, ...(product?.images || [])]) {
+      if (img && !seen.has(img)) { seen.add(img); result.push(imgUrl(img)) }
+    }
+    return result
+  }, [product])
+
+  // Key specs for pills (skip Артикул, take up to 4)
+  const specPills = useMemo(() => {
+    if (!product?.specs) return []
+    return Object.entries(product.specs)
+      .filter(([k]) => !['Артикул', 'Назва'].includes(k))
+      .slice(0, 4)
+  }, [product?.specs])
+
+  // Documents for this product (brochures + instructions)
+  const productDocs = useMemo(() => {
+    const ids = getDocsForProduct(categorySlug, name, product?.sku)
+    return ids
+      .map(id => FILES.find(f => f.id === id))
+      .filter(Boolean)
+      .filter(f => ['Інструкції', 'Брошури'].includes(f.category))
+  }, [categorySlug, name, product?.sku])
+
+  // 3D-моделі (STEP) для цього товару — за slug
+  const productModels = useMemo(() => getModels3D(product?.slug), [product?.slug])
+  // GLB для інтерактивного перегляду в галереї (якщо є)
+  const model3dUrl = useMemo(() => productModels.find(m => m.glb)?.glb || null, [productModels])
+
+  // ⚠️ ВСІ хуки мають бути вище — лише тепер безпечний ранній вихід (Rules of Hooks).
+  // Інакше для товару, що є лише в API (нема у статичному фолбеку products.js),
+  // кількість хуків змінюється між рендерами → React падає / сторінка зависає.
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
@@ -365,45 +402,11 @@ export default function ProductDetailPage() {
     )
   }
 
-  const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-  const desc = (lang !== 'uk' && product[`desc_${lang}`]) ? product[`desc_${lang}`] : (product.desc || product.description || '')
-
-  const allImages = useMemo(() => {
-    const seen = new Set()
-    const result = []
-    for (const img of [product.image, ...(product.images || [])]) {
-      if (img && !seen.has(img)) { seen.add(img); result.push(imgUrl(img)) }
-    }
-    return result
-  }, [product])
-
   const ytId = product.video ? (
     product.video.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/\s]{11})/)?.[1]
   ) : null
 
   const activeTab = tabs.find(t => t.key === tab) ? tab : tabs[0]?.key
-
-  // Key specs for pills (skip Артикул, take up to 4)
-  const specPills = useMemo(() => {
-    if (!product.specs) return []
-    return Object.entries(product.specs)
-      .filter(([k]) => !['Артикул', 'Назва'].includes(k))
-      .slice(0, 4)
-  }, [product.specs])
-
-  // Documents for this product (brochures + instructions)
-  const productDocs = useMemo(() => {
-    const ids = getDocsForProduct(categorySlug, name, product.sku)
-    return ids
-      .map(id => FILES.find(f => f.id === id))
-      .filter(Boolean)
-      .filter(f => ['Інструкції', 'Брошури'].includes(f.category))
-  }, [categorySlug, name])
-
-  // 3D-моделі (STEP) для цього товару — за slug
-  const productModels = useMemo(() => getModels3D(product.slug), [product.slug])
-  // GLB для інтерактивного перегляду в галереї (якщо є)
-  const model3dUrl = useMemo(() => productModels.find(m => m.glb)?.glb || null, [productModels])
 
   const priceUAH = product.price
     ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
