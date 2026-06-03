@@ -180,6 +180,7 @@ const CATEGORY_FILTERS = {
           { label: 'GRANDLIFT', test: p => /\bGRANDLIFT\b/i.test(p.name) },
           { label: 'MEGA',      test: p => /\bMEGA\b/i.test(p.name) },
           { label: 'SILENCER',  test: p => /\bSILENCER\b/i.test(p.name) },
+          { label: 'TBE',       test: p => /\bTBE\b/i.test(p.name) },
         ],
       },
       {

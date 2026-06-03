@@ -45,6 +45,7 @@ export const DOCS_BY_NAME = [
   { match: /GRANDLIFT/i,                ids: [140] },      // брошура GRANDLIFT
   { match: /MEGA\s*100-120/i,           ids: [141] },      // брошура MEGA (лише насос, не категорія)
   { match: /SILENCER/i,                 ids: [142] },      // брошура SILENCER
+  { match: /\bTBE\b/i,                  ids: [143] },      // каталог TBE (інлайн з частотним керуванням)
   // Сепаратори — інструкції за артикулом
   { match: /TJ4F/i,                     ids: [130] },      // повітряний клапан
   { match: /TJVT6G/i,                   ids: [134] },      // повітря+бруду
