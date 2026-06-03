@@ -49,7 +49,7 @@ export function AppProvider({ children }) {
   const [siteSettings, setSiteSettings] = useState({
     phone: '+380 50 718 91 65',
     email: 'termojet@sofievka.kiev.ua',
-    address: 'м. Київ, вул. Виробнича, 1',
+    address: 'Софіївська Борщагівка, вул. Київська 3',
     workHours: 'Пн-Пт 9:00–18:00',
     telegram: '',
   })

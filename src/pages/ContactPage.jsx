@@ -189,7 +189,7 @@ export default function ContactPage() {
                 city: 'КИЇВ',
                 addr: 'Софіївська Борщагівка, вул. Київська 3',
                 note: 'Виробництво + головний офіс',
-                src: 'https://maps.google.com/maps?q=' + encodeURIComponent('Софіївська Борщагівка, вул. Київська 3') + '&z=15&output=embed',
+                src: 'https://maps.google.com/maps?q=' + encodeURIComponent('Termojet, вул. Київська 3, Софіївська Борщагівка') + '&z=16&output=embed',
               },
               {
                 city: 'ЖИТОМИР',

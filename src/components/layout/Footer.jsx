@@ -157,6 +157,54 @@ export default function Footer() {
                 <span className="mt-1">{siteSettings.workHours}</span>
               </li>
             </ul>
+
+            {/* Соцмережі */}
+            <div className="mt-6">
+              <div className="text-white/40 text-xs uppercase tracking-wider mb-3" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                Ми в соцмережах
+              </div>
+              <div className="flex gap-2.5">
+                {[
+                  {
+                    href: 'https://www.facebook.com/Termojet.ukr/', label: 'Facebook',
+                    icon: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/>
+                      </svg>
+                    ),
+                  },
+                  {
+                    href: 'https://www.instagram.com/termojetua/', label: 'Instagram',
+                    icon: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                      </svg>
+                    ),
+                  },
+                  {
+                    href: 'https://share.google/K9c85Dx6byTlB8XN9',
+                    label: 'Google',
+                    icon: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#EA4335" d="M12 5.8c1.6 0 3.1.6 4.2 1.6l3.1-3.1C17.5 2.4 14.9 1.3 12 1.3 7.7 1.3 4 3.8 2.2 7.4l3.7 2.8C6.7 7.6 9.1 5.8 12 5.8z"/>
+                        <path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2.1H12v4h5.9c-.3 1.4-1 2.5-2.2 3.3l3.6 2.8c2.1-1.9 3.2-4.8 3.2-8z"/>
+                        <path fill="#FBBC05" d="M5.9 14.2c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2L2.2 7.4C1.5 8.8 1.1 10.4 1.1 12.2s.4 3.4 1.1 4.8l3.7-2.8z"/>
+                        <path fill="#34A853" d="M12 23c2.9 0 5.4-1 7.2-2.7l-3.6-2.8c-1 .7-2.3 1.1-3.6 1.1-2.9 0-5.3-1.9-6.1-4.5l-3.7 2.8C4 20.5 7.7 23 12 23z"/>
+                      </svg>
+                    ),
+                  },
+                ].map(s => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                    aria-label={s.label} title={s.label}
+                    className="w-9 h-9 rounded-lg flex items-center justify-center text-white/70 hover:text-white transition-all hover:bg-[var(--accent)]/20"
+                    style={{ background: 'rgba(255,255,255,0.06)' }}>
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
