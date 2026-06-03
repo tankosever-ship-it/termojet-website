@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b1b1b"/><stop offset="1" stop-color="#0a0a0a"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#E85D04"/>
+  <!-- glyph: hydraulic separator cylinder -->
+  <g transform="translate(900 315)" stroke="#E85D04" fill="none" stroke-width="14">
+    <rect x="-70" y="-180" width="140" height="360" rx="70"/>
+    <line x1="-70" y1="-110" x2="-150" y2="-110"/>
+    <line x1="-70" y1="110" x2="-150" y2="110"/>
+    <line x1="70" y1="-110" x2="150" y2="-110"/>
+    <line x1="70" y1="110" x2="150" y2="110"/>
+    <circle cx="0" cy="-150" r="10" fill="#E85D04"/>
+  </g>
+  <text x="80" y="200" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#E85D04" letter-spacing="4">ІНЖЕНЕРНА СТАТТЯ</text>
+  <text x="80" y="285" font-family="Arial, sans-serif" font-size="58" font-weight="bold" fill="#ffffff">Як вибрати</text>
+  <text x="80" y="355" font-family="Arial, sans-serif" font-size="58" font-weight="bold" fill="#ffffff">гідравлічний</text>
+  <text x="80" y="425" font-family="Arial, sans-serif" font-size="58" font-weight="bold" fill="#E85D04">роздільник</text>
+  <text x="80" y="540" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" letter-spacing="5">TERMOJET</text>
+</svg>

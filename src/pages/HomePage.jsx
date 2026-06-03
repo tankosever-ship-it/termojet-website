@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { ArrowRight, ArrowUpRight, Check, Smartphone, Play, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Check, Smartphone, Play, X, Star, Send, ImagePlus } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
 import { assetPath } from '../utils/assetPath'
+import { imgUrl } from '../utils/imgUrl'
 
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
@@ -267,13 +268,186 @@ function StarRating({ rating }) {
   return (
     <div className="flex gap-0.5">
       {[1, 2, 3, 4, 5].map(i => (
-        <span key={i} style={{ color: i <= rating ? 'var(--accent)' : 'rgba(255,255,255,0.15)', fontSize: 14 }}>★</span>
+        <span key={i} style={{ color: i <= rating ? 'var(--accent)' : '#d8d8d8', fontSize: 14 }}>★</span>
       ))}
     </div>
   )
 }
 
+function initials(name = '') {
+  return name.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase()
+}
+
+function ReviewCard({ review }) {
+  return (
+    <motion.div variants={fadeUp} className="flex flex-col gap-4 p-6"
+      style={{ background: '#f7f7f6', border: '1px solid #e8e8e8' }}>
+      <div className="flex items-center justify-between">
+        <StarRating rating={review.rating} />
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#bbb', letterSpacing: '0.06em' }}>
+          {review.date}
+        </span>
+      </div>
+      <p className="text-sm leading-relaxed flex-1" style={{ color: '#444' }}>
+        "{review.text}"
+      </p>
+      {review.photo && (
+        <a href={imgUrl(review.photo)} target="_blank" rel="noreferrer" className="block">
+          <img src={imgUrl(review.photo)} alt="" loading="lazy"
+            className="w-full h-40 object-cover border border-[#e0e0e0]" />
+        </a>
+      )}
+      <div className="pt-4 flex items-center gap-3" style={{ borderTop: '1px solid #e0e0e0' }}>
+        <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold"
+          style={{ background: 'var(--accent)' }}>
+          {initials(review.name)}
+        </div>
+        <div className="min-w-0">
+          <div className="font-bold text-[#1a1a1a] text-sm truncate">{review.name}</div>
+          {review.role && (
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#888', marginTop: 2, letterSpacing: '0.04em' }} className="truncate">
+              {review.role}
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+function ReviewFormModal({ onClose }) {
+  const { submitReview } = useApp()
+  const [form, setForm] = useState({ name: '', company: '', rating: 5, text: '' })
+  const [photo, setPhoto] = useState(null)
+  const [preview, setPreview] = useState('')
+  const [state, setState] = useState('idle') // idle | sending | done | error
+  const [msg, setMsg] = useState('')
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
+
+  function pickPhoto(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 8 * 1024 * 1024) { setMsg('Фото завелике (макс. 8 МБ)'); setState('error'); return }
+    setPhoto(file)
+    setPreview(URL.createObjectURL(file))
+  }
+
+  async function submit(e) {
+    e.preventDefault()
+    if (!form.name.trim() || form.text.trim().length < 10) {
+      setState('error'); setMsg('Вкажіть імʼя та текст відгуку (від 10 символів)'); return
+    }
+    setState('sending'); setMsg('')
+    const res = await submitReview({ ...form, photo })
+    if (res?.ok) { setState('done'); setMsg(res.message || 'Дякуємо! Відгук зʼявиться після перевірки.') }
+    else { setState('error'); setMsg(res?.error || 'Не вдалося надіслати. Спробуйте пізніше.') }
+  }
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.6)' }} onClick={onClose}>
+      <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+          <div className="font-black text-lg text-[#1a1a1a] font-['Archivo',sans-serif]">Залишити відгук</div>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-700"><X size={20} /></button>
+        </div>
+
+        {state === 'done' ? (
+          <div className="text-center py-12 px-6">
+            <Check size={46} className="mx-auto mb-4" style={{ color: '#22c55e' }} />
+            <div className="font-bold text-lg text-[#1a1a1a] mb-2">Відгук надіслано</div>
+            <p className="text-sm text-gray-500 mb-6">{msg}</p>
+            <button onClick={onClose}
+              className="px-6 py-2.5 text-white text-sm font-bold" style={{ background: 'var(--accent)' }}>
+              Закрити
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={submit} className="p-6 space-y-4">
+            {/* Зірки */}
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Оцінка</label>
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map(i => (
+                  <button type="button" key={i} onClick={() => set('rating', i)} className="p-0.5">
+                    <Star size={28} style={{ color: i <= form.rating ? 'var(--accent)' : '#d8d8d8' }}
+                      fill={i <= form.rating ? 'var(--accent)' : 'none'} />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Імʼя *</label>
+              <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Ваше імʼя" maxLength={80}
+                className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Компанія / посада / місто</label>
+              <input value={form.company} onChange={e => set('company', e.target.value)} placeholder="Напр.: Монтажник, Київ" maxLength={120}
+                className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Відгук *</label>
+              <textarea value={form.text} onChange={e => set('text', e.target.value)} rows={4} maxLength={1500}
+                placeholder="Розкажіть про ваш досвід із обладнанням Termojet..."
+                className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm resize-none" />
+            </div>
+
+            {/* Фото */}
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Фото (необовʼязково)</label>
+              <label className="flex items-center gap-3 px-4 py-3 border border-dashed border-gray-300 cursor-pointer hover:border-[var(--accent)] transition-colors">
+                {preview ? (
+                  <img src={preview} alt="" className="w-14 h-14 object-cover" />
+                ) : (
+                  <ImagePlus size={22} className="text-gray-400" />
+                )}
+                <span className="text-sm text-gray-500">{photo ? photo.name : 'Завантажити фото (jpg, png · до 8 МБ)'}</span>
+                <input type="file" accept="image/jpeg,image/png,image/webp" onChange={pickPhoto} className="hidden" />
+              </label>
+            </div>
+
+            {state === 'error' && <p className="text-sm text-red-500">{msg}</p>}
+
+            <button type="submit" disabled={state === 'sending'}
+              className="w-full flex items-center justify-center gap-2 py-3 text-white font-bold disabled:opacity-60"
+              style={{ background: 'var(--accent)' }}>
+              <Send size={16} />
+              {state === 'sending' ? 'Надсилання...' : 'Надіслати відгук'}
+            </button>
+            <p className="text-[11px] text-gray-400 text-center">Відгук буде опубліковано після перевірки модератором.</p>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function ReviewsSection() {
+  const { reviews } = useApp()
+  const [showForm, setShowForm] = useState(false)
+
+  // Реальні (схвалені) відгуки з API → у форму відображення
+  const real = (reviews || [])
+    .filter(r => r.published === 1 || r.published === true || r.published == null)
+    .map(r => ({
+      id: 'r' + r.id,
+      name: r.name,
+      role: r.company,
+      rating: r.rating || 5,
+      text: r.text,
+      photo: r.photo || '',
+      date: r.created_at ? new Date(r.created_at).toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' }) : '',
+    }))
+
+  // Реальні відгуки ПОЧЕРГОВО витісняють намальовані: спершу реальні, далі добиваємо намальованими
+  const TARGET = 6
+  const drawn = REVIEWS.map(r => ({ ...r, id: 'd' + r.id }))
+  const display = real.length >= TARGET ? real : [...real, ...drawn.slice(0, TARGET - real.length)]
+
   return (
     <section className="py-20 md:py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
@@ -291,45 +465,20 @@ function ReviewsSection() {
               Що кажуть наші клієнти
             </motion.h2>
           </div>
-          <motion.div variants={fadeUp}
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: '#aaa', letterSpacing: '0.06em' }}>
-            {REVIEWS.length} відгуків · всі перевірені
-          </motion.div>
+          <motion.button variants={fadeUp} onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 px-5 py-3 text-white text-sm font-bold self-start md:self-auto"
+            style={{ background: 'var(--accent)' }}>
+            <Star size={15} fill="white" /> Залишити відгук
+          </motion.button>
         </motion.div>
 
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {REVIEWS.map(review => (
-            <motion.div key={review.id} variants={fadeUp}
-              className="flex flex-col gap-4 p-6"
-              style={{
-                background: '#f7f7f6',
-                border: '1px solid #e8e8e8',
-              }}>
-              {/* Stars + date */}
-              <div className="flex items-center justify-between">
-                <StarRating rating={review.rating} />
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#bbb', letterSpacing: '0.06em' }}>
-                  {review.date}
-                </span>
-              </div>
-
-              {/* Review text */}
-              <p className="text-sm leading-relaxed flex-1" style={{ color: '#444' }}>
-                "{review.text}"
-              </p>
-
-              {/* Author */}
-              <div className="pt-4" style={{ borderTop: '1px solid #e0e0e0' }}>
-                <div className="font-bold text-[#1a1a1a] text-sm">{review.name}</div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#888', marginTop: 3, letterSpacing: '0.04em' }}>
-                  {review.role}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {display.map(review => <ReviewCard key={review.id} review={review} />)}
         </motion.div>
       </div>
+
+      {showForm && <ReviewFormModal onClose={() => setShowForm(false)} />}
     </section>
   )
 }
@@ -394,7 +543,8 @@ export default function HomePage() {
   }, [])
 
   const featuredCats  = CATEGORIES.slice(0, 6)
-  const recentPosts   = blog.filter(p => p.published).slice(0, 3)
+  const recentPosts   = blog.filter(p => p.published)
+    .slice().sort((a, b) => new Date(b.publishedAt || b.date) - new Date(a.publishedAt || a.date)).slice(0, 3)
   const recentPortfolio = portfolio.slice(0, 3)
 
   return (

@@ -176,6 +176,54 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        {/* Maps — Київ + Житомир */}
+        <div className="mt-14">
+          <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
+            className="uppercase block mb-5">
+            НА КАРТІ
+          </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                city: 'КИЇВ',
+                addr: 'Софіївська Борщагівка, вул. Київська 3',
+                note: 'Виробництво + головний офіс',
+                src: 'https://maps.google.com/maps?q=' + encodeURIComponent('Софіївська Борщагівка, вул. Київська 3') + '&z=15&output=embed',
+              },
+              {
+                city: 'ЖИТОМИР',
+                addr: 'пр. Незалежності, 79',
+                note: 'Регіональний офіс',
+                src: 'https://maps.google.com/maps?q=' + encodeURIComponent('Житомир, проспект Незалежності 79') + '&z=15&output=embed',
+              },
+            ].map(({ city, addr, note, src }) => (
+              <div key={city} className="border border-gray-200">
+                <div className="flex items-start gap-3 p-4 border-b border-gray-100">
+                  <div className="w-9 h-9 border border-gray-200 flex items-center justify-center flex-shrink-0">
+                    <MapPin size={15} className="text-[var(--accent)]" />
+                  </div>
+                  <div className="min-w-0">
+                    <div style={{ ...mono, fontSize: '10px', letterSpacing: '0.14em', color: 'var(--accent)' }} className="uppercase mb-0.5">
+                      {city}
+                    </div>
+                    <div className="text-sm font-semibold text-gray-900 leading-tight">{addr}</div>
+                    <div style={{ ...mono, fontSize: '10px', color: 'var(--text-muted)' }} className="mt-0.5">{note}</div>
+                  </div>
+                </div>
+                <iframe
+                  title={`Карта — ${city}`}
+                  src={src}
+                  width="100%" height="300"
+                  style={{ border: 0, display: 'block' }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   )
