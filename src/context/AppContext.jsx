@@ -69,12 +69,12 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/blog`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setBlog(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setBlog(data) })
       .catch(() => {})
 
     fetch(`${API}/portfolio`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setPortfolio(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setPortfolio(data) })
       .catch(() => {})
 
     fetch(`${API}/reviews`)

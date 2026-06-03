@@ -145,7 +145,7 @@ export const CATEGORIES = [
     id: 'clearance',
     slug: 'rozprodazh',
     icon: 'Percent',
-    image: `${BASE}/2023/11/sb_dlya_kataloga-1-1131x800-1-800x800.png`,
+    image: `/images/category-clearance.svg`,
     name: { uk: 'Розпродаж', en: 'Clearance', pl: 'Wyprzedaż', fr: 'Liquidation', de: 'Ausverkauf' },
     desc: { uk: 'Товари попередніх серій за акційними цінами', en: 'Previous-series products at special prices', pl: 'Produkty poprzednich serii w cenach promocyjnych', fr: 'Produits des séries précédentes à prix réduits', de: 'Produkte früherer Serien zu Sonderpreisen' },
     subcategories: ['Сепаратори'],

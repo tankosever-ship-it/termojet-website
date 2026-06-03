@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <rect width="800" height="800" fill="#ffffff"/>
+  <!-- price tag -->
+  <g transform="rotate(-18 400 380)">
+    <rect x="250" y="230" width="300" height="300" rx="34" fill="#DC2626"/>
+    <rect x="250" y="230" width="300" height="300" rx="34" fill="none" stroke="#b91c1c" stroke-width="6"/>
+    <!-- tag hole -->
+    <circle cx="318" cy="298" r="26" fill="#ffffff"/>
+    <circle cx="318" cy="298" r="11" fill="#DC2626"/>
+    <!-- percent -->
+    <text x="415" y="430" font-family="Arial, Helvetica, sans-serif" font-size="180" font-weight="bold" fill="#ffffff" text-anchor="middle">%</text>
+  </g>
+  <!-- caption -->
+  <text x="400" y="650" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="bold" fill="#0D0D0D" text-anchor="middle" letter-spacing="2">РОЗПРОДАЖ</text>
+  <text x="400" y="708" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500" fill="#E85D04" text-anchor="middle" letter-spacing="6">TERMOJET</text>
+</svg>
