@@ -35,6 +35,24 @@ const stagger = { show: { transition: { staggerChildren: 0.04 } } }
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
 const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
 
+// Продуктивність насоса (м³/год) зі specs; л/хв → м³/год
+const qmaxNum = p => {
+  const s = p.specs || {}
+  const raw = String(s['Qmax'] || s['Макс. продуктивність'] || s['Продуктивність'] || s['Максимальна подача'] || '')
+  const m = raw.match(/([\d]+[.,]?[\d]*)/)
+  if (!m) return null
+  let v = parseFloat(m[1].replace(',', '.'))
+  if (/л\/хв/i.test(raw)) v = v * 0.06
+  return v
+}
+// Напір насоса (м) зі specs
+const napirNum = p => {
+  const s = p.specs || {}
+  const raw = String(s['Hmax'] || s['Макс. напір'] || s['Максимальний напір'] || s['Напір'] || '')
+  const m = raw.match(/([\d]+[.,]?[\d]*)/)
+  return m ? parseFloat(m[1].replace(',', '.')) : null
+}
+
 // Тип приєднання насоса (з назви + полів specs про зʼєднання/діаметр/вихід)
 const pumpConnHay = p => {
   const s = p.specs || {}
@@ -206,6 +224,63 @@ const CATEGORY_FILTERS = {
           { label: '180 мм',     test: p => /\/180\b/.test(p.name) },
           { label: '220–250 мм', test: p => /\/220\b|[-\/]250\b/.test(p.name) },
           { label: '280–340 мм', test: p => /[-\/]280\b|[-\/]340\b/.test(p.name) },
+        ],
+      },
+      {
+        key: 'qmax',
+        label: 'Продуктивність, м³/год',
+        multi: true,
+        options: [
+          { label: 'до 4',    test: p => { const v = qmaxNum(p); return v !== null && v <= 4 } },
+          { label: '4–10',    test: p => { const v = qmaxNum(p); return v !== null && v > 4 && v <= 10 } },
+          { label: '10–25',   test: p => { const v = qmaxNum(p); return v !== null && v > 10 && v <= 25 } },
+          { label: '25+',     test: p => { const v = qmaxNum(p); return v !== null && v > 25 } },
+        ],
+      },
+      {
+        key: 'napir',
+        label: 'Напір, м',
+        multi: true,
+        options: [
+          { label: 'до 6',   test: p => { const v = napirNum(p); return v !== null && v <= 6 } },
+          { label: '6–10',   test: p => { const v = napirNum(p); return v !== null && v > 6 && v <= 10 } },
+          { label: '10+',    test: p => { const v = napirNum(p); return v !== null && v > 10 } },
+        ],
+      },
+    ],
+  },
+
+  'termojet-box': {
+    groups: [
+      {
+        key: 'model',
+        label: 'Модель',
+        options: [
+          { label: 'НГ-36', test: p => /НГ-36/i.test(p.name) },
+          { label: 'НГ-37', test: p => /НГ-37/i.test(p.name) },
+          { label: 'НГ-38', test: p => /НГ-38/i.test(p.name) },
+          { label: 'BOX2',  test: p => /BOX\s*2/i.test(p.name) },
+          { label: 'BOX3',  test: p => /BOX\s*3/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'exec',
+        label: 'Виконання',
+        multi: true,
+        options: [
+          { label: 'Пряма',            test: p => /пряма/i.test(p.name) },
+          { label: 'Зі змішувачем',    test: p => /змішувач/i.test(p.name) },
+          { label: 'З термокраном',    test: p => /термостатичним краном|термокран/i.test(p.name) },
+          { label: 'З приводом 413',   test: p => /привід|413|A-?413/i.test(p.name + ' ' + (p.specs?.['Привід'] || '')) },
+        ],
+      },
+      {
+        key: 'circuits',
+        label: 'Контури (BOX)',
+        multi: true,
+        options: [
+          { label: '2 контури', test: p => /BOX\s*2/i.test(p.name) || /\b2\b/.test(p.specs?.['Контури'] || '') },
+          { label: '3 контури', test: p => /BOX\s*3/i.test(p.name) || /\b3\b/.test(p.specs?.['Контури'] || '') },
         ],
       },
     ],
@@ -489,12 +564,18 @@ const CATEGORY_FILTERS = {
   },
 }
 
-function Sidebar({ categorySlug, filters, setFilters }) {
+function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPrice }) {
   const config = CATEGORY_FILTERS[categorySlug]
-  if (!config) return null
+  const hasPrice = priceBounds && priceBounds[1] > priceBounds[0]
+  if (!config && !hasPrice) return null
 
-  const hasAny = Object.values(filters).some(Boolean)
   const mono = { fontFamily: "'JetBrains Mono', monospace" }
+  const lo = price ? price[0] : (priceBounds ? priceBounds[0] : 0)
+  const hi = price ? price[1] : (priceBounds ? priceBounds[1] : 0)
+  const priceActive = hasPrice && (lo > priceBounds[0] || hi < priceBounds[1])
+  const filtersActive = Object.values(filters).some(v => Array.isArray(v) ? v.length : v)
+  const hasAny = filtersActive || priceActive
+  const fmt = n => Math.round(n).toLocaleString('uk-UA')
 
   return (
     <aside className="hidden lg:block w-52 flex-shrink-0">
@@ -506,7 +587,7 @@ function Sidebar({ categorySlug, filters, setFilters }) {
             Фільтри
           </span>
           {hasAny && (
-            <button onClick={() => setFilters({})}
+            <button onClick={() => { setFilters({}); setPrice(null) }}
               className="flex items-center gap-1 transition-colors hover:text-[var(--accent)]"
               style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
               <X size={10} /> Скинути
@@ -514,9 +595,31 @@ function Sidebar({ categorySlug, filters, setFilters }) {
           )}
         </div>
 
-        {/* Filter groups */}
         <div className="p-3 space-y-5 overflow-y-auto overscroll-contain flex-1">
-          {config.groups.map(group => (
+
+          {/* Ціна (#5) */}
+          {hasPrice && (
+            <div>
+              <div className="mb-2 px-1 flex items-center justify-between"
+                style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
+                <span>Ціна, ₴</span>
+              </div>
+              <div className="px-1">
+                <div className="flex items-center justify-between mb-1.5" style={{ ...mono, fontSize: '11px', fontWeight: 700, color: 'var(--accent)' }}>
+                  <span>{fmt(lo)}</span><span>{fmt(hi)}</span>
+                </div>
+                <input type="range" min={priceBounds[0]} max={priceBounds[1]} value={lo}
+                  onChange={e => setPrice([Math.min(+e.target.value, hi), hi])}
+                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label="Ціна від" />
+                <input type="range" min={priceBounds[0]} max={priceBounds[1]} value={hi}
+                  onChange={e => setPrice([lo, Math.max(+e.target.value, lo)])}
+                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label="Ціна до" />
+              </div>
+            </div>
+          )}
+
+          {/* Filter groups */}
+          {config && config.groups.map(group => (
             <div key={group.key}>
               <div className="mb-2 px-1"
                 style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
@@ -524,10 +627,18 @@ function Sidebar({ categorySlug, filters, setFilters }) {
               </div>
               <div className="flex flex-col gap-0.5">
                 {group.options.map(opt => {
-                  const active = filters[group.key] === opt.label
+                  const sel = filters[group.key]
+                  const active = group.multi ? (Array.isArray(sel) && sel.includes(opt.label)) : sel === opt.label
+                  const toggle = () => setFilters(f => {
+                    if (group.multi) {
+                      const cur = Array.isArray(f[group.key]) ? f[group.key] : []
+                      const next = cur.includes(opt.label) ? cur.filter(l => l !== opt.label) : [...cur, opt.label]
+                      return { ...f, [group.key]: next }
+                    }
+                    return { ...f, [group.key]: active ? '' : opt.label }
+                  })
                   return (
-                    <button key={opt.label}
-                      onClick={() => setFilters(f => ({ ...f, [group.key]: active ? '' : opt.label }))}
+                    <button key={opt.label} onClick={toggle}
                       className="flex items-center gap-2.5 w-full px-3 py-2 text-left transition-all"
                       style={{
                         background: active ? 'rgba(255,85,0,0.07)' : 'transparent',
@@ -537,6 +648,7 @@ function Sidebar({ categorySlug, filters, setFilters }) {
                         style={{
                           border: active ? '1px solid var(--accent)' : '1px solid #ccc',
                           background: active ? 'var(--accent)' : 'transparent',
+                          borderRadius: group.multi ? '3px' : '50%',
                         }}>
                         {active && <span style={{ color: 'white', fontSize: '9px', lineHeight: 1 }}>✓</span>}
                       </span>
@@ -706,16 +818,24 @@ export default function CatalogPage() {
   const [sort, setSort] = useState('default')
   const [catFilters, setCatFilters] = useState({})
   const [viewMode, setViewMode] = useState('grid') // 'grid' | 'list'
+  const [price, setPrice] = useState(null) // [lo, hi] у ₴ або null
 
   const currentCategory = categorySlug ? CATEGORIES.find(c => c.slug === categorySlug) : null
 
-  // Скидаємо фільтри при зміні категорії
-  useMemo(() => { setCatFilters({}) }, [categorySlug])
+  // Скидаємо фільтри й ціну при зміні категорії
+  useMemo(() => { setCatFilters({}); setPrice(null) }, [categorySlug])
 
   const catProducts = useMemo(() => {
     if (!currentCategory) return products
     return products.filter(p => p.categorySlug === currentCategory.id || p.categorySlug === currentCategory.slug)
   }, [products, currentCategory])
+
+  // Межі ціни (#5) — у ₴, по поточній категорії
+  const priceBounds = useMemo(() => {
+    const vals = catProducts.map(p => toUAH(p.price, p.currency, eurRate) || 0).filter(v => v > 0)
+    if (!vals.length) return null
+    return [Math.floor(Math.min(...vals)), Math.ceil(Math.max(...vals))]
+  }, [catProducts, eurRate])
 
   const filtered = useMemo(() => {
     let list = catProducts
@@ -730,14 +850,25 @@ export default function CatalogPage() {
     const filterConfig = categorySlug ? CATEGORY_FILTERS[categorySlug] : null
     if (filterConfig) {
       filterConfig.groups.forEach(group => {
-        const activeLabel = catFilters[group.key]
-        if (!activeLabel) return
-        const opt = group.options.find(o => o.label === activeLabel)
-        if (opt) list = list.filter(opt.test)
+        const sel = catFilters[group.key]
+        if (group.multi) {
+          const labels = Array.isArray(sel) ? sel : []
+          if (!labels.length) return
+          const opts = group.options.filter(o => labels.includes(o.label))
+          if (opts.length) list = list.filter(p => opts.some(o => o.test(p))) // OR у групі
+        } else {
+          if (!sel) return
+          const opt = group.options.find(o => o.label === sel)
+          if (opt) list = list.filter(opt.test)
+        }
       })
     }
 
     const priceInUah = p => toUAH(p.price, p.currency, eurRate) || 0
+    // Фільтр за ціною (#5) — товари «по запиту» (ціна 0) лишаємо видимими
+    if (price && priceBounds && (price[0] > priceBounds[0] || price[1] < priceBounds[1])) {
+      list = list.filter(p => { const u = priceInUah(p); return u <= 0 || (u >= price[0] && u <= price[1]) })
+    }
     if (sort === 'priceAsc')  list = [...list].sort((a, b) => priceInUah(a) - priceInUah(b))
     if (sort === 'priceDesc') list = [...list].sort((a, b) => priceInUah(b) - priceInUah(a))
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
@@ -746,7 +877,7 @@ export default function CatalogPage() {
     if (sort === 'default' && categorySlug === 'separatory')
       list = [...list].sort((a, b) => sepRank(a) - sepRank(b))
     return list
-  }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang])
+  }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang, price, priceBounds, eurRate])
 
   return (
     <>
@@ -853,7 +984,8 @@ export default function CatalogPage() {
         {/* ── Основний контент: сайдбар + товари ── */}
         <div className="flex gap-6">
 
-        <Sidebar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters} />
+        <Sidebar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters}
+          priceBounds={priceBounds} price={price} setPrice={setPrice} />
 
         <div className="flex-1 min-w-0">
 
@@ -902,8 +1034,8 @@ export default function CatalogPage() {
         {/* Result count */}
         <div className="text-xs text-gray-400 font-mono mb-4">
           Знайдено: <span className="font-bold text-gray-600">{filtered.length}</span> товарів
-          {(search || inStockOnly || Object.values(catFilters).some(Boolean)) && (
-            <button onClick={() => { setSearch(''); setInStockOnly(false); setCatFilters({}) }}
+          {(search || inStockOnly || price || Object.values(catFilters).some(v => Array.isArray(v) ? v.length : v)) && (
+            <button onClick={() => { setSearch(''); setInStockOnly(false); setCatFilters({}); setPrice(null) }}
               className="ml-3 text-[var(--accent)] hover:underline">
               скинути фільтри
             </button>
