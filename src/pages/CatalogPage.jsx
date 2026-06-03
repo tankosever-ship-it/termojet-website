@@ -963,18 +963,17 @@ export default function CatalogPage() {
                   <div className="product-card-new group flex flex-row gap-0 overflow-hidden">
 
                     {/* Image */}
-                    <Link to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden"
-                      style={{ width: 140, minHeight: 120 }}>
+                    <Link to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden w-[104px] sm:w-[140px] min-h-[120px]">
                       {product.image ? (
                         <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
-                          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300" />
+                          className="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" />
                       ) : (
                         <div className="text-gray-200 text-5xl">⚙️</div>
                       )}
                     </Link>
 
                     {/* Content */}
-                    <div className="flex-1 min-w-0 p-4 flex flex-col justify-between border-l border-[var(--ink-200)]">
+                    <div className="flex-1 min-w-0 p-3 sm:p-4 flex flex-col justify-between border-l border-[var(--ink-200)]">
                       <div>
                         {catObj && (
                           <div className="eyebrow mb-1">{catObj.name[lang] || catObj.name.uk}</div>
@@ -995,17 +994,33 @@ export default function CatalogPage() {
                           </div>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[var(--ink-200)]">
+                      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[var(--ink-200)] flex-wrap">
                         <span className="text-[10px] font-mono text-gray-400">{product.sku || '—'}</span>
-                        <span className={`text-[10px] font-semibold flex items-center gap-1 ml-2 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
+                        <span className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
                           <span className="w-1.5 h-1.5 rounded-full" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
                           {product.inStock ? 'В наявності' : 'Під замовлення'}
                         </span>
+                        {/* Ціна — інлайн лише на мобільному */}
+                        <span className="sm:hidden ml-auto text-sm font-bold text-[var(--primary)]">
+                          {product.price > 0 ? formatPrice(product.price, product.currency, eurRate) : 'По запиту'}
+                        </span>
+                      </div>
+                      {/* Дії — лише на мобільному (на десктопі вони у правій колонці) */}
+                      <div className="flex sm:hidden gap-1.5 mt-2.5">
+                        <button onClick={() => addToCart(product)}
+                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 px-3 rounded-lg"
+                          style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
+                          <ShoppingCart size={12} /> В кошик
+                        </button>
+                        <Link to={href}
+                          className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg text-gray-600 text-xs font-semibold">
+                          Детальніше <ArrowRight size={11} />
+                        </Link>
                       </div>
                     </div>
 
-                    {/* Price + actions */}
-                    <div className="flex-shrink-0 flex flex-col items-end justify-between p-4 border-l border-[var(--ink-200)] min-w-[140px]">
+                    {/* Price + actions — лише на десктопі */}
+                    <div className="hidden sm:flex flex-shrink-0 flex-col items-end justify-between p-4 border-l border-[var(--ink-200)] min-w-[140px]">
                       <div className="text-right">
                         {product.price > 0 ? (
                           <div className="text-base font-bold text-[var(--primary)]">
