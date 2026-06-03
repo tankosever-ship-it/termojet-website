@@ -555,18 +555,85 @@ function Sidebar({ categorySlug, filters, setFilters }) {
   )
 }
 
+// #16 (Етап 3): корисні характеристики в картках per-категорія.
+// Значення беремо за пріоритетним списком матчерів ключів (підрядок lower-case;
+// масив = всі підрядки мають бути в ключі — для розрізнення ΔT=10/ΔT=20 за «10»/«20»,
+// що стійко до різних юнікодів Δ/△ і Т/T у даних).
+const BADGE_PREFERRED = {
+  'separatory':                 ['розмір'],
+  'nasosni-hrupy':              [['qmax', '10'], ['qmax', '20'], 'kvs', 'ізоляц'],
+  'klapany':                    ['dn', 'kvs', 'діапазон темп', 'різьба', 'тиск', 'крутний момент', 'керування', 'напруга', 'час оберт', 'підключ'],
+  'nasosy':                     ['діаметр', 'qmax', 'макс. продуктивн', 'hmax', 'напір', 'споживана потужн', 'потужн'],
+  'termojet-box':               ['контури', 'dn', 'діаметр', ['потужність', '10'], ['потужність', '20'], 'підключ', 'привід', 'ізоляц'],
+  'avtomatyka':                 ['кількість контур', 'wi-fi', 'погодозалеж', 'дисплей'],
+  'zonalne-keruvannya':         ['напруга', 'тип', 'різьба', 'монтаж', 'діапазон темп', 'живлення', 'wi-fi'],
+  'rozpodilchi-kolektory':      ['кількість виход', ['qmax', '10'], ['qmax', '20'], 'підключення котла'],
+  'kolektory-z-hidrostrilkoyu': ['кількість виход', 'виходи', ['qmax', '10'], ['qmax', '20'], 'підключення котла'],
+  'hidravlichni-rozdilnyky':    ['діаметр', ['qmax', '10'], ['qmax', '20'], "об'єм"],
+  'kolektory-pidloha':          ['кількість виход', 'підключ', 'матеріал', 'витратомір', 'температура'],
+  'balansuval-klapany':         ['dn', 'kvs', 'pn', 'функці'],
+  'termojet-mega':              ['dn', 'діаметр', 'розмір', ['qmax', '10'], ['qmax', '20'], 'kvs', 'gmax', 'підключ'],
+  'rozprodazh':                 ['розмір', 'dn', 'діаметр'],
+}
+const BADGE_EXCLUDE_KEYS = ['артикул', 'назва', 'виробник', 'характеристика', 'рідина']
+const BADGE_EXCLUDE_VALS = ['одиниця вимірювання', 'termojet', 'так', 'ні', 'немає', 'n/a', '—', '-', '']
+const BADGE_BOOL_KEYS = ['wi-fi', 'погодозалеж', 'гвс', 'термокран', 'термометр'] // показуємо як мітку, якщо «так»
+
 function extractBadges(product) {
   const badges = []
   const name = product.name || ''
   const specs = product.specs || {}
+  const cat = product.categorySlug || ''
 
   const specKeys = Object.keys(specs)
   if (specKeys.length > 0) {
-    specKeys.filter(k => !['Артикул', 'Назва'].includes(k)).slice(0, 5).forEach(k => {
-      const val = String(specs[k]).split(',')[0].trim()
-      if (val && val.length < 30) badges.push({ label: val, type: 'blue' })
+    const sku = String(product.sku || '').trim().toLowerCase()
+    const cleanVal = raw => String(raw).split(/[,;]\s+/)[0].trim() // не ріже десяткову кому «7,2»
+    const valBad = v => !v || v.length > 32 || BADGE_EXCLUDE_VALS.includes(v.toLowerCase()) || v.toLowerCase() === sku
+    const keyBad = k => BADGE_EXCLUDE_KEYS.some(e => k.toLowerCase().includes(e))
+    // голі числа → осмислена мітка за змістом ключа (DN15, «2 виходи»)
+    const fmtVal = (lk, v) => {
+      if (/^\d+$/.test(v)) {
+        if (/\bdn\b|діаметр|розмір/.test(lk)) return 'DN' + v
+        if (/контур/.test(lk)) return v + ' контури'
+        if (/виход/.test(lk)) return v + ' виходи'
+      }
+      return v
+    }
+    const findKey = m => specKeys.find(k => {
+      if (keyBad(k)) return false
+      const lk = k.toLowerCase()
+      return Array.isArray(m) ? m.every(s => lk.includes(s)) : lk.includes(m)
     })
-    return badges
+    const out = []
+    const push = label => {
+      const l = (label || '').trim()
+      if (!l || out.some(b => b.label.toLowerCase() === l.toLowerCase())) return
+      out.push({ label: l, type: ['blue', 'orange', 'gray'][out.length % 3] })
+    }
+
+    // тип сепаратора з підкатегорії (повітря / бруд / комбі) замість бренду
+    if (cat === 'separatory' && product.subcategory) {
+      push(product.subcategory.replace(/сепаратори\s+/i, '').trim())
+    }
+
+    const order = BADGE_PREFERRED[cat]
+    const keys = order
+      ? order.map(findKey).filter(Boolean)
+      : specKeys.filter(k => !keyBad(k))
+    for (const k of keys) {
+      if (out.length >= 4) break
+      const lk = k.toLowerCase()
+      if (BADGE_BOOL_KEYS.some(b => lk.includes(b))) {
+        const v = cleanVal(specs[k]).toLowerCase()
+        if (['ні', 'немає', '-', ''].includes(v)) continue
+        if (['так', '+', 'є'].includes(v)) { push(k.replace(/[:(].*$/, '').trim()); continue }
+        // інакше — справжнє значення (напр. «2.4 GHz»)
+      }
+      const v = cleanVal(specs[k])
+      if (!valBad(v)) push(fmtVal(lk, v))
+    }
+    return out
   }
 
   const pumpMatch = name.match(/APM\s*(\d+)\/(\d+)\/(\d+)/)
