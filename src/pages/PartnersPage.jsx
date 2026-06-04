@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { TrendingUp, Wrench, BookOpen, Truck, BarChart2, Headphones, CheckCircle, Building2, UserCheck } from 'lucide-react'
 import SEO from '../components/SEO'
 import ConsentCheckbox from '../components/ConsentCheckbox'
+import { assetPath } from '../utils/assetPath'
 
 const BENEFIT_ICONS = [TrendingUp, Wrench, BookOpen, Truck, BarChart2, Headphones]
 
@@ -174,6 +175,15 @@ export default function PartnersPage() {
             <p className="text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
               Приєднуйтесь до мережі дилерів та монтажних організацій, що успішно розвивають бізнес на якісному котельному обладнанні українського виробника.
             </p>
+          </motion.div>
+
+          {/* Hero image — рукостискання */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="relative rounded-2xl overflow-hidden mb-16 max-w-5xl mx-auto aspect-[21/9]">
+            <img src={assetPath('/partners-handshake.jpg')} alt="Партнерство з Termojet"
+              className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: 'linear-gradient(90deg, rgba(8,10,14,0.45) 0%, rgba(8,10,14,0.05) 60%, transparent 100%)' }} />
           </motion.div>
 
           {/* Benefits */}

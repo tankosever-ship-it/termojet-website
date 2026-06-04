@@ -310,15 +310,15 @@ export default function AboutPage() {
           <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
             viewport={{ once:true }} transition={{ duration:0.5 }}
             onClick={() => setVideoOpen(true)}
-            className="relative overflow-hidden mb-2 max-w-md mx-auto rounded-xl cursor-pointer group">
-            <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.3)' }}
+            className="relative overflow-hidden mb-3 max-w-lg mx-auto rounded-xl cursor-pointer group aspect-video bg-black ring-1 ring-white/10">
+            <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.55)' }}
               className="absolute top-3 left-3 z-10 uppercase bg-black/50 px-2 py-1">
               ● LIVE / ВИРОБНИЧИЙ ЦЕХ
             </div>
             <video
-              autoPlay muted loop playsInline
-              className="w-full block"
-              style={{ display: 'block' }}
+              autoPlay muted loop playsInline preload="metadata"
+              poster={MANUFACTURING_PHOTOS[0]}
+              className="w-full h-full object-cover block"
             >
               <source src={MANUFACTURING_VIDEO} type="video/mp4" />
             </video>

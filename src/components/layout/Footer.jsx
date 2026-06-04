@@ -29,11 +29,11 @@ function SubscribeForm() {
           value={email}
           onChange={e => { setEmail(e.target.value); if (status) setStatus(null) }}
           placeholder="Ваш email"
-          className="flex-1 px-4 py-2.5 text-sm text-white rounded-lg outline-none"
+          className="min-w-0 flex-1 px-3 py-2.5 text-sm text-white rounded-lg outline-none"
           style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
         />
         <button type="submit" disabled={status === 'loading'}
-          className="btn-primary px-5 py-2.5 text-sm whitespace-nowrap disabled:opacity-60">
+          className="btn-primary px-4 py-2.5 text-sm whitespace-nowrap disabled:opacity-60">
           {status === 'loading' ? '...' : 'Підписатись'}
         </button>
       </form>
@@ -79,24 +79,31 @@ export default function Footer() {
             <div className="mb-4">
               <img src={assetPath('/logo-white.png')} alt="Termojet" className="h-12 w-auto" />
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-5">{footer.company}</p>
+            <p className="text-white/50 text-sm leading-relaxed mb-4">{footer.company}</p>
 
-            {/* Made in UA badge */}
-            <div className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold tracking-wider border border-white/10"
-              style={{ background: 'rgba(255,255,255,0.05)' }}>
-              🇺🇦 <span>MADE IN UKRAINE</span>
+            {/* Підписка — одразу під описом */}
+            <div className="mb-5">
+              <div className="font-semibold text-white/90 text-sm mb-2 flex items-center gap-2">
+                <span className="w-1 h-4 rounded bg-[var(--accent)] inline-block" />
+                Підпишіться на новини
+              </div>
+              <SubscribeForm />
             </div>
 
-            {/* Stats mini */}
-            <div className="mt-5 grid grid-cols-2 gap-2">
+            {/* Made in UA + статистика — компактно разом */}
+            <div className="flex flex-wrap items-stretch gap-2">
+              <div className="inline-flex items-center gap-2 rounded-lg px-3 text-xs font-bold tracking-wider border border-white/10"
+                style={{ background: 'rgba(255,255,255,0.05)' }}>
+                🇺🇦 <span>MADE IN UKRAINE</span>
+              </div>
               {[
                 { val: '20+', label: 'років' },
                 { val: '50K+', label: "об'єктів" },
               ].map(s => (
-                <div key={s.val} className="rounded-lg p-2.5 text-center border border-white/8"
+                <div key={s.val} className="rounded-lg px-3 py-1.5 text-center border border-white/8"
                   style={{ background: 'rgba(255,255,255,0.04)' }}>
-                  <div className="font-black text-lg font-['Archivo',sans-serif] text-white">{s.val}</div>
-                  <div className="text-xs text-white/40">{s.label}</div>
+                  <div className="font-black text-base font-['Archivo',sans-serif] text-white leading-tight">{s.val}</div>
+                  <div className="text-[11px] text-white/40">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -249,22 +256,6 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── Newsletter ─── */}
-      <div className="relative border-t border-white/8">
-        <div className="max-w-7xl mx-auto px-4 py-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
-            <div>
-              <div className="font-bold text-white/90 text-lg mb-1 font-['Archivo',sans-serif] flex items-center gap-2">
-                <span className="w-1 h-4 rounded bg-[var(--accent)] inline-block" />
-                Підпишіться на новини
-              </div>
-              <p className="text-white/45 text-sm">Новинки, акції та технічні матеріали Termojet — на ваш email.</p>
-            </div>
-            <SubscribeForm />
           </div>
         </div>
       </div>

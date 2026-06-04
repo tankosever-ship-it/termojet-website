@@ -255,8 +255,8 @@ export default function Navbar() {
         {scrolled && <div className="absolute bottom-0 left-0 right-0 h-[1.5px]"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,85,0,0.4) 30%, rgba(255,85,0,0.4) 70%, transparent)' }} />}
 
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-3 h-[60px]">
+        <div className="px-5 lg:px-6">
+          <div className="flex items-center gap-2 h-[60px]">
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
@@ -264,7 +264,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center ml-2 flex-shrink-0">
+            <nav className="hidden lg:flex items-center ml-1 flex-shrink-0">
 
               {/* Каталог */}
               <div className="relative" ref={catalogRef}>

@@ -135,6 +135,9 @@ function setup() {
   // Оновити стару адресу-заглушку на реальну (Київ)
   db.prepare(`UPDATE settings SET value=? WHERE key='address' AND value='м. Київ, вул. Виробнича, 1'`)
     .run('Софіївська Борщагівка, вул. Київська 3')
+  // Оновити старий телефон-заглушку на актуальний
+  db.prepare(`UPDATE settings SET value=? WHERE key='phone' AND value='+380 50 718 91 65'`)
+    .run('+380 (50) 450 64 24')
 }
 
 function seedProducts() {

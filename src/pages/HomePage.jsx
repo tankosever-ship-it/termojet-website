@@ -838,7 +838,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           CONFIGURATOR — dark section
       ═══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden py-20 md:py-32" style={{ background: '#080808' }}>
+      <section className="relative overflow-hidden py-12 md:py-16" style={{ background: '#080808' }}>
 
         {/* Engineering grid bg */}
         <div className="absolute inset-0 pointer-events-none" style={{
@@ -854,7 +854,7 @@ export default function HomePage() {
 
           {/* Section header */}
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-            className="text-center mb-12">
+            className="text-center mb-6">
             <div className="eyebrow mb-3" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
             <h2 className="font-black font-['Archivo',sans-serif] leading-tight"
               style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', background: 'linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.65))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -863,7 +863,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Main: phones (left) + benefits (right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center mb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 items-center mb-8">
 
             {/* ── Phones: floating + glow + shimmer ── */}
             <div className="relative flex justify-center items-center">
@@ -879,7 +879,7 @@ export default function HomePage() {
               <motion.div
                 animate={{ y: [0, -14, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative z-10 w-full max-w-md overflow-hidden">
+                className="relative z-10 w-full max-w-[260px] overflow-hidden">
 
                 {/* Shimmer sweep */}
                 <motion.div
@@ -895,7 +895,7 @@ export default function HomePage() {
             </div>
 
             {/* ── Benefits cards ── */}
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
               {[
                 { icon: '📋', title: 'Повний каталог',       desc: 'Вся продукція Termojet завжди під рукою.' },
                 { icon: '⚙️', title: '100+ моделей',          desc: 'Конструктор з колекторів та насосних груп.' },
@@ -909,7 +909,7 @@ export default function HomePage() {
                   viewport={{ once:true }}
                   transition={{ delay: i * 0.07, duration: 0.4 }}
                   whileHover={{ y: -2 }}
-                  className="flex items-start gap-4 p-4 cursor-default group"
+                  className="flex items-start gap-3 p-3 cursor-default group"
                   style={{
                     background: 'rgba(255,255,255,0.03)',
                     border: '1px solid rgba(255,255,255,0.06)',
@@ -940,7 +940,7 @@ export default function HomePage() {
 
           {/* ── Bottom CTAs ── */}
           <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-8"
+            className="flex flex-wrap items-center justify-center gap-4 pt-6"
             style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
               className="btn-primary flex items-center gap-2 text-sm px-6 py-3">
