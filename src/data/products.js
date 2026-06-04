@@ -1647,7 +1647,9 @@ export const PRODUCTS = [
     "categorySlug": "rozpodilchi-kolektory",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0598-scaled.jpg",
     "images": [
-      "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0598-scaled.jpg"
+      "https://termojet.com.ua/wp-content/uploads/2023/08/dsc_0598-scaled.jpg",
+      "https://termojet.com.ua/wp-content/uploads/2023/08/4-150.jpg",
+      "https://termojet.com.ua/wp-content/uploads/2023/08/k42150300-1.jpg"
     ],
     "shortDesc": "Розподільчий колектор у теплоізоляції 4+1 з виходами вниз, міжосьова 150 мм, до 350 кВт.",
     "description": "Розподільчий колектор К42Н.150(300) з виходами вниз для котелень використовується в системах опалення, де потрібно розподілити теплоносій на декілька споживачів тепла з різними параметрами. Міжосьова відстань приєднувальних патрубків контурів — 150 мм. Кронштейни кріплення в комплекті.",
