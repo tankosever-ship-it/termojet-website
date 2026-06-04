@@ -42,6 +42,7 @@ export const MODELS_BY_SLUG = {
   "kolektor-k32v-125-200": [{ file: 'kolektor-k32v-125-200.step', name: 'К32В.125(200).step', size: '6 МБ', glb: '/uploads/3d/kolektor-k32v-125-200.glb' }],
   "kolektor-k32v-150-300": [{ file: 'kolektor-k32v-150-300.step', name: 'К32В.150(300).step', size: '22 МБ', glb: '/uploads/3d/kolektor-k32v-150-300.glb' }],
   "kolektor-k42n-125-200": [{ file: 'kolektor-k42n-125-200.step', name: 'К42Н.125(200).step', size: '25 МБ', glb: '/uploads/3d/kolektor-k42n-125-200.glb' }],
+  "kolektor-k42n-150-300": [{ file: 'kolektor-k42n-150-300.step', name: 'К42Н.150(300).step', size: '27 МБ', glb: '/uploads/3d/kolektor-k42n-150-300.glb' }],
   "kolektor-k42v-125-200": [{ file: 'kolektor-k42v-125-200.step', name: 'К42В.125(200).step', size: '25 МБ', glb: '/uploads/3d/kolektor-k42v-125-200.glb' }],
   "kolektor-k42v-150-300": [{ file: 'kolektor-k42v-150-300.step', name: 'К42В.150(300).step', size: '26 МБ', glb: '/uploads/3d/kolektor-k42v-150-300.glb' }],
   "kolektor-k42vn-150-300": [{ file: 'kolektor-k42vn-150-300.step', name: 'К42ВН.150(300).step', size: '20 МБ', glb: '/uploads/3d/kolektor-k42vn-150-300.glb' }],
