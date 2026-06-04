@@ -22,18 +22,18 @@ function SubscribeForm() {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="flex gap-2">
+      <form onSubmit={onSubmit} className="flex flex-col gap-2 max-w-sm">
         <input
           type="email"
           required
           value={email}
           onChange={e => { setEmail(e.target.value); if (status) setStatus(null) }}
           placeholder="Ваш email"
-          className="min-w-0 flex-1 px-3 py-2.5 text-sm text-white rounded-lg outline-none"
+          className="w-full px-3.5 py-2.5 text-sm text-white rounded-lg outline-none focus:border-[var(--accent)] transition-colors"
           style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
         />
         <button type="submit" disabled={status === 'loading'}
-          className="btn-primary px-4 py-2.5 text-sm whitespace-nowrap disabled:opacity-60">
+          className="btn-primary w-full justify-center px-4 py-2.5 text-sm disabled:opacity-60">
           {status === 'loading' ? '...' : 'Підписатись'}
         </button>
       </form>
@@ -90,22 +90,24 @@ export default function Footer() {
               <SubscribeForm />
             </div>
 
-            {/* Made in UA + статистика — компактно разом */}
-            <div className="flex flex-wrap items-stretch gap-2">
-              <div className="inline-flex items-center gap-2 rounded-lg px-3 text-xs font-bold tracking-wider border border-white/10"
+            {/* Made in UA + статистика */}
+            <div className="space-y-2.5 max-w-sm">
+              <div className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold tracking-wider border border-white/10"
                 style={{ background: 'rgba(255,255,255,0.05)' }}>
                 🇺🇦 <span>MADE IN UKRAINE</span>
               </div>
-              {[
-                { val: '20+', label: 'років' },
-                { val: '50K+', label: "об'єктів" },
-              ].map(s => (
-                <div key={s.val} className="rounded-lg px-3 py-1.5 text-center border border-white/8"
-                  style={{ background: 'rgba(255,255,255,0.04)' }}>
-                  <div className="font-black text-base font-['Archivo',sans-serif] text-white leading-tight">{s.val}</div>
-                  <div className="text-[11px] text-white/40">{s.label}</div>
-                </div>
-              ))}
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { val: '20+', label: 'років' },
+                  { val: '50K+', label: "об'єктів" },
+                ].map(s => (
+                  <div key={s.val} className="rounded-lg px-3 py-2 flex items-baseline gap-1.5 border border-white/8"
+                    style={{ background: 'rgba(255,255,255,0.04)' }}>
+                    <span className="font-black text-base font-['Archivo',sans-serif] text-white leading-none">{s.val}</span>
+                    <span className="text-[11px] text-white/45">{s.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
