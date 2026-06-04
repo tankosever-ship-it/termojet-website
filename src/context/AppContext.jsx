@@ -91,6 +91,11 @@ export function AppProvider({ children }) {
       .then(r => r.json())
       .then(data => { if (data) setSiteSettings(s => ({ ...s, ...data })) })
       .catch(() => {})
+
+    fetch(`${API}/faq`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setFaq(data) })
+      .catch(() => {})
   }, [])
 
   // helper for admin API calls
@@ -280,6 +285,36 @@ export function AppProvider({ children }) {
     setReviews(prev => [{ ...payload, id: Date.now(), published: 1 }, ...prev])
   }
 
+  // ── Адмін-CRUD з персистенцією в API ──
+  // Зберігає елемент (POST якщо новий → отримує id з БД, PUT якщо існує) + оновлює локальний стан.
+  async function adminSave(resource, setter, item) {
+    const isExisting = item.id != null && typeof item.id === 'number'
+    if (API && adminToken) {
+      try {
+        if (isExisting) {
+          await fetch(`${API}/${resource}/${item.id}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(item) })
+        } else {
+          const res = await fetch(`${API}/${resource}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(item) })
+          const data = await res.json().catch(() => ({}))
+          if (data.id != null) item = { ...item, id: data.id }
+        }
+      } catch {}
+    }
+    if (!item.id) item = { ...item, id: Date.now() }
+    setter(prev => isExisting ? prev.map(x => x.id === item.id ? { ...x, ...item } : x) : [...prev, item])
+    return item
+  }
+
+  async function adminDelete(resource, setter, id) {
+    if (API && adminToken) {
+      try { await fetch(`${API}/${resource}/${id}`, { method: 'DELETE', headers: authHeaders() }) } catch {}
+    }
+    setter(prev => prev.filter(x => x.id !== id))
+  }
+
+  const saveFaq   = (item) => adminSave('faq', setFaq, item)
+  const removeFaq = (id)   => adminDelete('faq', setFaq, id)
+
   return (
     <AppContext.Provider value={{
       lang, setLang,
@@ -301,6 +336,7 @@ export function AppProvider({ children }) {
       adminToken, authHeaders,
       placeOrder, sendConsultation, sendDealerRequest, subscribe,
       submitReview, moderateReview, removeReview, addReview,
+      adminSave, adminDelete, saveFaq, removeFaq,
       API,
     }}>
       {children}

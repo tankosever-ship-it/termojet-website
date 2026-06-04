@@ -114,6 +114,14 @@ function setup() {
       created_at  TEXT DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS faqs (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      question    TEXT NOT NULL,
+      answer      TEXT DEFAULT '',
+      sort        INTEGER DEFAULT 0,
+      created_at  TEXT DEFAULT (datetime('now'))
+    );
+
     CREATE TABLE IF NOT EXISTS settings (
       key         TEXT PRIMARY KEY,
       value       TEXT

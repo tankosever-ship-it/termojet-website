@@ -37,6 +37,7 @@ import AdminBlog from './pages/admin/AdminBlog'
 import AdminPortfolio from './pages/admin/AdminPortfolio'
 import AdminFiles from './pages/admin/AdminFiles'
 import AdminReviews from './pages/admin/AdminReviews'
+import AdminFAQ from './pages/admin/AdminFAQ'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -87,6 +88,7 @@ function AppLayout() {
           <Route path="/admin/portfolio" element={<AdminPortfolio />} />
           <Route path="/admin/files" element={<AdminFiles />} />
           <Route path="/admin/reviews" element={<AdminReviews />} />
+          <Route path="/admin/faq" element={<AdminFAQ />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
         </Routes>
       </main>
