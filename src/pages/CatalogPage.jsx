@@ -673,7 +673,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
 // масив = всі підрядки мають бути в ключі — для розрізнення ΔT=10/ΔT=20 за «10»/«20»,
 // що стійко до різних юнікодів Δ/△ і Т/T у даних).
 const BADGE_PREFERRED = {
-  'separatory':                 ['розмір'],
+  'separatory':                 ['розмір', 'пропускна'],
   'nasosni-hrupy':              [['qmax', '10'], ['qmax', '20'], 'kvs', 'ізоляц'],
   'klapany':                    ['dn', 'kvs', 'діапазон темп', 'різьба', 'тиск', 'крутний момент', 'керування', 'напруга', 'час оберт', 'підключ'],
   'nasosy':                     ['діаметр', 'qmax', 'макс. продуктивн', 'hmax', 'напір', 'споживана потужн', 'потужн'],
@@ -706,6 +706,7 @@ function extractBadges(product) {
     const keyBad = k => BADGE_EXCLUDE_KEYS.some(e => k.toLowerCase().includes(e))
     // голі числа → осмислена мітка за змістом ключа (DN15, «2 виходи»)
     const fmtVal = (lk, v) => {
+      if (/пропускна|здатн/.test(lk)) return v + ' м³/год'
       if (/^\d+$/.test(v)) {
         if (/\bdn\b|діаметр|розмір/.test(lk)) return 'DN' + v
         if (/контур/.test(lk)) return v + ' контури'
