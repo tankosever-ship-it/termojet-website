@@ -57,6 +57,10 @@ const ROWS = [
   ['TJ5503702401', 'Запірний кран Dn20 (3/4"M) Termojet', 14.2, 'sep-stopvalve', 'stopvalve', 'dodatkove', ''],
 ]
 
+// Пропускна здатність (м³/год) по DN — паспортний ряд Termojet +35%.
+// Тільки для проточних сепараторів (не для повітровідвідників air_vent).
+const FLOW = { '20': '1.8', '25': '2.7', '32': '5.0', '40': '6.8', '50': '10.1' }
+
 function buildSpecs(art, name, type) {
   const dn = (name.match(/Dn\s?(\d+)/i) || [])[1] || ''
   const inch = (name.match(/Dn\s?\d+\s*\(([^)]+)\)/i) || [])[1] || ''
@@ -69,6 +73,7 @@ function buildSpecs(art, name, type) {
   } else {
     s['Макс. температура'] = '110°C'; s['Макс. тиск'] = '10 бар'
     s['Матеріал'] = type === 'heatpump' ? 'Композит / латунь' : 'Латунь'
+    if (type !== 'air_vent' && FLOW[dn]) s['Пропускна здатність (м³/год)'] = FLOW[dn]
   }
   s['Виробник'] = 'TERMOJET'
   return s
