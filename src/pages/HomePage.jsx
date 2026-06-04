@@ -850,7 +850,7 @@ export default function HomePage() {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 65%)' }} />
 
-        <div className="relative max-w-5xl mx-auto px-4">
+        <div className="relative max-w-[57.6rem] mx-auto px-4">
 
           {/* Section header */}
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
@@ -942,10 +942,10 @@ export default function HomePage() {
                   <span className="flex items-center justify-center w-9 h-9 rounded-lg text-lg flex-shrink-0"
                     style={{ background: 'rgba(255,85,0,0.10)' }}>{item.icon}</span>
                   <div className="min-w-0">
-                    <div className="text-white font-semibold text-[15px] mb-1 leading-snug" style={{ fontFamily: "'Archivo', sans-serif" }}>
+                    <div className="text-white font-semibold text-[17px] mb-1 leading-snug" style={{ fontFamily: "'Archivo', sans-serif" }}>
                       {item.title}
                     </div>
-                    <div className="text-white/55 text-[13px] leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                    <div className="text-white/60 text-[14px] leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                       {item.desc}
                     </div>
                   </div>
