@@ -862,40 +862,62 @@ export default function HomePage() {
             </h2>
           </motion.div>
 
-          {/* Main: phones (left) + benefits (right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 items-center mb-8">
+          {/* Main: phones+buttons (left) + benefits 2-col (right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
 
-            {/* ── Phones: floating + glow + shimmer ── */}
-            <div className="relative flex justify-center items-center">
-              {/* Pulsing glow */}
-              <motion.div
-                animate={{ opacity: [0.25, 0.55, 0.25], scale: [1, 1.08, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 65%, rgba(255,85,0,0.22), transparent 70%)' }}
-              />
-
-              {/* Floating phones */}
-              <motion.div
-                animate={{ y: [0, -14, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative z-10 w-full max-w-[260px] overflow-hidden">
-
-                {/* Shimmer sweep */}
+            {/* ── LEFT: animated phones + app buttons ── */}
+            <div className="flex flex-col items-center gap-6">
+              <div className="relative flex justify-center items-center w-full">
+                {/* Pulsing glow */}
                 <motion.div
-                  animate={{ x: ['-120%', '220%'] }}
-                  transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 5, ease: 'easeInOut' }}
-                  className="absolute inset-y-0 w-1/3 pointer-events-none z-20"
-                  style={{ background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%)' }}
+                  animate={{ opacity: [0.25, 0.55, 0.25], scale: [1, 1.08, 1] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 65%, rgba(255,85,0,0.22), transparent 70%)' }}
                 />
 
-                <img src={assetPath('/app-promo-nobg.png')} alt="Termojet App"
-                  className="w-full block drop-shadow-2xl" style={{ filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }} />
-              </motion.div>
+                {/* Floating phones */}
+                <motion.div
+                  animate={{ y: [0, -14, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="relative z-10 w-full max-w-md overflow-hidden">
+
+                  {/* Shimmer sweep */}
+                  <motion.div
+                    animate={{ x: ['-120%', '220%'] }}
+                    transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 5, ease: 'easeInOut' }}
+                    className="absolute inset-y-0 w-1/3 pointer-events-none z-20"
+                    style={{ background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%)' }}
+                  />
+
+                  <img src={assetPath('/app-promo-nobg.png')} alt="Termojet App"
+                    className="w-full block drop-shadow-2xl" style={{ filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }} />
+                </motion.div>
+              </div>
+
+              {/* App buttons — одразу під анімованою картинкою */}
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
+                  className="btn-primary flex items-center gap-2 text-sm px-5 py-2.5">
+                  Запустити у браузері <ArrowUpRight size={16} />
+                </a>
+                <a href="https://apps.apple.com/ua/app/termojet/id6471802953" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 text-white text-sm transition-all hover:bg-white/8"
+                  style={{ border: '1px solid rgba(255,255,255,0.18)', fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                  App Store
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=ua.com.termojet.app" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 text-white text-sm transition-all hover:bg-white/8"
+                  style={{ border: '1px solid rgba(255,255,255,0.18)', fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.98.07l13.12-7.37-2.83-2.83-11.27 10.13zm-1.76-20.1A1.99 1.99 0 001 5.14v13.72c0 .72.39 1.35.96 1.69l.09.05 7.68-7.68v-.18L1.42 3.66zm17.8 8.22L16.67 9.6l-3.04 3.04 3.04 3.04 2.57-1.44c.73-.41.73-1.36-.02-1.76zM4.14.26L17.26 7.6l-2.83 2.83L4.16.91c.33-.19.72-.2.98-.65z"/></svg>
+                  Google Play
+                </a>
+              </div>
             </div>
 
-            {/* ── Benefits cards ── */}
-            <div className="flex flex-col gap-2">
+            {/* ── RIGHT: benefits 2-col ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {[
                 { icon: '📋', title: 'Повний каталог',       desc: 'Вся продукція Termojet завжди під рукою.' },
                 { icon: '⚙️', title: '100+ моделей',          desc: 'Конструктор з колекторів та насосних груп.' },
@@ -937,28 +959,6 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-
-          {/* ── Bottom CTAs ── */}
-          <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-6"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
-              className="btn-primary flex items-center gap-2 text-sm px-6 py-3">
-              Запустити у браузері <ArrowUpRight size={16} />
-            </a>
-            <a href="https://apps.apple.com/ua/app/termojet/id6471802953" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-5 py-3 text-white text-sm transition-all hover:bg-white/8"
-              style={{ border: '1px solid rgba(255,255,255,0.18)', fontFamily: "'IBM Plex Sans', sans-serif" }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-              App Store
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=ua.com.termojet.app" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-5 py-3 text-white text-sm transition-all hover:bg-white/8"
-              style={{ border: '1px solid rgba(255,255,255,0.18)', fontFamily: "'IBM Plex Sans', sans-serif" }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.98.07l13.12-7.37-2.83-2.83-11.27 10.13zm-1.76-20.1A1.99 1.99 0 001 5.14v13.72c0 .72.39 1.35.96 1.69l.09.05 7.68-7.68v-.18L1.42 3.66zm17.8 8.22L16.67 9.6l-3.04 3.04 3.04 3.04 2.57-1.44c.73-.41.73-1.36-.02-1.76zM4.14.26L17.26 7.6l-2.83 2.83L4.16.91c.33-.19.72-.2.98-.65z"/></svg>
-              Google Play
-            </a>
-          </motion.div>
 
         </div>
       </section>
