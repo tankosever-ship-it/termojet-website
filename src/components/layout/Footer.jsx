@@ -90,24 +90,10 @@ export default function Footer() {
               <SubscribeForm />
             </div>
 
-            {/* Made in UA + статистика */}
-            <div className="space-y-2.5 max-w-sm">
-              <div className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold tracking-wider border border-white/10"
-                style={{ background: 'rgba(255,255,255,0.05)' }}>
-                🇺🇦 <span>MADE IN UKRAINE</span>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {[
-                  { val: '20+', label: 'років' },
-                  { val: '50K+', label: "об'єктів" },
-                ].map(s => (
-                  <div key={s.val} className="rounded-lg px-3 py-2 flex items-baseline gap-1.5 border border-white/8"
-                    style={{ background: 'rgba(255,255,255,0.04)' }}>
-                    <span className="font-black text-base font-['Archivo',sans-serif] text-white leading-none">{s.val}</span>
-                    <span className="text-[11px] text-white/45">{s.label}</span>
-                  </div>
-                ))}
-              </div>
+            {/* Made in UA */}
+            <div className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold tracking-wider border border-white/10"
+              style={{ background: 'rgba(255,255,255,0.05)' }}>
+              🇺🇦 <span>MADE IN UKRAINE</span>
             </div>
           </div>
 
