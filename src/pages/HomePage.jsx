@@ -850,7 +850,7 @@ export default function HomePage() {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 65%)' }} />
 
-        <div className="relative max-w-3xl mx-auto px-4">
+        <div className="relative max-w-5xl mx-auto px-4">
 
           {/* Section header */}
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
@@ -863,7 +863,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Main: phones+buttons (left) + benefits 2-col (right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
 
             {/* ── LEFT: animated phones + app buttons ── */}
             <div className="flex flex-col items-center gap-6">
@@ -917,7 +917,7 @@ export default function HomePage() {
             </div>
 
             {/* ── RIGHT: benefits 2-col ── */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 auto-rows-fr">
               {[
                 { icon: '📋', title: 'Повний каталог',       desc: 'Вся продукція Termojet завжди під рукою.' },
                 { icon: '⚙️', title: '100+ моделей',          desc: 'Конструктор з колекторів та насосних груп.' },
@@ -926,35 +926,29 @@ export default function HomePage() {
                 { icon: '📄', title: 'Експорт PDF',           desc: 'Схема + список обладнання — одразу клієнту.' },
               ].map((item, i) => (
                 <motion.div key={i}
-                  initial={{ opacity:0, x:30 }}
-                  whileInView={{ opacity:1, x:0 }}
+                  initial={{ opacity:0, y:16 }}
+                  whileInView={{ opacity:1, y:0 }}
                   viewport={{ once:true }}
-                  transition={{ delay: i * 0.07, duration: 0.4 }}
+                  transition={{ delay: i * 0.06, duration: 0.4 }}
                   whileHover={{ y: -2 }}
-                  className="flex items-start gap-3 p-3 cursor-default group"
+                  className={`flex items-start gap-3 p-4 rounded-xl cursor-default group h-full ${i === 4 ? 'sm:col-span-2' : ''}`}
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                    borderRadius: 0,
+                    background: 'rgba(255,255,255,0.035)',
+                    border: '1px solid rgba(255,255,255,0.07)',
                     transition: 'border-color 0.2s, background 0.2s',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,85,0,0.35)'; e.currentTarget.style.background = 'rgba(255,85,0,0.04)' }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)' }}>
-                  <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
-                  <div>
-                    <div className="text-white font-semibold text-base mb-1" style={{ fontFamily: "'Archivo', sans-serif" }}>
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,85,0,0.35)'; e.currentTarget.style.background = 'rgba(255,85,0,0.05)' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.background = 'rgba(255,255,255,0.035)' }}>
+                  <span className="flex items-center justify-center w-9 h-9 rounded-lg text-lg flex-shrink-0"
+                    style={{ background: 'rgba(255,85,0,0.10)' }}>{item.icon}</span>
+                  <div className="min-w-0">
+                    <div className="text-white font-semibold text-[15px] mb-1 leading-snug" style={{ fontFamily: "'Archivo', sans-serif" }}>
                       {item.title}
                     </div>
-                    <div className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                    <div className="text-white/55 text-[13px] leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                       {item.desc}
                     </div>
                   </div>
-                  <motion.div
-                    animate={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="ml-auto self-center flex-shrink-0">
-                    <ArrowUpRight size={14} style={{ color: 'var(--accent)' }} />
-                  </motion.div>
                 </motion.div>
               ))}
             </div>
