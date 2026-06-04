@@ -16,8 +16,6 @@ const PROD_PHOTOS = [
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-12.jpg', label: '● Листогибне виробництво' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-22.jpg', label: '● Зварювання' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-32.jpg', label: '● Складання вузлів' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-41.jpg', label: '● Контроль якості' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-44.jpg', label: '● Готова продукція' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-33-55.jpg', label: '● Пакування' },
   { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-47.jpg', label: '● Склад відвантаження' },
 ]
@@ -45,7 +43,7 @@ function CategoryCard({ cat, lang }) {
   const imgSrc = cat.image
   return (
     <Link to={`/catalog/${cat.slug}`}
-      className="cat-card block h-full"
+      className="cat-card block"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
 
@@ -406,11 +404,10 @@ export default function HomePage() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
           <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
           <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
-            <iframe className="w-full h-full rounded-2xl shadow-2xl"
-              src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&rel=0&modestbranding=1`}
-              title="Termojet виробництво"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen />
+            <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
+              src={MP4_URL}
+              controls autoPlay playsInline
+              title="Termojet виробництво" />
             <button onClick={() => setVideoOpen(false)}
               className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
               <X size={18} />
@@ -538,7 +535,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            className="grid grid-cols-2 md:grid-cols-3 gap-3 items-start">
             {featuredCats.map(cat => (
               <motion.div key={cat.id} variants={fadeUp}>
                 <CategoryCard cat={cat} lang={lang} />
@@ -575,7 +572,7 @@ export default function HomePage() {
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { num: '01', title: 'Власне виробництво', desc: 'Завод 3 000 м² у Києві. Повний цикл від металу до готового вузла.' },
+              { num: '01', title: 'Власне виробництво', desc: 'Завод 3 000 м² у Києві та Житомирі. Повний цикл від металу до готового вузла.' },
               { num: '02', title: 'Гарантія якості',    desc: 'Кожна одиниця проходить вихідний контроль. ISO 9001:2015, CE.' },
               { num: '03', title: 'Наявність на складі', desc: 'Склад 2 500 м². Більшість позицій відвантажуємо наступного дня.' },
               { num: '04', title: 'Міжнародний досвід', desc: 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року.' },
@@ -703,7 +700,7 @@ export default function HomePage() {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 65%)' }} />
 
-        <div className="relative max-w-5xl mx-auto px-4">
+        <div className="relative max-w-3xl mx-auto px-4">
 
           {/* Section header */}
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
@@ -893,7 +890,7 @@ export default function HomePage() {
             {/* Left — big text */}
             <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
               <h2 className="font-black font-['Archivo',sans-serif] text-white leading-[0.9]"
-                style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
+                style={{ fontSize: 'clamp(2.4rem, 6.4vw, 5.6rem)' }}>
                 Готові<br />
                 <span className="text-outline-white">проєктувати</span><br />
                 котельню?
@@ -924,17 +921,23 @@ export default function HomePage() {
       ═══════════════════════════════════════════ */}
       <section className="py-16 md:py-20 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="cta-gradient grain rounded-2xl p-8 md:p-14 text-white text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-dots pointer-events-none" />
-            <div className="orb orb-orange w-64 h-64 -bottom-16 -right-8 opacity-35" />
+          <div className="rounded-2xl p-8 md:p-16 text-white text-center relative overflow-hidden">
+            {/* Фонове фото рукостискання */}
+            <img src={assetPath('/partners-handshake.jpg')} alt="" aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover" />
+            {/* Затемнення під текст */}
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: 'linear-gradient(180deg, rgba(8,10,14,0.78) 0%, rgba(8,10,14,0.62) 50%, rgba(8,10,14,0.80) 100%)' }} />
             <div className="relative">
-              <div className="inline-flex items-center gap-2 bg-white/8 border border-white/12 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-                🤝 Програма для партнерів
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 backdrop-blur-sm">
+                🤝 Партнерська програма
               </div>
-              <h2 className="section-title-white mb-4 max-w-xl mx-auto">{t('dealers').title}</h2>
-              <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">{t('dealers').subtitle}</p>
+              <h2 className="section-title-white mb-4 max-w-xl mx-auto">Станьте партнером Termojet</h2>
+              <p className="text-white/75 text-base mb-8 max-w-xl mx-auto">
+                Шукаємо дилерів у всіх регіонах України та за кордоном. Вигідні умови, технічна підтримка.
+              </p>
               <Link to="/partners" className="btn-primary px-8 py-4 text-base">
-                {t('dealers').ctaBecome} <ArrowRight size={16} />
+                Дізнатись про партнерство <ArrowRight size={16} />
               </Link>
             </div>
           </div>

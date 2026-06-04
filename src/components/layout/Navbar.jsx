@@ -323,6 +323,18 @@ export default function Navbar() {
             {/* Right actions */}
             <div className="flex items-center gap-1">
 
+              {/* Phone */}
+              <a href={`tel:${siteSettings.phone.replace(/[^\d+]/g, '')}`}
+                className="hidden lg:flex items-center gap-2 px-2.5 py-1.5 transition-all whitespace-nowrap"
+                style={{ color: linkCol }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.currentTarget.style.color = linkCol}>
+                <Phone size={15} className="text-[var(--accent)]" />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '13px', fontWeight: 600, letterSpacing: '0.01em' }}>
+                  {siteSettings.phone}
+                </span>
+              </a>
+
               {/* Search */}
               <button onClick={() => setSearchOpen(v => !v)}
                 className="p-2 hidden md:flex transition-all"
@@ -370,17 +382,17 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* CTA */}
+              {/* CTA — Консультація (головна, оранжева заливка) + Стати партнером (оранжева рамка) */}
               <Link to="/partners"
-                className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
-                style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
-                Стати партнером
-              </Link>
-              <Link to="/contacts"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
+                Стати партнером
+              </Link>
+              <Link to="/contacts"
+                className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
+                style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
                 Консультація
               </Link>
 
@@ -449,15 +461,21 @@ export default function Navbar() {
                 Теплові насоси <ExternalLink size={11} />
               </a>
 
-              <div className="flex gap-2 pt-3 border-t border-[var(--border)] mt-2">
+              <a href={`tel:${siteSettings.phone.replace(/[^\d+]/g, '')}`}
+                className="px-3 py-2.5 mt-2 flex items-center gap-2 transition-colors"
+                style={{ ...navLinkStyle, color: '#1a1a1a', fontWeight: 600 }}>
+                <Phone size={15} className="text-[var(--accent)]" /> {siteSettings.phone}
+              </a>
+
+              <div className="flex gap-2 pt-3 border-t border-[var(--border)] mt-1">
                 <Link to="/partners"
-                  className="flex-1 py-2.5 text-white text-center"
-                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
+                  className="flex-1 py-2.5 text-center"
+                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
                   Стати партнером
                 </Link>
                 <Link to="/contacts"
-                  className="flex-1 py-2.5 text-center"
-                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
+                  className="flex-1 py-2.5 text-white text-center"
+                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
                   Консультація
                 </Link>
               </div>

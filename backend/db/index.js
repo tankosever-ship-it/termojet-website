@@ -108,6 +108,12 @@ function setup() {
       created_at  TEXT DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS subscribers (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      email       TEXT NOT NULL UNIQUE,
+      created_at  TEXT DEFAULT (datetime('now'))
+    );
+
     CREATE TABLE IF NOT EXISTS settings (
       key         TEXT PRIMARY KEY,
       value       TEXT
@@ -116,7 +122,7 @@ function setup() {
 
   // default settings
   const insertSetting = db.prepare(`INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)`)
-  insertSetting.run('phone', '+380 50 718 91 65')
+  insertSetting.run('phone', '+380 (50) 450 64 24')
   insertSetting.run('email', 'termojet@sofievka.kiev.ua')
   insertSetting.run('address', 'м. Київ, вул. Виробнича, 1')
   insertSetting.run('workHours', 'Пн-Пт 9:00–18:00')

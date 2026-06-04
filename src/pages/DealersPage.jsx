@@ -134,7 +134,7 @@ export default function DealersPage() {
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
                   <textarea {...register('comment')} placeholder="Розкажіть про ваш бізнес — чим займаєтесь, скільки років на ринку, які обсяги планує"
                     rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none" />
-                  <ConsentCheckbox register={register} error={errors.consent} />
+                  <ConsentCheckbox buttonLabel="Подати заявку на партнерство" />
                   <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-3">
                     {dealersT.ctaBecome}
                   </button>

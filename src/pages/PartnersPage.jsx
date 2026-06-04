@@ -140,7 +140,7 @@ function PartnerForm() {
           className={`${inp} border-gray-200 resize-none`} />
       </div>
 
-      <ConsentCheckbox />
+      <ConsentCheckbox buttonLabel="Надіслати заявку на партнерство" />
       <button type="submit"
         className="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all hover:opacity-90"
         style={{ background: 'var(--accent)' }}>

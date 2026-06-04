@@ -1,8 +1,52 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Clock, ArrowRight, ExternalLink } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
 import { assetPath } from '../../utils/assetPath'
+
+// ─── Форма підписки на новини ───
+function SubscribeForm() {
+  const { subscribe } = useApp()
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState(null) // null | 'loading' | 'ok' | 'err'
+
+  async function onSubmit(e) {
+    e.preventDefault()
+    if (!email.trim() || status === 'loading') return
+    setStatus('loading')
+    const res = await subscribe(email.trim())
+    if (res.ok) { setStatus('ok'); setEmail('') }
+    else setStatus('err')
+  }
+
+  return (
+    <div>
+      <form onSubmit={onSubmit} className="flex gap-2">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={e => { setEmail(e.target.value); if (status) setStatus(null) }}
+          placeholder="Ваш email"
+          className="flex-1 px-4 py-2.5 text-sm text-white rounded-lg outline-none"
+          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+        />
+        <button type="submit" disabled={status === 'loading'}
+          className="btn-primary px-5 py-2.5 text-sm whitespace-nowrap disabled:opacity-60">
+          {status === 'loading' ? '...' : 'Підписатись'}
+        </button>
+      </form>
+      {status === 'ok'  && <p className="text-[var(--accent-light)] text-xs mt-2">Дякуємо! Ви підписані на новини.</p>}
+      {status === 'err' && <p className="text-red-400 text-xs mt-2">Не вдалося підписатися. Спробуйте ще раз.</p>}
+      <p className="text-white/35 text-xs leading-relaxed mt-2">
+        Надаючи свій імейл ви погоджуєтесь з{' '}
+        <Link to="/privacy" className="underline hover:text-white/60" target="_blank">політикою конфіденційності</Link>
+        {' '}та даєте згоду на отримання новин.
+      </p>
+    </div>
+  )
+}
 
 export default function Footer() {
   const { siteSettings, lang } = useApp()
@@ -161,13 +205,42 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* ─── Newsletter ─── */}
+      <div className="relative border-t border-white/8">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+            <div>
+              <div className="font-bold text-white/90 text-lg mb-1 font-['Archivo',sans-serif] flex items-center gap-2">
+                <span className="w-1 h-4 rounded bg-[var(--accent)] inline-block" />
+                Підпишіться на новини
+              </div>
+              <p className="text-white/45 text-sm">Новинки, акції та технічні матеріали Termojet — на ваш email.</p>
+            </div>
+            <SubscribeForm />
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Service / legal links ─── */}
+      <div className="relative border-t border-white/8">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/50">
+          {[
+            ['Доставка і оплата', '/delivery'],
+            ['Повернення та обмін', '/returns'],
+            ['Політика конфіденційності', '/privacy'],
+            ['Умови використання', '/terms'],
+            ['Консультація', '/contacts'],
+          ].map(([label, to]) => (
+            <Link key={to} to={to} className="hover:text-white transition-colors">{label}</Link>
+          ))}
+        </div>
+      </div>
+
       {/* ─── Bottom bar ─── */}
       <div className="relative border-t border-white/8">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/30">
           <span>© {new Date().getFullYear()} Termojet. {footer.rights}.</span>
           <div className="flex gap-5">
-            <Link to="/privacy" className="hover:text-white/60 transition-colors">{footer.privacy}</Link>
-            <Link to="/terms" className="hover:text-white/60 transition-colors">{footer.terms}</Link>
             <a href="https://termojet.com.ua" target="_blank" rel="noopener noreferrer"
               className="hover:text-white/60 transition-colors flex items-center gap-1">
               termojet.com.ua <ExternalLink size={10} />

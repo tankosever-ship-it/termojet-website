@@ -36,6 +36,7 @@ app.use('/api/portfolio', require('./routes/portfolio'))
 app.use('/api/reviews', require('./routes/reviews'))
 app.use('/api/files', require('./routes/files'))
 app.use('/api/settings', require('./routes/settings'))
+app.use('/api/subscribers', require('./routes/subscribers'))
 app.use('/api/upload', require('./routes/upload'))
 
 // serve React build

@@ -47,7 +47,7 @@ export function AppProvider({ children }) {
   const [adminToken, setAdminToken] = useState(loadAdminToken)
   const [eurRate, setEurRate] = useState(null)
   const [siteSettings, setSiteSettings] = useState({
-    phone: '+380 50 718 91 65',
+    phone: '+380 (50) 450 64 24',
     email: 'termojet@sofievka.kiev.ua',
     address: 'м. Київ, вул. Виробнича, 1',
     workHours: 'Пн-Пт 9:00–18:00',
@@ -211,6 +211,24 @@ export function AppProvider({ children }) {
     setDealers(prev => [{ ...data, id: Date.now() }, ...prev])
   }
 
+  async function subscribe(email) {
+    if (!API) return { ok: true } // демо-режим без бекенду
+    try {
+      const res = await fetch(`${API}/subscribers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        return { ok: false, error: err.error || 'Помилка' }
+      }
+      return { ok: true }
+    } catch {
+      return { ok: false, error: 'Помилка мережі' }
+    }
+  }
+
   return (
     <AppContext.Provider value={{
       lang, setLang,
@@ -230,7 +248,7 @@ export function AppProvider({ children }) {
       siteSettings, setSiteSettings,
       isAdminAuth, adminLogin, adminLogout,
       adminToken, authHeaders,
-      placeOrder, sendConsultation, sendDealerRequest,
+      placeOrder, sendConsultation, sendDealerRequest, subscribe,
       API,
     }}>
       {children}

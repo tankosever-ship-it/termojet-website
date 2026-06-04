@@ -368,7 +368,7 @@ export default function ServicePage() {
                 </div>
                 <textarea {...register('message')} placeholder="Опишіть вашу ситуацію або питання..." rows={5}
                   className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none" />
-                <ConsentCheckbox register={register} error={errors.consent} />
+                <ConsentCheckbox buttonLabel="Надіслати заявку" />
                 <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-3.5 text-base">
                   {isSubmitting ? 'Надсилаємо...' : 'Надіслати заявку'}
                 </button>

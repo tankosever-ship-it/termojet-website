@@ -129,7 +129,7 @@ export default function CartPage() {
                 rows={2}
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none"
               />
-              <ConsentCheckbox register={register} error={errors.consent} />
+              <ConsentCheckbox buttonLabel="Оформити замовлення" />
               <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-3">
                 {cartT.form.submit}
               </button>

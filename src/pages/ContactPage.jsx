@@ -161,7 +161,7 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm transition-colors resize-none" />
                   </div>
 
-                  <ConsentCheckbox register={register} error={errors.consent} />
+                  <ConsentCheckbox buttonLabel="Надіслати" />
 
                   <button type="submit" disabled={isSubmitting}
                     className="w-full flex items-center justify-center gap-2 py-3.5 font-bold text-white transition-all"

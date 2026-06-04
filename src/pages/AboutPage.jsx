@@ -125,6 +125,7 @@ function PhotoGallery({ photos }) {
 export default function AboutPage() {
   const t     = useT()
   const about = t('about')
+  const [videoOpen, setVideoOpen] = useState(false)
 
   return (
     <>
@@ -305,22 +306,48 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Video */}
+          {/* Video — невелике вікно, клік розгортає на весь екран */}
           <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
             viewport={{ once:true }} transition={{ duration:0.5 }}
-            className="relative overflow-hidden mb-2 max-w-5xl mx-auto">
+            onClick={() => setVideoOpen(true)}
+            className="relative overflow-hidden mb-2 max-w-md mx-auto rounded-xl cursor-pointer group">
             <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.3)' }}
               className="absolute top-3 left-3 z-10 uppercase bg-black/50 px-2 py-1">
               ● LIVE / ВИРОБНИЧИЙ ЦЕХ
             </div>
             <video
-              autoPlay muted loop playsInline controls
-              className="w-full"
+              autoPlay muted loop playsInline
+              className="w-full block"
               style={{ display: 'block' }}
             >
               <source src={MANUFACTURING_VIDEO} type="video/mp4" />
             </video>
+            {/* play / expand overlay */}
+            <div className="absolute inset-0 flex items-center justify-center transition-colors group-hover:bg-black/30">
+              <span className="w-14 h-14 rounded-full bg-white/15 border border-white/40 backdrop-blur-sm flex items-center justify-center opacity-80 transition-all group-hover:opacity-100 group-hover:scale-110">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+            </div>
+            <div className="absolute bottom-3 right-3 z-10 bg-black/50 px-2 py-1 uppercase"
+              style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.65)' }}>
+              Натисніть, щоб розгорнути ↗
+            </div>
           </motion.div>
+
+          {/* Video modal — окреме вікно на весь екран */}
+          {videoOpen && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
+              <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
+              <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
+                <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
+                  src={MANUFACTURING_VIDEO} controls autoPlay playsInline />
+                <button onClick={() => setVideoOpen(false)}
+                  className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Photo count label */}
           <div className="text-center mb-3">
