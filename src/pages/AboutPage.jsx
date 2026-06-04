@@ -11,11 +11,6 @@ const BASE = 'https://termojet.com.ua/wp-content/uploads'
 const MANUFACTURING_VIDEO = `${BASE}/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4`
 
 const MANUFACTURING_PHOTOS = [
-  `${BASE}/2024/04/photo_2024-04-05_18-35-38.jpg`,
-  `${BASE}/2024/04/photo_2024-04-05_18-35-34.jpg`,
-  `${BASE}/2024/04/photo_2024-04-05_18-35-47.jpg`,
-  `${BASE}/2024/04/photo_2024-04-05_18-35-41.jpg`,
-  `${BASE}/2024/04/photo_2024-04-05_18-35-44.jpg`,
   `${BASE}/2024/04/photo_2024-04-05_18-34-39.jpg`,
   `${BASE}/2024/04/photo_2024-04-05_18-34-32.jpg`,
   `${BASE}/2024/04/photo_2024-04-05_18-34-36.jpg`,
