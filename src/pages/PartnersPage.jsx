@@ -179,11 +179,11 @@ export default function PartnersPage() {
 
           {/* Банер під текстом — рукостискання */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="relative rounded-2xl overflow-hidden mb-16 shadow-xl ring-1 ring-black/5 aspect-[16/6]">
+            className="relative rounded-2xl overflow-hidden mb-16 shadow-xl ring-1 ring-black/5 max-w-4xl mx-auto aspect-[21/7]">
             <img src={assetPath('/partners-handshake.jpg')} alt="Партнерство з Termojet"
               className="absolute inset-0 w-full h-full object-cover object-center" />
             <div className="absolute inset-0 pointer-events-none"
-              style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(8,10,14,0.55) 100%)' }} />
+              style={{ background: 'linear-gradient(180deg, rgba(8,10,14,0.40) 0%, rgba(8,10,14,0.35) 45%, rgba(8,10,14,0.70) 100%)' }} />
             <div className="absolute bottom-5 left-6 right-6">
               <p className="text-white font-bold text-lg md:text-2xl font-['Archivo',sans-serif] drop-shadow">
                 Зростаймо разом
