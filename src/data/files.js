@@ -7,13 +7,13 @@ export const FILES = [
   // === КАТАЛОГ / ПРАЙС ===
   {
     id: 1,
-    name: 'Каталог продукції TERMOJET',
+    name: 'Каталог продукції TERMOJET 2026',
     category: 'Каталоги та прайси',
     format: 'PDF',
-    url: `${BASE}/2024/03/katalogua.pdf`,
+    url: `/uploads/files/katalog-termojet-2026-ua.pdf`,
     lang: 'uk',
-    year: 2024,
-    desc: 'Повний асортимент: насосні групи, колектори, гідрострілки, клапани, насоси',
+    year: 2026,
+    desc: 'Повний асортимент 2026: насосні групи, колектори, гідрострілки, клапани, насоси, сепаратори',
   },
   {
     id: 2,
@@ -527,4 +527,10 @@ export const FILES = [
   { id: 134, name: 'Інструкція — Сепаратор повітря та бруду', category: 'Інструкції', format: 'PDF', url: '/files/sep-combined-instr.pdf', lang: 'uk', year: 2025, desc: 'Деаератор і сепаратор бруду TJVT6G' },
   { id: 135, name: 'Інструкція — Сепаратор бруду для теплових насосів', category: 'Інструкції', format: 'PDF', url: '/files/sep-heatpump-instr.pdf', lang: 'uk', year: 2025, desc: 'Магнітний сепаратор бруду TJ7575 для систем із тепловими насосами' },
   { id: 136, name: 'Інструкція — Антифризний клапан', category: 'Інструкції', format: 'PDF', url: '/files/antifreeze-instr.pdf', lang: 'uk', year: 2025, desc: 'Встановлення антифризного клапана TJ7590' },
+
+  // ── Брошури на серії насосів (#3) ──
+  { id: 140, name: 'Брошура — GRANDLIFT', category: 'Брошури', format: 'PDF', url: '/files/brochure-grandlift-ua.pdf', lang: 'uk', year: 2026, desc: 'Каналізаційні насосні станції GRANDLIFT: моделі, характеристики' },
+  { id: 141, name: 'Брошура — MEGA', category: 'Брошури', format: 'PDF', url: '/files/brochure-mega-ua.pdf', lang: 'uk', year: 2026, desc: 'Інтелектуальний циркуляційний насос MEGA 100-120F' },
+  { id: 142, name: 'Брошура — SILENCER', category: 'Брошури', format: 'PDF', url: '/files/brochure-silencer-ua.pdf', lang: 'uk', year: 2026, desc: 'Підвищувальні насоси SILENCER у шумоізоляції' },
+  { id: 143, name: 'Каталог — TBE', category: 'Брошури', format: 'PDF', url: '/uploads/files/brochure-tbe-ua.pdf', lang: 'uk', year: 2026, desc: 'Інлайн-насоси з частотним керуванням TBE (постійний тиск)' },
 ]

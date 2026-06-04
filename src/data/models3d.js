@@ -42,6 +42,7 @@ export const MODELS_BY_SLUG = {
   "kolektor-k32v-125-200": [{ file: 'kolektor-k32v-125-200.step', name: 'К32В.125(200).step', size: '6 МБ', glb: '/uploads/3d/kolektor-k32v-125-200.glb' }],
   "kolektor-k32v-150-300": [{ file: 'kolektor-k32v-150-300.step', name: 'К32В.150(300).step', size: '22 МБ', glb: '/uploads/3d/kolektor-k32v-150-300.glb' }],
   "kolektor-k42n-125-200": [{ file: 'kolektor-k42n-125-200.step', name: 'К42Н.125(200).step', size: '25 МБ', glb: '/uploads/3d/kolektor-k42n-125-200.glb' }],
+  "kolektor-k42n-150-300": [{ file: 'kolektor-k42n-150-300.step', name: 'К42Н.150(300).step', size: '27 МБ', glb: '/uploads/3d/kolektor-k42n-150-300.glb' }],
   "kolektor-k42v-125-200": [{ file: 'kolektor-k42v-125-200.step', name: 'К42В.125(200).step', size: '25 МБ', glb: '/uploads/3d/kolektor-k42v-125-200.glb' }],
   "kolektor-k42v-150-300": [{ file: 'kolektor-k42v-150-300.step', name: 'К42В.150(300).step', size: '26 МБ', glb: '/uploads/3d/kolektor-k42v-150-300.glb' }],
   "kolektor-k42vn-150-300": [{ file: 'kolektor-k42vn-150-300.step', name: 'К42ВН.150(300).step', size: '20 МБ', glb: '/uploads/3d/kolektor-k42vn-150-300.glb' }],
@@ -92,6 +93,34 @@ export const MODELS_BY_SLUG = {
   "perehid-pid-svarku-40-40": [{ file: 'perehid-pid-svarku-40-40.step', name: '84050121.step', size: '1 МБ', glb: '/uploads/3d/perehid-pid-svarku-40-40.glb' }],
   "perehid-pid-svarku-50-50": [{ file: 'perehid-pid-svarku-50-50.step', name: '84050122.step', size: '1 МБ', glb: '/uploads/3d/perehid-pid-svarku-50-50.glb' }],
   "silownik-termojet-aqua401-60-sek": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
+
+  // ── #1 (Етап 3): розподіл наявних 3D-моделей на схожі насоси/приводи за серією ──
+  // APE-130 → джерело ape-25-40-130mm
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-20-60-130-mm": [{ file: 'nasos-termojet-auto-ape-25-40-130mm.step', name: '30254013.step', size: '15 МБ', glb: '/uploads/3d/nasos-termojet-auto-ape-25-40-130mm.glb' }],
+  "nasos-termojet-auto-ape-25-60-130mm": [{ file: 'nasos-termojet-auto-ape-25-40-130mm.step', name: '30254013.step', size: '15 МБ', glb: '/uploads/3d/nasos-termojet-auto-ape-25-40-130mm.glb' }],
+  "nasos-termojet-auto-ape-25-80-130mm": [{ file: 'nasos-termojet-auto-ape-25-40-130mm.step', name: '30254013.step', size: '15 МБ', glb: '/uploads/3d/nasos-termojet-auto-ape-25-40-130mm.glb' }],
+  // APE-180 → джерело ape-32-80-180-mm
+  "nasos-termojet-auto-ape-25-40-180mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm.step', name: '30328018.step', size: '16 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm.step', name: '30328018.step', size: '16 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm.glb' }],
+  "nasos-termojet-auto-ape-25-80-180mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm.step', name: '30328018.step', size: '16 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm.glb' }],
+  // APM → джерело apm-32-12-180mm
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-25-8-180-mm": [{ file: 'nasos-termojet-auto-apm-32-12-180mm.step', name: '30321218.step', size: '20 МБ', glb: '/uploads/3d/nasos-termojet-auto-apm-32-12-180mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-25-12-180-mm": [{ file: 'nasos-termojet-auto-apm-32-12-180mm.step', name: '30321218.step', size: '20 МБ', glb: '/uploads/3d/nasos-termojet-auto-apm-32-12-180mm.glb' }],
+  "nasos-termojet-auto-apm-32-8-180mm": [{ file: 'nasos-termojet-auto-apm-32-12-180mm.step', name: '30321218.step', size: '20 МБ', glb: '/uploads/3d/nasos-termojet-auto-apm-32-12-180mm.glb' }],
+  "nasos-termojet-auto-apm-32-10-180mm": [{ file: 'nasos-termojet-auto-apm-32-12-180mm.step', name: '30321218.step', size: '20 МБ', glb: '/uploads/3d/nasos-termojet-auto-apm-32-12-180mm.glb' }],
+  // APM-F 250/280 → джерело apm-50-12f-280-mm (220мм взято найближчу 280-модель)
+  "nasos-tsyrkulyatsiynyy-termojet-auto-enerhozberihayuchyy-apm-40-8f-220-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.step', name: '30501228.step', size: '24 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-12f-250-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.step', name: '30501228.step', size: '24 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-15f-250-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.step', name: '30501228.step', size: '24 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-18f-250-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.step', name: '30501228.step', size: '24 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-10f-280-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.step', name: '30501228.step', size: '24 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm.glb' }],
+  // APM-F 340 → джерело apm-65-12f-340-mm
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-10f-340-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.step', name: '30651234.step', size: '18 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-15f-340-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.step', name: '30651234.step', size: '18 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.glb' }],
+  // Приводи → джерело 405N (silownik-termojet-aqua401-60-sek) на 401/411/412
+  "elektropryvid-z-trypozyczijnym-upravlinnyam-termojet-401n-230-v-120-sek-siryj": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
+  "elektropryvid-termojet-411-24v-ac-dc-02-10v-60s-120s-90-6-nm": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
+  "aquao910-3-230-060": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
 }
 
 export function getModels3D(slug) {

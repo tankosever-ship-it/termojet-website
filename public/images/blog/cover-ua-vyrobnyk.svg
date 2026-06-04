@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0D0D0D"/>
+  <!-- subtle UA accent band -->
+  <rect x="0" y="0" width="22" height="630" fill="#0057B7"/>
+  <rect x="22" y="0" width="22" height="630" fill="#FFD700"/>
+  <!-- gear -->
+  <g transform="translate(300 315)" fill="none" stroke="#E85D04" stroke-width="22">
+    <circle r="120"/>
+    <circle r="48" stroke="#ffffff" stroke-width="18"/>
+    <g stroke="#E85D04" stroke-width="34" stroke-linecap="round">
+      <line x1="0" y1="-120" x2="0" y2="-170"/>
+      <line x1="0" y1="120" x2="0" y2="170"/>
+      <line x1="-120" y1="0" x2="-170" y2="0"/>
+      <line x1="120" y1="0" x2="170" y2="0"/>
+      <line x1="-85" y1="-85" x2="-120" y2="-120"/>
+      <line x1="85" y1="85" x2="120" y2="120"/>
+      <line x1="-85" y1="85" x2="-120" y2="120"/>
+      <line x1="85" y1="-85" x2="120" y2="-120"/>
+    </g>
+  </g>
+  <!-- text -->
+  <text x="540" y="270" font-family="Arial, sans-serif" font-size="58" font-weight="bold" fill="#ffffff">Зроблено</text>
+  <text x="540" y="345" font-family="Arial, sans-serif" font-size="58" font-weight="bold" fill="#FFD700">в Україні</text>
+  <text x="540" y="417" font-family="Arial, sans-serif" font-size="30" fill="#9ca3af">Альтернатива імпортному котельному обладнанню</text>
+  <text x="540" y="500" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#E85D04" letter-spacing="4">TERMOJET</text>
+</svg>

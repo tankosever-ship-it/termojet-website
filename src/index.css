@@ -60,6 +60,13 @@
 
 @layer utilities {
 
+  /* ─── Смужка плиток-категорій: тонкий скролбар ─── */
+  .cat-strip { scrollbar-width: thin; scrollbar-color: #d1d1d1 transparent; }
+  .cat-strip::-webkit-scrollbar { height: 6px; }
+  .cat-strip::-webkit-scrollbar-track { background: transparent; }
+  .cat-strip::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 3px; }
+  .cat-strip::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+
   /* ─── BASE CARDS ─── */
   .card {
     background: white;
@@ -574,11 +581,16 @@
     position: relative;
     border-top: 2px solid transparent;
   }
-  .product-card-new:hover {
-    box-shadow: 0 8px 32px rgba(255,107,0,0.10);
-    transform: translateY(-2px);
-    border-top-color: var(--accent);
-    background: rgba(255,107,0,0.03);
+  /* Hover-ефекти лише на пристроях з курсором — інакше на тачі
+     перший тап «застрягає» на :hover замість переходу (баг #18). */
+  @media (hover: hover) and (pointer: fine) {
+    .product-card-new:hover {
+      box-shadow: 0 8px 32px rgba(255,107,0,0.10);
+      transform: translateY(-2px);
+      border-top-color: var(--accent);
+      background: rgba(255,107,0,0.03);
+    }
+    .product-card-new:hover .quick-bar { transform: translateY(0); }
   }
 
   /* Quick-action bar */
@@ -591,7 +603,10 @@
     backdrop-filter: blur(8px);
     border-top: 1px solid var(--border);
   }
-  .product-card-new:hover .quick-bar { transform: translateY(0); }
+  /* На тач-пристроях панель дій показана завжди (немає hover-стану) */
+  @media (hover: none), (pointer: coarse) {
+    .quick-bar { transform: translateY(0); }
+  }
 
   /* Spec pill */
   .spec-pill {

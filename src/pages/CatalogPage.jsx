@@ -35,6 +35,24 @@ const stagger = { show: { transition: { staggerChildren: 0.04 } } }
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
 const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
 
+// Продуктивність насоса (м³/год) зі specs; л/хв → м³/год
+const qmaxNum = p => {
+  const s = p.specs || {}
+  const raw = String(s['Qmax'] || s['Макс. продуктивність'] || s['Продуктивність'] || s['Максимальна подача'] || '')
+  const m = raw.match(/([\d]+[.,]?[\d]*)/)
+  if (!m) return null
+  let v = parseFloat(m[1].replace(',', '.'))
+  if (/л\/хв/i.test(raw)) v = v * 0.06
+  return v
+}
+// Напір насоса (м) зі specs
+const napirNum = p => {
+  const s = p.specs || {}
+  const raw = String(s['Hmax'] || s['Макс. напір'] || s['Максимальний напір'] || s['Напір'] || '')
+  const m = raw.match(/([\d]+[.,]?[\d]*)/)
+  return m ? parseFloat(m[1].replace(',', '.')) : null
+}
+
 // Тип приєднання насоса (з назви + полів specs про зʼєднання/діаметр/вихід)
 const pumpConnHay = p => {
   const s = p.specs || {}
@@ -162,6 +180,7 @@ const CATEGORY_FILTERS = {
           { label: 'GRANDLIFT', test: p => /\bGRANDLIFT\b/i.test(p.name) },
           { label: 'MEGA',      test: p => /\bMEGA\b/i.test(p.name) },
           { label: 'SILENCER',  test: p => /\bSILENCER\b/i.test(p.name) },
+          { label: 'TBE',       test: p => /\bTBE\b/i.test(p.name) },
         ],
       },
       {
@@ -206,6 +225,63 @@ const CATEGORY_FILTERS = {
           { label: '180 мм',     test: p => /\/180\b/.test(p.name) },
           { label: '220–250 мм', test: p => /\/220\b|[-\/]250\b/.test(p.name) },
           { label: '280–340 мм', test: p => /[-\/]280\b|[-\/]340\b/.test(p.name) },
+        ],
+      },
+      {
+        key: 'qmax',
+        label: 'Продуктивність, м³/год',
+        multi: true,
+        options: [
+          { label: 'до 4',    test: p => { const v = qmaxNum(p); return v !== null && v <= 4 } },
+          { label: '4–10',    test: p => { const v = qmaxNum(p); return v !== null && v > 4 && v <= 10 } },
+          { label: '10–25',   test: p => { const v = qmaxNum(p); return v !== null && v > 10 && v <= 25 } },
+          { label: '25+',     test: p => { const v = qmaxNum(p); return v !== null && v > 25 } },
+        ],
+      },
+      {
+        key: 'napir',
+        label: 'Напір, м',
+        multi: true,
+        options: [
+          { label: 'до 6',   test: p => { const v = napirNum(p); return v !== null && v <= 6 } },
+          { label: '6–10',   test: p => { const v = napirNum(p); return v !== null && v > 6 && v <= 10 } },
+          { label: '10+',    test: p => { const v = napirNum(p); return v !== null && v > 10 } },
+        ],
+      },
+    ],
+  },
+
+  'termojet-box': {
+    groups: [
+      {
+        key: 'model',
+        label: 'Модель',
+        options: [
+          { label: 'НГ-36', test: p => /НГ-36/i.test(p.name) },
+          { label: 'НГ-37', test: p => /НГ-37/i.test(p.name) },
+          { label: 'НГ-38', test: p => /НГ-38/i.test(p.name) },
+          { label: 'BOX2',  test: p => /BOX\s*2/i.test(p.name) },
+          { label: 'BOX3',  test: p => /BOX\s*3/i.test(p.name) },
+        ],
+      },
+      {
+        key: 'exec',
+        label: 'Виконання',
+        multi: true,
+        options: [
+          { label: 'Пряма',            test: p => /пряма/i.test(p.name) },
+          { label: 'Зі змішувачем',    test: p => /змішувач/i.test(p.name) },
+          { label: 'З термокраном',    test: p => /термостатичним краном|термокран/i.test(p.name) },
+          { label: 'З приводом 413',   test: p => /привід|413|A-?413/i.test(p.name + ' ' + (p.specs?.['Привід'] || '')) },
+        ],
+      },
+      {
+        key: 'circuits',
+        label: 'Контури (BOX)',
+        multi: true,
+        options: [
+          { label: '2 контури', test: p => /BOX\s*2/i.test(p.name) || /\b2\b/.test(p.specs?.['Контури'] || '') },
+          { label: '3 контури', test: p => /BOX\s*3/i.test(p.name) || /\b3\b/.test(p.specs?.['Контури'] || '') },
         ],
       },
     ],
@@ -489,12 +565,18 @@ const CATEGORY_FILTERS = {
   },
 }
 
-function Sidebar({ categorySlug, filters, setFilters }) {
+function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPrice }) {
   const config = CATEGORY_FILTERS[categorySlug]
-  if (!config) return null
+  const hasPrice = priceBounds && priceBounds[1] > priceBounds[0]
+  if (!config && !hasPrice) return null
 
-  const hasAny = Object.values(filters).some(Boolean)
   const mono = { fontFamily: "'JetBrains Mono', monospace" }
+  const lo = price ? price[0] : (priceBounds ? priceBounds[0] : 0)
+  const hi = price ? price[1] : (priceBounds ? priceBounds[1] : 0)
+  const priceActive = hasPrice && (lo > priceBounds[0] || hi < priceBounds[1])
+  const filtersActive = Object.values(filters).some(v => Array.isArray(v) ? v.length : v)
+  const hasAny = filtersActive || priceActive
+  const fmt = n => Math.round(n).toLocaleString('uk-UA')
 
   return (
     <aside className="hidden lg:block w-52 flex-shrink-0">
@@ -506,7 +588,7 @@ function Sidebar({ categorySlug, filters, setFilters }) {
             Фільтри
           </span>
           {hasAny && (
-            <button onClick={() => setFilters({})}
+            <button onClick={() => { setFilters({}); setPrice(null) }}
               className="flex items-center gap-1 transition-colors hover:text-[var(--accent)]"
               style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
               <X size={10} /> Скинути
@@ -514,9 +596,31 @@ function Sidebar({ categorySlug, filters, setFilters }) {
           )}
         </div>
 
-        {/* Filter groups */}
         <div className="p-3 space-y-5 overflow-y-auto overscroll-contain flex-1">
-          {config.groups.map(group => (
+
+          {/* Ціна (#5) */}
+          {hasPrice && (
+            <div>
+              <div className="mb-2 px-1 flex items-center justify-between"
+                style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
+                <span>Ціна, ₴</span>
+              </div>
+              <div className="px-1">
+                <div className="flex items-center justify-between mb-1.5" style={{ ...mono, fontSize: '11px', fontWeight: 700, color: 'var(--accent)' }}>
+                  <span>{fmt(lo)}</span><span>{fmt(hi)}</span>
+                </div>
+                <input type="range" min={priceBounds[0]} max={priceBounds[1]} value={lo}
+                  onChange={e => setPrice([Math.min(+e.target.value, hi), hi])}
+                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label="Ціна від" />
+                <input type="range" min={priceBounds[0]} max={priceBounds[1]} value={hi}
+                  onChange={e => setPrice([lo, Math.max(+e.target.value, lo)])}
+                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label="Ціна до" />
+              </div>
+            </div>
+          )}
+
+          {/* Filter groups */}
+          {config && config.groups.map(group => (
             <div key={group.key}>
               <div className="mb-2 px-1"
                 style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
@@ -524,10 +628,18 @@ function Sidebar({ categorySlug, filters, setFilters }) {
               </div>
               <div className="flex flex-col gap-0.5">
                 {group.options.map(opt => {
-                  const active = filters[group.key] === opt.label
+                  const sel = filters[group.key]
+                  const active = group.multi ? (Array.isArray(sel) && sel.includes(opt.label)) : sel === opt.label
+                  const toggle = () => setFilters(f => {
+                    if (group.multi) {
+                      const cur = Array.isArray(f[group.key]) ? f[group.key] : []
+                      const next = cur.includes(opt.label) ? cur.filter(l => l !== opt.label) : [...cur, opt.label]
+                      return { ...f, [group.key]: next }
+                    }
+                    return { ...f, [group.key]: active ? '' : opt.label }
+                  })
                   return (
-                    <button key={opt.label}
-                      onClick={() => setFilters(f => ({ ...f, [group.key]: active ? '' : opt.label }))}
+                    <button key={opt.label} onClick={toggle}
                       className="flex items-center gap-2.5 w-full px-3 py-2 text-left transition-all"
                       style={{
                         background: active ? 'rgba(255,85,0,0.07)' : 'transparent',
@@ -537,6 +649,7 @@ function Sidebar({ categorySlug, filters, setFilters }) {
                         style={{
                           border: active ? '1px solid var(--accent)' : '1px solid #ccc',
                           background: active ? 'var(--accent)' : 'transparent',
+                          borderRadius: group.multi ? '3px' : '50%',
                         }}>
                         {active && <span style={{ color: 'white', fontSize: '9px', lineHeight: 1 }}>✓</span>}
                       </span>
@@ -555,18 +668,86 @@ function Sidebar({ categorySlug, filters, setFilters }) {
   )
 }
 
+// #16 (Етап 3): корисні характеристики в картках per-категорія.
+// Значення беремо за пріоритетним списком матчерів ключів (підрядок lower-case;
+// масив = всі підрядки мають бути в ключі — для розрізнення ΔT=10/ΔT=20 за «10»/«20»,
+// що стійко до різних юнікодів Δ/△ і Т/T у даних).
+const BADGE_PREFERRED = {
+  'separatory':                 ['розмір', 'пропускна'],
+  'nasosni-hrupy':              [['qmax', '10'], ['qmax', '20'], 'kvs', 'ізоляц'],
+  'klapany':                    ['dn', 'kvs', 'діапазон темп', 'різьба', 'тиск', 'крутний момент', 'керування', 'напруга', 'час оберт', 'підключ'],
+  'nasosy':                     ['діаметр', 'qmax', 'макс. продуктивн', 'hmax', 'напір', 'споживана потужн', 'потужн'],
+  'termojet-box':               ['контури', 'dn', 'діаметр', ['потужність', '10'], ['потужність', '20'], 'підключ', 'привід', 'ізоляц'],
+  'avtomatyka':                 ['кількість контур', 'wi-fi', 'погодозалеж', 'дисплей'],
+  'zonalne-keruvannya':         ['напруга', 'тип', 'різьба', 'монтаж', 'діапазон темп', 'живлення', 'wi-fi'],
+  'rozpodilchi-kolektory':      ['кількість виход', ['qmax', '10'], ['qmax', '20'], 'підключення котла'],
+  'kolektory-z-hidrostrilkoyu': ['кількість виход', 'виходи', ['qmax', '10'], ['qmax', '20'], 'підключення котла'],
+  'hidravlichni-rozdilnyky':    ['діаметр', ['qmax', '10'], ['qmax', '20'], "об'єм"],
+  'kolektory-pidloha':          ['кількість виход', 'підключ', 'матеріал', 'витратомір', 'температура'],
+  'balansuval-klapany':         ['dn', 'kvs', 'pn', 'функці'],
+  'termojet-mega':              ['dn', 'діаметр', 'розмір', ['qmax', '10'], ['qmax', '20'], 'kvs', 'gmax', 'підключ'],
+  'rozprodazh':                 ['розмір', 'dn', 'діаметр'],
+}
+const BADGE_EXCLUDE_KEYS = ['артикул', 'назва', 'виробник', 'характеристика', 'рідина']
+const BADGE_EXCLUDE_VALS = ['одиниця вимірювання', 'termojet', 'так', 'ні', 'немає', 'n/a', '—', '-', '']
+const BADGE_BOOL_KEYS = ['wi-fi', 'погодозалеж', 'гвс', 'термокран', 'термометр'] // показуємо як мітку, якщо «так»
+
 function extractBadges(product) {
   const badges = []
   const name = product.name || ''
   const specs = product.specs || {}
+  const cat = product.categorySlug || ''
 
   const specKeys = Object.keys(specs)
   if (specKeys.length > 0) {
-    specKeys.filter(k => !['Артикул', 'Назва'].includes(k)).slice(0, 5).forEach(k => {
-      const val = String(specs[k]).split(',')[0].trim()
-      if (val && val.length < 30) badges.push({ label: val, type: 'blue' })
+    const sku = String(product.sku || '').trim().toLowerCase()
+    const cleanVal = raw => String(raw).split(/[,;]\s+/)[0].trim() // не ріже десяткову кому «7,2»
+    const valBad = v => !v || v.length > 32 || BADGE_EXCLUDE_VALS.includes(v.toLowerCase()) || v.toLowerCase() === sku
+    const keyBad = k => BADGE_EXCLUDE_KEYS.some(e => k.toLowerCase().includes(e))
+    // голі числа → осмислена мітка за змістом ключа (DN15, «2 виходи»)
+    const fmtVal = (lk, v) => {
+      if (/пропускна|здатн/.test(lk)) return v + ' м³/год'
+      if (/^\d+$/.test(v)) {
+        if (/\bdn\b|діаметр|розмір/.test(lk)) return 'DN' + v
+        if (/контур/.test(lk)) return v + ' контури'
+        if (/виход/.test(lk)) return v + ' виходи'
+      }
+      return v
+    }
+    const findKey = m => specKeys.find(k => {
+      if (keyBad(k)) return false
+      const lk = k.toLowerCase()
+      return Array.isArray(m) ? m.every(s => lk.includes(s)) : lk.includes(m)
     })
-    return badges
+    const out = []
+    const push = label => {
+      const l = (label || '').trim()
+      if (!l || out.some(b => b.label.toLowerCase() === l.toLowerCase())) return
+      out.push({ label: l, type: ['blue', 'orange', 'gray'][out.length % 3] })
+    }
+
+    // тип сепаратора з підкатегорії (повітря / бруд / комбі) замість бренду
+    if (cat === 'separatory' && product.subcategory) {
+      push(product.subcategory.replace(/сепаратори\s+/i, '').trim())
+    }
+
+    const order = BADGE_PREFERRED[cat]
+    const keys = order
+      ? order.map(findKey).filter(Boolean)
+      : specKeys.filter(k => !keyBad(k))
+    for (const k of keys) {
+      if (out.length >= 4) break
+      const lk = k.toLowerCase()
+      if (BADGE_BOOL_KEYS.some(b => lk.includes(b))) {
+        const v = cleanVal(specs[k]).toLowerCase()
+        if (['ні', 'немає', '-', ''].includes(v)) continue
+        if (['так', '+', 'є'].includes(v)) { push(k.replace(/[:(].*$/, '').trim()); continue }
+        // інакше — справжнє значення (напр. «2.4 GHz»)
+      }
+      const v = cleanVal(specs[k])
+      if (!valBad(v)) push(fmtVal(lk, v))
+    }
+    return out
   }
 
   const pumpMatch = name.match(/APM\s*(\d+)\/(\d+)\/(\d+)/)
@@ -639,16 +820,33 @@ export default function CatalogPage() {
   const [sort, setSort] = useState('default')
   const [catFilters, setCatFilters] = useState({})
   const [viewMode, setViewMode] = useState('grid') // 'grid' | 'list'
+  const [price, setPrice] = useState(null) // [lo, hi] у ₴ або null
 
   const currentCategory = categorySlug ? CATEGORIES.find(c => c.slug === categorySlug) : null
 
-  // Скидаємо фільтри при зміні категорії
-  useMemo(() => { setCatFilters({}) }, [categorySlug])
+  // Скидаємо фільтри й ціну при зміні категорії
+  useMemo(() => { setCatFilters({}); setPrice(null) }, [categorySlug])
 
   const catProducts = useMemo(() => {
     if (!currentCategory) return products
     return products.filter(p => p.categorySlug === currentCategory.id || p.categorySlug === currentCategory.slug)
   }, [products, currentCategory])
+
+  // Кількість товарів у кожній категорії (для плиток-категорій)
+  const catCounts = useMemo(() => {
+    const m = {}
+    for (const c of CATEGORIES) {
+      m[c.id] = products.filter(p => p.categorySlug === c.id || p.categorySlug === c.slug).length
+    }
+    return m
+  }, [products])
+
+  // Межі ціни (#5) — у ₴, по поточній категорії
+  const priceBounds = useMemo(() => {
+    const vals = catProducts.map(p => toUAH(p.price, p.currency, eurRate) || 0).filter(v => v > 0)
+    if (!vals.length) return null
+    return [Math.floor(Math.min(...vals)), Math.ceil(Math.max(...vals))]
+  }, [catProducts, eurRate])
 
   const filtered = useMemo(() => {
     let list = catProducts
@@ -663,14 +861,25 @@ export default function CatalogPage() {
     const filterConfig = categorySlug ? CATEGORY_FILTERS[categorySlug] : null
     if (filterConfig) {
       filterConfig.groups.forEach(group => {
-        const activeLabel = catFilters[group.key]
-        if (!activeLabel) return
-        const opt = group.options.find(o => o.label === activeLabel)
-        if (opt) list = list.filter(opt.test)
+        const sel = catFilters[group.key]
+        if (group.multi) {
+          const labels = Array.isArray(sel) ? sel : []
+          if (!labels.length) return
+          const opts = group.options.filter(o => labels.includes(o.label))
+          if (opts.length) list = list.filter(p => opts.some(o => o.test(p))) // OR у групі
+        } else {
+          if (!sel) return
+          const opt = group.options.find(o => o.label === sel)
+          if (opt) list = list.filter(opt.test)
+        }
       })
     }
 
     const priceInUah = p => toUAH(p.price, p.currency, eurRate) || 0
+    // Фільтр за ціною (#5) — товари «по запиту» (ціна 0) лишаємо видимими
+    if (price && priceBounds && (price[0] > priceBounds[0] || price[1] < priceBounds[1])) {
+      list = list.filter(p => { const u = priceInUah(p); return u <= 0 || (u >= price[0] && u <= price[1]) })
+    }
     if (sort === 'priceAsc')  list = [...list].sort((a, b) => priceInUah(a) - priceInUah(b))
     if (sort === 'priceDesc') list = [...list].sort((a, b) => priceInUah(b) - priceInUah(a))
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
@@ -679,7 +888,7 @@ export default function CatalogPage() {
     if (sort === 'default' && categorySlug === 'separatory')
       list = [...list].sort((a, b) => sepRank(a) - sepRank(b))
     return list
-  }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang])
+  }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang, price, priceBounds, eurRate])
 
   return (
     <>
@@ -739,54 +948,65 @@ export default function CatalogPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* ── Category nav ── */}
-        <div className="mb-5">
-          <div className="flex flex-wrap gap-2">
-          {/* "Всі категорії" — виділена, але компактна */}
-          <Link to="/catalog"
-            className="flex items-center gap-2 px-4 py-1.5 transition-all"
-            style={{
-              fontFamily: "'IBM Plex Sans', sans-serif",
-              fontSize: '13px', fontWeight: 600,
-              background: !currentCategory ? 'var(--accent)' : 'var(--primary)',
-              color: 'white',
-              border: 'none',
-            }}>
-            <CategoryIcon name="LayoutGrid" size={13} className="opacity-80" />
-            Всі категорії
-          </Link>
+        {/* ── Смужка плиток-категорій (стиль Prom) ── */}
+        <div className="mb-6 -mx-4 px-4">
+          <div className="flex gap-3 overflow-x-auto pb-3 cat-strip snap-x">
+            {/* Плитка "Всі категорії" */}
+            <Link to="/catalog"
+              className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${!currentCategory ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
+              <div className="h-[96px] flex items-center justify-center pt-3">
+                <span className="flex items-center justify-center w-14 h-14 rounded-full"
+                  style={{ background: !currentCategory ? 'var(--accent)' : 'rgba(255,107,0,0.1)' }}>
+                  <CategoryIcon name="LayoutGrid" size={26}
+                    className={!currentCategory ? 'text-white' : 'text-[var(--accent)]'} />
+                </span>
+              </div>
+              <div className="px-2 pb-3 pt-2 text-center">
+                <div className="text-[11.5px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
+                  Всі категорії
+                </div>
+                <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
+                  {products.length}
+                </div>
+              </div>
+            </Link>
 
-          {CATEGORIES.map(c => {
-            const isActive = currentCategory?.id === c.id
-            return (
-              <Link key={c.id} to={`/catalog/${c.slug}`}
-                className="flex items-center gap-2 px-3 py-1.5 transition-all hover:border-[var(--accent)]"
-                style={{
-                  fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '13px', fontWeight: 500,
-                  background: isActive ? 'var(--accent)' : 'transparent',
-                  color: isActive ? 'white' : 'var(--text-secondary)',
-                  border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)',
-                }}>
-                <span className="flex items-center justify-center w-5 h-5 flex-shrink-0"
-                  style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,107,0,0.1)' }}>
-                  <CategoryIcon name={c.icon} size={12}
-                    className={isActive ? 'text-white' : 'text-[var(--accent)]'} />
-                </span>
-                {c.name[lang] || c.name.uk}
-                <span style={{ opacity: 0.55, fontSize: '11px', fontFamily: "'JetBrains Mono', monospace" }}>
-                  {c.count}
-                </span>
-              </Link>
-            )
-          })}
+            {CATEGORIES.map(c => {
+              const isActive = currentCategory?.id === c.id
+              const n = catCounts[c.id] || 0
+              const src = (c.image || '').startsWith('/') ? assetPath(c.image) : c.image
+              return (
+                <Link key={c.id} to={`/catalog/${c.slug}`}
+                  className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${isActive ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
+                  <div className="h-[96px] flex items-center justify-center p-2 overflow-hidden bg-white">
+                    {src ? (
+                      <img src={src} alt={c.name[lang] || c.name.uk} loading="lazy"
+                        className="max-w-full max-h-full object-contain transition-transform group-hover:scale-105"
+                        onError={e => { e.currentTarget.style.display = 'none' }} />
+                    ) : (
+                      <CategoryIcon name={c.icon} size={30} className="text-[var(--accent)]" />
+                    )}
+                  </div>
+                  <div className="px-2 pb-3 pt-1.5 text-center">
+                    <div className="text-[11.5px] font-semibold leading-tight line-clamp-3 min-h-[42px] flex items-center justify-center"
+                      style={{ color: isActive ? 'var(--accent)' : 'var(--text-primary)' }}>
+                      {c.name[lang] || c.name.uk}
+                    </div>
+                    <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
+                      {n}
+                    </div>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
 
         {/* ── Основний контент: сайдбар + товари ── */}
         <div className="flex gap-6">
 
-        <Sidebar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters} />
+        <Sidebar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters}
+          priceBounds={priceBounds} price={price} setPrice={setPrice} />
 
         <div className="flex-1 min-w-0">
 
@@ -835,8 +1055,8 @@ export default function CatalogPage() {
         {/* Result count */}
         <div className="text-xs text-gray-400 font-mono mb-4">
           Знайдено: <span className="font-bold text-gray-600">{filtered.length}</span> товарів
-          {(search || inStockOnly || Object.values(catFilters).some(Boolean)) && (
-            <button onClick={() => { setSearch(''); setInStockOnly(false); setCatFilters({}) }}
+          {(search || inStockOnly || price || Object.values(catFilters).some(v => Array.isArray(v) ? v.length : v)) && (
+            <button onClick={() => { setSearch(''); setInStockOnly(false); setCatFilters({}); setPrice(null) }}
               className="ml-3 text-[var(--accent)] hover:underline">
               скинути фільтри
             </button>
@@ -963,18 +1183,17 @@ export default function CatalogPage() {
                   <div className="product-card-new group flex flex-row gap-0 overflow-hidden">
 
                     {/* Image */}
-                    <Link to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden"
-                      style={{ width: 140, minHeight: 120 }}>
+                    <Link to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden w-[104px] sm:w-[140px] min-h-[120px]">
                       {product.image ? (
                         <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
-                          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300" />
+                          className="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" />
                       ) : (
                         <div className="text-gray-200 text-5xl">⚙️</div>
                       )}
                     </Link>
 
                     {/* Content */}
-                    <div className="flex-1 min-w-0 p-4 flex flex-col justify-between border-l border-[var(--ink-200)]">
+                    <div className="flex-1 min-w-0 p-3 sm:p-4 flex flex-col justify-between border-l border-[var(--ink-200)]">
                       <div>
                         {catObj && (
                           <div className="eyebrow mb-1">{catObj.name[lang] || catObj.name.uk}</div>
@@ -995,17 +1214,33 @@ export default function CatalogPage() {
                           </div>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[var(--ink-200)]">
+                      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[var(--ink-200)] flex-wrap">
                         <span className="text-[10px] font-mono text-gray-400">{product.sku || '—'}</span>
-                        <span className={`text-[10px] font-semibold flex items-center gap-1 ml-2 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
+                        <span className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
                           <span className="w-1.5 h-1.5 rounded-full" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
                           {product.inStock ? 'В наявності' : 'Під замовлення'}
                         </span>
+                        {/* Ціна — інлайн лише на мобільному */}
+                        <span className="sm:hidden ml-auto text-sm font-bold text-[var(--primary)]">
+                          {product.price > 0 ? formatPrice(product.price, product.currency, eurRate) : 'По запиту'}
+                        </span>
+                      </div>
+                      {/* Дії — лише на мобільному (на десктопі вони у правій колонці) */}
+                      <div className="flex sm:hidden gap-1.5 mt-2.5">
+                        <button onClick={() => addToCart(product)}
+                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 px-3 rounded-lg"
+                          style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
+                          <ShoppingCart size={12} /> В кошик
+                        </button>
+                        <Link to={href}
+                          className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg text-gray-600 text-xs font-semibold">
+                          Детальніше <ArrowRight size={11} />
+                        </Link>
                       </div>
                     </div>
 
-                    {/* Price + actions */}
-                    <div className="flex-shrink-0 flex flex-col items-end justify-between p-4 border-l border-[var(--ink-200)] min-w-[140px]">
+                    {/* Price + actions — лише на десктопі */}
+                    <div className="hidden sm:flex flex-shrink-0 flex-col items-end justify-between p-4 border-l border-[var(--ink-200)] min-w-[140px]">
                       <div className="text-right">
                         {product.price > 0 ? (
                           <div className="text-base font-bold text-[var(--primary)]">

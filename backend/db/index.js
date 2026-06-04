@@ -128,6 +128,13 @@ function setup() {
   insertSetting.run('workHours', 'Пн-Пт 9:00–18:00')
   insertSetting.run('telegram', '')
   insertSetting.run('adminPassword', 'termojet2024')
+
+  // ── Міграції ──
+  // Фото у відгуках (для відгуків клієнтів з фото)
+  try { db.exec(`ALTER TABLE reviews ADD COLUMN photo TEXT DEFAULT ''`) } catch (e) { /* колонка вже існує */ }
+  // Оновити стару адресу-заглушку на реальну (Київ)
+  db.prepare(`UPDATE settings SET value=? WHERE key='address' AND value='м. Київ, вул. Виробнича, 1'`)
+    .run('Софіївська Борщагівка, вул. Київська 3')
 }
 
 function seedProducts() {

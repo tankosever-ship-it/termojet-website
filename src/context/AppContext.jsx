@@ -49,7 +49,7 @@ export function AppProvider({ children }) {
   const [siteSettings, setSiteSettings] = useState({
     phone: '+380 (50) 450 64 24',
     email: 'termojet@sofievka.kiev.ua',
-    address: 'м. Київ, вул. Виробнича, 1',
+    address: 'Софіївська Борщагівка, вул. Київська 3',
     workHours: 'Пн-Пт 9:00–18:00',
     telegram: '',
   })
@@ -69,12 +69,12 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/blog`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setBlog(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setBlog(data) })
       .catch(() => {})
 
     fetch(`${API}/portfolio`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setPortfolio(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setPortfolio(data) })
       .catch(() => {})
 
     fetch(`${API}/reviews`)
@@ -229,6 +229,57 @@ export function AppProvider({ children }) {
     }
   }
 
+  // Публічна відправка відгуку з фото (іде на модерацію)
+  async function submitReview({ name, company, rating, text, photo }) {
+    if (!API) return { error: 'Відправка недоступна' }
+    const fd = new FormData()
+    fd.append('name', name || '')
+    fd.append('company', company || '')
+    fd.append('rating', String(rating || 5))
+    fd.append('text', text || '')
+    if (photo) fd.append('photo', photo)
+    try {
+      const r = await fetch(`${API}/reviews/submit`, { method: 'POST', body: fd })
+      return await r.json()
+    } catch {
+      return { error: 'Помилка зʼєднання. Спробуйте пізніше.' }
+    }
+  }
+
+  // ── Модерація відгуків (адмін) ──
+  async function moderateReview(id, review) {
+    if (API && adminToken) {
+      try {
+        await fetch(`${API}/reviews/${id}`, {
+          method: 'PUT', headers: authHeaders(), body: JSON.stringify(review),
+        })
+      } catch {}
+    }
+    setReviews(prev => prev.map(r => r.id === id ? { ...r, ...review } : r))
+  }
+
+  async function removeReview(id) {
+    if (API && adminToken) {
+      try { await fetch(`${API}/reviews/${id}`, { method: 'DELETE', headers: authHeaders() }) } catch {}
+    }
+    setReviews(prev => prev.filter(r => r.id !== id))
+  }
+
+  async function addReview(data) {
+    const payload = { ...data, published: true }
+    if (API && adminToken) {
+      try {
+        const res = await fetch(`${API}/reviews`, {
+          method: 'POST', headers: authHeaders(), body: JSON.stringify(payload),
+        })
+        const { id } = await res.json()
+        setReviews(prev => [{ ...payload, id, published: 1 }, ...prev])
+        return
+      } catch {}
+    }
+    setReviews(prev => [{ ...payload, id: Date.now(), published: 1 }, ...prev])
+  }
+
   return (
     <AppContext.Provider value={{
       lang, setLang,
@@ -249,6 +300,7 @@ export function AppProvider({ children }) {
       isAdminAuth, adminLogin, adminLogout,
       adminToken, authHeaders,
       placeOrder, sendConsultation, sendDealerRequest, subscribe,
+      submitReview, moderateReview, removeReview, addReview,
       API,
     }}>
       {children}

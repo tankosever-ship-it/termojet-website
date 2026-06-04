@@ -1783,18 +1783,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/klapany/4-hodoviy-klapan-rmv04-dn20-kvs-12</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/klapany/4-hodoviy-klapan-rmv04-dn25-kvs-18</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/titanoviy-anod-ti400-dlh-emalsovanih-boyleriv-g3-4</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -2090,6 +2078,42 @@
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/pump-silencer900</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/avtomatyka/modul-rozshyrennya-termojet-one</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/avtomatyka/modul-termojet-wi-fi-rs</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42n-150-300</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-tbe-50-24-2</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-tbe-50-36-2</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-tbe-65-34-2</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

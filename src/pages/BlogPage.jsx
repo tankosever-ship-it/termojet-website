@@ -13,6 +13,7 @@ export default function BlogPage() {
   const [category, setCategory] = useState('')
 
   const published = blog.filter(p => p.published)
+    .slice().sort((a, b) => new Date(b.publishedAt || b.date) - new Date(a.publishedAt || a.date))
   const categories = [...new Set(published.map(p => p.category).filter(Boolean))]
 
   const filtered = published.filter(p => {

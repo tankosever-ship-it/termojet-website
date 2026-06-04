@@ -15,6 +15,17 @@ const SERVICES = [
   { icon: Package, title: 'Кастомізація упаковки',                       desc: 'Дизайн та виготовлення упаковки з логотипом, кольорами та текстами партнера.' },
 ]
 
+const GALLERY = [
+  { src: '/images/oem/oem-kollektor-logo.jpg',     caption: 'Колектор з логотипом партнера' },
+  { src: '/images/oem/oem-gs25-colors.jpg',        caption: 'Гідрострілка ГС-25 у фірмових кольорах' },
+  { src: '/images/oem/oem-ng27-logo.jpg',          caption: 'Насосна група НГ-27 з брендуванням партнера' },
+  { src: '/images/oem/oem-kollektor-color.jpg',    caption: 'Колектори у кольорах за RAL' },
+  { src: '/images/oem/oem-kollektor-sk312.jpg',    caption: 'Колектор SK-312 — постачання на експорт' },
+  { src: '/images/oem/oem-podstavka-logo.jpg',     caption: 'Підставка під тепловий насос з логотипом' },
+  { src: '/images/oem/oem-photo-1.jpg',            caption: 'Продукція під торговими марками партнерів' },
+  { src: '/images/oem/oem-photo-2.jpg',            caption: 'ОЕМ-виробництво систем швидкого монтажу' },
+]
+
 export default function OEMPage() {
   return (
     <>
@@ -47,8 +58,10 @@ export default function OEMPage() {
           <div className="label-accent mb-2">Партнерство</div>
           <h2 className="section-title">Що ми виробляємо для партнерів</h2>
           <p className="text-[var(--text-secondary)] mt-3 max-w-2xl">
-            Termojet спеціалізується на виробництві колекторів, гідроділювачів, насосних груп та трьохходових клапанів.
-            Пропонуємо повний цикл ОЕМ — від розробки конфігурації до кастомної упаковки.
+            Один із напрямків нашого виробництва — виготовлення систем швидкого монтажу
+            (колекторів, гідрострілок та насосних груп), трьохходових кранів із сервоприводами
+            та іншої продукції під торговими марками партнерів. Пропонуємо повний цикл ОЕМ —
+            від розробки конфігурації та кольорування до нанесення логотипу й кастомної упаковки.
           </p>
         </motion.div>
 
@@ -70,7 +83,34 @@ export default function OEMPage() {
         </motion.div>
       </section>
 
+      {/* Галерея ОЕМ-прикладів */}
       <section className="bg-[var(--bg)] py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-10 text-center">
+            <div className="label-accent mb-2">Приклади робіт</div>
+            <h2 className="section-title">Продукція під брендами партнерів</h2>
+            <p className="text-[var(--text-secondary)] mt-3 max-w-2xl mx-auto">
+              Наразі ми виготовляємо продукцію більш ніж під 10 торговими марками для партнерів в Україні та Європі.
+            </p>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {GALLERY.map(({ src, caption }, i) => (
+              <motion.figure key={i} variants={fadeUp} className="card overflow-hidden group">
+                <div className="aspect-square bg-white overflow-hidden">
+                  <img src={src} alt={caption} loading="lazy" decoding="async"
+                    className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300" />
+                </div>
+                <figcaption className="px-3 py-2.5 text-xs text-[var(--text-secondary)] leading-snug border-t border-[var(--ink-200)]">
+                  {caption}
+                </figcaption>
+              </motion.figure>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-16">
         <div className="max-w-4xl mx-auto px-4">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="bg-[var(--primary)] rounded-3xl p-10 text-white text-center">
