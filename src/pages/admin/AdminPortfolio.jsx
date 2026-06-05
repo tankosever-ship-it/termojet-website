@@ -43,7 +43,7 @@ function Form({ item, onSave, onCancel }) {
         </div>
       </div>
       <div className="flex gap-3">
-        <button onClick={() => onSave({ ...form, id: item.id || Date.now().toString() })} className="btn-primary text-sm py-2.5 px-5">Зберегти</button>
+        <button onClick={() => onSave({ ...form, ...(item.id != null ? { id: item.id } : {}) })} className="btn-primary text-sm py-2.5 px-5">Зберегти</button>
         <button onClick={onCancel} className="btn-secondary text-sm py-2.5 px-5">Скасувати</button>
       </div>
     </div>
@@ -51,7 +51,7 @@ function Form({ item, onSave, onCancel }) {
 }
 
 export default function AdminPortfolio() {
-  const { portfolio, setPortfolio, isAdminAuth } = useApp()
+  const { portfolio, savePortfolio, removePortfolio, isAdminAuth } = useApp()
   const navigate = useNavigate()
   const [editId, setEditId] = useState(null)
   const [showForm, setShowForm] = useState(false)
@@ -59,11 +59,7 @@ export default function AdminPortfolio() {
   if (!isAdminAuth) { navigate('/admin'); return null }
 
   function save(data) {
-    if (editId === 'new') {
-      setPortfolio(prev => [data, ...prev])
-    } else {
-      setPortfolio(prev => prev.map(p => p.id === editId ? data : p))
-    }
+    savePortfolio(data)
     setEditId(null); setShowForm(false)
   }
 
@@ -106,7 +102,7 @@ export default function AdminPortfolio() {
                   <div className="text-xs text-gray-400 mt-0.5">{item.location} {item.year && `• ${item.year}`} {item.power && `• ${item.power}`}</div>
                   <div className="flex gap-2 mt-3">
                     <button onClick={() => { setEditId(item.id); setShowForm(true) }} className="p-1.5 text-gray-400 hover:text-[var(--primary)]"><Pencil size={14} /></button>
-                    <button onClick={() => { if (confirm('Видалити?')) setPortfolio(prev => prev.filter(p => p.id !== item.id)) }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 size={14} /></button>
+                    <button onClick={() => { if (confirm('Видалити?')) removePortfolio(item.id) }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 size={14} /></button>
                   </div>
                 </div>
               </div>

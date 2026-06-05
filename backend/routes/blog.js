@@ -5,7 +5,7 @@ const { requireAdmin } = require('./auth')
 const router = express.Router()
 
 function parse(r) {
-  return { ...r, tags: JSON.parse(r.tags || '[]'), published: r.published === 1 }
+  return { ...r, tags: JSON.parse(r.tags || '[]'), published: r.published === 1, publishedAt: r.published_at || '' }
 }
 
 router.get('/', (req, res) => {
@@ -23,20 +23,20 @@ router.get('/:slug', (req, res) => {
 })
 
 router.post('/', requireAdmin, (req, res) => {
-  const { slug, title, excerpt, content, image, tags, published } = req.body
+  const { slug, title, excerpt, content, image, tags, published, category, publishedAt } = req.body
   const result = db.prepare(`
-    INSERT INTO blog_posts (slug, title, excerpt, content, image, tags, published)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0)
+    INSERT INTO blog_posts (slug, title, excerpt, content, image, tags, published, category, published_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, category||'', publishedAt||'')
   res.status(201).json({ id: result.lastInsertRowid })
 })
 
 router.put('/:id', requireAdmin, (req, res) => {
-  const { slug, title, excerpt, content, image, tags, published } = req.body
+  const { slug, title, excerpt, content, image, tags, published, category, publishedAt } = req.body
   db.prepare(`
-    UPDATE blog_posts SET slug=?, title=?, excerpt=?, content=?, image=?, tags=?, published=?
+    UPDATE blog_posts SET slug=?, title=?, excerpt=?, content=?, image=?, tags=?, published=?, category=?, published_at=?
     WHERE id=?
-  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, req.params.id)
+  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, category||'', publishedAt||'', req.params.id)
   res.json({ ok: true })
 })
 

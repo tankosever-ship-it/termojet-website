@@ -61,7 +61,7 @@ function PostForm({ post, onSave, onCancel }) {
 }
 
 export default function AdminBlog() {
-  const { blog, setBlog, isAdminAuth } = useApp()
+  const { blog, saveBlog, removeBlog, isAdminAuth } = useApp()
   const navigate = useNavigate()
   const [editId, setEditId] = useState(null)
   const [showForm, setShowForm] = useState(false)
@@ -69,21 +69,18 @@ export default function AdminBlog() {
   if (!isAdminAuth) { navigate('/admin'); return null }
 
   function save(data) {
-    if (editId === 'new') {
-      setBlog(prev => [{ ...data, id: Date.now().toString() }, ...prev])
-    } else {
-      setBlog(prev => prev.map(p => p.id === editId ? { ...p, ...data } : p))
-    }
+    saveBlog(editId === 'new' ? data : { ...data, id: editId })
     setEditId(null); setShowForm(false)
   }
 
   function remove(id) {
     if (!confirm('Видалити статтю?')) return
-    setBlog(prev => prev.filter(p => p.id !== id))
+    removeBlog(id)
   }
 
   function togglePublished(id) {
-    setBlog(prev => prev.map(p => p.id === id ? { ...p, published: !p.published } : p))
+    const post = blog.find(p => p.id === id)
+    if (post) saveBlog({ ...post, published: !post.published })
   }
 
   const editing = editId === 'new' ? EMPTY_POST : blog.find(p => p.id === editId)

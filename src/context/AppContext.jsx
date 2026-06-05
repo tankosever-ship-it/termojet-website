@@ -74,7 +74,11 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/portfolio`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data) && data.length > 0) setPortfolio(data) })
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setPortfolio(data.map(p => ({ ...p, desc: p.description ?? p.desc ?? '', image: (p.images && p.images[0]) || p.image || '' })))
+        }
+      })
       .catch(() => {})
 
     fetch(`${API}/reviews`)
@@ -286,22 +290,27 @@ export function AppProvider({ children }) {
   }
 
   // ── Адмін-CRUD з персистенцією в API ──
-  // Зберігає елемент (POST якщо новий → отримує id з БД, PUT якщо існує) + оновлює локальний стан.
-  async function adminSave(resource, setter, item) {
-    const isExisting = item.id != null && typeof item.id === 'number'
+  // Створити: POST → отримати id з БД, додати на початок локального стану.
+  async function adminCreate(resource, setter, item, { prepend = true } = {}) {
+    let saved = { ...item }
     if (API && adminToken) {
       try {
-        if (isExisting) {
-          await fetch(`${API}/${resource}/${item.id}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(item) })
-        } else {
-          const res = await fetch(`${API}/${resource}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(item) })
-          const data = await res.json().catch(() => ({}))
-          if (data.id != null) item = { ...item, id: data.id }
-        }
+        const res = await fetch(`${API}/${resource}`, { method: 'POST', headers: authHeaders(), body: JSON.stringify(item) })
+        const data = await res.json().catch(() => ({}))
+        if (data.id != null) saved.id = data.id
       } catch {}
     }
-    if (!item.id) item = { ...item, id: Date.now() }
-    setter(prev => isExisting ? prev.map(x => x.id === item.id ? { ...x, ...item } : x) : [...prev, item])
+    if (saved.id == null) saved.id = Date.now()
+    setter(prev => prepend ? [saved, ...prev] : [...prev, saved])
+    return saved
+  }
+
+  // Оновити: PUT за id + оновити локальний стан.
+  async function adminUpdate(resource, setter, item) {
+    if (API && adminToken) {
+      try { await fetch(`${API}/${resource}/${item.id}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(item) }) } catch {}
+    }
+    setter(prev => prev.map(x => x.id === item.id ? { ...x, ...item } : x))
     return item
   }
 
@@ -312,8 +321,22 @@ export function AppProvider({ children }) {
     setter(prev => prev.filter(x => x.id !== id))
   }
 
-  const saveFaq   = (item) => adminSave('faq', setFaq, item)
-  const removeFaq = (id)   => adminDelete('faq', setFaq, id)
+  // Зберегти: оновити якщо є id, інакше створити.
+  function adminUpsert(resource, setter, item, opts) {
+    return item.id != null ? adminUpdate(resource, setter, item) : adminCreate(resource, setter, item, opts)
+  }
+
+  const saveFaq        = (item) => adminUpsert('faq', setFaq, item, { prepend: false })
+  const removeFaq      = (id)   => adminDelete('faq', setFaq, id)
+  const saveBlog       = (item) => adminUpsert('blog', setBlog, item)
+  const removeBlog     = (id)   => adminDelete('blog', setBlog, id)
+  // Портфоліо: UI використовує desc/image, БД — description/images[]. Мапимо при збереженні.
+  const savePortfolio  = (item) => adminUpsert('portfolio', setPortfolio, {
+    ...item,
+    description: item.desc ?? item.description ?? '',
+    images: item.image ? [item.image] : (item.images || []),
+  })
+  const removePortfolio= (id)   => adminDelete('portfolio', setPortfolio, id)
 
   return (
     <AppContext.Provider value={{
@@ -336,7 +359,8 @@ export function AppProvider({ children }) {
       adminToken, authHeaders,
       placeOrder, sendConsultation, sendDealerRequest, subscribe,
       submitReview, moderateReview, removeReview, addReview,
-      adminSave, adminDelete, saveFaq, removeFaq,
+      adminCreate, adminUpdate, adminDelete, adminUpsert,
+      saveFaq, removeFaq, saveBlog, removeBlog, savePortfolio, removePortfolio,
       API,
     }}>
       {children}

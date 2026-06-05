@@ -140,6 +140,9 @@ function setup() {
   // ── Міграції ──
   // Фото у відгуках (для відгуків клієнтів з фото)
   try { db.exec(`ALTER TABLE reviews ADD COLUMN photo TEXT DEFAULT ''`) } catch (e) { /* колонка вже існує */ }
+  // Блог: категорія та дата публікації (форма адмінки їх збирає)
+  try { db.exec(`ALTER TABLE blog_posts ADD COLUMN category TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE blog_posts ADD COLUMN published_at TEXT DEFAULT ''`) } catch (e) { /* існує */ }
   // Оновити стару адресу-заглушку на реальну (Київ)
   db.prepare(`UPDATE settings SET value=? WHERE key='address' AND value='м. Київ, вул. Виробнича, 1'`)
     .run('Софіївська Борщагівка, вул. Київська 3')
