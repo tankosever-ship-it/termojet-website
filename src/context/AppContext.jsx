@@ -42,6 +42,7 @@ export function AppProvider({ children }) {
   const [faq, setFaq] = useState([])
   const [files, setFiles] = useState(FILES)
   const [banners, setBanners] = useState([])
+  const [promos, setPromos] = useState([])
   const [clients, setClients] = useState([])
   const [isAdminAuth, setIsAdminAuth] = useState(() => !!loadAdminToken())
   const [adminToken, setAdminToken] = useState(loadAdminToken)
@@ -99,6 +100,21 @@ export function AppProvider({ children }) {
     fetch(`${API}/faq`)
       .then(r => r.json())
       .then(data => { if (Array.isArray(data)) setFaq(data) })
+      .catch(() => {})
+
+    fetch(`${API}/banners`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setBanners(data) })
+      .catch(() => {})
+
+    fetch(`${API}/promos`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setPromos(data) })
+      .catch(() => {})
+
+    fetch(`${API}/clients`)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setClients(data) })
       .catch(() => {})
   }, [])
 
@@ -328,6 +344,12 @@ export function AppProvider({ children }) {
 
   const saveFaq        = (item) => adminUpsert('faq', setFaq, item, { prepend: false })
   const removeFaq      = (id)   => adminDelete('faq', setFaq, id)
+  const saveBanner     = (item) => adminUpsert('banners', setBanners, item, { prepend: false })
+  const removeBanner   = (id)   => adminDelete('banners', setBanners, id)
+  const savePromo      = (item) => adminUpsert('promos', setPromos, item, { prepend: false })
+  const removePromo    = (id)   => adminDelete('promos', setPromos, id)
+  const saveClient     = (item) => adminUpsert('clients', setClients, item, { prepend: false })
+  const removeClient   = (id)   => adminDelete('clients', setClients, id)
   const saveBlog       = (item) => adminUpsert('blog', setBlog, item)
   const removeBlog     = (id)   => adminDelete('blog', setBlog, id)
   // Портфоліо: UI використовує desc/image, БД — description/images[]. Мапимо при збереженні.
@@ -356,6 +378,7 @@ export function AppProvider({ children }) {
       faq, setFaq,
       files, setFiles,
       banners, setBanners,
+      promos, setPromos,
       clients, setClients,
       siteSettings, setSiteSettings,
       isAdminAuth, adminLogin, adminLogout,
@@ -365,6 +388,7 @@ export function AppProvider({ children }) {
       adminCreate, adminUpdate, adminDelete, adminUpsert,
       saveFaq, removeFaq, saveBlog, removeBlog, savePortfolio, removePortfolio,
       saveProduct, removeProduct,
+      saveBanner, removeBanner, savePromo, removePromo, saveClient, removeClient,
       API,
     }}>
       {children}

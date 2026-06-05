@@ -38,6 +38,9 @@ app.use('/api/files', require('./routes/files'))
 app.use('/api/settings', require('./routes/settings'))
 app.use('/api/subscribers', require('./routes/subscribers'))
 app.use('/api/faq', require('./routes/faq'))
+app.use('/api/banners', require('./routes/banners'))
+app.use('/api/promos', require('./routes/promos'))
+app.use('/api/clients', require('./routes/clients'))
 app.use('/api/upload', require('./routes/upload'))
 
 // serve React build

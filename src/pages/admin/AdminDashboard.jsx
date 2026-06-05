@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Package, ShoppingCart, Users, MessageSquare, FileText, BarChart2, Settings, Image, BookOpen, Briefcase, LogOut, Star, HelpCircle } from 'lucide-react'
+import { Package, ShoppingCart, Users, MessageSquare, FileText, BarChart2, Settings, Image, BookOpen, Briefcase, LogOut, Star, HelpCircle, Tag } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 const MENU = [
@@ -12,6 +12,9 @@ const MENU = [
   { to: '/admin/reviews', icon: Star, label: 'Відгуки', desc: 'Відгуки клієнтів' },
   { to: '/admin/faq', icon: HelpCircle, label: 'FAQ', desc: 'Питання та відповіді' },
   { to: '/admin/files', icon: FileText, label: 'Документи', desc: 'PDF файли та каталоги' },
+  { to: '/admin/banners', icon: Image, label: 'Банери', desc: 'Банери головної' },
+  { to: '/admin/promos', icon: Tag, label: 'Акції', desc: 'Промо-пропозиції' },
+  { to: '/admin/clients', icon: Users, label: 'Клієнти', desc: 'Логотипи клієнтів' },
   { to: '/admin/settings', icon: Settings, label: 'Налаштування', desc: 'Контакти, пароль' },
 ]
 

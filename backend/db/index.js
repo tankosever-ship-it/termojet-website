@@ -122,6 +122,37 @@ function setup() {
       created_at  TEXT DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS banners (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      title       TEXT NOT NULL,
+      subtitle    TEXT DEFAULT '',
+      image       TEXT DEFAULT '',
+      link        TEXT DEFAULT '',
+      active      INTEGER DEFAULT 1,
+      sort        INTEGER DEFAULT 0,
+      created_at  TEXT DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS promos (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      title       TEXT NOT NULL,
+      description TEXT DEFAULT '',
+      discount    TEXT DEFAULT '',
+      image       TEXT DEFAULT '',
+      active      INTEGER DEFAULT 1,
+      sort        INTEGER DEFAULT 0,
+      created_at  TEXT DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS clients (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      name        TEXT NOT NULL,
+      logo        TEXT DEFAULT '',
+      url         TEXT DEFAULT '',
+      sort        INTEGER DEFAULT 0,
+      created_at  TEXT DEFAULT (datetime('now'))
+    );
+
     CREATE TABLE IF NOT EXISTS settings (
       key         TEXT PRIMARY KEY,
       value       TEXT
