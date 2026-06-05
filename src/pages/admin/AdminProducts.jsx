@@ -99,7 +99,7 @@ function ProductForm({ product, onSave, onCancel }) {
 }
 
 export default function AdminProducts() {
-  const { products, setProducts, isAdminAuth } = useApp()
+  const { products, saveProduct, removeProduct, isAdminAuth } = useApp()
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
   const [editId, setEditId] = useState(null)
@@ -114,23 +114,20 @@ export default function AdminProducts() {
     return match && catMatch
   })
 
-  function saveProduct(data) {
-    if (editId === 'new') {
-      const newP = { ...data, id: Date.now().toString() }
-      setProducts(prev => [newP, ...prev])
-    } else {
-      setProducts(prev => prev.map(p => p.id === editId ? { ...p, ...data } : p))
-    }
+  function handleSave(data) {
+    const payload = editId === 'new' ? data : { ...data, id: editId }
+    saveProduct(payload)
     setEditId(null)
     setShowForm(false)
   }
 
-  function deleteProduct(id) {
+  function handleDelete(id) {
     if (!confirm('Видалити товар?')) return
-    setProducts(prev => prev.filter(p => p.id !== id))
+    removeProduct(id)
   }
 
-  const editingProduct = editId === 'new' ? EMPTY : products.find(p => p.id === editId)
+  const _found = products.find(p => p.id === editId)
+  const editingProduct = editId === 'new' ? EMPTY : (_found ? { ..._found, desc: _found.desc ?? _found.description ?? '' } : undefined)
 
   return (
     <div className="min-h-screen bg-[var(--bg)]">
@@ -152,7 +149,7 @@ export default function AdminProducts() {
         {showForm && editingProduct !== undefined && (
           <div className="mb-6">
             <h2 className="font-bold mb-3">{editId === 'new' ? 'Новий товар' : 'Редагування товару'}</h2>
-            <ProductForm product={editingProduct} onSave={saveProduct} onCancel={() => { setEditId(null); setShowForm(false) }} />
+            <ProductForm product={editingProduct} onSave={handleSave} onCancel={() => { setEditId(null); setShowForm(false) }} />
           </div>
         )}
 
@@ -224,7 +221,7 @@ export default function AdminProducts() {
                             className="p-1.5 text-gray-400 hover:text-[var(--primary)] transition-colors">
                             <Pencil size={15} />
                           </button>
-                          <button onClick={() => deleteProduct(p.id)}
+                          <button onClick={() => handleDelete(p.id)}
                             className="p-1.5 text-gray-400 hover:text-red-500 transition-colors">
                             <Trash2 size={15} />
                           </button>

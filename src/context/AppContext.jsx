@@ -337,6 +337,9 @@ export function AppProvider({ children }) {
     images: item.image ? [item.image] : (item.images || []),
   })
   const removePortfolio= (id)   => adminDelete('portfolio', setPortfolio, id)
+  // Товари: UI використовує desc, БД/API — description.
+  const saveProduct    = (item) => adminUpsert('products', setProducts, { ...item, description: item.desc ?? item.description ?? '' })
+  const removeProduct  = (id)   => adminDelete('products', setProducts, id)
 
   return (
     <AppContext.Provider value={{
@@ -361,6 +364,7 @@ export function AppProvider({ children }) {
       submitReview, moderateReview, removeReview, addReview,
       adminCreate, adminUpdate, adminDelete, adminUpsert,
       saveFaq, removeFaq, saveBlog, removeBlog, savePortfolio, removePortfolio,
+      saveProduct, removeProduct,
       API,
     }}>
       {children}
