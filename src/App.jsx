@@ -2,6 +2,7 @@ import { BrowserRouter, HashRouter, Routes, Route, Navigate, useLocation } from 
 import { useEffect } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { AppProvider } from './context/AppContext'
+import { captureUTM } from './utils/utm'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import FloatingActions from './components/FloatingActions'
@@ -44,7 +45,7 @@ import AdminClients from './pages/admin/AdminClients'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => { window.scrollTo(0, 0); captureUTM() }, [pathname])
   return null
 }
 

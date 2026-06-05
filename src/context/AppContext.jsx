@@ -5,6 +5,7 @@ import { BLOG_POSTS } from '../data/blog'
 import { PORTFOLIO } from '../data/portfolio'
 import { FILES } from '../data/files'
 import { fetchEurRate } from '../utils/currency'
+import { getUTM } from '../utils/utm'
 
 const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
@@ -194,7 +195,7 @@ export function AppProvider({ children }) {
 
   // Orders
   async function placeOrder(orderData) {
-    const order = { ...orderData, items: cart, total: cartTotal }
+    const order = { ...orderData, items: cart, total: cartTotal, utm: getUTM() }
     if (API) {
       try {
         const res = await fetch(`${API}/orders`, {
@@ -217,7 +218,7 @@ export function AppProvider({ children }) {
         await fetch(`${API}/consultations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, utm: getUTM() }),
         })
       } catch {}
     }
@@ -229,7 +230,7 @@ export function AppProvider({ children }) {
         await fetch(`${API}/dealers`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, utm: getUTM() }),
         })
       } catch {}
     }

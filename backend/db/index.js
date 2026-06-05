@@ -169,6 +169,10 @@ function setup() {
   insertSetting.run('adminPassword', 'termojet2024')
 
   // ── Міграції ──
+  // UTM-трекінг для замовлень, консультацій та дилерів
+  try { db.exec(`ALTER TABLE orders ADD COLUMN utm TEXT DEFAULT '{}'`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE consultations ADD COLUMN utm TEXT DEFAULT '{}'`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE dealers ADD COLUMN utm TEXT DEFAULT '{}'`) } catch (e) { /* існує */ }
   // Фото у відгуках (для відгуків клієнтів з фото)
   try { db.exec(`ALTER TABLE reviews ADD COLUMN photo TEXT DEFAULT ''`) } catch (e) { /* колонка вже існує */ }
   // Блог: категорія та дата публікації (форма адмінки їх збирає)

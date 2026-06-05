@@ -63,6 +63,11 @@ export default function AdminOrders() {
                 </div>
                 {expanded === order.id && (
                   <div className="border-t border-gray-100 p-4 bg-gray-50/50">
+                    {order.utm && Object.keys(order.utm).length > 0 && (
+                      <p className="text-xs text-gray-400 mb-2">
+                        Джерело: {order.utm.utm_source || order.utm.referrer || '—'}{order.utm.utm_medium ? ' · ' + order.utm.utm_medium : ''}{order.utm.utm_campaign ? ' · ' + order.utm.utm_campaign : ''}
+                      </p>
+                    )}
                     {order.address && <p className="text-sm text-gray-600 mb-2"><strong>Адреса:</strong> {order.address}</p>}
                     {order.comment && <p className="text-sm text-gray-600 mb-3"><strong>Коментар:</strong> {order.comment}</p>}
                     {order.items?.length > 0 && (

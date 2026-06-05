@@ -4,6 +4,7 @@ import { TrendingUp, Wrench, BookOpen, Truck, BarChart2, Headphones, CheckCircle
 import SEO from '../components/SEO'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import { assetPath } from '../utils/assetPath'
+import { getUTM } from '../utils/utm'
 
 const BENEFIT_ICONS = [TrendingUp, Wrench, BookOpen, Truck, BarChart2, Headphones]
 
@@ -54,10 +55,10 @@ function PartnerForm() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setErrors({})
 
-    fetch('/api-partners.php', {
+    fetch('/api/dealers', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...form, partnerType: type }),
+      body: JSON.stringify({ ...form, partnerType: type, utm: getUTM() }),
     }).catch(() => {})
     setSent(true)
   }

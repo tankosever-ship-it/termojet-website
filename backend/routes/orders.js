@@ -6,15 +6,15 @@ const router = express.Router()
 
 router.get('/', requireAdmin, (req, res) => {
   const rows = db.prepare('SELECT * FROM orders ORDER BY created_at DESC').all()
-  res.json(rows.map(r => ({ ...r, items: JSON.parse(r.items) })))
+  res.json(rows.map(r => ({ ...r, items: JSON.parse(r.items), utm: JSON.parse(r.utm || '{}') })))
 })
 
 router.post('/', (req, res) => {
-  const { items, total, name, phone, email, address, comment } = req.body
+  const { items, total, name, phone, email, address, comment, utm } = req.body
   const result = db.prepare(`
-    INSERT INTO orders (items, total, name, phone, email, address, comment)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `).run(JSON.stringify(items), total, name, phone, email, address, comment)
+    INSERT INTO orders (items, total, name, phone, email, address, comment, utm)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(JSON.stringify(items), total, name, phone, email, address, comment, JSON.stringify(utm || {}))
   res.status(201).json({ id: result.lastInsertRowid })
 })
 

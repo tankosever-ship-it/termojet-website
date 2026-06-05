@@ -34,6 +34,11 @@ export default function AdminConsultations() {
                       {c.email && <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Mail size={12} />{c.email}</a>}
                     </div>
                     {c.message && <p className="text-sm text-gray-600 mt-2 bg-gray-50 rounded-lg p-3">{c.message}</p>}
+                    {c.utm && Object.keys(c.utm).length > 0 && (
+                      <p className="text-xs text-gray-400 mt-2">
+                        Джерело: {c.utm.utm_source || c.utm.referrer || '—'}{c.utm.utm_medium ? ' · ' + c.utm.utm_medium : ''}{c.utm.utm_campaign ? ' · ' + c.utm.utm_campaign : ''}
+                      </p>
+                    )}
                   </div>
                   <span className="text-xs text-gray-400 flex-shrink-0">
                     {c.createdAt ? new Date(c.createdAt).toLocaleDateString('uk-UA') : ''}

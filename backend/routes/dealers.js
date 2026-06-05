@@ -5,14 +5,15 @@ const { requireAdmin } = require('./auth')
 const router = express.Router()
 
 router.get('/', requireAdmin, (req, res) => {
-  res.json(db.prepare('SELECT * FROM dealers ORDER BY created_at DESC').all())
+  const rows = db.prepare('SELECT * FROM dealers ORDER BY created_at DESC').all()
+  res.json(rows.map(r => ({ ...r, utm: JSON.parse(r.utm || '{}') })))
 })
 
 router.post('/', (req, res) => {
-  const { company, name, phone, email, city, message } = req.body
+  const { company, name, phone, email, city, message, utm } = req.body
   const result = db.prepare(
-    'INSERT INTO dealers (company, name, phone, email, city, message) VALUES (?, ?, ?, ?, ?, ?)'
-  ).run(company, name, phone, email, city, message)
+    'INSERT INTO dealers (company, name, phone, email, city, message, utm) VALUES (?, ?, ?, ?, ?, ?, ?)'
+  ).run(company, name, phone, email, city, message, JSON.stringify(utm || {}))
   res.status(201).json({ id: result.lastInsertRowid })
 })
 
