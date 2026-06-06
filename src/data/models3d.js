@@ -142,6 +142,12 @@ export const MODELS_BY_SLUG = {
   "ng-48p-zi-zmishuvachem-1epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
   "84622480a": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
   "ng-48-zi-zmishuvachem-1epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+
+  // ── #3 (2026-06-06): каналізаційні станції GRANDLIFT (літраж = об'єм бака) ──
+  "pump-grandlift-20-75sw": [{ file: 'pump-grandlift-20-75sw.step', name: 'GRANDLIFT 20-75SW.step', size: '3 МБ', glb: '/uploads/3d/pump-grandlift-20-75sw.glb' }],
+  "pump-grandlift-60-75sw": [{ file: 'pump-grandlift-60-75sw.step', name: 'GRANDLIFT 60-75SW.step', size: '0.3 МБ', glb: '/uploads/3d/pump-grandlift-60-75sw.glb' }],
+  "pump-grandlift-120-220sw": [{ file: 'pump-grandlift-120-220sw.step', name: 'GRANDLIFT 120-220SW.step', size: '2 МБ', glb: '/uploads/3d/pump-grandlift-120-220sw.glb' }],
+  "pump-grandlift-150-370dw": [{ file: 'pump-grandlift-150-370dw.step', name: 'GRANDLIFT 150-370DW.step', size: '4 МБ', glb: '/uploads/3d/pump-grandlift-150-370dw.glb' }],
 }
 
 export function getModels3D(slug) {
