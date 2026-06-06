@@ -124,10 +124,10 @@ export const MODELS_BY_SLUG = {
 
   // ── #2 (2026-06-05): нові 3D-моделі від постачальника (STEP+GLB на /uploads/3d/) ──
   // Рециркуляційні насоси SPE12
-  "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4": [{ file: 'nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4.step', name: 'SPE12-1.4.step', size: '3 МБ', glb: '/uploads/3d/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4.glb' }],
-  "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s": [{ file: 'nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s.step', name: 'SPE12-1.4S.step', size: '3 МБ', glb: '/uploads/3d/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s.glb' }],
+  "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4": [{ file: 'nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4.step', name: 'SPE12-1.4.step', size: '3 МБ', glb: '/uploads/3d/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4.glb?v=2' }],
+  "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s": [{ file: 'nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s.step', name: 'SPE12-1.4S.step', size: '3 МБ', glb: '/uploads/3d/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s.glb?v=2' }],
   // Насос MEGA 100-120F
-  "pump-mega100-120f-450": [{ file: 'pump-mega100-120f-450.step', name: 'MEGA 100-120F.step', size: '41 МБ', glb: '/uploads/3d/pump-mega100-120f-450.glb' }],
+  "pump-mega100-120f-450": [{ file: 'pump-mega100-120f-450.step', name: 'MEGA 100-120F.step', size: '41 МБ', glb: '/uploads/3d/pump-mega100-120f-450.glb?v=2' }],
   // Насоси підвищувальні SILENCER
   "pump-silencer300": [{ file: 'pump-silencer300.step', name: 'SILENCER 300.step', size: '21 МБ', glb: '/uploads/3d/pump-silencer300.glb' }],
   "pump-silencer900": [{ file: 'pump-silencer900.step', name: 'SILENCER 900.step', size: '21 МБ', glb: '/uploads/3d/pump-silencer900.glb' }],
