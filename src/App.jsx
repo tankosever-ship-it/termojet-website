@@ -44,6 +44,7 @@ import AdminBanners from './pages/admin/AdminBanners'
 import AdminPromos from './pages/admin/AdminPromos'
 import AdminAnalytics from './pages/admin/AdminAnalytics'
 import AdminContent from './pages/admin/AdminContent'
+import AdminAbout from './pages/admin/AdminAbout'
 import AdminSubscribers from './pages/admin/AdminSubscribers'
 
 function ScrollToTop() {
@@ -93,6 +94,7 @@ function AppRoutes() {
         <Route path="/admin/subscribers" element={<AdminSubscribers />} />
         <Route path="/admin/analytics" element={<AdminAnalytics />} />
         <Route path="/admin/content" element={<AdminContent />} />
+        <Route path="/admin/about" element={<AdminAbout />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
       </Route>
 

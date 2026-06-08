@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import { useT } from '../i18n/useT'
 import { assetPath } from '../utils/assetPath'
+import { useApp } from '../context/AppContext'
+import { youtubeId } from '../data/aboutContent'
 
 const BASE = 'https://termojet.com.ua/wp-content/uploads'
 
@@ -65,21 +67,30 @@ function PhotoGallery({ photos }) {
   function prev() { setLightbox(i => (i - 1 + photos.length) % photos.length) }
   function next() { setLightbox(i => (i + 1) % photos.length) }
 
+  const cols = photos.length >= 6 ? 'lg:grid-cols-6' : photos.length === 5 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
+
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1">
+      <div className={`grid grid-cols-2 md:grid-cols-3 ${cols} gap-1`}>
         {photos.map((photo, i) => (
           <button
             key={i}
             onClick={() => setLightbox(i)}
-            className="overflow-hidden aspect-square group"
+            className="relative overflow-hidden aspect-square group"
           >
             <img
-              src={photo}
-              alt={`Виробництво Termojet ${i + 1}`}
+              src={assetPath(photo.url)}
+              alt={photo.caption || `Виробництво Termojet ${i + 1}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
+            {photo.caption && (
+              <span className="absolute bottom-0 left-0 right-0 px-2 py-1.5 text-white text-left
+                bg-gradient-to-t from-black/75 to-transparent"
+                style={{ ...mono, fontSize: '9px', letterSpacing: '0.06em' }}>
+                ● {photo.caption}
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -93,12 +104,18 @@ function PhotoGallery({ photos }) {
             className="absolute left-4 text-white/70 hover:text-white p-3">
             <ChevronLeft size={32} />
           </button>
-          <img
-            src={photos[lightbox]}
-            alt=""
-            className="max-h-[90vh] max-w-[85vw] object-contain"
-            onClick={e => e.stopPropagation()}
-          />
+          <div className="flex flex-col items-center" onClick={e => e.stopPropagation()}>
+            <img
+              src={assetPath(photos[lightbox].url)}
+              alt={photos[lightbox].caption || ''}
+              className="max-h-[85vh] max-w-[85vw] object-contain"
+            />
+            {photos[lightbox].caption && (
+              <span className="mt-3 text-white/70" style={{ ...mono, fontSize: '12px' }}>
+                {photos[lightbox].caption}
+              </span>
+            )}
+          </div>
           <button onClick={e => { e.stopPropagation(); next() }}
             className="absolute right-4 text-white/70 hover:text-white p-3">
             <ChevronRight size={32} />
@@ -120,7 +137,13 @@ function PhotoGallery({ photos }) {
 export default function AboutPage() {
   const t     = useT()
   const about = t('about')
+  const { aboutContent: ac } = useApp()
   const [videoOpen, setVideoOpen] = useState(false)
+
+  const photos    = ac.photos?.length ? ac.photos : MANUFACTURING_PHOTOS.map((url, i) => ({ url, caption: '' }))
+  const localVid  = ac.localVideo ? assetPath(ac.localVideo) : MANUFACTURING_VIDEO
+  const ytId      = youtubeId(ac.youtubeUrl)
+  const poster    = photos[0] ? assetPath(photos[0].url) : MANUFACTURING_PHOTOS[0]
 
   return (
     <>
@@ -279,14 +302,17 @@ export default function AboutPage() {
             viewport={{ once:true }} className="mb-10 text-center">
             <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }}
               className="uppercase">
-              ВИРОБНИЧИЙ ЦЕХ · КИЇВ
+              {ac.manufEyebrow}
             </span>
             <h2 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif] text-white mt-3 mb-3 leading-tight">
-              Від листа сталі —<br />
-              <span style={{ color: 'var(--accent)' }}>до готового виробу</span>
+              {ac.manufTitle.split('\n').map((ln, i, a) => (
+                <span key={i} style={i === a.length - 1 && a.length > 1 ? { color: 'var(--accent)' } : undefined}>
+                  {ln}{i < a.length - 1 && <br />}
+                </span>
+              ))}
             </h2>
             <p className="text-white/40 text-sm max-w-lg mx-auto">
-              Весь виробничий цикл під одним дахом: лазерне різання, зварювання, порошкове фарбування та контроль якості
+              {ac.manufSubtitle}
             </p>
           </motion.div>
 
@@ -301,41 +327,60 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Video — невелике вікно, клік розгортає на весь екран */}
-          <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
-            viewport={{ once:true }} transition={{ duration:0.5 }}
-            onClick={() => setVideoOpen(true)}
-            className="relative overflow-hidden mb-3 max-w-lg mx-auto rounded-xl cursor-pointer group aspect-video bg-black ring-1 ring-white/10">
-            <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.55)' }}
-              className="absolute top-3 left-3 z-10 uppercase bg-black/50 px-2 py-1">
-              ● LIVE / ВИРОБНИЧИЙ ЦЕХ
-            </div>
-            <video
-              autoPlay muted loop playsInline preload="metadata"
-              poster={MANUFACTURING_PHOTOS[0]}
-              className="w-full h-full object-cover block"
-            >
-              <source src={MANUFACTURING_VIDEO} type="video/mp4" />
-            </video>
-            {/* play / expand overlay */}
-            <div className="absolute inset-0 flex items-center justify-center transition-colors group-hover:bg-black/30">
-              <span className="w-14 h-14 rounded-full bg-white/15 border border-white/40 backdrop-blur-sm flex items-center justify-center opacity-80 transition-all group-hover:opacity-100 group-hover:scale-110">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
-              </span>
-            </div>
-            <div className="absolute bottom-3 right-3 z-10 bg-black/50 px-2 py-1 uppercase"
-              style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.65)' }}>
-              Натисніть, щоб розгорнути ↗
-            </div>
-          </motion.div>
+          {/* Відео: власне відео цеху (зліва) + оглядове YouTube (справа) */}
+          <div className={`grid grid-cols-1 ${ytId ? 'lg:grid-cols-2' : ''} gap-4 max-w-4xl mx-auto mb-3`}>
+            {/* Власне відео — клік розгортає на весь екран */}
+            {localVid && (
+              <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
+                viewport={{ once:true }} transition={{ duration:0.5 }}
+                onClick={() => setVideoOpen(true)}
+                className="relative overflow-hidden rounded-xl cursor-pointer group aspect-video bg-black ring-1 ring-white/10">
+                <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.55)' }}
+                  className="absolute top-3 left-3 z-10 uppercase bg-black/50 px-2 py-1">
+                  ● ВИРОБНИЧИЙ ЦЕХ
+                </div>
+                <video
+                  autoPlay muted loop playsInline preload="metadata"
+                  poster={poster}
+                  className="w-full h-full object-cover block"
+                >
+                  <source src={localVid} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 flex items-center justify-center transition-colors group-hover:bg-black/30">
+                  <span className="w-14 h-14 rounded-full bg-white/15 border border-white/40 backdrop-blur-sm flex items-center justify-center opacity-80 transition-all group-hover:opacity-100 group-hover:scale-110">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                  </span>
+                </div>
+                <div className="absolute bottom-3 right-3 z-10 bg-black/50 px-2 py-1 uppercase"
+                  style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.65)' }}>
+                  Натисніть, щоб розгорнути ↗
+                </div>
+              </motion.div>
+            )}
 
-          {/* Video modal — окреме вікно на весь екран */}
-          {videoOpen && (
+            {/* Оглядове відео YouTube */}
+            {ytId && (
+              <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
+                viewport={{ once:true }} transition={{ duration:0.5, delay:0.1 }}
+                className="relative overflow-hidden rounded-xl aspect-video bg-black ring-1 ring-white/10">
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${ytId}`}
+                  title="Termojet — відео"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </motion.div>
+            )}
+          </div>
+
+          {/* Модалка власного відео — на весь екран */}
+          {videoOpen && localVid && (
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
               <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
               <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
                 <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
-                  src={MANUFACTURING_VIDEO} controls autoPlay playsInline />
+                  src={localVid} controls autoPlay playsInline />
                 <button onClick={() => setVideoOpen(false)}
                   className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
                   <X size={18} />
@@ -345,15 +390,15 @@ export default function AboutPage() {
           )}
 
           {/* Photo count label */}
-          <div className="text-center mb-3">
+          <div className="text-center mb-3 mt-8">
             <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)' }}
               className="uppercase">
-              ФОТОГАЛЕРЕЯ · {MANUFACTURING_PHOTOS.length} ЗНІМКІВ · КВІТЕНЬ 2024
+              ФОТОГАЛЕРЕЯ · ОБЛАДНАННЯ ЦЕХУ · {photos.length} ЗНІМКІВ
             </span>
           </div>
 
           {/* Photo grid */}
-          <PhotoGallery photos={MANUFACTURING_PHOTOS} />
+          <PhotoGallery photos={photos} />
         </div>
       </section>
 

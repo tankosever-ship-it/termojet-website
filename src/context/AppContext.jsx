@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { mergeHomeContent } from '../data/homeContent'
+import { mergeAboutContent } from '../data/aboutContent'
 import { PRODUCTS } from '../data/products'
 import { mergeWithEnriched } from '../data/mergeEnriched'
 import { BLOG_POSTS } from '../data/blog'
@@ -153,6 +154,13 @@ export function AppProvider({ children }) {
     if (typeof override === 'string') { try { override = JSON.parse(override) } catch { override = null } }
     return mergeHomeContent(override)
   }, [siteSettings.homeContent])
+
+  // Редагований контент сторінки «Про нас»
+  const aboutContent = useMemo(() => {
+    let override = siteSettings.aboutContent
+    if (typeof override === 'string') { try { override = JSON.parse(override) } catch { override = null } }
+    return mergeAboutContent(override)
+  }, [siteSettings.aboutContent])
 
   // Завантажити файл з компʼютера на сервер → { url, filename } або { error }.
   // FormData: НЕ виставляємо Content-Type вручну (браузер додасть boundary сам).
@@ -456,7 +464,7 @@ export function AppProvider({ children }) {
       subscribers, setSubscribers, removeSubscriber,
       newCounts, markViewed,
       siteSettings, setSiteSettings, saveSettings,
-      homeContent,
+      homeContent, aboutContent,
       isAdminAuth, adminLogin, adminLogout,
       adminToken, authHeaders,
       uploadFile, saveFile, removeFile,

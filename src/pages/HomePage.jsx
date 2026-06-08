@@ -519,8 +519,12 @@ function CountUpThousands({ end, duration = 1600 }) {
 }
 
 export default function HomePage() {
-  const { lang, blog, portfolio, products, homeContent } = useApp()
+  const { lang, blog, portfolio, products, homeContent, aboutContent } = useApp()
   const t    = useT()
+  // Фото виробництва — спільні зі сторінкою «Про нас» (редагуються в адмінці)
+  const prodPhotos = aboutContent.photos?.length
+    ? aboutContent.photos.map(p => ({ src: assetPath(p.url), label: p.caption ? `● ${p.caption}` : '' }))
+    : PROD_PHOTOS
   const hero = t('hero')
   const cats = t('categories')
   const seo  = t('seo')
@@ -797,7 +801,7 @@ export default function HomePage() {
 
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {PROD_PHOTOS.map((photo, i) => (
+            {prodPhotos.map((photo, i) => (
               <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
                 <img
                   src={photo.src}

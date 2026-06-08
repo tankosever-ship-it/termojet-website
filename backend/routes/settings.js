@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 })
 
 router.put('/', requireAdmin, (req, res) => {
-  const allowed = ['phone', 'email', 'address', 'workHours', 'telegram', 'adminPassword', 'homeContent']
+  const allowed = ['phone', 'email', 'address', 'workHours', 'telegram', 'adminPassword', 'homeContent', 'aboutContent']
   const update = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)')
   const tx = db.transaction(() => {
     for (const key of allowed) {
