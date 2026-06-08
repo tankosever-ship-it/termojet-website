@@ -6,6 +6,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import { splitAccentToken } from '../data/homeContent'
+import { mediaSrc } from '../data/aboutContent'
 import SEO from '../components/SEO'
 import { assetPath } from '../utils/assetPath'
 import { imgUrl } from '../utils/imgUrl'
@@ -521,9 +522,10 @@ function CountUpThousands({ end, duration = 1600 }) {
 export default function HomePage() {
   const { lang, blog, portfolio, products, homeContent, aboutContent } = useApp()
   const t    = useT()
-  // Фото виробництва — спільні зі сторінкою «Про нас» (редагуються в адмінці)
-  const prodPhotos = aboutContent.photos?.length
-    ? aboutContent.photos.map(p => ({ src: assetPath(p.url), label: p.caption ? `● ${p.caption}` : '' }))
+  // Фото виробництва — нові знімки з підписами зі сторінки «Про нас» (редагуються в адмінці)
+  const captioned = (aboutContent.photos || []).filter(p => p.caption)
+  const prodPhotos = captioned.length
+    ? captioned.map(p => ({ src: mediaSrc(p.url), label: `● ${p.caption}` }))
     : PROD_PHOTOS
   const hero = t('hero')
   const cats = t('categories')

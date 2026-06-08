@@ -6,7 +6,7 @@ import SEO from '../components/SEO'
 import { useT } from '../i18n/useT'
 import { assetPath } from '../utils/assetPath'
 import { useApp } from '../context/AppContext'
-import { youtubeId } from '../data/aboutContent'
+import { youtubeId, mediaSrc } from '../data/aboutContent'
 
 const BASE = 'https://termojet.com.ua/wp-content/uploads'
 
@@ -79,7 +79,7 @@ function PhotoGallery({ photos }) {
             className="relative overflow-hidden aspect-square group"
           >
             <img
-              src={assetPath(photo.url)}
+              src={mediaSrc(photo.url)}
               alt={photo.caption || `Виробництво Termojet ${i + 1}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
@@ -143,7 +143,7 @@ export default function AboutPage() {
   const photos    = ac.photos?.length ? ac.photos : MANUFACTURING_PHOTOS.map((url, i) => ({ url, caption: '' }))
   const localVid  = ac.localVideo ? assetPath(ac.localVideo) : MANUFACTURING_VIDEO
   const ytId      = youtubeId(ac.youtubeUrl)
-  const poster    = photos[0] ? assetPath(photos[0].url) : MANUFACTURING_PHOTOS[0]
+  const poster    = photos[0] ? mediaSrc(photos[0].url) : MANUFACTURING_PHOTOS[0]
 
   return (
     <>
