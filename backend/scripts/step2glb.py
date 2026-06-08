@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
 step2glb.py — STEP → GLB для 3D-в'юера сайту.
-Конвертує (cascadio) і перефарбовує модель у фірмовий темно-сірий
-(baseColor [0.235,0.243,0.267], metallic 0.45, rough 0.5), як решта моделей.
+За замовчуванням ЗБЕРІГАЄ оригінальні кольори зі STEP (більшість моделей сайту —
+кольорові). Прапорець --grey перефарбовує у фірмовий темно-сірий
+(baseColor [0.235,0.243,0.267], metallic 0.45, rough 0.5) — лише для моделей,
+що приходять прозорими/безбарвними (SPE, MEGA тощо).
 
 tol_linear — лінійна девіація тесселяції: більше = грубіше = легший GLB.
 Для важких збірок (BOX-II/III) піднімаємо tol, щоб GLB лишався ~15-20 МБ.
 
-  python3 step2glb.py <input.step> <output.glb> [tol_linear=0.05] [tol_angular=0.5]
+  python3 step2glb.py <input.step> <output.glb> [tol_linear=0.05] [tol_angular=0.5] [--grey]
 """
 import sys, json, struct
 import cascadio
@@ -81,13 +83,16 @@ def recolor_glb(path):
 
 
 def main():
-    inp, outp = sys.argv[1], sys.argv[2]
-    tol_lin = float(sys.argv[3]) if len(sys.argv) > 3 else 0.05
-    tol_ang = float(sys.argv[4]) if len(sys.argv) > 4 else 0.5
+    args = [a for a in sys.argv[1:] if a != "--grey"]
+    grey = "--grey" in sys.argv
+    inp, outp = args[0], args[1]
+    tol_lin = float(args[2]) if len(args) > 2 else 0.05
+    tol_ang = float(args[3]) if len(args) > 3 else 0.5
     cascadio.step_to_glb(inp, outp, tol_linear=tol_lin, tol_angular=tol_ang,
                          merge_primitives=True, use_parallel=True)
-    recolor_glb(outp)
-    print(f"OK {outp} tol={tol_lin}")
+    if grey:
+        recolor_glb(outp)
+    print(f"OK {outp} tol={tol_lin} {'grey' if grey else 'colors'}")
 
 
 if __name__ == "__main__":
