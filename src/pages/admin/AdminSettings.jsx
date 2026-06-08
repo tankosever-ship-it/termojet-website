@@ -4,16 +4,20 @@ import { ArrowLeft, Save, LogOut } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 export default function AdminSettings() {
-  const { siteSettings, setSiteSettings, isAdminAuth, adminLogout } = useApp()
+  const { siteSettings, saveSettings, isAdminAuth, adminLogout } = useApp()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ ...siteSettings })
+  // homeContent не редагуємо тут (є окрема сторінка) — виключаємо з форми
+  const [form, setForm] = useState(() => { const { homeContent, ...rest } = siteSettings; return { ...rest } })
   const [saved, setSaved] = useState(false)
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
   if (!isAdminAuth) { navigate('/admin'); return null }
 
-  function handleSave() {
-    setSiteSettings(form)
+  async function handleSave() {
+    // порожній пароль не відправляємо (щоб не перезаписати наявний)
+    const patch = { ...form }
+    if (!patch.adminPassword) delete patch.adminPassword
+    await saveSettings(patch)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }

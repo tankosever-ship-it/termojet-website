@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo } from 'react'
+import { mergeHomeContent } from '../data/homeContent'
 import { PRODUCTS } from '../data/products'
 import { mergeWithEnriched } from '../data/mergeEnriched'
 import { BLOG_POSTS } from '../data/blog'
@@ -122,6 +123,25 @@ export function AppProvider({ children }) {
   // helper for admin API calls
   function authHeaders() {
     return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }
+  }
+
+  // Редагований контент головної: override (JSON у settings.homeContent) поверх дефолтів
+  const homeContent = useMemo(() => {
+    let override = siteSettings.homeContent
+    if (typeof override === 'string') { try { override = JSON.parse(override) } catch { override = null } }
+    return mergeHomeContent(override)
+  }, [siteSettings.homeContent])
+
+  // Зберегти налаштування сайту в БД (PUT /settings) + оновити локальний стан.
+  // homeContent-обʼєкт серіалізуємо в JSON-рядок для зберігання.
+  async function saveSettings(patch) {
+    const body = { ...patch }
+    if (body.homeContent && typeof body.homeContent !== 'string') body.homeContent = JSON.stringify(body.homeContent)
+    if (API && adminToken) {
+      try { await fetch(`${API}/settings`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(body) }) } catch {}
+    }
+    setSiteSettings(s => ({ ...s, ...patch }))
+    return { ok: true }
   }
 
   // Cart
@@ -381,7 +401,8 @@ export function AppProvider({ children }) {
       banners, setBanners,
       promos, setPromos,
       clients, setClients,
-      siteSettings, setSiteSettings,
+      siteSettings, setSiteSettings, saveSettings,
+      homeContent,
       isAdminAuth, adminLogin, adminLogout,
       adminToken, authHeaders,
       placeOrder, sendConsultation, sendDealerRequest, subscribe,

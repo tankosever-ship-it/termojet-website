@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, Check, Smartphone, Play, X, Star, Send, Image
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
+import { splitAccentToken } from '../data/homeContent'
 import SEO from '../components/SEO'
 import { assetPath } from '../utils/assetPath'
 import { imgUrl } from '../utils/imgUrl'
@@ -29,11 +30,12 @@ const CONFIG_STEPS = [
   { n: '04', title: 'PDF та замовлення', desc: 'Експорт схеми, перелік обладнання, відправка менеджеру.' },
 ]
 
-const STATS = [
-  { ord: '01', num: '23', suffix: ' роки',  label: 'На ринку котельного обладнання' },
-  { ord: '02', num: '16', suffix: ' країн', label: 'Експорт у Європу — філія в Польщі' },
-  { ord: '03', num: '50', thousands: true,  label: 'Проектів укомплектовано' },
-  { ord: '04', num: '70', thousands: true,  label: 'Виробів на рік на заводі' },
+// Структурна мета статистики (порядок + формат «тисячі»); тексти беруться з homeContent
+const STATS_META = [
+  { ord: '01', thousands: false },
+  { ord: '02', thousands: false },
+  { ord: '03', thousands: true  },
+  { ord: '04', thousands: true  },
 ]
 
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
@@ -517,11 +519,13 @@ function CountUpThousands({ end, duration = 1600 }) {
 }
 
 export default function HomePage() {
-  const { lang, blog, portfolio, products } = useApp()
+  const { lang, blog, portfolio, products, homeContent } = useApp()
   const t    = useT()
   const hero = t('hero')
   const cats = t('categories')
   const seo  = t('seo')
+  const hc   = homeContent
+  const stats = STATS_META.map((m, i) => ({ ...m, ...(hc.stats[i] || {}) }))
 
   const [videoOpen, setVideoOpen] = useState(false)
   const [statsVisible, setStatsVisible] = useState(false)
@@ -603,28 +607,29 @@ export default function HomePage() {
                 className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-white/20 text-white/70"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.12em', backdropFilter: 'blur(8px)', background: 'rgba(255,255,255,0.05)' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
-                ВИРОБНИЦТВО З 2002 · КИЇВ, УКРАЇНА
+                {hc.heroBadge}
               </motion.div>
 
               <motion.h1 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] mb-8"
                 style={{ fontSize: 'clamp(1.8rem, 4.05vw, 3.15rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
-                Виробник систем{' '}<br />
-                швидкого монтажу{' '}<br />
-                для котелень <span className="text-[var(--accent)]">#1</span>{' '}<br />
-                в Україні.
+                {splitAccentToken(hc.heroTitle).map((p, i) =>
+                  p.accent
+                    ? <span key={i} className="text-[var(--accent)]">{p.t}</span>
+                    : <span key={i}>{p.t}</span>
+                )}
               </motion.h1>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
                 <Link to="/catalog"
                   className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:opacity-90"
                   style={{ background: 'var(--accent)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                  Переглянути каталог <ArrowRight size={18} />
+                  {hc.heroBtnPrimary} <ArrowRight size={18} />
                 </Link>
                 <Link to="/contacts"
                   className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:bg-white/10"
                   style={{ border: '2px solid rgba(255,255,255,0.6)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                  Отримати консультацію
+                  {hc.heroBtnSecondary}
                 </Link>
               </motion.div>
 
@@ -637,7 +642,7 @@ export default function HomePage() {
           style={{ background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(12px)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-              {STATS.map((s) => (
+              {stats.map((s) => (
                 <div key={s.ord} className="px-6 py-5">
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 6 }}>{s.ord}</div>
                   <div className="font-black leading-none font-['Archivo',sans-serif] text-white whitespace-nowrap mb-1"
@@ -674,7 +679,9 @@ export default function HomePage() {
               <motion.h2 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] leading-tight text-white"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
-                Все для котельні —<br />в одному місці.
+                {hc.catsTitle.split('\n').map((ln, i, a) => (
+                  <span key={i}>{ln}{i < a.length - 1 && <br />}</span>
+                ))}
               </motion.h2>
             </div>
             <motion.div variants={fadeUp}>
@@ -710,25 +717,20 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="text-center mb-14">
-            <motion.div variants={fadeUp} className="eyebrow-white mb-3">Наші переваги</motion.div>
+            <motion.div variants={fadeUp} className="eyebrow-white mb-3">{hc.advantagesEyebrow}</motion.div>
             <motion.h2 variants={fadeUp}
               className="font-black font-['Archivo',sans-serif] max-w-2xl mx-auto"
               style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
-              Чому обирають{' '}
-              <span className="text-gradient-orange">Termojet</span>
+              {hc.advantagesTitle.split('Termojet').map((p, i, a) => (
+                <span key={i}>{p}{i < a.length - 1 && <span className="text-gradient-orange">Termojet</span>}</span>
+              ))}
             </motion.h2>
           </motion.div>
 
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { num: '01', title: 'Власне виробництво', desc: 'Завод 3 000 м² у Києві та Житомирі. Повний цикл від металу до готового вузла.' },
-              { num: '02', title: 'Гарантія якості',    desc: 'Кожна одиниця проходить вихідний контроль. ISO 9001:2015, CE.' },
-              { num: '03', title: 'Наявність на складі', desc: 'Склад 2 500 м². Більшість позицій відвантажуємо наступного дня.' },
-              { num: '04', title: 'Міжнародний досвід', desc: 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року.' },
-              { num: '05', title: 'Технічна підтримка', desc: 'Інженерна підтримка на всіх етапах. Підбір під ваш проект.' },
-              { num: '06', title: 'Комплексні рішення', desc: 'TERMOJET BOX, Mini, Mega — від 30 кВт до 2 МВт.' },
-            ].map((item, i) => {
+            {hc.advantages.map((adv, i) => {
+              const item = { ...adv, num: String(i + 1).padStart(2, '0') }
               const isHovered = hoveredAdvantage === i
               return (
                 <motion.div key={i} variants={fadeUp}
@@ -784,10 +786,12 @@ export default function HomePage() {
             <motion.h2 variants={fadeUp}
               className="font-black font-['Archivo',sans-serif] leading-tight text-[var(--text-primary)]"
               style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
-              Від листа сталі —<br />до готового обладнання<br />для швидкого монтажу.
+              {hc.productionTitle.split('\n').map((ln, i, a) => (
+                <span key={i}>{ln}{i < a.length - 1 && <br />}</span>
+              ))}
             </motion.h2>
             <motion.p variants={fadeUp} className="text-[var(--text-secondary)] max-w-xs text-sm leading-relaxed md:text-right">
-              Лазерні верстати, листогини, напівавтоматичне зварювання та власна лінія порошкового фарбування. 5 500 м² площ.
+              {hc.productionText}
             </motion.p>
           </motion.div>
 
@@ -1045,14 +1049,14 @@ export default function HomePage() {
             <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.15 }}
               className="max-w-sm flex-shrink-0">
               <p className="text-white/55 text-base leading-relaxed mb-8">
-                Завантажте додаток або відкрийте каталог. Наші менеджери допоможуть з підбором обладнання за 1 робочий день.
+                {hc.ctaText}
               </p>
               <div className="flex flex-col gap-3">
                 <Link to="/catalog" className="btn-primary text-base py-4 px-8 justify-center">
-                  Відкрити каталог <ArrowRight size={16} />
+                  {hc.ctaBtnPrimary} <ArrowRight size={16} />
                 </Link>
                 <Link to="/contacts" className="btn-outline-white text-base py-4 px-8 justify-center">
-                  Замовити дзвінок
+                  {hc.ctaBtnSecondary}
                 </Link>
               </div>
             </motion.div>
@@ -1076,9 +1080,9 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 backdrop-blur-sm">
                 🤝 Партнерська програма
               </div>
-              <h2 className="section-title-white mb-4 max-w-xl mx-auto">Станьте партнером Termojet</h2>
+              <h2 className="section-title-white mb-4 max-w-xl mx-auto">{hc.dealersTitle}</h2>
               <p className="text-white/75 text-base mb-8 max-w-xl mx-auto">
-                Шукаємо дилерів у всіх регіонах України та за кордоном. Вигідні умови, технічна підтримка.
+                {hc.dealersText}
               </p>
               <Link to="/partners" className="btn-primary px-8 py-4 text-base">
                 Дізнатись про партнерство <ArrowRight size={16} />

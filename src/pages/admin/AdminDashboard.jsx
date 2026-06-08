@@ -1,8 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Package, ShoppingCart, Users, MessageSquare, FileText, BarChart2, Settings, Image, BookOpen, Briefcase, LogOut, Star, HelpCircle, Tag } from 'lucide-react'
+import { Package, ShoppingCart, Users, MessageSquare, FileText, BarChart2, Settings, Image, BookOpen, Briefcase, LogOut, Star, HelpCircle, Tag, TrendingUp, LayoutTemplate } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 const MENU = [
+  { to: '/admin/analytics', icon: TrendingUp, label: 'Аналітика', desc: 'Ліди, UTM, замовлення' },
   { to: '/admin/products', icon: Package, label: 'Товари', desc: 'Каталог та CRUD' },
   { to: '/admin/orders', icon: ShoppingCart, label: 'Замовлення', desc: 'Всі замовлення' },
   { to: '/admin/consultations', icon: MessageSquare, label: 'Консультації', desc: 'Запити на консультацію' },
@@ -15,6 +16,7 @@ const MENU = [
   { to: '/admin/banners', icon: Image, label: 'Банери', desc: 'Банери головної' },
   { to: '/admin/promos', icon: Tag, label: 'Акції', desc: 'Промо-пропозиції' },
   { to: '/admin/clients', icon: Users, label: 'Клієнти', desc: 'Логотипи клієнтів' },
+  { to: '/admin/content', icon: LayoutTemplate, label: 'Контент головної', desc: 'Тексти та заголовки' },
   { to: '/admin/settings', icon: Settings, label: 'Налаштування', desc: 'Контакти, пароль' },
 ]
 
