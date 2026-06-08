@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { MapPin, Calendar, Zap, X, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { MapPin, Calendar, Zap, X, ChevronRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
@@ -175,6 +176,26 @@ export default function PortfolioPage() {
 
               {selected.desc && (
                 <p className="text-gray-600 leading-relaxed text-sm">{selected.desc}</p>
+              )}
+
+              {selected.links?.length > 0 && (
+                <div className="mt-5 pt-4 border-t border-gray-100">
+                  <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
+                    className="uppercase mb-2.5">Обладнання об'єкта</div>
+                  <div className="flex flex-wrap gap-2">
+                    {selected.links.map(l => l.ext ? (
+                      <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
+                        {l.label} <ArrowUpRight size={12} />
+                      </a>
+                    ) : (
+                      <Link key={l.label} to={l.url} onClick={() => setSelected(null)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
+                        {l.label} <ChevronRight size={12} />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
           </div>
