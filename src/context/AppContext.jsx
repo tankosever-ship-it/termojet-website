@@ -206,6 +206,9 @@ export function AppProvider({ children }) {
     if (!API || !isAdminAuth || !adminToken) return
     const h = authHeaders()
 
+    // Адмін бачить усі товари, включно з прихованими (is_visible=0)
+    fetch(`${API}/products?admin=1&limit=1000`, { headers: h })
+      .then(r => r.json()).then(data => { if (data.products?.length) setProducts(data.products) }).catch(() => {})
     fetch(`${API}/orders`, { headers: h }).then(r => r.json()).then(setOrders).catch(() => {})
     fetch(`${API}/consultations`, { headers: h }).then(r => r.json()).then(setConsultations).catch(() => {})
     fetch(`${API}/dealers`, { headers: h }).then(r => r.json()).then(setDealers).catch(() => {})

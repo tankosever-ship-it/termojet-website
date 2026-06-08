@@ -1,6 +1,6 @@
 const express = require('express')
 const db = require('../db')
-const { requireAdmin } = require('./auth')
+const { requireAdmin, checkAdmin } = require('./auth')
 
 const router = express.Router()
 
@@ -33,7 +33,9 @@ router.get('/', (req, res) => {
   const { category, search, page = 1, limit = 100 } = req.query
   const offset = (parseInt(page) - 1) * parseInt(limit)
 
-  let query = 'SELECT * FROM products WHERE is_visible = 1'
+  // Адмін (з валідним токеном) бачить усі товари, включно з прихованими
+  const isAdmin = req.query.admin && checkAdmin(req)
+  let query = isAdmin ? 'SELECT * FROM products WHERE 1 = 1' : 'SELECT * FROM products WHERE is_visible = 1'
   const params = []
 
   if (category) {

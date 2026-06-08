@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Plus, Pencil, Trash2, Search, X, ArrowLeft, Package } from 'lucide-react'
+import { Plus, Pencil, Trash2, Search, X, ArrowLeft, Package, Eye, EyeOff } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { CATEGORIES } from '../../data/categories'
 import { toSlug } from '../../utils/slug'
 
-const EMPTY = { name: '', sku: '', price: '', categorySlug: '', desc: '', inStock: true, image: '', specs: {} }
+const EMPTY = { name: '', sku: '', price: '', categorySlug: '', desc: '', inStock: true, isVisible: true, image: '', specs: {} }
 
 function ProductForm({ product, onSave, onCancel }) {
   const [form, setForm] = useState({ ...EMPTY, ...product })
@@ -67,10 +67,16 @@ function ProductForm({ product, onSave, onCancel }) {
         </div>
       </div>
 
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" checked={form.inStock} onChange={e => set('inStock', e.target.checked)} className="accent-[var(--primary)]" />
-        <span className="text-sm text-gray-700">В наявності</span>
-      </label>
+      <div className="flex flex-wrap items-center gap-6">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" checked={form.inStock} onChange={e => set('inStock', e.target.checked)} className="accent-[var(--primary)]" />
+          <span className="text-sm text-gray-700">В наявності</span>
+        </label>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" checked={form.isVisible !== false} onChange={e => set('isVisible', e.target.checked)} className="accent-[var(--primary)]" />
+          <span className="text-sm text-gray-700">Показувати на сайті</span>
+        </label>
+      </div>
 
       {/* Specs */}
       <div>
@@ -126,6 +132,13 @@ export default function AdminProducts() {
     removeProduct(id)
   }
 
+  // Швидке приховування/показ товару без відкриття форми
+  function toggleVisible(p) {
+    saveProduct({ ...p, isVisible: p.isVisible === false ? true : false })
+  }
+
+  const hiddenCount = products.filter(p => p.isVisible === false).length
+
   const _found = products.find(p => p.id === editId)
   const editingProduct = editId === 'new' ? EMPTY : (_found ? { ..._found, desc: _found.desc ?? _found.description ?? '' } : undefined)
 
@@ -136,7 +149,9 @@ export default function AdminProducts() {
           <Link to="/admin/dashboard" className="text-white/60 hover:text-white transition-colors"><ArrowLeft size={18} /></Link>
           <div>
             <div className="font-bold">Товари</div>
-            <div className="text-white/60 text-xs">{products.length} позицій у каталозі</div>
+            <div className="text-white/60 text-xs">
+              {products.length} позицій{hiddenCount > 0 ? ` · ${hiddenCount} прихованих` : ''}
+            </div>
           </div>
         </div>
         <button onClick={() => { setEditId('new'); setShowForm(true) }} className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 transition-colors px-4 py-2 rounded-xl text-sm font-medium">
@@ -190,7 +205,7 @@ export default function AdminProducts() {
                 {filtered.map(p => {
                   const cat = CATEGORIES.find(c => c.slug === p.categorySlug)
                   return (
-                    <tr key={p.id} className="hover:bg-gray-50/50 transition-colors">
+                    <tr key={p.id} className={`hover:bg-gray-50/50 transition-colors ${p.isVisible === false ? 'opacity-50' : ''}`}>
                       <td className="px-4 py-3">
                         {p.image ? (
                           <img src={p.image} alt={p.name} className="w-12 h-12 object-contain bg-gray-50 rounded-lg" />
@@ -217,6 +232,11 @@ export default function AdminProducts() {
                       </td>
                       <td className="px-4 py-3 text-right">
                         <div className="flex items-center justify-end gap-2">
+                          <button onClick={() => toggleVisible(p)}
+                            title={p.isVisible === false ? 'Показати на сайті' : 'Приховати з сайту'}
+                            className={`p-1.5 transition-colors ${p.isVisible === false ? 'text-orange-400 hover:text-orange-600' : 'text-gray-400 hover:text-[var(--primary)]'}`}>
+                            {p.isVisible === false ? <EyeOff size={15} /> : <Eye size={15} />}
+                          </button>
                           <button onClick={() => { setEditId(p.id); setShowForm(true) }}
                             className="p-1.5 text-gray-400 hover:text-[var(--primary)] transition-colors">
                             <Pencil size={15} />

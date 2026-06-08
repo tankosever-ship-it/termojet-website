@@ -29,4 +29,11 @@ function requireAdmin(req, res, next) {
   }
 }
 
-module.exports = { router, requireAdmin }
+// М'яка перевірка адміна (не блокує запит) — для ендпоінтів, де адмін бачить більше
+function checkAdmin(req) {
+  const auth = req.headers.authorization
+  if (!auth?.startsWith('Bearer ')) return false
+  try { jwt.verify(auth.slice(7), JWT_SECRET); return true } catch { return false }
+}
+
+module.exports = { router, requireAdmin, checkAdmin }
