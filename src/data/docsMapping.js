@@ -39,7 +39,7 @@ export const DOCS_BY_NAME = [
   { match: /TRH10/i,                    ids: [116] },
   { match: /TJ03C/i,                    ids: [117] },
   { match: /TJ03RF/i,                   ids: [118] },
-  { match: /зональн.{0,12}клапан|ABF-ZV/i, ids: [18] },    // 3-ходовий зональний клапан
+  { match: /зональн.{0,12}клапан|ABF-ZV|ABF01-3/i, ids: [144], exclusive: true }, // зонний клапан ABF — лише власна брошура-інструкція
   { match: /413/,                       ids: [120, 121] }, // контролер/привід AQUA 413 (НГ-48A/52A + TJ413)
   { match: /84142380A/i,                ids: [120, 121] }, // НГ-38-А постачається з приводом AQUA 413
   { match: /GRANDLIFT/i,                ids: [140] },      // брошура GRANDLIFT
@@ -63,6 +63,10 @@ export const DOCS_BY_NAME = [
 // Returns deduplicated list of file IDs for a product
 export function getDocsForProduct(categorySlug, productName = '', sku = '') {
   const hay = `${productName} ${sku}`
+  // Ексклюзивне правило показує ЛИШЕ свої доки (ігнорує категорійні та інші збіги)
+  for (const { match, ids: exIds, exclusive } of DOCS_BY_NAME) {
+    if (exclusive && match.test(hay)) return [...new Set(exIds)]
+  }
   const ids = new Set(DOCS_BY_CATEGORY[categorySlug] || [])
   for (const { match, ids: extraIds } of DOCS_BY_NAME) {
     if (match.test(hay)) extraIds.forEach(id => ids.add(id))

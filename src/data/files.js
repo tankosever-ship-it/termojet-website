@@ -533,4 +533,7 @@ export const FILES = [
   { id: 141, name: 'Брошура — MEGA', category: 'Брошури', format: 'PDF', url: '/files/brochure-mega-ua.pdf', lang: 'uk', year: 2026, desc: 'Інтелектуальний циркуляційний насос MEGA 100-120F' },
   { id: 142, name: 'Брошура — SILENCER', category: 'Брошури', format: 'PDF', url: '/files/brochure-silencer-ua.pdf', lang: 'uk', year: 2026, desc: 'Підвищувальні насоси SILENCER у шумоізоляції' },
   { id: 143, name: 'Каталог — TBE', category: 'Брошури', format: 'PDF', url: '/uploads/files/brochure-tbe-ua.pdf', lang: 'uk', year: 2026, desc: 'Інлайн-насоси з частотним керуванням TBE (постійний тиск)' },
+
+  // ── Зонний клапан ABF ──
+  { id: 144, name: 'Інструкція — Зонний клапан ABF', category: 'Інструкції', format: 'PDF', url: '/files/zonnyj-klapan-abf-instrukciya.pdf', lang: 'uk', year: 2026, desc: 'Зонний 3-ходовий клапан ABF з електроприводом: характеристики, проводка, габарити' },
 ]
