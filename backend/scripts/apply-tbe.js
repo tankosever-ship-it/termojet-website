@@ -34,19 +34,19 @@ function specs(dn, kw, qmax, hmax, qrat, hrat) {
   }
 }
 
-// model, dn, kw, qmax, hmax, qrat, hrat, price(EUR)
+// model, dn, kw, qmax, hmax, qrat, hrat, price(EUR), article(артикул з прайсу)
 const ROWS = [
-  ['TBE 50-24/2', 50, 3,   35, 28, 25, 24, 1921],
-  ['TBE 50-36/2', 50, 5.5, 40, 42, 30, 36, 2371],
-  ['TBE 65-34/2', 65, 7.5, 60, 40, 50, 34, 2524],
+  ['TBE 50-24/2', 50, 3,   35, 28, 25, 24, 1921, '50242'],
+  ['TBE 50-36/2', 50, 5.5, 40, 42, 30, 36, 2371, '50362'],
+  ['TBE 65-34/2', 65, 7.5, 60, 40, 50, 34, 2524, '65342'],
 ]
 
-const NEW = ROWS.map(([model, dn, kw, qmax, hmax, qrat, hrat, price]) => {
+const NEW = ROWS.map(([model, dn, kw, qmax, hmax, qrat, hrat, price, article]) => {
   const slug = 'nasos-termojet-' + model.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   return {
     id: 'new_' + model.replace(/[^A-Za-z0-9]/g, ''), wpId: null,
     name: `Насос інлайн з частотним керуванням Termojet ${model} (${kw} кВт)`,
-    slug, sku: model,
+    slug, sku: article,
     price: String(price), currency: 'EUR',
     categorySlug: 'nasosy', subcategory: 'Інлайн з частотним керуванням',
     image: IMG, images: [IMG],
