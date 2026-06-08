@@ -236,7 +236,8 @@ export function AppProvider({ children }) {
     fetch(`${API}/orders`, { headers: h }).then(r => r.json()).then(setOrders).catch(() => {})
     fetch(`${API}/consultations`, { headers: h }).then(r => r.json()).then(setConsultations).catch(() => {})
     fetch(`${API}/dealers`, { headers: h }).then(r => r.json()).then(setDealers).catch(() => {})
-    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(setBlog).catch(() => {})
+    // не перезаписуємо статичні пости порожнім масивом, якщо в БД блогу ще немає
+    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data) && data.length) setBlog(data) }).catch(() => {})
     fetch(`${API}/reviews?admin=1`, { headers: h }).then(r => r.json()).then(setReviews).catch(() => {})
     fetch(`${API}/subscribers`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data)) setSubscribers(data) }).catch(() => {})
   }, [isAdminAuth, adminToken])

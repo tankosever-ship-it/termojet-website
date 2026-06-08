@@ -7,7 +7,7 @@ const STATUS_LABELS = { new: 'Новий', processing: 'В обробці', done
 const STATUS_COLORS = { new: 'bg-blue-50 text-blue-600', processing: 'bg-yellow-50 text-yellow-600', done: 'bg-green-50 text-green-600', cancelled: 'bg-red-50 text-red-500' }
 
 export default function AdminOrders() {
-  const { orders, setOrders, isAdminAuth } = useApp()
+  const { orders, setOrders, isAdminAuth, API, authHeaders } = useApp()
   const navigate = useNavigate()
   const [expanded, setExpanded] = useState(null)
 
@@ -15,6 +15,9 @@ export default function AdminOrders() {
 
   function setStatus(id, status) {
     setOrders(prev => prev.map(o => o.id === id ? { ...o, status } : o))
+    if (API) {
+      fetch(`${API}/orders/${id}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ status }) }).catch(() => {})
+    }
   }
 
   return (
@@ -39,9 +42,12 @@ export default function AdminOrders() {
               <div key={order.id} className="card overflow-hidden">
                 <div className="p-4 flex flex-wrap items-center gap-3 cursor-pointer" onClick={() => setExpanded(expanded === order.id ? null : order.id)}>
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900">#{order.id?.slice(-6)} — {order.name}</div>
+                    <div className="font-medium text-gray-900">#{String(order.id).slice(-6)} — {order.name}</div>
                     <div className="text-xs text-gray-400 mt-0.5">
-                      {order.phone} • {order.createdAt ? new Date(order.createdAt).toLocaleString('uk-UA') : ''}
+                      {order.phone} • {(() => {
+                        const d = order.created_at || order.createdAt
+                        return d ? new Date(String(d).replace(' ', 'T')).toLocaleString('uk-UA') : ''
+                      })()}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

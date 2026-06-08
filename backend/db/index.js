@@ -253,8 +253,25 @@ function migrateCurrency() {
   db.prepare("UPDATE products SET currency = 'UAH' WHERE currency IS NULL OR currency = ''").run()
 }
 
+// Засіяти статичні пости блогу в порожню БД (щоб ними можна було керувати в адмінці)
+function seedBlog() {
+  const count = db.prepare('SELECT COUNT(*) as c FROM blog_posts').get().c
+  if (count > 0) return
+  const seedPath = path.join(__dirname, '..', 'seed-blog.json')
+  if (!fs.existsSync(seedPath)) return
+  const posts = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+  const insert = db.prepare(`
+    INSERT OR IGNORE INTO blog_posts (slug, title, excerpt, content, image, tags, published, category, published_at)
+    VALUES (@slug, @title, @excerpt, @content, @image, '[]', @published, @category, @published_at)
+  `)
+  const tx = db.transaction(rows => { for (const p of rows) insert.run(p) })
+  tx(posts)
+  console.log(`Seeded ${posts.length} blog posts into SQLite`)
+}
+
 setup()
 seedProducts()
+seedBlog()
 migrateCurrency()
 
 module.exports = db
