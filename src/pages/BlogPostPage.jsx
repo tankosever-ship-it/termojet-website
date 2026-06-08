@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { Calendar, ArrowLeft, ArrowRight } from 'lucide-react'
+import { Calendar, ArrowLeft, ArrowRight, ChevronRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
@@ -75,10 +75,34 @@ export default function BlogPostPage() {
               if (para.startsWith('**') && para.endsWith('**')) {
                 return <h3 key={i} className="text-xl font-bold text-gray-900 mt-6 mb-3">{para.slice(2, -2)}</h3>
               }
-              const formatted = para.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+              let formatted = para.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+              // [текст](url) → посилання (зовнішні відкриваємо у новій вкладці)
+              formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
+                const ext = /^https?:/.test(url)
+                return `<a href="${url}" class="text-[var(--primary)] underline underline-offset-2 hover:opacity-80"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`
+              })
               return <p key={i} className="mb-4" dangerouslySetInnerHTML={{ __html: formatted }} />
             })}
           </div>
+
+          {post.links?.length > 0 && (
+            <div className="mt-8 pt-5 border-t border-gray-100">
+              <div className="text-[10px] font-mono uppercase tracking-[0.14em] text-gray-400 mb-2.5">Обладнання зі статті</div>
+              <div className="flex flex-wrap gap-2">
+                {post.links.map(l => l.ext ? (
+                  <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
+                    {l.label} <ArrowUpRight size={12} />
+                  </a>
+                ) : (
+                  <Link key={l.label} to={l.url}
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
+                    {l.label} <ChevronRight size={12} />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Back + CTA */}
