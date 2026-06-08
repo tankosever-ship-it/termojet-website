@@ -62,9 +62,15 @@ export default function BlogPostPage() {
           {excerpt && <p className="text-gray-500 text-lg mt-3 leading-relaxed">{excerpt}</p>}
         </div>
 
-        {/* Cover image */}
+        {/* Cover image — реальні фото (виставки) заповнюють, фото товарів вписуємо без обрізки */}
         {post.image && (
-          <img src={post.image} alt={title} className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8" />
+          post.image.includes('/blog/exh-') ? (
+            <img src={post.image} alt={title} className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8" />
+          ) : (
+            <div className="w-full h-64 md:h-80 rounded-2xl mb-8 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+              <img src={post.image} alt={title} className="max-h-full max-w-full object-contain p-4" />
+            </div>
+          )
         )}
 
         {/* Content */}
@@ -124,7 +130,11 @@ export default function BlogPostPage() {
                 const rTitle = (lang !== 'uk' && p[`title_${lang}`]) ? p[`title_${lang}`] : p.title
                 return (
                   <Link key={p.id} to={`/blog/${p.slug}`} className="card card-hover block overflow-hidden">
-                    {p.image && <img src={p.image} alt={rTitle} className="w-full h-36 object-cover" />}
+                    {p.image && (
+                      p.image.includes('/blog/exh-')
+                        ? <img src={p.image} alt={rTitle} className="w-full h-36 object-cover" />
+                        : <div className="w-full h-36 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img src={p.image} alt={rTitle} className="max-h-full max-w-full object-contain p-2" /></div>
+                    )}
                     <div className="p-4">
                       <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">{rTitle}</h3>
                     </div>
