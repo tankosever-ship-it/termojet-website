@@ -166,6 +166,11 @@ export const MODELS_BY_SLUG = {
   "84040tj-r-w-10": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
   "84040tj-r-w-11": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
   "84040tj-r-w-12": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+
+  // ── #5 (2026-06-08): інлайн-насоси TBE (з папки «tj 3D») ──
+  "nasos-termojet-tbe-50-24-2": [{ file: 'nasos-termojet-tbe-50-24-2.step', name: 'TBE 50-24-2.step', size: '7 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-24-2.glb' }],
+  "nasos-termojet-tbe-50-36-2": [{ file: 'nasos-termojet-tbe-50-36-2.step', name: 'TBE 50-36-2.step', size: '9 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-36-2.glb' }],
+  "nasos-termojet-tbe-65-34-2": [{ file: 'nasos-termojet-tbe-65-34-2.step', name: 'TBE 65-34-2.step', size: '10 МБ', glb: '/uploads/3d/nasos-termojet-tbe-65-34-2.glb' }],
 }
 
 export function getModels3D(slug) {
