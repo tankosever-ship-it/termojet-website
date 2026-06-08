@@ -1,6 +1,6 @@
 /*
  * apply-tbe.js — #2: насоси серії TBE (інлайн з частотним керуванням, постійний тиск).
- * Дані з «каталог 2.pdf» (Termojet TBE Series). Ціна «по запиту» (0) — уточнити пізніше.
+ * Дані з «каталог 2.pdf» (Termojet TBE Series). Ціни (EUR) з прайсу 2026-06-08: 1921/2371/2524.
  * Ідемпотентно: seed + жива БД.
  *   node backend/scripts/apply-tbe.js
  *   docker compose exec -T app node backend/scripts/apply-tbe.js
@@ -34,20 +34,20 @@ function specs(dn, kw, qmax, hmax, qrat, hrat) {
   }
 }
 
-// model, dn, kw, qmax, hmax, qrat, hrat
+// model, dn, kw, qmax, hmax, qrat, hrat, price(EUR)
 const ROWS = [
-  ['TBE 50-24/2', 50, 3,   35, 28, 25, 24],
-  ['TBE 50-36/2', 50, 5.5, 40, 42, 30, 36],
-  ['TBE 65-34/2', 65, 7.5, 60, 40, 50, 34],
+  ['TBE 50-24/2', 50, 3,   35, 28, 25, 24, 1921],
+  ['TBE 50-36/2', 50, 5.5, 40, 42, 30, 36, 2371],
+  ['TBE 65-34/2', 65, 7.5, 60, 40, 50, 34, 2524],
 ]
 
-const NEW = ROWS.map(([model, dn, kw, qmax, hmax, qrat, hrat]) => {
+const NEW = ROWS.map(([model, dn, kw, qmax, hmax, qrat, hrat, price]) => {
   const slug = 'nasos-termojet-' + model.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   return {
     id: 'new_' + model.replace(/[^A-Za-z0-9]/g, ''), wpId: null,
     name: `Насос інлайн з частотним керуванням Termojet ${model} (${kw} кВт)`,
     slug, sku: model,
-    price: '0', currency: 'EUR',
+    price: String(price), currency: 'EUR',
     categorySlug: 'nasosy', subcategory: 'Інлайн з частотним керуванням',
     image: IMG, images: [IMG],
     shortDesc: `Вертикальний інлайн-насос з частотним керуванням, DN${dn}, ${kw} кВт, до ${qmax} м³/год / ${hmax} м. Постійний тиск.`,
