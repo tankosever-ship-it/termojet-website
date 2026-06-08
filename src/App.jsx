@@ -42,7 +42,6 @@ import AdminReviews from './pages/admin/AdminReviews'
 import AdminFAQ from './pages/admin/AdminFAQ'
 import AdminBanners from './pages/admin/AdminBanners'
 import AdminPromos from './pages/admin/AdminPromos'
-import AdminClients from './pages/admin/AdminClients'
 import AdminAnalytics from './pages/admin/AdminAnalytics'
 import AdminContent from './pages/admin/AdminContent'
 import AdminSubscribers from './pages/admin/AdminSubscribers'
@@ -91,7 +90,6 @@ function AppRoutes() {
         <Route path="/admin/faq" element={<AdminFAQ />} />
         <Route path="/admin/banners" element={<AdminBanners />} />
         <Route path="/admin/promos" element={<AdminPromos />} />
-        <Route path="/admin/clients" element={<AdminClients />} />
         <Route path="/admin/subscribers" element={<AdminSubscribers />} />
         <Route path="/admin/analytics" element={<AdminAnalytics />} />
         <Route path="/admin/content" element={<AdminContent />} />

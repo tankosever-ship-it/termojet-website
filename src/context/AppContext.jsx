@@ -45,7 +45,6 @@ export function AppProvider({ children }) {
   const [files, setFiles] = useState(FILES)
   const [banners, setBanners] = useState([])
   const [promos, setPromos] = useState([])
-  const [clients, setClients] = useState([])
   const [subscribers, setSubscribers] = useState([])
   const [isAdminAuth, setIsAdminAuth] = useState(() => !!loadAdminToken())
   const [adminToken, setAdminToken] = useState(loadAdminToken)
@@ -114,11 +113,6 @@ export function AppProvider({ children }) {
     fetch(`${API}/promos`)
       .then(r => r.json())
       .then(data => { if (Array.isArray(data)) setPromos(data) })
-      .catch(() => {})
-
-    fetch(`${API}/clients`)
-      .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setClients(data) })
       .catch(() => {})
   }, [])
 
@@ -398,8 +392,6 @@ export function AppProvider({ children }) {
   const removeBanner   = (id)   => adminDelete('banners', setBanners, id)
   const savePromo      = (item) => adminUpsert('promos', setPromos, item, { prepend: false })
   const removePromo    = (id)   => adminDelete('promos', setPromos, id)
-  const saveClient     = (item) => adminUpsert('clients', setClients, item, { prepend: false })
-  const removeClient   = (id)   => adminDelete('clients', setClients, id)
   // Документи: лише створення/видалення (PUT не передбачено) — нові зверху
   const saveFile       = (item) => adminCreate('files', setFiles, item, { prepend: true })
   const removeFile     = (id)   => adminDelete('files', setFiles, id)
@@ -433,7 +425,6 @@ export function AppProvider({ children }) {
       files, setFiles,
       banners, setBanners,
       promos, setPromos,
-      clients, setClients,
       subscribers, setSubscribers, removeSubscriber,
       siteSettings, setSiteSettings, saveSettings,
       homeContent,
@@ -445,7 +436,7 @@ export function AppProvider({ children }) {
       adminCreate, adminUpdate, adminDelete, adminUpsert,
       saveFaq, removeFaq, saveBlog, removeBlog, savePortfolio, removePortfolio,
       saveProduct, removeProduct,
-      saveBanner, removeBanner, savePromo, removePromo, saveClient, removeClient,
+      saveBanner, removeBanner, savePromo, removePromo,
       API,
     }}>
       {children}

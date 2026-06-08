@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, TrendingUp, Package, ShoppingCart, MessageSquare, Briefcase,
-  BookOpen, Image, Star, HelpCircle, FileText, Tag, Users, Mail, LayoutTemplate, Settings,
+  BookOpen, Image, Star, HelpCircle, FileText, Tag, Mail, LayoutTemplate, Settings,
 } from 'lucide-react'
 
 // Єдине джерело розділів адмінки — використовується сайдбаром і дашбордом
@@ -18,7 +18,6 @@ export const ADMIN_MENU = [
   { to: '/admin/files',          icon: FileText,        label: 'Документи',       desc: 'PDF файли та каталоги' },
   { to: '/admin/banners',        icon: Image,           label: 'Банери',          desc: 'Банери головної' },
   { to: '/admin/promos',         icon: Tag,             label: 'Акції',           desc: 'Промо-пропозиції' },
-  { to: '/admin/clients',        icon: Users,           label: 'Клієнти',         desc: 'Логотипи клієнтів' },
   { to: '/admin/subscribers',    icon: Mail,            label: 'Підписники',      desc: 'Email із форми у футері' },
   { to: '/admin/content',        icon: LayoutTemplate,  label: 'Контент головної', desc: 'Тексти та заголовки' },
   { to: '/admin/settings',       icon: Settings,        label: 'Налаштування',    desc: 'Контакти, пароль' },
