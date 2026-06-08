@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
+const fs = require('fs')
 const compression = require('compression')
 
 const app = express()
@@ -20,6 +21,22 @@ app.use((req, res, next) => {
 app.use(cors({ origin: true, credentials: true }))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
+
+// Прекомпресовані 3D-моделі: якщо поряд лежить <file>.gz — віддаємо його з
+// Content-Encoding: gzip (нуль CPU на запит, браузер розпакує прозоро в оригінал).
+// Важкі STEP зберігаємо на сервері ЛИШЕ як .gz (економить диск і деплой ~4×).
+const UPLOADS_DIR = path.join(__dirname, 'uploads')
+app.get(/^\/uploads\/.+\.(glb|step)$/i, (req, res, next) => {
+  if (!/\bgzip\b/.test(req.headers['accept-encoding'] || '')) return next()
+  const rel = decodeURIComponent(req.path.replace(/^\/uploads\//, ''))
+  const gzPath = path.join(UPLOADS_DIR, rel + '.gz')
+  if (!gzPath.startsWith(UPLOADS_DIR + path.sep) || !fs.existsSync(gzPath)) return next()
+  res.setHeader('Content-Type', req.path.toLowerCase().endsWith('.glb') ? 'model/gltf-binary' : 'application/step')
+  res.setHeader('Content-Encoding', 'gzip')
+  res.setHeader('Vary', 'Accept-Encoding')
+  res.setHeader('Cache-Control', 'public, max-age=604800')
+  res.sendFile(gzPath)
+})
 
 // static uploads (3D-моделі, документи) — кеш на 7 днів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }))

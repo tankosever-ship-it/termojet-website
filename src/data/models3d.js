@@ -92,7 +92,7 @@ export const MODELS_BY_SLUG = {
   "perehid-pid-nasosnu-grupu-1-1-4": [{ file: 'perehid-pid-nasosnu-grupu-1-1-4.step', name: '84050116.step', size: '16 МБ', glb: '/uploads/3d/perehid-pid-nasosnu-grupu-1-1-4.glb' }],
   "perehid-pid-svarku-40-40": [{ file: 'perehid-pid-svarku-40-40.step', name: '84050121.step', size: '1 МБ', glb: '/uploads/3d/perehid-pid-svarku-40-40.glb' }],
   "perehid-pid-svarku-50-50": [{ file: 'perehid-pid-svarku-50-50.step', name: '84050122.step', size: '1 МБ', glb: '/uploads/3d/perehid-pid-svarku-50-50.glb' }],
-  "silownik-termojet-aqua401-60-sek": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
+  "silownik-termojet-aqua401-60-sek": [{ file: 'pryvod-ra400.step', name: 'RA400.step', size: '6 МБ', glb: '/uploads/3d/pryvod-ra400.glb' }],
 
   // ── #1 (Етап 3): розподіл наявних 3D-моделей на схожі насоси/приводи за серією ──
   // APE-130 → джерело ape-25-40-130mm
@@ -118,9 +118,68 @@ export const MODELS_BY_SLUG = {
   "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-10f-340-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.step', name: '30651234.step', size: '18 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.glb' }],
   "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-15f-340-mm": [{ file: 'nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.step', name: '30651234.step', size: '18 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm.glb' }],
   // Приводи → джерело 405N (silownik-termojet-aqua401-60-sek) на 401/411/412
-  "elektropryvid-z-trypozyczijnym-upravlinnyam-termojet-401n-230-v-120-sek-siryj": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
-  "elektropryvid-termojet-411-24v-ac-dc-02-10v-60s-120s-90-6-nm": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
-  "aquao910-3-230-060": [{ file: 'silownik-termojet-aqua401-60-sek.step', name: 'AQUAO405-3-230-060.step', size: '5 МБ', glb: '/uploads/3d/silownik-termojet-aqua401-60-sek.glb' }],
+  "elektropryvid-z-trypozyczijnym-upravlinnyam-termojet-401n-230-v-120-sek-siryj": [{ file: 'pryvod-ra400.step', name: 'RA400.step', size: '6 МБ', glb: '/uploads/3d/pryvod-ra400.glb' }],
+  "elektropryvid-termojet-411-24v-ac-dc-02-10v-60s-120s-90-6-nm": [{ file: 'pryvod-ra400.step', name: 'RA400.step', size: '6 МБ', glb: '/uploads/3d/pryvod-ra400.glb' }],
+  "aquao910-3-230-060": [{ file: 'pryvod-ra400.step', name: 'RA400.step', size: '6 МБ', glb: '/uploads/3d/pryvod-ra400.glb' }],
+
+  // ── #2 (2026-06-05): нові 3D-моделі від постачальника (STEP+GLB на /uploads/3d/) ──
+  // Рециркуляційні насоси SPE12
+  "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4": [{ file: 'nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4.step', name: 'SPE12-1.4.step', size: '3 МБ', glb: '/uploads/3d/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4.glb?v=2' }],
+  "nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s": [{ file: 'nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s.step', name: 'SPE12-1.4S.step', size: '3 МБ', glb: '/uploads/3d/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s.glb?v=2' }],
+  // Насос MEGA 100-120F
+  "pump-mega100-120f-450": [{ file: 'pump-mega100-120f-450.step', name: 'MEGA 100-120F.step', size: '41 МБ', glb: '/uploads/3d/pump-mega100-120f-450.glb?v=2' }],
+  // Насоси підвищувальні SILENCER
+  "pump-silencer300": [{ file: 'pump-silencer300.step', name: 'SILENCER 300.step', size: '21 МБ', glb: '/uploads/3d/pump-silencer300.glb' }],
+  "pump-silencer900": [{ file: 'pump-silencer900.step', name: 'SILENCER 900.step', size: '21 МБ', glb: '/uploads/3d/pump-silencer900.glb' }],
+  // Змішувальний вузол TJ-MU-10B (130mm)
+  "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b": [{ file: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b.step', name: 'TJ-MU-10B.step', size: '44 МБ', glb: '/uploads/3d/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b.glb' }],
+  // 180mm → усі насосні групи EPP BLACK (спільна модель)
+  "ng-49p-z-termokranom-1epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "ng-49-z-termokranom-1epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "nh-46-l-nasosna-hrupa-z-termokranom-25-55-s-1-vr-v-epp-black-teploizolyatsiyi-be": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "nh-47-nasosna-hrupa-bez-zmishuvacha-1-vr-v-epp-black-teploizolyatsiyi-bez-nasosa": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "ng-47-bez-zmishuvacha-1-epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "ng-48p-zi-zmishuvachem-1epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "84622480a": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+  "ng-48-zi-zmishuvachem-1epp": [{ file: 'nasosna-hrupa-epp-black-180mm.step', name: 'НГ EPP BLACK.step', size: '38 МБ', glb: '/uploads/3d/nasosna-hrupa-epp-black-180mm.glb' }],
+
+  // ── #3 (2026-06-06): каналізаційні станції GRANDLIFT (літраж = об'єм бака) ──
+  "pump-grandlift-20-75sw": [{ file: 'pump-grandlift-20-75sw.step', name: 'GRANDLIFT 20-75SW.step', size: '3 МБ', glb: '/uploads/3d/pump-grandlift-20-75sw.glb' }],
+  "pump-grandlift-60-75sw": [{ file: 'pump-grandlift-60-75sw.step', name: 'GRANDLIFT 60-75SW.step', size: '0.3 МБ', glb: '/uploads/3d/pump-grandlift-60-75sw.glb' }],
+  "pump-grandlift-120-220sw": [{ file: 'pump-grandlift-120-220sw.step', name: 'GRANDLIFT 120-220SW.step', size: '2 МБ', glb: '/uploads/3d/pump-grandlift-120-220sw.glb' }],
+  "pump-grandlift-150-370dw": [{ file: 'pump-grandlift-150-370dw.step', name: 'GRANDLIFT 150-370DW.step', size: '4 МБ', glb: '/uploads/3d/pump-grandlift-150-370dw.glb' }],
+
+  // ── #4 (2026-06-08): папка «tj 3D» — насоси XPS/HBS, вузол TJ-MU-25, колектори TJ-R-W ──
+  "38241225": [{ file: '38241225.step', name: 'HBS24-12.step', size: '6 МБ', glb: '/uploads/3d/38241225.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-xps-25-6-130": [{ file: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-130.step', name: 'XPS25-6-130B.step', size: '15 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-xps-25-6-130.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b": [{ file: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b.step', name: 'XPS25-8-180B.step', size: '5 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b.glb' }],
+  "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25": [{ file: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25.step', name: 'TJ-MU-25.step', size: '41 МБ', glb: '/uploads/3d/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25.glb' }],
+  // Колектори TJ-R-W (2–12 виходів) — поки спільна модель на всі
+  "84040tj-r-w-02": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-03": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-04": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-05": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-06": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-07": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-08": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-09": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-10": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-11": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-12": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+
+  // ── #5 (2026-06-08): інлайн-насоси TBE (з папки «tj 3D») ──
+  "nasos-termojet-tbe-50-24-2": [{ file: 'nasos-termojet-tbe-50-24-2.step', name: 'TBE 50-24-2.step', size: '7 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-24-2.glb' }],
+  "nasos-termojet-tbe-50-36-2": [{ file: 'nasos-termojet-tbe-50-36-2.step', name: 'TBE 50-36-2.step', size: '9 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-36-2.glb' }],
+  "nasos-termojet-tbe-65-34-2": [{ file: 'nasos-termojet-tbe-65-34-2.step', name: 'TBE 65-34-2.step', size: '10 МБ', glb: '/uploads/3d/nasos-termojet-tbe-65-34-2.glb' }],
+
+  // ── #6 (2026-06-08): мультинасосні групи — модулі BOX2/BOX3 + насосні групи НГ-36/37/38/38А.
+  //     STEP/GLB на сервері лежать у gzip (.step.gz/.glb.gz), nginx віддає прозоро (gzip_static).
+  "modul-termojet-box2-v-teploizolyatsiyi-km2-ups": [{ file: 'modul-termojet-box2-v-teploizolyatsiyi-km2-ups.step', name: 'BOX-II.step', size: '113 МБ', glb: '/uploads/3d/modul-termojet-box2-v-teploizolyatsiyi-km2-ups.glb?v=2' }],
+  "modul-termojet-box3-v-teploizolyatsiyi-km3-ups": [{ file: 'modul-termojet-box3-v-teploizolyatsiyi-km3-ups.step', name: 'BOX-III.step', size: '163 МБ', glb: '/uploads/3d/modul-termojet-box3-v-teploizolyatsiyi-km3-ups.glb?v=2' }],
+  "nh-36-z-termostatychnym-kranom": [{ file: 'nh-36-z-termostatychnym-kranom.step', name: 'НГ-36.step', size: '42 МБ', glb: '/uploads/3d/nh-36-z-termostatychnym-kranom.glb?v=2' }],
+  "nh-37-pryama": [{ file: 'nh-37-pryama.step', name: 'НГ-37.step', size: '28 МБ', glb: '/uploads/3d/nh-37-pryama.glb?v=2' }],
+  "nh-38-zi-zmishuvachem": [{ file: 'nh-38-zi-zmishuvachem.step', name: 'НГ-38.step', size: '32 МБ', glb: '/uploads/3d/nh-38-zi-zmishuvachem.glb?v=2' }],
+  "84142380a": [{ file: '84142380a.step', name: 'НГ-38А.step', size: '38 МБ', glb: '/uploads/3d/84142380a.glb?v=2' }],
 }
 
 export function getModels3D(slug) {
