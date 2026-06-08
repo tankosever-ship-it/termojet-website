@@ -148,6 +148,24 @@ export const MODELS_BY_SLUG = {
   "pump-grandlift-60-75sw": [{ file: 'pump-grandlift-60-75sw.step', name: 'GRANDLIFT 60-75SW.step', size: '0.3 МБ', glb: '/uploads/3d/pump-grandlift-60-75sw.glb' }],
   "pump-grandlift-120-220sw": [{ file: 'pump-grandlift-120-220sw.step', name: 'GRANDLIFT 120-220SW.step', size: '2 МБ', glb: '/uploads/3d/pump-grandlift-120-220sw.glb' }],
   "pump-grandlift-150-370dw": [{ file: 'pump-grandlift-150-370dw.step', name: 'GRANDLIFT 150-370DW.step', size: '4 МБ', glb: '/uploads/3d/pump-grandlift-150-370dw.glb' }],
+
+  // ── #4 (2026-06-08): папка «tj 3D» — насоси XPS/HBS, вузол TJ-MU-25, колектори TJ-R-W ──
+  "38241225": [{ file: '38241225.step', name: 'HBS24-12.step', size: '6 МБ', glb: '/uploads/3d/38241225.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-xps-25-6-130": [{ file: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-130.step', name: 'XPS25-6-130B.step', size: '15 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-xps-25-6-130.glb' }],
+  "nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b": [{ file: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b.step', name: 'XPS25-8-180B.step', size: '5 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b.glb' }],
+  "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25": [{ file: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25.step', name: 'TJ-MU-25.step', size: '41 МБ', glb: '/uploads/3d/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25.glb' }],
+  // Колектори TJ-R-W (2–12 виходів) — поки спільна модель на всі
+  "84040tj-r-w-02": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-03": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-04": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-05": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-06": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-07": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-08": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-09": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-10": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-11": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  "84040tj-r-w-12": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
 }
 
 export function getModels3D(slug) {
