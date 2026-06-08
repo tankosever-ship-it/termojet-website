@@ -1,37 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Package, ShoppingCart, Users, MessageSquare, FileText, BarChart2, Settings, Image, BookOpen, Briefcase, LogOut, Star, HelpCircle, Tag, TrendingUp, LayoutTemplate } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
-
-const MENU = [
-  { to: '/admin/analytics', icon: TrendingUp, label: 'Аналітика', desc: 'Ліди, UTM, замовлення' },
-  { to: '/admin/products', icon: Package, label: 'Товари', desc: 'Каталог та CRUD' },
-  { to: '/admin/orders', icon: ShoppingCart, label: 'Замовлення', desc: 'Всі замовлення' },
-  { to: '/admin/consultations', icon: MessageSquare, label: 'Консультації', desc: 'Запити на консультацію' },
-  { to: '/admin/dealers', icon: Briefcase, label: 'Дилери', desc: 'Заявки на партнерство' },
-  { to: '/admin/blog', icon: BookOpen, label: 'Блог', desc: 'Статті та новини' },
-  { to: '/admin/portfolio', icon: Image, label: 'Портфоліо', desc: 'Реалізовані проекти' },
-  { to: '/admin/reviews', icon: Star, label: 'Відгуки', desc: 'Відгуки клієнтів' },
-  { to: '/admin/faq', icon: HelpCircle, label: 'FAQ', desc: 'Питання та відповіді' },
-  { to: '/admin/files', icon: FileText, label: 'Документи', desc: 'PDF файли та каталоги' },
-  { to: '/admin/banners', icon: Image, label: 'Банери', desc: 'Банери головної' },
-  { to: '/admin/promos', icon: Tag, label: 'Акції', desc: 'Промо-пропозиції' },
-  { to: '/admin/clients', icon: Users, label: 'Клієнти', desc: 'Логотипи клієнтів' },
-  { to: '/admin/content', icon: LayoutTemplate, label: 'Контент головної', desc: 'Тексти та заголовки' },
-  { to: '/admin/settings', icon: Settings, label: 'Налаштування', desc: 'Контакти, пароль' },
-]
+import { ADMIN_MENU } from '../../data/adminMenu'
 
 export default function AdminDashboard() {
-  const { products, orders, consultations, dealers, adminLogout, isAdminAuth } = useApp()
+  const { products, orders, consultations, dealers, isAdminAuth } = useApp()
   const navigate = useNavigate()
 
   if (!isAdminAuth) {
     navigate('/admin')
     return null
-  }
-
-  function logout() {
-    adminLogout()
-    navigate('/admin')
   }
 
   const stats = [
@@ -41,23 +18,15 @@ export default function AdminDashboard() {
     { label: 'Заявок дилерів', value: dealers.length, color: 'text-purple-600' },
   ]
 
+  // У гриді — усі розділи, крім самого «Огляду»
+  const sections = ADMIN_MENU.filter(m => m.to !== '/admin/dashboard')
+
   return (
     <div className="min-h-screen bg-[var(--bg)]">
-      {/* Admin header */}
-      <div className="bg-[var(--primary)] text-white px-6 py-4 flex items-center justify-between">
-        <div>
-          <div className="font-black text-lg font-['Archivo',sans-serif]">TERMOJET Admin</div>
-          <div className="text-white/60 text-xs">Адміністративна панель</div>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link to="/" target="_blank" className="text-xs text-white/60 hover:text-white transition-colors">
-            Відкрити сайт →
-          </Link>
-          <button onClick={logout} className="flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors">
-            <LogOut size={14} />
-            Вийти
-          </button>
-        </div>
+      {/* Page header */}
+      <div className="bg-[var(--primary)] text-white px-6 py-4">
+        <div className="font-bold">Огляд</div>
+        <div className="text-white/60 text-xs">Адміністративна панель Termojet</div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -74,7 +43,7 @@ export default function AdminDashboard() {
         {/* Menu */}
         <h2 className="font-bold text-lg mb-4">Розділи</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {MENU.map(({ to, icon: Icon, label, desc }) => (
+          {sections.map(({ to, icon: Icon, label, desc }) => (
             <Link key={to} to={to} className="card card-hover p-5 flex items-center gap-4">
               <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Icon size={22} className="text-[var(--primary)]" />

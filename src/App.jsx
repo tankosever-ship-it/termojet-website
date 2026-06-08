@@ -1,4 +1,4 @@
-import { BrowserRouter, HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { AppProvider } from './context/AppContext'
@@ -7,6 +7,7 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import FloatingActions from './components/FloatingActions'
 import MobileBottomNav from './components/layout/MobileBottomNav'
+import AdminLayout from './components/admin/AdminLayout'
 
 import HomePage from './pages/HomePage'
 import CatalogPage from './pages/CatalogPage'
@@ -54,59 +55,73 @@ function ScrollToTop() {
 const isGhPages = import.meta.env.BASE_URL !== '/'
 const RouterWrapper = isGhPages ? HashRouter : BrowserRouter
 
-function AppLayout() {
+// Публічний layout — сайтовий хедер, футер, плаваючі кнопки
+function PublicLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pb-16 md:pb-0 pt-[60px]">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
-          <Route path="/catalog/:categorySlug/:productSlug" element={<ProductDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contacts" element={<ContactPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/dealers" element={<Navigate to="/partners" replace />} />
-          <Route path="/service" element={<ServicePage />} />
-          <Route path="/files" element={<FilesPage />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/delivery" element={<DeliveryPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/oem" element={<OEMPage />} />
-          <Route path="/warranty" element={<Navigate to="/service" replace />} />
-          <Route path="/support" element={<Navigate to="/service" replace />} />
-          <Route path="/returns" element={<ReturnPage />} />
-          <Route path="/partners" element={<PartnersPage />} />
-
-          {/* Admin */}
-          <Route path="/admin" element={<AdminLoginPage />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/products" element={<AdminProducts />} />
-          <Route path="/admin/orders" element={<AdminOrders />} />
-          <Route path="/admin/consultations" element={<AdminConsultations />} />
-          <Route path="/admin/dealers" element={<AdminDealers />} />
-          <Route path="/admin/blog" element={<AdminBlog />} />
-          <Route path="/admin/portfolio" element={<AdminPortfolio />} />
-          <Route path="/admin/files" element={<AdminFiles />} />
-          <Route path="/admin/reviews" element={<AdminReviews />} />
-          <Route path="/admin/faq" element={<AdminFAQ />} />
-          <Route path="/admin/banners" element={<AdminBanners />} />
-          <Route path="/admin/promos" element={<AdminPromos />} />
-          <Route path="/admin/clients" element={<AdminClients />} />
-          <Route path="/admin/analytics" element={<AdminAnalytics />} />
-          <Route path="/admin/content" element={<AdminContent />} />
-          <Route path="/admin/settings" element={<AdminSettings />} />
-        </Routes>
+        <Outlet />
       </main>
       <Footer />
       <FloatingActions />
       <MobileBottomNav />
     </div>
+  )
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      {/* Логін адмінки — без сайдбара і без сайтового chrome */}
+      <Route path="/admin" element={<AdminLoginPage />} />
+
+      {/* Адмінка — власний layout зі сайдбаром зліва (без сайтового хедера/футера) */}
+      <Route element={<AdminLayout />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin/consultations" element={<AdminConsultations />} />
+        <Route path="/admin/dealers" element={<AdminDealers />} />
+        <Route path="/admin/blog" element={<AdminBlog />} />
+        <Route path="/admin/portfolio" element={<AdminPortfolio />} />
+        <Route path="/admin/files" element={<AdminFiles />} />
+        <Route path="/admin/reviews" element={<AdminReviews />} />
+        <Route path="/admin/faq" element={<AdminFAQ />} />
+        <Route path="/admin/banners" element={<AdminBanners />} />
+        <Route path="/admin/promos" element={<AdminPromos />} />
+        <Route path="/admin/clients" element={<AdminClients />} />
+        <Route path="/admin/analytics" element={<AdminAnalytics />} />
+        <Route path="/admin/content" element={<AdminContent />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
+      </Route>
+
+      {/* Публічні сторінки */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
+        <Route path="/catalog/:categorySlug/:productSlug" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/dealers" element={<Navigate to="/partners" replace />} />
+        <Route path="/service" element={<ServicePage />} />
+        <Route path="/files" element={<FilesPage />} />
+        <Route path="/faq" element={<FaqPage />} />
+        <Route path="/delivery" element={<DeliveryPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/oem" element={<OEMPage />} />
+        <Route path="/warranty" element={<Navigate to="/service" replace />} />
+        <Route path="/support" element={<Navigate to="/service" replace />} />
+        <Route path="/returns" element={<ReturnPage />} />
+        <Route path="/partners" element={<PartnersPage />} />
+      </Route>
+    </Routes>
   )
 }
 
@@ -116,7 +131,7 @@ export default function App() {
       <AppProvider>
         <RouterWrapper>
           <ScrollToTop />
-          <AppLayout />
+          <AppRoutes />
         </RouterWrapper>
       </AppProvider>
     </HelmetProvider>
