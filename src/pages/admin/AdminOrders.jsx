@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ShoppingCart, ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 const STATUS_LABELS = { new: 'Новий', processing: 'В обробці', done: 'Виконано', cancelled: 'Скасовано' }
@@ -9,7 +8,6 @@ const STATUS_COLORS = { new: 'bg-blue-50 text-blue-600', processing: 'bg-yellow-
 export default function AdminOrders() {
   const { orders, setOrders, isAdminAuth, API, authHeaders } = useApp()
   const navigate = useNavigate()
-  const [expanded, setExpanded] = useState(null)
 
   if (!isAdminAuth) { navigate('/admin'); return null }
 
@@ -38,61 +36,64 @@ export default function AdminOrders() {
           </div>
         ) : (
           <div className="space-y-3">
-            {orders.map(order => (
-              <div key={order.id} className="card overflow-hidden">
-                <div className="p-4 flex flex-wrap items-center gap-3 cursor-pointer" onClick={() => setExpanded(expanded === order.id ? null : order.id)}>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900">#{String(order.id).slice(-6)} — {order.name}</div>
-                    <div className="text-xs text-gray-400 mt-0.5">
-                      {order.phone} • {(() => {
-                        const d = order.created_at || order.createdAt
-                        return d ? new Date(String(d).replace(' ', 'T')).toLocaleString('uk-UA') : ''
-                      })()}
+            {orders.map(order => {
+              const d = order.created_at || order.createdAt
+              const dateStr = d ? new Date(String(d).replace(' ', 'T')).toLocaleString('uk-UA') : ''
+              const sum = order.total || (order.items || []).reduce((s, i) => s + (i.price || 0) * i.quantity, 0)
+              return (
+                <div key={order.id} className="card p-4">
+                  {/* Шапка: номер, контакт, сума, статус */}
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-gray-900">#{String(order.id).slice(-6)} — {order.name}</div>
+                      <div className="text-xs text-gray-400 mt-0.5">
+                        {order.phone}{order.email ? ` • ${order.email}` : ''}{dateStr ? ` • ${dateStr}` : ''}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    {order.items && (
-                      <span className="text-sm font-bold text-gray-900">
-                        {order.items.reduce((s, i) => s + (i.price || 0) * i.quantity, 0).toLocaleString()} грн
-                      </span>
-                    )}
+                    <span className="text-base font-bold text-gray-900">{Math.round(sum).toLocaleString('uk-UA')} грн</span>
                     <select
                       value={order.status || 'new'}
-                      onChange={e => { e.stopPropagation(); setStatus(order.id, e.target.value) }}
-                      onClick={e => e.stopPropagation()}
+                      onChange={e => setStatus(order.id, e.target.value)}
                       className={`text-xs px-2 py-1 rounded-lg font-medium border-0 outline-none cursor-pointer ${STATUS_COLORS[order.status || 'new']}`}
                     >
                       {Object.entries(STATUS_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
                     </select>
-                    {expanded === order.id ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
                   </div>
-                </div>
-                {expanded === order.id && (
-                  <div className="border-t border-gray-100 p-4 bg-gray-50/50">
-                    {order.utm && Object.keys(order.utm).length > 0 && (
-                      <p className="text-xs text-gray-400 mb-2">
-                        Джерело: {order.utm.utm_source || order.utm.referrer || '—'}{order.utm.utm_medium ? ' · ' + order.utm.utm_medium : ''}{order.utm.utm_campaign ? ' · ' + order.utm.utm_campaign : ''}
-                      </p>
-                    )}
-                    {order.address && <p className="text-sm text-gray-600 mb-2"><strong>Адреса:</strong> {order.address}</p>}
-                    {order.comment && <p className="text-sm text-gray-600 mb-3"><strong>Коментар:</strong> {order.comment}</p>}
+
+                  {/* Деталі — завжди видно */}
+                  <div className="border-t border-gray-100 pt-3 space-y-3">
+                    {/* Товари */}
                     {order.items?.length > 0 && (
                       <div>
-                        <div className="text-xs text-gray-400 uppercase tracking-wider mb-2">Товари</div>
-                        <div className="space-y-2">
+                        <div className="text-xs text-gray-400 uppercase tracking-wider mb-1.5">Товари</div>
+                        <div className="space-y-1">
                           {order.items.map((item, i) => (
-                            <div key={i} className="flex items-center justify-between text-sm">
-                              <span className="text-gray-700">{item.name} × {item.quantity}</span>
-                              <span className="font-medium">{((item.price || 0) * item.quantity).toLocaleString()} грн</span>
+                            <div key={i} className="flex items-center justify-between text-sm gap-3">
+                              <span className="text-gray-700 min-w-0 truncate">{item.name} × {item.quantity}</span>
+                              <span className="font-medium flex-shrink-0">{((item.price || 0) * item.quantity).toLocaleString()} грн</span>
                             </div>
                           ))}
                         </div>
                       </div>
                     )}
+
+                    {/* Оплата · Адреса · Коментар */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-600">
+                      <p><strong className="text-gray-500 font-medium">Оплата:</strong> {order.payment || '—'}</p>
+                      <p><strong className="text-gray-500 font-medium">Адреса:</strong> {order.address || '—'}</p>
+                      {order.comment && <p className="sm:col-span-2"><strong className="text-gray-500 font-medium">Коментар:</strong> {order.comment}</p>}
+                    </div>
+
+                    {/* UTM-джерело */}
+                    {order.utm && Object.keys(order.utm).length > 0 && (
+                      <p className="text-xs text-gray-400">
+                        Джерело: {order.utm.utm_source || order.utm.referrer || '—'}{order.utm.utm_medium ? ' · ' + order.utm.utm_medium : ''}{order.utm.utm_campaign ? ' · ' + order.utm.utm_campaign : ''}
+                      </p>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              )
+            })}
           </div>
         )}
       </div>

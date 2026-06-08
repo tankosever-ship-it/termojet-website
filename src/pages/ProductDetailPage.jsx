@@ -16,6 +16,7 @@ import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
 import { trackViewItem, trackAddToCart } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
+import { isOnSale } from '../utils/sale'
 
 // ── Accordion ──────────────────────────────────────────────────────────────────
 function Accordion({ icon, title, children, defaultOpen = false }) {
@@ -411,8 +412,12 @@ export default function ProductDetailPage() {
   const priceUAH = product.price
     ? Math.round((toUAH(product.price, product.currency, eurRate) || 0) * qty)
     : null
-  // ціна за одиницю в ₴ для schema/SEO (узгоджено з тим, що бачить користувач)
-  const priceUAHunit = toUAH(product.price, product.currency, eurRate) || null
+  const onSale = isOnSale(product)
+  const salePriceUAH = onSale
+    ? Math.round((toUAH(product.salePrice, product.currency, eurRate) || 0) * qty)
+    : null
+  // ціна за одиницю в ₴ для schema/SEO (акційна, якщо є — узгоджено з тим, що бачить користувач)
+  const priceUAHunit = toUAH(onSale ? product.salePrice : product.price, product.currency, eurRate) || null
 
   return (
     <>
@@ -593,14 +598,23 @@ export default function ProductDetailPage() {
             {/* Price */}
             <div className="mb-4">
               {priceUAH ? (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-gray-900">
-                    {priceUAH.toLocaleString('uk-UA')}
-                  </span>
-                  <span className="text-lg text-gray-500">{common.uah || 'грн'}</span>
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  {onSale && salePriceUAH ? (
+                    <>
+                      <span className="text-3xl font-black text-[var(--accent)]">{salePriceUAH.toLocaleString('uk-UA')}</span>
+                      <span className="text-lg text-gray-500">{common.uah || 'грн'}</span>
+                      <span className="text-xl text-gray-400 line-through ml-1">{priceUAH.toLocaleString('uk-UA')}</span>
+                      <span className="text-[11px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full ml-1">Акція</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-3xl font-black text-gray-900">{priceUAH.toLocaleString('uk-UA')}</span>
+                      <span className="text-lg text-gray-500">{common.uah || 'грн'}</span>
+                    </>
+                  )}
                   {qty > 1 && (
-                    <span className="text-sm text-gray-400 ml-1">
-                      ({Math.round(priceUAH / qty).toLocaleString('uk-UA')} / шт.)
+                    <span className="text-sm text-gray-400 ml-1 w-full">
+                      ({Math.round((onSale && salePriceUAH ? salePriceUAH : priceUAH) / qty).toLocaleString('uk-UA')} / шт.)
                     </span>
                   )}
                 </div>

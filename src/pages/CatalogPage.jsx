@@ -7,7 +7,9 @@ import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
-import { formatPrice, toUAH } from '../utils/currency'
+import { toUAH } from '../utils/currency'
+import { isOnSale, SALE_CATEGORY_SLUG } from '../utils/sale'
+import ProductPrice from '../components/ProductPrice'
 import CategoryIcon from '../components/CategoryIcon'
 import { assetPath } from '../utils/assetPath'
 
@@ -829,6 +831,10 @@ export default function CatalogPage() {
 
   const catProducts = useMemo(() => {
     if (!currentCategory) return products
+    // Категорія «Акція» збирає всі товари з акційною ціною (+ явно призначені)
+    if (currentCategory.slug === SALE_CATEGORY_SLUG) {
+      return products.filter(p => isOnSale(p) || p.categorySlug === currentCategory.id || p.categorySlug === currentCategory.slug)
+    }
     return products.filter(p => p.categorySlug === currentCategory.id || p.categorySlug === currentCategory.slug)
   }, [products, currentCategory])
 
@@ -836,7 +842,9 @@ export default function CatalogPage() {
   const catCounts = useMemo(() => {
     const m = {}
     for (const c of CATEGORIES) {
-      m[c.id] = products.filter(p => p.categorySlug === c.id || p.categorySlug === c.slug).length
+      m[c.id] = c.slug === SALE_CATEGORY_SLUG
+        ? products.filter(p => isOnSale(p) || p.categorySlug === c.id || p.categorySlug === c.slug).length
+        : products.filter(p => p.categorySlug === c.id || p.categorySlug === c.slug).length
     }
     return m
   }, [products])
@@ -1098,6 +1106,11 @@ export default function CatalogPage() {
                         )}
                       </Link>
 
+                      {isOnSale(product) && (
+                        <span className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
+                          Акція
+                        </span>
+                      )}
                       {!product.inStock && (
                         <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-gray-700 text-white rounded-full">
                           Під замовлення
@@ -1146,13 +1159,7 @@ export default function CatalogPage() {
                       {/* 3. Ціна — завжди на одному рівні (прибита до низу) */}
                       <div className="mt-4 pt-3 border-t border-[var(--ink-200)]">
                         <div className="flex items-center justify-between mb-1.5">
-                          {product.price > 0 ? (
-                            <span className="text-base font-bold text-[var(--primary)]">
-                              {formatPrice(product.price, product.currency, eurRate)}
-                            </span>
-                          ) : (
-                            <span className="text-xs text-gray-400 italic">Ціна по запиту</span>
-                          )}
+                          <ProductPrice product={product} eurRate={eurRate} />
                           <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
                             <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
                             {product.inStock ? 'В наявності' : 'Замовлення'}
@@ -1221,8 +1228,8 @@ export default function CatalogPage() {
                           {product.inStock ? 'В наявності' : 'Під замовлення'}
                         </span>
                         {/* Ціна — інлайн лише на мобільному */}
-                        <span className="sm:hidden ml-auto text-sm font-bold text-[var(--primary)]">
-                          {product.price > 0 ? formatPrice(product.price, product.currency, eurRate) : 'По запиту'}
+                        <span className="sm:hidden ml-auto">
+                          <ProductPrice product={product} eurRate={eurRate} />
                         </span>
                       </div>
                       {/* Дії — лише на мобільному (на десктопі вони у правій колонці) */}
@@ -1242,13 +1249,7 @@ export default function CatalogPage() {
                     {/* Price + actions — лише на десктопі */}
                     <div className="hidden sm:flex flex-shrink-0 flex-col items-end justify-between p-4 border-l border-[var(--ink-200)] min-w-[140px]">
                       <div className="text-right">
-                        {product.price > 0 ? (
-                          <div className="text-base font-bold text-[var(--primary)]">
-                            {formatPrice(product.price, product.currency, eurRate)}
-                          </div>
-                        ) : (
-                          <div className="text-xs text-gray-400">Ціна по запиту</div>
-                        )}
+                        <ProductPrice product={product} eurRate={eurRate} />
                       </div>
                       <div className="flex flex-col gap-1.5 w-full mt-3">
                         <button onClick={() => addToCart(product)}

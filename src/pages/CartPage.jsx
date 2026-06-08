@@ -73,8 +73,15 @@ export default function CartPage() {
                         <Plus size={12} />
                       </button>
                     </div>
-                    <span className="font-bold text-gray-900">
-                      {Math.round((toUAH(item.price, item.currency, eurRate) || 0) * item.quantity).toLocaleString('uk-UA')} {common.uah}
+                    <span className="flex items-baseline gap-2">
+                      {item.onSale && item.originalPrice > 0 && (
+                        <span className="text-xs text-gray-400 line-through">
+                          {Math.round((toUAH(item.originalPrice, item.currency, eurRate) || 0) * item.quantity).toLocaleString('uk-UA')}
+                        </span>
+                      )}
+                      <span className={`font-bold ${item.onSale ? 'text-[var(--accent)]' : 'text-gray-900'}`}>
+                        {Math.round((toUAH(item.price, item.currency, eurRate) || 0) * item.quantity).toLocaleString('uk-UA')} {common.uah}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -129,6 +136,18 @@ export default function CartPage() {
                 rows={2}
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none"
               />
+              <div>
+                <label className="text-xs text-gray-500 block mb-1">Спосіб оплати</label>
+                <select
+                  {...register('payment')}
+                  defaultValue="Готівка при отриманні"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm bg-white"
+                >
+                  <option>Готівка при отриманні</option>
+                  <option>Безготівковий розрахунок (рахунок)</option>
+                  <option>Оплата карткою</option>
+                </select>
+              </div>
               <ConsentCheckbox buttonLabel="Оформити замовлення" />
               <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-3">
                 {cartT.form.submit}

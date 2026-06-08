@@ -13,6 +13,7 @@ function parseProduct(row) {
     slug:         row.slug,
     sku:          row.sku,
     price:        row.price,
+    salePrice:    row.sale_price || 0,
     currency:     row.currency || 'UAH',
     categorySlug: row.category_slug,
     subcategory:  row.subcategory,
@@ -66,15 +67,16 @@ router.get('/:slug', (req, res) => {
 router.post('/', requireAdmin, (req, res) => {
   const p = req.body
   const stmt = db.prepare(`
-    INSERT INTO products (id, wp_id, name, slug, sku, price, category_slug, subcategory,
+    INSERT INTO products (id, wp_id, name, slug, sku, price, sale_price, category_slug, subcategory,
       image, images, short_desc, description, specs, features, in_stock)
-    VALUES (@id, @wp_id, @name, @slug, @sku, @price, @category_slug, @subcategory,
+    VALUES (@id, @wp_id, @name, @slug, @sku, @price, @sale_price, @category_slug, @subcategory,
       @image, @images, @short_desc, @description, @specs, @features, @in_stock)
   `)
   const id = p.id || `p_${Date.now()}`
   stmt.run({
     id, wp_id: p.wpId || null, name: p.name, slug: p.slug, sku: p.sku || '',
-    price: parseFloat(p.price) || 0, category_slug: p.categorySlug || '',
+    price: parseFloat(p.price) || 0, sale_price: parseFloat(p.salePrice) || 0,
+    category_slug: p.categorySlug || '',
     subcategory: p.subcategory || '', image: p.image || '',
     images: JSON.stringify(p.images || []), short_desc: p.shortDesc || '',
     description: p.description || '', specs: JSON.stringify(p.specs || {}),
@@ -88,7 +90,7 @@ router.put('/:id', requireAdmin, (req, res) => {
   const p = req.body
   db.prepare(`
     UPDATE products SET
-      name = @name, slug = @slug, sku = @sku, price = @price,
+      name = @name, slug = @slug, sku = @sku, price = @price, sale_price = @sale_price,
       category_slug = @category_slug, subcategory = @subcategory,
       image = @image, images = @images, short_desc = @short_desc,
       description = @description, specs = @specs, features = @features,
@@ -96,7 +98,8 @@ router.put('/:id', requireAdmin, (req, res) => {
     WHERE id = @id
   `).run({
     id: req.params.id, name: p.name, slug: p.slug, sku: p.sku || '',
-    price: parseFloat(p.price) || 0, category_slug: p.categorySlug || '',
+    price: parseFloat(p.price) || 0, sale_price: parseFloat(p.salePrice) || 0,
+    category_slug: p.categorySlug || '',
     subcategory: p.subcategory || '', image: p.image || '',
     images: JSON.stringify(p.images || []), short_desc: p.shortDesc || '',
     description: p.description || '', specs: JSON.stringify(p.specs || {}),

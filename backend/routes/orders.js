@@ -10,11 +10,18 @@ router.get('/', requireAdmin, (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { items, total, name, phone, email, address, comment, utm } = req.body
+  const { items, total, name, phone, email, address, comment, payment, utm } = req.body
   const result = db.prepare(`
-    INSERT INTO orders (items, total, name, phone, email, address, comment, utm)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(JSON.stringify(items), total, name, phone, email, address, comment, JSON.stringify(utm || {}))
+    INSERT INTO orders (items, total, name, phone, email, address, comment, payment, utm)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(JSON.stringify(items), total, name, phone, email, address, comment, payment || '', JSON.stringify(utm || {}))
+
+  // Email із замовлення зберігаємо також у підписників (дедуп за UNIQUE)
+  const mail = (email || '').trim().toLowerCase()
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+    try { db.prepare('INSERT OR IGNORE INTO subscribers (email) VALUES (?)').run(mail) } catch {}
+  }
+
   res.status(201).json({ id: result.lastInsertRowid })
 })
 

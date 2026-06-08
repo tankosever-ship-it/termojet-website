@@ -6,7 +6,7 @@ import { CATEGORIES } from '../../data/categories'
 import { toSlug } from '../../utils/slug'
 import ImageUpload from '../../components/admin/ImageUpload'
 
-const EMPTY = { name: '', sku: '', price: '', categorySlug: '', desc: '', inStock: true, isVisible: true, image: '', specs: {} }
+const EMPTY = { name: '', sku: '', price: '', salePrice: '', categorySlug: '', desc: '', inStock: true, isVisible: true, image: '', specs: {} }
 
 function ProductForm({ product, onSave, onCancel }) {
   const [form, setForm] = useState({ ...EMPTY, ...product })
@@ -27,7 +27,7 @@ function ProductForm({ product, onSave, onCancel }) {
 
   function handleSave() {
     const slug = form.slug || toSlug(form.name)
-    onSave({ ...form, slug, price: form.price ? Number(form.price) : null })
+    onSave({ ...form, slug, price: form.price ? Number(form.price) : null, salePrice: form.salePrice ? Number(form.salePrice) : 0 })
   }
 
   return (
@@ -47,6 +47,12 @@ function ProductForm({ product, onSave, onCancel }) {
           <label className="text-xs text-gray-500 block mb-1">Ціна (грн)</label>
           <input value={form.price} onChange={e => set('price', e.target.value)} type="number" placeholder="0 = ціна по запиту"
             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
+        </div>
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Акційна ціна (грн)</label>
+          <input value={form.salePrice} onChange={e => set('salePrice', e.target.value)} type="number" placeholder="порожньо = без акції"
+            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
+          <p className="text-[11px] text-gray-400 mt-1">Якщо вказана й менша за ціну — товар потрапляє в категорію «Акція».</p>
         </div>
         <div>
           <label className="text-xs text-gray-500 block mb-1">Категорія *</label>
@@ -139,7 +145,7 @@ export default function AdminProducts() {
   const hiddenCount = products.filter(p => p.isVisible === false).length
 
   const _found = products.find(p => p.id === editId)
-  const editingProduct = editId === 'new' ? EMPTY : (_found ? { ..._found, desc: _found.desc ?? _found.description ?? '' } : undefined)
+  const editingProduct = editId === 'new' ? EMPTY : (_found ? { ..._found, desc: _found.desc ?? _found.description ?? '', salePrice: _found.salePrice || '' } : undefined)
 
   return (
     <div className="min-h-screen bg-[var(--bg)]">
@@ -220,9 +226,16 @@ export default function AdminProducts() {
                         <span className="text-xs text-gray-500">{cat ? cat.name.uk : p.categorySlug || '—'}</span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="font-medium text-gray-900">
-                          {p.price ? `${p.price.toLocaleString()} грн` : '—'}
-                        </span>
+                        {p.salePrice > 0 && (!p.price || p.salePrice < p.price) ? (
+                          <span className="flex flex-col">
+                            <span className="font-medium text-[var(--accent)]">{p.salePrice.toLocaleString()} грн</span>
+                            <span className="text-[11px] text-gray-400 line-through">{p.price ? p.price.toLocaleString() : ''}</span>
+                          </span>
+                        ) : (
+                          <span className="font-medium text-gray-900">
+                            {p.price ? `${p.price.toLocaleString()} грн` : '—'}
+                          </span>
+                        )}
                       </td>
                       <td className="px-4 py-3 hidden sm:table-cell">
                         <span className={`text-xs px-2 py-0.5 rounded-full ${p.inStock ? 'bg-green-50 text-green-600' : 'bg-gray-100 text-gray-500'}`}>

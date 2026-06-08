@@ -7,6 +7,7 @@ import { PORTFOLIO } from '../data/portfolio'
 import { FILES } from '../data/files'
 import { fetchEurRate } from '../utils/currency'
 import { getUTM } from '../utils/utm'
+import { effectivePrice, isOnSale } from '../utils/sale'
 
 const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
@@ -164,10 +165,12 @@ export function AppProvider({ children }) {
 
   // Cart
   function addToCart(product, quantity = 1) {
+    // У кошик кладемо ефективну (акційну) ціну; originalPrice — для перекреслення
+    const item = { ...product, price: effectivePrice(product), originalPrice: product.price, onSale: isOnSale(product) }
     setCart(prev => {
       const existing = prev.find(i => i.id === product.id)
       if (existing) return prev.map(i => i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i)
-      return [...prev, { ...product, quantity }]
+      return [...prev, { ...item, quantity }]
     })
   }
   function removeFromCart(id) { setCart(prev => prev.filter(i => i.id !== id)) }
