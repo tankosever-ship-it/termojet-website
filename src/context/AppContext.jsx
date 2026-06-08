@@ -15,6 +15,10 @@ const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 const IS_GITHUB_PAGES = import.meta.env.VITE_BASE_URL !== '/'
 const API = IS_GITHUB_PAGES ? null : '/api'
 
+// БД blog_posts не має колонки links — підтягуємо чіпи зі статичного blog.js за slug.
+const BLOG_LINKS = Object.fromEntries(BLOG_POSTS.filter(p => p.links?.length).map(p => [p.slug, p.links]))
+const mergeBlogLinks = (data) => data.map(p => BLOG_LINKS[p.slug] ? { ...p, links: BLOG_LINKS[p.slug] } : p)
+
 const AppContext = createContext(null)
 
 function loadCart() {
@@ -73,7 +77,7 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/blog`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data) && data.length > 0) setBlog(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setBlog(mergeBlogLinks(data)) })
       .catch(() => {})
 
     fetch(`${API}/portfolio`)
@@ -255,7 +259,7 @@ export function AppProvider({ children }) {
     fetch(`${API}/consultations`, { headers: h }).then(r => r.json()).then(setConsultations).catch(() => {})
     fetch(`${API}/dealers`, { headers: h }).then(r => r.json()).then(setDealers).catch(() => {})
     // не перезаписуємо статичні пости порожнім масивом, якщо в БД блогу ще немає
-    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data) && data.length) setBlog(data) }).catch(() => {})
+    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data) && data.length) setBlog(mergeBlogLinks(data)) }).catch(() => {})
     fetch(`${API}/reviews?admin=1`, { headers: h }).then(r => r.json()).then(setReviews).catch(() => {})
     fetch(`${API}/subscribers`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data)) setSubscribers(data) }).catch(() => {})
   }, [isAdminAuth, adminToken])
