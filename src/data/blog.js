@@ -49,8 +49,8 @@ export const BLOG_POSTS = [
 Присутність на ISH підтверджує: обладнання Termojet конкурентоспроможне на рівні провідних європейських брендів. А для українського клієнта це означає, що вдома доступна продукція світового рівня — без імпортного націнювання й тривалого очікування поставки.
 
 Дякуємо всім, хто завітав до нашого стенду. До зустрічі на наступних виставках!`,
-    date: '2026-05-30',
-    publishedAt: '2026-05-30T09:00:00Z',
+    date: '2026-06-08',
+    publishedAt: '2026-06-08T09:00:00Z',
     category: 'Виставки',
     image: '/images/blog/exh-ish-frankfurt.jpg',
     author: 'Команда Termojet',
@@ -658,7 +658,7 @@ Termojet комплектує групи енергозберігаючими н
     date: '2026-03-18',
     publishedAt: '2026-03-18T09:00:00Z',
     category: 'Статті',
-    image: IMG.cabinet,
+    image: '/images/portfolio/proj-6.jpg',
     author: 'Інженерний відділ Termojet',
     published: true,
     links: [
@@ -692,7 +692,7 @@ Termojet комплектує групи енергозберігаючими н
     date: '2026-06-02',
     publishedAt: '2026-06-02T09:00:00Z',
     category: 'Статті',
-    image: IMG.apmf,
+    image: '/images/portfolio/proj-3.jpg',
     author: 'Інженерний відділ Termojet',
     published: true,
     links: [
@@ -726,7 +726,7 @@ Termojet комплектує групи енергозберігаючими н
     date: '2026-05-26',
     publishedAt: '2026-05-26T09:00:00Z',
     category: 'Статті',
-    image: IMG.sepHeatpump,
+    image: '/images/portfolio/proj-2.jpg',
     author: 'Інженерний відділ Termojet',
     published: true,
     links: [
@@ -798,7 +798,7 @@ Termojet комплектує групи енергозберігаючими н
     date: '2026-03-24',
     publishedAt: '2026-03-24T09:00:00Z',
     category: 'Статті',
-    image: IMG.valves,
+    image: '/images/portfolio/proj-7.jpg',
     author: 'Інженерний відділ Termojet',
     published: true,
     links: [

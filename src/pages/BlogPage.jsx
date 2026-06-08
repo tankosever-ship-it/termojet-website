@@ -72,7 +72,7 @@ export default function BlogPage() {
             {featured && !search && !category && (
               <Link to={`/blog/${featured.slug}`} className="card card-hover block overflow-hidden mb-8 md:flex">
                 {featured.image && (
-                  featured.image.includes('/blog/exh-') ? (
+                  featured.image.match(/\/blog\/exh-|\/portfolio\//) ? (
                     <img src={featured.image} alt={featured.title} className="w-full md:w-80 lg:w-96 h-56 md:h-auto object-cover flex-shrink-0" />
                   ) : (
                     <div className="w-full md:w-80 lg:w-96 h-56 md:h-auto flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
@@ -109,7 +109,7 @@ export default function BlogPage() {
                 return (
                   <Link key={post.id} to={`/blog/${post.slug}`} className="card card-hover block overflow-hidden">
                     {post.image && (
-                      post.image.includes('/blog/exh-')
+                      post.image.match(/\/blog\/exh-|\/portfolio\//)
                         ? <img src={post.image} alt={title} className="w-full h-44 object-cover" />
                         : <div className="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img src={post.image} alt={title} className="max-h-full max-w-full object-contain p-3" /></div>
                     )}
