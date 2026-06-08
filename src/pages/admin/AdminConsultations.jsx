@@ -1,10 +1,21 @@
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, MessageSquare, Phone, Mail } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 export default function AdminConsultations() {
-  const { consultations, isAdminAuth } = useApp()
+  const { consultations, markViewed, isAdminAuth } = useApp()
   const navigate = useNavigate()
+  const markedRef = useRef(false)
+  const [newIds, setNewIds] = useState([])
+
+  // При відкритті розділу позначаємо нові заявки переглянутими (бейдж зникає)
+  useEffect(() => {
+    if (markedRef.current) return
+    const ids = consultations.filter(c => (c.status || 'new') === 'new').map(c => c.id)
+    if (ids.length) { markedRef.current = true; setNewIds(ids); markViewed('consultations', ids) }
+  }, [consultations])
+
   if (!isAdminAuth) { navigate('/admin'); return null }
 
   return (
@@ -28,7 +39,12 @@ export default function AdminConsultations() {
               <div key={c.id} className="card p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="font-medium text-gray-900">{c.name}</div>
+                    <div className="font-medium text-gray-900 flex items-center gap-2">
+                      {c.name}
+                      {newIds.includes(c.id) && (
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 bg-red-600 text-white rounded-full">Новий</span>
+                      )}
+                    </div>
                     <div className="flex flex-wrap gap-3 mt-1.5 text-sm text-gray-500">
                       {c.phone && <a href={`tel:${c.phone}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Phone size={12} />{c.phone}</a>}
                       {c.email && <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Mail size={12} />{c.email}</a>}

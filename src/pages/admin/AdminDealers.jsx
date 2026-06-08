@@ -1,10 +1,21 @@
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Handshake, Phone, Mail, MapPin } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 
 export default function AdminDealers() {
-  const { dealers, isAdminAuth } = useApp()
+  const { dealers, markViewed, isAdminAuth } = useApp()
   const navigate = useNavigate()
+  const markedRef = useRef(false)
+  const [newIds, setNewIds] = useState([])
+
+  // При відкритті розділу позначаємо нові заявки переглянутими (бейдж зникає)
+  useEffect(() => {
+    if (markedRef.current) return
+    const ids = dealers.filter(d => (d.status || 'new') === 'new').map(d => d.id)
+    if (ids.length) { markedRef.current = true; setNewIds(ids); markViewed('dealers', ids) }
+  }, [dealers])
+
   if (!isAdminAuth) { navigate('/admin'); return null }
 
   return (
@@ -28,7 +39,12 @@ export default function AdminDealers() {
               <div key={d.id} className="card p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="font-medium text-gray-900">{d.name}{d.company ? ` — ${d.company}` : ''}</div>
+                    <div className="font-medium text-gray-900 flex items-center gap-2">
+                      <span>{d.name}{d.company ? ` — ${d.company}` : ''}</span>
+                      {newIds.includes(d.id) && (
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 bg-red-600 text-white rounded-full">Новий</span>
+                      )}
+                    </div>
                     <div className="flex flex-wrap gap-3 mt-1.5 text-sm text-gray-500">
                       {d.phone && <a href={`tel:${d.phone}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Phone size={12} />{d.phone}</a>}
                       {d.email && <a href={`mailto:${d.email}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Mail size={12} />{d.email}</a>}

@@ -5,7 +5,7 @@ import { useApp } from '../../context/AppContext'
 import { ADMIN_MENU } from '../../data/adminMenu'
 
 function SidebarContent({ onNavigate }) {
-  const { adminLogout } = useApp()
+  const { adminLogout, newCounts } = useApp()
   const navigate = useNavigate()
 
   function logout() {
@@ -23,19 +23,27 @@ function SidebarContent({ onNavigate }) {
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto py-3">
-        {ADMIN_MENU.map(({ to, icon: Icon, label }) => (
-          <NavLink key={to} to={to} onClick={onNavigate} end
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-5 py-2.5 text-sm transition-colors border-l-2 ${
-                isActive
-                  ? 'bg-[var(--primary)]/15 text-white border-[var(--primary)]'
-                  : 'text-white/60 hover:text-white hover:bg-white/5 border-transparent'
-              }`
-            }>
-            <Icon size={17} className="flex-shrink-0" />
-            <span className="truncate">{label}</span>
-          </NavLink>
-        ))}
+        {ADMIN_MENU.map(({ to, icon: Icon, label }) => {
+          const count = newCounts?.[to] || 0
+          return (
+            <NavLink key={to} to={to} onClick={onNavigate} end
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-5 py-2.5 text-sm transition-colors border-l-2 ${
+                  isActive
+                    ? 'bg-[var(--primary)]/15 text-white border-[var(--primary)]'
+                    : 'text-white/60 hover:text-white hover:bg-white/5 border-transparent'
+                }`
+              }>
+              <Icon size={17} className="flex-shrink-0" />
+              <span className="truncate flex-1">{label}</span>
+              {count > 0 && (
+                <span className="flex-shrink-0 min-w-[20px] h-5 px-1.5 inline-flex items-center justify-center rounded-full bg-red-600 text-white text-[11px] font-bold">
+                  {count}
+                </span>
+              )}
+            </NavLink>
+          )
+        })}
       </nav>
 
       {/* Footer actions */}
@@ -54,12 +62,14 @@ function SidebarContent({ onNavigate }) {
 }
 
 export default function AdminLayout() {
-  const { isAdminAuth } = useApp()
+  const { isAdminAuth, newCounts } = useApp()
   const navigate = useNavigate()
   const location = useLocation()
   const [open, setOpen] = useState(false)
 
   if (!isAdminAuth) { navigate('/admin'); return null }
+
+  const totalNew = Object.values(newCounts || {}).reduce((s, n) => s + n, 0)
 
   return (
     <div className="min-h-screen bg-[var(--bg)]">
@@ -71,7 +81,14 @@ export default function AdminLayout() {
       {/* Mobile top bar */}
       <div className="md:hidden sticky top-0 z-40 flex items-center justify-between bg-[#1d1d1f] text-white px-4 py-3">
         <div className="font-black text-sm font-['Archivo',sans-serif]">TERMOJET Admin</div>
-        <button onClick={() => setOpen(true)} className="p-1.5"><Menu size={20} /></button>
+        <button onClick={() => setOpen(true)} className="relative p-1.5">
+          <Menu size={20} />
+          {totalNew > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 inline-flex items-center justify-center rounded-full bg-red-600 text-white text-[10px] font-bold">
+              {totalNew}
+            </span>
+          )}
+        </button>
       </div>
 
       {/* Mobile drawer */}

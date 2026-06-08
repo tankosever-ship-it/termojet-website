@@ -122,6 +122,27 @@ export function AppProvider({ children }) {
     return { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` }
   }
 
+  // Кількість НОВИХ заявок (status === 'new') для бейджів у меню адмінки
+  const isNew = (x) => (x.status || 'new') === 'new'
+  const newCounts = {
+    '/admin/orders': orders.filter(isNew).length,
+    '/admin/consultations': consultations.filter(isNew).length,
+    '/admin/dealers': dealers.filter(isNew).length,
+  }
+
+  // Позначити заявки переглянутими (status='viewed') — щоб бейдж «нових» зник
+  function markViewed(resource, ids) {
+    if (!ids || !ids.length) return
+    const setter = { consultations: setConsultations, dealers: setDealers, orders: setOrders }[resource]
+    if (!setter) return
+    setter(prev => prev.map(x => ids.includes(x.id) ? { ...x, status: 'viewed' } : x))
+    if (API && adminToken) {
+      ids.forEach(id => fetch(`${API}/${resource}/${id}`, {
+        method: 'PUT', headers: authHeaders(), body: JSON.stringify({ status: 'viewed' }),
+      }).catch(() => {}))
+    }
+  }
+
   // Редагований контент головної: override (JSON у settings.homeContent) поверх дефолтів
   const homeContent = useMemo(() => {
     let override = siteSettings.homeContent
@@ -429,6 +450,7 @@ export function AppProvider({ children }) {
       banners, setBanners,
       promos, setPromos,
       subscribers, setSubscribers, removeSubscriber,
+      newCounts, markViewed,
       siteSettings, setSiteSettings, saveSettings,
       homeContent,
       isAdminAuth, adminLogin, adminLogout,
