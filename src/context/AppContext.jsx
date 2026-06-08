@@ -46,6 +46,7 @@ export function AppProvider({ children }) {
   const [banners, setBanners] = useState([])
   const [promos, setPromos] = useState([])
   const [clients, setClients] = useState([])
+  const [subscribers, setSubscribers] = useState([])
   const [isAdminAuth, setIsAdminAuth] = useState(() => !!loadAdminToken())
   const [adminToken, setAdminToken] = useState(loadAdminToken)
   const [eurRate, setEurRate] = useState(null)
@@ -237,6 +238,7 @@ export function AppProvider({ children }) {
     fetch(`${API}/dealers`, { headers: h }).then(r => r.json()).then(setDealers).catch(() => {})
     fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(setBlog).catch(() => {})
     fetch(`${API}/reviews?admin=1`, { headers: h }).then(r => r.json()).then(setReviews).catch(() => {})
+    fetch(`${API}/subscribers`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data)) setSubscribers(data) }).catch(() => {})
   }, [isAdminAuth, adminToken])
 
   // Orders
@@ -400,6 +402,7 @@ export function AppProvider({ children }) {
   // Документи: лише створення/видалення (PUT не передбачено) — нові зверху
   const saveFile       = (item) => adminCreate('files', setFiles, item, { prepend: true })
   const removeFile     = (id)   => adminDelete('files', setFiles, id)
+  const removeSubscriber = (id) => adminDelete('subscribers', setSubscribers, id)
   const saveBlog       = (item) => adminUpsert('blog', setBlog, item)
   const removeBlog     = (id)   => adminDelete('blog', setBlog, id)
   // Портфоліо: UI використовує desc/image, БД — description/images[]. Мапимо при збереженні.
@@ -430,6 +433,7 @@ export function AppProvider({ children }) {
       banners, setBanners,
       promos, setPromos,
       clients, setClients,
+      subscribers, setSubscribers, removeSubscriber,
       siteSettings, setSiteSettings, saveSettings,
       homeContent,
       isAdminAuth, adminLogin, adminLogout,
