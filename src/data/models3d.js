@@ -171,6 +171,15 @@ export const MODELS_BY_SLUG = {
   "nasos-termojet-tbe-50-24-2": [{ file: 'nasos-termojet-tbe-50-24-2.step', name: 'TBE 50-24-2.step', size: '7 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-24-2.glb' }],
   "nasos-termojet-tbe-50-36-2": [{ file: 'nasos-termojet-tbe-50-36-2.step', name: 'TBE 50-36-2.step', size: '9 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-36-2.glb' }],
   "nasos-termojet-tbe-65-34-2": [{ file: 'nasos-termojet-tbe-65-34-2.step', name: 'TBE 65-34-2.step', size: '10 МБ', glb: '/uploads/3d/nasos-termojet-tbe-65-34-2.glb' }],
+
+  // ── #6 (2026-06-08): мультинасосні групи — модулі BOX2/BOX3 + насосні групи НГ-36/37/38/38А.
+  //     STEP/GLB на сервері лежать у gzip (.step.gz/.glb.gz), nginx віддає прозоро (gzip_static).
+  "modul-termojet-box2-v-teploizolyatsiyi-km2-ups": [{ file: 'modul-termojet-box2-v-teploizolyatsiyi-km2-ups.step', name: 'BOX-II.step', size: '113 МБ', glb: '/uploads/3d/modul-termojet-box2-v-teploizolyatsiyi-km2-ups.glb' }],
+  "modul-termojet-box3-v-teploizolyatsiyi-km3-ups": [{ file: 'modul-termojet-box3-v-teploizolyatsiyi-km3-ups.step', name: 'BOX-III.step', size: '163 МБ', glb: '/uploads/3d/modul-termojet-box3-v-teploizolyatsiyi-km3-ups.glb' }],
+  "nh-36-z-termostatychnym-kranom": [{ file: 'nh-36-z-termostatychnym-kranom.step', name: 'НГ-36.step', size: '42 МБ', glb: '/uploads/3d/nh-36-z-termostatychnym-kranom.glb' }],
+  "nh-37-pryama": [{ file: 'nh-37-pryama.step', name: 'НГ-37.step', size: '28 МБ', glb: '/uploads/3d/nh-37-pryama.glb' }],
+  "nh-38-zi-zmishuvachem": [{ file: 'nh-38-zi-zmishuvachem.step', name: 'НГ-38.step', size: '32 МБ', glb: '/uploads/3d/nh-38-zi-zmishuvachem.glb' }],
+  "84142380a": [{ file: '84142380a.step', name: 'НГ-38А.step', size: '38 МБ', glb: '/uploads/3d/84142380a.glb' }],
 }
 
 export function getModels3D(slug) {
