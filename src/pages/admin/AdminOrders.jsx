@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
-import { toUAH } from '../../utils/currency'
 
 const STATUS_LABELS = { new: 'Новий', processing: 'В обробці', done: 'Виконано', cancelled: 'Скасовано' }
 const STATUS_COLORS = { new: 'bg-blue-50 text-blue-600', processing: 'bg-yellow-50 text-yellow-600', done: 'bg-green-50 text-green-600', cancelled: 'bg-red-50 text-red-500' }
@@ -10,13 +9,19 @@ export default function AdminOrders() {
   const { orders, setOrders, isAdminAuth, API, authHeaders, eurRate } = useApp()
   const navigate = useNavigate()
 
-  // Ціна позиції у гривнях (товари в EUR конвертуємо за курсом)
-  const lineUAH = (item) => {
-    const uah = toUAH(item.price, item.currency, eurRate)
-    return Math.round((uah != null ? uah : (item.price || 0)) * item.quantity)
-  }
-
   if (!isAdminAuth) { navigate('/admin'); return null }
+
+  // Курс EUR, за яким оформлено конкретне замовлення — виводимо із суми замовлення,
+  // щоб позиції точно збігалися з total (а не «плавали» за поточним курсом НБУ).
+  function orderRateFor(order) {
+    const items = order.items || []
+    const eurSum = items.filter(i => i.currency === 'EUR').reduce((s, i) => s + (i.price || 0) * i.quantity, 0)
+    const uahSum = items.filter(i => i.currency !== 'EUR').reduce((s, i) => s + (i.price || 0) * i.quantity, 0)
+    if (eurSum > 0 && order.total) return (order.total - uahSum) / eurSum
+    return eurRate // фолбек: живий курс
+  }
+  const lineUAH = (item, rate) =>
+    Math.round((item.currency === 'EUR' ? (item.price || 0) * (rate || 0) : (item.price || 0)) * item.quantity)
 
   function setStatus(id, status) {
     setOrders(prev => prev.map(o => o.id === id ? { ...o, status } : o))
@@ -46,7 +51,8 @@ export default function AdminOrders() {
             {orders.map(order => {
               const d = order.created_at || order.createdAt
               const dateStr = d ? new Date(String(d).replace(' ', 'T')).toLocaleString('uk-UA') : ''
-              const sum = order.total || (order.items || []).reduce((s, i) => s + lineUAH(i), 0)
+              const rate = orderRateFor(order)
+              const sum = order.total || (order.items || []).reduce((s, i) => s + lineUAH(i, rate), 0)
               return (
                 <div key={order.id} className="card p-4">
                   {/* Шапка: номер, контакт, сума, статус */}
@@ -77,7 +83,7 @@ export default function AdminOrders() {
                           {order.items.map((item, i) => (
                             <div key={i} className="flex items-center justify-between text-sm gap-3">
                               <span className="text-gray-700 min-w-0 truncate">{item.name} × {item.quantity}</span>
-                              <span className="font-medium flex-shrink-0">{lineUAH(item).toLocaleString('uk-UA')} грн</span>
+                              <span className="font-medium flex-shrink-0">{lineUAH(item, rate).toLocaleString('uk-UA')} грн</span>
                             </div>
                           ))}
                         </div>
