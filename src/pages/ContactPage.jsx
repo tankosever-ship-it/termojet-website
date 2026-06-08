@@ -33,7 +33,7 @@ export default function ContactPage() {
       <SEO title={contact.title} />
 
       {/* Hero */}
-      <section style={{ background: '#0C0B0A' }} className="py-14 relative overflow-hidden">
+      <section style={{ background: '#0C0B0A', marginTop: '-60px', paddingTop: 'calc(3.5rem + 60px)' }} className="pb-14 relative overflow-hidden">
         <div className="absolute inset-0 bg-dots pointer-events-none opacity-40" />
         <div className="relative max-w-7xl mx-auto px-4">
           <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">

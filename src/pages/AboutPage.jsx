@@ -138,12 +138,18 @@ export default function AboutPage() {
   const t     = useT()
   const about = t('about')
   const { aboutContent: ac } = useApp()
-  const [videoOpen, setVideoOpen] = useState(false)
+  const [videoOpen, setVideoOpen] = useState(null) // url відкритого відео або null
 
-  const photos    = ac.photos?.length ? ac.photos : MANUFACTURING_PHOTOS.map((url, i) => ({ url, caption: '' }))
-  const localVid  = ac.localVideo ? assetPath(ac.localVideo) : MANUFACTURING_VIDEO
+  const photos    = ac.photos?.length ? ac.photos : MANUFACTURING_PHOTOS.map((url) => ({ url, caption: '' }))
   const ytId      = youtubeId(ac.youtubeUrl)
   const poster    = photos[0] ? mediaSrc(photos[0].url) : MANUFACTURING_PHOTOS[0]
+  // До 3 відео: старе (архівне), власне (нове) — як <video>; YouTube — як iframe
+  const fileVideos = [
+    ac.oldVideo   && { src: mediaSrc(ac.oldVideo),   label: 'Архівне відео цеху' },
+    ac.localVideo && { src: mediaSrc(ac.localVideo), label: 'Виробничий цех' },
+  ].filter(Boolean)
+  const videoCount = fileVideos.length + (ytId ? 1 : 0)
+  const vidCols = videoCount >= 3 ? 'lg:grid-cols-3' : videoCount === 2 ? 'lg:grid-cols-2' : ''
 
   return (
     <>
@@ -151,7 +157,8 @@ export default function AboutPage() {
         description="Termojet — провідний український виробник обладнання для котелень з 2002 року. 3000 м², ~100 фахівців, 50 000+ об'єктів." />
 
       {/* ═══ HERO ══════════════════════════════════════════════════════ */}
-      <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
+      <section className="hero-gradient grain relative overflow-hidden text-white pb-20 md:pb-28"
+        style={{ marginTop: '-60px', paddingTop: 'calc(5rem + 60px)' }}>
         {/* Фонове фото котельні */}
         <img src={assetPath('/about-hero.png')} alt="" aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -327,24 +334,20 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Відео: власне відео цеху (зліва) + оглядове YouTube (справа) */}
-          <div className={`grid grid-cols-1 ${ytId ? 'lg:grid-cols-2' : ''} gap-4 max-w-4xl mx-auto mb-3`}>
-            {/* Власне відео — клік розгортає на весь екран */}
-            {localVid && (
-              <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
-                viewport={{ once:true }} transition={{ duration:0.5 }}
-                onClick={() => setVideoOpen(true)}
+          {/* Відео: архівне + власне (як <video>) + оглядове YouTube (iframe) */}
+          <div className={`grid grid-cols-1 ${vidCols} gap-4 max-w-4xl mx-auto mb-3`}>
+            {fileVideos.map((v, i) => (
+              <motion.div key={v.src} initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
+                viewport={{ once:true }} transition={{ duration:0.5, delay: i * 0.08 }}
+                onClick={() => setVideoOpen(v.src)}
                 className="relative overflow-hidden rounded-xl cursor-pointer group aspect-video bg-black ring-1 ring-white/10">
                 <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.55)' }}
                   className="absolute top-3 left-3 z-10 uppercase bg-black/50 px-2 py-1">
-                  ● ВИРОБНИЧИЙ ЦЕХ
+                  ● {v.label}
                 </div>
-                <video
-                  autoPlay muted loop playsInline preload="metadata"
-                  poster={poster}
-                  className="w-full h-full object-cover block"
-                >
-                  <source src={localVid} type="video/mp4" />
+                <video autoPlay muted loop playsInline preload="metadata" poster={poster}
+                  className="w-full h-full object-cover block">
+                  <source src={v.src} type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 flex items-center justify-center transition-colors group-hover:bg-black/30">
                   <span className="w-14 h-14 rounded-full bg-white/15 border border-white/40 backdrop-blur-sm flex items-center justify-center opacity-80 transition-all group-hover:opacity-100 group-hover:scale-110">
@@ -353,20 +356,20 @@ export default function AboutPage() {
                 </div>
                 <div className="absolute bottom-3 right-3 z-10 bg-black/50 px-2 py-1 uppercase"
                   style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.65)' }}>
-                  Натисніть, щоб розгорнути ↗
+                  Розгорнути ↗
                 </div>
               </motion.div>
-            )}
+            ))}
 
             {/* Оглядове відео YouTube */}
             {ytId && (
               <motion.div initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
-                viewport={{ once:true }} transition={{ duration:0.5, delay:0.1 }}
+                viewport={{ once:true }} transition={{ duration:0.5, delay:0.16 }}
                 className="relative overflow-hidden rounded-xl aspect-video bg-black ring-1 ring-white/10">
                 <iframe
                   className="w-full h-full"
                   src={`https://www.youtube.com/embed/${ytId}`}
-                  title="Termojet — відео"
+                  title="Termojet — оглядове відео"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -374,14 +377,14 @@ export default function AboutPage() {
             )}
           </div>
 
-          {/* Модалка власного відео — на весь екран */}
-          {videoOpen && localVid && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
+          {/* Модалка відео — на весь екран */}
+          {videoOpen && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(null)}>
               <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
               <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
                 <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
-                  src={localVid} controls autoPlay playsInline />
-                <button onClick={() => setVideoOpen(false)}
+                  src={videoOpen} controls autoPlay playsInline />
+                <button onClick={() => setVideoOpen(null)}
                   className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
                   <X size={18} />
                 </button>

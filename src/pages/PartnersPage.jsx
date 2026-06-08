@@ -165,7 +165,7 @@ export default function PartnersPage() {
       />
 
       {/* Hero banner — фон рукостискання (як на /about) */}
-      <section className="relative overflow-hidden text-white py-24 md:py-32">
+      <section className="relative overflow-hidden text-white pb-24 md:pb-32" style={{ marginTop: '-60px', paddingTop: 'calc(6rem + 60px)' }}>
         <img src={assetPath('/partners-handshake.jpg')} alt="" aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0 pointer-events-none"

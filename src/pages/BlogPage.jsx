@@ -30,7 +30,7 @@ export default function BlogPage() {
     <>
       <SEO title={blogT.title} description={blogT.subtitle} />
 
-      <div className="bg-gradient-to-br from-[var(--primary)] to-[#1e4a7a] text-white py-12">
+      <div className="bg-gradient-to-br from-[var(--primary)] to-[#1e4a7a] text-white pb-12" style={{ marginTop: '-60px', paddingTop: 'calc(3rem + 60px)' }}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="label-accent mb-2" style={{ color: '#fb923c' }}>Termojet</div>
           <h1 className="text-4xl font-black font-['Archivo',sans-serif] mb-2">{blogT.title}</h1>

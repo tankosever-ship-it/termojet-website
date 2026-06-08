@@ -522,10 +522,10 @@ function CountUpThousands({ end, duration = 1600 }) {
 export default function HomePage() {
   const { lang, blog, portfolio, products, homeContent, aboutContent } = useApp()
   const t    = useT()
-  // Фото виробництва — нові знімки з підписами зі сторінки «Про нас» (редагуються в адмінці)
-  const captioned = (aboutContent.photos || []).filter(p => p.caption)
-  const prodPhotos = captioned.length
-    ? captioned.map(p => ({ src: mediaSrc(p.url), label: `● ${p.caption}` }))
+  // Фото виробництва — позначені home зі сторінки «Про нас» (редагуються в адмінці)
+  const homePhotos = (aboutContent.photos || []).filter(p => p.home)
+  const prodPhotos = homePhotos.length
+    ? homePhotos.map(p => ({ src: mediaSrc(p.url), label: p.caption ? `● ${p.caption}` : '' }))
     : PROD_PHOTOS
   const hero = t('hero')
   const cats = t('categories')

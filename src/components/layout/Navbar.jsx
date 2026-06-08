@@ -234,16 +234,23 @@ export default function Navbar() {
     { to: '/files',    label: 'Файли' },
   ]
 
-  // transparent at top → glassmorphism on scroll
-  const navBg = scrolled
+  // Сторінки зі світлим верхом (без темного героя) — навбар завжди світлий
+  const seg = location.pathname.split('/').filter(Boolean)
+  const lightTop =
+    ['/cart', '/privacy', '/terms'].includes(location.pathname) ||
+    (seg[0] === 'catalog' && seg.length === 3) // картка товару
+  // прозорий над темним героєм → світлий «glassmorphism» при скролі або на світлих сторінках
+  const solid = scrolled || lightTop
+
+  const navBg = solid
     ? 'rgba(255,255,255,0.88)'
     : 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
-  const navBackdrop = scrolled ? 'blur(20px)' : 'none'
-  const navShadow = scrolled ? '0 2px 32px rgba(0,0,0,0.12)' : 'none'
-  const navBorderB = scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent'
+  const navBackdrop = solid ? 'blur(20px)' : 'none'
+  const navShadow = solid ? '0 2px 32px rgba(0,0,0,0.12)' : 'none'
+  const navBorderB = solid ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent'
   // text: white on dark hero, dark on white glassmorphism
-  const linkCol = scrolled ? '#1a1a1a' : 'rgba(255,255,255,0.95)'
-  const linkColMuted = scrolled ? '#555' : 'rgba(255,255,255,0.75)'
+  const linkCol = solid ? '#1a1a1a' : 'rgba(255,255,255,0.95)'
+  const linkColMuted = solid ? '#555' : 'rgba(255,255,255,0.75)'
 
   return (
     <>
@@ -251,8 +258,8 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{ background: navBg, backdropFilter: navBackdrop, WebkitBackdropFilter: navBackdrop, boxShadow: navShadow, borderBottom: navBorderB }}>
 
-        {/* orange accent line bottom — only when scrolled */}
-        {scrolled && <div className="absolute bottom-0 left-0 right-0 h-[1.5px]"
+        {/* orange accent line bottom — only when solid */}
+        {solid && <div className="absolute bottom-0 left-0 right-0 h-[1.5px]"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,85,0,0.4) 30%, rgba(255,85,0,0.4) 70%, transparent)' }} />}
 
         <div className="px-5 lg:px-6">
@@ -348,7 +355,7 @@ export default function Navbar() {
               <div className="relative hidden lg:block" ref={langRef}>
                 <button onClick={() => setLangOpen(v => !v)}
                   className="flex items-center gap-1 px-2.5 py-1.5 transition-all"
-                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: linkCol, border: scrolled ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: '0.5rem', transition: 'all 0.3s' }}>
+                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: linkCol, border: solid ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: '0.5rem', transition: 'all 0.3s' }}>
                   {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>

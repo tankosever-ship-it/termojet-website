@@ -31,7 +31,7 @@ function Field({ label, value, onChange, textarea, rows = 2, hint, placeholder }
 }
 
 // Завантаження відео з компʼютера (mp4/webm/mov) → url
-function VideoUpload({ value, onChange }) {
+function VideoUpload({ value, onChange, label = 'Відео (mp4)' }) {
   const { uploadFile } = useApp()
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
@@ -50,7 +50,7 @@ function VideoUpload({ value, onChange }) {
 
   return (
     <div>
-      <label className="text-xs text-gray-500 block mb-1">Власне відео цеху (mp4)</label>
+      <label className="text-xs text-gray-500 block mb-1">{label}</label>
       <div className="flex items-center gap-3 flex-wrap">
         <input value={value || ''} onChange={e => onChange(e.target.value)} placeholder="/about-factory.mp4 або URL"
           className="flex-1 min-w-52 px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
@@ -119,8 +119,9 @@ export default function AdminAbout() {
           <Field label="Підзаголовок" value={form.manufSubtitle} onChange={v => set('manufSubtitle', v)} textarea rows={2} />
         </Section>
 
-        <Section title="Відео">
-          <VideoUpload value={form.localVideo} onChange={v => set('localVideo', v)} />
+        <Section title="Відео (показуються 3 у секції «Про нас»)">
+          <VideoUpload value={form.oldVideo} onChange={v => set('oldVideo', v)} label="Архівне відео цеху (mp4)" />
+          <VideoUpload value={form.localVideo} onChange={v => set('localVideo', v)} label="Власне відео цеху (mp4)" />
           <div>
             <Field label="Оглядове відео (YouTube)" value={form.youtubeUrl} onChange={v => set('youtubeUrl', v)}
               placeholder="https://youtu.be/..." />
@@ -144,6 +145,10 @@ export default function AdminAbout() {
                 </div>
                 <ImageUpload value={p.url} onChange={v => setPhoto(i, 'url', v)} label="Зображення" />
                 <Field label="Підпис" value={p.caption} onChange={v => setPhoto(i, 'caption', v)} placeholder="Напр.: Лазерний листоріз" />
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={!!p.home} onChange={e => setPhoto(i, 'home', e.target.checked)} className="accent-[var(--primary)]" />
+                  <span className="text-sm text-gray-700">Показувати також на головній</span>
+                </label>
               </div>
             ))}
           </div>

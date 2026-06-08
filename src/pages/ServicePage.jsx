@@ -88,7 +88,7 @@ export default function ServicePage() {
       />
 
       {/* Hero */}
-      <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
+      <section className="hero-gradient grain relative overflow-hidden text-white pb-20 md:pb-28" style={{ marginTop: '-60px', paddingTop: 'calc(5rem + 60px)' }}>
         <div className="orb orb-warm   w-[400px] h-[400px] -right-20 top-1/2 -translate-y-1/2 opacity-40" />
         <div className="orb orb-orange w-[280px] h-[280px] -left-16  -top-16              opacity-30" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.6)] to-transparent" />
