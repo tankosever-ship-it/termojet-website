@@ -91,7 +91,8 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/files`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data) && data.length) setFiles(data) })
+      // завантажені через адмінку документи — зверху, далі статичний каталог
+      .then(data => { if (Array.isArray(data) && data.length) setFiles([...data, ...FILES]) })
       .catch(() => {})
 
     fetch(`${API}/settings`)
@@ -131,6 +132,28 @@ export function AppProvider({ children }) {
     if (typeof override === 'string') { try { override = JSON.parse(override) } catch { override = null } }
     return mergeHomeContent(override)
   }, [siteSettings.homeContent])
+
+  // Завантажити файл з компʼютера на сервер → { url, filename } або { error }.
+  // FormData: НЕ виставляємо Content-Type вручну (браузер додасть boundary сам).
+  async function uploadFile(file) {
+    if (!API || !adminToken) return { error: 'Завантаження доступне лише в адмінці на сервері' }
+    const fd = new FormData()
+    fd.append('file', file)
+    try {
+      const res = await fetch(`${API}/upload`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${adminToken}` },
+        body: fd,
+      })
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}))
+        return { error: e.error || 'Помилка завантаження (перевірте тип/розмір файлу)' }
+      }
+      return await res.json()
+    } catch {
+      return { error: 'Помилка мережі під час завантаження' }
+    }
+  }
 
   // Зберегти налаштування сайту в БД (PUT /settings) + оновити локальний стан.
   // homeContent-обʼєкт серіалізуємо в JSON-рядок для зберігання.
@@ -374,6 +397,9 @@ export function AppProvider({ children }) {
   const removePromo    = (id)   => adminDelete('promos', setPromos, id)
   const saveClient     = (item) => adminUpsert('clients', setClients, item, { prepend: false })
   const removeClient   = (id)   => adminDelete('clients', setClients, id)
+  // Документи: лише створення/видалення (PUT не передбачено) — нові зверху
+  const saveFile       = (item) => adminCreate('files', setFiles, item, { prepend: true })
+  const removeFile     = (id)   => adminDelete('files', setFiles, id)
   const saveBlog       = (item) => adminUpsert('blog', setBlog, item)
   const removeBlog     = (id)   => adminDelete('blog', setBlog, id)
   // Портфоліо: UI використовує desc/image, БД — description/images[]. Мапимо при збереженні.
@@ -408,6 +434,7 @@ export function AppProvider({ children }) {
       homeContent,
       isAdminAuth, adminLogin, adminLogout,
       adminToken, authHeaders,
+      uploadFile, saveFile, removeFile,
       placeOrder, sendConsultation, sendDealerRequest, subscribe,
       submitReview, moderateReview, removeReview, addReview,
       adminCreate, adminUpdate, adminDelete, adminUpsert,

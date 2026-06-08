@@ -4,6 +4,7 @@ import { Plus, Pencil, Trash2, Search, X, ArrowLeft, Package, Eye, EyeOff } from
 import { useApp } from '../../context/AppContext'
 import { CATEGORIES } from '../../data/categories'
 import { toSlug } from '../../utils/slug'
+import ImageUpload from '../../components/admin/ImageUpload'
 
 const EMPTY = { name: '', sku: '', price: '', categorySlug: '', desc: '', inStock: true, isVisible: true, image: '', specs: {} }
 
@@ -56,9 +57,7 @@ function ProductForm({ product, onSave, onCancel }) {
           </select>
         </div>
         <div className="md:col-span-2">
-          <label className="text-xs text-gray-500 block mb-1">URL зображення</label>
-          <input value={form.image} onChange={e => set('image', e.target.value)} placeholder="https://..."
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
+          <ImageUpload value={form.image} onChange={v => set('image', v)} label="Фото товару" />
         </div>
         <div className="md:col-span-2">
           <label className="text-xs text-gray-500 block mb-1">Опис</label>

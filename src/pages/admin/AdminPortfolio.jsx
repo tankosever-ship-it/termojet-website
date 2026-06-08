@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Plus, Pencil, Trash2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import ImageUpload from '../../components/admin/ImageUpload'
 
 const EMPTY = { title: '', location: '', year: '', power: '', desc: '', image: '' }
 
@@ -31,10 +32,8 @@ function Form({ item, onSave, onCancel }) {
           <input value={form.power} onChange={e => set('power', e.target.value)} placeholder="500 кВт"
             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
         </div>
-        <div>
-          <label className="text-xs text-gray-500 block mb-1">URL фото</label>
-          <input value={form.image} onChange={e => set('image', e.target.value)} placeholder="https://..."
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
+        <div className="md:col-span-2">
+          <ImageUpload value={form.image} onChange={v => set('image', v)} label="Фото проекту" />
         </div>
         <div className="md:col-span-2">
           <label className="text-xs text-gray-500 block mb-1">Опис</label>
