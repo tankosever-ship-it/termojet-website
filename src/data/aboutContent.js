@@ -13,11 +13,11 @@ export const ABOUT_DEFAULTS = {
 
   // Фотогалерея верстатів (url + підпис)
   photos: [
-    { url: '/about/lazernyy-lystoriz.jpg',    caption: 'Лазерний листоріз' },
-    { url: '/about/lazernyy-truboriz.jpg',    caption: 'Лазерний труборіз' },
-    { url: '/about/valtsyuvalnyy-verstat.jpg', caption: 'Вальцювальний верстат' },
-    { url: '/about/lystohynnyy-verstat.jpg',  caption: 'Листогинний верстат' },
-    { url: '/about/tokarnyy-verstat-chpu.jpg', caption: 'Автоматичний токарний верстат з ЧПУ' },
+    { url: '/factory/lazernyy-lystoriz.jpg',    caption: 'Лазерний листоріз' },
+    { url: '/factory/lazernyy-truboriz.jpg',    caption: 'Лазерний труборіз' },
+    { url: '/factory/valtsyuvalnyy-verstat.jpg', caption: 'Вальцювальний верстат' },
+    { url: '/factory/lystohynnyy-verstat.jpg',  caption: 'Листогинний верстат' },
+    { url: '/factory/tokarnyy-verstat-chpu.jpg', caption: 'Автоматичний токарний верстат з ЧПУ' },
   ],
 }
 
