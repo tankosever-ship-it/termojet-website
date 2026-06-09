@@ -186,12 +186,18 @@ export const MODELS_BY_SLUG = {
   "84142380a": [{ file: '84142380a.step', name: 'НГ-38А.step', size: '38 МБ', glb: '/uploads/3d/84142380a.glb?v=2' }],
 
   // ── #7 (2026-06-09): сепаратори — одна 3D-модель на серію (TJVT6G комбіновані поки без 3D) ──
-  // TJV6G повітря: DN20/25 → корпус 3/4"; DN32/40/50 → корпус 1¼"
-  "sep-tjv6g20": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G 3⁄4".step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
-  "sep-tjv6g25": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G 3⁄4".step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
-  "sep-tjv6g32": [{ file: 'sep-tjv6g-g114.step', name: 'TJV6G 1¼".step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
-  "sep-tjv6g40": [{ file: 'sep-tjv6g-g114.step', name: 'TJV6G 1¼".step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
-  "sep-tjv6g50": [{ file: 'sep-tjv6g-g114.step', name: 'TJV6G 1¼".step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  // TJV6G повітря — модель 3/4" на всі DN20–50
+  "sep-tjv6g20": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G.step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  "sep-tjv6g25": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G.step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  "sep-tjv6g32": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G.step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  "sep-tjv6g40": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G.step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  "sep-tjv6g50": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G.step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  // TJVT6G повітря+бруд (комбіновані) — модель 1¼" (файл sep-tjv6g-g114) на всі DN20–50
+  "sep-tjvt6g20": [{ file: 'sep-tjv6g-g114.step', name: 'TJVT6G.step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  "sep-tjvt6g25": [{ file: 'sep-tjv6g-g114.step', name: 'TJVT6G.step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  "sep-tjvt6g32": [{ file: 'sep-tjv6g-g114.step', name: 'TJVT6G.step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  "sep-tjvt6g40": [{ file: 'sep-tjv6g-g114.step', name: 'TJVT6G.step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  "sep-tjvt6g50": [{ file: 'sep-tjv6g-g114.step', name: 'TJVT6G.step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
   // TJV7G поворотний повітря
   "sep-tjv7g20": [{ file: 'sep-tjv7g.step', name: 'TJV7G.step', size: '18 МБ', glb: '/uploads/3d/sep-tjv7g.glb' }],
   "sep-tjv7g25": [{ file: 'sep-tjv7g.step', name: 'TJV7G.step', size: '18 МБ', glb: '/uploads/3d/sep-tjv7g.glb' }],
