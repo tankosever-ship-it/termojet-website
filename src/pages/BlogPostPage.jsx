@@ -84,7 +84,10 @@ export default function BlogPostPage() {
               }
               let formatted = para.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
               // [текст](url) → посилання (зовнішні відкриваємо у новій вкладці)
+              // FIX 9 — only allow safe URL schemes; drop javascript:/data:/vbscript: etc.
               formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
+                const safe = /^(https?:\/\/|mailto:|\/|#)/.test(url)
+                if (!safe) return text
                 const ext = /^https?:/.test(url)
                 return `<a href="${url}" class="text-[var(--primary)] underline underline-offset-2 hover:opacity-80"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`
               })

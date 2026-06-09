@@ -11,11 +11,25 @@ router.get('/', requireAdmin, (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { items, total, name, phone, email, address, comment, payment, utm } = req.body
+  const { items, name, phone, email, address, comment, payment, utm } = req.body
+
+  // FIX 3 — recompute total server-side; never trust client-supplied price/total
+  const getProduct = db.prepare('SELECT price FROM products WHERE id = ?')
+  let serverTotal = 0
+  if (Array.isArray(items)) {
+    for (const item of items) {
+      if (!item || !item.id) continue
+      const row = getProduct.get(item.id)
+      if (!row) continue
+      const qty = Number(item.qty) || 1
+      serverTotal += (Number(row.price) || 0) * qty
+    }
+  }
+
   const result = db.prepare(`
     INSERT INTO orders (items, total, name, phone, email, address, comment, payment, utm)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(JSON.stringify(items), total, name, phone, email, address, comment, payment || '', JSON.stringify(utm || {}))
+  `).run(JSON.stringify(items), serverTotal, name, phone, email, address, comment, payment || '', JSON.stringify(utm || {}))
 
   // Email із замовлення зберігаємо також у підписників (дедуп за UNIQUE)
   const mail = (email || '').trim().toLowerCase()
@@ -35,7 +49,7 @@ router.post('/', (req, res) => {
     (payment ? `\n💳 ${esc(payment)}` : '') +
     (comment ? `\n💬 ${esc(comment)}` : '') +
     (itemLines ? `\n\n${itemLines}` : '') +
-    `\n\n💰 Сума: <b>${esc(total)}</b> грн`
+    `\n\n💰 Сума: <b>${esc(String(serverTotal))}</b> грн`
   )
 
   res.status(201).json({ id: result.lastInsertRowid })

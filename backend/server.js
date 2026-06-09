@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const rateLimit = require('express-rate-limit')
 const path = require('path')
 const fs = require('fs')
 const compression = require('compression')
@@ -12,9 +13,10 @@ app.use(compression())
 
 // security-заголовки. CSP навмисно поблажлива (allow https:) — блокує http/mixed-content,
 // inline-object/embed та base-uri, але не ламає шрифти Google, GTM, мапи, курс НБУ й 3D-в'юер.
+// FIX 6 — removed 'unsafe-eval' from script-src; added frame-ancestors 'self'
 const CSP = [
   "default-src 'self' https: data: blob:",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:",
+  "script-src 'self' 'unsafe-inline' https:",
   "style-src 'self' 'unsafe-inline' https:",
   "img-src 'self' data: blob: https:",
   "font-src 'self' https: data:",
@@ -23,6 +25,7 @@ const CSP = [
   "worker-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",
+  "frame-ancestors 'self'",
 ].join('; ')
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff')
@@ -32,7 +35,20 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(cors({ origin: true, credentials: true }))
+// FIX 5 — CORS allowlist from env CORS_ORIGINS (comma-separated) with sensible defaults
+const corsAllowed = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map(o => o.trim()).filter(Boolean)
+  : [
+      'https://termojet.com.ua',
+      'https://www.termojet.com.ua',
+      'https://app.termojet.com.ua',
+      'http://49.13.154.30:8080',
+      'http://localhost:5173',
+    ]
+app.use(cors({
+  origin: (o, cb) => cb(null, !o || corsAllowed.includes(o)),
+  credentials: true,
+}))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
@@ -70,24 +86,55 @@ app.get(/^\/uploads\/.+\.(glb|step)$/i, (req, res, next) => {
 // static uploads (3D-моделі, документи) — кеш на 7 днів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }))
 
+// FIX 4 — rate limiters
+// NOTE: when a reverse proxy is added later, set app.set('trust proxy', 1)
+//       so req.ip reflects the real client IP (do NOT set it now, no proxy yet).
+
+// Login: max 10 attempts per 15 min
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+// Public write endpoints: max 20 POSTs per minute
+const writeLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => req.method !== 'POST',
+})
+
+// Nova Poshta proxy: max 60 requests per minute
+const npLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
 // API routes
 const { router: authRouter } = require('./routes/auth')
+app.post('/api/auth/login', loginLimiter)
 app.use('/api/auth', authRouter)
 app.use('/api/products', require('./routes/products'))
-app.use('/api/orders', require('./routes/orders'))
-app.use('/api/consultations', require('./routes/consultations'))
-app.use('/api/dealers', require('./routes/dealers'))
+app.use('/api/orders', writeLimiter, require('./routes/orders'))
+app.use('/api/consultations', writeLimiter, require('./routes/consultations'))
+app.use('/api/dealers', writeLimiter, require('./routes/dealers'))
 app.use('/api/blog', require('./routes/blog'))
 app.use('/api/portfolio', require('./routes/portfolio'))
-app.use('/api/reviews', require('./routes/reviews'))
+app.use('/api/reviews', writeLimiter, require('./routes/reviews'))
 app.use('/api/files', require('./routes/files'))
 app.use('/api/settings', require('./routes/settings'))
-app.use('/api/subscribers', require('./routes/subscribers'))
+app.use('/api/subscribers', writeLimiter, require('./routes/subscribers'))
 app.use('/api/faq', require('./routes/faq'))
 app.use('/api/banners', require('./routes/banners'))
 app.use('/api/promos', require('./routes/promos'))
 app.use('/api/clients', require('./routes/clients'))
 app.use('/api/analytics', require('./routes/analytics'))
+app.use('/api/np', npLimiter)
 app.use('/api/upload', require('./routes/upload'))
 
 // serve React build
@@ -111,6 +158,14 @@ app.get('*', (req, res) => {
   }
   res.setHeader('Cache-Control', 'no-cache')
   res.sendFile(path.join(DIST, 'index.html'))
+})
+
+// FIX 7 — global error handler: log server-side, never leak stack traces to client
+// Must be defined after all routes and before app.listen
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(err.status || 500).json({ error: 'Internal error' })
 })
 
 app.listen(PORT, '0.0.0.0', () => {

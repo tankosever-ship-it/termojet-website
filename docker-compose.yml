@@ -10,9 +10,13 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - JWT_SECRET=${JWT_SECRET:-termojet-jwt-secret-change-me}
+      # REQUIRED — must be ≥32 chars (auth.js fails fast otherwise).
+      # Generate once: openssl rand -hex 32  → put in .env (gitignored).
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET is required (>=32 chars)}
       # Telegram lead notifications (shared bot @termojet_ua_bot).
       # Set real values in a .env file next to this compose file (gitignored).
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+      # CORS allowlist override (comma-separated). Defaults in server.js cover the domain + current IP.
+      - CORS_ORIGINS=${CORS_ORIGINS:-}
     restart: unless-stopped

@@ -15,9 +15,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 100 * 1024 * 1024 },
+  // FIX 8 — reduced from 100MB to 25MB; svg removed (stored-XSS risk)
+  limits: { fileSize: 25 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    const ok = /\.(jpg|jpeg|png|webp|gif|svg|pdf|doc|docx|xls|xlsx|ppt|pptx|dwg|zip|mp4|webm|mov|m4v)$/i.test(file.originalname)
+    const ok = /\.(jpg|jpeg|png|webp|gif|pdf|doc|docx|xls|xlsx|ppt|pptx|dwg|zip|mp4|webm|mov|m4v)$/i.test(file.originalname)
     cb(null, ok)
   },
 })

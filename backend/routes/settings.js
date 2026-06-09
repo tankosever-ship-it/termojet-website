@@ -1,4 +1,5 @@
 const express = require('express')
+const bcrypt = require('bcryptjs')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
 
@@ -14,11 +15,16 @@ router.get('/', (req, res) => {
 })
 
 router.put('/', requireAdmin, (req, res) => {
-  const allowed = ['phone', 'email', 'address', 'workHours', 'telegram', 'adminPassword', 'homeContent', 'aboutContent']
+  // FIX 2 — adminPassword is handled separately: hash it, and only if non-empty
+  const allowed = ['phone', 'email', 'address', 'workHours', 'telegram', 'homeContent', 'aboutContent']
   const update = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)')
   const tx = db.transaction(() => {
     for (const key of allowed) {
       if (req.body[key] !== undefined) update.run(key, req.body[key])
+    }
+    // hash new password only when explicitly provided and non-empty
+    if (req.body.adminPassword && typeof req.body.adminPassword === 'string' && req.body.adminPassword.length > 0) {
+      update.run('adminPassword', bcrypt.hashSync(req.body.adminPassword, 12))
     }
   })
   tx()
