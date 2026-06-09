@@ -64,7 +64,7 @@ export default function BlogPostPage() {
 
         {/* Cover image — реальні фото (виставки) заповнюють, фото товарів вписуємо без обрізки */}
         {post.image && (
-          post.image.match(/\/blog\/exh-|\/portfolio\//) ? (
+          post.image.match(/\/images\/(blog|portfolio)\//) ? (
             <img src={post.image} alt={title} className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8" />
           ) : (
             <div className="w-full h-64 md:h-80 rounded-2xl mb-8 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
@@ -131,7 +131,7 @@ export default function BlogPostPage() {
                 return (
                   <Link key={p.id} to={`/blog/${p.slug}`} className="card card-hover block overflow-hidden">
                     {p.image && (
-                      p.image.match(/\/blog\/exh-|\/portfolio\//)
+                      p.image.match(/\/images\/(blog|portfolio)\//)
                         ? <img src={p.image} alt={rTitle} className="w-full h-36 object-cover" />
                         : <div className="w-full h-36 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img src={p.image} alt={rTitle} className="max-h-full max-w-full object-contain p-2" /></div>
                     )}
