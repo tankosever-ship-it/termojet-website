@@ -418,24 +418,24 @@ export const T = {
     },
     deliveryPage: {
       title: 'Delivery & Payment',
-      subtitle: 'We deliver throughout Ukraine and to EU countries. Most items are in stock at our Kyiv warehouse.',
+      subtitle: 'We deliver equipment throughout Ukraine — safely, quickly and with a guarantee.',
       delivery: {
         title: 'Delivery Methods',
         methods: [
-          { title: 'Nova Poshta', desc: 'Delivery throughout Ukraine to branch offices or door-to-door. Timeframe: 1–3 business days.', days: '1–3 days' },
-          { title: 'Pickup from Warehouse', desc: 'Warehouse in Kyiv — Harmatna St. You can pick up your order yourself. Free of charge.', days: 'Today' },
-          { title: 'Freight Delivery', desc: 'For oversized and wholesale orders — freight delivery throughout Ukraine and to EU countries.', days: '3–7 days' },
+          { title: 'Nova Poshta', desc: 'Delivery to a branch or parcel locker throughout Ukraine. Timeframe: 1–3 business days depending on the region. Cost — from UAH 1,000 and above depending on weight and dimensions (carrier rates apply).', days: '1–3 days' },
+          { title: 'Self-Pickup', desc: 'You can collect your order from our warehouse at: Kyiv, Sofiivska Borshchahivka, Kyivska St. 3. Working hours: Mon–Fri 9:00–18:00, Sat 10:00–15:00.', days: 'Today' },
+          { title: 'Own Delivery', desc: 'For Kyiv and surrounding regions we offer delivery by our own transport. Date and time are arranged individually with the manager. Free of charge for orders from UAH 50,000.', days: '1–2 days' },
         ],
       },
       payment: {
         title: 'Payment Methods',
         methods: [
-          { title: 'Bank Transfer', desc: 'Payment by invoice for legal entities and sole proprietors. VAT 20%.' },
-          { title: 'Card Payment', desc: 'Online payment by Visa / Mastercard when placing an order.' },
-          { title: 'Cash on Delivery', desc: 'Payment to the courier or on pickup from the Kyiv warehouse.' },
+          { title: 'Bank Transfer', desc: 'Payment to the company bank account including VAT. For legal entities and sole proprietors we issue a VAT invoice. Dispatch after payment is received.' },
+          { title: 'Prepayment', desc: 'For non-standard configurations or items made to order — 50% prepayment required. The balance is paid before dispatch.' },
+          { title: 'Online Card Payment', desc: 'Payment by Visa / Mastercard via the secure LiqPay payment gateway. Available when placing an order on termojet.com.ua.' },
         ],
       },
-      info: { title: 'Important Information', items: ['No minimum order', 'Large orders — please clarify terms with your manager', 'Dispatch on the day of payment (subject to availability)', 'Returns and exchanges within 14 days if the product is in original condition', 'International delivery to EU countries — upon separate agreement'] },
+      info: { title: 'Important Information', items: ['Orders placed before 14:00 are processed on the same day.', 'All prices are in Ukrainian hryvnias including 20% VAT.', 'When receiving goods, always check the integrity of the packaging in the presence of the courier.', 'If damaged — draw up an act with the carrier and photograph the damage.', 'Delivery abroad is calculated individually — please contact the manager.'] },
     },
     footer: {
       company: 'Boiler Room Equipment Manufacturer',
@@ -636,24 +636,24 @@ export const T = {
     },
     deliveryPage: {
       title: 'Dostawa i płatność',
-      subtitle: 'Dostarczamy na terenie Ukrainy i do krajów UE. Większość pozycji dostępna w magazynie w Kijowie.',
+      subtitle: 'Dostarczamy sprzęt na terenie całej Ukrainy — bezpiecznie, szybko i z gwarancją.',
       delivery: {
-        title: 'Metody dostawy',
+        title: 'Sposoby dostawy',
         methods: [
-          { title: 'Nova Poshta', desc: 'Dostawa na terenie Ukrainy do oddziałów lub kurierem pod drzwi. Czas: 1–3 dni robocze.', days: '1–3 dni' },
-          { title: 'Odbiór z magazynu', desc: 'Magazyn w Kijowie — ul. Garmatna. Możliwość osobistego odbioru. Bezpłatnie.', days: 'Dzisiaj' },
-          { title: 'Dostawa towarowa', desc: 'Dla zamówień wielkogabarytowych i hurtowych — dostawa towarowa na Ukrainie i do krajów UE.', days: '3–7 dni' },
+          { title: 'Nova Poshta', desc: 'Dostawa do oddziału lub paczkomatu na terenie całej Ukrainy. Czas: 1–3 dni robocze w zależności od regionu. Koszt — od 1000 UAH wzwyż w zależności od wagi i gabarytów przesyłki (wg taryf przewoźnika).', days: '1–3 dni' },
+          { title: 'Odbiór własny', desc: 'Możesz odebrać zamówienie osobiście z naszego magazynu pod adresem: Kijów, Sofijiwska Borszczahiwka, ul. Kijowska 3. Godziny pracy: Pn–Pt 9:00–18:00, Sb 10:00–15:00.', days: 'Dzisiaj' },
+          { title: 'Dostawa własnym transportem', desc: 'Dla obwodu kijowskiego i sąsiednich obwodów oferujemy dostawę własnym transportem. Data i godzina ustalane indywidualnie z menedżerem. Bezpłatnie przy zamówieniu od 50 000 UAH.', days: '1–2 dni' },
         ],
       },
       payment: {
-        title: 'Metody płatności',
+        title: 'Sposoby płatności',
         methods: [
-          { title: 'Przelew bankowy', desc: 'Płatność na podstawie faktury dla firm i przedsiębiorców. VAT 20%.' },
-          { title: 'Płatność kartą', desc: 'Płatność online kartą Visa / Mastercard przy składaniu zamówienia.' },
-          { title: 'Gotówka przy odbiorze', desc: 'Płatność kurierowi lub przy odbiorze osobistym z magazynu w Kijowie.' },
+          { title: 'Przelew bankowy', desc: 'Płatność na rachunek bankowy firmy z VAT. Dla osób prawnych i przedsiębiorców wystawiamy fakturę VAT. Wysyłka po zaksięgowaniu środków.' },
+          { title: 'Przedpłata', desc: 'Przy zamówieniu niestandardowych konfiguracji lub pozycji na zamówienie — przedpłata 50%. Pozostała kwota płatna przed wysyłką.' },
+          { title: 'Płatność kartą online', desc: 'Płatność kartą Visa / Mastercard przez bezpieczną bramkę płatniczą LiqPay. Dostępna przy składaniu zamówienia na stronie termojet.com.ua.' },
         ],
       },
-      info: { title: 'Ważne informacje', items: ['Brak minimalnego zamówienia', 'Duże zamówienia — warunki do uzgodnienia z opiekunem', 'Wysyłka w dniu płatności (przy dostępności w magazynie)', 'Zwroty i wymiana w ciągu 14 dni przy zachowaniu oryginalnego stanu', 'Dostawa międzynarodowa do krajów UE — po indywidualnym uzgodnieniu'] },
+      info: { title: 'Ważne informacje', items: ['Zamówienia złożone przed godz. 14:00 są realizowane tego samego dnia.', 'Wszystkie ceny podane są w hrywniach ukraińskich z VAT 20%.', 'Przy odbiorze towaru koniecznie sprawdź integralność opakowania w obecności kuriera.', 'W przypadku uszkodzenia — sporządź protokół z przewoźnikiem i sfotografuj uszkodzenia.', 'Dostawa za granicę jest kalkulowana indywidualnie — skontaktuj się z menedżerem.'] },
     },
     footer: {
       company: 'Producent urządzeń do kotłowni',
