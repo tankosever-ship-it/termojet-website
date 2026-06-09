@@ -36,6 +36,21 @@ app.use(cors({ origin: true, credentials: true }))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
+// 301-редіректи зі старих WP-URL (termojet.com.ua) на нові React-маршрути — для збереження
+// SEO-трафіку при переносі домену. Карта: backend/redirects.json (генерує scripts/gen-redirects.mjs).
+// Мовні префікси /pl /en /de /fr стрипаємо й шукаємо UA-відповідник.
+let REDIRECTS = {}
+try { REDIRECTS = JSON.parse(fs.readFileSync(path.join(__dirname, 'redirects.json'), 'utf8')) } catch {}
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next()
+  let p = req.path.replace(/\/+$/, '') || '/'
+  const lng = p.match(/^\/(pl|en|de|fr)(\/.*|)$/)
+  if (lng) p = lng[2] || '/'
+  const to = REDIRECTS[p]
+  if (to && to !== req.path) return res.redirect(301, to)
+  next()
+})
+
 // Прекомпресовані 3D-моделі: якщо поряд лежить <file>.gz — віддаємо його з
 // Content-Encoding: gzip (нуль CPU на запит, браузер розпакує прозоро в оригінал).
 // Важкі STEP зберігаємо на сервері ЛИШЕ як .gz (економить диск і деплой ~4×).
