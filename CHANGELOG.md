@@ -1,5 +1,27 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-06-10 — Переїзд на домен termojet.com.ua
+
+### Запуск на постійний домен (HTTPS)
+- Сайт переведено зі старого WordPress на новий React-сайт на Hetzner: **https://termojet.com.ua**.
+- **DNS:** в ukrnames (#352670) A-записи `@` і `www` → `49.13.154.30` (було Hvosting `91.225.138.216`).
+- **SSL:** Let's Encrypt на `termojet.com.ua` + `www`. Видача через DNS-01 (домен ще був на старому
+  хостингу) тимчасовим хуком `/root/acme-dns-hook.sh` + TXT `_acme-challenge` в ukrnames. Після
+  переїзду автопродовження переключено на **автоматичне** (nginx/HTTP-01), перевірено `--dry-run` ✅.
+- **nginx** `/etc/nginx/sites-available/termojet`: проксі на `127.0.0.1:8080`, `www→без-www`, `http→https`.
+- Деталі — у `DEPLOY.md` (секція «Домен і HTTPS»).
+
+### 🖼️ Фікс: зникли фото товарів/категорій після переїзду
+- **Причина:** у даних **626 посилань (365 унікальних)** на абсолютні `https://termojet.com.ua/wp-content/uploads/...`.
+  Поки домен був на WP — вантажились; після переїзду на Hetzner (де `wp-content` немає) → 404.
+- **Рішення (без зміни коду/редеплою):**
+  - **Локальне дзеркало:** 364 фото (93 МБ) завантажено в `/var/www/termojet-wp/wp-content/uploads/`
+    зі старого хостингу (`curl --resolve termojet.com.ua:443:91.225.138.216`).
+  - **nginx:** `location /wp-content/ { root /var/www/termojet-wp; try_files $uri @wp_old; }` +
+    fallback-проксі `@wp_old` на старий хостинг для будь-яких непокритих URL.
+  - Перевірено: усі 130 wp-content URL з живої БД покриті дзеркалем. Старий хостинг тепер потрібен
+    лише як страхувальний fallback.
+
 ## Сесія 2026-06-08 / 09
 
 ### 3D-моделі: мультинасосні групи + gzip-роздача
