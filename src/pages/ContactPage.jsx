@@ -138,7 +138,8 @@ export default function ContactPage() {
                       className="uppercase block mb-1.5">
                       ТЕЛЕФОН *
                     </label>
-                    <input {...register('phone', { required: true })} placeholder="+380 XX XXX XX XX" type="tel"
+                    <input {...register('phone', { required: true })} type="tel" inputMode="tel" placeholder="+380 XX XXX XX XX"
+                      onInput={e => { e.target.value = e.target.value.replace(/[^\d\s+\-()]/g, '') }}
                       className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm transition-colors" />
                     {errors.phone && <p className="text-xs text-red-500 mt-1" style={mono}>ВВЕДІТЬ ТЕЛЕФОН</p>}
                   </div>

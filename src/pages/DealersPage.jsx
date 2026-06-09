@@ -121,7 +121,8 @@ export default function DealersPage() {
                       {errors.name && <p className="text-xs text-red-500 mt-1">Обов'язкове поле</p>}
                     </div>
                     <div>
-                      <input {...register('phone', { required: true })} placeholder="Телефон *" type="tel"
+                      <input {...register('phone', { required: true })} type="tel" inputMode="tel" placeholder="+380 XX XXX XX XX"
+                        onInput={e => { e.target.value = e.target.value.replace(/[^\d\s+\-()]/g, '') }}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
                       {errors.phone && <p className="text-xs text-red-500 mt-1">Обов'язкове поле</p>}
                     </div>
