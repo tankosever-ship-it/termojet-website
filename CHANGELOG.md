@@ -31,7 +31,8 @@
 - **CSP** (`server.js`, поблажлива, не ламає шрифти/GTM/мапи/3D) + 404 на службові `.xml/.txt/.json`.
 - **Sitemap** (`scripts/gen-sitemap.mjs`): 339 реальних URL замість 716 старих WP. Skip-link + `id=main`.
 - Результат: Core SEO 60→**92**, Performance 82→**89**, Content 88→**90**, Social →**100**; помилок 6→3 (решта — артефакти прев'ю: HTTPS/sitemap-domain, зникнуть на реальному домені).
-- **Лишилось на момент переносу:** HTTPS, абсолютні URL, 301-редіректи WP→React, sitemap/robots на домені, GA4 (заглушка `G-XXXXXXXXXX`), GSC change of address.
+- **301-редіректи WP→React** (`backend/redirects.json` + middleware у `server.js`, генератор `scripts/gen-redirects.mjs` з `backend/scripts/wp-urls.txt`): **280 правил** — 143 точні редіректи товарів `/product/{slug}` → `/catalog/{cat}/{slug}`, 118 на категорії (зняті з продажу/WP-категорії, без 404), решта — сторінки/блог. Мовні префікси /pl /en /de /fr стрипаються. Не чіпає /api, /uploads, валідні маршрути. Перевірено на проді (301 + Location).
+- **Лишилось на момент переносу:** HTTPS, абсолютні URL, sitemap/robots на домені, GA4 (заглушка `G-XXXXXXXXXX`), GSC change of address. ⚠️ На переносі переконатись, що React/Express обробляє ВСІ маршрути (старий WP/nginx не перехоплює `/product/*` раніше).
 - Встановлено інструмент: скіл **audit-website** + CLI **squirrel**.
 
 ### Сторінка «Про нас» — реальні фото, відео, CMS
