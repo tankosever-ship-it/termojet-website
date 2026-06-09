@@ -207,6 +207,7 @@ export const T = {
           { title: 'Нова Пошта', desc: 'Доставка до відділення або поштомату по всій Україні. Терміни: 1–3 робочих дні залежно від регіону. Вартість — від 1000 грн і вище залежно від ваги та габаритів вантажу (за тарифами перевізника).', days: '1–3 дні' },
           { title: 'Самовивіз', desc: 'Ви можете забрати замовлення самостійно з нашого складу за адресою: Київ, Софіївська Борщагівка, вул. Київська, 3. Графік роботи: Пн–Пт 9:00–18:00, Сб 10:00–15:00.', days: 'Сьогодні' },
           { title: 'Власна доставка', desc: 'Для Київської та суміжних областей пропонуємо доставку власним транспортом. Дата та час узгоджуються з менеджером індивідуально. Безкоштовно при замовленні від 50 000 грн.', days: '1–2 дні' },
+          { title: 'Кур\'єрська доставка по Україні', desc: 'Адресна доставка до вашого дому або офісу по всій Україні. Перевізник: Нова Пошта. Вартість — від 200 грн і вище залежно від ваги та габаритів вантажу (за тарифами перевізника).', days: '3 дні' },
         ],
       },
       payment: {
@@ -425,6 +426,7 @@ export const T = {
           { title: 'Nova Poshta', desc: 'Delivery to a branch or parcel locker throughout Ukraine. Timeframe: 1–3 business days depending on the region. Cost — from UAH 1,000 and above depending on weight and dimensions (carrier rates apply).', days: '1–3 days' },
           { title: 'Self-Pickup', desc: 'You can collect your order from our warehouse at: Kyiv, Sofiivska Borshchahivka, Kyivska St. 3. Working hours: Mon–Fri 9:00–18:00, Sat 10:00–15:00.', days: 'Today' },
           { title: 'Own Delivery', desc: 'For Kyiv and surrounding regions we offer delivery by our own transport. Date and time are arranged individually with the manager. Free of charge for orders from UAH 50,000.', days: '1–2 days' },
+          { title: 'Courier Delivery Across Ukraine', desc: 'Address delivery to your home or office throughout Ukraine. Carrier: Nova Poshta. Cost — from UAH 200 and above depending on weight and dimensions (carrier rates apply).', days: '3 days' },
         ],
       },
       payment: {
@@ -643,6 +645,7 @@ export const T = {
           { title: 'Nova Poshta', desc: 'Dostawa do oddziału lub paczkomatu na terenie całej Ukrainy. Czas: 1–3 dni robocze w zależności od regionu. Koszt — od 1000 UAH wzwyż w zależności od wagi i gabarytów przesyłki (wg taryf przewoźnika).', days: '1–3 dni' },
           { title: 'Odbiór własny', desc: 'Możesz odebrać zamówienie osobiście z naszego magazynu pod adresem: Kijów, Sofijiwska Borszczahiwka, ul. Kijowska 3. Godziny pracy: Pn–Pt 9:00–18:00, Sb 10:00–15:00.', days: 'Dzisiaj' },
           { title: 'Dostawa własnym transportem', desc: 'Dla obwodu kijowskiego i sąsiednich obwodów oferujemy dostawę własnym transportem. Data i godzina ustalane indywidualnie z menedżerem. Bezpłatnie przy zamówieniu od 50 000 UAH.', days: '1–2 dni' },
+          { title: 'Dostawa kurierska na terenie Ukrainy', desc: 'Dostawa pod wskazany adres — do domu lub biura na terenie całej Ukrainy. Przewoźnik: Nova Poshta. Koszt — od 200 UAH wzwyż w zależności od wagi i gabarytów przesyłki (wg taryf przewoźnika).', days: '3 dni' },
         ],
       },
       payment: {

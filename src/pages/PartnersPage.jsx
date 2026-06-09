@@ -121,9 +121,9 @@ function PartnerForm() {
         </div>
         <div>
           <label className="text-xs text-gray-400 mb-1 block">Телефон *</label>
-          <input type="tel" inputMode="tel" value={form.phone} onChange={set('phone')}
-            onInput={e => { e.target.value = e.target.value.replace(/[^\d\s+\-()]/g, '') }}
-            placeholder="+380 XX XXX XX XX"
+          <input type="tel" inputMode="numeric" maxLength={12} value={form.phone} onChange={set('phone')}
+            onInput={e => { e.target.value = e.target.value.replace(/\D/g, '') }}
+            placeholder="0XX XXX XX XX"
             className={`${inp} ${errors.phone ? 'border-red-400' : 'border-gray-200'}`} />
           {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
         </div>

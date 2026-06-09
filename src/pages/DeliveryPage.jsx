@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { Truck, Warehouse, Package, CreditCard, Building2, Banknote, Info, CheckCircle } from 'lucide-react'
+import { Truck, Warehouse, Package, Home, CreditCard, Building2, Banknote, Info, CheckCircle } from 'lucide-react'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
 
-const DELIVERY_ICONS = [Truck, Warehouse, Package]
+const DELIVERY_ICONS = [Truck, Warehouse, Package, Home]
 const PAYMENT_ICONS  = [Building2, CreditCard, Banknote]
 
 const fadeUp  = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
@@ -49,10 +49,10 @@ export default function DeliveryPage() {
 
           <motion.div
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {page.delivery.methods.map((method, i) => {
-              const Icon = DELIVERY_ICONS[i]
+              const Icon = DELIVERY_ICONS[i] || Truck
               return (
                 <motion.div key={i} variants={fadeUp} className="card p-7 flex flex-col gap-4">
                   <div className="flex items-start justify-between">

@@ -25,8 +25,14 @@ function MegaMenu({ lang, products, onClose }) {
 
           {/* ── Left: category list ── */}
           <div className="border-r border-[var(--border)] py-4 pr-2 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)', background: '#0D0D0D' }}>
-            <div className="px-3 mb-4" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
-              Категорії · {CATEGORIES.length}
+            <div className="px-3 mb-4 flex items-center justify-between gap-2">
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
+                Категорії · {CATEGORIES.length}
+              </span>
+              <Link to="/catalog" onClick={onClose}
+                style={{ background: '#FF6B00', color: '#fff', fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', padding: '3px 10px', borderRadius: '0.4rem', whiteSpace: 'nowrap' }}>
+                Перейти
+              </Link>
             </div>
             {CATEGORIES.map((cat, i) => (
               <Link
@@ -229,7 +235,7 @@ export default function Navbar() {
   const clientItems = [
     { to: '/service',  label: 'Сервіс' },
     { to: '/delivery', label: 'Доставка і оплата' },
-    { to: '/returns',  label: 'Повернення' },
+    { to: '/returns',  label: 'Повернення та обмін' },
     { to: '/oem',      label: 'OEM виробництво' },
     { to: '/files',    label: 'Файли' },
   ]

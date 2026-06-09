@@ -44,7 +44,7 @@ export default function PrivacyPage() {
               <li><strong>Юридична адреса:</strong> 08131, Київська область, Бучанський район, с. Софіївська Борщагівка, вул. Київська, буд. 3</li>
               <li><strong>Фактична адреса:</strong> м. Київ, смт Софіївська Борщагівка, вул. Київська, 3, 08131</li>
               <li><strong>Email:</strong> <A href="mailto:termojet@sofievka.kiev.ua">termojet@sofievka.kiev.ua</A></li>
-              <li><strong>Телефон:</strong> +380 (50) 718-91-65</li>
+              <li><strong>Телефон:</strong> +380 (50) 718-91-65, +380 (50) 450-64-24</li>
             </ul>
             <p>Використовуючи Сайт або надаючи нам свої дані через форми Сайту, ви підтверджуєте, що ознайомилися з цією Політикою та погоджуєтеся з її умовами.</p>
           </Section>
@@ -162,7 +162,7 @@ export default function PrivacyPage() {
             <div className="bg-slate-50 rounded-xl p-4 text-sm space-y-1">
               <p><strong>ТОВ «Софіївка Монтаж»</strong></p>
               <p>📧 <A href="mailto:termojet@sofievka.kiev.ua">termojet@sofievka.kiev.ua</A></p>
-              <p>📞 +380 (50) 718-91-65</p>
+              <p>📞 +380 (50) 718-91-65, +380 (50) 450-64-24</p>
               <p>📍 08131, Київська область, Бучанський район, с. Софіївська Борщагівка, вул. Київська, буд. 3</p>
               <p><strong>Відповідальна особа з питань захисту персональних даних:</strong> Куцевич Олександр Володимирович</p>
             </div>

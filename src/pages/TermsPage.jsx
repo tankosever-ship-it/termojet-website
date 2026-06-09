@@ -81,7 +81,7 @@ export default function TermsPage() {
               <li><strong>ТОВ «Софіївка Монтаж»</strong></li>
               <li>Адреса: Київ, Софіївська Борщагівка, вул. Київська, 3</li>
               <li>Email: <a href="mailto:termojet@sofievka.kiev.ua" className="text-orange-500 hover:underline">termojet@sofievka.kiev.ua</a></li>
-              <li>Телефон: <a href="tel:+380507189165" className="text-orange-500 hover:underline">+380 (50) 718-91-65</a></li>
+              <li>Телефон: <a href="tel:+380507189165" className="text-orange-500 hover:underline">+380 (50) 718-91-65</a>, <a href="tel:+380504506424" className="text-orange-500 hover:underline">+380 (50) 450-64-24</a></li>
             </ul>
           </section>
 

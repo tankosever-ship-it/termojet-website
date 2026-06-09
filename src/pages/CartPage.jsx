@@ -115,6 +115,9 @@ export default function CartPage() {
                   {...register('phone', { required: true })}
                   placeholder={cartT.form.phone}
                   type="tel"
+                  inputMode="numeric"
+                  maxLength={12}
+                  onInput={e => { e.target.value = e.target.value.replace(/\D/g, '') }}
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
                 />
                 {errors.phone && <p className="text-xs text-red-500 mt-1">Введіть телефон</p>}
