@@ -89,6 +89,11 @@ app.use(express.static(DIST, {
   },
 }))
 app.get('*', (req, res) => {
+  // Неіснуючі службові файли не маскуємо SPA-заглушкою (інакше /sitemap_index.xml,
+  // robots тощо віддавали б HTML і ламали валідацію). Реальні файли вже віддав express.static.
+  if (/\.(xml|txt|json|map|ico)$/i.test(req.path)) {
+    return res.status(404).type('text/plain').send('Not found')
+  }
   res.setHeader('Cache-Control', 'no-cache')
   res.sendFile(path.join(DIST, 'index.html'))
 })
