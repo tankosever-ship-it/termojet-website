@@ -1,5 +1,5 @@
 import { BrowserRouter, HashRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { AppProvider } from './context/AppContext'
 import { captureUTM } from './utils/utm'
@@ -9,43 +9,44 @@ import FloatingActions from './components/FloatingActions'
 import MobileBottomNav from './components/layout/MobileBottomNav'
 import AdminLayout from './components/admin/AdminLayout'
 
+// HomePage — eager (перша/LCP сторінка), решта — code-split через lazy()
 import HomePage from './pages/HomePage'
-import CatalogPage from './pages/CatalogPage'
-import ProductDetailPage from './pages/ProductDetailPage'
-import CartPage from './pages/CartPage'
-import AboutPage from './pages/AboutPage'
-import ContactPage from './pages/ContactPage'
-import BlogPage from './pages/BlogPage'
-import BlogPostPage from './pages/BlogPostPage'
-import PortfolioPage from './pages/PortfolioPage'
-import ServicePage from './pages/ServicePage'
-import FilesPage from './pages/FilesPage'
-import FaqPage from './pages/FaqPage'
-import DeliveryPage from './pages/DeliveryPage'
-import PrivacyPage from './pages/PrivacyPage'
-import TermsPage from './pages/TermsPage'
-import OEMPage from './pages/OEMPage'
-import ReturnPage from './pages/ReturnPage'
-import PartnersPage from './pages/PartnersPage'
+const CatalogPage = lazy(() => import('./pages/CatalogPage'))
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'))
+const CartPage = lazy(() => import('./pages/CartPage'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const BlogPage = lazy(() => import('./pages/BlogPage'))
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage'))
+const ServicePage = lazy(() => import('./pages/ServicePage'))
+const FilesPage = lazy(() => import('./pages/FilesPage'))
+const FaqPage = lazy(() => import('./pages/FaqPage'))
+const DeliveryPage = lazy(() => import('./pages/DeliveryPage'))
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
+const TermsPage = lazy(() => import('./pages/TermsPage'))
+const OEMPage = lazy(() => import('./pages/OEMPage'))
+const ReturnPage = lazy(() => import('./pages/ReturnPage'))
+const PartnersPage = lazy(() => import('./pages/PartnersPage'))
 
-import AdminLoginPage from './pages/admin/AdminLoginPage'
-import AdminDashboard from './pages/admin/AdminDashboard'
-import AdminProducts from './pages/admin/AdminProducts'
-import AdminOrders from './pages/admin/AdminOrders'
-import AdminConsultations from './pages/admin/AdminConsultations'
-import AdminSettings from './pages/admin/AdminSettings'
-import AdminDealers from './pages/admin/AdminDealers'
-import AdminBlog from './pages/admin/AdminBlog'
-import AdminPortfolio from './pages/admin/AdminPortfolio'
-import AdminFiles from './pages/admin/AdminFiles'
-import AdminReviews from './pages/admin/AdminReviews'
-import AdminFAQ from './pages/admin/AdminFAQ'
-import AdminBanners from './pages/admin/AdminBanners'
-import AdminPromos from './pages/admin/AdminPromos'
-import AdminAnalytics from './pages/admin/AdminAnalytics'
-import AdminContent from './pages/admin/AdminContent'
-import AdminAbout from './pages/admin/AdminAbout'
-import AdminSubscribers from './pages/admin/AdminSubscribers'
+const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
+const AdminProducts = lazy(() => import('./pages/admin/AdminProducts'))
+const AdminOrders = lazy(() => import('./pages/admin/AdminOrders'))
+const AdminConsultations = lazy(() => import('./pages/admin/AdminConsultations'))
+const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'))
+const AdminDealers = lazy(() => import('./pages/admin/AdminDealers'))
+const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'))
+const AdminPortfolio = lazy(() => import('./pages/admin/AdminPortfolio'))
+const AdminFiles = lazy(() => import('./pages/admin/AdminFiles'))
+const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
+const AdminFAQ = lazy(() => import('./pages/admin/AdminFAQ'))
+const AdminBanners = lazy(() => import('./pages/admin/AdminBanners'))
+const AdminPromos = lazy(() => import('./pages/admin/AdminPromos'))
+const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'))
+const AdminContent = lazy(() => import('./pages/admin/AdminContent'))
+const AdminAbout = lazy(() => import('./pages/admin/AdminAbout'))
+const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -60,8 +61,11 @@ const RouterWrapper = isGhPages ? HashRouter : BrowserRouter
 function PublicLayout() {
   return (
     <div className="min-h-screen flex flex-col">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[var(--primary)] focus:text-white focus:px-4 focus:py-2 focus:rounded">
+        Перейти до основного контенту
+      </a>
       <Navbar />
-      <main className="flex-1 pb-16 md:pb-0 pt-[60px]">
+      <main id="main" className="flex-1 pb-16 md:pb-0 pt-[60px]">
         <Outlet />
       </main>
       <Footer />
@@ -71,8 +75,17 @@ function PublicLayout() {
   )
 }
 
+function PageFallback() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+}
+
 function AppRoutes() {
   return (
+    <Suspense fallback={<PageFallback />}>
     <Routes>
       {/* Логін адмінки — без сайдбара і без сайтового chrome */}
       <Route path="/admin" element={<AdminLoginPage />} />
@@ -124,6 +137,7 @@ function AppRoutes() {
         <Route path="/partners" element={<PartnersPage />} />
       </Route>
     </Routes>
+    </Suspense>
   )
 }
 

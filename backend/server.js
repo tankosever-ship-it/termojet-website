@@ -10,11 +10,25 @@ const PORT = process.env.PORT || 3000
 // gzip-стиснення всіх відповідей (−~75% ваги JS/HTML/JSON)
 app.use(compression())
 
-// легкі security-заголовки (без CSP, щоб нічого не зламати)
+// security-заголовки. CSP навмисно поблажлива (allow https:) — блокує http/mixed-content,
+// inline-object/embed та base-uri, але не ламає шрифти Google, GTM, мапи, курс НБУ й 3D-в'юер.
+const CSP = [
+  "default-src 'self' https: data: blob:",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:",
+  "style-src 'self' 'unsafe-inline' https:",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' https: data:",
+  "connect-src 'self' https:",
+  "frame-src 'self' https:",
+  "worker-src 'self' blob:",
+  "object-src 'none'",
+  "base-uri 'self'",
+].join('; ')
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff')
   res.setHeader('X-Frame-Options', 'SAMEORIGIN')
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
+  res.setHeader('Content-Security-Policy', CSP)
   next()
 })
 
