@@ -2,6 +2,38 @@
 
 ## Сесія 2026-06-08 / 09
 
+### 3D-моделі: мультинасосні групи + gzip-роздача
+- Додано **6 моделей** (категорія `termojet-box`): модулі **BOX2, BOX3** і насосні групи **НГ-36/37/38/38А**. Джерело — STEP постачальника (BOX по 113/163 МБ). Прив'язка — `src/data/models3d.js`.
+- Конвертер `backend/scripts/step2glb.py` (cascadio). ⚠️ За замовчуванням **зберігає заводські кольори** STEP; сірими робимо лише прозорі моделі (прапорець `--grey`). BOX спершу помилково знебарвили — повернули (+`?v=2` cache-bust).
+- **gzip-роздача** (`backend/server.js`): middleware віддає прекомпресований `<file>.gz` з `Content-Encoding: gzip` (нуль CPU/запит). Важкі STEP на сервері **лише `.gz`** (−~4× диск/деплой); GLB по мережі менші у 2.5–2.8×. На сервері: `<slug>.glb` + `.glb.gz` + `.step.gz`.
+
+### Розділ «Наші проекти» — 15 реальних об'єктів
+- Замінено 12 стокових на **15 реальних** фото клієнта (`public/images/portfolio/proj-1..15.jpg`, ≤1600px).
+- SEO-описи (ключі + локація), нове поле `links[]` → чіпи «Обладнання об'єкта» в модалці (товари/категорії + tjheatpump.com.ua). Файли: `portfolio.js`, `PortfolioPage.jsx`.
+
+### Блог — продуктоцентрична переробка + перелінковка
+- Переписано всі статті на **реальні товари** (НГ/ГС/К/КГС, насоси APM/APE/APM-F, сепаратори TJV/TJT, BOX, Mega, A-413) замість вигаданих серій (НГТБ/СЕПА-50/«Grundfos-Wilo»). **21 пост** = 4 реальні виставки + 17 статей.
+- **Виставки** (реальні фото стендів `public/images/blog/exh-*`): ISH Франкфурт (перша/featured), Instalacje Познань, **Nowy Targ** (17.05.2026), Targi Budowlane. Старі вигадані — видалено.
+- Перелінковка: інлайн `[текст](url)` + чіпи `links[]`; кілька лінків на tjheatpump.com.ua. Автор — «Інженерний відділ Termojet».
+- Зображення: виставки `object-cover`; статті — фото з категорій/товарів `object-contain` (без обрізки); 4 статті — проектні фото (proj-2/3/6/7).
+- `BlogPostPage.jsx`: парсер markdown-лінків + чіпи. ⚠️ **БД синхронізація:** `blog_posts` перекриває статику через `/api/blog` → регенерувати `backend/seed-blog.json` з blog.js + `backend/scripts/apply-blog.js` у контейнері. Колонки `links` у БД немає → `AppContext.mergeBlogLinks()` підтягує за slug.
+
+### Зонні клапани ABF (виправлення за каталогом)
+- Звірено з Каталогом Termojet 2026, секція «ЗОННИЙ КЛАПАН» (стор. 83-84). Ключ: середні цифри SKU = DN.
+- **47032230** → DN32 (1¼", ABF01-3-114M, Kvs 13); **47025230** → DN25 (1", ABF01-3-100M, Kvs 8), перенесено `zonalne-keruvannya` → `klapany`.
+- Характеристики оновлено (PN10, 120 °C, CW617N, PPS, EPDM, 5 Нм, 8 с/60°, IP44). **Брошура-інструкція** вирізана зі стор. 83-84 → `public/files/zonnyj-klapan-abf-instrukciya.pdf` (files.js #144).
+- `docsMapping`: правило ABF тепер **exclusive** → лише власна брошура (прибрано хибні 18/31/119). Оновлено `products.js` + `seed-products.json` + жива БД (`backend/scripts/apply-klapany.js`).
+
+### SEO-підготовка до переносу на termojet.com.ua
+- Аудит squirrel: сайт — SPA без SSR (краулер бачив порожню оболонку). Код-правки (переносяться на домен):
+- `index.html`: статичні **meta description, OG, Twitter cards, canonical** (termojet.com.ua) + **noscript** (H1/контент/навігація).
+- **Code-split** (`App.jsx` React.lazy + Suspense): бандл **2.1 МБ → чанки <660 КБ**.
+- **CSP** (`server.js`, поблажлива, не ламає шрифти/GTM/мапи/3D) + 404 на службові `.xml/.txt/.json`.
+- **Sitemap** (`scripts/gen-sitemap.mjs`): 339 реальних URL замість 716 старих WP. Skip-link + `id=main`.
+- Результат: Core SEO 60→**92**, Performance 82→**89**, Content 88→**90**, Social →**100**; помилок 6→3 (решта — артефакти прев'ю: HTTPS/sitemap-domain, зникнуть на реальному домені).
+- **Лишилось на момент переносу:** HTTPS, абсолютні URL, 301-редіректи WP→React, sitemap/robots на домені, GA4 (заглушка `G-XXXXXXXXXX`), GSC change of address.
+- Встановлено інструмент: скіл **audit-website** + CLI **squirrel**.
+
 ### Сторінка «Про нас» — реальні фото, відео, CMS
 - **Медіа:** 5 фото верстатів (HEIC→JPG, стиснуто до 1600px) у `public/factory/`; власне відео цеху `IMG_8533.MOV`→`public/about-factory.mp4` (720p, 12.6 МБ, через `avconvert`).
 - **Галерея «Про нас»:** усі **18 знімків з підписами** (5 нових верстатів + 13 старих повернуто). Підписи невідомих визначено переглядом фото. `PhotoGallery` показує підпис на плитці й у лайтбоксі.
