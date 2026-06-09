@@ -263,11 +263,11 @@ export default function ReturnPage() {
             Для оформлення повернення або гарантійного звернення зв'яжіться з нашим відділом сервісу.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
-            <a href="tel:+380507189165" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
-              <Phone size={18} className="text-[var(--accent)]" /> +380 (50) 718 91 65
+            <a href="tel:+380504506424" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+              <Phone size={18} className="text-[var(--accent)]" /> +380 (50) 450-64-24
             </a>
-            <a href="mailto:v.kuchynskii@sofievka.kiev.ua" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
-              <Mail size={18} className="text-[var(--accent)]" /> v.kuchynskii@sofievka.kiev.ua
+            <a href="mailto:termojet@sofievka.kiev.ua" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+              <Mail size={18} className="text-[var(--accent)]" /> termojet@sofievka.kiev.ua
             </a>
             <Link to="/contacts" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
               Написати нам <ArrowRight size={18} className="text-[var(--accent)]" />
