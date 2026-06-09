@@ -786,6 +786,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-8f-240-mm</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-15f-280-mm</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-18f-280-mm</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1611,6 +1626,12 @@
   <url>
     <loc>https://termojet.com.ua/blog/vystavka-nowy-targ</loc>
     <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/blog/konstruktor-kotelni-web-versiya</loc>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
