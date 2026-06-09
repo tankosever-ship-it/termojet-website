@@ -20,7 +20,7 @@ export default function FloatingActions() {
   const tgHref = tg.startsWith('http') ? tg : `https://t.me/${tg.replace(/^@/, '')}`
 
   return (
-    <div className="fixed bottom-6 right-4 z-40 flex flex-col gap-3 md:bottom-8 md:right-6">
+    <div className="fixed right-4 z-40 flex flex-col gap-3 md:right-6 bottom-[calc(64px+env(safe-area-inset-bottom,12px)+16px)] md:bottom-8">
       {/* Telegram — слот під бота (з tjheatpump). Показується коли заданий у налаштуваннях. */}
       {tgHref && (
         <a
