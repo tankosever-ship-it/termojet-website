@@ -366,11 +366,11 @@ export default function Navbar() {
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {langOpen && (
-                  <div className="absolute top-full right-0 mt-0 w-24 z-50 overflow-hidden"
+                  <div className="absolute top-full right-0 mt-0 w-16 z-50 overflow-hidden"
                     style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
                     {LANGS.map(l => (
                       <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false) }}
-                        className="w-full flex items-center gap-2 px-3 py-2.5 transition-colors"
+                        className="w-full flex items-center gap-1.5 px-2.5 py-2 transition-colors"
                         style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', color: lang === l.code ? 'var(--accent)' : 'rgba(255,255,255,0.6)', background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
                         onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,85,0,0.10)'}
                         onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
