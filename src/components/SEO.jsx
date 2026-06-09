@@ -53,7 +53,7 @@ function buildBreadcrumbSchema(breadcrumbs) {
   }
 }
 
-export default function SEO({ title, description, image, canonical, type = 'website', product, breadcrumbs }) {
+export default function SEO({ title, description, image, canonical, type = 'website', product, article, breadcrumbs }) {
   const fullTitle = title ? `${title} | Termojet` : 'Termojet — Виробник обладнання для котелень'
   const desc = description || 'Termojet — провідний виробник насосних груп, колекторів, клапанів і систем для котелень. Власне виробництво в Києві з 2002 року.'
 
@@ -72,6 +72,23 @@ export default function SEO({ title, description, image, canonical, type = 'webs
   const pageUrl = canonical || (typeof window !== 'undefined' ? origin + window.location.pathname : origin)
   const toAbs = (u) => (!u ? u : /^https?:\/\//.test(u) ? u : origin + (u.startsWith('/') ? u : '/' + u))
   const ogImage = toAbs(image || '/about-hero.png')
+
+  // Article schema для статей блогу (E-E-A-T: автор + дата публікації)
+  if (type === 'article' && article) {
+    const isOrg = !article.author || /termojet|команда|відділ/i.test(article.author)
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description: desc,
+      image: [ogImage],
+      author: { '@type': isOrg ? 'Organization' : 'Person', name: article.author || 'Termojet' },
+      publisher: { '@type': 'Organization', name: 'Termojet', logo: { '@type': 'ImageObject', url: 'https://termojet.com.ua/logo-white.png' } },
+      datePublished: article.datePublished,
+      dateModified: article.dateModified || article.datePublished,
+      mainEntityOfPage: pageUrl,
+    })
+  }
 
   return (
     <Helmet>

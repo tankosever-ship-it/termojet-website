@@ -30,7 +30,8 @@ export default function BlogPostPage() {
 
   return (
     <>
-      <SEO title={title} description={excerpt} image={post.image} />
+      <SEO title={title} description={excerpt} image={post.image} type="article"
+        article={{ author: post.author, datePublished: post.publishedAt || post.date }} />
 
       {/* Breadcrumb */}
       <div className="border-b border-gray-100 bg-white">
