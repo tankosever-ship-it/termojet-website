@@ -11,4 +11,8 @@ services:
       - NODE_ENV=production
       - PORT=3000
       - JWT_SECRET=${JWT_SECRET:-termojet-jwt-secret-change-me}
+      # Telegram lead notifications (shared bot @termojet_ua_bot).
+      # Set real values in a .env file next to this compose file (gitignored).
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
     restart: unless-stopped

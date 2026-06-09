@@ -51,6 +51,7 @@ export default function AdminSettings() {
                 ['email', 'Email', 'email'],
                 ['address', 'Адреса', 'text'],
                 ['workHours', 'Графік роботи', 'text'],
+                ['telegram', 'Telegram (посилання на бота)', 'text'],
               ].map(([key, label, type]) => (
                 <div key={key}>
                   <label className="text-xs text-gray-500 block mb-1">{label}</label>

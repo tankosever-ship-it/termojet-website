@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
+const { notifyLead, esc } = require('../telegram')
 
 const router = express.Router()
 
@@ -14,6 +15,15 @@ router.post('/', (req, res) => {
   const result = db.prepare(
     'INSERT INTO consultations (name, phone, email, message, utm) VALUES (?, ?, ?, ?, ?)'
   ).run(name, phone, email, message, JSON.stringify(utm || {}))
+
+  notifyLead(
+    `🔵 <b>Termojet — заявка на консультацію</b>\n` +
+    `👤 ${esc(name)}\n` +
+    `📞 ${esc(phone)}` +
+    (email ? `\n✉️ ${esc(email)}` : '') +
+    (message ? `\n💬 ${esc(message)}` : '')
+  )
+
   res.status(201).json({ id: result.lastInsertRowid })
 })
 

@@ -60,7 +60,8 @@ export function AppProvider({ children }) {
     email: 'termojet@sofievka.kiev.ua',
     address: 'Софіївська Борщагівка, вул. Київська 3',
     workHours: 'Пн-Пт 9:00–18:00',
-    telegram: '',
+    // Спільний бот @termojet_ua_bot; ?start=termojet → менеджер бачить мітку 🔵 Termojet
+    telegram: 'https://t.me/termojet_ua_bot?start=termojet',
   })
 
   useEffect(() => { localStorage.setItem('tj2_lang', lang) }, [lang])

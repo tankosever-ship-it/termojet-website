@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
+const { notifyLead, esc } = require('../telegram')
 
 const router = express.Router()
 
@@ -21,6 +22,21 @@ router.post('/', (req, res) => {
   if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
     try { db.prepare('INSERT OR IGNORE INTO subscribers (email) VALUES (?)').run(mail) } catch {}
   }
+
+  const itemLines = Array.isArray(items)
+    ? items.map(i => `• ${esc(i.name || i.title || 'товар')}${i.qty ? ` × ${i.qty}` : ''}`).join('\n')
+    : ''
+  notifyLead(
+    `🔵 <b>Termojet — нове замовлення</b>\n` +
+    `👤 ${esc(name)}\n` +
+    `📞 ${esc(phone)}` +
+    (email ? `\n✉️ ${esc(email)}` : '') +
+    (address ? `\n🏠 ${esc(address)}` : '') +
+    (payment ? `\n💳 ${esc(payment)}` : '') +
+    (comment ? `\n💬 ${esc(comment)}` : '') +
+    (itemLines ? `\n\n${itemLines}` : '') +
+    `\n\n💰 Сума: <b>${esc(total)}</b> грн`
+  )
 
   res.status(201).json({ id: result.lastInsertRowid })
 })
