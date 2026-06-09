@@ -184,6 +184,41 @@ export const MODELS_BY_SLUG = {
   "nh-37-pryama": [{ file: 'nh-37-pryama.step', name: 'НГ-37.step', size: '28 МБ', glb: '/uploads/3d/nh-37-pryama.glb?v=2' }],
   "nh-38-zi-zmishuvachem": [{ file: 'nh-38-zi-zmishuvachem.step', name: 'НГ-38.step', size: '32 МБ', glb: '/uploads/3d/nh-38-zi-zmishuvachem.glb?v=2' }],
   "84142380a": [{ file: '84142380a.step', name: 'НГ-38А.step', size: '38 МБ', glb: '/uploads/3d/84142380a.glb?v=2' }],
+
+  // ── #7 (2026-06-09): сепаратори — одна 3D-модель на серію (TJVT6G комбіновані поки без 3D) ──
+  // TJV6G повітря: DN20/25 → корпус 3/4"; DN32/40/50 → корпус 1¼"
+  "sep-tjv6g20": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G 3⁄4".step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  "sep-tjv6g25": [{ file: 'sep-tjv6g-g34.step', name: 'TJV6G 3⁄4".step', size: '20 МБ', glb: '/uploads/3d/sep-tjv6g-g34.glb' }],
+  "sep-tjv6g32": [{ file: 'sep-tjv6g-g114.step', name: 'TJV6G 1¼".step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  "sep-tjv6g40": [{ file: 'sep-tjv6g-g114.step', name: 'TJV6G 1¼".step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  "sep-tjv6g50": [{ file: 'sep-tjv6g-g114.step', name: 'TJV6G 1¼".step', size: '40 МБ', glb: '/uploads/3d/sep-tjv6g-g114.glb' }],
+  // TJV7G поворотний повітря
+  "sep-tjv7g20": [{ file: 'sep-tjv7g.step', name: 'TJV7G.step', size: '18 МБ', glb: '/uploads/3d/sep-tjv7g.glb' }],
+  "sep-tjv7g25": [{ file: 'sep-tjv7g.step', name: 'TJV7G.step', size: '18 МБ', glb: '/uploads/3d/sep-tjv7g.glb' }],
+  "sep-tjv7g32": [{ file: 'sep-tjv7g.step', name: 'TJV7G.step', size: '18 МБ', glb: '/uploads/3d/sep-tjv7g.glb' }],
+  "sep-tjv7g40": [{ file: 'sep-tjv7g.step', name: 'TJV7G.step', size: '18 МБ', glb: '/uploads/3d/sep-tjv7g.glb' }],
+  // TJT6G бруд
+  "sep-tjt6g20": [{ file: 'sep-tjt6g.step', name: 'TJT6G.step', size: '24 МБ', glb: '/uploads/3d/sep-tjt6g.glb' }],
+  "sep-tjt6g25": [{ file: 'sep-tjt6g.step', name: 'TJT6G.step', size: '24 МБ', glb: '/uploads/3d/sep-tjt6g.glb' }],
+  "sep-tjt6g32": [{ file: 'sep-tjt6g.step', name: 'TJT6G.step', size: '24 МБ', glb: '/uploads/3d/sep-tjt6g.glb' }],
+  "sep-tjt6g40": [{ file: 'sep-tjt6g.step', name: 'TJT6G.step', size: '24 МБ', glb: '/uploads/3d/sep-tjt6g.glb' }],
+  "sep-tjt6g50": [{ file: 'sep-tjt6g.step', name: 'TJT6G.step', size: '24 МБ', glb: '/uploads/3d/sep-tjt6g.glb' }],
+  // TJT7G бруд поворотний
+  "sep-tjt7g20": [{ file: 'sep-tjt7g.step', name: 'TJT7G.step', size: '44 МБ', glb: '/uploads/3d/sep-tjt7g.glb' }],
+  "sep-tjt7g25": [{ file: 'sep-tjt7g.step', name: 'TJT7G.step', size: '44 МБ', glb: '/uploads/3d/sep-tjt7g.glb' }],
+  "sep-tjt7g32": [{ file: 'sep-tjt7g.step', name: 'TJT7G.step', size: '44 МБ', glb: '/uploads/3d/sep-tjt7g.glb' }],
+  "sep-tjt7g40": [{ file: 'sep-tjt7g.step', name: 'TJT7G.step', size: '44 МБ', glb: '/uploads/3d/sep-tjt7g.glb' }],
+  // TJ4F повітровідвідник
+  "sep-tj4f15-10-110-15": [{ file: 'sep-tj4f.step', name: 'TJ4F.step', size: '5 МБ', glb: '/uploads/3d/sep-tj4f.glb' }],
+  "sep-tj4f20-10-110-20": [{ file: 'sep-tj4f.step', name: 'TJ4F.step', size: '5 МБ', glb: '/uploads/3d/sep-tj4f.glb' }],
+  "sep-tj4f25-10-110-25": [{ file: 'sep-tj4f.step', name: 'TJ4F.step', size: '5 МБ', glb: '/uploads/3d/sep-tj4f.glb' }],
+  // TJ7590 антифризний клапан
+  "sep-tj7590100301": [{ file: 'sep-tj7590.step', name: 'TJ7590.step', size: '12 МБ', glb: '/uploads/3d/sep-tj7590.glb' }],
+  "sep-tj7590100801": [{ file: 'sep-tj7590.step', name: 'TJ7590.step', size: '12 МБ', glb: '/uploads/3d/sep-tj7590.glb' }],
+  // TJ5503 кран розширювального баку
+  "sep-tj5503702401": [{ file: 'sep-tj5503.step', name: 'TJ5503.step', size: '13 МБ', glb: '/uploads/3d/sep-tj5503.glb' }],
+  // TJ7575 сепаратор бруду для теплових насосів (пластиковий)
+  "sep-tj7575055501": [{ file: 'sep-tj7575.step', name: 'TJ7575.step', size: '207 МБ', glb: '/uploads/3d/sep-tj7575.glb' }],
 }
 
 export function getModels3D(slug) {
