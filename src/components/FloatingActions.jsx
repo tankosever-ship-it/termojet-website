@@ -10,11 +10,14 @@ function TelegramIcon({ size = 20 }) {
   )
 }
 
+// Спільний бот @termojet_ua_bot; ?start=termojet → менеджер бачить мітку 🔵 Termojet.
+// Fallback на випадок, якщо в налаштуваннях (БД) telegram порожній.
+const DEFAULT_TG = 'https://t.me/termojet_ua_bot?start=termojet'
+
 export default function FloatingActions() {
   const { siteSettings } = useApp()
-  const tgHref = siteSettings.telegram
-    ? (siteSettings.telegram.startsWith('http') ? siteSettings.telegram : `https://t.me/${siteSettings.telegram.replace(/^@/, '')}`)
-    : null
+  const tg = (siteSettings.telegram || '').trim() || DEFAULT_TG
+  const tgHref = tg.startsWith('http') ? tg : `https://t.me/${tg.replace(/^@/, '')}`
 
   return (
     <div className="fixed bottom-6 right-4 z-40 flex flex-col gap-3 md:bottom-8 md:right-6">
