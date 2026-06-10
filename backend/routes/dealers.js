@@ -2,6 +2,7 @@ const express = require('express')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
 const { notifyLead, esc } = require('../telegram')
+const { notifyCRM, utmString } = require('../crm')
 
 const router = express.Router()
 
@@ -25,6 +26,22 @@ router.post('/', (req, res) => {
     (city ? `\n🏙 ${esc(city)}` : '') +
     (message ? `\n💬 ${esc(message)}` : '')
   )
+
+  // Пересилаємо лід у CRM (звідки прийшов: сайт · форма · UTM-канал)
+  const utmStr = utmString(utm)
+  notifyCRM({
+    type: 'partnership',
+    name,
+    phone,
+    email,
+    source: `termojet.com.ua · Дилер${utm && utm.utm_source ? ` · ${utm.utm_source}` : ''}`,
+    message: [
+      company ? `Компанія: ${company}` : '',
+      city ? `Місто: ${city}` : '',
+      message || '',
+      utmStr ? `UTM: ${utmStr}` : '',
+    ].filter(Boolean).join('\n'),
+  })
 
   res.status(201).json({ id: result.lastInsertRowid })
 })
