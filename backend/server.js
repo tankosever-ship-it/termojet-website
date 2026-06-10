@@ -8,6 +8,11 @@ const compression = require('compression')
 const app = express()
 const PORT = process.env.PORT || 3000
 
+// За nginx reverse-proxy (127.0.0.1:8080). Довіряємо ЛИШЕ loopback-проксі —
+// req.ip бере реальний клієнтський IP з X-Forwarded-For (потрібно для коректного
+// rate-limiting), але зовнішні клієнти не можуть підробити XFF.
+app.set('trust proxy', 'loopback')
+
 // gzip-стиснення всіх відповідей (−~75% ваги JS/HTML/JSON)
 app.use(compression())
 
@@ -89,9 +94,7 @@ app.get(/^\/uploads\/.+\.(glb|step)$/i, (req, res, next) => {
 // static uploads (3D-моделі, документи) — кеш на 7 днів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }))
 
-// FIX 4 — rate limiters
-// NOTE: when a reverse proxy is added later, set app.set('trust proxy', 1)
-//       so req.ip reflects the real client IP (do NOT set it now, no proxy yet).
+// FIX 4 — rate limiters (req.ip = real client IP via trust proxy 'loopback' set above)
 
 // Login: max 10 attempts per 15 min
 const loginLimiter = rateLimit({
