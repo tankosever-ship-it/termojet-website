@@ -643,13 +643,14 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Stats bar — overlay bottom of video */}
-        <div className="absolute bottom-0 left-0 right-0 z-20"
-          style={{ background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(12px)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        {/* Stats bar — overlay bottom of video.
+            Моб: м'який градієнт (без жорсткого боксу, відео просвічує зверху).
+            ПК (md:): суцільний фон + блюр + верхня лінія — як було. */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_32%,rgba(0,0,0,0))] md:bg-none md:bg-[rgba(0,0,0,0.72)] md:backdrop-blur-md md:border-t md:border-white/[0.08]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
               {stats.map((s) => (
-                <div key={s.ord} className="px-6 py-5">
+                <div key={s.ord} className="px-6 pt-[34px] pb-3.5 md:py-5">
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 6 }}>{s.ord}</div>
                   <div className="font-black leading-none font-['Archivo',sans-serif] text-white whitespace-nowrap mb-1"
                     style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)' }}>
