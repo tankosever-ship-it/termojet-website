@@ -11,16 +11,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/portfolio</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://termojet.com.ua/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -33,11 +23,16 @@
   <url>
     <loc>https://termojet.com.ua/service</loc>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/delivery</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/files</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
@@ -46,19 +41,24 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/delivery</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://termojet.com.ua/partners</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/oem</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/portfolio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/returns</loc>
@@ -68,15 +68,20 @@
   <url>
     <loc>https://termojet.com.ua/privacy</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/terms</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -106,11 +111,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/nasosy</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://termojet.com.ua/catalog/klapany</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -121,7 +121,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -146,1595 +146,1994 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/rozprodazh</loc>
+    <loc>https://termojet.com.ua/catalog/separatory</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-46p-z-termokranom-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-46-z-termokranom-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-49p-z-termokranom-1epp</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-49-z-termokranom-1epp</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/nh-46-l-nasosna-hrupa-z-termokranom-25-55-s-1-vr-v-epp-black-teploizolyatsiyi-be</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-47p-bez-zmishuvacha-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-47-bez-zmishuvacha-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/nh-47-nasosna-hrupa-bez-zmishuvacha-1-vr-v-epp-black-teploizolyatsiyi-bez-nasosa</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-47-bez-zmishuvacha-1-epp</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-48p-zi-zmishuvachem-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-48-zi-zmishuvachem-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/84620480a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/84320480a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-48p-zi-zmishuvachem-1epp</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/84622480a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-48-zi-zmishuvachem-1epp</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-51p-bez-zmishuvacha-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-51-bez-zmishuvacha-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-52p-zi-zmishuvachem-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-52-zi-zmishuvachem-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/84612520a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/84312520a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/nasosni-hrupy/38241225</loc>
+    <loc>https://termojet.com.ua/catalog/nasosy/38241225</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/hidravlichni-rozdilnyky/gidrostrilka-gs-25-v-izolyacziyi</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/hidravlichni-rozdilnyky/gidrostrilka-gs-26-v-izolyacziyi</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/hidravlichni-rozdilnyky/gidrostrilka-gs-27-v-izolyacziyi</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/hidravlichni-rozdilnyky/gidrostrilka-gs-28-v-izolyacziyi</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/hidravlichni-rozdilnyky/gidravlichnyj-rozdilyuvach-gs-28</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22n-125-240-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k32v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k32n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k42gd125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k52v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k52n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k62vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k82vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22v-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22n-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k32v-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k32n-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42v-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42n-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k52v-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k52n-125-240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22v-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k22vn-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k32v-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k32n-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42v-150-300</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42n-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42vn-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k52v-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k52n-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k62vn-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k82vn-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k22v-125150-kolektor-v-teploizolyatsiyi-2-1-vhoru-staryy-art-sk-211-125-mini</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k32v-125150-kolektor-v-teploizolyatsiyi-3-1-vhoru-staryy-art-sk-311-125-mini</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k21v-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/84040492</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k31v-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k21v-12580-kolektor-v-teploizolyatsiyi-2-vhoru-staryy-art-sk-291-125-mini</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k31v-12580-kolektor-v-teploizolyatsiyi-2-vhoru-1-vnyz-staryy-art-sk-391-125-mini</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k41v-12580-kolektor-v-teploizolyatsiyi-3-vhoru-1-vnyz-staryy-art-sk-491-125-mini</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/k51v-12580-kolektor-v-teploizolyatsiyi-3-vhoru-2-vnyz-staryy-art-sk-591-125-mini</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kollektor-kgs22v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs22n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs22vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs22v-125150-kolektor-v-teploizolyatsiyi-2-vhoru-1-bokovyy-staryy-art-sk-221-12</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs22n-125150-kolektor-v-teploizolyatsiyi-2-vnyz-1-bokovyy-staryy-art-sk-231-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs22vn-125150-kolektor-v-teploizolyatsiyi-1-vhoru-vnyz-1-bokovyy-staryy-art-sk-</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kollektor-kgs32v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs32n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs31vn-125-kolektor-v-teploizolyatsiyi-2-vhoru-1-vnyz-staryy-art-sk-393-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs32v-125150-kolektor-v-teploizolyatsiyi-3-vhoru-1-bokovyy-staryy-art-sk-321-12</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs32n-125150-kolektor-v-teploizolyatsiyi-3-vnyz-1-bokovyy-staryy-art-sk-331-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs42v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs42n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs42vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/khs42vn-125150-kolektor-v-teploizolyatsiyi-4-1-vhoru-vnyz-staryy-art-sk-281-125-</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kollektor-kgs52v-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs52n-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs62vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-z-hidrostrilkoyu/kolektor-kgs82vn-125-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-box/nh-36-z-termostatychnym-kranom</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-box/nh-37-pryama</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-box/nh-38-zi-zmishuvachem</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-box/84142380a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-box/modul-termojet-box2-v-teploizolyatsiyi-km2-ups</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-box/modul-termojet-box3-v-teploizolyatsiyi-km3-ups</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/gidrostrilka-gs-31</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/gidrostrilka-gs-32</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/gidrostrilka-gs-33</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/gidrostrilka-gs-34</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/ng-61-bez-zmishuvacha-1-1-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/ng-62-zi-zmishuvachem-1-1-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-67150-dlya-pidklyuchennya-bojlera-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosni-hrupy/ng-67200-dlya-pidklyuchennya-bojlera-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/ng-71-bez-zmishuvacha-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/grupa-pompowa-gp-72-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/termojet-mega/ng-81-nasosna-hrupa-bez-zmishuvача-du65-termojet-mega</loc>
+    <loc>https://termojet.com.ua/catalog/termojet-mega/ng-81-nasosna-hrupa-bez-zmishuvacha-du65-termojet-mega</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/nh-82-250-l-nasosna-hrupa-zi-zmishuvachem-2-1-2-vr-v-teploizolyatsiyi-bez-nasosa</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/kolektor-na-2-vyhoda</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/kolektor-hydrauliczny-na-2-obwody-km281</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/kolektor-na-3-vyhoda</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/kolektor-hydrauliczny-na-3-obwody-km381</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-20-60-130-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-ape-25-40-180mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-ape-25-40-130mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-ape-25-60-130mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-ape-25-80-130mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-ape-25-80-180mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-25-8-180-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-25-12-180-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-apm-32-8-180mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-apm-32-10-180mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-auto-apm-32-12-180mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-tsyrkulyatsiynyy-termojet-auto-enerhozberihayuchyy-apm-40-8f-220-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-15f-250-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-18f-250-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-10f-280-mm</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-8f-240-mm</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-15f-280-mm</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-18f-280-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-12f-280-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-10f-340-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-15f-340-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nergozberigayuchi-reczyrkulyaczijni-nasosy-termojet-spe12-1-4s</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/33250618</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/kanalizatsiyna-ustanovka-termojet-wt-400-a</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/kanalizatsiyna-ustanovka-termojet-wt-400-b</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/kanalizatsiyna-ustanovka-termojet-wt-400-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/termostatychnyj-trohhodovyj-zmishuvalnyj-kran-termojet-tmv121-20-43-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/termostatychnyj-trohhodovyj-zmishuvalnyj-kran-termojet-tmv122-35-60-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/termostatychnyj-trohhodovyj-zmishuvalnyj-kran-termojet-tmv131-20-43-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/termostatychnyj-trohhodovyj-zmishuvalnyj-kran-termojet-tmv132-35-60-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/termostatychnyj-trohhodovyj-zmishuvalnyj-kran-termojet-tmv231-20-43-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/termostatychnyj-trohhodovyj-zmishuvalnyj-kran-termojet-tmv232-35-60-c</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-3-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-zovnishnoyu-rizboyu-3-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-zovnishnoyu-rizboyu-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-zovnishnoyu-rizboyu-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-zovnishnoyu-rizboyu-1-1-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/chotyrohhodovyj-zmishuvalnyj-kran-termojet-rmv04110-100-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/chotyrohhodovyj-zmishuvalnyj-kran-termojet-rmv04110-100</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/3-hodovyj-zonalnyj-klapan-1-z-pryvodom-230v-ac-8s-60-5nm-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/elektropryvid-z-trypozyczijnym-upravlinnyam-termojet-401n-230-v-120-sek-siryj</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/silownik-termojet-aqua401-60-sek</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/elektropryvid-termojet-411-24v-ac-dc-02-10v-60s-120s-90-6-nm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/aquao910-3-230-060</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/balansuval-klapany/statychnyi-balansuvalny-klapan-termojet-sbv-dn15</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/balansuval-klapany/statychnyi-balansuvalny-klapan-termojet-sbv-dn20</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/balansuval-klapany/statychnyi-balansuvalny-klapan-termojet-sbv-dn25</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-povitrya-ta-brudu-tj-cad-dn25</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-povitrya-ta-brudu-tj-cad-dn25</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/44032265</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/44032265</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-povitrya-ta-brudu-tj-cad-dn40</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-povitrya-ta-brudu-tj-cad-dn40</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-povitrya-ta-brudu-tj-cad-dn50m</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-povitrya-ta-brudu-tj-cad-dn50m</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/43025155</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/43025155</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/43020145</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/43020145</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-brudu-tj-cd-dn25</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-brudu-tj-cd-dn25</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-brudu-tj-cd-dn32</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-brudu-tj-cd-dn32</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-brudu-tj-cd-dn40</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-brudu-tj-cd-dn40</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/separator-brudu-tj-cd-dn50m</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/separator-brudu-tj-cd-dn50m</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/42020170</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/42020170</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/42025185</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/42025185</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/42032200</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/42032200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/42040240</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/42040240</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/povitryanyj-separator-tj-ca-dn50m</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/povitryanyj-separator-tj-ca-dn50m</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/41015110</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/41015110</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/41020110</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/41020110</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/separatory/41025110</loc>
+    <loc>https://termojet.com.ua/catalog/rozprodazh/41025110</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/920018tj</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ht102wrd</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ht120blk</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ht120wht</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ht130blk</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ht130wht</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/wt102wif</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/wt150blk</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/wt150wht</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ro6wifir</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/ntc10ksn</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/trh10wif</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/egw100wf</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/tj03cwrd</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/zonalne-keruvannya/tj03rfws</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/klapany/abf-zv3-100-3-khodovyy-zonalnyy-klapan-1-z-pryvodom-230v-ac-8s-60-5nm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-02</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-03</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-04</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-05</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-06</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-07</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-08</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-09</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-10</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-11</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-12</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-13</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-14</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-w-15</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-02</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-03</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-04</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-05</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-06</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-07</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-08</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-09</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-10</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-11</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-r-w-12</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-00</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-01</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-02</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-03</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-04</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-05</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-vnutrishnia-termojet-06</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-00</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-01</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-02</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-03</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-04</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-05</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/shafa-kolektorna-zovnishnia-termojet-06</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/bajpas</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/yevrokonus</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/kran-sharovyj-1v-h-1v-z-nakydnoyu-gajkoyu</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/avtomatyka/avtomatyka-termojet-light</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/avtomatyka/avtomatyka-termojet-profi-plus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/avtomatyka/modul-rozshyrennya-termojet-one</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/catalog/avtomatyka/modul-termojet-wi-fi-rs</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/84040tj-ec-202</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/pidstavka-dlya-zovnishnogo-bloku-teplovogo-nasosu-do-150kg</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/pidklccennh-do-gs-31</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/pidklccennh-do-gs-32</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/pidklccennh-do-gs-33</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/pidklccennh-do-gs-34</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-flanceviy-80-80</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-flanceviy-100-100</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-flanceviy-125-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-flanceviy-150-150</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-svarku-40-40</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-svarku-50-50</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-svarku-80-80</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-svarku-100-100</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-svarku-125-125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-svarku-150-150</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-rizsbu-40-40</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-rizsbu-50-50</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-nasosnu-grupu-1</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/perehid-pid-nasosnu-grupu-1-1-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn32</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn40</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn50</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn65</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn80</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn100</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn125</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn150</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/termojet-mega/mufta-termojet-dn200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/titanoviy-anod-ti400-dlh-emalsovanih-boyleriv-g3-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/titanoviy-anod-ti400-dlh-nerjaviccih-boyleriv-g3-4</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/pidlogove-kriplennh-radiatoriv-krn-200</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/pidlogove-kriplennh-radiatoriv-krn-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/pidlogove-kriplennh-radiatoriv-krn-500</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/kriplennh-rozsircvalsnogo-baku-sk-56</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/dodatkove/taker-termojet-dlh-skob-40-60-mm</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/truba-termojet-pe-rt-16-2-6-bar-70-c-500m</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/skoba-do-takera-45-mm-300-st</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/kolektory-pidloha/folsgovana-plivka-z-rozmitkoc</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-12f-250-mm</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-xps-25-6-130</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tj4f15-10-110-15</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tj4f20-10-110-20</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tj4f25-10-110-25</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv6g20</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv6g25</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv6g32</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv6g40</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv6g50</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv7g20</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv7g25</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv7g32</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjv7g40</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjvt6g20</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjvt6g25</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjvt6g32</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjvt6g40</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjvt6g50</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt6g20</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt6g25</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt6g32</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt6g40</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt6g50</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt7g20</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt7g25</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt7g32</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tjt7g40</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/separatory/sep-tj7575055501</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/dodatkove/sep-tj7590100301</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/dodatkove/sep-tj7590100801</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/dodatkove/sep-tj5503702401</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-mega100-120f-450</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-grandlift-20-75sw</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-grandlift-60-75sw</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-grandlift-120-220sw</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-grandlift-150-370dw</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-silencer300</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/nasosy/pump-silencer900</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/avtomatyka/modul-rozshyrennya-termojet-one</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/avtomatyka/modul-termojet-wi-fi-rs</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/kolektor-k42n-150-300</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-tbe-50-24-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-tbe-50-36-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-termojet-tbe-65-34-2</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/blog/vystavka-ish-frankfurt</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-8f-240-mm</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/blog/vystavka-instalacje-poznan</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-15f-280-mm</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://termojet.com.ua/blog/vystavka-targi-budowlane</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/vystavka-nowy-targ</loc>
-    <lastmod>2026-05-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/konstruktor-kotelni-web-versiya</loc>
-    <lastmod>2026-06-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/yak-vybraty-hidravlichnyy-rozdilnyk</loc>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/nasosni-grupy-typy-ta-zastosuvannya</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/kolektory-rozpodilchi-dlya-kotelni</loc>
-    <lastmod>2026-02-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/termojet-novynky-obladnannya</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/separatory-shlamu-ta-povitrya</loc>
-    <lastmod>2026-03-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/gidrostrilka-rozdilnyk-rozpodilnyk-koly-shcho-stavyty</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/yak-pidibraty-nasosnu-grupu-potuzhnist-delta-t</loc>
-    <lastmod>2026-05-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/chomu-separator-podovzhuye-zhyttya-kotla</loc>
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/chomu-dalni-radiatory-kholodni-balansuvannya</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/tepla-pidloga-chy-radiatory-shcho-obraty</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/pogodozalezhna-avtomatyka-skilky-ekonomyt</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/kotelnya-pid-klyuch-modulna-obvyazka</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/cheklist-pered-opalyuvalnym-sezonom</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/opalennya-pid-chas-blekautiv-nezalezhna-kotelnya</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/het-vid-gazu-gibryd-kotel-teplovyy-nasos</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/modulni-kotelni-dlya-vidbudovy-infrastruktury</loc>
-    <lastmod>2026-03-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://termojet.com.ua/blog/ukrayinskyy-vyrobnyk-proty-importu</loc>
-    <lastmod>2026-03-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-50-18f-280-mm</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

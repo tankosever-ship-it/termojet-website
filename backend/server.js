@@ -140,6 +140,9 @@ app.use('/api/upload', require('./routes/upload'))
 // serve React build
 const DIST = path.join(__dirname, '..', 'dist')
 app.use(express.static(DIST, {
+  // НЕ робити 301 на директорію (напр. /files → /files/) — такі шляхи мають віддаватись
+  // SPA-маршрутом React (FilesPage), а не редиректом. Реальні файли віддаються як є.
+  redirect: false,
   setHeaders: (res, filePath) => {
     // хешовані ассети (vite кладе контент-хеш у назву) — кеш на рік, immutable
     if (filePath.includes(`${path.sep}assets${path.sep}`)) {
