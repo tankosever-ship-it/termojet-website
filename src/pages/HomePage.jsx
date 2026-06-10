@@ -648,9 +648,11 @@ export default function HomePage() {
             ПК (md:): суцільний фон + блюр + верхня лінія — як було. */}
         <div className="absolute bottom-0 left-0 right-0 z-20 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_32%,rgba(0,0,0,0))] md:bg-none md:bg-[rgba(0,0,0,0.72)] md:backdrop-blur-md md:border-t md:border-white/[0.08]">
           <div className="max-w-7xl mx-auto px-4">
+            {/* МОБ: у комірках pt зменшено (було pt-[34px]) — блок опущено ~1см, щоб не наїжджав
+                на кнопку «Отримати консультацію». ВІДКАТ: повернути pt-[34px] pb-3.5. ПК (md:) без змін. */}
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
               {stats.map((s) => (
-                <div key={s.ord} className="px-6 pt-[34px] pb-3.5 md:py-5">
+                <div key={s.ord} className="px-6 pt-1.5 pb-3 md:py-5">
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', marginBottom: 6 }}>{s.ord}</div>
                   <div className="font-black leading-none font-['Archivo',sans-serif] text-white whitespace-nowrap mb-1"
                     style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)' }}>
