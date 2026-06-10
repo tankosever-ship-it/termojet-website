@@ -810,6 +810,15 @@ function sepRank(p) {
   return g * 10000 + pr * 1000 + dn
 }
 
+// Порядок категорій для перегляду «всі товари» (без вибраної категорії) —
+// точно як плитки-категорії зверху, тобто порядок масиву CATEGORIES.
+const CAT_ORDER = (() => {
+  const m = {}
+  CATEGORIES.forEach((c, i) => { m[c.slug] = i; if (c.id != null) m[c.id] = i })
+  return m
+})()
+const catRank = p => (p.categorySlug in CAT_ORDER ? CAT_ORDER[p.categorySlug] : 999)
+
 export default function CatalogPage() {
   const { categorySlug } = useParams()
   const [searchParams] = useSearchParams()
@@ -895,6 +904,9 @@ export default function CatalogPage() {
       list = [...list].sort((a, b) => kpRank(a) - kpRank(b))
     if (sort === 'default' && categorySlug === 'separatory')
       list = [...list].sort((a, b) => sepRank(a) - sepRank(b))
+    // «Всі товари» (без вибраної категорії): групуємо за порядком категорій зверху
+    if (sort === 'default' && !categorySlug)
+      list = [...list].sort((a, b) => catRank(a) - catRank(b))
     return list
   }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang, price, priceBounds, eurRate])
 
