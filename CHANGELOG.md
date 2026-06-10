@@ -22,6 +22,48 @@
   - Перевірено: усі 130 wp-content URL з живої БД покриті дзеркалем. Старий хостинг тепер потрібен
     лише як страхувальний fallback.
 
+## Сесія 2026-06-09 / 10 — Telegram-бот, безпека, доробки сайту, підготовка до домену
+
+> Деплой Hetzner: `ssh hetzner` → `/home/tankoseva/termojet-website` → `git pull && docker compose up -d --build`. Прод: http://49.13.154.30:8080 (→ termojet.com.ua).
+> **Стан гілок:** `main` (= робоча гілка `site-updates`, усе нижче задеплоєно) і **`lane-a-checkout`** — НП+LiqPay checkout, НЕ задеплоєний, чекає API-ключів + rebase на main.
+
+### Telegram-бот — спільний бот на 2 сайти (tjheatpump + termojet)
+- Один бот **@termojet_ua_bot**; deep-link `?start=termojet` → менеджер бачить мітку **🔵 Termojet** у спільній групі **Termojet Sales** (`-1003809508040`). Логіка бота — у `tjheatpump/server-php/tg-webhook.php` (масив `$SITES`), termojet власного webhook НЕ має.
+- **Кнопка-чат:** `AppContext` дефолт `telegram = https://t.me/termojet_ua_bot?start=termojet`; `FloatingActions.jsx` падає на `DEFAULT_TG`, якщо `settings.telegram` порожній (у БД було `''` → кнопка ховалась); поле «Telegram» додано в `AdminSettings.jsx`.
+- **Сповіщення про ліди:** `backend/telegram.js` (`notifyLead`, токен+chat_id **лише з env**, бо `GET /api/settings` публічний); підключено в `orders`/`consultations`/`dealers` POST. Env на сервері: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID=-1003809508040`. `docker-compose.yml` + `.env.example`.
+
+### Доробки UI/контенту
+- **Моб. плаваючі кнопки** (`FloatingActions.jsx`): підняті над нижнім меню (`bottom-[calc(64px+env(safe-area-inset-bottom)+16px)]`) — більше не перекриваються bottom-nav.
+- **Навбар** (`Navbar.jsx`): меню вибору мови звужено `w-24→w-16`; додано оранжеву кнопку **«Перейти»** біля «Категорії · N» (→ `/catalog`); пункт меню «Повернення» → **«Повернення та обмін»**.
+- **Доставка** (`DeliveryPage.jsx` + `translations.js` uk/en/pl): додано 4-й спосіб **«Кур'єрська доставка по Україні»** (3 дні, від 200 грн); `DELIVERY_ICONS` +Home, сітка `md:grid-cols-2 lg:grid-cols-4`.
+- **/returns** (`ReturnPage.jsx`): повне переоформлення контенту (умови повернення/обміну, гарантія, кроки, строки, правова основа). Блок контактів — **приглушений темний** (`--bg-dark-2`) замість яскравого `--primary` оранж; контакти: **+380 (50) 450-64-24**, **termojet@sofievka.kiev.ua**, «Написати нам».
+- **Privacy/Terms:** додано номер **+380 (50) 450-64-24**.
+- **Усі форми** (Cart/Dealers/Partners/Contact/Service): телефон — **лише цифри** (`onInput` `\D`-фільтр) + `maxLength 12` + `inputMode numeric`.
+
+### Безпека — аудит + фікс-пас (задеплоєно, коміт `a6166fd`)
+Проведено повний security-аудит (security-reviewer). Знайдено 2 крит/5 вис/6 сер/4 низ. Виправлено й задеплоєно на `main`:
+- **JWT_SECRET** (`auth.js`): прибрано слабкий fallback, **fail-fast** якщо <32 симв; `docker-compose` робить його обов'язковим (`${JWT_SECRET:?}`); TTL `7d→24h`. ⚠️ **На сервері згенеровано 64-hex у `.env`** — без нього контейнер НЕ стартує (важливо при перерозгортанні).
+- **Адмін-пароль:** `bcryptjs`-хеш + **одноразова автоміграція** з plaintext при першому вході; `settings` PUT хешує. (Дефолт `termojet2024` ще в seed — змінити!)
+- **Сума замовлення** (`orders.js`): рахується на сервері з цін товарів у БД (anti-tampering), клієнтський `total` ігнорується.
+- **Rate-limiting** (`express-rate-limit`): login 10/15хв, публічні POST 20/хв, NP 60/хв.
+- **CORS** allowlist (env `CORS_ORIGINS`) замість `origin:true`.
+- **CSP**: прибрано `unsafe-eval`, додано `frame-ancestors 'self'`; глобальний **error-handler** (без стек-трейсів); **upload** без `svg` + ліміт 100→25 МБ; **blog markdown** href-фільтр (блок `javascript:`).
+- Залежності: `npm audit` чистий; секрети в git не потрапляли (перевірено).
+
+### Безпека checkout (гілка `lane-a-checkout`, НЕ задеплоєно, коміт `dfeb6e3`)
+- **LiqPay amount-tampering фікс** (`payments.js`): сума береться **виключно з БД** (`order.total`), перевірка існування замовлення + `payment_status != 'paid'` (replay). Повна гарантія — після rebase на hardened main (де `orders.total` серверний).
+
+### Лишилось на момент переходу на termojet.com.ua (server-ops, відкладено)
+1. DNS A-запис `termojet.com.ua` → `49.13.154.30`.
+2. **TLS reverse-proxy** (Caddy/Nginx + Let's Encrypt), 80→443, **HSTS**.
+3. `app.set('trust proxy', 1)` (для коректного req.ip і LiqPay https-callback) + `SITE_URL=https://termojet.com.ua`.
+4. Фаєрвол: закрити публічний **8080**, лишити 80/443.
+5. **Бекапи** `backend/data/*.db` + `uploads/` (єдине джерело замовлень/лідів).
+6. Змінити дефолтний адмін-пароль; LiqPay `LIQPAY_SANDBOX=1→0` після тесту.
+7. **Влити `lane-a-checkout`** (rebase на main + ключі `NOVAPOSHTA_API_KEY`/`LIQPAY_*`) щоб активувати НП+онлайн-оплату.
+
+> Окремий незавершений напрям: **i18n-ретрофіт** — `translations.js` повний (uk/en/pl), але ~200+ рядків і 14 сторінок захардкоджені UA повз `t()` (план — окремо, на паузі).
+
 ## Сесія 2026-06-08 / 09
 
 ### 3D-моделі: мультинасосні групи + gzip-роздача
