@@ -60,6 +60,9 @@ try { REDIRECTS = JSON.parse(fs.readFileSync(path.join(__dirname, 'redirects.jso
 app.use((req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next()
   let p = req.path.replace(/\/+$/, '') || '/'
+  // Шлях може приходити URL-закодованим (напр. кирилиця %D0%B0…) — розкодовуємо,
+  // щоб збігалося з ключами карти редиректів.
+  try { p = decodeURIComponent(p) } catch {}
   const lng = p.match(/^\/(pl|en|de|fr)(\/.*|)$/)
   if (lng) p = lng[2] || '/'
   const to = REDIRECTS[p]
