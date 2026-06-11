@@ -82,10 +82,12 @@
     border-radius: 0;
   }
   .card-hover { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
-  .card-hover:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
-    border-color: #CCCCCC;
+  @media (hover: hover) and (pointer: fine) {
+    .card-hover:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      border-color: #CCCCCC;
+    }
   }
 
   /* ─── GLASS CARDS (for dark sections) ─── */
@@ -97,10 +99,12 @@
     -webkit-backdrop-filter: blur(16px);
     transition: all 0.3s ease;
   }
-  .glass-card:hover {
-    background: rgba(255,255,255,0.10);
-    border-color: rgba(255,85,0,0.25);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .glass-card:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,85,0,0.25);
+      transform: translateY(-2px);
+    }
   }
 
   .glass {
@@ -288,13 +292,15 @@
     border: 2px solid var(--accent);
     cursor: pointer;
   }
-  .btn-primary:hover {
-    background: var(--accent-dim);
-    border-color: var(--accent-dim);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(255,85,0,0.35);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent-dim);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255,85,0,0.35);
+    }
+    .btn-primary:hover svg:last-child { transform: translateX(3px); }
   }
-  .btn-primary:hover svg:last-child { transform: translateX(3px); }
   .btn-primary svg { transition: transform 0.2s ease; }
   .btn-primary:active { transform: translateY(0); }
 
@@ -316,12 +322,14 @@
     border: 2px solid var(--ink-100);
     cursor: pointer;
   }
-  .btn-secondary:hover {
-    background: var(--ink-100);
-    color: white;
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-secondary:hover {
+      background: var(--ink-100);
+      color: white;
+      transform: translateY(-1px);
+    }
+    .btn-secondary:hover svg:last-child { transform: translateX(3px); }
   }
-  .btn-secondary:hover svg:last-child { transform: translateX(3px); }
   .btn-secondary svg { transition: transform 0.2s ease; }
 
   /* Outline white — for dark sections */
@@ -342,12 +350,14 @@
     border: 2px solid rgba(255,255,255,0.4);
     cursor: pointer;
   }
-  .btn-outline-white:hover {
-    background: rgba(255,255,255,0.10);
-    border-color: white;
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: white;
+      transform: translateY(-1px);
+    }
+    .btn-outline-white:hover svg:last-child { transform: translateX(3px); }
   }
-  .btn-outline-white:hover svg:last-child { transform: translateX(3px); }
   .btn-outline-white svg { transition: transform 0.2s ease; }
 
   /* Ghost */
@@ -368,8 +378,10 @@
     border: none;
     cursor: pointer;
   }
-  .btn-ghost:hover { color: var(--accent); }
-  .btn-ghost:hover svg:last-child { transform: translateX(3px); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover { color: var(--accent); }
+    .btn-ghost:hover svg:last-child { transform: translateX(3px); }
+  }
   .btn-ghost svg { transition: transform 0.2s ease; }
 
   /* ─── CATEGORY CARD ─── */
@@ -381,10 +393,12 @@
     position: relative;
     overflow: hidden;
   }
-  .cat-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent), 0 16px 40px rgba(255,85,0,0.15);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .cat-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 16px 40px rgba(255,85,0,0.15);
+      transform: translateY(-2px);
+    }
   }
 
   /* ─── BACKGROUNDS ─── */
@@ -484,10 +498,12 @@
     transition: all 0.3s ease;
     border-top: 2px solid transparent;
   }
-  .stat-card:hover {
-    background: rgba(255,255,255,0.08);
-    border-top-color: var(--accent);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .stat-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-top-color: var(--accent);
+      transform: translateY(-2px);
+    }
   }
 
   /* Editorial stat row on white — Gemini rule #3 */
@@ -660,9 +676,15 @@
     gap: 8px; text-decoration: none; color: inherit;
     border-left: 2px solid transparent;
   }
-  .mega-cat-item:hover, .mega-cat-item.active {
+  .mega-cat-item.active {
     background: var(--bg-warm);
     border-left-color: var(--accent);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .mega-cat-item:hover {
+      background: var(--bg-warm);
+      border-left-color: var(--accent);
+    }
   }
 
   /* Spec badge */
@@ -698,9 +720,11 @@
     padding: 16px;
     transition: all 0.2s ease;
   }
-  .config-step:hover {
-    background: rgba(255,255,255,0.07);
-    border-left-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .config-step:hover {
+      background: rgba(255,255,255,0.07);
+      border-left-color: var(--accent);
+    }
   }
 
   /* App store button */
@@ -716,10 +740,12 @@
     transition: all 0.2s ease; cursor: pointer;
     backdrop-filter: blur(8px);
   }
-  .btn-app-store:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.4);
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-app-store:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(-1px);
+    }
   }
 
   /* Production photo */
@@ -729,7 +755,9 @@
     background: var(--bg-subtle);
   }
   .prod-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-  .prod-photo:hover img { transform: scale(1.04); }
+  @media (hover: hover) and (pointer: fine) {
+    .prod-photo:hover img { transform: scale(1.04); }
+  }
 
   /* ─── SECTION NUMBER (editorial) ─── */
   .section-num {
