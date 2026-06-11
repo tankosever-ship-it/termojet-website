@@ -419,6 +419,41 @@ export default function ProductDetailPage() {
   // ціна за одиницю в ₴ для schema/SEO (акційна, якщо є — узгоджено з тим, що бачить користувач)
   const priceUAHunit = toUAH(onSale ? product.salePrice : product.price, product.currency, eurRate) || null
 
+  // Блок завантаження 3D (STEP). Рендериться у двох місцях з адаптивною видимістю:
+  // десктоп — у лівій колонці під «Категорією»; мобільний — у правій (порядок не міняється).
+  const models3DBlock = productModels.length > 0 ? (
+    <div className="mb-5 rounded-xl overflow-hidden border border-sky-200 bg-sky-50">
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-sky-600 text-white">
+        <Box size={15} />
+        <span className="text-sm font-bold tracking-wide">3D-модель (STEP)</span>
+      </div>
+      <div className="divide-y divide-sky-100">
+        {productModels.map(m => (
+          <a
+            key={m.file}
+            href={`/uploads/3d/${m.file}`}
+            download={m.name}
+            className="flex items-center gap-3 px-4 py-3 hover:bg-sky-100 transition-colors group"
+          >
+            <span className="flex-shrink-0 w-9 h-9 bg-white rounded-lg shadow-sm flex items-center justify-center border border-sky-200">
+              <Box size={16} className="text-sky-600" />
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-gray-800 leading-tight group-hover:text-sky-700 truncate">
+                {m.name}
+              </p>
+              <p className="text-xs text-sky-600 font-medium mt-0.5">3D-модель · STEP · {m.size}</p>
+            </div>
+            <span className="flex-shrink-0 flex items-center gap-1 bg-white border border-sky-300 text-sky-700 text-xs font-bold px-2.5 py-1.5 rounded-lg group-hover:bg-sky-600 group-hover:text-white transition-colors">
+              <Download size={12} />
+              STEP
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  ) : null
+
   return (
     <>
       <SEO
@@ -540,6 +575,9 @@ export default function ProductDetailPage() {
                 </Link>
               </div>
             )}
+
+            {/* 3D-блок (STEP) — лише десктоп, під «Категорією»; на мобільному він у правій колонці */}
+            {models3DBlock && <div className="hidden lg:block">{models3DBlock}</div>}
           </div>
 
           {/* ── Right column ── */}
@@ -674,39 +712,8 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            {/* 3D models block */}
-            {productModels.length > 0 && (
-              <div className="mb-5 rounded-xl overflow-hidden border border-sky-200 bg-sky-50">
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-sky-600 text-white">
-                  <Box size={15} />
-                  <span className="text-sm font-bold tracking-wide">3D-модель (STEP)</span>
-                </div>
-                <div className="divide-y divide-sky-100">
-                  {productModels.map(m => (
-                    <a
-                      key={m.file}
-                      href={`/uploads/3d/${m.file}`}
-                      download={m.name}
-                      className="flex items-center gap-3 px-4 py-3 hover:bg-sky-100 transition-colors group"
-                    >
-                      <span className="flex-shrink-0 w-9 h-9 bg-white rounded-lg shadow-sm flex items-center justify-center border border-sky-200">
-                        <Box size={16} className="text-sky-600" />
-                      </span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-800 leading-tight group-hover:text-sky-700 truncate">
-                          {m.name}
-                        </p>
-                        <p className="text-xs text-sky-600 font-medium mt-0.5">3D-модель · STEP · {m.size}</p>
-                      </div>
-                      <span className="flex-shrink-0 flex items-center gap-1 bg-white border border-sky-300 text-sky-700 text-xs font-bold px-2.5 py-1.5 rounded-lg group-hover:bg-sky-600 group-hover:text-white transition-colors">
-                        <Download size={12} />
-                        STEP
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* 3D-блок (STEP) — лише мобільний; на десктопі він у лівій колонці під «Категорією» */}
+            {models3DBlock && <div className="lg:hidden">{models3DBlock}</div>}
 
             {/* Qty + Cart */}
             <div className="flex items-center gap-3 mb-3">
