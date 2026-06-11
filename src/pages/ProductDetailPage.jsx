@@ -99,7 +99,10 @@ function ImageGallery({ images, name, model3d }) {
     })
   }, [active])
 
-  const onTouchStart = e => { touchStart.current = e.touches[0].clientX }
+  const onTouchStart = e => {
+    if (current?.type === '3d') return  // на 3D-слайді тач = обертання моделі, а не свайп галереї
+    touchStart.current = e.touches[0].clientX
+  }
   const onTouchEnd = e => {
     if (touchStart.current === null) return
     const dx = e.changedTouches[0].clientX - touchStart.current
@@ -182,7 +185,7 @@ function ImageGallery({ images, name, model3d }) {
 
           {current?.type === '3d' && (
             <span className="absolute top-3 left-3 flex items-center gap-1 bg-sky-600 text-white text-[11px] font-bold px-2 py-1 rounded-full pointer-events-none">
-              <Box size={12} /> 3D · обертайте мишею
+              <Box size={12} /> 3D · обертайте
             </span>
           )}
 
