@@ -827,7 +827,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ delay:0.3 }}
-            className="flex gap-3 mt-8">
+            className="flex flex-wrap gap-3 mt-8">
             <Link to="/about" className="btn-secondary">
               Про виробництво <ArrowRight size={15} />
             </Link>

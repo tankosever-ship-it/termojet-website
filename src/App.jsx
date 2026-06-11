@@ -60,7 +60,7 @@ const RouterWrapper = isGhPages ? HashRouter : BrowserRouter
 // Публічний layout — сайтовий хедер, футер, плаваючі кнопки
 function PublicLayout() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[var(--primary)] focus:text-white focus:px-4 focus:py-2 focus:rounded">
         Перейти до основного контенту
       </a>
