@@ -1,5 +1,28 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-06-11 — Ліди з сайту → Termojet CRM
+
+### 🔗 Пересилання заявок у CRM з трекінгом джерела
+- Форми **Замовлення**, **Консультація**, **Дилер** тепер, окрім запису в БД і Telegram,
+  автоматично пересилають лід у **CRM** (`heat-pump-registration`) —
+  `POST https://crm.tjheatpump.com.ua/api/leads`, **сервер-до-сервера, fire-and-forget**.
+- **Новий файл** `backend/crm.js` — транспорт `notifyCRM` (ENV `CRM_LEADS_URL` / `CRM_LEAD_SECRET`,
+  таймаут 8 с, ніколи не кидає виняток). Викликається в `routes/orders.js|consultations.js|dealers.js`
+  поруч із наявним `notifyLead`.
+- **Видно, звідки лід** — поле `source` у CRM:
+  - `termojet.com.ua · Магазин · <utm_source>` (замовлення, `type=order`)
+  - `termojet.com.ua · Консультація · <utm_source>` (`type=consultation`)
+  - `termojet.com.ua · Дилер · <utm_source>` (`type=partnership`)
+  - у `message` — деталі: склад кошика / місто / компанія / повний UTM.
+  - UTM сайт уже захоплював (`src/utils/utm.js` → sessionStorage → тіло POST).
+- **Чому сервер-до-сервера:** CORS CRM не містить termojet.com.ua (браузерний POST блокувався б);
+  спрацьовує навіть якщо клієнт закрив вкладку; не світить URL CRM у фронті.
+- **Нічого не ламається:** якщо CRM недоступна — заявка зберігається в БД сайту і йде в Telegram.
+- **На кожен лід** CRM авто-створює HIGH-задачу-дзвінок адміну (стандартна поведінка CRM).
+- Підписку на email у CRM **не** шлемо (це не лід).
+- ⚠️ Рейт-ліміт CRM `/api/leads` = 5/хв на IP — усі ліди сайту з одного IP; лишено як є (деталі в `DEPLOY.md`).
+- Перевірено живим тестом сайт→CRM (source відобразився коректно). Коміт `7285961`.
+
 ## Сесія 2026-06-10 — Переїзд на домен termojet.com.ua
 
 ### Запуск на постійний домен (HTTPS)
