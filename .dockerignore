@@ -1,0 +1,34 @@
+# Git / залежності / збірка
+.git
+.gitattributes
+**/node_modules
+dist
+
+# Інструментарій / стан
+.omc
+.claude
+.DS_Store
+.vscode
+
+# Постійні дані (монтуються як volume, не потрібні в образі)
+backend/data
+backend/uploads
+data
+uploads
+
+# Локальні робочі теки
+_materiali
+_zvity
+
+# Докси, прайси, матеріали, скріншоти в корені — не потрібні для збірки
+/*.md
+/*.xlsx
+/*.psd
+/*.zip
+/*.py
+/*.avif
+/*.webp
+/*.jpeg
+/new_design
+/tz_xml_feed.html
+Знімок*.png

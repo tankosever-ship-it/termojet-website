@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /Users/pavelkucevich/CODE/heat-pump-registration 2>/dev/null && echo \\\"✓ у проєкті CRM\\\" || { echo \\\"немає такої теки, шукаю CRM:\\\"; ls /Users/pavelkucevich/CODE/ | grep -iE \\\"crm|heat|...",
+  "error": "Exit code 1\n✓ у проєкті CRM\n\n=== гілка / стан ===\nmain\n M .omc/state/hud-stdin-cache.json\n?? .DS_Store\n?? .omc/state/last-tool-error.json\n?? .omc/state/sessions/e7cd2bab-8bf7-4f07-8d23-e30d03cab18e/\n?? ACCESS.md\n?? client/.omc/state/last-tool-error.json\n?? server/.omc/state/last-tool-error.json\n\n=== останні коміти ===\n1b9ae11 fix: cast to numeric before ROUND in ABC margin_pct (PostgreSQL type error)\n9999568 feat: analytics improvements — ABC fix, dead stock filters, CategoryTree everywhere\ne26c...",
+  "timestamp": "2026-06-04T07:28:57.411Z",
+  "retry_count": 1
+}
