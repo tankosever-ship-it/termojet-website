@@ -824,12 +824,18 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
   const scrollRef = useRef(null)
   const [canLeft, setCanLeft] = useState(false)
   const [canRight, setCanRight] = useState(false)
+  const [bar, setBar] = useState({ scrollable: false, w: 0, x: 0 })
 
   const update = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
+    const max = el.scrollWidth - el.clientWidth
     setCanLeft(el.scrollLeft > 4)
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+    setCanRight(el.scrollLeft < max - 4)
+    // індикатор прокрутки (моб): ширина бігунця = частка видимого, позиція = частка скролу
+    const w = Math.min(100, (el.clientWidth / el.scrollWidth) * 100)
+    const pos = max > 0 ? el.scrollLeft / max : 0
+    setBar({ scrollable: max > 4, w, x: pos * (100 - w) })
   }, [])
 
   useEffect(() => {
@@ -931,6 +937,15 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
             <ChevronRight size={20} />
           </button>
         </>
+      )}
+
+      {/* Індикатор прокрутки — лише мобільний (десктоп має стрілки) */}
+      {bar.scrollable && (
+        <div className="md:hidden mt-1.5 mx-auto h-[3px] rounded-full overflow-hidden"
+          style={{ width: '64px', background: 'var(--ink-200)' }} aria-hidden="true">
+          <div className="h-full rounded-full"
+            style={{ width: `${bar.w}%`, marginLeft: `${bar.x}%`, background: 'var(--accent)', transition: 'margin-left .08s linear' }} />
+        </div>
       )}
     </div>
   )
