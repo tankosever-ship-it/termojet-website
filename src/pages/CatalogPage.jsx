@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Search, ChevronRight, X, ShoppingCart, LayoutGrid, List, ArrowRight } from 'lucide-react'
+import { Search, ChevronRight, ChevronLeft, X, ShoppingCart, LayoutGrid, List, ArrowRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
@@ -819,6 +819,123 @@ const CAT_ORDER = (() => {
 })()
 const catRank = p => (p.categorySlug in CAT_ORDER ? CAT_ORDER[p.categorySlug] : 999)
 
+// ── Смужка плиток-категорій зі стрілками + fade + peek ───────────────────────────
+function CategoryStrip({ products, categories, catCounts, currentCategory, lang }) {
+  const scrollRef = useRef(null)
+  const [canLeft, setCanLeft] = useState(false)
+  const [canRight, setCanRight] = useState(false)
+
+  const update = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setCanLeft(el.scrollLeft > 4)
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+  }, [])
+
+  useEffect(() => {
+    update()
+    const el = scrollRef.current
+    if (!el) return
+    el.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    // повторний замір після завантаження зображень / шрифтів
+    const t = setTimeout(update, 400)
+    return () => { el.removeEventListener('scroll', update); window.removeEventListener('resize', update); clearTimeout(t) }
+  }, [update])
+
+  const scrollByDir = dir => {
+    const el = scrollRef.current
+    if (!el) return
+    // крок = ширина однієї картки + gap (gap-3 = 12px) → гортаємо по одній категорії
+    const firstCard = el.querySelector('a')
+    const step = firstCard ? firstCard.offsetWidth + 12 : 136
+    el.scrollBy({ left: dir * step, behavior: 'smooth' })
+  }
+
+  const arrowBase = 'hidden md:flex absolute top-[74px] -translate-y-1/2 z-20 w-10 h-10 items-center justify-center rounded-full bg-white border border-[var(--ink-200)] shadow-md text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors'
+
+  return (
+    <div className="mb-6 relative">
+      {/* Смужка — сильніший peek через scroll-padding праворуч */}
+      <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-3 cat-strip snap-x"
+        style={{ scrollPaddingLeft: 8, scrollPaddingRight: 56 }}>
+        {/* Плитка "Всі категорії" */}
+        <Link to="/catalog"
+          className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${!currentCategory ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
+          <div className="h-[96px] flex items-center justify-center pt-3">
+            <span className="flex items-center justify-center w-14 h-14 rounded-full"
+              style={{ background: !currentCategory ? 'var(--accent)' : 'rgba(255,107,0,0.1)' }}>
+              <CategoryIcon name="LayoutGrid" size={26}
+                className={!currentCategory ? 'text-white' : 'text-[var(--accent)]'} />
+            </span>
+          </div>
+          <div className="px-2 pb-3 pt-2 text-center">
+            <div className="text-[11.5px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
+              Всі категорії
+            </div>
+            <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
+              {products.length}
+            </div>
+          </div>
+        </Link>
+
+        {categories.map(c => {
+          const isActive = currentCategory?.id === c.id
+          const n = catCounts[c.id] || 0
+          const src = (c.image || '').startsWith('/') ? assetPath(c.image) : c.image
+          return (
+            <Link key={c.id} to={`/catalog/${c.slug}`}
+              className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${isActive ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
+              <div className="h-[96px] flex items-center justify-center p-2 overflow-hidden bg-white">
+                {src ? (
+                  <img src={src} alt={c.name[lang] || c.name.uk} loading="lazy"
+                    className="max-w-full max-h-full object-contain transition-transform group-hover:scale-105"
+                    onError={e => { e.currentTarget.style.display = 'none' }} />
+                ) : (
+                  <CategoryIcon name={c.icon} size={30} className="text-[var(--accent)]" />
+                )}
+              </div>
+              <div className="px-2 pb-3 pt-1.5 text-center">
+                <div className="text-[11.5px] font-semibold leading-tight line-clamp-3 min-h-[42px] flex items-center justify-center"
+                  style={{ color: isActive ? 'var(--accent)' : 'var(--text-primary)' }}>
+                  {c.name[lang] || c.name.uk}
+                </div>
+                <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
+                  {n}
+                </div>
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+
+      {/* Fade ліворуч + стрілка */}
+      {canLeft && (
+        <>
+          <div className="absolute left-0 top-0 bottom-3 w-12 md:w-14 pointer-events-none z-10"
+            style={{ background: 'linear-gradient(90deg, var(--bg) 35%, transparent)' }} />
+          <button type="button" aria-label="Прокрутити ліворуч" onClick={() => scrollByDir(-1)}
+            className={`${arrowBase} left-1`}>
+            <ChevronLeft size={20} />
+          </button>
+        </>
+      )}
+
+      {/* Fade праворуч + стрілка */}
+      {canRight && (
+        <>
+          <div className="absolute right-0 top-0 bottom-3 w-12 md:w-14 pointer-events-none z-10"
+            style={{ background: 'linear-gradient(270deg, var(--bg) 35%, transparent)' }} />
+          <button type="button" aria-label="Прокрутити праворуч" onClick={() => scrollByDir(1)}
+            className={`${arrowBase} right-1`}>
+            <ChevronRight size={20} />
+          </button>
+        </>
+      )}
+    </div>
+  )
+}
+
 export default function CatalogPage() {
   const { categorySlug } = useParams()
   const [searchParams] = useSearchParams()
@@ -968,59 +1085,8 @@ export default function CatalogPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* ── Смужка плиток-категорій (стиль Prom) ── */}
-        <div className="mb-6 -mx-4 px-4">
-          <div className="flex gap-3 overflow-x-auto pb-3 cat-strip snap-x">
-            {/* Плитка "Всі категорії" */}
-            <Link to="/catalog"
-              className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${!currentCategory ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
-              <div className="h-[96px] flex items-center justify-center pt-3">
-                <span className="flex items-center justify-center w-14 h-14 rounded-full"
-                  style={{ background: !currentCategory ? 'var(--accent)' : 'rgba(255,107,0,0.1)' }}>
-                  <CategoryIcon name="LayoutGrid" size={26}
-                    className={!currentCategory ? 'text-white' : 'text-[var(--accent)]'} />
-                </span>
-              </div>
-              <div className="px-2 pb-3 pt-2 text-center">
-                <div className="text-[11.5px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
-                  Всі категорії
-                </div>
-                <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
-                  {products.length}
-                </div>
-              </div>
-            </Link>
-
-            {CATEGORIES.map(c => {
-              const isActive = currentCategory?.id === c.id
-              const n = catCounts[c.id] || 0
-              const src = (c.image || '').startsWith('/') ? assetPath(c.image) : c.image
-              return (
-                <Link key={c.id} to={`/catalog/${c.slug}`}
-                  className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${isActive ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
-                  <div className="h-[96px] flex items-center justify-center p-2 overflow-hidden bg-white">
-                    {src ? (
-                      <img src={src} alt={c.name[lang] || c.name.uk} loading="lazy"
-                        className="max-w-full max-h-full object-contain transition-transform group-hover:scale-105"
-                        onError={e => { e.currentTarget.style.display = 'none' }} />
-                    ) : (
-                      <CategoryIcon name={c.icon} size={30} className="text-[var(--accent)]" />
-                    )}
-                  </div>
-                  <div className="px-2 pb-3 pt-1.5 text-center">
-                    <div className="text-[11.5px] font-semibold leading-tight line-clamp-3 min-h-[42px] flex items-center justify-center"
-                      style={{ color: isActive ? 'var(--accent)' : 'var(--text-primary)' }}>
-                      {c.name[lang] || c.name.uk}
-                    </div>
-                    <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
-                      {n}
-                    </div>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
+        {/* ── Смужка плиток-категорій (стиль Prom) — стрілки + fade + peek ── */}
+        <CategoryStrip products={products} categories={CATEGORIES} catCounts={catCounts} currentCategory={currentCategory} lang={lang} />
 
         {/* ── Основний контент: сайдбар + товари ── */}
         <div className="flex gap-6">
