@@ -19,9 +19,11 @@ app.use(compression())
 // security-заголовки. CSP навмисно поблажлива (allow https:) — блокує http/mixed-content,
 // inline-object/embed та base-uri, але не ламає шрифти Google, GTM, мапи, курс НБУ й 3D-в'юер.
 // FIX 6 — removed 'unsafe-eval' from script-src; added frame-ancestors 'self'
+// 'wasm-unsafe-eval' — дозволяє WebAssembly для 3D-в'юера (model-viewer), але НЕ
+// загальний eval (значно безпечніше за 'unsafe-eval').
 const CSP = [
   "default-src 'self' https: data: blob:",
-  "script-src 'self' 'unsafe-inline' https:",
+  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https:",
   "style-src 'self' 'unsafe-inline' https:",
   "img-src 'self' data: blob: https:",
   "font-src 'self' https: data:",
