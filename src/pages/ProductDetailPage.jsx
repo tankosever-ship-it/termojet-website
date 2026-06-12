@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
   Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
@@ -20,7 +20,16 @@ import { isOnSale } from '../utils/sale'
 
 // Рендер опису: якщо є нумерована комплектація «N – ...» (en-dash) — виводимо її
 // охайним списком з номерами + примітку «Увага!» окремим виноском. Інакше — абзаци.
+// Чистий текст з опису (для мета-тегів) — прибирає HTML-теги
+function plainText(desc) {
+  return (desc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
 function renderDescriptionBody(desc) {
+  // Новий формат — готовий HTML (<p>, <ul>, <a>): рендеримо як є (наш контент)
+  if (/<(p|ul|ol|h[1-6]|a|strong|br)\b/i.test(desc || '')) {
+    return <div className="pdp-desc-html" dangerouslySetInnerHTML={{ __html: desc }} />
+  }
   const text = (desc || '').replace(/\s+/g, ' ').trim()
   const matches = [...text.matchAll(/(\d+)\s–\s/g)]
   if (matches.length < 2) {
@@ -555,7 +564,15 @@ function ImageGallery({ images, name, model3d }) {
 // ── Main component ─────────────────────────────────────────────────────────────
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams()
+  const navigate = useNavigate()
   const { products, lang, addToCart, siteSettings, eurRate } = useApp()
+  // Перехоплення кліків по внутрішніх лінках в описі → SPA-навігація (без перезавантаження)
+  const onDescClick = e => {
+    const a = e.target.closest('a')
+    if (!a) return
+    const href = a.getAttribute('href') || ''
+    if (href.startsWith('/')) { e.preventDefault(); navigate(href) }
+  }
   const t = useT()
   const pt = t('product')
   const cat = t('catalog')
@@ -707,10 +724,10 @@ export default function ProductDetailPage() {
     <>
       <SEO
         title={name}
-        description={desc?.slice(0, 160)}
+        description={plainText(desc).slice(0, 160)}
         type="product"
         image={allImages[0]}
-        product={{ name, description: desc, sku: product.sku, price: priceUAHunit, images: allImages }}
+        product={{ name, description: plainText(desc), sku: product.sku, price: priceUAHunit, images: allImages }}
         breadcrumbs={[
           { name: 'Головна', url: 'https://termojet.com.ua/' },
           { name: 'Каталог', url: 'https://termojet.com.ua/catalog' },
@@ -998,7 +1015,7 @@ export default function ProductDetailPage() {
                 <span className="section-num">03</span>
                 <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>Опис</h2>
               </div>
-              <div>
+              <div onClick={onDescClick}>
                 {renderDescriptionBody(desc)}
               </div>
               {/* Video */}

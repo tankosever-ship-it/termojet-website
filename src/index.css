@@ -799,6 +799,16 @@
     .pdp-desc-grid { grid-template-columns: 1fr 360px; gap: 56px; }
   }
 
+  /* ─── PDP — HTML-опис товару (SEO-описи з перелінковками) ─── */
+  .pdp-desc-html { max-width: 72ch; font-size: 15px; line-height: 1.75; color: var(--text-secondary); }
+  .pdp-desc-html p { margin: 0 0 12px; }
+  .pdp-desc-html h2, .pdp-desc-html h3 { font-family: 'Archivo', system-ui, sans-serif; color: var(--ink-100); font-size: 17px; font-weight: 700; margin: 20px 0 10px; }
+  .pdp-desc-html ul, .pdp-desc-html ol { margin: 10px 0; padding-left: 20px; }
+  .pdp-desc-html li { margin: 5px 0; }
+  .pdp-desc-html strong { color: var(--ink-100); }
+  .pdp-desc-html a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255,85,0,.35); }
+  @media (hover: hover) and (pointer: fine) { .pdp-desc-html a:hover { border-bottom-color: var(--accent); } }
+
   /* ─── PDP Variant A — характеристики: 1 колонка на моб, 2 на десктопі ─── */
   .pdp-specs-grid { display: grid; grid-template-columns: 1fr; }
   @media (min-width: 768px) {
