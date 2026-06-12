@@ -1193,7 +1193,7 @@ export default function CatalogPage() {
                       <Link to={href} className="block w-full h-full">
                         {product.image ? (
                           <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
-                            className="w-full h-full object-contain p-4 group-hover:scale-[1.06] transition-transform duration-500" />
+                            className="pdp-card-photo group-hover:scale-[1.06] transition-transform duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>
                         )}

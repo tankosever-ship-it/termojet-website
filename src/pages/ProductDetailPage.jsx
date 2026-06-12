@@ -982,10 +982,9 @@ export default function ProductDetailPage() {
               </div>
               <div className="pdp-specs-grid">
                 {Object.entries(product.specs).map(([k, v]) => (
-                  <div key={k} style={{ display: 'flex', alignItems: 'baseline', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--ink-200)' }}>
-                    <span style={{ fontSize: 13.5, color: 'var(--text-secondary)', minWidth: 0 }}>{k}</span>
-                    <span style={{ flex: 1, borderBottom: '1px dotted #C9C6BF', position: 'relative', top: -3, minWidth: 16 }} />
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13.5, fontWeight: 700, color: 'var(--ink-100)', flexShrink: 0 }}>{v}</span>
+                  <div key={k} className="pdp-spec-row">
+                    <span className="pdp-spec-k">{k}</span>
+                    <span className="pdp-spec-v">{v}</span>
                   </div>
                 ))}
               </div>

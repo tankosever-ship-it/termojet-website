@@ -804,6 +804,26 @@
   @media (min-width: 768px) {
     .pdp-specs-grid { grid-template-columns: 1fr 1fr; column-gap: 64px; }
   }
+  /* Рядок характеристики: значення переноситься й ніколи не накладається на назву */
+  .pdp-spec-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 6px 16px; flex-wrap: wrap;
+    padding: 12px 0; border-bottom: 1px solid var(--ink-200);
+  }
+  .pdp-spec-k { font-size: 13.5px; color: var(--text-secondary); }
+  .pdp-spec-v {
+    font-family: 'JetBrains Mono', monospace; font-size: 13.5px; font-weight: 700;
+    color: var(--ink-100); margin-left: auto; text-align: right;
+    min-width: 0; overflow-wrap: anywhere; word-break: break-word;
+  }
+
+  /* ─── Фото товару в картці каталогу — повністю видиме, не під панеллю кнопок ─── */
+  .pdp-card-photo { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
+  /* На тач-пристроях панель «Купити/Детальніше» постійно видима внизу фото —
+     лишаємо запас знизу, щоб високі фото не заходили під неї. */
+  @media (hover: none), (pointer: coarse) {
+    .pdp-card-photo { padding-bottom: 56px; }
+  }
 
   /* ─── PDP Variant A — hover rules (pointer-safe) ─── */
   @media (hover: hover) and (pointer: fine) {
