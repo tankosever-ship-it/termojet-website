@@ -1,16 +1,17 @@
 /*
  * apply-seo-descriptions.js — оновлює description товарів НОВИМИ SEO-описами (HTML).
- * Джерело: _zvity/seo-descriptions/apply-data.json = [{slug, description}].
+ * Джерело: backend/scripts/seo-descriptions-data.json = [{slug, description}]
+ * (у backend/, бо саме backend копіюється в Docker-контейнер).
  * Оновлює 3 місця: src/data/products.js (статичний фолбек), backend/seed-products.json,
  * живу БД. Точкова заміна значення description (мінімальний diff). Ідемпотентно.
- *   node backend/scripts/apply-seo-descriptions.js            (локально: products.js + seed)
- *   docker compose exec -T app node backend/scripts/apply-seo-descriptions.js   (на сервері: seed + БД)
+ *   node backend/scripts/apply-seo-descriptions.js            (локально: products.js + seed + лок.БД)
+ *   docker compose exec -T app node backend/scripts/apply-seo-descriptions.js   (на сервері: БД)
  */
 const fs = require('fs')
 const path = require('path')
 
 const ROOT = path.join(__dirname, '..', '..')
-const DATA = path.join(__dirname, '..', '..', '_zvity', 'seo-descriptions', 'apply-data.json')
+const DATA = path.join(__dirname, 'seo-descriptions-data.json')
 const SEED = path.join(__dirname, '..', 'seed-products.json')
 const PRODUCTS_JS = path.join(ROOT, 'src', 'data', 'products.js')
 const DBP = path.join(__dirname, '..', 'data', 'termojet.db')
