@@ -799,6 +799,12 @@
     .pdp-desc-grid { grid-template-columns: 1fr 360px; gap: 56px; }
   }
 
+  /* ─── PDP Variant A — характеристики: 1 колонка на моб, 2 на десктопі ─── */
+  .pdp-specs-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 768px) {
+    .pdp-specs-grid { grid-template-columns: 1fr 1fr; column-gap: 64px; }
+  }
+
   /* ─── PDP Variant A — hover rules (pointer-safe) ─── */
   @media (hover: hover) and (pointer: fine) {
     .pdp-btn-consult:hover {

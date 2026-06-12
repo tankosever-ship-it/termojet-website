@@ -226,6 +226,9 @@ function ImageGallery({ images, name, model3d }) {
   const current = slides[active] || null
   const main = current?.type === 'img' ? current.src : null
 
+  // При зміні товару (новий набір фото) — завжди показувати перше фото
+  useEffect(() => { setActive(0) }, [images])
+
   // Lazy load <model-viewer> — wait for whenDefined before rendering
   useEffect(() => {
     if (!model3d) return
@@ -253,10 +256,21 @@ function ImageGallery({ images, name, model3d }) {
   }, [lightbox, prev, next])
 
   useEffect(() => {
+    // Скролимо ЛИШЕ контейнер мініатюр (не вікно!) — інакше scrollIntoView зсував
+    // усю сторінку: відкривало посередині та їхало вбік при кліку на дальні фото.
     ;[thumbsRef, vThumbsRef].forEach(ref => {
-      if (!ref.current) return
-      const btn = ref.current.children[active]
-      btn?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      const cont = ref.current
+      if (!cont) return
+      const btn = cont.children[active]
+      if (!btn) return
+      const c = cont.getBoundingClientRect()
+      const b = btn.getBoundingClientRect()
+      if (cont.scrollWidth > cont.clientWidth + 1) {
+        cont.scrollBy({ left: (b.left - c.left) - (cont.clientWidth - b.width) / 2, behavior: 'smooth' })
+      }
+      if (cont.scrollHeight > cont.clientHeight + 1) {
+        cont.scrollBy({ top: (b.top - c.top) - (cont.clientHeight - b.height) / 2, behavior: 'smooth' })
+      }
     })
   }, [active])
 
@@ -966,12 +980,12 @@ export default function ProductDetailPage() {
                   <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>Технічні характеристики</h2>
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 64 }}>
+              <div className="pdp-specs-grid">
                 {Object.entries(product.specs).map(([k, v]) => (
                   <div key={k} style={{ display: 'flex', alignItems: 'baseline', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--ink-200)' }}>
-                    <span style={{ fontSize: 13.5, color: 'var(--text-secondary)', flexShrink: 0 }}>{k}</span>
-                    <span style={{ flex: 1, borderBottom: '1px dotted #C9C6BF', position: 'relative', top: -3, minWidth: 24 }} />
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13.5, fontWeight: 700, color: 'var(--ink-100)', whiteSpace: 'nowrap' }}>{v}</span>
+                    <span style={{ fontSize: 13.5, color: 'var(--text-secondary)', minWidth: 0 }}>{k}</span>
+                    <span style={{ flex: 1, borderBottom: '1px dotted #C9C6BF', position: 'relative', top: -3, minWidth: 16 }} />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13.5, fontWeight: 700, color: 'var(--ink-100)', flexShrink: 0 }}>{v}</span>
                   </div>
                 ))}
               </div>
