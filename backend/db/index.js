@@ -24,6 +24,8 @@ function setup() {
       images      TEXT DEFAULT '[]',
       short_desc  TEXT DEFAULT '',
       description TEXT DEFAULT '',
+      seo_title   TEXT DEFAULT '',
+      meta_description TEXT DEFAULT '',
       specs       TEXT DEFAULT '{}',
       features    TEXT DEFAULT '[]',
       in_stock    INTEGER DEFAULT 1,
@@ -204,10 +206,10 @@ function seedProducts() {
   const insert = db.prepare(`
     INSERT OR IGNORE INTO products
       (id, wp_id, name, slug, sku, price, currency, category_slug, subcategory,
-       image, images, short_desc, description, specs, features, in_stock)
+       image, images, short_desc, description, seo_title, meta_description, specs, features, in_stock)
     VALUES
       (@id, @wp_id, @name, @slug, @sku, @price, @currency, @category_slug, @subcategory,
-       @image, @images, @short_desc, @description, @specs, @features, @in_stock)
+       @image, @images, @short_desc, @description, @seo_title, @meta_description, @specs, @features, @in_stock)
   `)
 
   const seedAll = db.transaction((rows) => {
@@ -226,6 +228,8 @@ function seedProducts() {
         images:        JSON.stringify(p.images || []),
         short_desc:    p.shortDesc || '',
         description:   p.description || '',
+        seo_title:     p.seoTitle || '',
+        meta_description: p.metaDescription || '',
         specs:         JSON.stringify(p.specs || {}),
         features:      JSON.stringify(p.features || []),
         in_stock:      p.inStock !== false ? 1 : 0,
@@ -257,6 +261,20 @@ function migrateCurrency() {
   db.prepare("UPDATE products SET currency = 'UAH' WHERE currency IS NULL OR currency = ''").run()
 }
 
+// Міграція: додати колонки seo_title / meta_description у вже засіяну БД + backfill із seed.
+function migrateSeo() {
+  const cols = db.prepare('PRAGMA table_info(products)').all().map(c => c.name)
+  if (!cols.includes('seo_title')) db.exec("ALTER TABLE products ADD COLUMN seo_title TEXT DEFAULT ''")
+  if (!cols.includes('meta_description')) db.exec("ALTER TABLE products ADD COLUMN meta_description TEXT DEFAULT ''")
+  const seedPath = path.join(__dirname, '..', 'seed-products.json')
+  if (fs.existsSync(seedPath)) {
+    const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+    const upd = db.prepare('UPDATE products SET seo_title = ?, meta_description = ? WHERE slug = ? AND (? <> \'\' OR ? <> \'\')')
+    const tx = db.transaction(rows => { for (const p of rows) { const t = p.seoTitle || '', m = p.metaDescription || ''; if (t || m) upd.run(t, m, p.slug, t, m) } })
+    tx(seed)
+  }
+}
+
 // Засіяти статичні пости блогу в порожню БД (щоб ними можна було керувати в адмінці)
 function seedBlog() {
   const count = db.prepare('SELECT COUNT(*) as c FROM blog_posts').get().c
@@ -277,5 +295,6 @@ setup()
 seedProducts()
 seedBlog()
 migrateCurrency()
+migrateSeo()
 
 module.exports = db

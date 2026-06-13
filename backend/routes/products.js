@@ -21,6 +21,8 @@ function parseProduct(row) {
     images:       JSON.parse(row.images || '[]'),
     shortDesc:    row.short_desc,
     description:  row.description,
+    seoTitle:     row.seo_title || '',
+    metaDescription: row.meta_description || '',
     specs:        JSON.parse(row.specs || '{}'),
     features:     JSON.parse(row.features || '[]'),
     inStock:      row.in_stock === 1,

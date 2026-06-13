@@ -723,8 +723,8 @@ export default function ProductDetailPage() {
   return (
     <>
       <SEO
-        title={name}
-        description={plainText(desc).slice(0, 160)}
+        title={product.seoTitle || name}
+        description={product.metaDescription || plainText(desc).slice(0, 160)}
         type="product"
         image={allImages[0]}
         product={{ name, description: plainText(desc), sku: product.sku, price: priceUAHunit, images: allImages }}
