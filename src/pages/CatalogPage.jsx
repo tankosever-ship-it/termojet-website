@@ -1179,7 +1179,7 @@ export default function CatalogPage() {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
               // 2. Strip leading "Опис " prefix from shortDesc
               const rawDesc = product.shortDesc || product.description || ''
-              const shortDesc = rawDesc.replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '')
+              const shortDesc = rawDesc.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               const badges = extractBadges(product)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
@@ -1273,7 +1273,7 @@ export default function CatalogPage() {
             {filtered.map(product => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
               const rawDesc2 = product.shortDesc || product.description || ''
-              const shortDesc = rawDesc2.replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '')
+              const shortDesc = rawDesc2.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               const badges = extractBadges(product)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
