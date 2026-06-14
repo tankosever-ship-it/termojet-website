@@ -827,11 +827,14 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Short description */}
-            {desc && (
-              <p style={{ fontSize: 13.5, lineHeight: 1.65, color: 'var(--text-secondary)', marginBottom: 16 }}>
-                {desc.length > 200 ? desc.slice(0, 200) + '…' : desc}
-              </p>
-            )}
+            {desc && (() => {
+              const intro = plainText(desc)
+              return intro ? (
+                <p style={{ fontSize: 13.5, lineHeight: 1.65, color: 'var(--text-secondary)', marginBottom: 16 }}>
+                  {intro.length > 200 ? intro.slice(0, 200) + '…' : intro}
+                </p>
+              ) : null
+            })()}
 
             {/* Spec chips */}
             {specPills.length > 0 && (
