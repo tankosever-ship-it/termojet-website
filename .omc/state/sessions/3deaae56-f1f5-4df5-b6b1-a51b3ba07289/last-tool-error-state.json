@@ -1,7 +1,7 @@
 {
   "tool_name": "WebFetch",
-  "tool_input_preview": "{\"url\":\"https://product-selection.grundfos.com/products/alpha/alpha2/alpha2-25-60-130-99411150\",\"prompt\":\"Extract all technical specifications: EEI value, operating modes (AutoAdapt, constant pressure...",
+  "tool_input_preview": "{\"url\":\"https://iwarm.decorexpro.com/en/uteplenie/truba-iz-sshitogo-polietilena-rehau-harakteristiki.html\",\"prompt\":\"Extract all technical specifications for RAUTITAN PE-Xa pipe types (stabil, flex, p...",
   "error": "timeout of 60000ms exceeded",
-  "timestamp": "2026-06-13T07:39:33.787Z",
-  "retry_count": 1
+  "timestamp": "2026-06-14T08:04:15.213Z",
+  "retry_count": 5
 }
