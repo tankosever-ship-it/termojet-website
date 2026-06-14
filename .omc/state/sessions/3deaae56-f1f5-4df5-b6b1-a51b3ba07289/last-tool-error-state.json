@@ -1,7 +1,7 @@
 {
-  "tool_name": "WebFetch",
-  "tool_input_preview": "{\"url\":\"https://iwarm.decorexpro.com/en/uteplenie/truba-iz-sshitogo-polietilena-rehau-harakteristiki.html\",\"prompt\":\"Extract all technical specifications for RAUTITAN PE-Xa pipe types (stabil, flex, p...",
-  "error": "timeout of 60000ms exceeded",
-  "timestamp": "2026-06-14T08:04:15.213Z",
-  "retry_count": 5
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"/Users/pavelkucevich/CODE/termojet/website/public/files/wt102-instrukcia.pdf\",\"pages\":\"1-5\"}",
+  "error": "pdftoppm is not installed. Install poppler-utils (e.g. `brew install poppler` or `apt-get install poppler-utils`) to enable PDF page rendering.",
+  "timestamp": "2026-06-14T11:25:11.363Z",
+  "retry_count": 4
 }
