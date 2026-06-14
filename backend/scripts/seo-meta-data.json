@@ -1528,5 +1528,25 @@
     "slug": "ntc10ksn",
     "seoTitle": "Датчик температури підлоги NTC10K — Termojet NTC10KSN",
     "metaDescription": "Виносний датчик підлоги Termojet NTC10K (3950), кабель 2 м, для терморегуляторів HT-120 та HT-130. Точний контроль температури теплої підлоги."
+  },
+  {
+    "slug": "avtomatyka-termojet-light",
+    "seoTitle": "Автоматика котельні Termojet LIGHT — 2 контури + ГВП",
+    "metaDescription": "Контролер Termojet LIGHT: 2 змішувальних контури + ГВП, OpenTherm 4.0, погодозалежне керування, 4.3\" LCD, шина RS, 230В. Розширення ONE та Wi-Fi RS. Ціна"
+  },
+  {
+    "slug": "avtomatyka-termojet-profi-plus",
+    "seoTitle": "Termojet PROFI PLUS — автоматика 3 контури + сонячні",
+    "metaDescription": "Контролер Termojet PROFI PLUS: 3 змішувальних контури + ГВП + сонячні колектори, OpenTherm 4.0, PWM-насос, 4.3\" LCD, шина RS, 230В. Розширення ONE і Wi-Fi RS."
+  },
+  {
+    "slug": "modul-rozshyrennya-termojet-one",
+    "seoTitle": "Termojet ONE — модуль розширення для LIGHT і PROFI PLUS",
+    "metaDescription": "Termojet ONE — модуль розширення для Termojet LIGHT і PROFI PLUS. Додає один змішувальний контур (3- або 4-ходовий клапан + насос) по шині RS. 4 датчики у"
+  },
+  {
+    "slug": "modul-termojet-wi-fi-rs",
+    "seoTitle": "Termojet Wi-Fi RS — дистанційне керування котельнею",
+    "metaDescription": "Termojet Wi-Fi RS: дистанційне керування опаленням через мобільний застосунок. Wi-Fi 2.4GHz (802.11 b/g/n), підключення кабелем RS до LIGHT або PROFI PLUS"
   }
 ]
