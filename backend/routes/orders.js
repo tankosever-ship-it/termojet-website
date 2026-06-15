@@ -12,7 +12,9 @@ router.get('/', requireAdmin, (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { items, name, phone, email, address, comment, payment, utm } = req.body
+  const { items, name, phone, email, address, comment, payment, utm,
+    np_city, np_city_ref, np_warehouse, np_warehouse_ref } = req.body
+  const npLine = [np_city, np_warehouse].filter(Boolean).join(', ')
 
   // FIX 3 — recompute total server-side; never trust client-supplied price/total
   const getProduct = db.prepare('SELECT price FROM products WHERE id = ?')
@@ -28,9 +30,10 @@ router.post('/', (req, res) => {
   }
 
   const result = db.prepare(`
-    INSERT INTO orders (items, total, name, phone, email, address, comment, payment, utm)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(JSON.stringify(items), serverTotal, name, phone, email, address, comment, payment || '', JSON.stringify(utm || {}))
+    INSERT INTO orders (items, total, name, phone, email, address, comment, payment, utm, np_city, np_city_ref, np_warehouse, np_warehouse_ref)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(JSON.stringify(items), serverTotal, name, phone, email, address, comment, payment || '', JSON.stringify(utm || {}),
+    np_city || '', np_city_ref || '', np_warehouse || '', np_warehouse_ref || '')
 
   // Email із замовлення зберігаємо також у підписників (дедуп за UNIQUE)
   const mail = (email || '').trim().toLowerCase()
@@ -46,6 +49,7 @@ router.post('/', (req, res) => {
     `👤 ${esc(name)}\n` +
     `📞 ${esc(phone)}` +
     (email ? `\n✉️ ${esc(email)}` : '') +
+    (npLine ? `\n🏤 Нова Пошта: ${esc(npLine)}` : '') +
     (address ? `\n🏠 ${esc(address)}` : '') +
     (payment ? `\n💳 ${esc(payment)}` : '') +
     (comment ? `\n💬 ${esc(comment)}` : '') +
@@ -66,6 +70,7 @@ router.post('/', (req, res) => {
     source: `termojet.com.ua · Магазин${utm && utm.utm_source ? ` · ${utm.utm_source}` : ''}`,
     message: [
       plainItems,
+      npLine ? `Нова Пошта: ${npLine}` : '',
       address ? `Адреса: ${address}` : '',
       payment ? `Оплата: ${payment}` : '',
       comment ? `Коментар: ${comment}` : '',

@@ -142,7 +142,7 @@ app.use('/api/banners', require('./routes/banners'))
 app.use('/api/promos', require('./routes/promos'))
 app.use('/api/clients', require('./routes/clients'))
 app.use('/api/analytics', require('./routes/analytics'))
-app.use('/api/np', npLimiter)
+app.use('/api/np', npLimiter, require('./routes/novaposhta'))
 app.use('/api/upload', require('./routes/upload'))
 
 // serve React build

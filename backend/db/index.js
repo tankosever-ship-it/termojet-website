@@ -184,6 +184,11 @@ function setup() {
   try { db.exec(`ALTER TABLE products ADD COLUMN sale_price REAL DEFAULT 0`) } catch (e) { /* існує */ }
   // Спосіб оплати замовлення
   try { db.exec(`ALTER TABLE orders ADD COLUMN payment TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  // Нова Пошта (Етап 1): місто + відділення
+  try { db.exec(`ALTER TABLE orders ADD COLUMN np_city TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE orders ADD COLUMN np_city_ref TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE orders ADD COLUMN np_warehouse TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE orders ADD COLUMN np_warehouse_ref TEXT DEFAULT ''`) } catch (e) { /* існує */ }
   // Оновити стару адресу-заглушку на реальну (Київ)
   db.prepare(`UPDATE settings SET value=? WHERE key='address' AND value='м. Київ, вул. Виробнича, 1'`)
     .run('Софіївська Борщагівка, вул. Київська 3')

@@ -93,6 +93,9 @@ export default function AdminOrders() {
                     {/* Оплата · Адреса · Коментар */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-600">
                       <p><strong className="text-gray-500 font-medium">Оплата:</strong> {order.payment || '—'}</p>
+                      {(order.np_city || order.np_warehouse) && (
+                        <p><strong className="text-gray-500 font-medium">Нова Пошта:</strong> {[order.np_city, order.np_warehouse].filter(Boolean).join(', ')}</p>
+                      )}
                       <p><strong className="text-gray-500 font-medium">Адреса:</strong> {order.address || '—'}</p>
                       {order.comment && <p className="sm:col-span-2"><strong className="text-gray-500 font-medium">Коментар:</strong> {order.comment}</p>}
                     </div>

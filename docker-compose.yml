@@ -19,4 +19,7 @@ services:
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
       # CORS allowlist override (comma-separated). Defaults in server.js cover the domain + current IP.
       - CORS_ORIGINS=${CORS_ORIGINS:-}
+      # Nova Poshta API key (кабінет НП → Налаштування → Безпека → Ключі API).
+      # Без нього /api/np віддає 503 і вибір міста/відділення в кошику не працює.
+      - NOVA_POSHTA_API_KEY=${NOVA_POSHTA_API_KEY:-}
     restart: unless-stopped

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
@@ -17,10 +17,66 @@ export default function CartPage() {
   const [success, setSuccess] = useState(false)
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
 
+  // ── Нова Пошта (Етап 1): місто + відділення ───────────────────────────
+  const NP_API = '/api/np'
+  const [cityQuery, setCityQuery] = useState('')
+  const [citySug, setCitySug] = useState([])
+  const [cityOpen, setCityOpen] = useState(false)
+  const [npCity, setNpCity] = useState(null)            // { ref, label }
+  const [warehouses, setWarehouses] = useState([])
+  const [npWarehouse, setNpWarehouse] = useState(null)  // { ref, label }
+  const [npError, setNpError] = useState('')
+  const [npAvailable, setNpAvailable] = useState(true)  // якщо ключ НП не заданий — фолбек на поле адреси
+
+  // Одноразова перевірка, чи НП налаштована на бекенді (503 = ключа немає)
+  useEffect(() => {
+    fetch(`${NP_API}/cities?q=ки`)
+      .then(r => { if (r.status === 503) setNpAvailable(false) })
+      .catch(() => setNpAvailable(false))
+  }, [])
+
+  // Дебаунс-пошук міста
+  useEffect(() => {
+    if (npCity && cityQuery === npCity.label) return
+    const q = cityQuery.trim()
+    const id = setTimeout(async () => {
+      if (q.length < 2) { setCitySug([]); return }
+      try {
+        const r = await fetch(`${NP_API}/cities?q=${encodeURIComponent(q)}`)
+        setCitySug(r.ok ? await r.json() : [])
+      } catch { setCitySug([]) }
+    }, 300)
+    return () => clearTimeout(id)
+  }, [cityQuery, npCity])
+
+  async function pickCity(c) {
+    setNpCity(c); setCityQuery(c.label); setCityOpen(false); setCitySug([])
+    setNpWarehouse(null); setWarehouses([])
+    try {
+      const r = await fetch(`${NP_API}/warehouses?cityRef=${encodeURIComponent(c.ref)}`)
+      if (r.ok) setWarehouses(await r.json())
+    } catch { /* ignore */ }
+  }
+
   async function onSubmit(data) {
-    await placeOrder(data)
+    if (npAvailable && (!npCity || !npWarehouse)) {
+      setNpError('Оберіть місто та відділення Нової Пошти')
+      return
+    }
+    setNpError('')
+    const npFields = (npAvailable && npCity && npWarehouse)
+      ? {
+          np_city: npCity.label,
+          np_city_ref: npCity.ref,
+          np_warehouse: npWarehouse.label,
+          np_warehouse_ref: npWarehouse.ref,
+          address: `${npCity.label}, ${npWarehouse.label}`,
+        }
+      : {}
+    await placeOrder({ ...data, ...npFields })
     setSuccess(true)
     reset()
+    setNpCity(null); setNpWarehouse(null); setCityQuery(''); setWarehouses([])
   }
 
   if (success) {
@@ -128,11 +184,51 @@ export default function CartPage() {
                 type="email"
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
               />
-              <input
-                {...register('address')}
-                placeholder={cartT.form.address}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
-              />
+              {/* Доставка — Нова Пошта (фолбек на поле адреси, якщо НП не налаштована) */}
+              {npAvailable ? (
+              <div className="space-y-2">
+                <label className="text-xs text-gray-500 block">Доставка — Нова Пошта</label>
+                <div className="relative">
+                  <input
+                    value={cityQuery}
+                    onChange={e => { setCityQuery(e.target.value); setNpCity(null); setCityOpen(true) }}
+                    onFocus={() => setCityOpen(true)}
+                    onBlur={() => setTimeout(() => setCityOpen(false), 150)}
+                    placeholder="Місто"
+                    autoComplete="off"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
+                  />
+                  {cityOpen && citySug.length > 0 && (
+                    <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-56 overflow-auto">
+                      {citySug.map(c => (
+                        <li key={c.ref}>
+                          <button type="button" onClick={() => pickCity(c)}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50">
+                            {c.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <select
+                  value={npWarehouse?.ref || ''}
+                  onChange={e => setNpWarehouse(warehouses.find(x => x.ref === e.target.value) || null)}
+                  disabled={!npCity || warehouses.length === 0}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm bg-white disabled:bg-gray-50 disabled:text-gray-400"
+                >
+                  <option value="">{npCity ? 'Оберіть відділення' : 'Спершу оберіть місто'}</option>
+                  {warehouses.map(w => <option key={w.ref} value={w.ref}>{w.label}</option>)}
+                </select>
+                {npError && <p className="text-xs text-red-500">{npError}</p>}
+              </div>
+              ) : (
+                <input
+                  {...register('address')}
+                  placeholder={cartT.form.address}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
+                />
+              )}
               <textarea
                 {...register('comment')}
                 placeholder={cartT.form.comment}
