@@ -1,6 +1,21 @@
 // Прив'язка 3D-моделей (STEP+GLB) до товарів за slug. Файли — на сервері в /uploads/3d/.
 // Згенеровано з «Маппінг 3D-моделей.xlsx». Важкі STEP/GLB не в git (том /uploads).
 export const MODELS_BY_SLUG = {
+  // Колектори з нерж. сталі з витратомірами TJ-W-02..15 — спільна представницька модель серії (2026-06-15)
+  "84040tj-w-02": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-02.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-03": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-03.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-04": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-04.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-05": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-05.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-06": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-06.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-07": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-07.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-08": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-08.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-09": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-09.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-10": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-10.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-11": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-11.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-12": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-12.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-13": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-13.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-14": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-14.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  "84040tj-w-15": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-15.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
   "3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1": [{ file: '3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1.step', name: 'RMV03100-100.step', size: '7 МБ', glb: '/uploads/3d/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1.glb' }],
   "3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-2": [{ file: '3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-2.step', name: 'RMV03100-112.step', size: '7 МБ', glb: '/uploads/3d/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-2.glb' }],
   "3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-4": [{ file: '3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-4.step', name: 'RMV03100-114.step', size: '6 МБ', glb: '/uploads/3d/3-h-hodovyj-klapan-z-vnutrishnoyu-rizboyu-1-1-4.glb' }],
