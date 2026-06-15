@@ -234,6 +234,7 @@ export default function Navbar() {
   ]
   const clientItems = [
     { to: '/service',  label: 'Сервіс' },
+    { to: '/navchannya', label: 'Навчання' },
     { to: '/delivery', label: 'Доставка і оплата' },
     { to: '/returns',  label: 'Повернення та обмін' },
     { to: '/oem',      label: 'OEM виробництво' },
@@ -305,7 +306,7 @@ export default function Navbar() {
               <div className="relative" ref={clientRef}>
                 <button onClick={() => { setClientOpen(v => !v); setCatalogOpen(false); setAboutOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                  style={{ ...navLinkStyle, color: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/service','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  style={{ ...navLinkStyle, color: ['/service','/navchannya','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/service','/navchannya','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   Для клієнта
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: clientOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>

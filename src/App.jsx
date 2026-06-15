@@ -6,6 +6,7 @@ import { captureUTM } from './utils/utm'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import FloatingActions from './components/FloatingActions'
+import TrainingPopup from './components/TrainingPopup'
 import MobileBottomNav from './components/layout/MobileBottomNav'
 import AdminLayout from './components/admin/AdminLayout'
 
@@ -28,6 +29,7 @@ const TermsPage = lazy(() => import('./pages/TermsPage'))
 const OEMPage = lazy(() => import('./pages/OEMPage'))
 const ReturnPage = lazy(() => import('./pages/ReturnPage'))
 const PartnersPage = lazy(() => import('./pages/PartnersPage'))
+const TrainingPage = lazy(() => import('./pages/TrainingPage'))
 
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
@@ -71,6 +73,7 @@ function PublicLayout() {
       <Footer />
       <FloatingActions />
       <MobileBottomNav />
+      <TrainingPopup />
     </div>
   )
 }
@@ -135,6 +138,8 @@ function AppRoutes() {
         <Route path="/support" element={<Navigate to="/service" replace />} />
         <Route path="/returns" element={<ReturnPage />} />
         <Route path="/partners" element={<PartnersPage />} />
+        <Route path="/navchannya" element={<TrainingPage />} />
+        <Route path="/training" element={<Navigate to="/navchannya" replace />} />
       </Route>
     </Routes>
     </Suspense>
