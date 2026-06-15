@@ -4,6 +4,7 @@ import { X, GraduationCap, ArrowUpRight, Check } from 'lucide-react'
 
 const STORAGE_KEY = 'termojet_training_popup_seen'
 const REG_URL = 'https://crm.tjheatpump.com.ua/r/724d25775589ca0abf99f80a21143e4a'
+const BG_IMAGE = 'https://tjheatpump.com.ua/catalog-images/suntide-large/1.jpg'
 const DELAY_MS = 9000
 
 const PERKS = [
@@ -54,13 +55,19 @@ export default function TrainingPopup() {
       aria-modal="true"
       aria-label="Навчання з теплових насосів"
     >
-      <div className="relative w-full max-w-md bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative w-full max-w-md bg-white shadow-2xl overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${BG_IMAGE})` }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Напівпрозорий шар поверх фото — щоб текст лишався читабельним */}
+        <div className="absolute inset-0 bg-white/88" aria-hidden="true" />
         <button onClick={close} aria-label="Закрити"
-          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
+          className="absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors">
           <X size={18} />
         </button>
 
-        <div className="p-6 md:p-8">
+        <div className="relative z-10 p-6 md:p-8">
           <div className="w-11 h-11 bg-[var(--accent)]/10 flex items-center justify-center mb-4">
             <GraduationCap size={22} className="text-[var(--accent)]" />
           </div>
