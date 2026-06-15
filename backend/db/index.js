@@ -275,6 +275,29 @@ function migrateSeo() {
   }
 }
 
+// Міграція: привести specs.Артикул до значення sku (sku — джерело істини).
+// Ідемпотентно, виконується щостарту й самовиправляється; інших полів specs не чіпає.
+function migrateSpecsArticle() {
+  const rows = db.prepare('SELECT id, sku, specs FROM products').all()
+  const upd = db.prepare('UPDATE products SET specs = ? WHERE id = ?')
+  let fixed = 0
+  const tx = db.transaction(list => {
+    for (const r of list) {
+      if (!r.sku || !r.specs) continue
+      let specs
+      try { specs = JSON.parse(r.specs) } catch { continue }
+      if (!specs || typeof specs !== 'object') continue
+      if (specs['Артикул'] !== undefined && specs['Артикул'] !== r.sku) {
+        specs['Артикул'] = r.sku
+        upd.run(JSON.stringify(specs), r.id)
+        fixed++
+      }
+    }
+  })
+  tx(rows)
+  if (fixed) console.log(`Synced specs.Артикул = sku for ${fixed} products`)
+}
+
 // Засіяти статичні пости блогу в порожню БД (щоб ними можна було керувати в адмінці)
 function seedBlog() {
   const count = db.prepare('SELECT COUNT(*) as c FROM blog_posts').get().c
@@ -296,5 +319,6 @@ seedProducts()
 seedBlog()
 migrateCurrency()
 migrateSeo()
+migrateSpecsArticle()
 
 module.exports = db
