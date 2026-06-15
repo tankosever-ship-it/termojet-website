@@ -16,6 +16,10 @@ export default function TrainingPopup() {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    // Force-open via ?seminar — shareable direct link, bypasses delay + seen-flag.
+    try {
+      if (new URLSearchParams(window.location.search).has('seminar')) { setOpen(true); return }
+    } catch { /* ignore */ }
     try {
       if (localStorage.getItem(STORAGE_KEY)) return
     } catch { /* ignore */ }
