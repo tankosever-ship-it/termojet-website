@@ -62,7 +62,7 @@ export default function TrainingPopup() {
           </div>
           <h3 className="text-xl font-black text-gray-900 mb-1.5 leading-tight">Безкоштовні семінари з теплових насосів</h3>
           <p className="text-gray-500 text-sm mb-5 leading-relaxed">
-            Проводимо навчання для монтажників, проєктувальників і власників. Приєднуйтесь до наступного семінару.
+            Проводимо навчання в офісі компанії Termojet у Києві — для монтажників, проєктувальників і власників. Приєднуйтесь до наступного семінару.
           </p>
 
           <ul className="space-y-2.5 mb-6">
