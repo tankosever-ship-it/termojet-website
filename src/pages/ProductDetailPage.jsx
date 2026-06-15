@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
   Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
-  Truck, CreditCard, ShieldCheck, Factory, Banknote,
+  Truck, CreditCard, ShieldCheck, Factory,
   FileDown, Box, RotateCcw
 } from 'lucide-react'
 import { useApp } from '../context/AppContext'
@@ -196,7 +196,6 @@ function accordionContent(key) {
         body: (
           <ul style={{ listStyle: 'none', display: 'grid', gap: 13 }}>
             {[
-              [<Banknote size={17} />, 'Готівка при отриманні', 'Оплата кур\'єру або у відділенні при самовивозі.'],
               [<CreditCard size={17} />, 'Онлайн-оплата картою', 'Visa / Mastercard через захищений платіж.'],
               [<span style={{ fontWeight: 800 }}>₴</span>, 'Безготівковий розрахунок з ПДВ', 'Для юридичних осіб — рахунок-фактура з ПДВ.'],
               [<span style={{ fontWeight: 800 }}>₴</span>, 'Безготівковий розрахунок без ПДВ', 'Спрощена система — рахунок без ПДВ.'],

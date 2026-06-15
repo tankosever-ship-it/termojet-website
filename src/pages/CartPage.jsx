@@ -143,10 +143,9 @@ export default function CartPage() {
                 <label className="text-xs text-gray-500 block mb-1">Спосіб оплати</label>
                 <select
                   {...register('payment')}
-                  defaultValue="Готівка при отриманні"
+                  defaultValue="Безготівковий розрахунок (рахунок)"
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm bg-white"
                 >
-                  <option>Готівка при отриманні</option>
                   <option>Безготівковий розрахунок (рахунок)</option>
                   <option>Оплата карткою</option>
                 </select>
