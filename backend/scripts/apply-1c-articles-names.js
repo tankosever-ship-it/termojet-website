@@ -78,6 +78,18 @@ const CHANGES = {
   },
   "new_33250618": {
     "sku": "cable1000"
+  },
+  "pump_grandlift-20-75sw": {
+    "sku": "GL2075"
+  },
+  "pump_grandlift-60-75sw": {
+    "sku": "GL6075"
+  },
+  "pump_grandlift-120-220sw": {
+    "sku": "GL120220"
+  },
+  "pump_grandlift-150-370dw": {
+    "sku": "GL150370"
   }
 }
 const upd = db.prepare('UPDATE products SET name = COALESCE(@name, name), sku = COALESCE(@sku, sku) WHERE id = @id')
