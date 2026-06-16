@@ -90,6 +90,54 @@ const CHANGES = {
   },
   "pump_grandlift-150-370dw": {
     "sku": "GL150370"
+  },
+  "new_termojet_wifi_rs": {
+    "sku": "90184270"
+  },
+  "new_termojet_one": {
+    "sku": "90185860"
+  },
+  "pump_mega100-120f-450": {
+    "sku": "3310012045"
+  },
+  "new_pidlogove-kriplennh-radiatoriv-krn-200": {
+    "sku": "КРН200V"
+  },
+  "new_pidlogove-kriplennh-radiatoriv-krn-300": {
+    "sku": "КРН300V"
+  },
+  "new_pidlogove-kriplennh-radiatoriv-krn-500": {
+    "sku": "КРН500V"
+  },
+  "new_21500168": {
+    "name": "Титановий активний анод Termojet з блоком живлення для емал. бойлерів TI 400 G3/4\""
+  },
+  "new_21500169": {
+    "name": "Титановий активний анод Termojet з блоком живлення для нерж. бойлерів TI 400 G3/4\""
+  },
+  "wp_19331": {
+    "name": "TJ-CA-DN50M Сепаратор повітря DN50 (2'') 110*C/10bar Termojet"
+  },
+  "wp_19342": {
+    "name": "TJ-CD-DN25 Сепаратор бруду DN25 (1'') 110*C/10bar Termojet"
+  },
+  "wp_19343": {
+    "name": "TJ-CD-DN32 Сепаратор бруду DN32 (1 1/4'') 110*C/10bar Termojet"
+  },
+  "wp_19344": {
+    "name": "Сепаратор бруду DN40 (1 1/2'') 110*C/10bar Termojet"
+  },
+  "wp_19345": {
+    "name": "TJ-CD-DN50M Сепаратор бруду DN50 (2'') 110*C/10bar Termojet"
+  },
+  "wp_19356": {
+    "name": "TJ-CAD-DN25 Сепаратор повітря і бруду DN25 (1'') 110*C/10bar Termojet"
+  },
+  "wp_19358": {
+    "name": "Сепаратор повітря і бруду TJ-CAD- DN40 (1 1/2'') 110*C/10bar Termojet"
+  },
+  "wp_19359": {
+    "name": "Сепаратор повітря і бруду DN50 (2'') 110*C/10bar Termojet"
   }
 }
 const upd = db.prepare('UPDATE products SET name = COALESCE(@name, name), sku = COALESCE(@sku, sku) WHERE id = @id')
