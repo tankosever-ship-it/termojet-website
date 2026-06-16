@@ -2981,7 +2981,7 @@ export const PRODUCTS = [
     "id": "new_84030810",
     "name": "НГ-81 Насосна група без змішувача ДУ65 в теплоізоляції Termojet Mega",
     "slug": "ng-81-nasosna-hrupa-bez-zmishuvacha-du65-termojet-mega",
-    "sku": "84030810",
+    "sku": "84030081",
     "price": "",
     "currency": "UAH",
     "categorySlug": "termojet-mega",
@@ -3935,7 +3935,7 @@ export const PRODUCTS = [
     "wpId": null,
     "name": "Кабель живлення з вилкою до насосів APE",
     "slug": "33250618",
-    "sku": "33250618",
+    "sku": "cable1000",
     "price": "3.5",
     "price_uah": "",
     "categorySlug": "nasosy",
@@ -7087,7 +7087,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050103",
-    "name": "Підключення до ГС-31",
+    "name": "Комплект підключення гідрострілки до колектора  КПГ.80/150 (ГС-31)",
     "slug": "pidklccennh-do-gs-31",
     "sku": "84050103",
     "price": "12450",
@@ -7107,7 +7107,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050104",
-    "name": "Підключення до ГС-32",
+    "name": "Комплект підключення  гідрострілки до колектора КПГ.100/150 (ГС-32)",
     "slug": "pidklccennh-do-gs-32",
     "sku": "84050104",
     "price": "13710",
@@ -7127,7 +7127,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050105",
-    "name": "Підключення до ГС-33",
+    "name": "Комплект підключення гідрострілки до колектора КПГ.125/150 (ГС-33)",
     "slug": "pidklccennh-do-gs-33",
     "sku": "84050105",
     "price": "14990",
@@ -7147,7 +7147,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050106",
-    "name": "Підключення до ГС-34",
+    "name": "Комплект підключення гідрострілки до колектора КПГ.150/150 (ГС-34)",
     "slug": "pidklccennh-do-gs-34",
     "sku": "84050106",
     "price": "16400",
@@ -7167,7 +7167,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050107",
-    "name": "Перехід фланцевий 80/80",
+    "name": "Комплект переходів до фланцевого приєднання  КПФ 80/80 (ГС-31) Termojet",
     "slug": "perehid-flanceviy-80-80",
     "sku": "84050107",
     "price": "3660",
@@ -7187,7 +7187,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050108",
-    "name": "Перехід фланцевий 100/100",
+    "name": "Комплект переходів до фланцевого приєднання  КПФ 100/100 (ГС-32) Termojet",
     "slug": "perehid-flanceviy-100-100",
     "sku": "84050108",
     "price": "5030",
@@ -7207,7 +7207,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050109",
-    "name": "Перехід фланцевий 125/125",
+    "name": "Комплект переходів до фланцевого приєднання  КПФ 125/125 (ГС-33) Termojet",
     "slug": "perehid-flanceviy-125-125",
     "sku": "84050109",
     "price": "8680",
@@ -7227,7 +7227,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050110",
-    "name": "Перехід фланцевий 150/150",
+    "name": "Комплект переходів до фланцевого приєднання  КПФ 150/150 (ГС-34) Termojet",
     "slug": "perehid-flanceviy-150-150",
     "sku": "84050110",
     "price": "11680",
@@ -7247,7 +7247,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050121",
-    "name": "Перехід під сварку 40/40",
+    "name": "Комплект закінчень для  насосних груп під приварку  КЗЗ 40/40",
     "slug": "perehid-pid-svarku-40-40",
     "sku": "84050121",
     "price": "1100",
@@ -7267,7 +7267,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050122",
-    "name": "Перехід під сварку 50/50",
+    "name": "Комплект закінчень для  насосних груп під приварку  КЗЗ 50/50",
     "slug": "perehid-pid-svarku-50-50",
     "sku": "84050122",
     "price": "1250",
@@ -7287,7 +7287,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050111",
-    "name": "Перехід під сварку 80/80",
+    "name": "Комплект переходів для приєднання  під зварювання  КПС 80/80 (ГС-31)",
     "slug": "perehid-pid-svarku-80-80",
     "sku": "84050111",
     "price": "1190",
@@ -7307,7 +7307,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050112",
-    "name": "Перехід під сварку 100/100",
+    "name": "Комплект переходів для приєднання  під зварювання  КПС 100/100 (ГС-32)",
     "slug": "perehid-pid-svarku-100-100",
     "sku": "84050112",
     "price": "1290",
@@ -7327,7 +7327,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050113",
-    "name": "Перехід під сварку 125/125",
+    "name": "Комплект переходів для приєднання  під зварювання  КПС 125/125 (ГС-33) (2 шт. в компл.)",
     "slug": "perehid-pid-svarku-125-125",
     "sku": "84050113",
     "price": "1430",
@@ -7347,7 +7347,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050114",
-    "name": "Перехід під сварку 150/150",
+    "name": "Комплект переходів для приєднання під зварювання  КПС 150/150 (ГС-34)",
     "slug": "perehid-pid-svarku-150-150",
     "sku": "84050114",
     "price": "1600",
@@ -7407,7 +7407,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050115",
-    "name": "Перехід під насосну групу 1\"",
+    "name": "Перехід для приєднання різьбових насосних груп 1\" (СК-271.07.000)",
     "slug": "perehid-pid-nasosnu-grupu-1",
     "sku": "84050115",
     "price": "5520",
@@ -7427,7 +7427,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_84050116",
-    "name": "Перехід під насосну групу 1 1/4\"",
+    "name": "Перехід для приєднання різьбових насосних груп 1 1/4\" (ДУ 159 ГМ L=95 мм СК-271.06.000)",
     "slug": "perehid-pid-nasosnu-grupu-1-1-4",
     "sku": "84050116",
     "price": "5890",
@@ -7527,7 +7527,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_7307003",
-    "name": "Муфта Termojet DN80",
+    "name": "Муфта гнучка  3\"/80-88,9мм Termojet",
     "slug": "mufta-termojet-dn80",
     "sku": "7307003",
     "price": "980",
@@ -7547,7 +7547,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_7307004",
-    "name": "Муфта Termojet DN100",
+    "name": "Муфта гнучка  4\"/100-108,0мм Termojet",
     "slug": "mufta-termojet-dn100",
     "sku": "7307004",
     "price": "1246",
@@ -7587,7 +7587,7 @@ export const PRODUCTS = [
   },
   {
     "id": "new_7307006",
-    "name": "Муфта Termojet DN150",
+    "name": "Муфта гнучка  6\"/150-159,0мм Termojet",
     "slug": "mufta-termojet-dn150",
     "sku": "7307006",
     "price": "2144",
@@ -7751,9 +7751,9 @@ export const PRODUCTS = [
   },
   {
     "id": "new_kriplennh-rozsircvalsnogo-baku-sk-56",
-    "name": "Кріплення розширювального баку СК-56",
+    "name": "Кріплення для баків універсальне от 5 до 35 літрів СК-56",
     "slug": "kriplennh-rozsircvalsnogo-baku-sk-56",
-    "sku": "",
+    "sku": "53556",
     "price": "280",
     "categorySlug": "dodatkove",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/08/img_40882-1.jpg",
@@ -7858,7 +7858,7 @@ export const PRODUCTS = [
     "wpId": null,
     "name": "Насос інлайн з частотним керуванням Termojet TBE 50-24/2 (3 кВт)",
     "slug": "nasos-termojet-tbe-50-24-2",
-    "sku": "50242",
+    "sku": "3350242",
     "price": "1921",
     "currency": "EUR",
     "categorySlug": "nasosy",
@@ -7891,7 +7891,7 @@ export const PRODUCTS = [
     "wpId": null,
     "name": "Насос інлайн з частотним керуванням Termojet TBE 50-36/2 (5.5 кВт)",
     "slug": "nasos-termojet-tbe-50-36-2",
-    "sku": "50362",
+    "sku": "3350362",
     "price": "2371",
     "currency": "EUR",
     "categorySlug": "nasosy",
@@ -7924,7 +7924,7 @@ export const PRODUCTS = [
     "wpId": null,
     "name": "Насос інлайн з частотним керуванням Termojet TBE 65-34/2 (7.5 кВт)",
     "slug": "nasos-termojet-tbe-65-34-2",
-    "sku": "65342",
+    "sku": "3365342",
     "price": "2524",
     "currency": "EUR",
     "categorySlug": "nasosy",
