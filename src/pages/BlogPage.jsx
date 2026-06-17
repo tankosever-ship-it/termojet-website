@@ -4,6 +4,7 @@ import { Calendar, ArrowRight, Search } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
+import PageHero from '../components/PageHero'
 
 export default function BlogPage() {
   const { blog, lang } = useApp()
@@ -30,13 +31,12 @@ export default function BlogPage() {
     <>
       <SEO title={blogT.title} description={blogT.subtitle} />
 
-      <div className="bg-gradient-to-br from-[var(--primary)] to-[#1e4a7a] text-white pb-12" style={{ marginTop: '-60px', paddingTop: 'calc(3rem + 60px)' }}>
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="label-accent mb-2" style={{ color: '#fb923c' }}>Termojet</div>
-          <h1 className="text-4xl font-black font-['Archivo',sans-serif] mb-2">{blogT.title}</h1>
-          <p className="text-white/70">{blogT.subtitle}</p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="БЛОГ · TERMOJET"
+        title={blogT.title}
+        subtitle={blogT.subtitle}
+        image="/banner-blog.webp"
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex flex-wrap gap-3 mb-8">

@@ -4,6 +4,7 @@ import { MapPin, Calendar, Zap, X, ChevronRight, ArrowUpRight } from 'lucide-rea
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
+import PageHero from '../components/PageHero'
 
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
@@ -18,32 +19,26 @@ export default function PortfolioPage() {
       <SEO title={portT.title} description={portT.subtitle} />
 
       {/* Hero */}
-      <section style={{ background: '#0C0B0A' }} className="py-14 relative overflow-hidden">
-        <div className="absolute inset-0 bg-dots pointer-events-none opacity-40" />
-        <div className="relative max-w-7xl mx-auto px-4">
-          <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
-            РЕАЛІЗОВАНІ ОБ'ЄКТИ · TERMOJET
-          </span>
-          <h1 className="text-4xl md:text-5xl font-black font-['Archivo',sans-serif] text-white mt-3 mb-3 leading-tight">
-            {portT.title}
-          </h1>
-          <p className="text-white/50 max-w-xl">{portT.subtitle}</p>
-
-          {/* Stats */}
-          <div className="flex flex-wrap gap-6 mt-8">
-            {[
-              ['50 000+', 'ОСНАЩЕНИХ ОБ\'ЄКТІВ'],
-              ['15', 'КРАЇН ЄС'],
-              ['22', 'РОКИ ДОСВІДУ'],
-            ].map(([v, l]) => (
-              <div key={l}>
-                <div className="text-2xl font-black text-white">{v}</div>
-                <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.35)' }} className="uppercase mt-0.5">{l}</div>
-              </div>
-            ))}
-          </div>
+      <PageHero
+        eyebrow="РЕАЛІЗОВАНІ ОБ'ЄКТИ · TERMOJET"
+        title={portT.title}
+        subtitle={portT.subtitle}
+        image="/banner-portfolio.webp"
+      >
+        {/* Stats */}
+        <div className="flex flex-wrap gap-6 mt-8">
+          {[
+            ['50 000+', 'ОСНАЩЕНИХ ОБ\'ЄКТІВ'],
+            ['15', 'КРАЇН ЄС'],
+            ['22', 'РОКИ ДОСВІДУ'],
+          ].map(([v, l]) => (
+            <div key={l}>
+              <div className="text-2xl font-black text-white">{v}</div>
+              <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.35)' }} className="uppercase mt-0.5">{l}</div>
+            </div>
+          ))}
         </div>
-      </section>
+      </PageHero>
 
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 py-10">
