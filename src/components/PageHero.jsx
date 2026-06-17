@@ -16,7 +16,7 @@ export default function PageHero({ eyebrow = 'TERMOJET', title, subtitle, image,
         marginTop: '-60px',
         paddingTop: 'calc(3.5rem + 60px)',
         paddingBottom: '2.75rem',
-        minHeight: 340,
+        minHeight: 400,
         background: 'linear-gradient(160deg, #0C0B0A, #141414)',
       }}
     >
