@@ -25,10 +25,21 @@ function plainText(desc) {
   return (desc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
 }
 
+// Прибирає вбудовану таблицю тех. характеристик з HTML-опису — вона дублює
+// канонічну секцію «02 · Технічні характеристики» (сітка з product.specs).
+// Видаляємо заголовок «...характеристик...» разом із наступною <table>,
+// а також будь-яку решту <table> (кілька описів мають таблицю без заголовка).
+function stripSpecTable(html) {
+  return (html || '')
+    .replace(/<h[1-6][^>]*>[^<]*характеристик[^<]*<\/h[1-6]>\s*<table[\s\S]*?<\/table>/gi, '')
+    .replace(/<table[\s\S]*?<\/table>/gi, '')
+    .trim()
+}
+
 function renderDescriptionBody(desc) {
   // Новий формат — готовий HTML (<p>, <ul>, <a>): рендеримо як є (наш контент)
   if (/<(p|ul|ol|h[1-6]|a|strong|br)\b/i.test(desc || '')) {
-    return <div className="pdp-desc-html" dangerouslySetInnerHTML={{ __html: desc }} />
+    return <div className="pdp-desc-html" dangerouslySetInnerHTML={{ __html: stripSpecTable(desc) }} />
   }
   const text = (desc || '').replace(/\s+/g, ' ').trim()
   const matches = [...text.matchAll(/(\d+)\s–\s/g)]
