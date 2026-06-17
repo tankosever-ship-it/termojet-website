@@ -3,6 +3,7 @@ const multer = require('multer')
 const path = require('path')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
+const { withI18n } = require('./_i18n')
 
 const router = express.Router()
 
@@ -26,7 +27,11 @@ router.get('/', (req, res) => {
   const q = admin
     ? 'SELECT * FROM reviews ORDER BY created_at DESC'
     : 'SELECT * FROM reviews WHERE published = 1 ORDER BY created_at DESC'
-  res.json(db.prepare(q).all())
+  const rows = db.prepare(q).all().map(r => {
+    const { i18n, ...rest } = r
+    return withI18n({ ...rest }, i18n, { text: 'text', company: 'company' })
+  })
+  res.json(rows)
 })
 
 // POST /submit — ПУБЛІЧНИЙ: клієнт залишає відгук з фото, йде на модерацію (published=0)
@@ -49,17 +54,17 @@ router.post('/submit', upload.single('photo'), (req, res) => {
 
 // POST — адмін додає одразу опублікований
 router.post('/', requireAdmin, (req, res) => {
-  const { name, company, rating, text, photo, published } = req.body
+  const { name, company, rating, text, photo, published, i18n } = req.body
   const result = db.prepare(
-    'INSERT INTO reviews (name, company, rating, text, photo, published) VALUES (?, ?, ?, ?, ?, ?)'
-  ).run(name, company || '', rating || 5, text, photo || '', published !== false ? 1 : 0)
+    'INSERT INTO reviews (name, company, rating, text, photo, published, i18n) VALUES (?, ?, ?, ?, ?, ?, ?)'
+  ).run(name, company || '', rating || 5, text, photo || '', published !== false ? 1 : 0, i18n ? JSON.stringify(i18n) : '{}')
   res.status(201).json({ id: result.lastInsertRowid })
 })
 
 router.put('/:id', requireAdmin, (req, res) => {
-  const { name, company, rating, text, photo, published } = req.body
-  db.prepare('UPDATE reviews SET name=?, company=?, rating=?, text=?, photo=?, published=? WHERE id=?')
-    .run(name, company || '', rating || 5, text, photo || '', published ? 1 : 0, req.params.id)
+  const { name, company, rating, text, photo, published, i18n } = req.body
+  db.prepare('UPDATE reviews SET name=?, company=?, rating=?, text=?, photo=?, published=?, i18n=COALESCE(?, i18n) WHERE id=?')
+    .run(name, company || '', rating || 5, text, photo || '', published ? 1 : 0, i18n !== undefined ? JSON.stringify(i18n) : null, req.params.id)
   res.json({ ok: true })
 })
 

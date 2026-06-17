@@ -428,7 +428,7 @@ function ReviewFormModal({ onClose }) {
 
 function ReviewsSection() {
   const t = useT()
-  const { reviews } = useApp()
+  const { reviews, lang } = useApp()
   const [showForm, setShowForm] = useState(false)
 
   // Реальні (схвалені) відгуки з API → у форму відображення
@@ -437,9 +437,9 @@ function ReviewsSection() {
     .map(r => ({
       id: 'r' + r.id,
       name: r.name,
-      role: r.company,
+      role: (lang !== 'uk' && r[`company_${lang}`]) ? r[`company_${lang}`] : r.company,
       rating: r.rating || 5,
-      text: r.text,
+      text: (lang !== 'uk' && r[`text_${lang}`]) ? r[`text_${lang}`] : r.text,
       photo: r.photo || '',
       date: r.created_at ? new Date(r.created_at).toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' }) : '',
     }))
@@ -991,11 +991,11 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPortfolio.map(item => (
                 <div key={item.id} className="card card-hover overflow-hidden bg-white">
-                  {item.image && <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover" />}
+                  {item.image && <img src={item.image} alt={(lang !== 'uk' && item[`title_${lang}`]) ? item[`title_${lang}`] : item.title} loading="lazy" decoding="async" className="w-full h-48 object-cover" />}
                   <div className="p-4">
-                    <div className="text-xs text-gray-400 mb-1">{item.location || ''}</div>
-                    <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                    {item.desc && <p className="text-sm text-gray-500 mt-1 line-clamp-2">{item.desc}</p>}
+                    <div className="text-xs text-gray-400 mb-1">{(lang !== 'uk' && item[`location_${lang}`]) ? item[`location_${lang}`] : (item.location || '')}</div>
+                    <h3 className="font-semibold text-gray-900">{(lang !== 'uk' && item[`title_${lang}`]) ? item[`title_${lang}`] : item.title}</h3>
+                    {item.desc && <p className="text-sm text-gray-500 mt-1 line-clamp-2">{(lang !== 'uk' && item[`desc_${lang}`]) ? item[`desc_${lang}`] : item.desc}</p>}
                   </div>
                 </div>
               ))}

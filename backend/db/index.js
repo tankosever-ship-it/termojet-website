@@ -319,11 +319,27 @@ function seedBlog() {
   console.log(`Seeded ${posts.length} blog posts into SQLite`)
 }
 
+// Міграція: додати JSON-колонку i18n для перекладів контенту (EN/PL/FR/DE).
+// i18n = { "en": { name, short_desc, description, specs, ... }, "pl": {...}, ... }
+// UA лишається канонічним у наявних колонках; i18n зберігає лише переклади + _srcHash.
+// Ідемпотентно — додає колонку лише якщо її ще немає.
+function migrateI18n() {
+  const tables = ['products', 'blog_posts', 'portfolio', 'reviews', 'faqs']
+  for (const t of tables) {
+    const cols = db.prepare(`PRAGMA table_info(${t})`).all().map(c => c.name)
+    if (!cols.includes('i18n')) {
+      db.exec(`ALTER TABLE ${t} ADD COLUMN i18n TEXT DEFAULT '{}'`)
+      console.log(`Added i18n column to ${t}`)
+    }
+  }
+}
+
 setup()
 seedProducts()
 seedBlog()
 migrateCurrency()
 migrateSeo()
 migrateSpecsArticle()
+migrateI18n()
 
 module.exports = db

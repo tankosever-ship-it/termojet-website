@@ -16,6 +16,13 @@ export default function BlogPage() {
   const published = blog.filter(p => p.published)
     .slice().sort((a, b) => new Date(b.publishedAt || b.date) - new Date(a.publishedAt || a.date))
   const categories = [...new Set(published.map(p => p.category).filter(Boolean))]
+  const categoryLabels = Object.fromEntries(
+    categories.map(c => {
+      const post = published.find(p => p.category === c)
+      const label = (lang !== 'uk' && post?.[`category_${lang}`]) ? post[`category_${lang}`] : c
+      return [c, label]
+    })
+  )
 
   const filtered = published.filter(p => {
     const title = (lang !== 'uk' && p[`title_${lang}`]) ? p[`title_${lang}`] : p.title
@@ -54,7 +61,7 @@ export default function BlogPage() {
               {categories.map(c => (
                 <button key={c} onClick={() => setCategory(c === category ? '' : c)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${category === c ? 'bg-[var(--primary)] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:border-[var(--primary)]'}`}>
-                  {c}
+                  {categoryLabels[c]}
                 </button>
               ))}
             </div>
@@ -82,7 +89,7 @@ export default function BlogPage() {
                 )}
                 <div className="p-6 md:p-8 flex flex-col justify-center">
                   <div className="flex items-center gap-2 mb-3">
-                    {featured.category && <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{featured.category}</span>}
+                    {featured.category && <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{(lang !== 'uk' && featured[`category_${lang}`]) ? featured[`category_${lang}`] : featured.category}</span>}
                     {featured.publishedAt && (
                       <span className="text-xs text-gray-400 flex items-center gap-1 ml-2">
                         <Calendar size={11} /> {new Date(featured.publishedAt).toLocaleDateString('uk-UA')}
@@ -115,7 +122,7 @@ export default function BlogPage() {
                     )}
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2">
-                        {post.category && <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{post.category}</span>}
+                        {post.category && <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{(lang !== 'uk' && post[`category_${lang}`]) ? post[`category_${lang}`] : post.category}</span>}
                         {post.publishedAt && (
                           <span className="text-xs text-gray-400 flex items-center gap-1 ml-auto">
                             <Calendar size={11} /> {new Date(post.publishedAt).toLocaleDateString('uk-UA')}

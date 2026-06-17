@@ -50,7 +50,7 @@ export default function BlogPostPage() {
           <div className="flex items-center gap-3 mb-4">
             {post.category && (
               <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider bg-orange-50 px-3 py-1 rounded-full">
-                {post.category}
+                {(lang !== 'uk' && post[`category_${lang}`]) ? post[`category_${lang}`] : post.category}
               </span>
             )}
             {post.publishedAt && (

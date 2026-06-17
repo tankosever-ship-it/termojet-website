@@ -48,20 +48,22 @@ const DEFAULT_FAQ = [
   },
 ]
 
-function FAQItem({ item }) {
+function FAQItem({ item, lang }) {
   const [open, setOpen] = useState(false)
+  const question = (lang !== 'uk' && item[`question_${lang}`]) ? item[`question_${lang}`] : item.question
+  const answer = (lang !== 'uk' && item[`answer_${lang}`]) ? item[`answer_${lang}`] : item.answer
   return (
     <div className="card overflow-hidden">
       <button
         onClick={() => setOpen(v => !v)}
         className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-gray-50/50 transition-colors"
       >
-        <span className="font-semibold text-gray-900 pr-2">{item.question}</span>
+        <span className="font-semibold text-gray-900 pr-2">{question}</span>
         <ChevronDown size={18} className={`text-[var(--primary)] flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
         <div className="px-5 pb-5 border-t border-gray-50">
-          <p className="text-gray-600 leading-relaxed pt-4">{item.answer}</p>
+          <p className="text-gray-600 leading-relaxed pt-4">{answer}</p>
         </div>
       )}
     </div>
@@ -69,7 +71,7 @@ function FAQItem({ item }) {
 }
 
 export default function FaqPage() {
-  const { faq } = useApp()
+  const { faq, lang } = useApp()
   const t = useT()
   const faqT = t('faq')
 
@@ -89,7 +91,7 @@ export default function FaqPage() {
 
       <div className="max-w-3xl mx-auto px-4 py-10">
         <div className="space-y-3 mb-12">
-          {items.map(item => <FAQItem key={item.id} item={item} />)}
+          {items.map(item => <FAQItem key={item.id} item={item} lang={lang} />)}
         </div>
 
         <div className="card p-6 text-center bg-[var(--primary)]/5 border-[var(--primary)]/15">

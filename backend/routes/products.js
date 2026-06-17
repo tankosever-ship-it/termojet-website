@@ -1,12 +1,13 @@
 const express = require('express')
 const db = require('../db')
 const { requireAdmin, checkAdmin } = require('./auth')
+const { withI18n } = require('./_i18n')
 
 const router = express.Router()
 
 function parseProduct(row) {
   if (!row) return null
-  return {
+  const obj = {
     id:           row.id,
     wpId:         row.wp_id,
     name:         row.name,
@@ -29,6 +30,13 @@ function parseProduct(row) {
     isVisible:    row.is_visible === 1,
     createdAt:    row.created_at,
   }
+  // Пласкі переклади: name_<lang>, desc_<lang>, specs_<lang>, shortDesc_<lang>, тощо.
+  // Фронт читає `name_${lang}` (Navbar/Catalog/PDP) і `desc_${lang}` (PDP).
+  return withI18n(obj, row.i18n, {
+    name: 'name', desc: 'description', shortDesc: 'short_desc',
+    specs: 'specs', features: 'features', subcategory: 'subcategory',
+    seoTitle: 'seo_title', metaDescription: 'meta_description',
+  })
 }
 
 // GET /api/products
@@ -70,9 +78,9 @@ router.post('/', requireAdmin, (req, res) => {
   const p = req.body
   const stmt = db.prepare(`
     INSERT INTO products (id, wp_id, name, slug, sku, price, sale_price, category_slug, subcategory,
-      image, images, short_desc, description, specs, features, in_stock)
+      image, images, short_desc, description, specs, features, in_stock, i18n)
     VALUES (@id, @wp_id, @name, @slug, @sku, @price, @sale_price, @category_slug, @subcategory,
-      @image, @images, @short_desc, @description, @specs, @features, @in_stock)
+      @image, @images, @short_desc, @description, @specs, @features, @in_stock, @i18n)
   `)
   const id = p.id || `p_${Date.now()}`
   stmt.run({
@@ -83,6 +91,7 @@ router.post('/', requireAdmin, (req, res) => {
     images: JSON.stringify(p.images || []), short_desc: p.shortDesc || '',
     description: p.description || '', specs: JSON.stringify(p.specs || {}),
     features: JSON.stringify(p.features || []), in_stock: p.inStock !== false ? 1 : 0,
+    i18n: p.i18n ? JSON.stringify(p.i18n) : '{}',
   })
   res.status(201).json({ id })
 })
@@ -96,7 +105,7 @@ router.put('/:id', requireAdmin, (req, res) => {
       category_slug = @category_slug, subcategory = @subcategory,
       image = @image, images = @images, short_desc = @short_desc,
       description = @description, specs = @specs, features = @features,
-      in_stock = @in_stock, is_visible = @is_visible
+      in_stock = @in_stock, is_visible = @is_visible, i18n = COALESCE(@i18n, i18n)
     WHERE id = @id
   `).run({
     id: req.params.id, name: p.name, slug: p.slug, sku: p.sku || '',
@@ -108,6 +117,7 @@ router.put('/:id', requireAdmin, (req, res) => {
     features: JSON.stringify(p.features || []),
     in_stock: p.inStock !== false ? 1 : 0,
     is_visible: p.isVisible !== false ? 1 : 0,
+    i18n: p.i18n !== undefined ? JSON.stringify(p.i18n) : null,
   })
   res.json({ ok: true })
 })

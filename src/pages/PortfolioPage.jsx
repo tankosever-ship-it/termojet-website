@@ -9,7 +9,7 @@ import PageHero from '../components/PageHero'
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
 export default function PortfolioPage() {
-  const { portfolio } = useApp()
+  const { portfolio, lang } = useApp()
   const t = useT()
   const portT = t('portfolio')
   const [selected, setSelected] = useState(null)
@@ -89,7 +89,7 @@ export default function PortfolioPage() {
                       {item.location && (
                         <span className="flex items-center gap-1 text-gray-400"
                           style={{ ...mono, fontSize: '10px' }}>
-                          <MapPin size={10} />{item.location}
+                          <MapPin size={10} />{(lang !== 'uk' && item[`location_${lang}`]) ? item[`location_${lang}`] : item.location}
                         </span>
                       )}
                       {item.year && (
@@ -101,15 +101,15 @@ export default function PortfolioPage() {
                       {item.power && (
                         <span className="flex items-center gap-1"
                           style={{ ...mono, fontSize: '10px', color: 'var(--accent)' }}>
-                          <Zap size={10} />{item.power}
+                          <Zap size={10} />{(lang !== 'uk' && item[`power_${lang}`]) ? item[`power_${lang}`] : item.power}
                         </span>
                       )}
                     </div>
                     <h3 className="font-bold text-gray-900 mb-1 group-hover:text-[var(--primary)] transition-colors">
-                      {item.title}
+                      {(lang !== 'uk' && item[`title_${lang}`]) ? item[`title_${lang}`] : item.title}
                     </h3>
                     {item.desc && (
-                      <p className="text-sm text-gray-500 line-clamp-2">{item.desc}</p>
+                      <p className="text-sm text-gray-500 line-clamp-2">{(lang !== 'uk' && item[`desc_${lang}`]) ? item[`desc_${lang}`] : item.desc}</p>
                     )}
                     <span className="inline-flex items-center gap-1 mt-3 text-[var(--primary)] opacity-0 group-hover:opacity-100 transition-opacity"
                       style={{ ...mono, fontSize: '10px', letterSpacing: '0.08em' }}>
@@ -141,7 +141,7 @@ export default function PortfolioPage() {
                       {selected.type}
                     </span>
                   )}
-                  <h2 className="font-black text-xl text-gray-900">{selected.title}</h2>
+                  <h2 className="font-black text-xl text-gray-900">{(lang !== 'uk' && selected[`title_${lang}`]) ? selected[`title_${lang}`] : selected.title}</h2>
                 </div>
                 <button onClick={() => setSelected(null)} className="text-gray-400 hover:text-gray-600 flex-shrink-0">
                   <X size={20} />
@@ -152,7 +152,7 @@ export default function PortfolioPage() {
                 {selected.location && (
                   <span className="flex items-center gap-1.5 text-gray-500"
                     style={{ ...mono, fontSize: '11px' }}>
-                    <MapPin size={12} /> {selected.location}
+                    <MapPin size={12} /> {(lang !== 'uk' && selected[`location_${lang}`]) ? selected[`location_${lang}`] : selected.location}
                   </span>
                 )}
                 {selected.year && (
@@ -164,13 +164,13 @@ export default function PortfolioPage() {
                 {selected.power && (
                   <span className="flex items-center gap-1.5 font-semibold"
                     style={{ ...mono, fontSize: '11px', color: 'var(--accent)' }}>
-                    <Zap size={12} /> {selected.power}
+                    <Zap size={12} /> {(lang !== 'uk' && selected[`power_${lang}`]) ? selected[`power_${lang}`] : selected.power}
                   </span>
                 )}
               </div>
 
               {selected.desc && (
-                <p className="text-gray-600 leading-relaxed text-sm">{selected.desc}</p>
+                <p className="text-gray-600 leading-relaxed text-sm">{(lang !== 'uk' && selected[`desc_${lang}`]) ? selected[`desc_${lang}`] : selected.desc}</p>
               )}
 
               {selected.links?.length > 0 && (
