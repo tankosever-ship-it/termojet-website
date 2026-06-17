@@ -8,7 +8,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/1713896218178656-800x800.jpg`,
     name: { uk: 'Насосні групи', en: 'Pump Groups', pl: 'Grupy pompowe', fr: 'Groupes de pompes', de: 'Pumpengruppen' },
     desc: { uk: 'Готові насосні вузли з обв\'язкою', en: 'Ready-made pump units with connections', pl: 'Gotowe zestawy pompowe z przyłączami', fr: 'Groupes de pompes prêts à l\'emploi', de: 'Fertige Pumpenstationen mit Anschlüssen' },
-    subcategories: ['З термостатичним клапаном', 'З теплоізоляцією EPP', 'Без теплоізоляції'],
+    subcategories: {
+      uk: ['З термостатичним клапаном', 'З теплоізоляцією EPP', 'Без теплоізоляції'],
+      en: ['With thermostatic valve', 'With EPP insulation', 'Without insulation'],
+      pl: ['Z zaworem termostatycznym', 'Z izolacją EPP', 'Bez izolacji'],
+      fr: ['Avec vanne thermostatique', 'Avec isolation EPP', 'Sans isolation'],
+      de: ['Mit Thermostatventil', 'Mit EPP-Dämmung', 'Ohne Dämmung'],
+    },
     color: '#E85D04',
   },
   {
@@ -18,7 +24,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/1713882023331300-800x800.jpg`,
     name: { uk: 'Роздільники гідравлічні', en: 'Hydraulic Separators', pl: 'Rozdzielacze hydrauliczne', fr: 'Séparateurs hydrauliques', de: 'Hydraulische Weichen' },
     desc: { uk: 'Гідрострілки для котельних систем', en: 'Hydraulic arrows for boiler systems', pl: 'Rozdzielacze hydrauliczne do systemów kotłowych', fr: 'Séparateurs hydrauliques pour systèmes de chaudières', de: 'Hydraulische Weichen für Kesselsysteme' },
-    subcategories: ['ГС до 60 кВт', 'ГС до 105 кВт', 'ГС до 175 кВт', 'ГС Mega'],
+    subcategories: {
+      uk: ['ГС до 60 кВт', 'ГС до 105 кВт', 'ГС до 175 кВт', 'ГС Mega'],
+      en: ['HS up to 60 kW', 'HS up to 105 kW', 'HS up to 175 kW', 'HS Mega'],
+      pl: ['HS do 60 kW', 'HS do 105 kW', 'HS do 175 kW', 'HS Mega'],
+      fr: ['SH jusqu\'à 60 kW', 'SH jusqu\'à 105 kW', 'SH jusqu\'à 175 kW', 'SH Mega'],
+      de: ['HW bis 60 kW', 'HW bis 105 kW', 'HW bis 175 kW', 'HW Mega'],
+    },
     color: '#333333',
   },
   {
@@ -28,7 +40,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/1714128425361220-800x800.jpg`,
     name: { uk: 'Розподільчі колектори', en: 'Distribution Manifolds', pl: 'Kolektory rozdzielcze', fr: 'Collecteurs de distribution', de: 'Verteiler' },
     desc: { uk: 'По потужності 60/105/175 кВт', en: 'By capacity 60/105/175 kW', pl: 'Według mocy 60/105/175 kW', fr: 'Par puissance 60/105/175 kW', de: 'Nach Leistung 60/105/175 kW' },
-    subcategories: ['Серія 60 кВт', 'Серія 105 кВт', 'Серія 175 кВт', 'Серія Mega'],
+    subcategories: {
+      uk: ['Серія 60 кВт', 'Серія 105 кВт', 'Серія 175 кВт', 'Серія Mega'],
+      en: ['60 kW Series', '105 kW Series', '175 kW Series', 'Mega Series'],
+      pl: ['Seria 60 kW', 'Seria 105 kW', 'Seria 175 kW', 'Seria Mega'],
+      fr: ['Série 60 kW', 'Série 105 kW', 'Série 175 kW', 'Série Mega'],
+      de: ['Serie 60 kW', 'Serie 105 kW', 'Serie 175 kW', 'Serie Mega'],
+    },
     color: '#0891b2',
   },
   {
@@ -38,7 +56,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/1713954944505991-800x800.jpg`,
     name: { uk: 'Розподільчі колектори з гідрострілкою', en: 'Manifolds with Hydraulic Separator', pl: 'Kolektory z rozdzielaczem hydraulicznym', fr: 'Collecteurs avec séparateur hydraulique', de: 'Verteiler mit hydraulischer Weiche' },
     desc: { uk: 'Колектори з вбудованою гідрострілкою', en: 'Manifolds with integrated hydraulic separator', pl: 'Kolektory ze zintegrowanym rozdzielaczem hydraulicznym', fr: 'Collecteurs avec séparateur hydraulique intégré', de: 'Verteiler mit integrierter hydraulischer Weiche' },
-    subcategories: ['2-контурні', '3-контурні', '4-контурні', '5-6-контурні'],
+    subcategories: {
+      uk: ['2-контурні', '3-контурні', '4-контурні', '5-6-контурні'],
+      en: ['2-circuit', '3-circuit', '4-circuit', '5-6-circuit'],
+      pl: ['2-obiegowe', '3-obiegowe', '4-obiegowe', '5-6-obiegowe'],
+      fr: ['à 2 circuits', 'à 3 circuits', 'à 4 circuits', 'à 5-6 circuits'],
+      de: ['2-Kreis', '3-Kreis', '4-Kreis', '5-6-Kreis'],
+    },
     color: '#0891b2',
   },
   {
@@ -48,7 +72,13 @@ export const CATEGORIES = [
     image: `${BASE}/2023/08/dsc_0549-800x532.jpg`,
     name: { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX' },
     desc: { uk: 'Компактні вузли обв\'язки котла', en: 'Compact boiler connection units', pl: 'Kompaktowe węzły przyłączeniowe kotłów', fr: 'Groupes de raccordement compacts pour chaudières', de: 'Kompakte Kesselanschlusssätze' },
-    subcategories: ['BOX 2 контури', 'BOX 3 контури', 'BOX з ГВС-бойлером'],
+    subcategories: {
+      uk: ['BOX 2 контури', 'BOX 3 контури', 'BOX з ГВС-бойлером'],
+      en: ['BOX 2 circuits', 'BOX 3 circuits', 'BOX with DHW boiler'],
+      pl: ['BOX 2 obiegi', 'BOX 3 obiegi', 'BOX z bojlerem CWU'],
+      fr: ['BOX 2 circuits', 'BOX 3 circuits', 'BOX avec ballon ECS'],
+      de: ['BOX 2 Kreise', 'BOX 3 Kreise', 'BOX mit Warmwasserspeicher'],
+    },
     color: '#E85D04',
   },
   {
@@ -58,7 +88,13 @@ export const CATEGORIES = [
     image: `${BASE}/2023/11/sb_dlya_kataloga-1-1131x800-1-800x800.png`,
     name: { uk: 'Серія Termojet Mega (до 2200 кВт)', en: 'Termojet Mega Series (up to 2200 kW)', pl: 'Seria Termojet Mega (do 2200 kW)', fr: 'Série Termojet Mega (jusqu\'à 2200 kW)', de: 'Serie Termojet Mega (bis 2200 kW)' },
     desc: { uk: 'Промислові системи до 2.2 МВт', en: 'Industrial systems up to 2.2 MW', pl: 'Systemy przemysłowe do 2,2 MW', fr: 'Systèmes industriels jusqu\'à 2,2 MW', de: 'Industriesysteme bis 2,2 MW' },
-    subcategories: ['До 600 кВт', 'До 1 МВт', 'До 2.2 МВт'],
+    subcategories: {
+      uk: ['До 600 кВт', 'До 1 МВт', 'До 2.2 МВт'],
+      en: ['Up to 600 kW', 'Up to 1 MW', 'Up to 2.2 MW'],
+      pl: ['Do 600 kW', 'Do 1 MW', 'Do 2,2 MW'],
+      fr: ['Jusqu\'à 600 kW', 'Jusqu\'à 1 MW', 'Jusqu\'à 2,2 MW'],
+      de: ['Bis 600 kW', 'Bis 1 MW', 'Bis 2,2 MW'],
+    },
     color: '#E85D04',
   },
   {
@@ -68,7 +104,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/1713881601309906-800x800.jpg`,
     name: { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen' },
     desc: { uk: 'Циркуляційні насоси для систем опалення', en: 'Circulation pumps for heating systems', pl: 'Pompy obiegowe do systemów grzewczych', fr: 'Pompes de circulation pour systèmes de chauffage', de: 'Umwälzpumpen für Heizsysteme' },
-    subcategories: ['Насоси APM', 'Насоси XPS', 'Насоси Grundfos', 'Насоси Wilo'],
+    subcategories: {
+      uk: ['Насоси APM', 'Насоси XPS', 'Насоси Grundfos', 'Насоси Wilo'],
+      en: ['APM Pumps', 'XPS Pumps', 'Grundfos Pumps', 'Wilo Pumps'],
+      pl: ['Pompy APM', 'Pompy XPS', 'Pompy Grundfos', 'Pompy Wilo'],
+      fr: ['Pompes APM', 'Pompes XPS', 'Pompes Grundfos', 'Pompes Wilo'],
+      de: ['APM-Pumpen', 'XPS-Pumpen', 'Grundfos-Pumpen', 'Wilo-Pumpen'],
+    },
     color: '#0D0D0D',
   },
   {
@@ -78,7 +120,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/04/photo_2024-04-23_21-17-36-800x800.jpg`,
     name: { uk: '3-х/4-х ходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile' },
     desc: { uk: '3-ходові, 4-ходові клапани та електричні сервоприводи', en: '3-way, 4-way valves and electric actuators', pl: 'Zawory 3-drożne, 4-drożne i siłowniki elektryczne', fr: 'Vannes 3 voies, 4 voies et servomoteurs électriques', de: '3-Wege-, 4-Wege-Ventile und elektrische Stellantriebe' },
-    subcategories: ['3-ходові клапани', '4-ходові клапани', 'Електричні сервоприводи'],
+    subcategories: {
+      uk: ['3-ходові клапани', '4-ходові клапани', 'Електричні сервоприводи'],
+      en: ['3-way valves', '4-way valves', 'Electric actuators'],
+      pl: ['Zawory 3-drożne', 'Zawory 4-drożne', 'Siłowniki elektryczne'],
+      fr: ['Vannes 3 voies', 'Vannes 4 voies', 'Servomoteurs électriques'],
+      de: ['3-Wege-Ventile', '4-Wege-Ventile', 'Elektrische Stellantriebe'],
+    },
     color: '#0D0D0D',
   },
   {
@@ -88,7 +136,13 @@ export const CATEGORIES = [
     image: `${BASE}/2025/03/screenshot_1123.png`,
     name: { uk: 'Статичний балансувальний клапан', en: 'Static Balancing Valve', pl: 'Statyczny zawór równoważący', fr: 'Vanne d\'équilibrage statique', de: 'Statisches Regulierventil' },
     desc: { uk: 'Статичне балансування систем опалення', en: 'Static heating system balancing', pl: 'Statyczne równoważenie systemów grzewczych', fr: 'Équilibrage statique des systèmes de chauffage', de: 'Statischer Heizungsabgleich' },
-    subcategories: ['Статичні клапани', 'З вимірювальним ніпелем'],
+    subcategories: {
+      uk: ['Статичні клапани', 'З вимірювальним ніпелем'],
+      en: ['Static valves', 'With measuring nipple'],
+      pl: ['Zawory statyczne', 'Z nyplem pomiarowym'],
+      fr: ['Vannes statiques', 'Avec nipple de mesure'],
+      de: ['Statische Ventile', 'Mit Meßnippel'],
+    },
     color: '#0891b2',
   },
   {
@@ -98,7 +152,13 @@ export const CATEGORIES = [
     image: `${BASE}/2024/06/img_1411-800x800.jpg`,
     name: { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren' },
     desc: { uk: 'Шламові та повітряні сепаратори', en: 'Sludge and air separators', pl: 'Separatory szlamu i powietrza', fr: 'Séparateurs de boues et d\'air', de: 'Schlamm- und Luftabscheider' },
-    subcategories: ['Шламові сепаратори', 'Повітряні сепаратори', 'Комбіновані'],
+    subcategories: {
+      uk: ['Шламові сепаратори', 'Повітряні сепаратори', 'Комбіновані'],
+      en: ['Sludge separators', 'Air separators', 'Combined'],
+      pl: ['Separatory szlamu', 'Separatory powietrza', 'Kombinowane'],
+      fr: ['Séparateurs de boues', 'Séparateurs d\'air', 'Combinés'],
+      de: ['Schlammabscheider', 'Luftabscheider', 'Kombinierte'],
+    },
     color: '#0D0D0D',
   },
   {
@@ -108,7 +168,13 @@ export const CATEGORIES = [
     image: `/images/avtomatyka/HT120BLK.png`,
     name: { uk: 'Термостати та зональне керування', en: 'Thermostats & Zone Control', pl: 'Termostaty i sterowanie strefowe', fr: 'Thermostats et contrôle de zone', de: 'Thermostate und Zonenregelung' },
     desc: { uk: 'Термостати, програматори, центри комутації та аксесуари', en: 'Thermostats, programmers, switching centers and accessories', pl: 'Termostaty, programatory, centra przełączania i akcesoria', fr: 'Thermostats, programmateurs, centrales de commutation et accessoires', de: 'Thermostate, Programmer, Schaltzentralen und Zubehör' },
-    subcategories: ['Програматори дротові', 'Програматори бездротові', 'Центри комутації', 'Термоголовки та датчики'],
+    subcategories: {
+      uk: ['Програматори дротові', 'Програматори бездротові', 'Центри комутації', 'Термоголовки та датчики'],
+      en: ['Wired programmers', 'Wireless programmers', 'Switching centers', 'Thermostatic heads & sensors'],
+      pl: ['Programatory przewodowe', 'Programatory bezprzewodowe', 'Centra przełączania', 'Głowice termostatyczne i czujniki'],
+      fr: ['Programmateurs filaires', 'Programmateurs sans fil', 'Centrales de commutation', 'Têtes thermostatiques et capteurs'],
+      de: ['Kabelgebundene Programmierer', 'Drahtlose Programmierer', 'Schaltzentralen', 'Thermostatköpfe und Sensoren'],
+    },
     color: '#0891b2',
   },
   {
@@ -118,7 +184,13 @@ export const CATEGORIES = [
     image: `${BASE}/2023/08/dsc_0557-800x532.jpg`,
     name: { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem' },
     desc: { uk: 'Колектори, змішувальні вузли та шафи для теплої підлоги', en: 'Manifolds, mixing units and cabinets for underfloor heating', pl: 'Kolektory, węzły mieszające i szafy dla ogrzewania podłogowego', fr: 'Collecteurs, nœuds de mélange et armoires pour chauffage sol', de: 'Verteiler, Mischeinheiten und Schränke für Fußbodenheizung' },
-    subcategories: ['Розподільчі гребінки', 'З витратомірами', 'Змішувальні вузли', 'Шафи колекторні'],
+    subcategories: {
+      uk: ['Розподільчі гребінки', 'З витратомірами', 'Змішувальні вузли', 'Шафи колекторні'],
+      en: ['Distribution manifolds', 'With flow meters', 'Mixing units', 'Manifold cabinets'],
+      pl: ['Listwy rozdzielcze', 'Z przepływomierzami', 'Węzły mieszające', 'Szafy kolektorowe'],
+      fr: ['Collecteurs de distribution', 'Avec débitmètres', 'Nœuds de mélange', 'Armoires de collecteurs'],
+      de: ['Verteilerleisten', 'Mit Durchflussmessern', 'Mischeinheiten', 'Verteilergehäuse'],
+    },
     color: '#0891b2',
   },
   {
@@ -128,7 +200,13 @@ export const CATEGORIES = [
     image: `${BASE}/2023/11/termojet-profi-plus-2-800x800.jpg`,
     name: { uk: 'Автоматика котельного обладнання', en: 'Boiler Equipment Automation', pl: 'Automatyka urządzeń kotłowych', fr: 'Automatisation des équipements de chaudière', de: 'Kesselautomatik' },
     desc: { uk: 'Контролери та системи управління котлами', en: 'Controllers and boiler management systems', pl: 'Sterowniki i systemy zarządzania kotłami', fr: 'Contrôleurs et systèmes de gestion chaudières', de: 'Steuerungen und Kesselmanagementsysteme' },
-    subcategories: ['Termojet Light', 'Termojet Profi Plus', 'Погодозалежне управління'],
+    subcategories: {
+      uk: ['Termojet Light', 'Termojet Profi Plus', 'Погодозалежне управління'],
+      en: ['Termojet Light', 'Termojet Profi Plus', 'Weather-compensated control'],
+      pl: ['Termojet Light', 'Termojet Profi Plus', 'Sterowanie pogodowe'],
+      fr: ['Termojet Light', 'Termojet Profi Plus', 'Régulation climatique'],
+      de: ['Termojet Light', 'Termojet Profi Plus', 'Witterungsgeführte Regelung'],
+    },
     color: '#333333',
   },
   {
@@ -138,7 +216,13 @@ export const CATEGORIES = [
     image: `${BASE}/2023/11/krn-5001-1-1000x1000-1-800x800.jpg`,
     name: { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung' },
     desc: { uk: 'Аксесуари і супутні товари', en: 'Accessories and related products', pl: 'Akcesoria i produkty pokrewne', fr: 'Accessoires et produits connexes', de: 'Zubehör und verwandte Produkte' },
-    subcategories: ['Кріплення', 'Теплоізоляція', 'Шафи колекторні', 'Аксесуари для монтажу'],
+    subcategories: {
+      uk: ['Кріплення', 'Теплоізоляція', 'Шафи колекторні', 'Аксесуари для монтажу'],
+      en: ['Mounting hardware', 'Thermal insulation', 'Manifold cabinets', 'Installation accessories'],
+      pl: ['Mocowania', 'Izolacja termiczna', 'Szafy kolektorowe', 'Akcesoria montażowe'],
+      fr: ['Fixations', 'Isolation thermique', 'Armoires de collecteurs', 'Accessoires de montage'],
+      de: ['Befestigungsmaterial', 'Wärmedämmung', 'Verteilergehäuse', 'Montagezubehör'],
+    },
     color: '#0D0D0D',
   },
   {
@@ -148,7 +232,7 @@ export const CATEGORIES = [
     image: `/images/category-clearance.svg`,
     name: { uk: 'Акція', en: 'Sale', pl: 'Promocja', fr: 'Promotion', de: 'Aktion' },
     desc: { uk: 'Товари за акційними цінами', en: 'Products at special prices', pl: 'Produkty w cenach promocyjnych', fr: 'Produits à prix réduits', de: 'Produkte zu Sonderpreisen' },
-    subcategories: [],
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [] },
     color: '#DC2626',
   },
 ]

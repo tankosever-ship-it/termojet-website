@@ -75,7 +75,7 @@ function CategoryCard({ cat, lang }) {
         {/* Підкатегорії */}
         <div style={{ overflow: 'hidden', maxHeight: hovered ? 120 : 0, transition: 'max-height 0.3s ease', marginBottom: hovered ? 8 : 0 }}>
           <div className="flex flex-col gap-1.5 pb-1">
-            {(cat.subcategories || []).map((sub, i) => (
+            {((cat.subcategories?.[lang] || cat.subcategories?.uk) || []).map((sub, i) => (
               <span key={i} className="flex items-center gap-1.5"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#777', letterSpacing: '0.04em' }}>
                 <span style={{ color: 'var(--accent)', fontSize: '8px' }}>▸</span>

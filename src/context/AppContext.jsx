@@ -153,15 +153,15 @@ export function AppProvider({ children }) {
   const homeContent = useMemo(() => {
     let override = siteSettings.homeContent
     if (typeof override === 'string') { try { override = JSON.parse(override) } catch { override = null } }
-    return mergeHomeContent(override)
-  }, [siteSettings.homeContent])
+    return mergeHomeContent(override, lang)
+  }, [siteSettings.homeContent, lang])
 
   // Редагований контент сторінки «Про нас»
   const aboutContent = useMemo(() => {
     let override = siteSettings.aboutContent
     if (typeof override === 'string') { try { override = JSON.parse(override) } catch { override = null } }
-    return mergeAboutContent(override)
-  }, [siteSettings.aboutContent])
+    return mergeAboutContent(override, lang)
+  }, [siteSettings.aboutContent, lang])
 
   // Завантажити файл з компʼютера на сервер → { url, filename } або { error }.
   // FormData: НЕ виставляємо Content-Type вручну (браузер додасть boundary сам).
