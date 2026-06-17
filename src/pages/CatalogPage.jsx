@@ -31,8 +31,7 @@ const CATEGORY_BANNERS = {
   'zonalne-keruvannya': '/banner-zonalne-keruvannya.png',
 }
 
-const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.3 } } }
-const stagger = { show: { transition: { staggerChildren: 0.04 } } }
+const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }
 
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
 const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
@@ -1173,9 +1172,8 @@ export default function CatalogPage() {
           </div>
         ) : viewMode === 'grid' ? (
           /* ── GRID VIEW ── */
-          <motion.div variants={stagger} initial="hidden" animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map(product => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filtered.map((product, i) => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
               // 2. Strip leading "Опис " prefix from shortDesc
               const rawDesc = product.shortDesc || product.description || ''
@@ -1185,7 +1183,8 @@ export default function CatalogPage() {
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
-                <motion.div key={product.id} variants={fadeUp} className="h-full">
+                <motion.div key={product.id} variants={fadeUp} initial="hidden" animate="show"
+                  transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.3) }} className="h-full">
                   {/* 1. Фіксована висота фото: overflow-hidden + height строго 240px */}
                   <div className="product-card-new group flex flex-col" style={{ height: '100%' }}>
 
@@ -1266,11 +1265,11 @@ export default function CatalogPage() {
                 </motion.div>
               )
             })}
-          </motion.div>
+          </div>
         ) : (
           /* ── LIST VIEW ── */
-          <motion.div variants={stagger} initial="hidden" animate="show" className="flex flex-col gap-3">
-            {filtered.map(product => {
+          <div className="flex flex-col gap-3">
+            {filtered.map((product, i) => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
               const rawDesc2 = product.shortDesc || product.description || ''
               const shortDesc = rawDesc2.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
@@ -1279,7 +1278,8 @@ export default function CatalogPage() {
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
-                <motion.div key={product.id} variants={fadeUp}>
+                <motion.div key={product.id} variants={fadeUp} initial="hidden" animate="show"
+                  transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.3) }}>
                   <div className="product-card-new group flex flex-row gap-0 overflow-hidden">
 
                     {/* Image */}
@@ -1361,7 +1361,7 @@ export default function CatalogPage() {
                 </motion.div>
               )
             })}
-          </motion.div>
+          </div>
         )}
 
         </div>{/* end flex-1 */}
