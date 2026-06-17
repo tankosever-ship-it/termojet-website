@@ -5,6 +5,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import SEO from '../components/SEO'
+import PageHero from '../components/PageHero'
 
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
@@ -33,20 +34,12 @@ export default function ContactPage() {
       <SEO title={contact.title} />
 
       {/* Hero */}
-      <section style={{ background: '#0C0B0A', marginTop: '-60px', paddingTop: 'calc(3.5rem + 60px)' }} className="pb-14 relative overflow-hidden">
-        <div className="absolute inset-0 bg-dots pointer-events-none opacity-40" />
-        <div className="relative max-w-7xl mx-auto px-4">
-          <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
-            КОНТАКТИ · TERMOJET
-          </span>
-          <h1 className="text-4xl md:text-5xl font-black font-['Archivo',sans-serif] text-white mt-3 mb-3 leading-tight">
-            {contact.title}
-          </h1>
-          <p className="text-white/50 max-w-lg text-sm">
-            {t('contact.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="КОНТАКТИ · TERMOJET"
+        title={contact.title}
+        subtitle={t('contact.subtitle')}
+        image="/banner-contacts.webp"
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
