@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import { useT } from '../i18n/useT'
 
 const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
@@ -54,8 +55,9 @@ function buildBreadcrumbSchema(breadcrumbs) {
 }
 
 export default function SEO({ title, description, image, canonical, type = 'website', product, article, breadcrumbs }) {
-  const fullTitle = title ? `${title} | Termojet` : 'Termojet — Виробник обладнання для котелень'
-  const desc = description || 'Termojet — провідний виробник насосних груп, колекторів, клапанів і систем для котелень. Власне виробництво в Києві з 2002 року.'
+  const t = useT()
+  const fullTitle = title ? `${title} | Termojet` : t('seo.defaultTitle')
+  const desc = description || t('seo.defaultDescription')
 
   const schemas = [ORGANIZATION_SCHEMA]
 

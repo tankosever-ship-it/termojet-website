@@ -2,49 +2,52 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Headphones, FileText, Settings, Car, LayoutTemplate, Flame, Phone, Mail } from 'lucide-react'
 import SEO from '../components/SEO'
+import { useT } from '../i18n/useT'
 
 const fadeUp  = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.1 } } }
 
-const SERVICES = [
-  {
-    icon: Headphones,
-    title: 'Консультація спеціалістів',
-    desc: 'Відповімо на технічні питання щодо підбору, монтажу та налаштування обладнання. Консультуємо телефоном та електронною поштою.',
-  },
-  {
-    icon: FileText,
-    title: 'Розробка технічних схем',
-    desc: 'Розробляємо гідравлічні схеми підключення колекторів, насосних груп та теплових насосів під конкретний об\'єкт.',
-  },
-  {
-    icon: Settings,
-    title: 'Підбір обладнання',
-    desc: 'Розраховуємо параметри та підбираємо оптимальне обладнання виходячи з потужності системи та вимог замовника.',
-  },
-  {
-    icon: Car,
-    title: 'Виїзд спеціаліста',
-    desc: 'Організовуємо виїзд авторизованого інженера для технічного огляду, запуску або усунення несправностей.',
-  },
-  {
-    icon: LayoutTemplate,
-    title: 'Комплексне проектування',
-    desc: 'Проектуємо системи опалення та гарячого водопостачання під ключ: від технічного завдання до робочих креслень.',
-  },
-  {
-    icon: Flame,
-    title: 'Налаштування котельні',
-    desc: 'Виконуємо пусконалагодження котелень, програмування контролерів та балансування контурів опалення.',
-  },
-]
-
 export default function TechSupportPage() {
+  const t = useT()
+
+  const SERVICES = [
+    {
+      icon: Headphones,
+      title: t('techSupport.service1Title'),
+      desc: t('techSupport.service1Desc'),
+    },
+    {
+      icon: FileText,
+      title: t('techSupport.service2Title'),
+      desc: t('techSupport.service2Desc'),
+    },
+    {
+      icon: Settings,
+      title: t('techSupport.service3Title'),
+      desc: t('techSupport.service3Desc'),
+    },
+    {
+      icon: Car,
+      title: t('techSupport.service4Title'),
+      desc: t('techSupport.service4Desc'),
+    },
+    {
+      icon: LayoutTemplate,
+      title: t('techSupport.service5Title'),
+      desc: t('techSupport.service5Desc'),
+    },
+    {
+      icon: Flame,
+      title: t('techSupport.service6Title'),
+      desc: t('techSupport.service6Desc'),
+    },
+  ]
+
   return (
     <>
       <SEO
-        title="Технічна підтримка — Termojet"
-        description="Технічна підтримка Termojet: консультації, розробка схем, підбір обладнання, виїзд спеціаліста та налаштування котелень."
+        title={t('techSupport.seoTitle')}
+        description={t('techSupport.seoDesc')}
       />
 
       <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
@@ -57,10 +60,10 @@ export default function TechSupportPage() {
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.div variants={fadeUp} className="label-accent mb-4">Termojet</motion.div>
             <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl font-black mb-4 leading-tight font-['Archivo',sans-serif]">
-              Технічна підтримка
+              {t('techSupport.heroTitle')}
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-white/70 max-w-2xl mx-auto">
-              Супроводжуємо вас на всіх етапах — від вибору обладнання до запуску системи
+              {t('techSupport.heroSubtitle')}
             </motion.p>
           </motion.div>
         </div>
@@ -68,8 +71,8 @@ export default function TechSupportPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-16">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-10">
-          <div className="label-accent mb-2">Послуги</div>
-          <h2 className="section-title">Як ми допоможемо</h2>
+          <div className="label-accent mb-2">{t('techSupport.servicesLabel')}</div>
+          <h2 className="section-title">{t('techSupport.servicesHeading')}</h2>
         </motion.div>
 
         <motion.div
@@ -95,10 +98,10 @@ export default function TechSupportPage() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="label-accent mb-4">Контакти</div>
-              <h2 className="text-3xl font-black mb-4 font-['Archivo',sans-serif]">Зв'яжіться з технічним відділом</h2>
+              <div className="label-accent mb-4">{t('nav.contacts')}</div>
+              <h2 className="text-3xl font-black mb-4 font-['Archivo',sans-serif]">{t('techSupport.contactHeading')}</h2>
               <p className="text-white/70 mb-6">
-                Наші інженери готові відповісти на ваші питання в робочий час. Для термінових питань — телефонуйте.
+                {t('techSupport.contactBody')}
               </p>
               <div className="space-y-3 mb-8">
                 <a href="tel:+380507189165" className="flex items-center gap-3 text-white font-medium hover:text-[var(--accent)] transition-colors">
@@ -117,7 +120,7 @@ export default function TechSupportPage() {
             </div>
             <div className="text-center lg:text-right">
               <Link to="/contacts" className="btn-primary inline-flex text-base px-8 py-4">
-                Залишити заявку
+                {t('servicePage.contact.form.title')}
               </Link>
             </div>
           </div>

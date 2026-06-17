@@ -1,18 +1,20 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Home, Grid, ShoppingCart, Blocks, Phone } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
-
-const TABS = [
-  { label: 'Головна',     icon: Home,         path: '/' },
-  { label: 'Каталог',     icon: Grid,         path: '/catalog' },
-  { label: 'Кошик',       icon: ShoppingCart, path: '/cart' },
-  { label: 'Конструктор', icon: Blocks,       href: 'https://app.termojet.com.ua/', external: true },
-  { label: 'Контакти',    icon: Phone,        path: '/contacts' },
-]
+import { useT } from '../../i18n/useT'
 
 export default function MobileBottomNav() {
   const location = useLocation()
   const { cart } = useApp()
+  const t = useT()
+
+  const TABS = [
+    { label: t('mobileNav.home'),        icon: Home,         path: '/' },
+    { label: t('nav.catalog'),           icon: Grid,         path: '/catalog' },
+    { label: t('nav.cart'),              icon: ShoppingCart, path: '/cart' },
+    { label: t('mobileNav.constructor'), icon: Blocks,       href: 'https://app.termojet.com.ua/', external: true },
+    { label: t('nav.contacts'),          icon: Phone,        path: '/contacts' },
+  ]
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0)
 

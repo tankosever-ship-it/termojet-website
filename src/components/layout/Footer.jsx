@@ -8,6 +8,8 @@ import { assetPath } from '../../utils/assetPath'
 // ─── Форма підписки на новини ───
 function SubscribeForm() {
   const { subscribe } = useApp()
+  const t = useT()
+  const footer = t('footer')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState(null) // null | 'loading' | 'ok' | 'err'
 
@@ -28,21 +30,21 @@ function SubscribeForm() {
           required
           value={email}
           onChange={e => { setEmail(e.target.value); if (status) setStatus(null) }}
-          placeholder="Ваш email"
+          placeholder={footer.emailPlaceholder}
           className="w-full px-3.5 py-2.5 text-sm text-white rounded-lg outline-none focus:border-[var(--accent)] transition-colors"
           style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
         />
         <button type="submit" disabled={status === 'loading'}
           className="btn-primary w-full justify-center px-4 py-2.5 text-sm disabled:opacity-60">
-          {status === 'loading' ? '...' : 'Підписатись'}
+          {status === 'loading' ? '...' : footer.subscribe}
         </button>
       </form>
-      {status === 'ok'  && <p className="text-[var(--accent-light)] text-xs mt-2">Дякуємо! Ви підписані на новини.</p>}
-      {status === 'err' && <p className="text-red-400 text-xs mt-2">Не вдалося підписатися. Спробуйте ще раз.</p>}
+      {status === 'ok'  && <p className="text-[var(--accent-light)] text-xs mt-2">{footer.subscribeSuccess}</p>}
+      {status === 'err' && <p className="text-red-400 text-xs mt-2">{footer.subscribeError}</p>}
       <p className="text-white/35 text-xs leading-relaxed mt-2">
-        Надаючи свій імейл ви погоджуєтесь з{' '}
-        <Link to="/privacy" className="underline hover:text-white/60" target="_blank">політикою конфіденційності</Link>
-        {' '}та даєте згоду на отримання новин.
+        {footer.subscribeConsentPre}{' '}
+        <Link to="/privacy" className="underline hover:text-white/60" target="_blank">{footer.subscribeConsentPrivacy}</Link>
+        {' '}{footer.subscribeConsentPost}
       </p>
     </div>
   )
@@ -85,7 +87,7 @@ export default function Footer() {
             <div className="mb-5">
               <div className="font-semibold text-white/90 text-sm mb-2 flex items-center gap-2">
                 <span className="w-1 h-4 rounded bg-[var(--accent)] inline-block" />
-                Підпишіться на новини
+                {footer.newsletterTitle}
               </div>
               <SubscribeForm />
             </div>
@@ -105,10 +107,10 @@ export default function Footer() {
             </div>
             <ul className="space-y-2.5 text-sm">
               {[
-                ['Насоси', '/catalog/nasosy'],
-                ['Насосні групи', '/catalog/nasosni-hrupy'],
-                ['Клапани і приводи', '/catalog/klapany'],
-                ['Розподільчі колектори', '/catalog/rozpodilchi-kolektory'],
+                [footer.catPumps, '/catalog/nasosy'],
+                [footer.catPumpGroups, '/catalog/nasosni-hrupy'],
+                [footer.catValves, '/catalog/klapany'],
+                [footer.catManifolds, '/catalog/rozpodilchi-kolektory'],
                 ['TERMOJET Mega', '/catalog/termojet-mega'],
                 ['TERMOJET Mini', '/catalog/termojet-mini'],
                 ['TERMOJET BOX', '/catalog/termojet-box'],
@@ -122,7 +124,7 @@ export default function Footer() {
               ))}
               <li className="pt-1">
                 <Link to="/catalog" className="text-[var(--accent-light)] hover:text-white transition-colors font-semibold text-xs uppercase tracking-wide flex items-center gap-1">
-                  Весь каталог <ArrowRight size={12} />
+                  {footer.allCatalog} <ArrowRight size={12} />
                 </Link>
               </li>
             </ul>
@@ -200,7 +202,7 @@ export default function Footer() {
             {/* Соцмережі */}
             <div className="mt-6">
               <div className="text-white/40 text-xs uppercase tracking-wider mb-3" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                Ми в соцмережах
+                {footer.followUs}
               </div>
               <div className="flex gap-2.5">
                 {[
@@ -252,11 +254,11 @@ export default function Footer() {
       <div className="relative border-t border-white/8">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/50">
           {[
-            ['Доставка і оплата', '/delivery'],
-            ['Повернення та обмін', '/returns'],
-            ['Політика конфіденційності', '/privacy'],
-            ['Умови використання', '/terms'],
-            ['Консультація', '/contacts'],
+            [footer.delivery, '/delivery'],
+            [footer.returns, '/returns'],
+            [footer.privacy, '/privacy'],
+            [footer.terms, '/terms'],
+            [footer.consultation, '/contacts'],
           ].map(([label, to]) => (
             <Link key={to} to={to} className="hover:text-white transition-colors">{label}</Link>
           ))}

@@ -11,6 +11,7 @@ import CategoryIcon from '../CategoryIcon'
 
 // ─── Mega-menu каталог (full-width) ───
 function MegaMenu({ lang, products, onClose }) {
+  const t = useT()
   const [activeCatIdx, setActiveCatIdx] = useState(0)
   const activeCat = CATEGORIES[activeCatIdx]
   const catProducts = products
@@ -27,11 +28,11 @@ function MegaMenu({ lang, products, onClose }) {
           <div className="border-r border-[var(--border)] py-4 pr-2 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 64px)', background: '#0D0D0D' }}>
             <div className="px-3 mb-4 flex items-center justify-between gap-2">
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
-                Категорії · {CATEGORIES.length}
+                {t('navbar.categories')} · {CATEGORIES.length}
               </span>
               <Link to="/catalog" onClick={onClose}
                 style={{ background: '#FF6B00', color: '#fff', fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', padding: '3px 10px', borderRadius: '0.4rem', whiteSpace: 'nowrap' }}>
-                Перейти
+                {t('navbar.goTo')}
               </Link>
             </div>
             {CATEGORIES.map((cat, i) => (
@@ -69,7 +70,7 @@ function MegaMenu({ lang, products, onClose }) {
               <Link to={`/catalog/${activeCat?.slug}`} onClick={onClose}
                 className="flex items-center gap-1 hover:gap-2 transition-all"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)' }}>
-                Всі товари <ArrowRight size={11} />
+                {t('navbar.allProducts')} <ArrowRight size={11} />
               </Link>
             </div>
 
@@ -103,7 +104,7 @@ function MegaMenu({ lang, products, onClose }) {
                 })}
               </div>
             ) : (
-              <div className="flex items-center justify-center h-40 text-gray-300 text-sm">Оберіть категорію</div>
+              <div className="flex items-center justify-center h-40 text-gray-300 text-sm">{t('navbar.selectCategory')}</div>
             )}
           </div>
 
@@ -112,7 +113,7 @@ function MegaMenu({ lang, products, onClose }) {
             {/* Phones image on dark bg */}
             <div className="flex-shrink-0 flex items-center justify-center px-4 pt-5 pb-2 relative"
               style={{ background: 'radial-gradient(ellipse 120% 80% at 50% 100%, rgba(255,85,0,0.18), transparent 70%)' }}>
-              <img src={assetPath('/app-promo-nobg.png')} alt="Конструктор Termojet"
+              <img src={assetPath('/app-promo-nobg.png')} alt={t('navbar.appPromoAlt')}
                 className="w-full block" style={{ maxHeight: 180, objectFit: 'contain' }} />
             </div>
             <div className="p-5 flex flex-col gap-3 flex-1">
@@ -120,19 +121,19 @@ function MegaMenu({ lang, products, onClose }) {
                 Termojet App
               </div>
               <h4 className="text-white font-black text-lg leading-tight font-['Archivo',sans-serif]">
-                Конструктор<br />котельної<br />системи
+                {t('navbar.appHeading')}
               </h4>
               <p className="text-white/50 text-xs leading-relaxed" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                Підберіть колектор та насосні групи без помилок. Експорт PDF.
+                {t('navbar.appDesc')}
               </p>
               <div className="h-px bg-white/8 my-1" />
               <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
                 className="mt-auto flex items-center gap-2 text-white border border-white/20 px-4 py-2.5 hover:bg-white/10 transition-colors self-start"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: '0.5rem' }}>
-                Запустити <ArrowUpRight size={13} />
+                {t('navbar.launch')} <ArrowUpRight size={13} />
               </a>
               <Link to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
-                Весь каталог →
+                {t('navbar.allCatalog')}
               </Link>
             </div>
           </div>
@@ -227,18 +228,18 @@ export default function Navbar() {
   const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '15px', fontWeight: 500, letterSpacing: '0.01em', transition: 'color 0.3s' }
 
   const aboutItems = [
-    { to: '/about',     label: 'Про нас' },
-    { to: '/portfolio', label: 'Проекти' },
-    { to: '/blog',      label: 'Блог' },
-    { to: '/contacts',  label: 'Контакти' },
+    { to: '/about',     label: t('navbar.aboutUs') },
+    { to: '/portfolio', label: t('navbar.projects') },
+    { to: '/blog',      label: t('navbar.blog') },
+    { to: '/contacts',  label: t('navbar.contacts') },
   ]
   const clientItems = [
-    { to: '/service',  label: 'Сервіс' },
-    { to: '/navchannya', label: 'Навчання' },
-    { to: '/delivery', label: 'Доставка і оплата' },
-    { to: '/returns',  label: 'Повернення та обмін' },
-    { to: '/oem',      label: 'OEM виробництво' },
-    { to: '/files',    label: 'Файли' },
+    { to: '/service',    label: t('navbar.service') },
+    { to: '/navchannya', label: t('navbar.training') },
+    { to: '/delivery',   label: t('navbar.delivery') },
+    { to: '/returns',    label: t('navbar.returns') },
+    { to: '/oem',        label: t('navbar.oem') },
+    { to: '/files',      label: t('navbar.files') },
   ]
 
   // Сторінки зі світлим верхом (без темного героя) — навбар завжди світлий
@@ -285,7 +286,7 @@ export default function Navbar() {
                 <button onClick={() => { setCatalogOpen(v => !v); setAboutOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap group"
                   style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : linkCol, borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
-                  Каталог
+                  {t('nav.catalog')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: catalogOpen ? 'rotate(180deg)' : 'none', color: catalogOpen ? 'var(--accent)' : 'currentColor' }} />
                 </button>
                 {catalogOpen && <MegaMenu lang={lang} products={products} onClose={() => setCatalogOpen(false)} />}
@@ -296,7 +297,7 @@ export default function Navbar() {
                 <button onClick={() => { setAboutOpen(v => !v); setCatalogOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
-                  Про Termojet
+                  {t('navbar.aboutTermojet')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: aboutOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {aboutOpen && <DarkDropdown items={aboutItems} onClose={() => setAboutOpen(false)} />}
@@ -307,7 +308,7 @@ export default function Navbar() {
                 <button onClick={() => { setClientOpen(v => !v); setCatalogOpen(false); setAboutOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/service','/navchannya','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/service','/navchannya','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
-                  Для клієнта
+                  {t('navbar.forClient')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: clientOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {clientOpen && <DarkDropdown items={clientItems} onClose={() => setClientOpen(false)} />}
@@ -319,7 +320,7 @@ export default function Navbar() {
                 style={{ ...navLinkStyle, color: linkColMuted, borderBottom: '2px solid transparent' }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
-                Теплові насоси <ExternalLink size={10} />
+                {t('navbar.heatPumps')} <ExternalLink size={10} />
               </a>
 
               {/* Конструктор */}
@@ -328,7 +329,7 @@ export default function Navbar() {
                 style={{ ...navLinkStyle, color: 'var(--accent)', borderBottom: '2px solid transparent', fontWeight: 600 }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'white'; e.currentTarget.style.background = 'var(--accent)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.background = 'transparent' }}>
-                Конструктор <ExternalLink size={10} />
+                {t('navbar.constructor')} <ExternalLink size={10} />
               </a>
             </nav>
 
@@ -402,12 +403,12 @@ export default function Navbar() {
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
-                Стати партнером
+                {t('navbar.becomePartner')}
               </Link>
               <Link to="/contacts"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
                 style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
-                Консультація
+                {t('navbar.consultation')}
               </Link>
 
               {/* Mobile burger */}
@@ -423,7 +424,7 @@ export default function Navbar() {
               <div className="relative">
                 <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input ref={searchRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Пошук товарів..."
+                  placeholder={t('navbar.searchPlaceholder')}
                   className="w-full pl-9 pr-4 py-2.5 text-sm bg-[var(--bg-warm)]"
                   style={{ border: '1px solid var(--border)', borderBottom: '2px solid var(--accent)', borderRadius: '0.5rem', outline: 'none', fontFamily: "'IBM Plex Sans', sans-serif" }} />
               </div>
@@ -440,11 +441,11 @@ export default function Navbar() {
               <Link to="/catalog"
                 className="px-3 py-2.5 transition-colors"
                 style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderLeft: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
-                Каталог
+                {t('nav.catalog')}
               </Link>
 
               <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
-                Про Termojet
+                {t('navbar.aboutTermojet')}
               </div>
               {aboutItems.map(i => (
                 <Link key={i.to} to={i.to}
@@ -457,7 +458,7 @@ export default function Navbar() {
               ))}
 
               <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
-                Для клієнта
+                {t('navbar.forClient')}
               </div>
               {clientItems.map(i => (
                 <Link key={i.to} to={i.to}
@@ -472,7 +473,7 @@ export default function Navbar() {
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
                 className="px-3 py-2.5 flex items-center gap-2 transition-colors"
                 style={{ ...navLinkStyle, color: '#444' }}>
-                Теплові насоси <ExternalLink size={11} />
+                {t('navbar.heatPumps')} <ExternalLink size={11} />
               </a>
 
               <a href={`tel:${siteSettings.phone.replace(/[^\d+]/g, '')}`}
@@ -485,12 +486,12 @@ export default function Navbar() {
                 <Link to="/partners"
                   className="flex-1 py-2.5 text-center"
                   style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
-                  Стати партнером
+                  {t('navbar.becomePartner')}
                 </Link>
                 <Link to="/contacts"
                   className="flex-1 py-2.5 text-white text-center"
                   style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
-                  Консультація
+                  {t('navbar.consultation')}
                 </Link>
               </div>
 

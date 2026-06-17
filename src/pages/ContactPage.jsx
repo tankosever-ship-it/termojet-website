@@ -22,10 +22,10 @@ export default function ContactPage() {
   }
 
   const contactItems = [
-    { icon: Phone, label: 'ТЕЛЕФОН', value: siteSettings.phone, href: `tel:${siteSettings.phone}` },
-    { icon: Mail, label: 'EMAIL', value: siteSettings.email, href: `mailto:${siteSettings.email}` },
-    { icon: MapPin, label: 'АДРЕСА', value: siteSettings.address },
-    { icon: Clock, label: 'ГРАФІК', value: siteSettings.workHours },
+    { icon: Phone, label: t('contact.phone'), value: siteSettings.phone, href: `tel:${siteSettings.phone}` },
+    { icon: Mail, label: t('contact.email'), value: siteSettings.email, href: `mailto:${siteSettings.email}` },
+    { icon: MapPin, label: t('contact.address'), value: siteSettings.address },
+    { icon: Clock, label: t('contact.workHours'), value: siteSettings.workHours },
   ]
 
   return (
@@ -43,7 +43,7 @@ export default function ContactPage() {
             {contact.title}
           </h1>
           <p className="text-white/50 max-w-lg text-sm">
-            Зв'яжіться з нами будь-яким зручним способом — відповімо швидко
+            {t('contact.subtitle')}
           </p>
         </div>
       </section>
@@ -55,7 +55,7 @@ export default function ContactPage() {
           <div>
             <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
               className="uppercase block mb-6">
-              РЕКВІЗИТИ ТА АДРЕСИ
+              {t('contact.requisites')}
             </span>
 
             <div className="space-y-1 mb-8">
@@ -85,13 +85,13 @@ export default function ContactPage() {
             <div>
               <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
                 className="uppercase block mb-4">
-                ОФІСИ ТА ВИРОБНИЦТВО
+                {t('contact.offices')}
               </span>
               <div className="space-y-3">
                 {[
-                  { city: 'КИЇВ', addr: 'Софіївська Борщагівка, вул. Київська 3', note: 'Виробництво + головний офіс' },
-                  { city: 'ЖИТОМИР', addr: 'пр. Незалежності, 79', note: 'Регіональний офіс' },
-                  { city: 'ЗАБЖЕ, ПОЛЬЩА', addr: '', note: 'Офіс для ринків ЄС · з 2018 року' },
+                  { city: 'КИЇВ', addr: 'Софіївська Борщагівка, вул. Київська 3', note: t('contact.kyivNote') },
+                  { city: 'ЖИТОМИР', addr: 'пр. Незалежності, 79', note: t('contact.zhytomyrNote') },
+                  { city: 'ЗАБЖЕ, ПОЛЬЩА', addr: '', note: t('contact.zabrzeNote') },
                 ].map(({ city, addr, note }) => (
                   <div key={city} className="border border-gray-100 p-4">
                     <div style={{ ...mono, fontSize: '10px', letterSpacing: '0.14em', color: 'var(--accent)' }} className="uppercase mb-1">
@@ -109,16 +109,16 @@ export default function ContactPage() {
           <div>
             <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
               className="uppercase block mb-6">
-              НАПИСАТИ НАМ
+              {t('contact.sendMessage')}
             </span>
 
             <div className="card p-6 md:p-8">
               {success ? (
                 <div className="text-center py-12">
                   <CheckCircle size={48} className="mx-auto mb-4" style={{ color: '#22c55e' }} />
-                  <div className="font-black text-xl text-gray-900 mb-2">Повідомлення надіслано</div>
+                  <div className="font-black text-xl text-gray-900 mb-2">{t('contact.form.successTitle')}</div>
                   <div style={{ ...mono, fontSize: '11px', color: 'var(--text-muted)' }}>
-                    Ми зв'яжемося з вами найближчим часом
+                    {t('contact.form.successSub')}
                   </div>
                 </div>
               ) : (
@@ -126,28 +126,28 @@ export default function ContactPage() {
                   <div>
                     <label style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
                       className="uppercase block mb-1.5">
-                      ІМ'Я *
+                      {t('contact.form.nameLabel')}
                     </label>
-                    <input {...register('name', { required: true })} placeholder="Ваше ім'я"
+                    <input {...register('name', { required: true })} placeholder={t('contact.form.namePlaceholder')}
                       className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm transition-colors" />
-                    {errors.name && <p className="text-xs text-red-500 mt-1" style={mono}>ВВЕДІТЬ ІМ'Я</p>}
+                    {errors.name && <p className="text-xs text-red-500 mt-1" style={mono}>{t('contact.form.nameError')}</p>}
                   </div>
 
                   <div>
                     <label style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
                       className="uppercase block mb-1.5">
-                      ТЕЛЕФОН *
+                      {t('contact.form.phoneLabel')}
                     </label>
                     <input {...register('phone', { required: true })} type="tel" inputMode="numeric" maxLength={12} placeholder="0XX XXX XX XX"
                       onInput={e => { e.target.value = e.target.value.replace(/\D/g, '') }}
                       className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm transition-colors" />
-                    {errors.phone && <p className="text-xs text-red-500 mt-1" style={mono}>ВВЕДІТЬ ТЕЛЕФОН</p>}
+                    {errors.phone && <p className="text-xs text-red-500 mt-1" style={mono}>{t('contact.form.phoneError')}</p>}
                   </div>
 
                   <div>
                     <label style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
                       className="uppercase block mb-1.5">
-                      EMAIL
+                      {t('contact.form.emailLabel')}
                     </label>
                     <input {...register('email')} placeholder="your@email.com" type="email"
                       className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm transition-colors" />
@@ -156,20 +156,20 @@ export default function ContactPage() {
                   <div>
                     <label style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
                       className="uppercase block mb-1.5">
-                      ПОВІДОМЛЕННЯ
+                      {t('contact.form.messageLabel')}
                     </label>
-                    <textarea {...register('message')} placeholder="Ваше запитання або повідомлення..." rows={5}
+                    <textarea {...register('message')} placeholder={t('contact.form.messagePlaceholder')} rows={5}
                       className="w-full px-4 py-3 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm transition-colors resize-none" />
                   </div>
 
-                  <ConsentCheckbox buttonLabel="Надіслати" />
+                  <ConsentCheckbox buttonLabel={t('contact.form.submit')} />
 
                   <button type="submit" disabled={isSubmitting}
                     className="w-full flex items-center justify-center gap-2 py-3.5 font-bold text-white transition-all"
                     style={{ background: 'var(--accent)' }}>
                     <Send size={16} />
                     <span style={{ ...mono, fontSize: '12px', letterSpacing: '0.08em' }}>
-                      {isSubmitting ? 'НАДСИЛАННЯ...' : 'НАДІСЛАТИ'}
+                      {isSubmitting ? t('contact.form.submitting') : t('contact.form.submitLabel')}
                     </span>
                   </button>
                 </form>
@@ -182,20 +182,20 @@ export default function ContactPage() {
         <div className="mt-14">
           <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
             className="uppercase block mb-5">
-            НА КАРТІ
+            {t('contact.map')}
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
                 city: 'КИЇВ',
                 addr: 'Софіївська Борщагівка, вул. Київська 3',
-                note: 'Виробництво + головний офіс',
+                note: t('contact.kyivNote'),
                 src: 'https://maps.google.com/maps?q=' + encodeURIComponent('Termojet, вул. Київська 3, Софіївська Борщагівка') + '&z=16&output=embed',
               },
               {
                 city: 'ЖИТОМИР',
                 addr: 'пр. Незалежності, 79',
-                note: 'Регіональний офіс',
+                note: t('contact.zhytomyrNote'),
                 src: 'https://maps.google.com/maps?q=' + encodeURIComponent('Житомир, проспект Незалежності 79') + '&z=15&output=embed',
               },
             ].map(({ city, addr, note, src }) => (
@@ -213,7 +213,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <iframe
-                  title={`Карта — ${city}`}
+                  title={`${t('contact.map')} — ${city}`}
                   src={src}
                   width="100%" height="300"
                   style={{ border: 0, display: 'block' }}

@@ -28,40 +28,11 @@ const MANUFACTURING_PHOTOS = [
   `${BASE}/2024/04/photo_2024-04-05_18-34-04.jpg`,
 ]
 
-const PROCESS_STEPS = [
-  { num: '01', label: 'ЛАЗЕРНЕ РІЗАННЯ' },
-  { num: '02', label: 'ЛИСТОГИН' },
-  { num: '03', label: 'ЗВАРЮВАННЯ' },
-  { num: '04', label: 'ПОРОШКОВЕ ФАРБУВАННЯ' },
-  { num: '05', label: 'ТЕПЛОІЗОЛЯЦІЯ' },
-  { num: '06', label: 'КОНТРОЛЬ ЯКОСТІ' },
-]
-
-const TIMELINE = [
-  { year: '2002', title: 'Заснування', desc: 'Перша гідрострілка Termojet виготовлена у невеликому гаражі в Києві.' },
-  { year: '2005', title: 'Власний цех', desc: 'Відкрито перший виробничий цех площею 1 000 м². Серійне виробництво колекторів.' },
-  { year: '2008', title: 'Вихід до ЄС', desc: 'Перші поставки в країни Євросоюзу. Сертифікація продукції за стандартами ЄС.' },
-  { year: '2012', title: 'Розширення', desc: 'Виробничі площі зросли до 3 000 м². Потужність — 70 000+ одиниць на рік.' },
-  { year: '2015', title: '10 000 котелень', desc: 'Оснащено 10 000-у котельню. Запуск серії TERMOJET Mega для промислових об\'єктів.' },
-  { year: '2018', title: 'Польська філія', desc: 'Відкрито офіс у Забже (Польща) для ринків Центральної та Східної Європи.' },
-  { year: '2022', title: 'Не зупиняємось', desc: 'Попри повномасштабне вторгнення виробництво не зупинялось. Забезпечуємо критичну інфраструктуру.' },
-  { year: '2024', title: 'Сьогодні', desc: '50 000+ оснащених об\'єктів. Експорт у 15 країн ЄС. ~100 працівників.' },
-]
-
-const STATS = [
-  { value: '2002', label: 'РІК ЗАСНУВАННЯ' },
-  { value: '3 000', label: 'М² ВИРОБНИЦТВА' },
-  { value: '70 000+', label: 'ОДИНИЦЬ / РІК' },
-  { value: '~100', label: 'СПЕЦІАЛІСТІВ' },
-  { value: '50 000+', label: 'КОТЕЛЕНЬ' },
-  { value: '15', label: 'КРАЇН ЄС' },
-]
-
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
 const stagger = { show: { transition: { staggerChildren:0.07 } } }
 
-function PhotoGallery({ photos }) {
+function PhotoGallery({ photos, t }) {
   const [lightbox, setLightbox] = useState(null)
 
   function prev() { setLightbox(i => (i - 1 + photos.length) % photos.length) }
@@ -80,7 +51,7 @@ function PhotoGallery({ photos }) {
           >
             <img
               src={mediaSrc(photo.url)}
-              alt={photo.caption || `Виробництво Termojet ${i + 1}`}
+              alt={photo.caption || `${t('about.photoAlt')} ${i + 1}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
@@ -140,21 +111,50 @@ export default function AboutPage() {
   const { aboutContent: ac } = useApp()
   const [videoOpen, setVideoOpen] = useState(null) // url відкритого відео або null
 
+  const PROCESS_STEPS = [
+    { num: '01', label: t('about.stepLaserCut') },
+    { num: '02', label: t('about.stepBending') },
+    { num: '03', label: t('about.stepWelding') },
+    { num: '04', label: t('about.stepPowderCoat') },
+    { num: '05', label: t('about.stepInsulation') },
+    { num: '06', label: t('about.stepQualityControl') },
+  ]
+
+  const TIMELINE = [
+    { year: '2002', title: t('about.tl2002Title'), desc: t('about.tl2002Desc') },
+    { year: '2005', title: t('about.tl2005Title'), desc: t('about.tl2005Desc') },
+    { year: '2008', title: t('about.tl2008Title'), desc: t('about.tl2008Desc') },
+    { year: '2012', title: t('about.tl2012Title'), desc: t('about.tl2012Desc') },
+    { year: '2015', title: t('about.tl2015Title'), desc: t('about.tl2015Desc') },
+    { year: '2018', title: t('about.tl2018Title'), desc: t('about.tl2018Desc') },
+    { year: '2022', title: t('about.tl2022Title'), desc: t('about.tl2022Desc') },
+    { year: '2024', title: t('about.tl2024Title'), desc: t('about.tl2024Desc') },
+  ]
+
+  const STATS = [
+    { value: '2002', label: t('about.statFoundedLabel') },
+    { value: '3 000', label: t('about.statAreaLabel') },
+    { value: '70 000+', label: t('about.statCapacityLabel') },
+    { value: '~100', label: t('about.statEmployeesLabel') },
+    { value: '50 000+', label: t('about.statObjectsLabel') },
+    { value: '15', label: t('about.statCountriesLabel') },
+  ]
+
+  const fileVideos = [
+    ac.oldVideo   && { src: mediaSrc(ac.oldVideo),   label: t('about.videoArchiveLabel') },
+    ac.localVideo && { src: mediaSrc(ac.localVideo), label: t('about.videoWorkshopLabel') },
+  ].filter(Boolean)
   const photos    = ac.photos?.length ? ac.photos : MANUFACTURING_PHOTOS.map((url) => ({ url, caption: '' }))
   const ytId      = youtubeId(ac.youtubeUrl)
   const poster    = photos[0] ? mediaSrc(photos[0].url) : MANUFACTURING_PHOTOS[0]
   // До 3 відео: старе (архівне), власне (нове) — як <video>; YouTube — як iframe
-  const fileVideos = [
-    ac.oldVideo   && { src: mediaSrc(ac.oldVideo),   label: 'Архівне відео цеху' },
-    ac.localVideo && { src: mediaSrc(ac.localVideo), label: 'Виробничий цех' },
-  ].filter(Boolean)
   const videoCount = fileVideos.length + (ytId ? 1 : 0)
   const vidCols = videoCount >= 3 ? 'lg:grid-cols-3' : videoCount === 2 ? 'lg:grid-cols-2' : ''
 
   return (
     <>
       <SEO title={about.title}
-        description="Termojet — провідний український виробник обладнання для котелень з 2002 року. 3000 м², ~100 фахівців, 50 000+ об'єктів." />
+        description={t('about.seoDesc')} />
 
       {/* ═══ HERO ══════════════════════════════════════════════════════ */}
       <section className="hero-gradient grain relative overflow-hidden text-white pb-20 md:pb-28"
@@ -175,22 +175,21 @@ export default function AboutPage() {
           <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}>
             <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,85,0,0.9)' }}
               className="uppercase">
-              ПРО КОМПАНІЮ · TERMOJET · З 2002 РОКУ
+              {t('about.heroEyebrow')}
             </span>
           </motion.div>
           <motion.h1 initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.1 }}
             className="text-4xl md:text-6xl font-black font-['Archivo',sans-serif] mt-4 mb-5 leading-[1.05]">
-            Виробляємо в Україні.<br />
-            <span style={{ color: 'var(--accent)' }}>Власними руками.</span>
+            {t('about.heroTitle')}<br />
+            <span style={{ color: 'var(--accent)' }}>{t('about.heroTitleAccent')}</span>
           </motion.h1>
           <motion.p initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}
             className="text-white/60 text-lg leading-relaxed max-w-2xl mb-8">
-            З 2002 року виробляємо насосні групи, колектори та гідрострілки на власному заводі у Києві.
-            Повний цикл — від лазерного різання до фінального контролю якості.
+            {t('about.heroSubtitle')}
           </motion.p>
           <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.3 }}
             className="flex flex-wrap gap-3">
-            {['🇺🇦 MADE IN UKRAINE', '🏭 3 000 М² ЗАВОДУ', '⚙️ 70 000+ ВИРОБІВ / РІК'].map(tag => (
+            {[t('about.heroBadge1'), t('about.heroBadge2'), t('about.heroBadge3')].map(tag => (
               <span key={tag} className="bg-white/8 border border-white/15 px-4 py-1.5 text-sm backdrop-blur-sm"
                 style={{ ...mono, fontSize: '10px', letterSpacing: '0.1em' }}>
                 {tag}
@@ -231,17 +230,17 @@ export default function AboutPage() {
             <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }}
               viewport={{ once:true }} transition={{ duration:0.5 }}>
               <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
-                ПРО НАС
+                {t('about.aboutEyebrow')}
               </span>
               <h2 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif] mt-3 mb-6 leading-tight">
-                Сімейна компанія.<br />
-                <span className="text-gradient-orange">Національний виробник.</span>
+                {t('about.aboutTitle')}<br />
+                <span className="text-gradient-orange">{t('about.aboutTitleAccent')}</span>
               </h2>
               <div className="space-y-4 text-gray-500 leading-relaxed text-sm">
-                <p><strong className="text-gray-900">Termojet</strong> — виробнича сімейна компанія, заснована у 2002 році у Києві на базі торгової компанії «Софіївка». Двадцять два роки тому в невеликому гаражі було виготовлено першу сталеву гідрострілку Termojet.</p>
-                <p>За ці роки компанія перетворилась з невеликого виробництва у <strong className="text-gray-900">найбільший в Україні завод-виробник систем швидкого монтажу для котелень</strong> — колекторів, гідрострілок, насосних груп.</p>
-                <p>Колектори, гідрострілки та насосні групи Termojet виготовляються на <strong className="text-gray-900">високотехнологічному обладнанні</strong>: лазерних верстатах, листогинах, напівавтоматичних зварювальних апаратах та лінії порошкового фарбування.</p>
-                <p>В цеху фінальної збірки обладнання додатково перевіряється, вдягається в теплоізоляцію, пакується та передається на склад готової продукції.</p>
+                <p><strong className="text-gray-900">Termojet</strong> — {t('about.aboutP1')}</p>
+                <p>{t('about.aboutP2Start')}<strong className="text-gray-900">{t('about.aboutP2Bold')}</strong>{t('about.aboutP2End')}</p>
+                <p>{t('about.aboutP3Start')}<strong className="text-gray-900">{t('about.aboutP3Bold')}</strong>{t('about.aboutP3End')}</p>
+                <p>{t('about.aboutP4')}</p>
               </div>
             </motion.div>
 
@@ -253,16 +252,16 @@ export default function AboutPage() {
               <div className="card p-6">
                 <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
                   className="uppercase mb-4">
-                  ВИРОБНИЧІ ДАНІ · КИЇВ, УКРАЇНА
+                  {t('about.specsCardEyebrow')}
                 </div>
                 <div className="space-y-0 divide-y divide-gray-100">
                   {[
-                    ['ВИРОБНИЧІ ПЛОЩІ', '3 000 м²'],
-                    ['СКЛАДСЬКІ ПЛОЩІ', '2 500 м²'],
-                    ['ВИРОБНИЧА ПОТУЖНІСТЬ', '70 000+ одиниць / рік'],
-                    ['КОМАНДА', '~100 спеціалістів'],
-                    ['ПОЛЬСЬКА ФІЛІЯ', 'Забже, з 2018 року'],
-                    ['РИНКИ ЗБУТУ', '15 країн ЄС + Україна'],
+                    [t('about.specAreaKey'),       t('about.specAreaVal')],
+                    [t('about.specWarehouseKey'),  t('about.specWarehouseVal')],
+                    [t('about.specCapacityKey'),   t('about.specCapacityVal')],
+                    [t('about.specTeamKey'),        t('about.specTeamVal')],
+                    [t('about.specPolandKey'),      t('about.specPolandVal')],
+                    [t('about.specMarketsKey'),     t('about.specMarketsVal')],
                   ].map(([k, v]) => (
                     <div key={k} className="flex justify-between items-center py-3">
                       <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em', color: 'var(--text-muted)' }} className="uppercase">{k}</span>
@@ -276,14 +275,14 @@ export default function AboutPage() {
               <div className="card p-6">
                 <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }}
                   className="uppercase mb-4">
-                  СЕРТИФІКАЦІЯ
+                  {t('about.certsEyebrow')}
                 </div>
                 <ul className="space-y-2.5">
                   {[
-                    'ISO 9001:2015 — Система менеджменту якості',
-                    'CE маркування — відповідність стандартам ЄС',
-                    'Технічні умови України (ТУ)',
-                    'Дозволи Держпраці України',
+                    t('about.cert1'),
+                    t('about.cert2'),
+                    t('about.cert3'),
+                    t('about.cert4'),
                   ].map(c => (
                     <li key={c} className="flex items-start gap-3 text-sm text-gray-600">
                       <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -356,7 +355,7 @@ export default function AboutPage() {
                 </div>
                 <div className="absolute bottom-3 right-3 z-10 bg-black/50 px-2 py-1 uppercase"
                   style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.65)' }}>
-                  Розгорнути ↗
+                  {t('about.videoExpand')}
                 </div>
               </motion.div>
             ))}
@@ -369,7 +368,7 @@ export default function AboutPage() {
                 <iframe
                   className="w-full h-full"
                   src={`https://www.youtube.com/embed/${ytId}`}
-                  title="Termojet — оглядове відео"
+                  title={t('about.youtubeTitle')}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -396,12 +395,12 @@ export default function AboutPage() {
           <div className="text-center mb-3 mt-8">
             <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)' }}
               className="uppercase">
-              ФОТОГАЛЕРЕЯ · ОБЛАДНАННЯ ЦЕХУ · {photos.length} ЗНІМКІВ
+              {t('about.galleryLabel')} · {photos.length} {t('about.galleryShots')}
             </span>
           </div>
 
           {/* Photo grid */}
-          <PhotoGallery photos={photos} />
+          <PhotoGallery photos={photos} t={t} />
         </div>
       </section>
 
@@ -411,10 +410,10 @@ export default function AboutPage() {
           <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }}
             viewport={{ once:true }} className="text-center mb-14">
             <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
-              ХРОНОЛОГІЯ
+              {t('about.timelineEyebrow')}
             </span>
             <h2 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif] mt-3 leading-tight">
-              22 роки росту
+              {t('about.timelineTitle')}
             </h2>
           </motion.div>
 
@@ -464,14 +463,14 @@ export default function AboutPage() {
             <div className="relative">
               <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.5)' }}
                 className="uppercase">
-                ПАРТНЕРСЬКА ПРОГРАМА
+                {t('about.ctaEyebrow')}
               </span>
-              <h2 className="section-title-white mt-3 mb-3 max-w-lg mx-auto">Станьте партнером Termojet</h2>
+              <h2 className="section-title-white mt-3 mb-3 max-w-lg mx-auto">{t('about.ctaTitle')}</h2>
               <p className="text-white/55 mb-7 max-w-md mx-auto text-sm leading-relaxed">
-                Шукаємо дилерів у всіх регіонах України та за кордоном. Вигідні умови, технічна підтримка.
+                {t('about.ctaSubtitle')}
               </p>
               <Link to="/dealers" className="btn-primary px-8 py-3.5">
-                Дізнатись про партнерство <ArrowRight size={16} />
+                {t('about.ctaBtn')} <ArrowRight size={16} />
               </Link>
             </div>
           </div>

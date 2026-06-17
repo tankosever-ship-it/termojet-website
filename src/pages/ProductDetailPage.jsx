@@ -25,7 +25,7 @@ function plainText(desc) {
   return (desc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
 }
 
-function renderDescriptionBody(desc) {
+function renderDescriptionBody(desc, t) {
   // Новий формат — готовий HTML (<p>, <ul>, <a>): рендеримо як є (наш контент)
   if (/<(p|ul|ol|h[1-6]|a|strong|br)\b/i.test(desc || '')) {
     return <div className="pdp-desc-html" dangerouslySetInnerHTML={{ __html: desc }} />
@@ -56,7 +56,7 @@ function renderDescriptionBody(desc) {
         </div>
         {/* Праворуч — картка «Комплектація» */}
         <div style={{ border: '1px solid var(--border)', background: 'var(--bg-warm)', alignSelf: 'start' }}>
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-100)', padding: '11px 16px', borderBottom: '1px solid var(--border)', background: '#fff' }}>Комплектація</div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-100)', padding: '11px 16px', borderBottom: '1px solid var(--border)', background: '#fff' }}>{t('product.kitContents')}</div>
           <ol style={{ listStyle: 'none' }}>
             {items.map((it, idx) => (
               <li key={it.num} style={{ display: 'flex', gap: 11, alignItems: 'flex-start', padding: '10px 16px', borderBottom: idx < items.length - 1 ? '1px solid var(--ink-200)' : 'none' }}>
@@ -95,11 +95,11 @@ function Accordion({ icon: Icon, title, defaultOpen, children }) {
   )
 }
 
-function TrustAccordions() {
+function TrustAccordions({ t }) {
   return (
     <div style={{ display: 'grid', gap: 8 }}>
       {ACCORDION_ORDER.map((key) => {
-        const d = accordionContent(key)
+        const d = accordionContent(key, t)
         return (
           <Accordion key={key} icon={d.icon} title={d.title}>
             {d.body}
@@ -111,25 +111,25 @@ function TrustAccordions() {
 }
 
 // Контент акордеонів (інфо по блоках).
-function accordionContent(key) {
+function accordionContent(key, t) {
   switch (key) {
     case 'production':
       return {
-        title: 'Власне виробництво',
+        title: t('product.accordion.productionTitle'),
         icon: Factory,
         body: (
           <>
             <p style={{ marginBottom: 14 }}>
-              Termojet — український виробник обладнання для котелень з 2002 року. Повний цикл — від проєктування й металообробки до фінальної збірки, теплоізоляції та контролю якості — на власних потужностях у <strong>Києві</strong> та <strong>Житомирі</strong>.
+              {t('product.accordion.productionDesc1')}
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', marginBottom: 14 }}>
               {[
-                ['3 000 м²', 'виробничих площ'],
-                ['2 500 м²', 'складських площ'],
-                ['70 000+', 'одиниць на рік'],
-                ['~100', 'фахівців'],
-                ['50 000+', 'оснащених об\'єктів'],
-                ['15 країн', 'експорт у ЄС'],
+                ['3 000 м²', t('product.accordion.productionStat1')],
+                ['2 500 м²', t('product.accordion.productionStat2')],
+                ['70 000+', t('product.accordion.productionStat3')],
+                ['~100', t('product.accordion.productionStat4')],
+                ['50 000+', t('product.accordion.productionStat5')],
+                ['15 країн', t('product.accordion.productionStat6')],
               ].map(([v, l]) => (
                 <div key={l} style={{ background: '#fff', padding: '12px 14px' }}>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 19, fontWeight: 800, color: 'var(--accent)', lineHeight: 1 }}>{v}</div>
@@ -138,23 +138,23 @@ function accordionContent(key) {
               ))}
             </div>
             <p style={{ fontSize: 13.5, color: 'var(--text-secondary)' }}>
-              Власне виробництво — це контроль якості на кожному етапі, стабільні строки та гарантія на всю продукцію.
+              {t('product.accordion.productionDesc2')}
             </p>
           </>
         ),
       }
     case 'warranty':
       return {
-        title: 'Гарантія та сервіс',
+        title: t('product.accordion.warrantyTitle'),
         icon: ShieldCheck,
         body: (
           <>
             <ul style={{ listStyle: 'none', display: 'grid', gap: 11, marginBottom: 16 }}>
               {[
-                ['🛡️', <>Гарантія <strong>2 роки</strong> на все обладнання Termojet</>],
-                ['🔧', 'Гарантійний та постгарантійний сервіс'],
-                ['📞', 'Технічна підтримка та консультації інженерів'],
-                ['✅', 'Заміна або ремонт у разі виробничого дефекту'],
+                ['🛡️', t('product.accordion.warrantyItem1')],
+                ['🔧', t('product.accordion.warrantyItem2')],
+                ['📞', t('product.accordion.warrantyItem3')],
+                ['✅', t('product.accordion.warrantyItem4')],
               ].map(([emo, txt], i) => (
                 <li key={i} style={{ display: 'flex', gap: 11, alignItems: 'flex-start', fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                   <span style={{ fontSize: 16, flexShrink: 0 }}>{emo}</span><span>{txt}</span>
@@ -162,27 +162,27 @@ function accordionContent(key) {
               ))}
             </ul>
             <Link to="/warranty" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--accent)', fontWeight: 600, fontSize: 13.5, textDecoration: 'none' }}>
-              Детальні умови гарантії <ChevronRight size={14} />
+              {t('product.accordion.warrantyLink')} <ChevronRight size={14} />
             </Link>
           </>
         ),
       }
     case 'delivery':
       return {
-        title: 'Доставка по Україні',
+        title: t('product.accordion.deliveryTitle'),
         icon: Truck,
         body: (
           <ul style={{ listStyle: 'none', display: 'grid', gap: 13 }}>
             {[
-              ['📦', 'Нова Пошта', 'По всій Україні — до відділення або кур\'єром до дверей.'],
-              ['🚚', 'Власна доставка', 'Київ, Житомир та прилеглі регіони — власним транспортом.'],
-              ['📍', 'Самовивіз', 'З офісів/складів у Києві та Житомирі.'],
-            ].map(([emo, t, d], i) => (
+              ['📦', t('product.accordion.deliveryMethod1Title'), t('product.accordion.deliveryMethod1Desc')],
+              ['🚚', t('product.accordion.deliveryMethod2Title'), t('product.accordion.deliveryMethod2Desc')],
+              ['📍', t('product.accordion.deliveryMethod3Title'), t('product.accordion.deliveryMethod3Desc')],
+            ].map(([emo, title, desc], i) => (
               <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                 <span style={{ fontSize: 18, flexShrink: 0 }}>{emo}</span>
                 <span>
-                  <span style={{ display: 'block', fontWeight: 600, color: 'var(--ink-100)', fontSize: 14 }}>{t}</span>
-                  <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.5 }}>{d}</span>
+                  <span style={{ display: 'block', fontWeight: 600, color: 'var(--ink-100)', fontSize: 14 }}>{title}</span>
+                  <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.5 }}>{desc}</span>
                 </span>
               </li>
             ))}
@@ -191,20 +191,20 @@ function accordionContent(key) {
       }
     case 'payment':
       return {
-        title: 'Оплата',
+        title: t('product.accordion.paymentTitle'),
         icon: CreditCard,
         body: (
           <ul style={{ listStyle: 'none', display: 'grid', gap: 13 }}>
             {[
-              [<CreditCard size={17} />, 'Онлайн-оплата картою', 'Visa / Mastercard через захищений платіж.'],
-              [<span style={{ fontWeight: 800 }}>₴</span>, 'Безготівковий розрахунок з ПДВ', 'Для юридичних осіб — рахунок-фактура з ПДВ.'],
-              [<span style={{ fontWeight: 800 }}>₴</span>, 'Безготівковий розрахунок без ПДВ', 'Спрощена система — рахунок без ПДВ.'],
-            ].map(([ic, t, d], i) => (
+              [<CreditCard size={17} />, t('product.accordion.paymentMethod1Title'), t('product.accordion.paymentMethod1Desc')],
+              [<span style={{ fontWeight: 800 }}>₴</span>, t('product.accordion.paymentMethod2Title'), t('product.accordion.paymentMethod2Desc')],
+              [<span style={{ fontWeight: 800 }}>₴</span>, t('product.accordion.paymentMethod3Title'), t('product.accordion.paymentMethod3Desc')],
+            ].map(([ic, title, desc], i) => (
               <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                 <span style={{ color: 'var(--accent)', flexShrink: 0, width: 20, display: 'inline-flex', justifyContent: 'center', marginTop: 1 }}>{ic}</span>
                 <span>
-                  <span style={{ display: 'block', fontWeight: 600, color: 'var(--ink-100)', fontSize: 14 }}>{t}</span>
-                  <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.5 }}>{d}</span>
+                  <span style={{ display: 'block', fontWeight: 600, color: 'var(--ink-100)', fontSize: 14 }}>{title}</span>
+                  <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.5 }}>{desc}</span>
                 </span>
               </li>
             ))}
@@ -217,7 +217,7 @@ function accordionContent(key) {
 }
 
 // ── ImageGallery ───────────────────────────────────────────────────────────────
-function ImageGallery({ images, name, model3d }) {
+function ImageGallery({ images, name, model3d, t }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const [mv3dReady, setMv3dReady] = useState(false)
@@ -300,7 +300,7 @@ function ImageGallery({ images, name, model3d }) {
     return (
       <button
         onClick={() => setActive(idx)}
-        aria-label={slide.type === '3d' ? '3D-модель' : `Фото ${idx + 1}`}
+        aria-label={slide.type === '3d' ? t('product.gallery.model3dLabel') : `${t('product.gallery.photoLabel')} ${idx + 1}`}
         style={{
           width: dim, height: dim, flexShrink: 0,
           border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border)'}`,
@@ -367,7 +367,7 @@ function ImageGallery({ images, name, model3d }) {
             padding: '5px 9px', backdropFilter: 'blur(4px)',
           }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#16A34A', boxShadow: '0 0 0 3px rgba(22,163,74,.15)', flexShrink: 0 }} />
-            В наявності
+            {t('product.inStock')}
           </span>
 
           {/* 3D badge */}
@@ -386,7 +386,7 @@ function ImageGallery({ images, name, model3d }) {
           {main && (
             <button
               onClick={() => setLightbox(true)}
-              aria-label="Збільшити"
+              aria-label={t('product.gallery.zoomIn')}
               style={{
                 position: 'absolute', top: 58, right: 14, zIndex: 3,
                 width: 34, height: 34, background: 'rgba(255,255,255,.94)',
@@ -429,7 +429,7 @@ function ImageGallery({ images, name, model3d }) {
                     fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase',
                     color: '#BFE0F5', border: '1px solid rgba(191,224,245,.35)', padding: '7px 13px',
                   }}>
-                    <RotateCcw size={12} />3D · завантаження
+                    <RotateCcw size={12} />{t('product.gallery.loading3d')}
                   </span>
                 </>
               )}
@@ -451,10 +451,10 @@ function ImageGallery({ images, name, model3d }) {
           {/* Prev/next nav */}
           {total > 1 && (
             <>
-              <button onClick={prev} aria-label="Попереднє" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, background: '#fff', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink-100)', zIndex: 3, cursor: 'pointer' }}>
+              <button onClick={prev} aria-label={t('product.gallery.prev')} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, background: '#fff', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink-100)', zIndex: 3, cursor: 'pointer' }}>
                 <ChevronLeft size={17} />
               </button>
-              <button onClick={next} aria-label="Наступне" style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, background: '#fff', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink-100)', zIndex: 3, cursor: 'pointer' }}>
+              <button onClick={next} aria-label={t('product.gallery.next')} style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, background: '#fff', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink-100)', zIndex: 3, cursor: 'pointer' }}>
                 <ChevronRight size={17} />
               </button>
             </>
@@ -483,7 +483,7 @@ function ImageGallery({ images, name, model3d }) {
             ) : (
               <div className="flex flex-col items-center gap-2 text-sky-600">
                 <Box size={32} className="animate-pulse" />
-                <span className="text-xs font-medium">Завантаження 3D…</span>
+                <span className="text-xs font-medium">{t('product.gallery.loading3d')}</span>
               </div>
             )
           ) : main ? (
@@ -492,7 +492,7 @@ function ImageGallery({ images, name, model3d }) {
             <div className="text-gray-200 text-8xl">⚙️</div>
           )}
           {main && (
-            <button onClick={() => setLightbox(true)} className="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-all" title="Збільшити">
+            <button onClick={() => setLightbox(true)} className="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-all" title={t('product.gallery.zoomIn')}>
               <ZoomIn size={14} />
             </button>
           )}
@@ -655,8 +655,8 @@ export default function ProductDetailPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <Package size={56} className="mx-auto text-gray-300 mb-4" />
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">Товар не знайдено</h2>
-        <p className="text-gray-400 mb-6">Можливо, він був переміщений або видалений</p>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">{t('product.notFound')}</h2>
+        <p className="text-gray-400 mb-6">{t('product.notFoundSub')}</p>
         <Link to="/catalog" className="btn-primary">{cat.title}</Link>
       </div>
     )
@@ -693,7 +693,7 @@ export default function ProductDetailPage() {
         <Box size={20} />
       </span>
       <span style={{ flex: 1, minWidth: 0 }}>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#9CC6E0', display: 'block' }}>3D-модель для проєктування</span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#9CC6E0', display: 'block' }}>{t('product.model3dLabel')}</span>
         {productModels.map(m => (
           <span key={m.file} style={{ fontSize: 13.5, fontWeight: 600, display: 'block', marginTop: 3 }}>{m.name}</span>
         ))}
@@ -728,8 +728,8 @@ export default function ProductDetailPage() {
         image={allImages[0]}
         product={{ name, description: plainText(desc), sku: product.sku, price: priceUAHunit, images: allImages }}
         breadcrumbs={[
-          { name: 'Головна', url: 'https://termojet.com.ua/' },
-          { name: 'Каталог', url: 'https://termojet.com.ua/catalog' },
+          { name: t('product.breadcrumbHome'), url: 'https://termojet.com.ua/' },
+          { name: t('nav').catalog, url: 'https://termojet.com.ua/catalog' },
           ...(category ? [{ name: category.name?.uk || category.name, url: `https://termojet.com.ua/catalog/${categorySlug}` }] : []),
           { name, url: `https://termojet.com.ua/catalog/${categorySlug}/${productSlug}` },
         ]}
@@ -739,7 +739,7 @@ export default function ProductDetailPage() {
       <div style={{ background: '#fff', borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4" style={{ display: 'flex', alignItems: 'center', gap: 9, height: 46 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 600, letterSpacing: '.05em', color: 'var(--text-muted)', textTransform: 'uppercase', flex: 1, minWidth: 0, overflow: 'hidden' }}>
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">Головна</Link>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('product.breadcrumbHome')}</Link>
             <span style={{ color: '#C9C6BF' }}>/</span>
             <Link to="/catalog" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('nav').catalog}</Link>
             {category && (
@@ -755,7 +755,7 @@ export default function ProductDetailPage() {
           </div>
           {product.sku && (
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 600, letterSpacing: '.05em', color: 'var(--text-secondary)', flexShrink: 0 }}>
-              АРТ <strong style={{ color: 'var(--ink-100)' }}>{product.sku}</strong>
+              {t('product.artLabel')} <strong style={{ color: 'var(--ink-100)' }}>{product.sku}</strong>
             </span>
           )}
         </div>
@@ -769,12 +769,12 @@ export default function ProductDetailPage() {
 
           {/* LEFT: gallery + 3D STEP (desktop) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <ImageGallery images={allImages} name={name} model3d={model3dUrl} />
+            <ImageGallery images={allImages} name={name} model3d={model3dUrl} t={t} />
 
             {/* Category meta — desktop */}
             {category && (
               <div className="hidden lg:flex items-center justify-between text-sm" style={{ paddingInline: 2 }}>
-                <span style={{ color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>Категорія</span>
+                <span style={{ color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>{t('product.category')}</span>
                 <Link to={`/catalog/${categorySlug}`} style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 13, textDecoration: 'none' }} className="hover:underline">
                   {category.name[lang] || category.name.uk}
                 </Link>
@@ -782,7 +782,7 @@ export default function ProductDetailPage() {
             )}
 
             {/* Trust-блок під галереєю — акордеони (доставка / оплата / гарантія / виробництво) */}
-            <TrustAccordions />
+            <TrustAccordions t={t} />
           </div>
 
           {/* RIGHT: buy panel */}
@@ -797,7 +797,7 @@ export default function ProductDetailPage() {
                 fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase',
                 color: 'var(--accent-dim)', background: 'rgba(255,85,0,.08)', borderLeft: '2px solid var(--accent)',
                 padding: '4px 8px', whiteSpace: 'nowrap',
-              }}>Власне виробництво</span>
+              }}>{t('product.ownProduction')}</span>
             </div>
 
             {/* Product name */}
@@ -810,7 +810,7 @@ export default function ProductDetailPage() {
                   fontFamily: "'JetBrains Mono', monospace", fontSize: 11, fontWeight: 600, letterSpacing: '.06em',
                   color: 'var(--text-secondary)', border: '1px solid var(--border)', background: 'var(--bg-warm)', padding: '5px 10px',
                 }}>
-                  АРТ <strong style={{ color: 'var(--ink-100)', fontWeight: 700 }}>{product.sku}</strong>
+                  {t('product.artLabel')} <strong style={{ color: 'var(--ink-100)', fontWeight: 700 }}>{product.sku}</strong>
                 </span>
               )}
               {product.inStock ? (
@@ -858,7 +858,7 @@ export default function ProductDetailPage() {
             {/* Price block */}
             <div style={{ borderTop: '2px solid var(--ink-100)', paddingTop: 16, marginBottom: 18 }}>
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>
-                {onSale ? 'Акційна ціна · з ПДВ' : 'Ціна · з ПДВ'}
+                {onSale ? t('product.salePriceLabel') : t('product.priceLabel')}
               </span>
               {priceUAH ? (
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
@@ -869,7 +869,7 @@ export default function ProductDetailPage() {
                         <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>₴</span>
                       </span>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, color: 'var(--text-muted)', textDecoration: 'line-through' }}>{priceUAH.toLocaleString('uk-UA')}</span>
-                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, padding: '3px 7px', background: 'var(--accent)', color: '#fff', letterSpacing: '.08em', textTransform: 'uppercase' }}>Акція</span>
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, padding: '3px 7px', background: 'var(--accent)', color: '#fff', letterSpacing: '.08em', textTransform: 'uppercase' }}>{t('product.saleTag')}</span>
                     </>
                   ) : (
                     <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, color: 'var(--ink-100)' }}>
@@ -879,11 +879,11 @@ export default function ProductDetailPage() {
                   )}
                 </div>
               ) : (
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 20, fontWeight: 700, color: 'var(--text-secondary)' }}>Ціна по запиту</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 20, fontWeight: 700, color: 'var(--text-secondary)' }}>{t('product.priceOnRequest')}</div>
               )}
               {priceUAH && (
                 <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 7 }}>
-                  за 1 шт{qty > 1 ? ` · ${Math.round((onSale && salePriceUAH ? salePriceUAH : priceUAH) / qty).toLocaleString('uk-UA')} / шт` : ''} · оплата при отриманні або за рахунком
+                  {t('product.perUnit')}{qty > 1 ? ` · ${Math.round((onSale && salePriceUAH ? salePriceUAH : priceUAH) / qty).toLocaleString('uk-UA')} / шт` : ''} · {t('product.paymentNote')}
                 </p>
               )}
             </div>
@@ -894,7 +894,7 @@ export default function ProductDetailPage() {
               <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--ink-100)', height: 52, flexShrink: 0 }}>
                 <button
                   onClick={() => setQty(q => Math.max(1, q - 1))}
-                  aria-label="Менше"
+                  aria-label={t('product.qtyDecrease')}
                   style={{ width: 44, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', background: 'none', border: 'none', cursor: 'pointer' }}
                 >
                   <Minus size={13} />
@@ -902,7 +902,7 @@ export default function ProductDetailPage() {
                 <span style={{ width: 40, textAlign: 'center', fontFamily: "'JetBrains Mono', monospace", fontSize: 15, fontWeight: 700, color: 'var(--ink-100)' }}>{qty}</span>
                 <button
                   onClick={() => setQty(q => q + 1)}
-                  aria-label="Більше"
+                  aria-label={t('product.qtyIncrease')}
                   style={{ width: 44, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', background: 'none', border: 'none', cursor: 'pointer' }}
                 >
                   <Plus size={13} />
@@ -921,7 +921,7 @@ export default function ProductDetailPage() {
                 }}
               >
                 <ShoppingCart size={15} />
-                {added ? '✓ Додано!' : (pt.addToCart || 'Додати в кошик')}
+                {added ? t('product.added') : (pt.addToCart || 'Додати в кошик')}
               </button>
             </div>
 
@@ -945,8 +945,8 @@ export default function ProductDetailPage() {
             {productDocs.length > 0 && (
               <div style={{ border: '1px solid var(--border)', marginBottom: 14 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg-warm)', borderBottom: '1px solid var(--border)', padding: '9px 14px' }}>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-100)' }}>Документи для завантаження</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, color: 'var(--text-muted)' }}>{productDocs.length} файли</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-100)' }}>{t('product.docsTitle')}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, color: 'var(--text-muted)' }}>{productDocs.length} {t('product.filesCount')}</span>
                 </div>
                 {productDocs.map(doc => (
                   <a
@@ -996,7 +996,7 @@ export default function ProductDetailPage() {
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 16, borderBottom: '2px solid var(--ink-100)', paddingBottom: 13, marginBottom: 26 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
                   <span className="section-num">02</span>
-                  <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>Технічні характеристики</h2>
+                  <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>{t('product.specsHeading')}</h2>
                 </div>
               </div>
               <div className="pdp-specs-grid">
@@ -1015,17 +1015,17 @@ export default function ProductDetailPage() {
             <section style={{ marginTop: 60 }}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, borderBottom: '2px solid var(--ink-100)', paddingBottom: 13, marginBottom: 26 }}>
                 <span className="section-num">03</span>
-                <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>Опис</h2>
+                <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>{t('product.descHeading')}</h2>
               </div>
               <div onClick={onDescClick}>
-                {renderDescriptionBody(desc)}
+                {renderDescriptionBody(desc, t)}
               </div>
               {/* Video */}
               {ytId && (
                 <div style={{ marginTop: 32, aspectRatio: '16/9', maxWidth: 720 }}>
                   <iframe
                     src={`https://www.youtube.com/embed/${ytId}`}
-                    title="Відео товару"
+                    title={t('product.videoTitle')}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -1045,7 +1045,7 @@ export default function ProductDetailPage() {
                   <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>{pt.related || 'Схожі товари'}</h2>
                 </div>
                 <Link to={`/catalog/${categorySlug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--text-secondary)', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">
-                  Усі товари
+                  {t('product.allProducts')}
                   <ChevronRight size={11} />
                 </Link>
               </div>
@@ -1095,7 +1095,7 @@ export default function ProductDetailPage() {
                               {pPriceUAH.toLocaleString('uk-UA')} <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>₴</span>
                             </span>
                           ) : (
-                            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: 'var(--text-muted)' }}>По запиту</span>
+                            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: 'var(--text-muted)' }}>{t('product.priceOnRequest')}</span>
                           )}
                           <ChevronRight size={14} style={{ color: 'var(--text-muted)' }} className="pdp-rel-arrow" />
                         </div>

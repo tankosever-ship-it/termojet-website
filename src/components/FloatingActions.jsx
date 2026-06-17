@@ -1,5 +1,6 @@
 import { Phone } from 'lucide-react'
 import { useApp } from '../context/AppContext'
+import { useT } from '../i18n/useT'
 
 // Інлайн Telegram-іконка (у lucide немає бренд-іконки)
 function TelegramIcon({ size = 20 }) {
@@ -16,6 +17,7 @@ const DEFAULT_TG = 'https://t.me/termojet_ua_bot?start=termojet'
 
 export default function FloatingActions() {
   const { siteSettings } = useApp()
+  const t = useT()
   const tg = (siteSettings.telegram || '').trim() || DEFAULT_TG
   const tgHref = tg.startsWith('http') ? tg : `https://t.me/${tg.replace(/^@/, '')}`
 
@@ -39,7 +41,7 @@ export default function FloatingActions() {
       <a
         href={`tel:${(siteSettings.phone || '').replace(/[^\d+]/g, '')}`}
         className="w-12 h-12 bg-[var(--accent)] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
-        aria-label="Зателефонувати"
+        aria-label={t('floatingActions.callUs')}
       >
         <Phone size={20} />
       </a>

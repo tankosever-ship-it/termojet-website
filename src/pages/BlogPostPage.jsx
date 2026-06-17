@@ -18,7 +18,7 @@ export default function BlogPostPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <p className="text-5xl mb-4">📄</p>
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">Статтю не знайдено</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">{t('blogPost.notFound')}</h2>
         <Link to="/blog" className="btn-primary mt-4">{blogT.viewAll}</Link>
       </div>
     )
@@ -97,7 +97,7 @@ export default function BlogPostPage() {
 
           {post.links?.length > 0 && (
             <div className="mt-8 pt-5 border-t border-gray-100">
-              <div className="text-[10px] font-mono uppercase tracking-[0.14em] text-gray-400 mb-2.5">Обладнання зі статті</div>
+              <div className="text-[10px] font-mono uppercase tracking-[0.14em] text-gray-400 mb-2.5">{t('blogPost.equipmentFromArticle')}</div>
               <div className="flex flex-wrap gap-2">
                 {post.links.map(l => l.ext ? (
                   <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
@@ -121,14 +121,14 @@ export default function BlogPostPage() {
             <ArrowLeft size={14} /> {blogT.viewAll}
           </Link>
           <Link to="/contacts" className="btn-primary text-sm">
-            Отримати консультацію <ArrowRight size={14} />
+            {t('hero.ctaContact')} <ArrowRight size={14} />
           </Link>
         </div>
 
         {/* Related */}
         {related.length > 0 && (
           <div className="mt-12">
-            <h2 className="font-bold text-xl mb-5">Читайте також</h2>
+            <h2 className="font-bold text-xl mb-5">{t('blogPost.readAlso')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {related.map(p => {
                 const rTitle = (lang !== 'uk' && p[`title_${lang}`]) ? p[`title_${lang}`] : p.title

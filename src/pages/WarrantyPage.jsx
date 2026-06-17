@@ -1,75 +1,78 @@
 import { motion } from 'framer-motion'
 import { ShieldCheck, AlertTriangle, CheckCircle, Clock, Thermometer, Zap } from 'lucide-react'
 import SEO from '../components/SEO'
+import { useT } from '../i18n/useT'
 
 const fadeUp  = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.1 } } }
 
-const WARRANTY_BLOCKS = [
-  {
-    icon: ShieldCheck,
-    badge: '2 роки',
-    title: 'Колектори, гідроділювачі, насосні групи',
-    items: [
-      'Розподільні колектори всіх модифікацій',
-      'Гідравлічні розділювачі (гідроділювачі)',
-      'Насосні групи в зборі',
-      'Кріплення та монтажне обладнання',
-      'Автоматика та контролери',
-    ],
-    color: 'var(--primary)',
-  },
-  {
-    icon: Thermometer,
-    badge: '3 роки',
-    title: 'Теплові насоси Termojet',
-    items: [
-      'За умови щорічного технічного обслуговування',
-      'Авторизований запуск сертифікованим фахівцем',
-      'Реєстрація в системі гарантійного обліку',
-      'Дотримання умов монтажу згідно інструкції',
-    ],
-    color: 'var(--accent)',
-  },
-  {
-    icon: Clock,
-    badge: '2 роки',
-    title: 'Циркуляційні насоси, клапани, електроприводи',
-    items: [
-      'Безумовна гарантія на циркуляційні насоси',
-      'Трьохходові та двохходові клапани',
-      'Електроприводи та сервоприводи',
-      'Без додаткових умов для стандартної гарантії',
-    ],
-    color: 'var(--primary)',
-  },
-]
-
-const HEAT_PUMP_REQUIREMENTS = [
-  'Введення в експлуатацію авторизованим сервісним партнером Termojet',
-  'Щорічне технічне обслуговування з підписанням акту виконаних робіт',
-  'Заповнення та реєстрація гарантійного талону в день монтажу',
-  'Дотримання параметрів теплоносія відповідно до вимог технічної документації',
-  'Встановлення захисних фільтрів та обладнання відповідно до схеми підключення',
-  'Збереження всіх документів: накладної, паспорта, акту введення в експлуатацію',
-]
-
-const VOID_CASES = [
-  'Монтаж та обслуговування некваліфікованим персоналом',
-  'Забруднення теплоносія або системи механічними частинками',
-  'Стрибки напруги та відхилення від норм електромережі',
-  'Неправильний монтаж, що суперечить схемі підключення',
-  'Хімічний склад теплоносія поза допустимими межами',
-  'Замерзання рідини в системі через відключення живлення',
-  'Механічне пошкодження ущільнень, різьб або корпусних елементів',
-]
-
 export default function WarrantyPage() {
+  const t = useT()
+
+  const WARRANTY_BLOCKS = [
+    {
+      icon: ShieldCheck,
+      badge: t('warranty.blocks.collectors.badge'),
+      title: t('warranty.blocks.collectors.title'),
+      items: [
+        t('warranty.blocks.collectors.item1'),
+        t('warranty.blocks.collectors.item2'),
+        t('warranty.blocks.collectors.item3'),
+        t('warranty.blocks.collectors.item4'),
+        t('warranty.blocks.collectors.item5'),
+      ],
+      color: 'var(--primary)',
+    },
+    {
+      icon: Thermometer,
+      badge: t('warranty.blocks.heatPumps.badge'),
+      title: t('warranty.blocks.heatPumps.title'),
+      items: [
+        t('warranty.blocks.heatPumps.item1'),
+        t('warranty.blocks.heatPumps.item2'),
+        t('warranty.blocks.heatPumps.item3'),
+        t('warranty.blocks.heatPumps.item4'),
+      ],
+      color: 'var(--accent)',
+    },
+    {
+      icon: Clock,
+      badge: t('warranty.blocks.pumpsValves.badge'),
+      title: t('warranty.blocks.pumpsValves.title'),
+      items: [
+        t('warranty.blocks.pumpsValves.item1'),
+        t('warranty.blocks.pumpsValves.item2'),
+        t('warranty.blocks.pumpsValves.item3'),
+        t('warranty.blocks.pumpsValves.item4'),
+      ],
+      color: 'var(--primary)',
+    },
+  ]
+
+  const HEAT_PUMP_REQUIREMENTS = [
+    t('warranty.requirements.item1'),
+    t('warranty.requirements.item2'),
+    t('warranty.requirements.item3'),
+    t('warranty.requirements.item4'),
+    t('warranty.requirements.item5'),
+    t('warranty.requirements.item6'),
+  ]
+
+  const VOID_CASES = [
+    t('warranty.voidCases.item1'),
+    t('warranty.voidCases.item2'),
+    t('warranty.voidCases.item3'),
+    t('warranty.voidCases.item4'),
+    t('warranty.voidCases.item5'),
+    t('warranty.voidCases.item6'),
+    t('warranty.voidCases.item7'),
+  ]
+
   return (
     <>
       <SEO
-        title="Гарантія — Termojet"
-        description="Умови гарантійного обслуговування обладнання Termojet: колектори — 2 роки, теплові насоси — 3 роки."
+        title={t('warranty.seo.title')}
+        description={t('warranty.seo.description')}
       />
 
       <section className="hero-gradient grain relative overflow-hidden text-white py-20 md:py-28">
@@ -82,10 +85,10 @@ export default function WarrantyPage() {
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.div variants={fadeUp} className="label-accent mb-4">Termojet</motion.div>
             <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl font-black mb-4 leading-tight font-['Archivo',sans-serif]">
-              Гарантія
+              {t('warranty.hero.title')}
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-white/70 max-w-2xl mx-auto">
-              Підтверджуємо якість кожного виробу офіційною гарантією від виробника
+              {t('warranty.hero.subtitle')}
             </motion.p>
           </motion.div>
         </div>
@@ -93,8 +96,8 @@ export default function WarrantyPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-16">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-10">
-          <div className="label-accent mb-2">Гарантійні умови</div>
-          <h2 className="section-title">Терміни гарантії на продукцію</h2>
+          <div className="label-accent mb-2">{t('warranty.section.label')}</div>
+          <h2 className="section-title">{t('warranty.section.heading')}</h2>
         </motion.div>
 
         <motion.div
@@ -132,7 +135,7 @@ export default function WarrantyPage() {
             <div className="bg-[var(--primary)]/5 border border-[var(--primary)]/10 rounded-2xl p-8">
               <div className="flex items-center gap-3 mb-5">
                 <div className="icon-badge-dark"><ShieldCheck size={20} /></div>
-                <h2 className="font-bold text-xl text-[var(--text-primary)]">Вимоги для теплових насосів</h2>
+                <h2 className="font-bold text-xl text-[var(--text-primary)]">{t('warranty.requirements.title')}</h2>
               </div>
               <ul className="space-y-3">
                 {HEAT_PUMP_REQUIREMENTS.map((item, i) => (
@@ -151,7 +154,7 @@ export default function WarrantyPage() {
                 <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
                   <AlertTriangle size={20} className="text-red-500" />
                 </div>
-                <h2 className="font-bold text-xl text-[var(--text-primary)]">Випадки відмови в гарантії</h2>
+                <h2 className="font-bold text-xl text-[var(--text-primary)]">{t('warranty.voidCases.title')}</h2>
               </div>
               <ul className="space-y-3">
                 {VOID_CASES.map((item, i) => (

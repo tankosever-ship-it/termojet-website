@@ -18,12 +18,21 @@ function getExt(file) {
   return (file.url || '').split('.').pop()?.toLowerCase() || 'pdf'
 }
 
+// Канонічні (UA) значення категорій — використовуються як ключі зіставлення з file.category.
 const CATEGORY_ORDER = [
   'Каталоги та прайси',
   'Інструкції',
   'Брошури',
   'Сертифікати та декларації',
 ]
+
+// Відображувана мітка категорії (i18n) — ключ зіставлення лишається UA-рядком вище.
+const CATEGORY_LABEL_KEYS = {
+  'Каталоги та прайси': 'files.catCatalogs',
+  'Інструкції': 'files.catInstructions',
+  'Брошури': 'files.catBrochures',
+  'Сертифікати та декларації': 'files.catCertificates',
+}
 
 export default function FilesPage() {
   const { files } = useApp()
@@ -60,13 +69,13 @@ export default function FilesPage() {
             {filesT.title}
           </h1>
           <p className="text-white/50 max-w-lg text-sm">
-            Інструкції, сертифікати, декларації відповідності, каталоги та прайси — всі документи для завантаження
+            {t('files.heroSubtitle')}
           </p>
           <div className="flex flex-wrap gap-6 mt-8">
             {[
-              [String(files.length), 'ДОКУМЕНТІВ'],
-              ['14', 'ІНСТРУКЦІЙ'],
-              ['4', 'БРОШУРИ'],
+              [String(files.length), t('files.statDocuments')],
+              ['14', t('files.statInstructions')],
+              ['4', t('files.statBrochures')],
             ].map(([v, l]) => (
               <div key={l}>
                 <div className="text-2xl font-black text-white">{v}</div>
@@ -85,7 +94,7 @@ export default function FilesPage() {
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Пошук документів..."
+              placeholder={t('files.searchPlaceholder')}
               className="w-full pl-9 pr-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm bg-white transition-colors"
             />
           </div>
@@ -95,7 +104,7 @@ export default function FilesPage() {
               className={`px-4 py-2 text-sm font-medium transition-colors border ${!category ? 'border-[var(--accent)] text-[var(--accent)] bg-orange-50' : 'border-gray-200 text-gray-600 bg-white hover:border-gray-300'}`}
               style={mono}
             >
-              ВСІ
+              {t('files.filterAll')}
             </button>
             {categories.map(c => (
               <button
@@ -104,7 +113,7 @@ export default function FilesPage() {
                 className={`px-4 py-2 text-sm font-medium transition-colors border ${category === c ? 'border-[var(--accent)] text-[var(--accent)] bg-orange-50' : 'border-gray-200 text-gray-600 bg-white hover:border-gray-300'}`}
                 style={{ ...mono, fontSize: '10px', letterSpacing: '0.06em' }}
               >
-                {c.toUpperCase()}
+                {(CATEGORY_LABEL_KEYS[c] ? t(CATEGORY_LABEL_KEYS[c]) : c).toUpperCase()}
               </button>
             ))}
           </div>
@@ -113,8 +122,8 @@ export default function FilesPage() {
         {filtered.length === 0 ? (
           <div className="text-center py-20 text-gray-400">
             <FileText size={48} className="mx-auto mb-4 opacity-30" />
-            <p className="text-lg font-medium mb-1">Нічого не знайдено</p>
-            <p className="text-sm">Спробуйте змінити пошуковий запит</p>
+            <p className="text-lg font-medium mb-1">{t('files.emptyTitle')}</p>
+            <p className="text-sm">{t('files.emptyHint')}</p>
           </div>
         ) : (
           <div className="space-y-10">
@@ -123,7 +132,7 @@ export default function FilesPage() {
                 {/* Category heading */}
                 <div className="flex items-center gap-3 mb-4">
                   <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.16em', color: 'var(--text-muted)' }} className="uppercase">
-                    {cat}
+                    {CATEGORY_LABEL_KEYS[cat] ? t(CATEGORY_LABEL_KEYS[cat]) : cat}
                   </span>
                   <div className="flex-1 h-px bg-gray-100" />
                   <span style={{ ...mono, fontSize: '9px', color: 'var(--text-muted)' }}>{items.length}</span>
@@ -169,7 +178,7 @@ export default function FilesPage() {
                         >
                           <Download size={14} />
                           <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.08em' }} className="hidden sm:inline uppercase">
-                            Завантажити
+                            {t('files.download')}
                           </span>
                         </a>
                       </div>

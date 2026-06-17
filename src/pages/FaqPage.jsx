@@ -77,13 +77,13 @@ export default function FaqPage() {
 
   return (
     <>
-      <SEO title={faqT.title} description="Відповіді на найпоширеніші питання про обладнання Termojet, умови замовлення, доставку та партнерство." />
+      <SEO title={faqT.title} description={t('faq.seoDesc')} />
 
       <div className="bg-gradient-to-br from-[var(--primary)] to-[#1e4a7a] text-white pb-12" style={{ marginTop: '-60px', paddingTop: 'calc(3rem + 60px)' }}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="label-accent mb-2" style={{ color: '#fb923c' }}>Допомога</div>
+          <div className="label-accent mb-2" style={{ color: '#fb923c' }}>{t('faq.helpLabel')}</div>
           <h1 className="text-4xl font-black font-['Archivo',sans-serif] mb-2">{faqT.title}</h1>
-          <p className="text-white/70">Відповіді на найпоширеніші питання про Termojet</p>
+          <p className="text-white/70">{t('faq.subtitle')}</p>
         </div>
       </div>
 
@@ -93,14 +93,14 @@ export default function FaqPage() {
         </div>
 
         <div className="card p-6 text-center bg-[var(--primary)]/5 border-[var(--primary)]/15">
-          <h3 className="font-bold text-lg mb-2">Не знайшли відповідь?</h3>
-          <p className="text-gray-500 text-sm mb-4">Зателефонуйте нам або надішліть запит — відповімо швидко</p>
+          <h3 className="font-bold text-lg mb-2">{t('faq.ctaTitle')}</h3>
+          <p className="text-gray-500 text-sm mb-4">{t('faq.ctaBody')}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="tel:+380507189165" className="btn-primary justify-center">
-              <Phone size={15} /> Зателефонувати
+              <Phone size={15} /> {t('faq.callUs')}
             </a>
             <Link to="/contacts" className="btn-secondary justify-center">
-              Написати нам
+              {t('faq.writeUs')}
             </Link>
           </div>
         </div>

@@ -1,87 +1,94 @@
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
+import { useT } from '../i18n/useT'
 
 export default function TermsPage() {
+  const t = useT()
+
   return (
     <div className="min-h-screen bg-white pb-24">
       <SEO
-        title="Умови використання — Termojet"
-        description="Умови використання сайту Termojet. Правила роботи з сайтом, інтелектуальна власність, відповідальність сторін."
+        title={t('terms.seoTitle')}
+        description={t('terms.seoDescription')}
         canonical="/terms"
       />
 
       <div className="max-w-3xl mx-auto px-6 py-16">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Умови використання</h1>
+        <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('terms.title')}</h1>
         <p className="text-slate-400 text-sm mb-10">
-          Дата набуття чинності: 1 червня 2026 р.
+          {t('terms.effectiveDate')}
         </p>
 
         <div className="prose prose-slate max-w-none space-y-8 text-slate-600 leading-relaxed">
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">1. Загальні положення</h2>
-            <p>Ці Умови використання (далі — «Умови») регулюють доступ та використання вебсайту <strong>termojet.com.ua</strong> (далі — «Сайт»), який належить ТОВ «Софіївка Монтаж» (далі — «Компанія»). Використовуючи Сайт, ви погоджуєтесь з цими Умовами в повному обсязі. Якщо ви не погоджуєтесь з будь-яким положенням, будь ласка, утримайтесь від використання Сайту.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s1.heading')}</h2>
+            <p>{t('terms.s1.body')}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">2. Використання Сайту</h2>
-            <p>Ви зобов'язуєтесь:</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s2.heading')}</h2>
+            <p>{t('terms.s2.intro')}</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li>Використовувати Сайт виключно в законних цілях і у спосіб, що не порушує права інших осіб.</li>
-              <li>Не здійснювати дії, що можуть порушити роботу Сайту або завдати шкоди Компанії чи третім особам.</li>
-              <li>Не намагатися отримати несанкціонований доступ до будь-яких частин Сайту або пов'язаних систем.</li>
-              <li>Не публікувати, не передавати та не поширювати матеріали, що є незаконними, шкідливими, образливими або такими, що порушують права інтелектуальної власності.</li>
+              <li>{t('terms.s2.li1')}</li>
+              <li>{t('terms.s2.li2')}</li>
+              <li>{t('terms.s2.li3')}</li>
+              <li>{t('terms.s2.li4')}</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">3. Інтелектуальна власність</h2>
-            <p>Усі матеріали Сайту — тексти, зображення, логотипи, технічні описи, фотографії та програмне забезпечення — є власністю ТОВ «Софіївка Монтаж» або використовуються на законних підставах. Забороняється копіювання, відтворення, розповсюдження або інше використання матеріалів без письмової згоди Компанії, крім випадків, дозволених чинним законодавством України.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s3.heading')}</h2>
+            <p>{t('terms.s3.body')}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">4. Інформація про продукцію</h2>
-            <p>Компанія докладає всіх зусиль для забезпечення точності та актуальності інформації на Сайті, однак не гарантує, що всі відомості є повними або позбавленими помилок. Технічні характеристики, ціни та наявність товарів можуть змінюватись без попереднього повідомлення. Остаточна ціна та умови узгоджуються з менеджером перед оформленням замовлення.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s4.heading')}</h2>
+            <p>{t('terms.s4.body')}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">5. Обмеження відповідальності</h2>
-            <p>Сайт надається «як є». Компанія не несе відповідальності за:</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s5.heading')}</h2>
+            <p>{t('terms.s5.intro')}</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li>Будь-які прямі чи непрямі збитки, що виникли внаслідок використання або неможливості використання Сайту.</li>
-              <li>Тимчасову недоступність Сайту з технічних причин.</li>
-              <li>Дії третіх осіб, пов'язані з використанням Сайту.</li>
+              <li>{t('terms.s5.li1')}</li>
+              <li>{t('terms.s5.li2')}</li>
+              <li>{t('terms.s5.li3')}</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">6. Посилання на сторонні ресурси</h2>
-            <p>Сайт може містити посилання на ресурси третіх осіб. Компанія не контролює такі ресурси та не несе відповідальності за їх зміст, точність або доступність. Перехід за зовнішніми посиланнями здійснюється на власний ризик користувача.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s6.heading')}</h2>
+            <p>{t('terms.s6.body')}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">7. Персональні дані та конфіденційність</h2>
-            <p>Збір та обробка персональних даних здійснюється відповідно до нашої <Link to="/privacy" className="text-orange-500 hover:underline">Політики конфіденційності</Link>. Використовуючи форми зворотного зв'язку на Сайті, ви надаєте згоду на обробку ваших персональних даних з метою обробки запитів.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s7.heading')}</h2>
+            <p>
+              {t('terms.s7.bodyBefore')}{' '}
+              <Link to="/privacy" className="text-orange-500 hover:underline">{t('terms.s7.privacyLink')}</Link>
+              {t('terms.s7.bodyAfter')}
+            </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">8. Зміни до Умов</h2>
-            <p>Компанія залишає за собою право змінювати ці Умови в будь-який час без попереднього повідомлення. Актуальна версія завжди доступна на цій сторінці. Продовження використання Сайту після внесення змін означає вашу згоду з оновленими Умовами.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s8.heading')}</h2>
+            <p>{t('terms.s8.body')}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">9. Застосовне право</h2>
-            <p>Ці Умови регулюються законодавством України. Усі спори, що виникають у зв'язку з використанням Сайту, підлягають розгляду відповідно до чинного законодавства України.</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s9.heading')}</h2>
+            <p>{t('terms.s9.body')}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">10. Контакти</h2>
-            <p>З питань щодо цих Умов звертайтесь:</p>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s10.heading')}</h2>
+            <p>{t('terms.s10.intro')}</p>
             <ul className="list-none mt-2 space-y-1">
-              <li><strong>ТОВ «Софіївка Монтаж»</strong></li>
-              <li>Адреса: Київ, Софіївська Борщагівка, вул. Київська, 3</li>
+              <li><strong>{t('terms.s10.company')}</strong></li>
+              <li>{t('terms.s10.address')}</li>
               <li>Email: <a href="mailto:termojet@sofievka.kiev.ua" className="text-orange-500 hover:underline">termojet@sofievka.kiev.ua</a></li>
-              <li>Телефон: <a href="tel:+380507189165" className="text-orange-500 hover:underline">+380 (50) 718-91-65</a>, <a href="tel:+380504506424" className="text-orange-500 hover:underline">+380 (50) 450-64-24</a></li>
+              <li>{t('terms.s10.phone')}: <a href="tel:+380507189165" className="text-orange-500 hover:underline">+380 (50) 718-91-65</a>, <a href="tel:+380504506424" className="text-orange-500 hover:underline">+380 (50) 450-64-24</a></li>
             </ul>
           </section>
 

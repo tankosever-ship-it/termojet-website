@@ -15,21 +15,14 @@ const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973c
 const YT_ID   = 'UzEOVxcS4mw'
 
 const PROD_PHOTOS = [
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-09.jpg', label: '● Лазерне різання' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-12.jpg', label: '● Листогибне виробництво' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-22.jpg', label: '● Зварювання' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-32.jpg', label: '● Складання вузлів' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-33-55.jpg', label: '● Пакування' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-47.jpg', label: '● Склад відвантаження' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-09.jpg', labelKey: 'prodLaserCutting' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-12.jpg', labelKey: 'prodSheetMetal' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-22.jpg', labelKey: 'prodWelding' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-34-32.jpg', labelKey: 'prodAssembly' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-33-55.jpg', labelKey: 'prodPacking' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/04/photo_2024-04-05_18-35-47.jpg', labelKey: 'prodWarehouse' },
 ]
 
-
-const CONFIG_STEPS = [
-  { n: '01', title: 'Вибір потужності',  desc: 'Від 30 кВт до 2 МВт — система сама запропонує серію.' },
-  { n: '02', title: 'Контури системи',   desc: 'Радіатори, тепла підлога, бойлер ГВС, басейн.' },
-  { n: '03', title: 'Авто-підбір груп',  desc: '100+ моделей колекторів і насосних груп автоматично.' },
-  { n: '04', title: 'PDF та замовлення', desc: 'Експорт схеми, перелік обладнання, відправка менеджеру.' },
-]
 
 // Структурна мета статистики (порядок + формат «тисячі»); тексти беруться з homeContent
 const STATS_META = [
@@ -43,6 +36,7 @@ const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transitio
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
 function CategoryCard({ cat, lang }) {
+  const t = useT()
   const [hovered, setHovered] = useState(false)
   const imgSrc = cat.image
   return (
@@ -102,7 +96,7 @@ function CategoryCard({ cat, lang }) {
             borderRadius: '0.375rem',
             transition: 'all 0.2s'
           }}>
-            Переглянути →
+            {t('home.categoryViewBtn')}
           </span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: '#aaa', letterSpacing: '0.06em' }}>
             {cat.count} SKU
@@ -114,24 +108,25 @@ function CategoryCard({ cat, lang }) {
 }
 
 const PROJECT_PHOTOS = [
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436260112_1028062199320076_3448976492944701510_n-1.jpg', label: 'Котельня промислова' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436346403_1028062205986742_1945016056577705001_n-1.jpg', label: 'Вузол підмішування' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441415989_1029207962538833_8255095048528061398_n-1.jpg', label: 'Насосна станція' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441923833_1036832648443031_6061180382749463508_n-1.jpg', label: 'Колекторний вузол' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443716920_1034298352029794_8241212954317908008_n-1.jpg', label: 'Котельня на підприємстві' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443717382_1035094698616826_2882206306103516977_n-1.jpg', label: 'Монтаж системи' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445077258_1032797785513184_3472109855078885848_n-1.jpg', label: 'Розподільний вузол' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445741031_1033532898773006_7539877099138788841_n-1.jpg', label: 'Готовий об\'єкт' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448770252_1054379716688324_6993680917338285497_n-1.jpg', label: 'Теплова станція' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448963173_1057194799740149_5056344012506323464_n-1.jpg', label: 'Насосна група в роботі' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448862036_1054379710021658_8530154308900725780_n-1.jpg', label: 'Підключення колекторів' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/449446624_1063156462477316_8539246227030569584_n-1.jpg', label: 'Промисловий об\'єкт' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450069451_1064322915694004_2995371254833168558_n-1.jpg', label: 'Готова котельня' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450567120_1070326941760268_5112914741981000641_n-1.jpg', label: 'Монтаж вузла' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/452863875_1078280964298199_2202968223287568557_n-1.jpg', label: 'Котельня ЖК' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436260112_1028062199320076_3448976492944701510_n-1.jpg', labelKey: 'projIndustrialBoiler' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436346403_1028062205986742_1945016056577705001_n-1.jpg', labelKey: 'projMixingUnit' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441415989_1029207962538833_8255095048528061398_n-1.jpg', labelKey: 'projPumpStation' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441923833_1036832648443031_6061180382749463508_n-1.jpg', labelKey: 'projManifoldUnit' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443716920_1034298352029794_8241212954317908008_n-1.jpg', labelKey: 'projEnterpriseBoiler' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443717382_1035094698616826_2882206306103516977_n-1.jpg', labelKey: 'projSystemInstall' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445077258_1032797785513184_3472109855078885848_n-1.jpg', labelKey: 'projDistributionUnit' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445741031_1033532898773006_7539877099138788841_n-1.jpg', labelKey: 'projCompletedObject' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448770252_1054379716688324_6993680917338285497_n-1.jpg', labelKey: 'projHeatStation' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448963173_1057194799740149_5056344012506323464_n-1.jpg', labelKey: 'projPumpGroupWork' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448862036_1054379710021658_8530154308900725780_n-1.jpg', labelKey: 'projManifoldConnect' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/449446624_1063156462477316_8539246227030569584_n-1.jpg', labelKey: 'projIndustrialObject' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450069451_1064322915694004_2995371254833168558_n-1.jpg', labelKey: 'projReadyBoiler' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450567120_1070326941760268_5112914741981000641_n-1.jpg', labelKey: 'projUnitInstall' },
+  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/452863875_1078280964298199_2202968223287568557_n-1.jpg', labelKey: 'projResidentialBoiler' },
 ]
 
 function ProjectsCarousel() {
+  const t = useT()
   const trackRef = useRef(null)
   const isPausedRef = useRef(false)
   const posRef = useRef(0)
@@ -181,7 +176,7 @@ function ProjectsCarousel() {
             <button onClick={() => setLightbox(null)}
               className="absolute -top-10 right-0 text-white/60 hover:text-white transition-colors"
               style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.08em' }}>
-              ESC · ЗАКРИТИ
+              {t('home.lightboxClose')}
             </button>
           </div>
         </div>
@@ -192,17 +187,17 @@ function ProjectsCarousel() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="flex items-end justify-between">
             <div>
-              <motion.div variants={fadeUp} className="eyebrow mb-3" style={{ color: 'var(--accent)' }}>● Реалізовані проекти</motion.div>
+              <motion.div variants={fadeUp} className="eyebrow mb-3" style={{ color: 'var(--accent)' }}>{t('home.projectsEyebrow')}</motion.div>
               <motion.h2 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] text-white leading-tight"
                 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
-                50 000+ котелень оснащено<br />обладнанням Termojet
+                {t('home.projectsTitle')}
               </motion.h2>
             </div>
             <motion.a variants={fadeUp} href="/portfolio"
               className="hidden md:flex items-center gap-2 text-white/40 hover:text-white transition-colors"
               style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              Всі проекти <ArrowRight size={13} />
+              {t('home.projectsViewAll')} <ArrowRight size={13} />
             </motion.a>
           </motion.div>
         </div>
@@ -211,32 +206,35 @@ function ProjectsCarousel() {
           onMouseEnter={() => { isPausedRef.current = true }}
           onMouseLeave={() => { isPausedRef.current = false }}>
           <div ref={trackRef} className="flex gap-4" style={{ willChange: 'transform', width: 'max-content' }}>
-            {items.map((photo, i) => (
-              <div key={i}
-                className="flex-shrink-0 relative overflow-hidden cursor-pointer group"
-                style={{ width: 280, height: 210 }}
-                onClick={() => setLightbox(photo)}>
-                <img
-                  src={photo.src}
-                  alt={photo.label}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                  onError={e => { e.target.style.display = 'none'; e.target.parentElement.style.background = '#1a1a1a' }}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-10 h-10 border border-white/60 flex items-center justify-center">
-                    <ArrowUpRight size={18} className="text-white" />
+            {items.map((photo, i) => {
+              const carouselLabel = photo.labelKey ? t(`home.${photo.labelKey}`) : (photo.label || '')
+              return (
+                <div key={i}
+                  className="flex-shrink-0 relative overflow-hidden cursor-pointer group"
+                  style={{ width: 280, height: 210 }}
+                  onClick={() => setLightbox({ ...photo, label: carouselLabel })}>
+                  <img
+                    src={photo.src}
+                    alt={carouselLabel}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    onError={e => { e.target.style.display = 'none'; e.target.parentElement.style.background = '#1a1a1a' }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-10 h-10 border border-white/60 flex items-center justify-center">
+                      <ArrowUpRight size={18} className="text-white" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                      {carouselLabel}
+                    </span>
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    {photo.label}
-                  </span>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* Fade edges */}
@@ -248,7 +246,7 @@ function ProjectsCarousel() {
 
         <div className="max-w-7xl mx-auto px-4 mt-6 text-right">
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.08em' }}>
-            Наведіть мишку — зупинити · Клік — збільшити
+            {t('home.carouselHint')}
           </span>
         </div>
       </section>
@@ -317,6 +315,7 @@ function ReviewCard({ review }) {
 }
 
 function ReviewFormModal({ onClose }) {
+  const t = useT()
   const { submitReview } = useApp()
   const [form, setForm] = useState({ name: '', company: '', rating: 5, text: '' })
   const [photo, setPhoto] = useState(null)
@@ -328,7 +327,7 @@ function ReviewFormModal({ onClose }) {
   function pickPhoto(e) {
     const file = e.target.files?.[0]
     if (!file) return
-    if (file.size > 8 * 1024 * 1024) { setMsg('Фото завелике (макс. 8 МБ)'); setState('error'); return }
+    if (file.size > 8 * 1024 * 1024) { setMsg(t('home.reviewPhotoTooBig')); setState('error'); return }
     setPhoto(file)
     setPreview(URL.createObjectURL(file))
   }
@@ -336,12 +335,12 @@ function ReviewFormModal({ onClose }) {
   async function submit(e) {
     e.preventDefault()
     if (!form.name.trim() || form.text.trim().length < 10) {
-      setState('error'); setMsg('Вкажіть імʼя та текст відгуку (від 10 символів)'); return
+      setState('error'); setMsg(t('home.reviewValidationError')); return
     }
     setState('sending'); setMsg('')
     const res = await submitReview({ ...form, photo })
-    if (res?.ok) { setState('done'); setMsg(res.message || 'Дякуємо! Відгук зʼявиться після перевірки.') }
-    else { setState('error'); setMsg(res?.error || 'Не вдалося надіслати. Спробуйте пізніше.') }
+    if (res?.ok) { setState('done'); setMsg(res.message || t('home.reviewSuccessMsg')) }
+    else { setState('error'); setMsg(res?.error || t('home.reviewSendError')) }
   }
 
   return (
@@ -349,25 +348,25 @@ function ReviewFormModal({ onClose }) {
       style={{ background: 'rgba(0,0,0,0.6)' }} onClick={onClose}>
       <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <div className="font-black text-lg text-[#1a1a1a] font-['Archivo',sans-serif]">Залишити відгук</div>
+          <div className="font-black text-lg text-[#1a1a1a] font-['Archivo',sans-serif]">{t('home.leaveReview')}</div>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-700"><X size={20} /></button>
         </div>
 
         {state === 'done' ? (
           <div className="text-center py-12 px-6">
             <Check size={46} className="mx-auto mb-4" style={{ color: '#22c55e' }} />
-            <div className="font-bold text-lg text-[#1a1a1a] mb-2">Відгук надіслано</div>
+            <div className="font-bold text-lg text-[#1a1a1a] mb-2">{t('home.reviewSentTitle')}</div>
             <p className="text-sm text-gray-500 mb-6">{msg}</p>
             <button onClick={onClose}
               className="px-6 py-2.5 text-white text-sm font-bold" style={{ background: 'var(--accent)' }}>
-              Закрити
+              {t('common.close')}
             </button>
           </div>
         ) : (
           <form onSubmit={submit} className="p-6 space-y-4">
             {/* Зірки */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Оцінка</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">{t('home.reviewFormRating')}</label>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map(i => (
                   <button type="button" key={i} onClick={() => set('rating', i)} className="p-0.5">
@@ -379,34 +378,34 @@ function ReviewFormModal({ onClose }) {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Імʼя *</label>
-              <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Ваше імʼя" maxLength={80}
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormName')}</label>
+              <input value={form.name} onChange={e => set('name', e.target.value)} placeholder={t('home.reviewFormNamePlaceholder')} maxLength={80}
                 className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Компанія / посада / місто</label>
-              <input value={form.company} onChange={e => set('company', e.target.value)} placeholder="Напр.: Монтажник, Київ" maxLength={120}
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormCompany')}</label>
+              <input value={form.company} onChange={e => set('company', e.target.value)} placeholder={t('home.reviewFormCompanyPlaceholder')} maxLength={120}
                 className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Відгук *</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormText')}</label>
               <textarea value={form.text} onChange={e => set('text', e.target.value)} rows={4} maxLength={1500}
-                placeholder="Розкажіть про ваш досвід із обладнанням Termojet..."
+                placeholder={t('home.reviewFormTextPlaceholder')}
                 className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm resize-none" />
             </div>
 
             {/* Фото */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Фото (необовʼязково)</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormPhoto')}</label>
               <label className="flex items-center gap-3 px-4 py-3 border border-dashed border-gray-300 cursor-pointer hover:border-[var(--accent)] transition-colors">
                 {preview ? (
                   <img src={preview} alt="" className="w-14 h-14 object-cover" />
                 ) : (
                   <ImagePlus size={22} className="text-gray-400" />
                 )}
-                <span className="text-sm text-gray-500">{photo ? photo.name : 'Завантажити фото (jpg, png · до 8 МБ)'}</span>
+                <span className="text-sm text-gray-500">{photo ? photo.name : t('home.reviewFormPhotoUpload')}</span>
                 <input type="file" accept="image/jpeg,image/png,image/webp" onChange={pickPhoto} className="hidden" />
               </label>
             </div>
@@ -417,9 +416,9 @@ function ReviewFormModal({ onClose }) {
               className="w-full flex items-center justify-center gap-2 py-3 text-white font-bold disabled:opacity-60"
               style={{ background: 'var(--accent)' }}>
               <Send size={16} />
-              {state === 'sending' ? 'Надсилання...' : 'Надіслати відгук'}
+              {state === 'sending' ? t('home.reviewFormSending') : t('home.reviewFormSubmit')}
             </button>
-            <p className="text-[11px] text-gray-400 text-center">Відгук буде опубліковано після перевірки модератором.</p>
+            <p className="text-[11px] text-gray-400 text-center">{t('home.reviewFormDisclaimer')}</p>
           </form>
         )}
       </div>
@@ -428,6 +427,7 @@ function ReviewFormModal({ onClose }) {
 }
 
 function ReviewsSection() {
+  const t = useT()
   const { reviews } = useApp()
   const [showForm, setShowForm] = useState(false)
 
@@ -458,18 +458,18 @@ function ReviewsSection() {
             <motion.div variants={fadeUp}
               style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--accent)' }}
               className="mb-3">
-              ● ВІДГУКИ
+              {t('home.reviewsEyebrow')}
             </motion.div>
             <motion.h2 variants={fadeUp}
               className="font-black font-['Archivo',sans-serif] text-[#1a1a1a] leading-tight"
               style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
-              Що кажуть наші клієнти
+              {t('home.reviewsTitle')}
             </motion.h2>
           </div>
           <motion.button variants={fadeUp} onClick={() => setShowForm(true)}
             className="inline-flex items-center gap-2 px-5 py-3 text-white text-sm font-bold self-start md:self-auto"
             style={{ background: 'var(--accent)' }}>
-            <Star size={15} fill="white" /> Залишити відгук
+            <Star size={15} fill="white" /> {t('home.leaveReview')}
           </motion.button>
         </motion.div>
 
@@ -567,7 +567,7 @@ export default function HomePage() {
             <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
               src={MP4_URL}
               controls autoPlay playsInline
-              title="Termojet виробництво" />
+              title={t('home.productionVideoTitle')} />
             <button onClick={() => setVideoOpen(false)}
               className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
               <X size={18} />
@@ -683,7 +683,7 @@ export default function HomePage() {
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <div>
               <motion.div variants={fadeUp} className="eyebrow-white mb-3">
-                Каталог
+                {t('nav.catalog')}
               </motion.div>
               <motion.h2 variants={fadeUp}
                 className="font-black font-['Archivo',sans-serif] leading-tight text-white"
@@ -717,7 +717,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden py-20 md:py-28 text-white">
         <img
           src="https://termojet.com.ua/wp-content/uploads/2025/09/img_4674.jpg"
-          alt="Виробництво Termojet"
+          alt={t('home.productionImgAlt')}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.3)' }}
         />
@@ -806,33 +806,36 @@ export default function HomePage() {
 
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {prodPhotos.map((photo, i) => (
-              <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
-                <img
-                  src={photo.src}
-                  alt={`Виробництво Termojet ${i+1}`}
-                  onError={e => {
-                    e.target.style.display = 'none'
-                    e.target.parentElement.style.background = `hsl(${210 + i*15}, 30%, ${15 + i*5}%)`
-                  }}
-                />
-                <div className="absolute bottom-3 left-3 right-3">
-                  <span className="text-white/70 bg-black/40 backdrop-blur-sm rounded-lg px-2.5 py-1 block truncate"
-                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px' }}>
-                    {photo.label}
-                  </span>
+            {prodPhotos.map((photo, i) => {
+              const photoLabel = photo.labelKey ? t(`home.${photo.labelKey}`) : (photo.label || '')
+              return (
+                <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
+                  <img
+                    src={photo.src}
+                    alt={`${t('home.productionImgAlt')} ${i+1}`}
+                    onError={e => {
+                      e.target.style.display = 'none'
+                      e.target.parentElement.style.background = `hsl(${210 + i*15}, 30%, ${15 + i*5}%)`
+                    }}
+                  />
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <span className="text-white/70 bg-black/40 backdrop-blur-sm rounded-lg px-2.5 py-1 block truncate"
+                      style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px' }}>
+                      {photoLabel}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </motion.div>
 
           <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ delay:0.3 }}
             className="flex flex-wrap gap-3 mt-8">
             <Link to="/about" className="btn-secondary">
-              Про виробництво <ArrowRight size={15} />
+              {t('home.productionBtn')} <ArrowRight size={15} />
             </Link>
             <button onClick={() => setVideoOpen(true)} className="btn-primary">
-              <Play size={14} fill="white" /> Відео заводу
+              <Play size={14} fill="white" /> {t('home.productionVideo')}
             </button>
           </motion.div>
         </div>
@@ -868,10 +871,10 @@ export default function HomePage() {
           {/* Section header */}
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
             className="text-center mb-6">
-            <div className="eyebrow mb-3" style={{ color:'var(--accent)' }}>● Termojet App · Безкоштовно</div>
+            <div className="eyebrow mb-3" style={{ color:'var(--accent)' }}>{t('home.appEyebrow')}</div>
             <h2 className="font-black font-['Archivo',sans-serif] leading-tight"
               style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', background: 'linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.65))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Конструктор котельної системи — в одному додатку
+              {t('home.appTitle')}
             </h2>
           </motion.div>
 
@@ -912,7 +915,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
                   className="btn-primary flex items-center gap-2 text-sm px-5 py-2.5">
-                  Запустити у браузері <ArrowUpRight size={16} />
+                  {t('home.appLaunchBrowser')} <ArrowUpRight size={16} />
                 </a>
                 <a href="https://apps.apple.com/ua/app/termojet/id6471802953" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 text-white text-sm transition-all hover:bg-white/8"
@@ -932,11 +935,11 @@ export default function HomePage() {
             {/* ── RIGHT: benefits 2-col ── */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 auto-rows-fr">
               {[
-                { icon: '📋', title: 'Повний каталог',       desc: 'Вся продукція Termojet завжди під рукою.' },
-                { icon: '⚙️', title: '100+ моделей',          desc: 'Конструктор з колекторів та насосних груп.' },
-                { icon: '🛡️', title: 'Без помилок',           desc: 'Автоматичний підбір — несумісне поєднати неможливо.' },
-                { icon: '⚡', title: 'Швидкий підбір',        desc: 'Підберіть систему саме для вашої котельні.' },
-                { icon: '📄', title: 'Експорт PDF',           desc: 'Схема + список обладнання — одразу клієнту.' },
+                { icon: '📋', title: t('home.appBenefits.fullCatalogTitle'),   desc: t('home.appBenefits.fullCatalogDesc') },
+                { icon: '⚙️', title: t('home.appBenefits.modelsTitle'),        desc: t('home.appBenefits.modelsDesc') },
+                { icon: '🛡️', title: t('home.appBenefits.noErrorsTitle'),      desc: t('home.appBenefits.noErrorsDesc') },
+                { icon: '⚡', title: t('home.appBenefits.fastSelectionTitle'), desc: t('home.appBenefits.fastSelectionDesc') },
+                { icon: '📄', title: t('home.appBenefits.pdfTitle'),           desc: t('home.appBenefits.pdfDesc') },
               ].map((item, i) => (
                 <motion.div key={i}
                   initial={{ opacity:0, y:16 }}
@@ -1048,9 +1051,9 @@ export default function HomePage() {
             <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }}>
               <h2 className="font-black font-['Archivo',sans-serif] text-white leading-[0.9]"
                 style={{ fontSize: 'clamp(2.4rem, 6.4vw, 5.6rem)' }}>
-                Готові<br />
-                <span className="text-outline-white">проєктувати</span><br />
-                котельню?
+                {t('home.ctaHeadingLine1')}<br />
+                <span className="text-outline-white">{t('home.ctaHeadingLine2')}</span><br />
+                {t('home.ctaHeadingLine3')}
               </h2>
             </motion.div>
 
@@ -1087,14 +1090,14 @@ export default function HomePage() {
               style={{ background: 'linear-gradient(180deg, rgba(8,10,14,0.78) 0%, rgba(8,10,14,0.62) 50%, rgba(8,10,14,0.80) 100%)' }} />
             <div className="relative">
               <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 backdrop-blur-sm">
-                🤝 Партнерська програма
+                {t('home.dealersBadge')}
               </div>
               <h2 className="section-title-white mb-4 max-w-xl mx-auto">{hc.dealersTitle}</h2>
               <p className="text-white/75 text-base mb-8 max-w-xl mx-auto">
                 {hc.dealersText}
               </p>
               <Link to="/partners" className="btn-primary px-8 py-4 text-base">
-                Дізнатись про партнерство <ArrowRight size={16} />
+                {t('home.dealersBtn')} <ArrowRight size={16} />
               </Link>
             </div>
           </div>

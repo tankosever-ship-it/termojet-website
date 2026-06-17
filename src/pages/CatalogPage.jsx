@@ -567,7 +567,45 @@ const CATEGORY_FILTERS = {
   },
 }
 
+// Map of filter group keys → translation keys under catalog.filterGroups.*
+const FILTER_GROUP_LABEL_KEYS = {
+  type: 'catalog.filterGroups.type',
+  thermostat: 'catalog.filterGroups.thermostat',
+  thread: 'catalog.filterGroups.thread',
+  dn: 'catalog.filterGroups.dn',
+  kvs: 'catalog.filterGroups.kvs',
+  temprange: 'catalog.filterGroups.temprange',
+  connection: 'catalog.filterGroups.connection',
+  purpose: 'catalog.filterGroups.purpose',
+  side: 'catalog.filterGroups.side',
+  seriya: 'catalog.filterGroups.seriya',
+  pumptype: 'catalog.filterGroups.pumptype',
+  power_supply: 'catalog.filterGroups.powerSupply',
+  execution: 'catalog.filterGroups.execution',
+  mountlen: 'catalog.filterGroups.mountlen',
+  qmax: 'catalog.filterGroups.qmax',
+  napir: 'catalog.filterGroups.napir',
+  model: 'catalog.filterGroups.model',
+  exec: 'catalog.filterGroups.exec',
+  circuits: 'catalog.filterGroups.circuits',
+  outlets: 'catalog.filterGroups.outlets',
+  direction: 'catalog.filterGroups.direction',
+  ng_interaxis: 'catalog.filterGroups.ngInteraxis',
+  side_interaxis: 'catalog.filterGroups.sideInteraxis',
+  balka: 'catalog.filterGroups.balka',
+  power: 'catalog.filterGroups.power',
+  septype: 'catalog.filterGroups.septype',
+  gmax: 'catalog.filterGroups.gmax',
+  devtype: 'catalog.filterGroups.devtype',
+  prodtype: 'catalog.filterGroups.prodtype',
+  cabinettype: 'catalog.filterGroups.cabinettype',
+  mega_type: 'catalog.filterGroups.megaType',
+  mega_dn: 'catalog.filterGroups.megaDn',
+  eqtype: 'catalog.filterGroups.eqtype',
+}
+
 function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPrice }) {
+  const t = useT()
   const config = CATEGORY_FILTERS[categorySlug]
   const hasPrice = priceBounds && priceBounds[1] > priceBounds[0]
   if (!config && !hasPrice) return null
@@ -587,13 +625,13 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--ink-200)] flex-shrink-0">
           <span style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
-            Фільтри
+            {t('catalog.filters.heading')}
           </span>
           {hasAny && (
             <button onClick={() => { setFilters({}); setPrice(null) }}
               className="flex items-center gap-1 transition-colors hover:text-[var(--accent)]"
               style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
-              <X size={10} /> Скинути
+              <X size={10} /> {t('catalog.filters.reset')}
             </button>
           )}
         </div>
@@ -605,7 +643,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
             <div>
               <div className="mb-2 px-1 flex items-center justify-between"
                 style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
-                <span>Ціна, ₴</span>
+                <span>{t('catalog.filters.priceLabel')}</span>
               </div>
               <div className="px-1">
                 <div className="flex items-center justify-between mb-1.5" style={{ ...mono, fontSize: '11px', fontWeight: 700, color: 'var(--accent)' }}>
@@ -613,10 +651,10 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
                 </div>
                 <input type="range" min={priceBounds[0]} max={priceBounds[1]} value={lo}
                   onChange={e => setPrice([Math.min(+e.target.value, hi), hi])}
-                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label="Ціна від" />
+                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label={t('catalog.filters.priceFrom')} />
                 <input type="range" min={priceBounds[0]} max={priceBounds[1]} value={hi}
                   onChange={e => setPrice([lo, Math.max(+e.target.value, lo)])}
-                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label="Ціна до" />
+                  className="w-full" style={{ accentColor: 'var(--accent)' }} aria-label={t('catalog.filters.priceTo')} />
               </div>
             </div>
           )}
@@ -626,7 +664,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
             <div key={group.key}>
               <div className="mb-2 px-1"
                 style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
-                {group.label}
+                {FILTER_GROUP_LABEL_KEYS[group.key] ? t(FILTER_GROUP_LABEL_KEYS[group.key]) : group.label}
               </div>
               <div className="flex flex-col gap-0.5">
                 {group.options.map(opt => {
@@ -821,6 +859,7 @@ const catRank = p => (p.categorySlug in CAT_ORDER ? CAT_ORDER[p.categorySlug] : 
 
 // ── Смужка плиток-категорій зі стрілками + fade + peek ───────────────────────────
 function CategoryStrip({ products, categories, catCounts, currentCategory, lang }) {
+  const t = useT()
   const scrollRef = useRef(null)
   const [canLeft, setCanLeft] = useState(false)
   const [canRight, setCanRight] = useState(false)
@@ -877,7 +916,7 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
           </div>
           <div className="px-2 pb-3 pt-2 text-center">
             <div className="text-[11.5px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
-              Всі категорії
+              {t('catalog.filter.all')}
             </div>
             <div className="text-[10px] mt-1" style={{ color: 'var(--text-secondary)', fontFamily: "'JetBrains Mono', monospace" }}>
               {products.length}
@@ -920,7 +959,7 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
         <>
           <div className="absolute left-0 top-0 bottom-3 w-12 md:w-14 pointer-events-none z-10"
             style={{ background: 'linear-gradient(90deg, var(--bg) 35%, transparent)' }} />
-          <button type="button" aria-label="Прокрутити ліворуч" onClick={() => scrollByDir(-1)}
+          <button type="button" aria-label={t('catalog.scrollLeft')} onClick={() => scrollByDir(-1)}
             className={`${arrowBase} left-1`}>
             <ChevronLeft size={20} />
           </button>
@@ -932,7 +971,7 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
         <>
           <div className="absolute right-0 top-0 bottom-3 w-12 md:w-14 pointer-events-none z-10"
             style={{ background: 'linear-gradient(270deg, var(--bg) 35%, transparent)' }} />
-          <button type="button" aria-label="Прокрутити праворуч" onClick={() => scrollByDir(1)}
+          <button type="button" aria-label={t('catalog.scrollRight')} onClick={() => scrollByDir(1)}
             className={`${arrowBase} right-1`}>
             <ChevronRight size={20} />
           </button>
@@ -1069,16 +1108,16 @@ export default function CatalogPage() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(232,93,4,0.4)] to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-2 text-xs text-white/40 mb-3">
-            <Link to="/" className="hover:text-white/70 transition-colors">Головна</Link>
+            <Link to="/" className="hover:text-white/70 transition-colors">{t('catalog.breadcrumbHome')}</Link>
             <ChevronRight size={12} />
             {currentCategory ? (
               <>
-                <Link to="/catalog" className="hover:text-white/70 transition-colors">Каталог</Link>
+                <Link to="/catalog" className="hover:text-white/70 transition-colors">{t('nav.catalog')}</Link>
                 <ChevronRight size={12} />
                 <span className="text-white/70">{currentCategory.name[lang] || currentCategory.name.uk}</span>
               </>
             ) : (
-              <span className="text-white/70">Каталог</span>
+              <span className="text-white/70">{t('nav.catalog')}</span>
             )}
           </div>
           <div className="flex items-end justify-between gap-4">
@@ -1092,7 +1131,7 @@ export default function CatalogPage() {
             </div>
             <div className="text-right flex-shrink-0">
               <div className="text-3xl font-black font-['Archivo',sans-serif]">{filtered.length}</div>
-              <div className="text-white/50 text-xs">товарів</div>
+              <div className="text-white/50 text-xs">{t('catalog.productsWord')}</div>
             </div>
           </div>
         </div>
@@ -1142,12 +1181,12 @@ export default function CatalogPage() {
           <div className="flex border border-gray-200 overflow-hidden">
             <button onClick={() => setViewMode('grid')}
               className={`px-3 py-2 transition-colors ${viewMode === 'grid' ? 'bg-[var(--primary)] text-white' : 'bg-gray-50 text-gray-500 hover:bg-gray-100'}`}
-              title="Сітка">
+              title={t('catalog.viewGrid')}>
               <LayoutGrid size={15} />
             </button>
             <button onClick={() => setViewMode('list')}
               className={`px-3 py-2 transition-colors border-l border-gray-200 ${viewMode === 'list' ? 'bg-[var(--primary)] text-white' : 'bg-gray-50 text-gray-500 hover:bg-gray-100'}`}
-              title="Список">
+              title={t('catalog.viewList')}>
               <List size={15} />
             </button>
           </div>
@@ -1155,11 +1194,11 @@ export default function CatalogPage() {
 
         {/* Result count */}
         <div className="text-xs text-gray-400 font-mono mb-4">
-          Знайдено: <span className="font-bold text-gray-600">{filtered.length}</span> товарів
+          {t('catalog.foundCount')} <span className="font-bold text-gray-600">{filtered.length}</span> {t('catalog.productsWord')}
           {(search || inStockOnly || price || Object.values(catFilters).some(v => Array.isArray(v) ? v.length : v)) && (
             <button onClick={() => { setSearch(''); setInStockOnly(false); setCatFilters({}); setPrice(null) }}
               className="ml-3 text-[var(--accent)] hover:underline">
-              скинути фільтри
+              {t('catalog.resetFilters')}
             </button>
           )}
         </div>
@@ -1169,7 +1208,7 @@ export default function CatalogPage() {
           <div className="text-center py-24 text-gray-400">
             <div className="text-5xl mb-4">🔍</div>
             <p className="text-lg font-semibold mb-2 text-gray-600">{cat.noResults}</p>
-            <p className="text-sm">Спробуйте змінити параметри пошуку</p>
+            <p className="text-sm">{t('catalog.tryChangeSearch')}</p>
           </div>
         ) : viewMode === 'grid' ? (
           /* ── GRID VIEW ── */
@@ -1201,12 +1240,12 @@ export default function CatalogPage() {
 
                       {isOnSale(product) && (
                         <span className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
-                          Акція
+                          {t('catalog.saleBadge')}
                         </span>
                       )}
                       {!product.inStock && (
                         <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-gray-700 text-white rounded-full">
-                          Під замовлення
+                          {t('catalog.outOfStock')}
                         </span>
                       )}
 
@@ -1214,11 +1253,11 @@ export default function CatalogPage() {
                         <button onClick={() => addToCart(product)}
                           className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 rounded-lg transition-colors"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
-                          <ShoppingCart size={12} /> Купити в 1 клік
+                          <ShoppingCart size={12} /> {t('catalog.buyOneClick')}
                         </button>
                         <Link to={href}
                           className="flex items-center gap-1 px-3 h-9 border border-[var(--ink-200)] rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
-                          Детальніше <ArrowRight size={11} />
+                          {t('catalog.details')} <ArrowRight size={11} />
                         </Link>
                       </div>
                     </div>
@@ -1255,7 +1294,7 @@ export default function CatalogPage() {
                           <ProductPrice product={product} eurRate={eurRate} />
                           <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
                             <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
-                            {product.inStock ? 'В наявності' : 'Замовлення'}
+                            {product.inStock ? t('catalog.inStock') : t('catalog.orderShort')}
                           </div>
                         </div>
                         <div className="text-[10px] font-mono text-gray-300">{product.sku || ''}</div>
@@ -1318,7 +1357,7 @@ export default function CatalogPage() {
                         <span className="text-[10px] font-mono text-gray-400">{product.sku || '—'}</span>
                         <span className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
                           <span className="w-1.5 h-1.5 rounded-full" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
-                          {product.inStock ? 'В наявності' : 'Під замовлення'}
+                          {product.inStock ? t('catalog.inStock') : t('catalog.outOfStock')}
                         </span>
                         {/* Ціна — інлайн лише на мобільному */}
                         <span className="sm:hidden ml-auto">
@@ -1330,11 +1369,11 @@ export default function CatalogPage() {
                         <button onClick={() => addToCart(product)}
                           className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 px-3 rounded-lg"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
-                          <ShoppingCart size={12} /> В кошик
+                          <ShoppingCart size={12} /> {t('catalog.addToCart')}
                         </button>
                         <Link to={href}
                           className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg text-gray-600 text-xs font-semibold">
-                          Детальніше <ArrowRight size={11} />
+                          {t('catalog.details')} <ArrowRight size={11} />
                         </Link>
                       </div>
                     </div>
@@ -1348,11 +1387,11 @@ export default function CatalogPage() {
                         <button onClick={() => addToCart(product)}
                           className="flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 px-3 w-full rounded-lg transition-colors"
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
-                          <ShoppingCart size={12} /> В кошик
+                          <ShoppingCart size={12} /> {t('catalog.addToCart')}
                         </button>
                         <Link to={href}
                           className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg hover:border-[var(--primary)] text-gray-600 hover:text-[var(--primary)] text-xs font-semibold transition-colors w-full">
-                          Детальніше <ArrowRight size={11} />
+                          {t('catalog.details')} <ArrowRight size={11} />
                         </Link>
                       </div>
                     </div>

@@ -22,7 +22,7 @@ export default function PortfolioPage() {
         <div className="absolute inset-0 bg-dots pointer-events-none opacity-40" />
         <div className="relative max-w-7xl mx-auto px-4">
           <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
-            РЕАЛІЗОВАНІ ОБ'ЄКТИ · TERMOJET
+            {t('portfolio.heroBadge')}
           </span>
           <h1 className="text-4xl md:text-5xl font-black font-['Archivo',sans-serif] text-white mt-3 mb-3 leading-tight">
             {portT.title}
@@ -32,9 +32,9 @@ export default function PortfolioPage() {
           {/* Stats */}
           <div className="flex flex-wrap gap-6 mt-8">
             {[
-              ['50 000+', 'ОСНАЩЕНИХ ОБ\'ЄКТІВ'],
-              ['15', 'КРАЇН ЄС'],
-              ['22', 'РОКИ ДОСВІДУ'],
+              ['50 000+', t('portfolio.statObjects')],
+              ['15', t('portfolio.statCountries')],
+              ['22', t('portfolio.statYears')],
             ].map(([v, l]) => (
               <div key={l}>
                 <div className="text-2xl font-black text-white">{v}</div>
@@ -50,13 +50,13 @@ export default function PortfolioPage() {
         {portfolio.length === 0 ? (
           <div className="text-center py-20 text-gray-400">
             <p className="text-5xl mb-4">🏗️</p>
-            <p className="text-lg font-medium mb-1">Проекти в процесі додавання</p>
+            <p className="text-lg font-medium mb-1">{t('portfolio.emptyState')}</p>
           </div>
         ) : (
           <>
             <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
               className="uppercase mb-6">
-              {portfolio.length} ПРОЕКТІВ — ВИБЕРИ ДЛЯ ДЕТАЛЕЙ
+              {portfolio.length} {t('portfolio.projectsLabel')}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -118,7 +118,7 @@ export default function PortfolioPage() {
                     )}
                     <span className="inline-flex items-center gap-1 mt-3 text-[var(--primary)] opacity-0 group-hover:opacity-100 transition-opacity"
                       style={{ ...mono, fontSize: '10px', letterSpacing: '0.08em' }}>
-                      ДЕТАЛІ <ChevronRight size={11} />
+                      {t('portfolio.details')} <ChevronRight size={11} />
                     </span>
                   </div>
                 </button>
@@ -181,7 +181,7 @@ export default function PortfolioPage() {
               {selected.links?.length > 0 && (
                 <div className="mt-5 pt-4 border-t border-gray-100">
                   <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--text-muted)' }}
-                    className="uppercase mb-2.5">Обладнання об'єкта</div>
+                    className="uppercase mb-2.5">{t('portfolio.equipmentLabel')}</div>
                   <div className="flex flex-wrap gap-2">
                     {selected.links.map(l => l.ext ? (
                       <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"

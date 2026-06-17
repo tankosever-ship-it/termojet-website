@@ -5,40 +5,12 @@ import SEO from '../components/SEO'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import { assetPath } from '../utils/assetPath'
 import { getUTM } from '../utils/utm'
+import { useT } from '../i18n/useT'
 
 const BENEFIT_ICONS = [TrendingUp, Wrench, BookOpen, Truck, BarChart2, Headphones]
 
-const BENEFITS = [
-  { title: 'Вигідне ціноутворення',      desc: 'Гнучка система знижок та дилерські ціни залежно від обсягу продажів.' },
-  { title: 'Технічна підтримка',          desc: 'Навчання персоналу, сервісна документація та консультації інженерів.' },
-  { title: 'Маркетингова допомога',       desc: 'Надаємо рекламні матеріали, каталоги та підтримку у просуванні.' },
-  { title: 'Гнучкі поставки',            desc: 'Широкий асортимент в наявності, швидка доставка по всій Україні.' },
-  { title: 'Стабільний прибуток',         desc: 'Якісна продукція з попитом, що постійно зростає на ринку.' },
-  { title: 'Підтримка на кожному кроці', desc: 'Персональний менеджер, допомога з тендерами і складними об\'єктами.' },
-]
-
-const TYPES = [
-  { title: 'Системний партнер',  desc: 'Взаємовигідний бізнес на узгоджених умовах із регулярними поставками та спільним плануванням продажів.' },
-  { title: 'Договір поставки',   desc: 'Для разових закупівель або тестового запуску без довгострокових зобов\'язань.' },
-]
-
-const DEALER_REQ = [
-  'Юридична особа або ФОП з банківським рахунком',
-  'Спеціалізована діяльність у сфері інженерних систем',
-  'Офіс і хоча б один виставковий зразок обладнання',
-  'Штатний фахівець з продажу котельного обладнання',
-  'Персонал і обладнання для сервісного обслуговування',
-  'Підписані дилерська і сервісна угоди',
-]
-
-const INSTALLER_REQ = [
-  'Статус ФОП або юридичної особи',
-  'Спеціалізація у монтажі котельного обладнання або ВК',
-  'Досвід монтажу інженерних систем',
-  'Підписана партнерська угода',
-]
-
 function PartnerForm() {
+  const t = useT()
   const [type, setType] = useState('dealer')
   const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState({})
@@ -49,9 +21,9 @@ function PartnerForm() {
   function handleSubmit(e) {
     e.preventDefault()
     const errs = {}
-    if (!form.name.trim()) errs.name = 'Введіть ім\'я'
-    if (form.phone.replace(/\D/g, '').length < 10) errs.phone = 'Введіть коректний номер'
-    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Некоректний email'
+    if (!form.name.trim()) errs.name = t('partners.errName')
+    if (form.phone.replace(/\D/g, '').length < 10) errs.phone = t('partners.errPhone')
+    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = t('partners.errEmail')
     if (Object.keys(errs).length) { setErrors(errs); return }
     setErrors({})
 
@@ -69,11 +41,11 @@ function PartnerForm() {
         <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
           <CheckCircle size={32} className="text-emerald-500" />
         </div>
-        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Заявку надіслано!</h3>
-        <p className="text-[var(--text-secondary)] text-sm max-w-xs">Наш менеджер зв'яжеться з вами протягом 1 робочого дня.</p>
+        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">{t('partners.sentTitle')}</h3>
+        <p className="text-[var(--text-secondary)] text-sm max-w-xs">{t('partners.sentBody')}</p>
         <button onClick={() => { setSent(false); setForm({ name: '', email: '', phone: '', city: '', company: '', message: '' }) }}
           className="mt-6 text-[var(--accent)] hover:opacity-80 text-sm font-medium transition-colors">
-          Подати ще одну заявку
+          {t('partners.sentAgain')}
         </button>
       </div>
     )
@@ -85,9 +57,9 @@ function PartnerForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Type selector */}
       <div>
-        <label className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-2 block">Тип співпраці</label>
+        <label className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-2 block">{t('partners.formTypeLabel')}</label>
         <div className="flex gap-2">
-          {[{ value: 'dealer', label: 'Дилер' }, { value: 'installer', label: 'Інсталятор' }].map(ft => (
+          {[{ value: 'dealer', label: t('partners.typeDealer') }, { value: 'installer', label: t('partners.typeInstaller') }].map(ft => (
             <button key={ft.value} type="button" onClick={() => setType(ft.value)}
               className={`flex-1 py-2 rounded-lg text-sm font-medium border transition-all ${
                 type === ft.value ? 'bg-[var(--accent)] border-[var(--accent)] text-white' : 'border-gray-200 text-gray-600 hover:border-[var(--accent)]/40'
@@ -100,27 +72,27 @@ function PartnerForm() {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs text-gray-400 mb-1 block">Ім'я та прізвище *</label>
-          <input value={form.name} onChange={set('name')} placeholder="Іван Петренко"
+          <label className="text-xs text-gray-400 mb-1 block">{t('partners.fieldName')}</label>
+          <input value={form.name} onChange={set('name')} placeholder={t('partners.fieldNamePlaceholder')}
             className={`${inp} ${errors.name ? 'border-red-400' : 'border-gray-200'}`} />
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
         </div>
         <div>
-          <label className="text-xs text-gray-400 mb-1 block">Компанія</label>
-          <input value={form.company} onChange={set('company')} placeholder="ТОВ «Назва»"
+          <label className="text-xs text-gray-400 mb-1 block">{t('partners.fieldCompany')}</label>
+          <input value={form.company} onChange={set('company')} placeholder={t('partners.fieldCompanyPlaceholder')}
             className={`${inp} border-gray-200`} />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs text-gray-400 mb-1 block">Email *</label>
+          <label className="text-xs text-gray-400 mb-1 block">{t('partners.fieldEmail')}</label>
           <input type="email" value={form.email} onChange={set('email')} placeholder="email@company.ua"
             className={`${inp} ${errors.email ? 'border-red-400' : 'border-gray-200'}`} />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="text-xs text-gray-400 mb-1 block">Телефон *</label>
+          <label className="text-xs text-gray-400 mb-1 block">{t('partners.fieldPhone')}</label>
           <input type="tel" inputMode="numeric" maxLength={12} value={form.phone} onChange={set('phone')}
             onInput={e => { e.target.value = e.target.value.replace(/\D/g, '') }}
             placeholder="0XX XXX XX XX"
@@ -130,38 +102,69 @@ function PartnerForm() {
       </div>
 
       <div>
-        <label className="text-xs text-gray-400 mb-1 block">Місто</label>
-        <input value={form.city} onChange={set('city')} placeholder="Київ"
+        <label className="text-xs text-gray-400 mb-1 block">{t('partners.fieldCity')}</label>
+        <input value={form.city} onChange={set('city')} placeholder={t('partners.fieldCityPlaceholder')}
           className={`${inp} border-gray-200`} />
       </div>
 
       <div>
-        <label className="text-xs text-gray-400 mb-1 block">Повідомлення</label>
+        <label className="text-xs text-gray-400 mb-1 block">{t('partners.fieldMessage')}</label>
         <textarea value={form.message} onChange={set('message')} rows={3}
-          placeholder="Розкажіть про ваш бізнес і досвід роботи у сфері..."
+          placeholder={t('partners.fieldMessagePlaceholder')}
           className={`${inp} border-gray-200 resize-none`} />
       </div>
 
-      <ConsentCheckbox buttonLabel="Надіслати заявку на партнерство" />
+      <ConsentCheckbox buttonLabel={t('partners.submitBtn')} />
       <button type="submit"
         className="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all hover:opacity-90"
         style={{ background: 'var(--accent)' }}>
-        Надіслати заявку на партнерство
+        {t('partners.submitBtn')}
       </button>
-      <p className="text-gray-400 text-xs text-center">Після отримання заявки наш менеджер зв'яжеться з вами протягом 1 робочого дня</p>
+      <p className="text-gray-400 text-xs text-center">{t('partners.submitNote')}</p>
     </form>
   )
 }
 
 export default function PartnersPage() {
+  const t = useT()
   const [activeTab, setActiveTab] = useState('dealer')
   const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
+
+  const BENEFITS = [
+    { title: t('partners.benefit1Title'), desc: t('partners.benefit1Desc') },
+    { title: t('partners.benefit2Title'), desc: t('partners.benefit2Desc') },
+    { title: t('partners.benefit3Title'), desc: t('partners.benefit3Desc') },
+    { title: t('partners.benefit4Title'), desc: t('partners.benefit4Desc') },
+    { title: t('partners.benefit5Title'), desc: t('partners.benefit5Desc') },
+    { title: t('partners.benefit6Title'), desc: t('partners.benefit6Desc') },
+  ]
+
+  const TYPES = [
+    { title: t('partners.type1Title'), desc: t('partners.type1Desc') },
+    { title: t('partners.type2Title'), desc: t('partners.type2Desc') },
+  ]
+
+  const DEALER_REQ = [
+    t('partners.dealerReq1'),
+    t('partners.dealerReq2'),
+    t('partners.dealerReq3'),
+    t('partners.dealerReq4'),
+    t('partners.dealerReq5'),
+    t('partners.dealerReq6'),
+  ]
+
+  const INSTALLER_REQ = [
+    t('partners.installerReq1'),
+    t('partners.installerReq2'),
+    t('partners.installerReq3'),
+    t('partners.installerReq4'),
+  ]
 
   return (
     <>
       <SEO
-        title="Стати партнером — Termojet"
-        description="Партнерська програма Termojet для дилерів та монтажних організацій. Вигідні умови, маркетингова підтримка, навчання."
+        title={t('partners.seoTitle')}
+        description={t('partners.seoDesc')}
       />
 
       {/* Hero banner — фон рукостискання (як на /about) */}
@@ -173,12 +176,12 @@ export default function PartnersPage() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,85,0,0.6)] to-transparent" />
         <motion.div initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.45 }}
           className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-          <div className="label-accent mb-3" style={{ color: 'var(--accent)' }}>Партнерська програма</div>
+          <div className="label-accent mb-3" style={{ color: 'var(--accent)' }}>{t('dealers.heroBadge')}</div>
           <h1 className="text-3xl md:text-5xl font-black mb-4 font-['Archivo',sans-serif] drop-shadow">
-            Станьте партнером Termojet
+            {t('partners.heroTitle')}
           </h1>
           <p className="text-white/85 max-w-2xl mx-auto leading-relaxed">
-            Приєднуйтесь до мережі дилерів та монтажних організацій, що успішно розвивають бізнес на якісному котельному обладнанні українського виробника.
+            {t('partners.heroSubtitle')}
           </p>
         </motion.div>
       </section>
@@ -211,7 +214,7 @@ export default function PartnersPage() {
 
           {/* Cooperation types */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
-            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6 text-center">Формати співпраці</h3>
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6 text-center">{t('partners.formatsHeading')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {TYPES.map((tp, i) => (
                 <div key={tp.title} className="rounded-2xl border border-[var(--ink-200)] p-6">
@@ -231,12 +234,12 @@ export default function PartnersPage() {
 
             {/* Requirements */}
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6">Вимоги до партнерів</h3>
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6">{t('partners.reqHeading')}</h3>
 
               <div className="flex gap-2 mb-6">
                 {[
-                  { key: 'dealer', label: 'Дилер', icon: Building2 },
-                  { key: 'installer', label: 'Інсталятор', icon: UserCheck },
+                  { key: 'dealer', label: t('partners.typeDealer'), icon: Building2 },
+                  { key: 'installer', label: t('partners.typeInstaller'), icon: UserCheck },
                 ].map(({ key, label, icon: Icon }) => (
                   <button key={key} onClick={() => setActiveTab(key)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
@@ -261,9 +264,9 @@ export default function PartnersPage() {
               </ul>
 
               <div className="mt-8 rounded-2xl p-5" style={{ background: 'rgba(255,85,0,0.06)', border: '1px solid rgba(255,85,0,0.15)' }}>
-                <p className="text-sm font-medium mb-1" style={{ color: '#c44000' }}>Маєте питання?</p>
+                <p className="text-sm font-medium mb-1" style={{ color: '#c44000' }}>{t('partners.questionTitle')}</p>
                 <p className="text-sm" style={{ color: '#c44000' }}>
-                  Зателефонуйте нам:{' '}
+                  {t('partners.questionBody')}{' '}
                   <a href="tel:+380507189165" className="font-bold hover:underline">+380 50 718 91 65</a>
                 </p>
               </div>
@@ -272,7 +275,7 @@ export default function PartnersPage() {
             {/* Form */}
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
               className="card rounded-3xl p-8">
-              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6">Реєстрація партнера</h3>
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6">{t('partners.formHeading')}</h3>
               <PartnerForm />
             </motion.div>
 

@@ -2,67 +2,70 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Package, RefreshCw, ArrowRight, CheckCircle, XCircle, Phone, Mail, Wrench, Clock, Scale } from 'lucide-react'
 import SEO from '../components/SEO'
+import { useT } from '../i18n/useT'
 
 const fadeUp  = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.1 } } }
 
-const RETURN_CONDITIONS = [
-  'Товар не був у використанні — збережений товарний вигляд, пломби, ярлики.',
-  'Наявна оригінальна упаковка та всі комплектуючі.',
-  'Є документ, що підтверджує покупку (накладна, чек).',
-  'Технічно складні товари (теплові насоси) повертаються за умови відсутності слідів монтажу та підключення.',
-  'Товар не має механічних пошкоджень, слідів ремонту або стороннього втручання.',
-  'Не підлягають поверненню: товари, виготовлені за індивідуальними специфікаціями замовника.',
-]
-
-const NO_RETURN_CONDITIONS = [
-  'Обладнання, виготовлене за індивідуальним замовленням або нестандартними специфікаціями.',
-  'Товари зі слідами монтажу, підключення до системи, або які перебували в експлуатації.',
-  'Обладнання з порушеною заводською пломбою без наявності гарантійного випадку.',
-  'Комплектуючі та витратні матеріали (фільтри, фреон, ущільнювачі) після відкриття упаковки.',
-  'Програмне забезпечення та електронні ліцензії після активації.',
-]
-
-const WARRANTY_EXCLUSIONS = [
-  'Пошкодження внаслідок неправильного монтажу або підключення сторонньою організацією.',
-  'Механічні пошкодження та пошкодження внаслідок стихійного лиха.',
-  'Наслідки використання обладнання не за призначенням.',
-  'Природне зношення фільтрів, ущільнювачів та інших витратних матеріалів.',
-]
-
-const STEPS = [
-  {
-    num: '01',
-    icon: Phone,
-    title: 'Зв\'яжіться з нами',
-    desc: 'Подзвоніть або напишіть нам, вказавши номер замовлення та причину повернення.',
-  },
-  {
-    num: '02',
-    icon: Package,
-    title: 'Отримайте підтвердження',
-    desc: 'Менеджер погодить умови повернення та надасть інструкції щодо пакування та відправки.',
-  },
-  {
-    num: '03',
-    icon: RefreshCw,
-    title: 'Відправте товар',
-    desc: 'Упакуйте товар в оригінальну упаковку та відправте на наш склад: Нова Пошта, м. Вишневе, склад №1. Вартість доставки при поверненні оплачує покупець (крім гарантійних випадків).',
-  },
-  {
-    num: '04',
-    icon: CheckCircle,
-    title: 'Отримайте кошти',
-    desc: 'Після перевірки товару повертаємо кошти протягом 7 робочих днів на ваш банківський рахунок.',
-  },
-]
-
 export default function ReturnPage() {
+  const t = useT()
+
+  const RETURN_CONDITIONS = [
+    t('returns.returnConditions.item1'),
+    t('returns.returnConditions.item2'),
+    t('returns.returnConditions.item3'),
+    t('returns.returnConditions.item4'),
+    t('returns.returnConditions.item5'),
+    t('returns.returnConditions.item6'),
+  ]
+
+  const NO_RETURN_CONDITIONS = [
+    t('returns.noReturnConditions.item1'),
+    t('returns.noReturnConditions.item2'),
+    t('returns.noReturnConditions.item3'),
+    t('returns.noReturnConditions.item4'),
+    t('returns.noReturnConditions.item5'),
+  ]
+
+  const WARRANTY_EXCLUSIONS = [
+    t('returns.warrantyExclusions.item1'),
+    t('returns.warrantyExclusions.item2'),
+    t('returns.warrantyExclusions.item3'),
+    t('returns.warrantyExclusions.item4'),
+  ]
+
+  const STEPS = [
+    {
+      num: '01',
+      icon: Phone,
+      title: t('returns.steps.step1.title'),
+      desc: t('returns.steps.step1.desc'),
+    },
+    {
+      num: '02',
+      icon: Package,
+      title: t('returns.steps.step2.title'),
+      desc: t('returns.steps.step2.desc'),
+    },
+    {
+      num: '03',
+      icon: RefreshCw,
+      title: t('returns.steps.step3.title'),
+      desc: t('returns.steps.step3.desc'),
+    },
+    {
+      num: '04',
+      icon: CheckCircle,
+      title: t('returns.steps.step4.title'),
+      desc: t('returns.steps.step4.desc'),
+    },
+  ]
+
   return (
     <>
       <SEO
-        title="Повернення та обмін — Termojet"
-        description="Умови повернення та обміну обладнання Termojet згідно із Законом України «Про захист прав споживачів». Процедура, гарантія та контакти."
+        title={t('returns.seoTitle')}
+        description={t('returns.seoDescription')}
       />
 
       <section className="hero-gradient grain relative overflow-hidden text-white pb-20 md:pb-28" style={{ marginTop: '-60px', paddingTop: 'calc(5rem + 60px)' }}>
@@ -75,10 +78,10 @@ export default function ReturnPage() {
           <motion.div initial="hidden" animate="show" variants={stagger}>
             <motion.div variants={fadeUp} className="label-accent mb-4">Termojet</motion.div>
             <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl font-black mb-4 leading-tight font-['Archivo',sans-serif]">
-              Повернення та обмін
+              {t('returns.heroTitle')}
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-white/70 max-w-2xl mx-auto">
-              Ми дотримуємося всіх норм Закону України «Про захист прав споживачів».
+              {t('returns.heroSubtitle')}
             </motion.p>
           </motion.div>
         </div>
@@ -89,12 +92,10 @@ export default function ReturnPage() {
         {/* Умови повернення товару належної якості */}
         <section>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-8">
-            <div className="label-accent mb-2">Умови</div>
-            <h2 className="section-title">Умови повернення товару належної якості</h2>
+            <div className="label-accent mb-2">{t('returns.conditionsLabel')}</div>
+            <h2 className="section-title">{t('returns.conditionsTitle')}</h2>
             <p className="text-[var(--text-secondary)] mt-3 max-w-3xl">
-              Відповідно до законодавства України, ви маєте право повернути товар належної якості протягом
-              14 календарних днів з моменту отримання, якщо він не підійшов вам за формою, габаритами,
-              фасоном, кольором або комплектацією.
+              {t('returns.conditionsBody')}
             </p>
           </motion.div>
 
@@ -104,7 +105,7 @@ export default function ReturnPage() {
           >
             <motion.div variants={fadeUp} className="card p-8">
               <h3 className="font-bold text-lg text-[var(--text-primary)] mb-5 flex items-center gap-2">
-                <CheckCircle size={20} className="text-green-500" /> Товар приймається до повернення
+                <CheckCircle size={20} className="text-green-500" /> {t('returns.acceptedHeading')}
               </h3>
               <ul className="space-y-3">
                 {RETURN_CONDITIONS.map((item, i) => (
@@ -118,7 +119,7 @@ export default function ReturnPage() {
 
             <motion.div variants={fadeUp} className="card p-8">
               <h3 className="font-bold text-lg text-[var(--text-primary)] mb-5 flex items-center gap-2">
-                <XCircle size={20} className="text-red-400" /> Товари, що не підлягають поверненню
+                <XCircle size={20} className="text-red-400" /> {t('returns.notAcceptedHeading')}
               </h3>
               <ul className="space-y-3">
                 {NO_RETURN_CONDITIONS.map((item, i) => (
@@ -135,15 +136,13 @@ export default function ReturnPage() {
         {/* Обмін товару */}
         <section>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-8">
-            <div className="label-accent mb-2">Обмін</div>
-            <h2 className="section-title">Обмін товару</h2>
+            <div className="label-accent mb-2">{t('returns.exchangeLabel')}</div>
+            <h2 className="section-title">{t('returns.exchangeTitle')}</h2>
           </motion.div>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="card p-8">
             <p className="text-[var(--text-secondary)] leading-relaxed">
-              Якщо придбаний товар не підійшов за технічними характеристиками, ви можете обміняти його
-              протягом 14 календарних днів на інший товар з нашого асортименту. Різниця у вартості
-              перераховується або доплачується покупцем.
+              {t('returns.exchangeBody')}
             </p>
           </motion.div>
         </section>
@@ -151,11 +150,10 @@ export default function ReturnPage() {
         {/* Гарантійний обмін та ремонт */}
         <section>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-8">
-            <div className="label-accent mb-2">Гарантія</div>
-            <h2 className="section-title">Гарантійний обмін та ремонт</h2>
+            <div className="label-accent mb-2">{t('returns.warrantyLabel')}</div>
+            <h2 className="section-title">{t('returns.warrantyTitle')}</h2>
             <p className="text-[var(--text-secondary)] mt-3 max-w-3xl">
-              Гарантійне обслуговування здійснюється відповідно до гарантійного талона, що додається
-              до кожного виробу. Гарантійний термін — 3 роки з дати введення в експлуатацію.
+              {t('returns.warrantyBody')}
             </p>
           </motion.div>
 
@@ -165,27 +163,25 @@ export default function ReturnPage() {
           >
             <motion.div variants={fadeUp} className="card p-8">
               <h3 className="font-bold text-lg text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                <Wrench size={20} className="text-[var(--accent)]" /> Гарантійний ремонт
+                <Wrench size={20} className="text-[var(--accent)]" /> {t('returns.warrantyRepairTitle')}
               </h3>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-                Безкоштовний ремонт або заміна несправних вузлів протягом гарантійного терміну.
-                Виїзд сервісного інженера по Київській області — безкоштовно, в інших регіонах — за домовленістю.
+                {t('returns.warrantyRepairBody')}
               </p>
             </motion.div>
             <motion.div variants={fadeUp} className="card p-8">
               <h3 className="font-bold text-lg text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                <RefreshCw size={20} className="text-[var(--accent)]" /> Гарантійний обмін
+                <RefreshCw size={20} className="text-[var(--accent)]" /> {t('returns.warrantyExchangeTitle')}
               </h3>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-                Якщо обладнання не підлягає ремонту або несправність виникає повторно, здійснюємо
-                заміну на аналогічний або рівноцінний товар.
+                {t('returns.warrantyExchangeBody')}
               </p>
             </motion.div>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="card p-8">
-            <h3 className="font-bold text-base text-[var(--text-primary)] mb-4">Гарантія не поширюється на:</h3>
+            <h3 className="font-bold text-base text-[var(--text-primary)] mb-4">{t('returns.warrantyExclusionsTitle')}</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {WARRANTY_EXCLUSIONS.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
@@ -200,8 +196,8 @@ export default function ReturnPage() {
         {/* Як оформити повернення */}
         <section>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-8">
-            <div className="label-accent mb-2">Процес</div>
-            <h2 className="section-title">Як оформити повернення</h2>
+            <div className="label-accent mb-2">{t('returns.processLabel')}</div>
+            <h2 className="section-title">{t('returns.processTitle')}</h2>
           </motion.div>
 
           <motion.div
@@ -230,23 +226,21 @@ export default function ReturnPage() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="card p-8">
             <h3 className="font-bold text-lg text-[var(--text-primary)] mb-4 flex items-center gap-2">
-              <Clock size={20} className="text-[var(--accent)]" /> Строки повернення коштів
+              <Clock size={20} className="text-[var(--accent)]" /> {t('returns.refundTimingTitle')}
             </h3>
             <div className="flex items-start justify-between gap-4 border-t border-[var(--border)] pt-4">
-              <span className="text-[var(--text-primary)] text-sm font-medium">Банківський переказ</span>
-              <span className="text-[var(--text-secondary)] text-sm text-right">до 5–7 робочих днів після підтвердження повернення</span>
+              <span className="text-[var(--text-primary)] text-sm font-medium">{t('returns.refundTimingMethod')}</span>
+              <span className="text-[var(--text-secondary)] text-sm text-right">{t('returns.refundTimingDuration')}</span>
             </div>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="card p-8">
             <h3 className="font-bold text-lg text-[var(--text-primary)] mb-4 flex items-center gap-2">
-              <Scale size={20} className="text-[var(--accent)]" /> Правова основа
+              <Scale size={20} className="text-[var(--accent)]" /> {t('returns.legalBasisTitle')}
             </h3>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-              Всі умови повернення та обміну регулюються Законом України «Про захист прав споживачів»
-              (стаття 9) та Цивільним кодексом України. Ми зобов'язуємося дотримуватись усіх вимог
-              чинного законодавства та гарантуємо захист ваших прав як покупця.
+              {t('returns.legalBasisBody')}
             </p>
           </motion.div>
         </section>
@@ -257,10 +251,10 @@ export default function ReturnPage() {
           className="rounded-3xl p-10 text-white text-center border border-white/10"
           style={{ background: 'var(--bg-dark-2)' }}
         >
-          <div className="label-accent mb-4">Контакти для повернень</div>
-          <h2 className="text-2xl font-black mb-3 font-['Archivo',sans-serif]">Маєте питання щодо повернення?</h2>
+          <div className="label-accent mb-4">{t('returns.contactLabel')}</div>
+          <h2 className="text-2xl font-black mb-3 font-['Archivo',sans-serif]">{t('returns.contactTitle')}</h2>
           <p className="text-white/60 mb-8 max-w-2xl mx-auto">
-            Для оформлення повернення або гарантійного звернення зв'яжіться з нашим відділом сервісу.
+            {t('returns.contactBody')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <a href="tel:+380504506424" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
@@ -270,7 +264,7 @@ export default function ReturnPage() {
               <Mail size={18} className="text-[var(--accent)]" /> termojet@sofievka.kiev.ua
             </a>
             <Link to="/contacts" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
-              Написати нам <ArrowRight size={18} className="text-[var(--accent)]" />
+              {t('returns.contactWriteUs')} <ArrowRight size={18} className="text-[var(--accent)]" />
             </Link>
           </div>
         </motion.section>

@@ -60,7 +60,7 @@ export default function CartPage() {
 
   async function onSubmit(data) {
     if (npAvailable && (!npCity || !npWarehouse)) {
-      setNpError('Оберіть місто та відділення Нової Пошти')
+      setNpError(t('cartPage.np.selectCityAndBranch'))
       return
     }
     setNpError('')
@@ -118,7 +118,7 @@ export default function CartPage() {
                 )}
                 <div className="flex-1 min-w-0">
                   <h3 className="font-medium text-gray-900 line-clamp-2 text-sm">{item.name}</h3>
-                  {item.sku && <p className="text-xs text-gray-400 mt-0.5">Арт. {item.sku}</p>}
+                  {item.sku && <p className="text-xs text-gray-400 mt-0.5">{t('catalog.article')} {item.sku}</p>}
                   <div className="flex items-center justify-between mt-3">
                     <div className="flex items-center gap-2">
                       <button onClick={() => updateCartQuantity(item.id, item.quantity - 1)} className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">
@@ -164,7 +164,7 @@ export default function CartPage() {
                   placeholder={cartT.form.name}
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
                 />
-                {errors.name && <p className="text-xs text-red-500 mt-1">Введіть ім'я</p>}
+                {errors.name && <p className="text-xs text-red-500 mt-1">{t('cartPage.error.name')}</p>}
               </div>
               <div>
                 <input
@@ -176,7 +176,7 @@ export default function CartPage() {
                   onInput={e => { e.target.value = e.target.value.replace(/\D/g, '') }}
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
                 />
-                {errors.phone && <p className="text-xs text-red-500 mt-1">Введіть телефон</p>}
+                {errors.phone && <p className="text-xs text-red-500 mt-1">{t('cartPage.error.phone')}</p>}
               </div>
               <input
                 {...register('email')}
@@ -187,14 +187,14 @@ export default function CartPage() {
               {/* Доставка — Нова Пошта (фолбек на поле адреси, якщо НП не налаштована) */}
               {npAvailable ? (
               <div className="space-y-2">
-                <label className="text-xs text-gray-500 block">Доставка — Нова Пошта</label>
+                <label className="text-xs text-gray-500 block">{t('cartPage.np.label')}</label>
                 <div className="relative">
                   <input
                     value={cityQuery}
                     onChange={e => { setCityQuery(e.target.value); setNpCity(null); setCityOpen(true) }}
                     onFocus={() => setCityOpen(true)}
                     onBlur={() => setTimeout(() => setCityOpen(false), 150)}
-                    placeholder="Місто"
+                    placeholder={t('cartPage.np.cityPlaceholder')}
                     autoComplete="off"
                     className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
                   />
@@ -217,7 +217,7 @@ export default function CartPage() {
                   disabled={!npCity || warehouses.length === 0}
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm bg-white disabled:bg-gray-50 disabled:text-gray-400"
                 >
-                  <option value="">{npCity ? 'Оберіть відділення' : 'Спершу оберіть місто'}</option>
+                  <option value="">{npCity ? t('cartPage.np.selectBranch') : t('cartPage.np.selectCityFirst')}</option>
                   {warehouses.map(w => <option key={w.ref} value={w.ref}>{w.label}</option>)}
                 </select>
                 {npError && <p className="text-xs text-red-500">{npError}</p>}
@@ -236,17 +236,17 @@ export default function CartPage() {
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none"
               />
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Спосіб оплати</label>
+                <label className="text-xs text-gray-500 block mb-1">{t('cartPage.payment.label')}</label>
                 <select
                   {...register('payment')}
-                  defaultValue="Безготівковий розрахунок (рахунок)"
+                  defaultValue={t('cartPage.payment.bankTransfer')}
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm bg-white"
                 >
-                  <option>Безготівковий розрахунок (рахунок)</option>
-                  <option>Оплата карткою</option>
+                  <option>{t('cartPage.payment.bankTransfer')}</option>
+                  <option>{t('cartPage.payment.card')}</option>
                 </select>
               </div>
-              <ConsentCheckbox buttonLabel="Оформити замовлення" />
+              <ConsentCheckbox buttonLabel={t('cartPage.payment.placeOrder')} />
               <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-3">
                 {cartT.form.submit}
               </button>
