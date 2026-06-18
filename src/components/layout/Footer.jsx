@@ -188,14 +188,14 @@ export default function Footer() {
                   style={{ background: 'rgba(255,85,0,0.10)' }}>
                   <MapPin size={14} className="text-[var(--accent-light)]" />
                 </span>
-                <span className="mt-1">{siteSettings.address}</span>
+                <span className="mt-1">{(lang !== 'uk' && siteSettings[`address_${lang}`]) ? siteSettings[`address_${lang}`] : siteSettings.address}</span>
               </li>
               <li className="flex items-start gap-3 text-white/50">
                 <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                   style={{ background: 'rgba(255,255,255,0.05)' }}>
                   <Clock size={14} className="text-white/40" />
                 </span>
-                <span className="mt-1">{siteSettings.workHours}</span>
+                <span className="mt-1">{(lang !== 'uk' && siteSettings[`workHours_${lang}`]) ? siteSettings[`workHours_${lang}`] : siteSettings.workHours}</span>
               </li>
             </ul>
 

@@ -10,8 +10,9 @@ import PageHero from '../components/PageHero'
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
 export default function ContactPage() {
-  const { siteSettings, sendConsultation } = useApp()
+  const { siteSettings, sendConsultation, lang } = useApp()
   const t = useT()
+  const sv = (key) => (lang !== 'uk' && siteSettings[`${key}_${lang}`]) ? siteSettings[`${key}_${lang}`] : siteSettings[key]
   const contact = t('contact')
   const [success, setSuccess] = useState(false)
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
@@ -25,8 +26,8 @@ export default function ContactPage() {
   const contactItems = [
     { icon: Phone, label: t('contact.phone'), value: siteSettings.phone, href: `tel:${siteSettings.phone}` },
     { icon: Mail, label: t('contact.email'), value: siteSettings.email, href: `mailto:${siteSettings.email}` },
-    { icon: MapPin, label: t('contact.address'), value: siteSettings.address },
-    { icon: Clock, label: t('contact.workHours'), value: siteSettings.workHours },
+    { icon: MapPin, label: t('contact.address'), value: sv('address') },
+    { icon: Clock, label: t('contact.workHours'), value: sv('workHours') },
   ]
 
   return (
