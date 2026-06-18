@@ -602,6 +602,8 @@ export default function ProductDetailPage() {
 
   const name = (lang !== 'uk' && product?.[`name_${lang}`]) ? product[`name_${lang}`] : (product?.name || '')
   const desc = (lang !== 'uk' && product?.[`desc_${lang}`]) ? product[`desc_${lang}`] : (product?.desc || product?.description || '')
+  // Локалізовані характеристики (specs_<lang> з API), фолбек на канонічні UA
+  const displaySpecs = (lang !== 'uk' && product?.[`specs_${lang}`]) ? product[`specs_${lang}`] : (product?.specs || {})
 
   const tabs = useMemo(() => {
     if (!product) return []
@@ -640,13 +642,14 @@ export default function ProductDetailPage() {
     return result
   }, [product])
 
-  // Key specs for chips (skip Артикул, take up to 5)
+  // Key specs for chips (skip Артикул/SKU за значенням і назвою, take up to 5)
+  const ARTICLE_LABELS = ['Артикул', 'Назва', 'SKU', 'Article', 'Name', 'Nazwa', 'Nom', 'Bezeichnung', 'Numer artykułu', 'Référence', 'Artikelnummer']
   const specPills = useMemo(() => {
-    if (!product?.specs) return []
-    return Object.entries(product.specs)
-      .filter(([k]) => !['Артикул', 'Назва'].includes(k))
+    if (!displaySpecs) return []
+    return Object.entries(displaySpecs)
+      .filter(([k, v]) => !ARTICLE_LABELS.includes(k) && v !== product?.sku)
       .slice(0, 5)
-  }, [product?.specs])
+  }, [displaySpecs, product?.sku])
 
   // Documents for this product
   const productDocs = useMemo(() => {
@@ -858,7 +861,7 @@ export default function ProductDetailPage() {
                     {k}: <strong style={{ color: 'var(--ink-100)', fontWeight: 700 }}>{v}</strong>
                   </span>
                 ))}
-                {Object.keys(product.specs || {}).length > 5 && (
+                {Object.keys(displaySpecs || {}).length > 5 && (
                   <button onClick={() => setTab('specs')} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 600, letterSpacing: '.03em', color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 2px' }}>
                     ще →
                   </button>
@@ -1011,7 +1014,7 @@ export default function ProductDetailPage() {
                 </div>
               </div>
               <div className="pdp-specs-grid">
-                {Object.entries(product.specs).map(([k, v]) => (
+                {Object.entries(displaySpecs).map(([k, v]) => (
                   <div key={k} className="pdp-spec-row">
                     <span className="pdp-spec-k">{k}</span>
                     <span className="pdp-spec-v">{v}</span>

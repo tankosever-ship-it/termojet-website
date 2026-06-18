@@ -731,10 +731,12 @@ const BADGE_EXCLUDE_KEYS = ['артикул', 'назва', 'виробник', 
 const BADGE_EXCLUDE_VALS = ['одиниця вимірювання', 'termojet', 'так', 'ні', 'немає', 'n/a', '—', '-', '']
 const BADGE_BOOL_KEYS = ['wi-fi', 'погодозалеж', 'гвс', 'термокран', 'термометр'] // показуємо як мітку, якщо «так»
 
-function extractBadges(product) {
+function extractBadges(product, displaySpecs) {
   const badges = []
   const name = product.name || ''
+  // specs (canonical UA) drives key selection; displaySpecs used only for displayed values
   const specs = product.specs || {}
+  const dspecs = displaySpecs || specs
   const cat = product.categorySlug || ''
 
   const specKeys = Object.keys(specs)
@@ -777,13 +779,15 @@ function extractBadges(product) {
     for (const k of keys) {
       if (out.length >= 4) break
       const lk = k.toLowerCase()
+      // for bool keys, use canonical UA value for the true/false gate; display key label as-is
       if (BADGE_BOOL_KEYS.some(b => lk.includes(b))) {
         const v = cleanVal(specs[k]).toLowerCase()
         if (['ні', 'немає', '-', ''].includes(v)) continue
         if (['так', '+', 'є'].includes(v)) { push(k.replace(/[:(].*$/, '').trim()); continue }
-        // інакше — справжнє значення (напр. «2.4 GHz»)
+        // інакше — справжнє значення (напр. «2.4 GHz»): show from displaySpecs
       }
-      const v = cleanVal(specs[k])
+      // use displaySpecs for the displayed value (translated), canonical key for lookup
+      const v = cleanVal(dspecs[k] !== undefined ? dspecs[k] : specs[k])
       if (!valBad(v)) push(fmtVal(lk, v))
     }
     return out
@@ -1214,11 +1218,15 @@ export default function CatalogPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((product, i) => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-              // 2. Strip leading "Опис " prefix from shortDesc
-              const rawDesc = product.shortDesc || product.description || ''
+              // Prefer per-lang shortDesc/desc, fall back to UA
+              const rawDesc = (lang !== 'uk' && (product[`shortDesc_${lang}`] || product[`desc_${lang}`]))
+                ? (product[`shortDesc_${lang}`] || product[`desc_${lang}`])
+                : (product.shortDesc || product.description || '')
               const shortDesc = rawDesc.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
-              const badges = extractBadges(product)
+              // Prefer per-lang specs for badge display; selection stays on canonical UA specs inside extractBadges
+              const pSpecs = (lang !== 'uk' && product[`specs_${lang}`]) ? product[`specs_${lang}`] : product.specs
+              const badges = extractBadges(product, pSpecs)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
@@ -1310,10 +1318,15 @@ export default function CatalogPage() {
           <div className="flex flex-col gap-3">
             {filtered.map((product, i) => {
               const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-              const rawDesc2 = product.shortDesc || product.description || ''
+              // Prefer per-lang shortDesc/desc, fall back to UA
+              const rawDesc2 = (lang !== 'uk' && (product[`shortDesc_${lang}`] || product[`desc_${lang}`]))
+                ? (product[`shortDesc_${lang}`] || product[`desc_${lang}`])
+                : (product.shortDesc || product.description || '')
               const shortDesc = rawDesc2.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
-              const badges = extractBadges(product)
+              // Prefer per-lang specs for badge display; selection stays on canonical UA specs inside extractBadges
+              const pSpecs = (lang !== 'uk' && product[`specs_${lang}`]) ? product[`specs_${lang}`] : product.specs
+              const badges = extractBadges(product, pSpecs)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
