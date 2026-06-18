@@ -1456,6 +1456,21 @@ export const T = {
       "notFound": "Статтю не знайдено",
       "equipmentFromArticle": "Обладнання зі статті",
       "readAlso": "Читайте також"
+    },
+    "legal": {
+      "title": "Юридичні реквізити",
+      "fullName": "Повне найменування",
+      "shortName": "Скорочена назва",
+      "edrpou": "Код ЄДРПОУ",
+      "legalAddress": "Юридична адреса",
+      "actualAddress": "Фактична адреса",
+      "emailLabel": "Email",
+      "fullNameVal": "Товариство з обмеженою відповідальністю «Софіївка Монтаж»",
+      "shortNameVal": "ТОВ «Софіївка Монтаж»",
+      "edrpouVal": "37074476",
+      "legalAddressVal": "08131, Київська обл., Бучанський р-н, с. Софіївська Борщагівка, вул. Київська, буд. 3",
+      "actualAddressVal": "м. Київ, смт Софіївська Борщагівка, вул. Київська, 3, 08131",
+      "emailVal": "termojet@sofievka.kiev.ua"
     }
   },
   "en": {
@@ -2887,6 +2902,21 @@ export const T = {
       "notFound": "Article not found",
       "equipmentFromArticle": "Equipment from the article",
       "readAlso": "Read also"
+    },
+    "legal": {
+      "title": "Legal details",
+      "fullName": "Full name",
+      "shortName": "Short name",
+      "edrpou": "EDRPOU code",
+      "legalAddress": "Legal address",
+      "actualAddress": "Actual address",
+      "emailLabel": "Email",
+      "fullNameVal": "Sofiivka Montazh LLC",
+      "shortNameVal": "Sofiivka Montazh LLC",
+      "edrpouVal": "37074476",
+      "legalAddressVal": "08131, Kyiv region, Bucha district, Sofiivska Borshchahivka, Kyivska St. 3",
+      "actualAddressVal": "Kyiv, Sofiivska Borshchahivka, Kyivska St. 3, 08131",
+      "emailVal": "termojet@sofievka.kiev.ua"
     }
   },
   "pl": {
@@ -4318,6 +4348,21 @@ export const T = {
       "notFound": "Artykuł nie został znaleziony",
       "equipmentFromArticle": "Sprzęt z artykułu",
       "readAlso": "Czytaj również"
+    },
+    "legal": {
+      "title": "Dane rejestrowe",
+      "fullName": "Pełna nazwa",
+      "shortName": "Nazwa skrócona",
+      "edrpou": "Kod EDRPOU",
+      "legalAddress": "Adres rejestrowy",
+      "actualAddress": "Adres rzeczywisty",
+      "emailLabel": "Email",
+      "fullNameVal": "Sofiivka Montazh Sp. z o.o.",
+      "shortNameVal": "Sofiivka Montazh Sp. z o.o.",
+      "edrpouVal": "37074476",
+      "legalAddressVal": "08131, obwód kijowski, rejon buczański, Sofiivska Borszczahiwka, ul. Kyivska 3",
+      "actualAddressVal": "Kijów, Sofiivska Borszczahiwka, ul. Kyivska 3, 08131",
+      "emailVal": "termojet@sofievka.kiev.ua"
     }
   },
   "fr": {
@@ -5744,6 +5789,21 @@ export const T = {
       "notFound": "Article introuvable",
       "equipmentFromArticle": "Équipement mentionné dans l’article",
       "readAlso": "Lire aussi"
+    },
+    "legal": {
+      "title": "Mentions légales",
+      "fullName": "Raison sociale",
+      "shortName": "Nom abrégé",
+      "edrpou": "Code EDRPOU",
+      "legalAddress": "Adresse légale",
+      "actualAddress": "Adresse effective",
+      "emailLabel": "Email",
+      "fullNameVal": "Sofiivka Montazh SARL",
+      "shortNameVal": "Sofiivka Montazh SARL",
+      "edrpouVal": "37074476",
+      "legalAddressVal": "08131, oblast de Kyiv, district de Boutcha, Sofiivska Borchtchahivka, rue Kyivska 3",
+      "actualAddressVal": "Kyiv, Sofiivska Borchtchahivka, rue Kyivska 3, 08131",
+      "emailVal": "termojet@sofievka.kiev.ua"
     }
   },
   "de": {
@@ -7170,6 +7230,21 @@ export const T = {
       "notFound": "Artikel nicht gefunden",
       "equipmentFromArticle": "Geräte aus dem Artikel",
       "readAlso": "Lesen Sie auch"
+    },
+    "legal": {
+      "title": "Impressum",
+      "fullName": "Vollständiger Name",
+      "shortName": "Kurzname",
+      "edrpou": "EDRPOU-Code",
+      "legalAddress": "Rechtssitz",
+      "actualAddress": "Tatsächliche Adresse",
+      "emailLabel": "Email",
+      "fullNameVal": "Sofiivka Montazh GmbH",
+      "shortNameVal": "Sofiivka Montazh GmbH",
+      "edrpouVal": "37074476",
+      "legalAddressVal": "08131, Oblast Kyjiw, Rajon Butscha, Sofiivska Borschtschahiwka, Kyivska Str. 3",
+      "actualAddressVal": "Kyjiw, Sofiivska Borschtschahiwka, Kyivska Str. 3, 08131",
+      "emailVal": "termojet@sofievka.kiev.ua"
     }
   }
 }
