@@ -868,13 +868,27 @@ const BADGE_EXCLUDE_KEYS = ['артикул', 'назва', 'виробник', 
 const BADGE_EXCLUDE_VALS = ['одиниця вимірювання', 'termojet', 'так', 'ні', 'немає', 'n/a', '—', '-', '']
 const BADGE_BOOL_KEYS = ['wi-fi', 'погодозалеж', 'гвс', 'термокран', 'термометр'] // показуємо як мітку, якщо «так»
 
-function extractBadges(product, displaySpecs) {
+// Одиниці-слова для бейджів за мовами (для голих чисел: контури/виходи/потік)
+const BADGE_UNITS = {
+  circuits: { uk: ' контури', en: ' circuits', pl: ' obiegi', fr: ' circuits', de: ' Kreise' },
+  outlets:  { uk: ' виходи',  en: ' outlets',  pl: ' wyjścia', fr: ' sorties',  de: ' Ausgänge' },
+  flow:     { uk: ' м³/год',  en: ' m³/h',     pl: ' m³/h',    fr: ' m³/h',     de: ' m³/h' },
+}
+
+function extractBadges(product, displaySpecs, lang = 'uk') {
   const badges = []
-  const name = product.name || ''
-  // specs (canonical UA) drives key selection; displaySpecs used only for displayed values
+  const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
+  // specs (canonical UA) drives key selection; displaySpecs (translated) used for displayed values
   const specs = product.specs || {}
   const dspecs = displaySpecs || specs
   const cat = product.categorySlug || ''
+  // specs_<lang> має ПЕРЕКЛАДЕНІ ключі — зіставляємо значення/ключ за ПОЗИЦІЄЮ канонічного ключа
+  const canonKeys = Object.keys(specs)
+  const dVals = Object.values(dspecs)
+  const dKeys = Object.keys(dspecs)
+  const tVal = (k) => { const i = canonKeys.indexOf(k); return (i >= 0 && dVals[i] !== undefined) ? dVals[i] : specs[k] }
+  const tKey = (k) => { const i = canonKeys.indexOf(k); return (i >= 0 && dKeys[i] !== undefined) ? dKeys[i] : k }
+  const uw = (kind) => BADGE_UNITS[kind][lang] || BADGE_UNITS[kind].uk
 
   const specKeys = Object.keys(specs)
   if (specKeys.length > 0) {
@@ -884,11 +898,11 @@ function extractBadges(product, displaySpecs) {
     const keyBad = k => BADGE_EXCLUDE_KEYS.some(e => k.toLowerCase().includes(e))
     // голі числа → осмислена мітка за змістом ключа (DN15, «2 виходи»)
     const fmtVal = (lk, v) => {
-      if (/пропускна|здатн/.test(lk)) return v + ' м³/год'
+      if (/пропускна|здатн/.test(lk)) return v + uw('flow')
       if (/^\d+$/.test(v)) {
         if (/\bdn\b|діаметр|розмір/.test(lk)) return 'DN' + v
-        if (/контур/.test(lk)) return v + ' контури'
-        if (/виход/.test(lk)) return v + ' виходи'
+        if (/контур/.test(lk)) return v + uw('circuits')
+        if (/виход/.test(lk)) return v + uw('outlets')
       }
       return v
     }
@@ -920,11 +934,11 @@ function extractBadges(product, displaySpecs) {
       if (BADGE_BOOL_KEYS.some(b => lk.includes(b))) {
         const v = cleanVal(specs[k]).toLowerCase()
         if (['ні', 'немає', '-', ''].includes(v)) continue
-        if (['так', '+', 'є'].includes(v)) { push(k.replace(/[:(].*$/, '').trim()); continue }
-        // інакше — справжнє значення (напр. «2.4 GHz»): show from displaySpecs
+        if (['так', '+', 'є'].includes(v)) { push(tKey(k).replace(/[:(].*$/, '').trim()); continue }
+        // інакше — справжнє значення (напр. «2.4 GHz»): show translated
       }
-      // use displaySpecs for the displayed value (translated), canonical key for lookup
-      const v = cleanVal(dspecs[k] !== undefined ? dspecs[k] : specs[k])
+      // translated displayed value (matched by canonical key position), canonical key for lookup
+      const v = cleanVal(tVal(k))
       if (!valBad(v)) push(fmtVal(lk, v))
     }
     return out
@@ -1363,7 +1377,7 @@ export default function CatalogPage() {
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               // Prefer per-lang specs for badge display; selection stays on canonical UA specs inside extractBadges
               const pSpecs = (lang !== 'uk' && product[`specs_${lang}`]) ? product[`specs_${lang}`] : product.specs
-              const badges = extractBadges(product, pSpecs)
+              const badges = extractBadges(product, pSpecs, lang)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
@@ -1463,7 +1477,7 @@ export default function CatalogPage() {
               const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
               // Prefer per-lang specs for badge display; selection stays on canonical UA specs inside extractBadges
               const pSpecs = (lang !== 'uk' && product[`specs_${lang}`]) ? product[`specs_${lang}`] : product.specs
-              const badges = extractBadges(product, pSpecs)
+              const badges = extractBadges(product, pSpecs, lang)
               const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
 
               return (
