@@ -161,6 +161,41 @@ app.use(express.static(DIST, {
     }
   },
 }))
+// ── Per-product OG-теги для прев'ю посилань (Telegram/Viber/FB не виконують JS) ──
+// Сторінка товару = /catalog/<cat>/<slug>. Підставляємо фото/назву/опис у мета-теги
+// index.html, щоб кожне посилання мало СВОЮ мініатюру, а не одну спільну.
+const _db = require('./db')
+const SITE = 'https://termojet.com.ua'
+const DEFAULT_OG_IMG = `${SITE}/images/portfolio/proj-1.jpg`
+const DEFAULT_TITLE = 'Termojet — Виробник обладнання для котелень'
+const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const absImg = u => {
+  if (!u) return DEFAULT_OG_IMG
+  if (/^https?:\/\//i.test(u)) return u
+  return SITE + (u.startsWith('/') ? u : '/' + u)
+}
+const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+
+app.get('/catalog/:cat/:slug', (req, res, next) => {
+  try {
+    const row = _db.prepare('SELECT name, image, short_desc, description FROM products WHERE slug = ? AND is_visible = 1').get(req.params.slug)
+    if (!row) return next()
+    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+    const title = `${row.name} — Termojet`
+    const desc = (stripHtml(row.short_desc) || stripHtml(row.description) || DEFAULT_TITLE).slice(0, 200)
+    const img = absImg(row.image)
+    const url = `${SITE}/catalog/${encodeURIComponent(req.params.cat)}/${encodeURIComponent(req.params.slug)}`
+    html = html
+      .split(DEFAULT_OG_IMG).join(esc(img))
+      .split(DEFAULT_TITLE).join(esc(title))
+      .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
+      .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+      .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+    res.setHeader('Cache-Control', 'no-cache')
+    return res.type('html').send(html)
+  } catch (e) { return next() }
+})
+
 app.get('*', (req, res) => {
   // Неіснуючі службові файли не маскуємо SPA-заглушкою (інакше /sitemap_index.xml,
   // robots тощо віддавали б HTML і ламали валідацію). Реальні файли вже віддав express.static.
