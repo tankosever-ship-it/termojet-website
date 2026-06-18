@@ -603,8 +603,145 @@ const FILTER_GROUP_LABEL_KEYS = {
   eqtype: 'catalog.filterGroups.eqtype',
 }
 
+// Авто-згенерована мапа перекладу значень фільтрів (показ; ключ=канонічний UA для матчингу).
+const FILTER_LABEL_I18N = {
+  "1-фазне (220–230 В)": {"en": "Single-phase (220–230 V)", "pl": "Jednofazowe (220–230 V)", "fr": "Monophasé (220–230 V)", "de": "Einphasig (220–230 V)"},
+  "100 мм": {"en": "100 mm", "pl": "100 mm", "fr": "100 mm", "de": "100 mm"},
+  "10–15 м³/год": {"en": "10–15 m³/h", "pl": "10–15 m³/h", "fr": "10–15 m³/h", "de": "10–15 m³/h"},
+  "125 мм": {"en": "125 mm", "pl": "125 mm", "fr": "125 mm", "de": "125 mm"},
+  "130 мм": {"en": "130 mm", "pl": "130 mm", "fr": "130 mm", "de": "130 mm"},
+  "15+ м³/год": {"en": "15+ m³/h", "pl": "15+ m³/h", "fr": "15+ m³/h", "de": "15+ m³/h"},
+  "150 мм": {"en": "150 mm", "pl": "150 mm", "fr": "150 mm", "de": "150 mm"},
+  "175+ кВт": {"en": "175+ kW", "pl": "175+ kW", "fr": "175+ kW", "de": "175+ kW"},
+  "180 мм": {"en": "180 mm", "pl": "180 mm", "fr": "180 mm", "de": "180 mm"},
+  "2 виходи": {"en": "2 outlets", "pl": "2 wyjścia", "fr": "2 sorties", "de": "2 Ausgänge"},
+  "2 контури": {"en": "2 circuits", "pl": "2 obwody", "fr": "2 circuits", "de": "2 Kreise"},
+  "200 мм": {"en": "200 mm", "pl": "200 mm", "fr": "200 mm", "de": "200 mm"},
+  "20–45°C (санітарна)": {"en": "20–45°C (sanitary)", "pl": "20–45°C (sanitarna)", "fr": "20–45°C (sanitaire)", "de": "20–45°C (sanitär)"},
+  "220–250 мм": {"en": "220–250 mm", "pl": "220–250 mm", "fr": "220–250 mm", "de": "220–250 mm"},
+  "240 мм": {"en": "240 mm", "pl": "240 mm", "fr": "240 mm", "de": "240 mm"},
+  "250+ кВт": {"en": "250+ kW", "pl": "250+ kW", "fr": "250+ kW", "de": "250+ kW"},
+  "280–340 мм": {"en": "280–340 mm", "pl": "280–340 mm", "fr": "280–340 mm", "de": "280–340 mm"},
+  "3 виходи": {"en": "3 outlets", "pl": "3 wyjścia", "fr": "3 sorties", "de": "3 Ausgänge"},
+  "3 контури": {"en": "3 circuits", "pl": "3 obwody", "fr": "3 circuits", "de": "3 Kreise"},
+  "3-фазне (380 В)": {"en": "Three-phase (380 V)", "pl": "Trójfazowe (380 V)", "fr": "Triphasé (380 V)", "de": "Dreiphasig (380 V)"},
+  "3-ходові": {"en": "3-way", "pl": "3-drożne", "fr": "3 voies", "de": "3-Wege"},
+  "300 мм": {"en": "300 mm", "pl": "300 mm", "fr": "300 mm", "de": "300 mm"},
+  "35–60°C (опалення)": {"en": "35–60°C (heating)", "pl": "35–60°C (ogrzewanie)", "fr": "35–60°C (chauffage)", "de": "35–60°C (Heizung)"},
+  "4 виходи": {"en": "4 outlets", "pl": "4 wyjścia", "fr": "4 sorties", "de": "4 Ausgänge"},
+  "4-ходові": {"en": "4-way", "pl": "4-drożne", "fr": "4 voies", "de": "4-Wege"},
+  "5+ виходів": {"en": "5+ outlets", "pl": "5+ wyjść", "fr": "5+ sorties", "de": "5+ Ausgänge"},
+  "5–10 м³/год": {"en": "5–10 m³/h", "pl": "5–10 m³/h", "fr": "5–10 m³/h", "de": "5–10 m³/h"},
+  "80 мм": {"en": "80 mm", "pl": "80 mm", "fr": "80 mm", "de": "80 mm"},
+  "KVS, м³/год": {"en": "KVS, m³/h", "pl": "KVS, m³/h", "fr": "KVS, m³/h", "de": "KVS, m³/h"},
+  "Аноди для бойлерів": {"en": "Anodes for boilers", "pl": "Anody do bojlerów", "fr": "Anodes pour chauffe-eau", "de": "Anoden für Boiler"},
+  "Без змішувача": {"en": "Without mixer", "pl": "Bez mieszacza", "fr": "Sans mélangeur", "de": "Ohne Mischer"},
+  "Бездротовий": {"en": "Wireless", "pl": "Bezprzewodowy", "fr": "Sans fil", "de": "Kabellos"},
+  "Бойлерна": {"en": "Boiler (DHW)", "pl": "Bojler (CWU)", "fr": "Chauffe-eau (ECS)", "de": "Boiler (TWW)"},
+  "Боковий": {"en": "Side", "pl": "Boczny", "fr": "Latéral", "de": "Seitlich"},
+  "Вгору": {"en": "Up", "pl": "Góra", "fr": "Vers le haut", "de": "Nach oben"},
+  "Вгору+Вниз": {"en": "Up+Down", "pl": "Góra+Dół", "fr": "Haut+Bas", "de": "Oben+Unten"},
+  "Вид": {"en": "View", "pl": "Widok", "fr": "Vue", "de": "Ansicht"},
+  "Виконання": {"en": "Version", "pl": "Wykonanie", "fr": "Version", "de": "Ausführung"},
+  "Виходів": {"en": "Outlets", "pl": "Wyjścia", "fr": "Sorties", "de": "Ausgänge"},
+  "Вниз": {"en": "Down", "pl": "Dół", "fr": "Vers le bas", "de": "Nach unten"},
+  "Внутрішня": {"en": "Female (internal)", "pl": "Wewnętrzny (żeński)", "fr": "Femelle (interne)", "de": "Innengewinde (IG)"},
+  "Внутрішня (вбудована)": {"en": "Internal (built-in)", "pl": "Wewnętrzna (wbudowana)", "fr": "Interne (intégrée)", "de": "Intern (eingebaut)"},
+  "ГВС та бойлер": {"en": "DHW & boiler", "pl": "CWU i bojler", "fr": "ECS et chauffe-eau", "de": "TWW & Boiler"},
+  "Гідрострілка": {"en": "Hydraulic separator", "pl": "Rozdzielacz hydrauliczny", "fr": "Séparateur hydraulique", "de": "Hydraulische Weiche"},
+  "Датчик / приймач": {"en": "Sensor / receiver", "pl": "Czujnik / odbiornik", "fr": "Capteur / récepteur", "de": "Sensor / Empfänger"},
+  "Двонасосна станція": {"en": "Twin-pump station", "pl": "Stacja dwupompowa", "fr": "Station double pompe", "de": "Doppelpumpstation"},
+  "Діаметр": {"en": "Diameter", "pl": "Średnica", "fr": "Diamètre", "de": "Durchmesser"},
+  "Діапазон темп.": {"en": "Temp. range", "pl": "Zakres temp.", "fr": "Plage de temp.", "de": "Temp.-Bereich"},
+  "до 100 кВт": {"en": "up to 100 kW", "pl": "do 100 kW", "fr": "jusqu'à 100 kW", "de": "bis 100 kW"},
+  "до 110 кВт": {"en": "up to 110 kW", "pl": "do 110 kW", "fr": "jusqu'à 110 kW", "de": "bis 110 kW"},
+  "до 150 кВт": {"en": "up to 150 kW", "pl": "do 150 kW", "fr": "jusqu'à 150 kW", "de": "bis 150 kW"},
+  "до 3": {"en": "up to 3", "pl": "do 3", "fr": "jusqu'à 3", "de": "bis 3"},
+  "до 30 кВт": {"en": "up to 30 kW", "pl": "do 30 kW", "fr": "jusqu'à 30 kW", "de": "bis 30 kW"},
+  "до 4": {"en": "up to 4", "pl": "do 4", "fr": "jusqu'à 4", "de": "bis 4"},
+  "до 5 м³/год": {"en": "up to 5 m³/h", "pl": "do 5 m³/h", "fr": "jusqu'à 5 m³/h", "de": "bis 5 m³/h"},
+  "до 6": {"en": "up to 6", "pl": "do 6", "fr": "jusqu'à 6", "de": "bis 6"},
+  "до 60 кВт": {"en": "up to 60 kW", "pl": "do 60 kW", "fr": "jusqu'à 60 kW", "de": "bis 60 kW"},
+  "до 65 кВт": {"en": "up to 65 kW", "pl": "do 65 kW", "fr": "jusqu'à 65 kW", "de": "bis 65 kW"},
+  "до 75 кВт": {"en": "up to 75 kW", "pl": "do 75 kW", "fr": "jusqu'à 75 kW", "de": "bis 75 kW"},
+  "Дротовий": {"en": "Wired", "pl": "Przewodowy", "fr": "Filaire", "de": "Kabelgebunden"},
+  "Електропривід": {"en": "Electric actuator", "pl": "Siłownik elektryczny", "fr": "Actionneur électrique", "de": "Elektrischer Stellantrieb"},
+  "Живлення": {"en": "Power supply", "pl": "Zasilanie", "fr": "Alimentation", "de": "Stromversorgung"},
+  "З приводом 413": {"en": "With actuator 413", "pl": "Z siłownikiem 413", "fr": "Avec actionneur 413", "de": "Mit Stellantrieb 413"},
+  "З приводом A-413": {"en": "With actuator A-413", "pl": "Z siłownikiem A-413", "fr": "Avec actionneur A-413", "de": "Mit Stellantrieb A-413"},
+  "З термокраном": {"en": "With thermostatic valve", "pl": "Z zaworem termostatycznym", "fr": "Avec robinet thermostatique", "de": "Mit Thermostatventil"},
+  "З\\": {"en": "W/", "pl": "Z/", "fr": "Av./", "de": "M./"},
+  "Зʼєднання": {"en": "Connection", "pl": "Połączenie", "fr": "Raccordement", "de": "Anschluss"},
+  "Зі змішувачем": {"en": "With mixer", "pl": "Z mieszaczem", "fr": "Avec mélangeur", "de": "Mit Mischer"},
+  "Змішувальний вузол": {"en": "Mixing unit", "pl": "Węzeł mieszający", "fr": "Groupe de mélange", "de": "Mischeinheit"},
+  "Зовнішня": {"en": "Male (external)", "pl": "Zewnętrzny (męski)", "fr": "Mâle (externe)", "de": "Außengewinde (AG)"},
+  "Зовнішня (накладна)": {"en": "External (surface-mount)", "pl": "Zewnętrzna (natynkowa)", "fr": "Externe (en saillie)", "de": "Extern (aufputz)"},
+  "Зональний клапан": {"en": "Zone valve", "pl": "Zawór strefowy", "fr": "Vanne de zone", "de": "Zonenventil"},
+  "Каналізаційна установка": {"en": "Sewage pump unit", "pl": "Przepompownia ścieków", "fr": "Station de relevage", "de": "Abwasserhebeanlage"},
+  "Колектор": {"en": "Manifold", "pl": "Rozdzielacz", "fr": "Collecteur", "de": "Verteiler"},
+  "Колектор з витратомірами": {"en": "Manifold with flow meters", "pl": "Rozdzielacz z przepływomierzami", "fr": "Collecteur avec débitmètres", "de": "Verteiler mit Durchflussmessern"},
+  "Колектор з кранами": {"en": "Manifold with valves", "pl": "Rozdzielacz z zaworami", "fr": "Collecteur avec robinets", "de": "Verteiler mit Ventilen"},
+  "Комплектуючі": {"en": "Accessories", "pl": "Akcesoria", "fr": "Accessoires", "de": "Zubehör"},
+  "Контури (BOX)": {"en": "Circuits (BOX)", "pl": "Obwody (BOX)", "fr": "Circuits (BOX)", "de": "Kreise (BOX)"},
+  "Кріплення радіаторів": {"en": "Radiator brackets", "pl": "Uchwyty do grzejników", "fr": "Supports de radiateurs", "de": "Heizkörperbefestigung"},
+  "Кріплення та монтаж": {"en": "Mounting & installation", "pl": "Mocowanie i montaż", "fr": "Fixation et installation", "de": "Befestigung & Montage"},
+  "Ліва": {"en": "Left", "pl": "Lewa", "fr": "Gauche", "de": "Links"},
+  "Міжосьова бокових виходів": {"en": "Side outlet spacing", "pl": "Rozstaw bocznych wyjść", "fr": "Entraxe des sorties latérales", "de": "Achsabstand Seitenausgänge"},
+  "Міжосьова для НГ": {"en": "Spacing for NG", "pl": "Rozstaw dla NG", "fr": "Entraxe pour NG", "de": "Achsabstand für NG"},
+  "Модель": {"en": "Model", "pl": "Model", "fr": "Modèle", "de": "Modell"},
+  "Монтажна довжина": {"en": "Installation length", "pl": "Długość montażowa", "fr": "Longueur de montage", "de": "Einbaulänge"},
+  "Муфта": {"en": "Coupling", "pl": "Mufa", "fr": "Manchon", "de": "Muffe"},
+  "Напір, м": {"en": "Head, m", "pl": "Wysokość, m", "fr": "Hauteur manométrique, m", "de": "Förderhöhe, m"},
+  "Напрямок виходів": {"en": "Outlet direction", "pl": "Kierunek wyjść", "fr": "Direction des sorties", "de": "Ausgangsrichtung"},
+  "Насосна група": {"en": "Pump group", "pl": "Grupa pompowa", "fr": "Groupe de pompage", "de": "Pumpengruppe"},
+  "НГ-36": {"en": "NG-36", "pl": "NG-36", "fr": "NG-36", "de": "NG-36"},
+  "НГ-37": {"en": "NG-37", "pl": "NG-37", "fr": "NG-37", "de": "NG-37"},
+  "НГ-38": {"en": "NG-38", "pl": "NG-38", "fr": "NG-38", "de": "NG-38"},
+  "Нетермостатичний": {"en": "Non-thermostatic", "pl": "Nietermostatyczny", "fr": "Non thermostatique", "de": "Nicht thermostatisch"},
+  "Обладнання для ТН": {"en": "Heat pump equipment", "pl": "Wyposażenie dla pomp ciepła", "fr": "Équipement pour pompes à chaleur", "de": "Wärmepumpen-Zubehör"},
+  "Одинарна станція": {"en": "Single-pump station", "pl": "Stacja jednotlokowa", "fr": "Station simple pompe", "de": "Einzelpumpstation"},
+  "Перехід": {"en": "Reducer", "pl": "Przejście", "fr": "Réduction", "de": "Übergang"},
+  "Підключення": {"en": "Connection", "pl": "Podłączenie", "fr": "Raccordement", "de": "Anschluss"},
+  "Повітря + бруду": {"en": "Air + dirt", "pl": "Powietrze + zanieczyszczenia", "fr": "Air + boues", "de": "Luft + Schmutz"},
+  "Потужність (ΔT=10°C)": {"en": "Power (ΔT=10°C)", "pl": "Moc (ΔT=10°C)", "fr": "Puissance (ΔT=10°C)", "de": "Leistung (ΔT=10°C)"},
+  "Права": {"en": "Right", "pl": "Prawa", "fr": "Droite", "de": "Rechts"},
+  "Призначення": {"en": "Purpose", "pl": "Przeznaczenie", "fr": "Destination", "de": "Verwendungszweck"},
+  "Продуктивність, м³/год": {"en": "Flow rate, m³/h", "pl": "Wydajność, m³/h", "fr": "Débit, m³/h", "de": "Durchfluss, m³/h"},
+  "Пряма": {"en": "Straight", "pl": "Prosta", "fr": "Droit", "de": "Gerade"},
+  "Радіатори": {"en": "Radiators", "pl": "Grzejniki", "fr": "Radiateurs", "de": "Heizkörper"},
+  "Рециркуляційний ГВС": {"en": "DHW recirculation", "pl": "Recyrkulacja CWU", "fr": "Recirculation ECS", "de": "TWW-Zirkulation"},
+  "Різьба": {"en": "Thread", "pl": "Gwint", "fr": "Filetage", "de": "Gewinde"},
+  "Різьбові": {"en": "Threaded", "pl": "Gwintowane", "fr": "Fileté", "de": "Gewindeanschluss"},
+  "Розмір (DN)": {"en": "Size (DN)", "pl": "Rozmiar (DN)", "fr": "Taille (DN)", "de": "Größe (DN)"},
+  "Сепаратори бруду": {"en": "Dirt separators", "pl": "Separatory zanieczyszczeń", "fr": "Séparateurs de boues", "de": "Schmutzabscheider"},
+  "Сепаратори повітря": {"en": "Air separators", "pl": "Separatory powietrza", "fr": "Séparateurs d'air", "de": "Luftabscheider"},
+  "Сервопривід": {"en": "Servo actuator", "pl": "Siłownik serwo", "fr": "Servomoteur", "de": "Servoantrieb"},
+  "Серія": {"en": "Series", "pl": "Seria", "fr": "Série", "de": "Baureihe"},
+  "Станція підвищення тиску": {"en": "Pressure booster station", "pl": "Stacja podnoszenia ciśnienia", "fr": "Station de surpression", "de": "Druckerhöhungsstation"},
+  "Сторона подачі": {"en": "Supply side", "pl": "Strona zasilania", "fr": "Côté alimentation", "de": "Vorlaufseite"},
+  "Тепла підлога": {"en": "Underfloor heating", "pl": "Ogrzewanie podłogowe", "fr": "Plancher chauffant", "de": "Fußbodenheizung"},
+  "Термоголовка": {"en": "Thermostatic head", "pl": "Głowica termostatyczna", "fr": "Tête thermostatique", "de": "Thermostatkopf"},
+  "Термостат бездротовий": {"en": "Wireless thermostat", "pl": "Termostat bezprzewodowy", "fr": "Thermostat sans fil", "de": "Funk-Thermostat"},
+  "Термостат дротовий": {"en": "Wired thermostat", "pl": "Termostat przewodowy", "fr": "Thermostat filaire", "de": "Kabel-Thermostat"},
+  "Термостатичний": {"en": "Thermostatic", "pl": "Termostatyczny", "fr": "Thermostatique", "de": "Thermostatisch"},
+  "Тип": {"en": "Type", "pl": "Typ", "fr": "Type", "de": "Typ"},
+  "Тип клапана": {"en": "Valve type", "pl": "Typ zaworu", "fr": "Type de vanne", "de": "Ventiltyp"},
+  "Тип обладнання": {"en": "Equipment type", "pl": "Typ urządzenia", "fr": "Type d'équipement", "de": "Gerätetyp"},
+  "Тип пристрою": {"en": "Device type", "pl": "Typ urządzenia", "fr": "Type d'appareil", "de": "Gerätetyp"},
+  "Тип шафи": {"en": "Cabinet type", "pl": "Typ szafy", "fr": "Type d'armoire", "de": "Schranktyp"},
+  "Фланцеві": {"en": "Flanged", "pl": "Kołnierzowe", "fr": "À brides", "de": "Flanschanschluss"},
+  "Хаб / шлюз": {"en": "Hub / gateway", "pl": "Hub / brama", "fr": "Hub / passerelle", "de": "Hub / Gateway"},
+  "Центр комутації": {"en": "Switching center", "pl": "Centrum przełączania", "fr": "Centre de commutation", "de": "Schaltzentrale"},
+  "Циркуляційний насос": {"en": "Circulation pump", "pl": "Pompa obiegowa", "fr": "Pompe de circulation", "de": "Umwälzpumpe"},
+  "Шафа колекторна": {"en": "Manifold cabinet", "pl": "Szafka rozdzielaczowa", "fr": "Armoire collecteur", "de": "Verteilerkasten"},
+  "Ширина балки": {"en": "Beam width", "pl": "Szerokość belki", "fr": "Largeur de poutre", "de": "Balkenbreite"},
+}
+
 function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPrice }) {
   const t = useT()
+  const { lang } = useApp()
+  // Показ значення фільтра перекладеною мовою; ключ opt.label лишається UA для матчингу.
+  const flabel = (label) => (lang !== 'uk' && FILTER_LABEL_I18N[label]?.[lang]) || label
   const config = CATEGORY_FILTERS[categorySlug]
   const hasPrice = priceBounds && priceBounds[1] > priceBounds[0]
   if (!config && !hasPrice) return null
@@ -663,7 +800,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
             <div key={group.key}>
               <div className="mb-2 px-1"
                 style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
-                {FILTER_GROUP_LABEL_KEYS[group.key] ? t(FILTER_GROUP_LABEL_KEYS[group.key]) : group.label}
+                {FILTER_GROUP_LABEL_KEYS[group.key] ? t(FILTER_GROUP_LABEL_KEYS[group.key]) : flabel(group.label)}
               </div>
               <div className="flex flex-col gap-0.5">
                 {group.options.map(opt => {
@@ -693,7 +830,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
                         {active && <span style={{ color: 'white', fontSize: '9px', lineHeight: 1 }}>✓</span>}
                       </span>
                       <span style={{ ...mono, fontSize: '11px', fontWeight: active ? 700 : 500, color: active ? 'var(--accent)' : 'var(--text-secondary)', letterSpacing: '0.02em' }}>
-                        {opt.label}
+                        {flabel(opt.label)}
                       </span>
                     </button>
                   )
