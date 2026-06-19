@@ -1,10 +1,11 @@
 // Portfolio / реалізовані об'єкти для PortfolioPage.
 // Реальні фото об'єктів — public/images/portfolio/proj-N.jpg (оптимізовані, у git).
 // links[] — SEO-перелінковка: { label, url, ext? } (ext=true → зовнішнє посилання, напр. tjheatpump.com.ua).
+import { PORTFOLIO_I18N } from './portfolioI18n'
 
 const HEATPUMP = 'https://tjheatpump.com.ua/'
 
-export const PORTFOLIO = [
+const RAW = [
   {
     id: 1,
     title: 'Колектор Termojet MEGA та насосні групи — виробниче приміщення',
@@ -238,3 +239,25 @@ export const PORTFOLIO = [
     ],
   },
 ]
+
+// Резолвер: додає пласкі поля <field>_<lang> із словника PORTFOLIO_I18N (ключ = UA-рядок),
+// які читає фронтенд: title_<lang>, desc_<lang>, type_<lang>, location_<lang>, links[].label_<lang>.
+const I18N_LANGS = ['en', 'pl', 'fr', 'de']
+function flat(item) {
+  const out = { ...item }
+  for (const f of ['title', 'desc', 'type', 'location']) {
+    const tr = item[f] && PORTFOLIO_I18N[item[f]]
+    if (tr) for (const l of I18N_LANGS) if (tr[l]) out[`${f}_${l}`] = tr[l]
+  }
+  if (Array.isArray(item.links)) {
+    out.links = item.links.map((lk) => {
+      const lo = { ...lk }
+      const tr = lk.label && PORTFOLIO_I18N[lk.label]
+      if (tr) for (const l of I18N_LANGS) if (tr[l]) lo[`label_${l}`] = tr[l]
+      return lo
+    })
+  }
+  return out
+}
+
+export const PORTFOLIO = RAW.map(flat)

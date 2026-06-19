@@ -73,7 +73,7 @@ export default function PortfolioPage() {
                     {item.type && (
                       <span className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm text-white px-2 py-1"
                         style={{ ...mono, fontSize: '9px', letterSpacing: '0.1em' }}>
-                        {item.type.toUpperCase()}
+                        {((lang !== 'uk' && item[`type_${lang}`]) ? item[`type_${lang}`] : item.type).toUpperCase()}
                       </span>
                     )}
                     {/* Number */}
@@ -138,7 +138,7 @@ export default function PortfolioPage() {
                   {selected.type && (
                     <span style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'var(--accent)' }}
                       className="uppercase block mb-1">
-                      {selected.type}
+                      {(lang !== 'uk' && selected[`type_${lang}`]) ? selected[`type_${lang}`] : selected.type}
                     </span>
                   )}
                   <h2 className="font-black text-xl text-gray-900">{(lang !== 'uk' && selected[`title_${lang}`]) ? selected[`title_${lang}`] : selected.title}</h2>
@@ -181,12 +181,12 @@ export default function PortfolioPage() {
                     {selected.links.map(l => l.ext ? (
                       <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
-                        {l.label} <ArrowUpRight size={12} />
+                        {(lang !== 'uk' && l[`label_${lang}`]) ? l[`label_${lang}`] : l.label} <ArrowUpRight size={12} />
                       </a>
                     ) : (
                       <Link key={l.label} to={l.url} onClick={() => setSelected(null)}
                         className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
-                        {l.label} <ChevronRight size={12} />
+                        {(lang !== 'uk' && l[`label_${lang}`]) ? l[`label_${lang}`] : l.label} <ChevronRight size={12} />
                       </Link>
                     ))}
                   </div>
