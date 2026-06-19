@@ -155,6 +155,11 @@ app.use(express.static(DIST, {
     // хешовані ассети (vite кладе контент-хеш у назву) — кеш на рік, immutable
     if (filePath.includes(`${path.sep}assets${path.sep}`)) {
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+    } else if (/\.(png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|mp4|webm|glb|gltf)$/i.test(filePath)) {
+      // Статичні медіа з public/ (фото товарів, шрифти, 3D-моделі) — кеш на 7 днів.
+      // Раніше йшли з no-cache → браузер ревалідував КОЖНЕ фото при кожній навігації/
+      // перемальовуванні (білий кадр → блимання, зайвий трафік на важких PNG).
+      res.setHeader('Cache-Control', 'public, max-age=604800')
     } else {
       // index.html та інші кореневі файли — завжди свіжі
       res.setHeader('Cache-Control', 'no-cache')
