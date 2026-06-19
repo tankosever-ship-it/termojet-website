@@ -77,7 +77,7 @@ function PhotoGallery({ photos, t }) {
           </button>
           <div className="flex flex-col items-center" onClick={e => e.stopPropagation()}>
             <img
-              src={assetPath(photos[lightbox].url)}
+              src={mediaSrc(photos[lightbox].url)}
               alt={photos[lightbox].caption || ''}
               className="max-h-[85vh] max-w-[85vw] object-contain"
             />
