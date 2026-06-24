@@ -145,6 +145,9 @@ app.use('/api/analytics', require('./routes/analytics'))
 app.use('/api/np', npLimiter, require('./routes/novaposhta'))
 app.use('/api/upload', require('./routes/upload'))
 
+// Google Shopping / Merchant Center фід (динамічний, з БД) — ДО SPA-статики
+app.use('/google-merchant.xml', require('./routes/merchant'))
+
 // serve React build
 const DIST = path.join(__dirname, '..', 'dist')
 app.use(express.static(DIST, {
