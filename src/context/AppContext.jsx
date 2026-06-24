@@ -9,6 +9,7 @@ import { FILES } from '../data/files'
 import { fetchEurRate } from '../utils/currency'
 import { getUTM } from '../utils/utm'
 import { effectivePrice, isOnSale } from '../utils/sale'
+import { trackAddToCart, trackRemoveFromCart } from '../utils/analytics'
 
 const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
 
@@ -206,8 +207,15 @@ export function AppProvider({ children }) {
       if (existing) return prev.map(i => i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i)
       return [...prev, { ...item, quantity }]
     })
+    trackAddToCart(product, quantity)
   }
-  function removeFromCart(id) { setCart(prev => prev.filter(i => i.id !== id)) }
+  function removeFromCart(id) {
+    setCart(prev => {
+      const item = prev.find(i => i.id === id)
+      if (item) trackRemoveFromCart(item, item.quantity)
+      return prev.filter(i => i.id !== id)
+    })
+  }
   function updateCartQuantity(id, quantity) {
     if (quantity <= 0) { removeFromCart(id); return }
     setCart(prev => prev.map(i => i.id === id ? { ...i, quantity } : i))

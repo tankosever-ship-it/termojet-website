@@ -79,7 +79,7 @@ export default function Footer() {
           {/* Brand column */}
           <div>
             <div className="mb-4">
-              <img src={assetPath('/logo-white.png')} alt="Termojet" className="h-12 w-auto" />
+              <img src={assetPath(lang === 'uk' ? '/logo-white.png' : '/logo-en-white.png')} alt="Termojet" className="h-12 w-auto" />
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-4">{footer.company}</p>
 

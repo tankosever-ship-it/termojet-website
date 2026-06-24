@@ -14,7 +14,7 @@ import { FILES } from '../data/files'
 import { getDocsForProduct } from '../data/docsMapping'
 import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
-import { trackViewItem, trackAddToCart } from '../utils/analytics'
+import { trackViewItem } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
 import { isOnSale } from '../utils/sale'
 
@@ -621,14 +621,13 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     if (product) {
-      trackViewItem({ sku: product.sku, id: product.id, name, price: product.price, categorySlug })
+      trackViewItem({ ...product, name, categorySlug })
     }
   }, [product?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleAddToCart() {
     if (!product) return
-    addToCart(product, qty)
-    trackAddToCart({ sku: product.sku, id: product.id, name, price: product.price, categorySlug }, qty)
+    addToCart(product, qty) // add_to_cart подія летить централізовано в AppContext.addToCart
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }

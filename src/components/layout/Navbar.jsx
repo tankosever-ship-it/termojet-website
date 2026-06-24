@@ -275,7 +275,7 @@ export default function Navbar() {
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
-              <img src={assetPath('/logo-orange.png')} alt="Termojet" className="h-10 w-auto" />
+              <img src={assetPath(lang === 'uk' ? '/logo-orange.png' : '/logo-en-orange.png')} alt="Termojet" className="h-10 w-auto" />
             </Link>
 
             {/* Desktop nav */}

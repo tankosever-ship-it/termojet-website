@@ -46,6 +46,7 @@ const AdminFAQ = lazy(() => import('./pages/admin/AdminFAQ'))
 const AdminBanners = lazy(() => import('./pages/admin/AdminBanners'))
 const AdminPromos = lazy(() => import('./pages/admin/AdminPromos'))
 const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'))
+const AdminUTM = lazy(() => import('./pages/admin/AdminUTM'))
 const AdminContent = lazy(() => import('./pages/admin/AdminContent'))
 const AdminAbout = lazy(() => import('./pages/admin/AdminAbout'))
 const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'))
@@ -109,6 +110,7 @@ function AppRoutes() {
         <Route path="/admin/promos" element={<AdminPromos />} />
         <Route path="/admin/subscribers" element={<AdminSubscribers />} />
         <Route path="/admin/analytics" element={<AdminAnalytics />} />
+        <Route path="/admin/utm" element={<AdminUTM />} />
         <Route path="/admin/content" element={<AdminContent />} />
         <Route path="/admin/about" element={<AdminAbout />} />
         <Route path="/admin/settings" element={<AdminSettings />} />

@@ -8,6 +8,7 @@ import { useT } from '../i18n/useT'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import SEO from '../components/SEO'
 import { toUAH } from '../utils/currency'
+import { trackBeginCheckout, trackPurchase } from '../utils/analytics'
 
 export default function CartPage() {
   const { cart, removeFromCart, updateCartQuantity, cartTotal, placeOrder, eurRate } = useApp()
@@ -33,6 +34,12 @@ export default function CartPage() {
     fetch(`${NP_API}/cities?q=ки`)
       .then(r => { if (r.status === 503) setNpAvailable(false) })
       .catch(() => setNpAvailable(false))
+  }, [])
+
+  // begin_checkout — при відкритті сторінки кошика/оформлення (якщо є товари)
+  useEffect(() => {
+    if (cart.length) trackBeginCheckout(cart)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Дебаунс-пошук міста
@@ -73,7 +80,8 @@ export default function CartPage() {
           address: `${npCity.label}, ${npWarehouse.label}`,
         }
       : {}
-    await placeOrder({ ...data, ...npFields })
+    const order = await placeOrder({ ...data, ...npFields })
+    if (order) trackPurchase({ id: order.id, items: order.items, total: order.total, affiliation: 'cart' })
     setSuccess(true)
     reset()
     setNpCity(null); setNpWarehouse(null); setCityQuery(''); setWarehouses([])
