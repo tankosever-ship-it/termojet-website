@@ -384,7 +384,7 @@ export default function Navbar() {
               </div>
 
               {/* Cart */}
-              <Link to="/cart" className="relative p-2 transition-all"
+              <Link to="/cart" className="relative p-2 mr-2 transition-all"
                 style={{ color: linkColMuted }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
