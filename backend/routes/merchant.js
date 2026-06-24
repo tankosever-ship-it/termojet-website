@@ -101,7 +101,7 @@ function feed(lang) {
       const descRaw = lang === 'uk'
         ? (p.short_desc || p.description)
         : (tr.short_desc || tr.description || p.short_desc || p.description)
-      const desc = (plain(descRaw) || name).replace(/^Опис[\s:—-]+/i, '').slice(0, 4900)
+      const desc = (plain(descRaw) || name).replace(/^(Опис|Description|Opis|Beschreibung)[\s:—-]+/i, '').slice(0, 4900)
       const ptype = (CAT[p.category_slug] && (CAT[p.category_slug][lang] || CAT[p.category_slug].uk)) || p.category_slug
       const gpc = GPC[p.category_slug] || GPC_DEFAULT
 
