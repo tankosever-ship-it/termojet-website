@@ -76,7 +76,8 @@ router.get('/', async (req, res) => {
     if (!uah || uah <= 0) continue
 
     const link = `${BASE}/catalog/${p.category_slug}/${p.slug}`
-    const desc = (plain(p.short_desc) || plain(p.description) || p.name || '').slice(0, 4900)
+    const desc = (plain(p.short_desc) || plain(p.description) || p.name || '')
+      .replace(/^Опис[\s:—-]+/i, '').slice(0, 4900)
     const avail = p.in_stock === 1 ? 'in_stock' : 'out_of_stock'
     const ptype = CAT_NAME[p.category_slug] || p.category_slug
 
