@@ -145,8 +145,13 @@ app.use('/api/analytics', require('./routes/analytics'))
 app.use('/api/np', npLimiter, require('./routes/novaposhta'))
 app.use('/api/upload', require('./routes/upload'))
 
-// Google Shopping / Merchant Center фід (динамічний, з БД) — ДО SPA-статики
-app.use('/google-merchant.xml', require('./routes/merchant'))
+// Google Shopping / Merchant Center фіди (динамічні, з БД) — ДО SPA-статики
+const { feed: merchantFeed } = require('./routes/merchant')
+app.get('/google-merchant.xml', merchantFeed('uk'))
+app.get('/google-merchant-en.xml', merchantFeed('en'))
+app.get('/google-merchant-pl.xml', merchantFeed('pl'))
+app.get('/google-merchant-de.xml', merchantFeed('de'))
+app.get('/google-merchant-fr.xml', merchantFeed('fr'))
 
 // serve React build
 const DIST = path.join(__dirname, '..', 'dist')
