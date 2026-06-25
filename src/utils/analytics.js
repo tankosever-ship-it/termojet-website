@@ -1,4 +1,4 @@
-// GA4 ecommerce events → dataLayer (для GTM, контейнер GTM-TC9RFNLP).
+// GA4 ecommerce events → dataLayer (для GTM, контейнер GTM-P9DW9P6D).
 // Формат за ТЗ: спершу скидаємо ecommerce (null), потім пушимо подію.
 import { CATEGORIES } from '../data/categories'
 
