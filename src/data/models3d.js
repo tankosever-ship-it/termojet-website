@@ -1,18 +1,19 @@
 // Прив'язка 3D-моделей (STEP+GLB) до товарів за slug. Файли — на сервері в /uploads/3d/.
 // Згенеровано з «Маппінг 3D-моделей.xlsx». Важкі STEP/GLB не в git (том /uploads).
 export const MODELS_BY_SLUG = {
-  // Колектори з нерж. сталі з витратомірами TJ-W-02..15 — спільна представницька модель серії (2026-06-15)
-  "84040tj-w-02": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-02.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-03": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-03.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-04": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-04.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-05": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-05.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-06": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-06.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-07": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-07.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-08": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-08.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-09": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-09.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-10": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-10.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-11": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-11.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
-  "84040tj-w-12": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-12.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
+  // Колектори з нерж. сталі з витратомірами TJ-W-02..15 — індивідуальні моделі за к-стю контурів
+  // (2026-06-29: STEP 2–12 WAY з теки «tj 3D/TJRW TJW/Flowmeter»; 13–15 поки на спільній моделі)
+  "84040tj-w-02": [{ file: 'kolektor-tj-w-02.step', name: '84040TJ-W-02.step', size: '18 МБ', glb: '/uploads/3d/kolektor-tj-w-02.glb' }],
+  "84040tj-w-03": [{ file: 'kolektor-tj-w-03.step', name: '84040TJ-W-03.step', size: '18 МБ', glb: '/uploads/3d/kolektor-tj-w-03.glb' }],
+  "84040tj-w-04": [{ file: 'kolektor-tj-w-04.step', name: '84040TJ-W-04.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-04.glb' }],
+  "84040tj-w-05": [{ file: 'kolektor-tj-w-05.step', name: '84040TJ-W-05.step', size: '18 МБ', glb: '/uploads/3d/kolektor-tj-w-05.glb' }],
+  "84040tj-w-06": [{ file: 'kolektor-tj-w-06.step', name: '84040TJ-W-06.step', size: '18 МБ', glb: '/uploads/3d/kolektor-tj-w-06.glb' }],
+  "84040tj-w-07": [{ file: 'kolektor-tj-w-07.step', name: '84040TJ-W-07.step', size: '19 МБ', glb: '/uploads/3d/kolektor-tj-w-07.glb' }],
+  "84040tj-w-08": [{ file: 'kolektor-tj-w-08.step', name: '84040TJ-W-08.step', size: '19 МБ', glb: '/uploads/3d/kolektor-tj-w-08.glb' }],
+  "84040tj-w-09": [{ file: 'kolektor-tj-w-09.step', name: '84040TJ-W-09.step', size: '19 МБ', glb: '/uploads/3d/kolektor-tj-w-09.glb' }],
+  "84040tj-w-10": [{ file: 'kolektor-tj-w-10.step', name: '84040TJ-W-10.step', size: '19 МБ', glb: '/uploads/3d/kolektor-tj-w-10.glb' }],
+  "84040tj-w-11": [{ file: 'kolektor-tj-w-11.step', name: '84040TJ-W-11.step', size: '19 МБ', glb: '/uploads/3d/kolektor-tj-w-11.glb' }],
+  "84040tj-w-12": [{ file: 'kolektor-tj-w-12.step', name: '84040TJ-W-12.step', size: '15 МБ', glb: '/uploads/3d/kolektor-tj-w-12.glb' }],
   "84040tj-w-13": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-13.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
   "84040tj-w-14": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-14.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
   "84040tj-w-15": [{ file: 'kolektor-tj-w-vytratomiry.step', name: '84040TJ-W-15.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-w-vytratomiry.glb' }],
@@ -173,18 +174,19 @@ export const MODELS_BY_SLUG = {
   "nasos-czyrkulyaczijnyj-termojet-xps-25-6-130": [{ file: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-130.step', name: 'XPS25-6-130B.step', size: '15 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-xps-25-6-130.glb' }],
   "nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b": [{ file: 'nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b.step', name: 'XPS25-8-180B.step', size: '5 МБ', glb: '/uploads/3d/nasos-czyrkulyaczijnyj-termojet-xps-25-6-180b.glb' }],
   "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25": [{ file: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25.step', name: 'TJ-MU-25.step', size: '41 МБ', glb: '/uploads/3d/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25.glb' }],
-  // Колектори TJ-R-W (2–12 виходів) — поки спільна модель на всі
-  "84040tj-r-w-02": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-03": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-04": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-05": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-06": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-07": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-08": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-09": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-10": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-11": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
-  "84040tj-r-w-12": [{ file: 'kolektor-tj-r-w.step', name: 'TJ-R-W.step', size: '11 МБ', glb: '/uploads/3d/kolektor-tj-r-w.glb' }],
+  // Колектори радіаторні TJ-R-W (з кранами, 2–12 виходів) — індивідуальні моделі за к-стю контурів
+  // (2026-06-29: STEP з теки «tj 3D/TJRW TJW/Lockshield»)
+  "84040tj-r-w-02": [{ file: 'kolektor-tj-r-w-02.step', name: 'TJ-R-W-02.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-02.glb' }],
+  "84040tj-r-w-03": [{ file: 'kolektor-tj-r-w-03.step', name: 'TJ-R-W-03.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-03.glb' }],
+  "84040tj-r-w-04": [{ file: 'kolektor-tj-r-w-04.step', name: 'TJ-R-W-04.step', size: '14 МБ', glb: '/uploads/3d/kolektor-tj-r-w-04.glb' }],
+  "84040tj-r-w-05": [{ file: 'kolektor-tj-r-w-05.step', name: 'TJ-R-W-05.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-05.glb' }],
+  "84040tj-r-w-06": [{ file: 'kolektor-tj-r-w-06.step', name: 'TJ-R-W-06.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-06.glb' }],
+  "84040tj-r-w-07": [{ file: 'kolektor-tj-r-w-07.step', name: 'TJ-R-W-07.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-07.glb' }],
+  "84040tj-r-w-08": [{ file: 'kolektor-tj-r-w-08.step', name: 'TJ-R-W-08.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-08.glb' }],
+  "84040tj-r-w-09": [{ file: 'kolektor-tj-r-w-09.step', name: 'TJ-R-W-09.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-09.glb' }],
+  "84040tj-r-w-10": [{ file: 'kolektor-tj-r-w-10.step', name: 'TJ-R-W-10.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-10.glb' }],
+  "84040tj-r-w-11": [{ file: 'kolektor-tj-r-w-11.step', name: 'TJ-R-W-11.step', size: '16 МБ', glb: '/uploads/3d/kolektor-tj-r-w-11.glb' }],
+  "84040tj-r-w-12": [{ file: 'kolektor-tj-r-w-12.step', name: 'TJ-R-W-12.step', size: '12 МБ', glb: '/uploads/3d/kolektor-tj-r-w-12.glb' }],
 
   // ── #5 (2026-06-08): інлайн-насоси TBE (з папки «tj 3D») ──
   "nasos-termojet-tbe-50-24-2": [{ file: 'nasos-termojet-tbe-50-24-2.step', name: 'TBE 50-24-2.step', size: '7 МБ', glb: '/uploads/3d/nasos-termojet-tbe-50-24-2.glb' }],
