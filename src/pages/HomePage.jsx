@@ -534,6 +534,7 @@ export default function HomePage() {
   const stats = STATS_META.map((m, i) => ({ ...m, ...(hc.stats[i] || {}) }))
 
   const [videoOpen, setVideoOpen] = useState(false)
+  const [photoLightbox, setPhotoLightbox] = useState(null)
   const [statsVisible, setStatsVisible] = useState(false)
   const [hoveredAdvantage, setHoveredAdvantage] = useState(null)
 
@@ -543,6 +544,13 @@ export default function HomePage() {
     window.addEventListener('keydown', fn)
     return () => window.removeEventListener('keydown', fn)
   }, [videoOpen])
+
+  useEffect(() => {
+    if (!photoLightbox) return
+    const fn = (e) => { if (e.key === 'Escape') setPhotoLightbox(null) }
+    window.addEventListener('keydown', fn)
+    return () => window.removeEventListener('keydown', fn)
+  }, [photoLightbox])
 
   // stats visible on load after short delay
   useEffect(() => {
@@ -571,6 +579,29 @@ export default function HomePage() {
             <button onClick={() => setVideoOpen(false)}
               className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
               <X size={18} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ─── PHOTO LIGHTBOX ─── */}
+      {photoLightbox && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" onClick={() => setPhotoLightbox(null)}>
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
+          <div className="relative z-10 max-w-4xl w-full" onClick={e => e.stopPropagation()}>
+            <img src={photoLightbox.src} alt={photoLightbox.label}
+              className="w-full max-h-[80vh] object-contain"
+              style={{ borderRadius: 0 }} />
+            {photoLightbox.label && (
+              <div className="mt-3 text-center"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                {photoLightbox.label}
+              </div>
+            )}
+            <button onClick={() => setPhotoLightbox(null)}
+              className="absolute -top-10 right-0 text-white/60 hover:text-white transition-colors"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.08em' }}>
+              {t('home.lightboxClose')}
             </button>
           </div>
         </div>
@@ -809,7 +840,7 @@ export default function HomePage() {
             {prodPhotos.map((photo, i) => {
               const photoLabel = photo.labelKey ? t(`home.${photo.labelKey}`) : (photo.label || '')
               return (
-                <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setVideoOpen(true)}>
+                <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setPhotoLightbox({ src: photo.src, label: photoLabel })}>
                   <img
                     src={photo.src}
                     alt={`${t('home.productionImgAlt')} ${i+1}`}
