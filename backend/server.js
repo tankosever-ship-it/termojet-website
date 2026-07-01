@@ -8,10 +8,14 @@ const compression = require('compression')
 const app = express()
 const PORT = process.env.PORT || 3000
 
-// За nginx reverse-proxy (127.0.0.1:8080). Довіряємо ЛИШЕ loopback-проксі —
-// req.ip бере реальний клієнтський IP з X-Forwarded-For (потрібно для коректного
-// rate-limiting), але зовнішні клієнти не можуть підробити XFF.
-app.set('trust proxy', 'loopback')
+// За nginx reverse-proxy у Docker: nginx (127.0.0.1) → published-порт контейнера,
+// тож усередині контейнера peer = docker-gateway (172.x.x.x), НЕ loopback. Тому
+// довіряємо loopback + приватним діапазонам (unique-local) — Express пройде ланцюг
+// довірених приватних проксі й візьме реальний клієнтський IP з X-Forwarded-For
+// (nginx ставить XFF=$proxy_add_x_forwarded_for). Зовнішній клієнт (публічний peer)
+// не довірений → його XFF ігнорується, req.ip = справжній IP. Потрібно для коректного
+// rate-limiting і IP-allowlist вебхука Binotel.
+app.set('trust proxy', ['loopback', 'uniquelocal'])
 
 // gzip-стиснення всіх відповідей (−~75% ваги JS/HTML/JSON)
 app.use(compression())
