@@ -22,4 +22,10 @@ services:
       # Nova Poshta API key (кабінет НП → Налаштування → Безпека → Ключі API).
       # Без нього /api/np віддає 503 і вибір міста/відділення в кошику не працює.
       - NOVA_POSHTA_API_KEY=${NOVA_POSHTA_API_KEY:-}
+      # Binotel API PUSH — вхідні дзвінки → лід у CRM + Telegram (backend/routes/binotel.js).
+      # COMPANY_ID + ALLOWED_IPS = верифікація вебхука; порожні → перевірку пропущено.
+      - BINOTEL_COMPANY_ID=${BINOTEL_COMPANY_ID:-}
+      - BINOTEL_ALLOWED_IPS=${BINOTEL_ALLOWED_IPS:-}
+      - BINOTEL_API_KEY=${BINOTEL_API_KEY:-}
+      - BINOTEL_API_SECRET=${BINOTEL_API_SECRET:-}
     restart: unless-stopped

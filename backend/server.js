@@ -123,6 +123,15 @@ const npLimiter = rateLimit({
   legacyHeaders: false,
 })
 
+// Binotel call webhook: до 120 запитів/хв (на дзвінок кілька подій + захист від флуду).
+// НЕ через writeLimiter (20/хв) — сплеск дзвінків не має губити події.
+const binotelLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
 // API routes
 const { router: authRouter } = require('./routes/auth')
 app.post('/api/auth/login', loginLimiter)
@@ -144,6 +153,8 @@ app.use('/api/clients', require('./routes/clients'))
 app.use('/api/analytics', require('./routes/analytics'))
 app.use('/api/np', npLimiter, require('./routes/novaposhta'))
 app.use('/api/upload', require('./routes/upload'))
+// Binotel API PUSH: вхідний дзвінок → лід у CRM + Telegram (backend/routes/binotel.js)
+app.use('/api/webhooks/binotel', binotelLimiter, require('./routes/binotel'))
 
 // Google Shopping / Merchant Center фіди (динамічні, з БД) — ДО SPA-статики
 const { feed: merchantFeed } = require('./routes/merchant')
