@@ -118,6 +118,53 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
 > IP сервера, тож сплеск (рекламна кампанія, 6+ заявок/хв) може впертись у `429`. Наразі лишено
 > як є. Якщо стане проблемою — додати IP сайту у виняток ліміту на боці CRM (`server/src/index.ts`).
 
+---
+
+## Інтеграція з Binotel (вхідні дзвінки) — налаштовано 2026-07-01
+
+Вхідні дзвінки з віртуальної АТС **Binotel** (зі сквозною аналітикою CallTracking)
+створюють лід у **Termojet CRM** і сповіщення в Telegram — так само, як заявки з форм.
+
+- **Код:** `backend/routes/binotel.js`, зареєстровано в `server.js`
+  (`app.use('/api/webhooks/binotel', binotelLimiter, …)`, окремий rate-limit 120/хв).
+  Реюзить `notifyLead` (`backend/telegram.js`) + `notifyCRM` (`backend/crm.js`).
+- **Webhook-URL (метод API PUSH):** `https://termojet.com.ua/api/webhooks/binotel`.
+  Налаштовує **підтримка Binotel** на своєму боці (лист на support@binotel.ua з пошти
+  адміністратора АТС). CallTracking підключено на домені `tjheatpump.com.ua`.
+- **Події Binotel** (поле `requestType`, усі на один URL):
+  `receivedTheCall` → `answeredTheCall` → `hangupTheCall` (мінімальний, без `companyID`)
+  → **`apiCallCompleted`** (фінал з `callDetails` + `callTrackingData`).
+  Обробка: `receivedTheCall` → миттєвий Telegram «дзвонить зараз»; `answeredTheCall` і
+  flat `hangupTheCall` → ігноруються; **`apiCallCompleted`** → лід + багата картка
+  (`billsec>0` прийнятий, інакше ПРОПУЩЕНИЙ; `callType=1` вихідні — ігноруються).
+- **Куди шле лід:** той самий `POST https://crm.tjheatpump.com.ua/api/leads` (`type:'call'`).
+  Пропущений у CRM автоматично стає HIGH-задачею «Дзвінок клієнту».
+- **Що в картці/ліді:** клієнт (`customerData.name`), сторінка дзвінка, час на сайті до
+  дзвінка, перший візит, UTM, гео, IP, GA client/tracking ID, `binotel_id`, посилання на
+  запис розмови, хто відповів.
+- **Безпека** (Binotel запити НЕ підписує): приймаємо лише з IP серверів Binotel
+  (`BINOTEL_ALLOWED_IPS`) + звірка `BINOTEL_COMPANY_ID`. ⚠️ Працює завдяки
+  `trust proxy` = `['loopback','uniquelocal']` у `server.js` — інакше за nginx+Docker
+  `req.ip` був би docker-gateway і allowlist відхиляв би ВСІ дзвінки.
+
+### ENV (сервер `/home/tankoseva/termojet-website/.env`, gitignored — значення НЕ в репо)
+| Змінна | Призначення |
+|---|---|
+| `BINOTEL_COMPANY_ID` | ID компанії Binotel (звірка вхідних; порожньо → без перевірки) |
+| `BINOTEL_ALLOWED_IPS` | CSV IP серверів Binotel (allowlist; порожньо → без перевірки) |
+| `BINOTEL_API_KEY` / `BINOTEL_API_SECRET` | доступ до REST Binotel (запис розмови тощо), на майбутнє |
+
+> Реальні значення (Company ID, IP-адреси, key/secret) — у серверному `.env` та в листі-відповіді
+> підтримки Binotel. Прокидаються в контейнер через `environment:` у `docker-compose.yml`.
+> Плейсхолдери — у `.env.example`.
+
+### Діагностика
+- Роут логує кожну подію: `docker logs -f termojet-website-app-1 | grep binotel`
+  (рядок `[binotel] <requestType> from <ip> ext=… disp=… bill=…`).
+- Тест гейтів без фейкових лідів: `curl` на `http://127.0.0.1:8080/api/webhooks/binotel`
+  з/без заголовка `X-Forwarded-For: <IP Binotel>` — чужий IP → `403 forbidden`,
+  IP Binotel + чужа компанія → `403 wrong company`, вихідний (`callType:1`) → `200` без ліда.
+
 ## Оновлення сайту
 
 ```bash

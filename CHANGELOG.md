@@ -1,5 +1,22 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-07-01 — Binotel call-tracking → лід у CRM + Telegram
+
+> Деплой Hetzner: `ssh hetzner` → `/home/tankoseva/termojet-website` → `git pull && docker compose up -d --build`. Задеплоєно й перевірено наживо (реальні дзвінки).
+
+### 📞 Вебхук вхідних дзвінків Binotel (коміти `1debfa2`, `0386ab9`)
+- Новий роут **`POST /api/webhooks/binotel`** (`backend/routes/binotel.js`), зареєстрований у `server.js` з окремим rate-limit (120/хв, в обхід `writeLimiter`). Реюзить `notifyLead` (Telegram) + `notifyCRM` (CRM) — той самий бот/група/CRM, що й ліди з форм.
+- **Binotel API PUSH** шле 4 події на дзвінок (поле `requestType`): `receivedTheCall` → `answeredTheCall` → `hangupTheCall` (мінімальний leg-hangup, БЕЗ `companyID`) → **`apiCallCompleted`** (фінал з `callDetails` + `callTrackingData`). Маршрутизація за `requestType`:
+  - `receivedTheCall` → 1 миттєвий Telegram-пінг «дзвонить зараз» (швидка реакція);
+  - `answeredTheCall` + flat `hangupTheCall` → ігноруються (без дублів);
+  - `apiCallCompleted` → **лід у CRM + багата картка**. `billsec>0` = прийнятий; інакше — ПРОПУЩЕНИЙ (+гучний Telegram, у CRM автоматично стає HIGH-задачею «Дзвінок клієнту»); `callType=1` (вихідні) — ігноруються.
+- **Багата картка** (Telegram + `message` CRM-ліда) з `callDetails.callTrackingData`: клієнт (`customerData.name`, якщо розпізнаний), сторінка дзвінка (`fullUrl`), час на сайті до дзвінка, перший візит, `utm_*`, гео (місто/область/країна), IP, GA client/tracking ID, `binotel_id`, посилання на запис розмови, хто відповів (для прийнятих). Номери `0XX…` → `+380XX…`.
+- **Безпека** (Binotel запити не підписує): IP-allowlist серверів Binotel + звірка `companyID`. Env — `BINOTEL_*` (див. `DEPLOY.md` / `.env.example`), значення лише в серверному `.env`.
+- Покрито тестом на реальних payload'ах (прийнятий + пропущений, вся послідовність подій).
+
+### 🔧 Fix: `trust proxy` — реальний IP клієнта за nginx у Docker (коміт `d50a459`)
+- `server.js`: `trust proxy` `'loopback'` → **`['loopback','uniquelocal']`**. Контейнер за nginx у Docker бачить peer як docker-gateway (`172.x`), не loopback, тож із `'loopback'` Express ігнорував `X-Forwarded-For` і брав IP шлюзу. Наслідок: усі rate-limiter'и рахувались на один IP (`172.21.0.1`), а IP-allowlist вебхука Binotel відхиляв би ВСІ реальні дзвінки (403). Тепер `req.ip` = реальний IP клієнта (підробити ззовні не можна — публічний peer недовірений).
+
 ## Сесія 2026-06-24 — Маркетинг-аналітика: GTM, GA4 Ecommerce, UTM, Google Shopping
 
 > Деплой Hetzner: `ssh hetzner` → `/home/tankoseva/termojet-website` → `git pull && docker compose up -d --build`. Усе нижче задеплоєно й перевірено наживо.
