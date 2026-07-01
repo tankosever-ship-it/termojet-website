@@ -223,10 +223,10 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ Юридичні реквізити ═══════════════════════════════════════════ */}
-      <section className="py-12" style={{ background: '#0C0B0A' }}>
+      <section className="py-12 section-gradient-light">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="section-title-white text-center mb-8">{t('legal.title')}</h2>
-          <div className="rounded-2xl p-6 md:p-10" style={{ background: '#15161D', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <h2 className="section-title text-center mb-8">{t('legal.title')}</h2>
+          <div className="rounded-2xl p-6 md:p-10" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.05)' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
               {[
                 ['legal.fullName', 'legal.fullNameVal'],
@@ -237,13 +237,13 @@ export default function AboutPage() {
                 ['legal.emailLabel', 'legal.emailVal'],
               ].map(([labelKey, valKey]) => (
                 <div key={labelKey}>
-                  <div style={{ ...mono, fontSize: '11px', letterSpacing: '0.06em' }} className="uppercase text-white/35 mb-1.5">
+                  <div style={{ ...mono, fontSize: '11px', letterSpacing: '0.06em' }} className="uppercase text-gray-400 mb-1.5">
                     {t(labelKey)}
                   </div>
                   {valKey === 'legal.emailVal' ? (
-                    <a href={`mailto:${t(valKey)}`} className="text-white/90 hover:text-[var(--accent)] transition-colors break-words">{t(valKey)}</a>
+                    <a href={`mailto:${t(valKey)}`} className="text-gray-800 hover:text-[var(--accent)] transition-colors break-words">{t(valKey)}</a>
                   ) : (
-                    <div className="text-white/90 leading-snug break-words">{t(valKey)}</div>
+                    <div className="text-gray-800 leading-snug break-words">{t(valKey)}</div>
                   )}
                 </div>
               ))}
