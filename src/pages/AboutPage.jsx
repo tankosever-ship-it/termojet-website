@@ -222,6 +222,36 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ═══ Юридичні реквізити ═══════════════════════════════════════════ */}
+      <section className="py-12" style={{ background: '#0C0B0A' }}>
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="section-title-white text-center mb-8">{t('legal.title')}</h2>
+          <div className="rounded-2xl p-6 md:p-10" style={{ background: '#15161D', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
+              {[
+                ['legal.fullName', 'legal.fullNameVal'],
+                ['legal.shortName', 'legal.shortNameVal'],
+                ['legal.edrpou', 'legal.edrpouVal'],
+                ['legal.legalAddress', 'legal.legalAddressVal'],
+                ['legal.actualAddress', 'legal.actualAddressVal'],
+                ['legal.emailLabel', 'legal.emailVal'],
+              ].map(([labelKey, valKey]) => (
+                <div key={labelKey}>
+                  <div style={{ ...mono, fontSize: '11px', letterSpacing: '0.06em' }} className="uppercase text-white/35 mb-1.5">
+                    {t(labelKey)}
+                  </div>
+                  {valKey === 'legal.emailVal' ? (
+                    <a href={`mailto:${t(valKey)}`} className="text-white/90 hover:text-[var(--accent)] transition-colors break-words">{t(valKey)}</a>
+                  ) : (
+                    <div className="text-white/90 leading-snug break-words">{t(valKey)}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ ABOUT TEXT ═════════════════════════════════════════════════ */}
       <section className="py-16 md:py-20 section-gradient-light">
         <div className="max-w-7xl mx-auto px-4">
@@ -448,36 +478,6 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ Юридичні реквізити ═══════════════════════════════════════════ */}
-      <section className="py-12" style={{ background: '#0C0B0A' }}>
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="section-title-white text-center mb-8">{t('legal.title')}</h2>
-          <div className="rounded-2xl p-6 md:p-10" style={{ background: '#15161D', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
-              {[
-                ['legal.fullName', 'legal.fullNameVal'],
-                ['legal.shortName', 'legal.shortNameVal'],
-                ['legal.edrpou', 'legal.edrpouVal'],
-                ['legal.legalAddress', 'legal.legalAddressVal'],
-                ['legal.actualAddress', 'legal.actualAddressVal'],
-                ['legal.emailLabel', 'legal.emailVal'],
-              ].map(([labelKey, valKey]) => (
-                <div key={labelKey}>
-                  <div style={{ ...mono, fontSize: '11px', letterSpacing: '0.06em' }} className="uppercase text-white/35 mb-1.5">
-                    {t(labelKey)}
-                  </div>
-                  {valKey === 'legal.emailVal' ? (
-                    <a href={`mailto:${t(valKey)}`} className="text-white/90 hover:text-[var(--accent)] transition-colors break-words">{t(valKey)}</a>
-                  ) : (
-                    <div className="text-white/90 leading-snug break-words">{t(valKey)}</div>
-                  )}
-                </div>
               ))}
             </div>
           </div>
