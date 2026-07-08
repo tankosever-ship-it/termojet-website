@@ -132,3 +132,16 @@
 | 2026-07-08 | 2/0b | Міграція helmet→React19-метадані OK (structural mismatch зник). АЛЕ DOM-snapshot prerender не дає метадані не-JS краулерам (React19 metadata = runtime-only) + pre-existing Navbar hydration issues. Висновок: **DOM-snapshot prerender не годиться**. Розвилка: A=серверний ін'єкт метаданих / B=справжній SSR | — |
 | 2026-07-08 | — | **Обрано A+** (серверний ін'єкт метаданих+контенту з БД). Prerender-WIP відкочено до `309ee7f`. | — |
 | 2026-07-08 | A+ | Реалізовано ін'єкт для **товарів** (title←seo_title, canonical=self, description←meta_description, og, H1+опис у noscript) і **блогу** (title/excerpt). Локально перевірено curl-ом. `backend/server.js` | — |
+| 2026-07-08 | A+ | **Задеплоєно** (`2317a85`) на Hetzner + перевірено на живому сайті: товар/блог — сторінкові title/canonical(self)/description/H1, 1 canonical; головна не зламана | **73→78** |
+
+### Результат ре-аудиту після A+ (товари+блог)
+- Score **73 → 78**; Core SEO 90→**95**; Social Media 77→**100**.
+- `meta-title >60`: **269 → 0** · `duplicate-description`: **361 → 30** · `og-url-match`: **331 → 0**.
+- Залишок 30 дубль-title/description = категорії+головна+статичні (наступний інкремент).
+- Новий дрібний пункт: **6 дубль-seo_title на ~10 товарах-варіантах** (НГ-52/НГ-52П тощо) → дедуплікація в БД (Фаза 3).
+
+### Наступні інкременти A+ (TODO)
+- [x] Категорії `/catalog/:cat` — мапа 15 назв (CATEGORY_META) → title/description/H1. *(8 лип)*
+- [x] Статичні сторінки (catalog/about/contacts/blog/service/faq/delivery/files/oem/partners/portfolio/returns/terms/privacy/navchannya) — STATIC_META. *(8 лип)*
+- [ ] (нюанс) з JS у Google-рендері canonical/description присутні двічі (сервер + React helmet, значення однакові) — нешкідливо; за бажанням прибрати клієнтський canonical на початковому рендері.
+- [ ] Решта фаз плану: 3 (контент категорій), 4 (перелінковка/orphan, /en, sitemap lastmod), 5 (JS split, зображення webp), 6 (privacy, CSP).

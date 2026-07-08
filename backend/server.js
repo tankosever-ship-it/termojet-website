@@ -260,7 +260,86 @@ app.get('/blog/:slug', (req, res, next) => {
   } catch (e) { return next() }
 })
 
+// Спільний хелпер ін'єкту метаданих у shell (для краулерів/LLM без JS).
+function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyText }) {
+  let out = img ? html.split(DEFAULT_OG_IMG).join(esc(img)) : html
+  out = out
+    .split(DEFAULT_TITLE).join(esc(title))
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${esc(url)}$2`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
+    .replace(/(<meta property="og:type" content=")[^"]*(")/, `$1${esc(ogType)}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+  if (h1) out = out.replace(/<h1>Termojet[^<]*<\/h1>/, `<h1>${esc(h1)}</h1>${bodyText ? `\n        <p>${esc(bodyText)}</p>` : ''}`)
+  return out
+}
+
+// Назви+описи 15 категорій (джерело — src/data/categories.js; бекенд CJS не імпортує ESM-фронт).
+const CATEGORY_META = {
+  'nasosni-hrupy': { name: 'Насосні групи', desc: 'Готові насосні вузли з обв’язкою для котелень' },
+  'hidravlichni-rozdilnyky': { name: 'Роздільники гідравлічні', desc: 'Гідрострілки для котельних систем' },
+  'rozpodilchi-kolektory': { name: 'Розподільчі колектори', desc: 'Колектори по потужності 60/105/175 кВт' },
+  'kolektory-z-hidrostrilkoyu': { name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою' },
+  'termojet-box': { name: 'Модульні системи TERMOJET BOX', desc: 'Компактні вузли обв’язки котла' },
+  'termojet-mega': { name: 'Серія Termojet Mega (до 2200 кВт)', desc: 'Промислові системи опалення до 2.2 МВт' },
+  'nasosy': { name: 'Насоси', desc: 'Циркуляційні насоси для систем опалення' },
+  'klapany': { name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові клапани та електричні сервоприводи' },
+  'balansuval-klapany': { name: 'Статичний балансувальний клапан', desc: 'Статичне балансування систем опалення' },
+  'separatory': { name: 'Сепаратори', desc: 'Шламові та повітряні сепаратори' },
+  'zonalne-keruvannya': { name: 'Термостати та зональне керування', desc: 'Термостати, програматори, центри комутації та аксесуари' },
+  'kolektory-pidloha': { name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та шафи для теплої підлоги' },
+  'avtomatyka': { name: 'Автоматика котельного обладнання', desc: 'Контролери та системи управління котлами' },
+  'dodatkove': { name: 'Додаткове обладнання', desc: 'Аксесуари і супутні товари для монтажу' },
+  'rozprodazh': { name: 'Акція', desc: 'Обладнання Termojet за акційними цінами' },
+}
+
+// Статичні сторінки — унікальні title/description (усувають дубль generic на не-товарних).
+const STATIC_META = {
+  '/catalog': { title: 'Каталог обладнання для котелень | Termojet', desc: 'Каталог Termojet: насосні групи, колектори, гідрострілки, клапани, сепаратори, автоматика. Власне виробництво з 2002 року.' },
+  '/about': { title: 'Про компанію Termojet — виробник з 2002 року', desc: 'Termojet — український виробник обладнання для котелень з 2002 року: власне виробництво, інженерна підтримка, гарантія.' },
+  '/contacts': { title: 'Контакти Termojet — звʼязатися з виробником', desc: 'Контакти Termojet: телефони, адреса, форма звʼязку. Консультація з підбору обладнання для котелень.' },
+  '/blog': { title: 'Блог Termojet — опалення, котельні, монтаж', desc: 'Статті Termojet про опалення, котельні, монтаж систем, новини компанії та галузеві виставки.' },
+  '/service': { title: 'Сервіс і гарантія | Termojet', desc: 'Сервісне обслуговування та гарантія на обладнання Termojet для котелень.' },
+  '/faq': { title: 'Часті питання (FAQ) | Termojet', desc: 'Відповіді на часті питання про обладнання Termojet: підбір, монтаж, доставка, гарантія.' },
+  '/delivery': { title: 'Доставка й оплата | Termojet', desc: 'Умови доставки й оплати обладнання Termojet по Україні.' },
+  '/files': { title: 'Документація й каталоги | Termojet', desc: 'Технічна документація, каталоги та інструкції на обладнання Termojet.' },
+  '/oem': { title: 'OEM та приватна марка | Termojet', desc: 'OEM-виробництво обладнання для котелень під приватною маркою від Termojet.' },
+  '/partners': { title: 'Дилерам і партнерам | Termojet', desc: 'Співпраця з Termojet: умови для дилерів, інсталяторів і партнерів.' },
+  '/portfolio': { title: 'Наші проекти | Termojet', desc: 'Реалізовані проекти котелень і систем опалення з обладнанням Termojet.' },
+  '/returns': { title: 'Повернення й обмін | Termojet', desc: 'Умови повернення й обміну обладнання Termojet.' },
+  '/terms': { title: 'Умови використання | Termojet', desc: 'Умови використання сайту та придбання обладнання Termojet.' },
+  '/privacy': { title: 'Політика конфіденційності | Termojet', desc: 'Політика конфіденційності та обробки персональних даних Termojet.' },
+  '/navchannya': { title: 'Навчання та тренінги | Termojet', desc: 'Навчальні матеріали й тренінги Termojet з монтажу та підбору обладнання для котелень.' },
+}
+
+// A+ per-категорія (/catalog/:cat) — title/description/H1 з CATEGORY_META.
+app.get('/catalog/:cat', (req, res, next) => {
+  const cm = CATEGORY_META[req.params.cat]
+  if (!cm) return next()
+  try {
+    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+    const title = `${cm.name} | Termojet`
+    const desc = `${cm.desc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
+    const url = `${SITE}/catalog/${encodeURIComponent(req.params.cat)}`
+    html = injectMeta(html, { title, desc, url, h1: cm.name, bodyText: cm.desc })
+    res.setHeader('Cache-Control', 'no-cache')
+    return res.type('html').send(html)
+  } catch (e) { return next() }
+})
+
 app.get('*', (req, res) => {
+  // A+ статичні сторінки — унікальні метадані з STATIC_META.
+  const sm = STATIC_META[(req.path.replace(/\/+$/, '') || '/')]
+  if (sm) {
+    try {
+      let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+      const url = SITE + (req.path === '/' ? '/' : req.path.replace(/\/+$/, ''))
+      html = injectMeta(html, { title: sm.title, desc: sm.desc, url })
+      res.setHeader('Cache-Control', 'no-cache')
+      return res.type('html').send(html)
+    } catch (e) { /* fall through */ }
+  }
   // Неіснуючі службові файли не маскуємо SPA-заглушкою (інакше /sitemap_index.xml,
   // robots тощо віддавали б HTML і ламали валідацію). Реальні файли вже віддав express.static.
   if (/\.(xml|txt|json|map|ico)$/i.test(req.path)) {
