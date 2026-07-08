@@ -12,7 +12,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { imgUrl } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
-import { FILES } from '../data/files'
+
 import { getDocsForProduct } from '../data/docsMapping'
 import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
@@ -578,7 +578,7 @@ function ImageGallery({ images, name, model3d, t }) {
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams()
   const navigate = useNavigate()
-  const { products, lang, addToCart, siteSettings, eurRate } = useApp()
+  const { products, lang, addToCart, siteSettings, eurRate, files } = useApp()
   // Перехоплення кліків по внутрішніх лінках в описі → SPA-навігація (без перезавантаження)
   const onDescClick = e => {
     const a = e.target.closest('a')
@@ -657,10 +657,10 @@ export default function ProductDetailPage() {
   const productDocs = useMemo(() => {
     const ids = getDocsForProduct(categorySlug, name, product?.sku)
     return ids
-      .map(id => FILES.find(f => f.id === id))
+      .map(id => files.find(f => f.id === id))
       .filter(Boolean)
       .filter(f => ['Інструкції', 'Брошури'].includes(f.category))
-  }, [categorySlug, name, product?.sku])
+  }, [categorySlug, name, product?.sku, files])
 
   // 3D models (STEP)
   const productModels = useMemo(() => getModels3D(product?.slug), [product?.slug])

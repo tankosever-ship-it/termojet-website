@@ -1,25 +1,24 @@
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { mergeHomeContent } from '../data/homeContent'
 import { mergeAboutContent } from '../data/aboutContent'
-import { PRODUCTS } from '../data/products'
-import { mergeWithEnriched } from '../data/mergeEnriched'
-import { BLOG_POSTS } from '../data/blog'
-import { PORTFOLIO } from '../data/portfolio'
-import { FILES } from '../data/files'
 import { fetchEurRate } from '../utils/currency'
 import { getUTM } from '../utils/utm'
 import { effectivePrice, isOnSale } from '../utils/sale'
 import { trackAddToCart, trackRemoveFromCart } from '../utils/analytics'
 
-const BASE_PRODUCTS = mergeWithEnriched(PRODUCTS)
-
 // On GitHub Pages use static data; on real server use /api
 const IS_GITHUB_PAGES = import.meta.env.VITE_BASE_URL !== '/'
 const API = IS_GITHUB_PAGES ? null : '/api'
 
-// БД blog_posts не має колонки links — підтягуємо чіпи зі статичного blog.js за slug.
-const BLOG_LINKS = Object.fromEntries(BLOG_POSTS.filter(p => p.links?.length).map(p => [p.slug, p.links]))
-const mergeBlogLinks = (data) => data.map(p => BLOG_LINKS[p.slug] ? { ...p, links: BLOG_LINKS[p.slug] } : p)
+// blog.js links are only needed for GitHub Pages mode; loaded lazily below
+let _blogLinksCache = null
+async function getBlogLinks() {
+  if (_blogLinksCache) return _blogLinksCache
+  const { BLOG_POSTS } = await import('../data/blog')
+  _blogLinksCache = Object.fromEntries(BLOG_POSTS.filter(p => p.links?.length).map(p => [p.slug, p.links]))
+  return _blogLinksCache
+}
+const mergeBlogLinks = (data, blogLinks) => data.map(p => blogLinks[p.slug] ? { ...p, links: blogLinks[p.slug] } : p)
 
 const AppContext = createContext(null)
 
@@ -40,16 +39,16 @@ function saveAdminToken(token) {
 
 export function AppProvider({ children }) {
   const [lang, setLang] = useState(() => localStorage.getItem('tj2_lang') || 'uk')
-  const [products, setProducts] = useState(BASE_PRODUCTS)
+  const [products, setProducts] = useState([])
   const [cart, setCart] = useState(loadCart)
   const [orders, setOrders] = useState([])
   const [consultations, setConsultations] = useState([])
   const [dealers, setDealers] = useState([])
   const [reviews, setReviews] = useState([])
-  const [blog, setBlog] = useState(BLOG_POSTS)
-  const [portfolio, setPortfolio] = useState(PORTFOLIO)
+  const [blog, setBlog] = useState([])
+  const [portfolio, setPortfolio] = useState([])
   const [faq, setFaq] = useState([])
-  const [files, setFiles] = useState(FILES)
+  const [files, setFiles] = useState([])
   const [banners, setBanners] = useState([])
   const [promos, setPromos] = useState([])
   const [subscribers, setSubscribers] = useState([])
@@ -69,9 +68,30 @@ export function AppProvider({ children }) {
   useEffect(() => { saveCart(cart) }, [cart])
   useEffect(() => { fetchEurRate().then(rate => setEurRate(rate)) }, [])
 
-  // load from API if available
+  // load from API if available, otherwise load static fallback data dynamically (GitHub Pages)
   useEffect(() => {
-    if (!API) return
+    if (!API) {
+      // GitHub Pages mode: load heavy static data via dynamic imports so they
+      // are NOT included in the initial bundle — loaded only when needed here.
+      import('../data/products').then(async ({ PRODUCTS }) => {
+        const { mergeWithEnriched } = await import('../data/mergeEnriched')
+        setProducts(mergeWithEnriched(PRODUCTS))
+      }).catch(() => {})
+
+      import('../data/blog').then(({ BLOG_POSTS }) => {
+        setBlog(BLOG_POSTS)
+      }).catch(() => {})
+
+      import('../data/portfolio').then(({ PORTFOLIO }) => {
+        setPortfolio(PORTFOLIO)
+      }).catch(() => {})
+
+      import('../data/files').then(({ FILES }) => {
+        setFiles(FILES)
+      }).catch(() => {})
+
+      return
+    }
 
     fetch(`${API}/products?limit=500`)
       .then(r => r.json())
@@ -80,7 +100,12 @@ export function AppProvider({ children }) {
 
     fetch(`${API}/blog`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data) && data.length > 0) setBlog(mergeBlogLinks(data)) })
+      .then(async data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const blogLinks = await getBlogLinks()
+          setBlog(mergeBlogLinks(data, blogLinks))
+        }
+      })
       .catch(() => {})
 
     fetch(`${API}/portfolio`)
@@ -100,8 +125,19 @@ export function AppProvider({ children }) {
     fetch(`${API}/files`)
       .then(r => r.json())
       // завантажені через адмінку документи — зверху, далі статичний каталог
-      .then(data => { if (Array.isArray(data) && data.length) setFiles([...data, ...FILES]) })
-      .catch(() => {})
+      .then(async data => {
+        if (Array.isArray(data) && data.length) {
+          const { FILES } = await import('../data/files')
+          setFiles([...data, ...FILES])
+        } else {
+          const { FILES } = await import('../data/files')
+          setFiles(FILES)
+        }
+      })
+      .catch(async () => {
+        const { FILES } = await import('../data/files')
+        setFiles(FILES)
+      })
 
     fetch(`${API}/settings`)
       .then(r => r.json())
@@ -276,7 +312,7 @@ export function AppProvider({ children }) {
     fetch(`${API}/consultations`, { headers: h }).then(r => r.json()).then(setConsultations).catch(() => {})
     fetch(`${API}/dealers`, { headers: h }).then(r => r.json()).then(setDealers).catch(() => {})
     // не перезаписуємо статичні пости порожнім масивом, якщо в БД блогу ще немає
-    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data) && data.length) setBlog(mergeBlogLinks(data)) }).catch(() => {})
+    fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(async data => { if (Array.isArray(data) && data.length) { const blogLinks = await getBlogLinks(); setBlog(mergeBlogLinks(data, blogLinks)) } }).catch(() => {})
     fetch(`${API}/reviews?admin=1`, { headers: h }).then(r => r.json()).then(setReviews).catch(() => {})
     fetch(`${API}/subscribers`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data)) setSubscribers(data) }).catch(() => {})
   }, [isAdminAuth, adminToken])
