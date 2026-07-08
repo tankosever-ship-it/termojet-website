@@ -453,12 +453,15 @@ function handleCategory(lang) {
       const uaUrl = `${SITE}/catalog/${catEnc}`
       const enUrl = `${SITE}/en/catalog/${catEnc}`
       if (lang === 'en') {
-        const title = `${cm.nameEn} | Termojet`
+        // Короткі назви категорій дають задовгий/закороткий title — падимо до ≥30 симв.
+        let title = `${cm.nameEn} | Termojet`
+        if (title.length < 35) title = `${cm.nameEn} — boiler room equipment | Termojet`.slice(0, 60)
         const desc = `${cm.descEn}. Termojet — manufacturer since 2002, delivery across Ukraine.`.slice(0, 200)
         const alternates = buildAlternates(uaUrl, enUrl)
         html = injectMeta(html, { title, desc, url: enUrl, h1: cm.nameEn, bodyText: cm.descEn, alternates })
       } else {
-        const title = `${cm.name} | Termojet`
+        let title = `${cm.name} | Termojet`
+        if (title.length < 35) title = `${cm.name} — обладнання для котелень | Termojet`.slice(0, 60)
         const desc = `${cm.desc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
         const alternates = buildAlternates(uaUrl, enUrl)
         html = injectMeta(html, { title, desc, url: uaUrl, h1: cm.name, bodyText: cm.desc, alternates })

@@ -145,9 +145,9 @@
 
 | 2026-07-08 | EN-пілот | **Мультимовне SEO /en задеплоєно** (`f35e69a`). Фронтенд: роутинг /en/* + LangSync + LLink(lang-aware посилання). Бекенд: EN-ін'єкт з i18n БД + hreflang uk↔en+x-default + sitemap 768 URL(UA+EN). Наскрізь перевірено (curl бот + puppeteer рендер): /en англійською, UK не зламано. | — |
 
-### EN-пілот — залишкові хвости (TODO)
-- [ ] **9 «голих» /catalog-посилань** на EN-товарі (частина Link не через LLink) → навігація там впаде в UK. Знайти й закрити.
-- [ ] **EN-титули статичних сторінок** (/en/about тощо) — зараз UA-фолбек. Додати `STATIC_META_EN` або `titleEn/descEn`.
+### EN-пілот — залишкові хвости
+- [x] **Голі /catalog-посилання** на EN закрито (9→0): решта `<Link>`→`LLink` (breadcrumbs/blog/portfolio/related), guard зовнішніх URL у `localizedPath`, `localizeHtml` для href у HTML-контенті описів/блогу. Коміт `93f824d`. *(8 лип)*
+- [x] **EN-титули статичних** сторінок — `STATIC_META_EN` у server.js. *(8 лип)*
 - [ ] **Google Search Console:** сабмітнути sitemap, стежити за індексацією /en.
 - [ ] Після стабілізації EN — додати **pl/de/fr** (той самий механізм; дані i18n готові).
 - [ ] `TechSupportPage.jsx` не в роутах — при підключенні використати LLink.
