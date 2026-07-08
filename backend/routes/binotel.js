@@ -15,7 +15,8 @@
 //   1) IP-allowlist серверів Binotel (req.ip коректний завдяки trust proxy у server.js).
 //   2) Звірка companyID (де він є в payload).
 // ENV (сервер, .env поряд з docker-compose): BINOTEL_COMPANY_ID, BINOTEL_ALLOWED_IPS,
-//   BINOTEL_API_KEY, BINOTEL_API_SECRET (останні два — на майбутнє: REST Binotel).
+//   BINOTEL_API_KEY, BINOTEL_API_SECRET (останні два — на майбутнє: REST Binotel),
+//   TELEGRAM_CALLS_THREAD_ID (топік для карток дзвінків, окремо від форм termojet).
 
 const express = require('express')
 const { notifyLead, esc } = require('../telegram')
@@ -26,6 +27,12 @@ const router = express.Router()
 const COMPANY_ID = String(process.env.BINOTEL_COMPANY_ID || '').trim()
 const ALLOWED_IPS = (process.env.BINOTEL_ALLOWED_IPS || '')
   .split(',').map(s => s.trim()).filter(Boolean)
+
+// Дзвінки роутимо в окремий forum-топік «TJ Heat Pumps» (колтрекінг стоїть на
+// tjheatpump.com.ua), окремо від форм termojet — ті йдуть у топік 🔵 Termojet через
+// TELEGRAM_THREAD_ID. Порожньо → падає в дефолтний топік notifyLead (як форми).
+// Майбутнє «номер/домен → свій топік»: обчислювати threadId per-call тут.
+const CALLS_THREAD_ID = process.env.TELEGRAM_CALLS_THREAD_ID || undefined
 
 function clientIp(req) {
   return String(req.ip || '').replace(/^::ffff:/, '')
@@ -98,7 +105,8 @@ router.post('/', (req, res) => {
       notifyLead(
         `📞 <b>Termojet — вхідний дзвінок</b>\n` +
         `☎️ ${esc(phone)}\n` +
-        `⏳ Дзвонить зараз — підніміть слухавку`
+        `⏳ Дзвонить зараз — підніміть слухавку`,
+        CALLS_THREAD_ID
       )
     }
     return res.json({ status: 'success' })
@@ -144,7 +152,7 @@ function handleCompleted(d, res) {
   if (ct.gaClientId || ct.gaTrackingId) L.push(`📈 GA: ${esc(ct.gaClientId || '')}${ct.gaTrackingId ? ` · ${esc(ct.gaTrackingId)}` : ''}`)
   if (rec) L.push(`🎧 <a href="${esc(rec)}">Запис розмови</a>`)
   if (btId) L.push(`🆔 binotel_id: ${esc(btId)}`)
-  notifyLead(L.join('\n'))
+  notifyLead(L.join('\n'), CALLS_THREAD_ID)
 
   // ── Лід у CRM (деталі в message; пропущений → у CRM стає HIGH-задачею) ──
   const M = [

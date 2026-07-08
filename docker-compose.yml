@@ -22,6 +22,10 @@ services:
       # Get it once via tjheatpump: /tg-create-lead-topics.php?secret=<WEBHOOK_SECRET>
       # (use the "termojet_leads_thread_id" value from its JSON output).
       - TELEGRAM_THREAD_ID=${TELEGRAM_THREAD_ID:-}
+      # Forum-topic id for BINOTEL CALL cards (TJ Heat Pumps topic). CallTracking
+      # lives on tjheatpump.com.ua, so call cards go to that topic, apart from the
+      # termojet forms topic above. Empty → calls fall back to notifyLead default.
+      - TELEGRAM_CALLS_THREAD_ID=${TELEGRAM_CALLS_THREAD_ID:-}
       # CORS allowlist override (comma-separated). Defaults in server.js cover the domain + current IP.
       - CORS_ORIGINS=${CORS_ORIGINS:-}
       # Nova Poshta API key (кабінет НП → Налаштування → Безпека → Ключі API).
