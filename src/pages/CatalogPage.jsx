@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { motion } from 'framer-motion'
 import { Search, ChevronRight, ChevronLeft, X, ShoppingCart, LayoutGrid, List, ArrowRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
@@ -1059,7 +1060,7 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
       <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-3 cat-strip snap-x"
         style={{ scrollPaddingLeft: 8, scrollPaddingRight: 56 }}>
         {/* Плитка "Всі категорії" */}
-        <Link to="/catalog"
+        <LLink to="/catalog"
           className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${!currentCategory ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
           <div className="h-[96px] flex items-center justify-center pt-3">
             <span className="flex items-center justify-center w-14 h-14 rounded-full"
@@ -1076,14 +1077,14 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
               {products.length}
             </div>
           </div>
-        </Link>
+        </LLink>
 
         {categories.map(c => {
           const isActive = currentCategory?.id === c.id
           const n = catCounts[c.id] || 0
           const src = (c.image || '').startsWith('/') ? assetPath(c.image) : c.image
           return (
-            <Link key={c.id} to={`/catalog/${c.slug}`}
+            <LLink key={c.id} to={`/catalog/${c.slug}`}
               className={`group flex-shrink-0 w-[124px] snap-start flex flex-col bg-white border transition-all rounded-xl overflow-hidden ${isActive ? 'border-[var(--accent)] shadow-md' : 'border-[var(--ink-200)] hover:border-[var(--accent)] hover:shadow-md'}`}>
               <div className="h-[96px] flex items-center justify-center p-2 overflow-hidden bg-white">
                 {src ? (
@@ -1103,7 +1104,7 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
                   {n}
                 </div>
               </div>
-            </Link>
+            </LLink>
           )
         })}
       </div>
@@ -1262,11 +1263,11 @@ export default function CatalogPage() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(232,93,4,0.4)] to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-2 text-xs text-white/40 mb-3">
-            <Link to="/" className="hover:text-white/70 transition-colors">{t('catalog.breadcrumbHome')}</Link>
+            <LLink to="/" className="hover:text-white/70 transition-colors">{t('catalog.breadcrumbHome')}</LLink>
             <ChevronRight size={12} />
             {currentCategory ? (
               <>
-                <Link to="/catalog" className="hover:text-white/70 transition-colors">{t('nav.catalog')}</Link>
+                <LLink to="/catalog" className="hover:text-white/70 transition-colors">{t('nav.catalog')}</LLink>
                 <ChevronRight size={12} />
                 <span className="text-white/70">{currentCategory.name[lang] || currentCategory.name.uk}</span>
               </>
@@ -1387,14 +1388,14 @@ export default function CatalogPage() {
                   <div className="product-card-new group flex flex-col" style={{ height: '100%' }}>
 
                     <div className="relative flex-shrink-0 overflow-hidden bg-[var(--bg)]" style={{ height: '240px' }}>
-                      <Link to={href} className="block w-full h-full">
+                      <LLink to={href} className="block w-full h-full">
                         {product.image ? (
                           <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
                             className="pdp-card-photo group-hover:scale-[1.06] transition-transform duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>
                         )}
-                      </Link>
+                      </LLink>
 
                       {isOnSale(product) && (
                         <span className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
@@ -1413,10 +1414,10 @@ export default function CatalogPage() {
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <ShoppingCart size={12} /> {t('catalog.buyOneClick')}
                         </button>
-                        <Link to={href}
+                        <LLink to={href}
                           className="flex items-center gap-1 px-3 h-9 border border-[var(--ink-200)] rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
                           {t('catalog.details')} <ArrowRight size={11} />
-                        </Link>
+                        </LLink>
                       </div>
                     </div>
 
@@ -1428,11 +1429,11 @@ export default function CatalogPage() {
                         {catObj && (
                           <div className="eyebrow mb-1.5 truncate">{catObj.name[lang] || catObj.name.uk}</div>
                         )}
-                        <Link to={href}>
+                        <LLink to={href}>
                           <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors mb-2 leading-snug">
                             {name}
                           </h3>
-                        </Link>
+                        </LLink>
                         {/* 2. Опис без слова "Опис" */}
                         {shortDesc && (
                           <p className="text-xs text-gray-400 leading-relaxed mb-2.5 line-clamp-2">{shortDesc}</p>
@@ -1486,14 +1487,14 @@ export default function CatalogPage() {
                   <div className="product-card-new group flex flex-row gap-0 overflow-hidden">
 
                     {/* Image */}
-                    <Link to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden w-[104px] sm:w-[140px] min-h-[120px]">
+                    <LLink to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden w-[104px] sm:w-[140px] min-h-[120px]">
                       {product.image ? (
                         <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
                           className="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" />
                       ) : (
                         <div className="text-gray-200 text-5xl">⚙️</div>
                       )}
-                    </Link>
+                    </LLink>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0 p-3 sm:p-4 flex flex-col justify-between border-l border-[var(--ink-200)]">
@@ -1501,11 +1502,11 @@ export default function CatalogPage() {
                         {catObj && (
                           <div className="eyebrow mb-1">{catObj.name[lang] || catObj.name.uk}</div>
                         )}
-                        <Link to={href}>
+                        <LLink to={href}>
                           <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors leading-snug mb-1.5">
                             {name}
                           </h3>
-                        </Link>
+                        </LLink>
                         {shortDesc && (
                           <p className="text-xs text-gray-400 leading-relaxed line-clamp-2 mb-2">{shortDesc}</p>
                         )}
@@ -1535,10 +1536,10 @@ export default function CatalogPage() {
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <ShoppingCart size={12} /> {t('catalog.addToCart')}
                         </button>
-                        <Link to={href}
+                        <LLink to={href}
                           className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg text-gray-600 text-xs font-semibold">
                           {t('catalog.details')} <ArrowRight size={11} />
-                        </Link>
+                        </LLink>
                       </div>
                     </div>
 
@@ -1553,10 +1554,10 @@ export default function CatalogPage() {
                           style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
                           <ShoppingCart size={12} /> {t('catalog.addToCart')}
                         </button>
-                        <Link to={href}
+                        <LLink to={href}
                           className="flex items-center justify-center gap-1 py-2 px-3 border border-gray-200 rounded-lg hover:border-[var(--primary)] text-gray-600 hover:text-[var(--primary)] text-xs font-semibold transition-colors w-full">
                           {t('catalog.details')} <ArrowRight size={11} />
-                        </Link>
+                        </LLink>
                       </div>
                     </div>
 

@@ -1,3 +1,4 @@
+import LLink from '../components/LLink'
 import { useState } from 'react'
 import { ChevronDown, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -101,9 +102,9 @@ export default function FaqPage() {
             <a href="tel:+380507189165" className="btn-primary justify-center">
               <Phone size={15} /> {t('faq.callUs')}
             </a>
-            <Link to="/contacts" className="btn-secondary justify-center">
+            <LLink to="/contacts" className="btn-secondary justify-center">
               {t('faq.writeUs')}
-            </Link>
+            </LLink>
           </div>
         </div>
       </div>

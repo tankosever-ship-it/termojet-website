@@ -3,6 +3,7 @@ import { useEffect, lazy, Suspense } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { AppProvider } from './context/AppContext'
 import { captureUTM } from './utils/utm'
+import { useLangFromUrl } from './hooks/useLangFromUrl'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import FloatingActions from './components/FloatingActions'
@@ -57,6 +58,12 @@ function ScrollToTop() {
   return null
 }
 
+// Синхронізує lang у AppContext з мовним префіксом URL (/en/...)
+function LangSync() {
+  useLangFromUrl()
+  return null
+}
+
 const isGhPages = import.meta.env.BASE_URL !== '/'
 const RouterWrapper = isGhPages ? HashRouter : BrowserRouter
 
@@ -64,6 +71,7 @@ const RouterWrapper = isGhPages ? HashRouter : BrowserRouter
 function PublicLayout() {
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
+      <LangSync />
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[var(--primary)] focus:text-white focus:px-4 focus:py-2 focus:rounded">
         Перейти до основного контенту
       </a>
@@ -116,7 +124,7 @@ function AppRoutes() {
         <Route path="/admin/settings" element={<AdminSettings />} />
       </Route>
 
-      {/* Публічні сторінки */}
+      {/* Публічні сторінки (UK — без префікса) */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
@@ -142,6 +150,34 @@ function AppRoutes() {
         <Route path="/partners" element={<PartnersPage />} />
         <Route path="/navchannya" element={<TrainingPage />} />
         <Route path="/training" element={<Navigate to="/navchannya" replace />} />
+      </Route>
+
+      {/* Публічні сторінки (EN — префікс /en) */}
+      <Route path="/en" element={<PublicLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="catalog" element={<CatalogPage />} />
+        <Route path="catalog/:categorySlug" element={<CatalogPage />} />
+        <Route path="catalog/:categorySlug/:productSlug" element={<ProductDetailPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="contacts" element={<ContactPage />} />
+        <Route path="blog" element={<BlogPage />} />
+        <Route path="blog/:slug" element={<BlogPostPage />} />
+        <Route path="portfolio" element={<PortfolioPage />} />
+        <Route path="dealers" element={<Navigate to="/en/partners" replace />} />
+        <Route path="service" element={<ServicePage />} />
+        <Route path="files" element={<FilesPage />} />
+        <Route path="faq" element={<FaqPage />} />
+        <Route path="delivery" element={<DeliveryPage />} />
+        <Route path="privacy" element={<PrivacyPage />} />
+        <Route path="terms" element={<TermsPage />} />
+        <Route path="oem" element={<OEMPage />} />
+        <Route path="warranty" element={<Navigate to="/en/service" replace />} />
+        <Route path="support" element={<Navigate to="/en/service" replace />} />
+        <Route path="returns" element={<ReturnPage />} />
+        <Route path="partners" element={<PartnersPage />} />
+        <Route path="navchannya" element={<TrainingPage />} />
+        <Route path="training" element={<Navigate to="/en/navchannya" replace />} />
       </Route>
     </Routes>
     </Suspense>

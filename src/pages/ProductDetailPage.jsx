@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import LLink from '../components/LLink'
 import {
   ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
   Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
@@ -172,9 +173,9 @@ function accordionContent(key, t) {
                 </li>
               ))}
             </ul>
-            <Link to="/warranty" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--accent)', fontWeight: 600, fontSize: 13.5, textDecoration: 'none' }}>
+            <LLink to="/warranty" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--accent)', fontWeight: 600, fontSize: 13.5, textDecoration: 'none' }}>
               {t('product.accordion.warrantyLink')} <ChevronRight size={14} />
-            </Link>
+            </LLink>
           </>
         ),
       }
@@ -670,7 +671,7 @@ export default function ProductDetailPage() {
         <Package size={56} className="mx-auto text-gray-300 mb-4" />
         <h2 className="text-xl font-semibold text-gray-700 mb-2">{t('product.notFound')}</h2>
         <p className="text-gray-400 mb-6">{t('product.notFoundSub')}</p>
-        <Link to="/catalog" className="btn-primary">{cat.title}</Link>
+        <LLink to="/catalog" className="btn-primary">{cat.title}</LLink>
       </div>
     )
   }
@@ -752,15 +753,15 @@ export default function ProductDetailPage() {
       <div style={{ background: '#fff', borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4" style={{ display: 'flex', alignItems: 'center', gap: 9, height: 46 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 600, letterSpacing: '.05em', color: 'var(--text-muted)', textTransform: 'uppercase', flex: 1, minWidth: 0, overflow: 'hidden' }}>
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('product.breadcrumbHome')}</Link>
+            <LLink to="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('product.breadcrumbHome')}</LLink>
             <span style={{ color: '#C9C6BF' }}>/</span>
-            <Link to="/catalog" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('nav').catalog}</Link>
+            <LLink to="/catalog" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('nav').catalog}</LLink>
             {category && (
               <>
                 <span style={{ color: '#C9C6BF' }}>/</span>
-                <Link to={`/catalog/${categorySlug}`} style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">
+                <LLink to={`/catalog/${categorySlug}`} style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">
                   {category.name[lang] || category.name.uk}
-                </Link>
+                </LLink>
               </>
             )}
             <span style={{ color: '#C9C6BF' }}>/</span>

@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, ExternalLink } from 'lucide-rea
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
 import { assetPath } from '../../utils/assetPath'
+import LLink from '../LLink'
 
 // ─── Форма підписки на новини ───
 function SubscribeForm() {
@@ -43,7 +44,7 @@ function SubscribeForm() {
       {status === 'err' && <p className="text-red-400 text-xs mt-2">{footer.subscribeError}</p>}
       <p className="text-white/35 text-xs leading-relaxed mt-2">
         {footer.subscribeConsentPre}{' '}
-        <Link to="/privacy" className="underline hover:text-white/60" target="_blank">{footer.subscribeConsentPrivacy}</Link>
+        <LLink to="/privacy" className="underline hover:text-white/60" target="_blank">{footer.subscribeConsentPrivacy}</LLink>
         {' '}{footer.subscribeConsentPost}
       </p>
     </div>
@@ -116,16 +117,16 @@ export default function Footer() {
                 ['TERMOJET BOX', '/catalog/termojet-box'],
               ].map(([label, to]) => (
                 <li key={to}>
-                  <Link to={to} className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5 group">
+                  <LLink to={to} className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5 group">
                     <span className="w-0 group-hover:w-3 overflow-hidden transition-all text-[var(--accent)] flex-shrink-0">›</span>
                     {label}
-                  </Link>
+                  </LLink>
                 </li>
               ))}
               <li className="pt-1">
-                <Link to="/catalog" className="text-[var(--accent-light)] hover:text-white transition-colors font-semibold text-xs uppercase tracking-wide flex items-center gap-1">
+                <LLink to="/catalog" className="text-[var(--accent-light)] hover:text-white transition-colors font-semibold text-xs uppercase tracking-wide flex items-center gap-1">
                   {footer.allCatalog} <ArrowRight size={12} />
-                </Link>
+                </LLink>
               </li>
             </ul>
           </div>
@@ -147,10 +148,10 @@ export default function Footer() {
                 [footer.delivery, '/delivery'],
               ].map(([label, to]) => (
                 <li key={to}>
-                  <Link to={to} className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5 group">
+                  <LLink to={to} className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5 group">
                     <span className="w-0 group-hover:w-3 overflow-hidden transition-all text-[var(--accent)] flex-shrink-0">›</span>
                     {label}
-                  </Link>
+                  </LLink>
                 </li>
               ))}
             </ul>
@@ -260,7 +261,7 @@ export default function Footer() {
             [footer.terms, '/terms'],
             [footer.consultation, '/contacts'],
           ].map(([label, to]) => (
-            <Link key={to} to={to} className="hover:text-white transition-colors">{label}</Link>
+            <LLink key={to} to={to} className="hover:text-white transition-colors">{label}</LLink>
           ))}
         </div>
       </div>

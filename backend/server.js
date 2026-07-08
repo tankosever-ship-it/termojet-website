@@ -66,6 +66,8 @@ app.use(express.urlencoded({ extended: true }))
 // 301-редіректи зі старих WP-URL (termojet.com.ua) на нові React-маршрути — для збереження
 // SEO-трафіку при переносі домену. Карта: backend/redirects.json (генерує scripts/gen-redirects.mjs).
 // Мовні префікси /pl /en /de /fr стрипаємо й шукаємо UA-відповідник.
+// ВАЖЛИВО: стрипуємо лише якщо стрипнутий шлях реально є в redirects.json, щоб не 301-ити
+// чинні /en/catalog/... і /en/blog/... маршрути.
 let REDIRECTS = {}
 try { REDIRECTS = JSON.parse(fs.readFileSync(path.join(__dirname, 'redirects.json'), 'utf8')) } catch {}
 app.use((req, res, next) => {
@@ -75,7 +77,15 @@ app.use((req, res, next) => {
   // щоб збігалося з ключами карти редиректів.
   try { p = decodeURIComponent(p) } catch {}
   const lng = p.match(/^\/(pl|en|de|fr)(\/.*|)$/)
-  if (lng) p = lng[2] || '/'
+  if (lng) {
+    const stripped = lng[2] || '/'
+    // Редіректимо тільки якщо стрипнутий шлях є в redirects.json.
+    // Якщо стрипнутого шляху нема — це чинний /en/... маршрут, пропускаємо далі.
+    if (REDIRECTS[stripped] && REDIRECTS[stripped] !== req.path) {
+      return res.redirect(301, REDIRECTS[stripped])
+    }
+    return next()
+  }
   const to = REDIRECTS[p]
   if (to && to !== req.path) return res.redirect(301, to)
   next()
@@ -174,6 +184,8 @@ app.use(express.static(DIST, {
   // НЕ робити 301 на директорію (напр. /files → /files/) — такі шляхи мають віддаватись
   // SPA-маршрутом React (FilesPage), а не редиректом. Реальні файли віддаються як є.
   redirect: false,
+  // index: false — не автосервити index.html для /, щоб catch-all міг вставити hreflang
+  index: false,
   setHeaders: (res, filePath) => {
     // хешовані ассети (vite кладе контент-хеш у назву) — кеш на рік, immutable
     if (filePath.includes(`${path.sep}assets${path.sep}`)) {
@@ -189,9 +201,8 @@ app.use(express.static(DIST, {
     }
   },
 }))
-// ── Per-product OG-теги для прев'ю посилань (Telegram/Viber/FB не виконують JS) ──
-// Сторінка товару = /catalog/<cat>/<slug>. Підставляємо фото/назву/опис у мета-теги
-// index.html, щоб кожне посилання мало СВОЮ мініатюру, а не одну спільну.
+
+// ── Хелпери SEO-ін'єкту ──────────────────────────────────────────────────────
 const _db = require('./db')
 const SITE = 'https://termojet.com.ua'
 const DEFAULT_OG_IMG = `${SITE}/images/portfolio/proj-1.jpg`
@@ -204,68 +215,49 @@ const absImg = u => {
 }
 const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
 
-// A+ per-товар: серверний ін'єкт у сирий HTML (для краулерів, у т.ч. LLM-ботів без JS).
+// Хелпер локалізації: повертає локалізовані поля для lang з фолбеком на UA-колонки.
+// Для товарів: {name, description, short_desc, seo_title, meta_description}.
+// Для блогу: {title, excerpt, content}.
+function pickLang(row, lang) {
+  if (!lang || lang === 'uk') return row
+  let i18n = null
+  try { i18n = row.i18n ? JSON.parse(row.i18n) : null } catch {}
+  if (!i18n || !i18n[lang]) return row
+  const loc = i18n[lang]
+  return Object.assign({}, row, {
+    name: loc.name || row.name,
+    title: loc.title || row.title,
+    description: loc.description || row.description,
+    short_desc: loc.short_desc || row.short_desc,
+    seo_title: loc.seo_title || row.seo_title,
+    meta_description: loc.meta_description || row.meta_description,
+    excerpt: loc.excerpt || row.excerpt,
+    content: loc.content || row.content,
+  })
+}
+
+// A+ per-товар і per-стаття: серверний ін'єкт у сирий HTML (для краулерів, у т.ч. LLM-ботів без JS).
 // Метадані беремо з готових полів БД: seo_title (≤60, унікальні), meta_description.
 // Head: title/canonical(self)/description/og. Body: у <noscript> ставимо сторінковий H1 +
 // опис (React на клієнті рендерить своє в #root; <noscript> користувачам не видно → без флешу).
-app.get('/catalog/:cat/:slug', (req, res, next) => {
-  try {
-    const row = _db.prepare('SELECT name, image, short_desc, description, seo_title, meta_description FROM products WHERE slug = ? AND is_visible = 1').get(req.params.slug)
-    if (!row) return next()
-    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-    const title = row.seo_title || `${row.name} — Termojet`
-    const desc = (row.meta_description || stripHtml(row.short_desc) || stripHtml(row.description) || DEFAULT_TITLE).slice(0, 200)
-    const img = absImg(row.image)
-    const url = `${SITE}/catalog/${encodeURIComponent(req.params.cat)}/${encodeURIComponent(req.params.slug)}`
-    const bodyText = (stripHtml(row.description) || stripHtml(row.short_desc) || desc).slice(0, 600)
-    const noscriptH1 = `<h1>${esc(row.name)}</h1>${bodyText ? `\n        <p>${esc(bodyText)}</p>` : ''}`
-    html = html
-      .split(DEFAULT_OG_IMG).join(esc(img))
-      .split(DEFAULT_TITLE).join(esc(title))
-      .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${esc(url)}$2`)
-      .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
-      .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
-      .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
-      .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
-      .replace(/<h1>Termojet[^<]*<\/h1>/, noscriptH1)
-    res.setHeader('Cache-Control', 'no-cache')
-    return res.type('html').send(html)
-  } catch (e) { return next() }
-})
-
-// A+ per-стаття блогу: той самий ін'єкт із blog_posts (title/excerpt).
-app.get('/blog/:slug', (req, res, next) => {
-  try {
-    const row = _db.prepare('SELECT title, excerpt, content, image FROM blog_posts WHERE slug = ? AND published = 1').get(req.params.slug)
-    if (!row) return next()
-    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-    const title = `${row.title} | Termojet`
-    const desc = (stripHtml(row.excerpt) || stripHtml(row.content) || DEFAULT_TITLE).slice(0, 200)
-    const img = absImg(row.image)
-    const url = `${SITE}/blog/${encodeURIComponent(req.params.slug)}`
-    const bodyText = (stripHtml(row.excerpt) || stripHtml(row.content) || desc).slice(0, 600)
-    const noscriptH1 = `<h1>${esc(row.title)}</h1>${bodyText ? `\n        <p>${esc(bodyText)}</p>` : ''}`
-    html = html
-      .split(DEFAULT_OG_IMG).join(esc(img))
-      .split(DEFAULT_TITLE).join(esc(title))
-      .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${esc(url)}$2`)
-      .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
-      .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
-      .replace(/(<meta property="og:type" content=")[^"]*(")/, `$1article$2`)
-      .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
-      .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
-      .replace(/<h1>Termojet[^<]*<\/h1>/, noscriptH1)
-    res.setHeader('Cache-Control', 'no-cache')
-    return res.type('html').send(html)
-  } catch (e) { return next() }
-})
 
 // Спільний хелпер ін'єкту метаданих у shell (для краулерів/LLM без JS).
-function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyText }) {
+// alternates: [{hreflang, href}] — список <link rel="alternate"> для hreflang.
+// Вставляємо їх одразу після canonical-тега.
+function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyText, alternates }) {
   let out = img ? html.split(DEFAULT_OG_IMG).join(esc(img)) : html
   out = out
     .split(DEFAULT_TITLE).join(esc(title))
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${esc(url)}$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, (_, a, b) => {
+      let canon = `${a}${esc(url)}${b}`
+      if (alternates && alternates.length) {
+        const links = alternates.map(alt =>
+          `\n    <link rel="alternate" hreflang="${esc(alt.hreflang)}" href="${esc(alt.href)}" />`
+        ).join('')
+        canon += links
+      }
+      return canon
+    })
     .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
     .replace(/(<meta property="og:type" content=")[^"]*(")/, `$1${esc(ogType)}$2`)
@@ -275,27 +267,82 @@ function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyT
   return out
 }
 
-// Назви+описи 15 категорій (джерело — src/data/categories.js; бекенд CJS не імпортує ESM-фронт).
+// Будує пару hreflang-альтернатив uk↔en+x-default для товару/категорії/блогу.
+function buildAlternates(uaUrl, enUrl) {
+  return [
+    { hreflang: 'uk', href: uaUrl },
+    { hreflang: 'en', href: enUrl },
+    { hreflang: 'x-default', href: uaUrl },
+  ]
+}
+
+// Назви+описи 15 категорій (uk + en; джерело — src/data/categories.js; бекенд CJS не імпортує ESM-фронт).
 const CATEGORY_META = {
-  'nasosni-hrupy': { name: 'Насосні групи', desc: 'Готові насосні вузли з обв’язкою для котелень' },
-  'hidravlichni-rozdilnyky': { name: 'Роздільники гідравлічні', desc: 'Гідрострілки для котельних систем' },
-  'rozpodilchi-kolektory': { name: 'Розподільчі колектори', desc: 'Колектори по потужності 60/105/175 кВт' },
-  'kolektory-z-hidrostrilkoyu': { name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою' },
-  'termojet-box': { name: 'Модульні системи TERMOJET BOX', desc: 'Компактні вузли обв’язки котла' },
-  'termojet-mega': { name: 'Серія Termojet Mega (до 2200 кВт)', desc: 'Промислові системи опалення до 2.2 МВт' },
-  'nasosy': { name: 'Насоси', desc: 'Циркуляційні насоси для систем опалення' },
-  'klapany': { name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові клапани та електричні сервоприводи' },
-  'balansuval-klapany': { name: 'Статичний балансувальний клапан', desc: 'Статичне балансування систем опалення' },
-  'separatory': { name: 'Сепаратори', desc: 'Шламові та повітряні сепаратори' },
-  'zonalne-keruvannya': { name: 'Термостати та зональне керування', desc: 'Термостати, програматори, центри комутації та аксесуари' },
-  'kolektory-pidloha': { name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та шафи для теплої підлоги' },
-  'avtomatyka': { name: 'Автоматика котельного обладнання', desc: 'Контролери та системи управління котлами' },
-  'dodatkove': { name: 'Додаткове обладнання', desc: 'Аксесуари і супутні товари для монтажу' },
-  'rozprodazh': { name: 'Акція', desc: 'Обладнання Termojet за акційними цінами' },
+  'nasosni-hrupy': {
+    name: 'Насосні групи', desc: 'Готові насосні вузли з обв’язкою для котелень',
+    nameEn: 'Pump Groups', descEn: 'Ready-made pump units with connections for boiler rooms',
+  },
+  'hidravlichni-rozdilnyky': {
+    name: 'Роздільники гідравлічні', desc: 'Гідрострілки для котельних систем',
+    nameEn: 'Hydraulic Separators', descEn: 'Hydraulic arrows for boiler systems',
+  },
+  'rozpodilchi-kolektory': {
+    name: 'Розподільчі колектори', desc: 'Колектори по потужності 60/105/175 кВт',
+    nameEn: 'Distribution Manifolds', descEn: 'Manifolds by capacity 60/105/175 kW',
+  },
+  'kolektory-z-hidrostrilkoyu': {
+    name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою',
+    nameEn: 'Manifolds with Hydraulic Separator', descEn: 'Manifolds with integrated hydraulic separator',
+  },
+  'termojet-box': {
+    name: 'Модульні системи TERMOJET BOX', desc: 'Компактні вузли обв’язки котла',
+    nameEn: 'TERMOJET BOX Modular Systems', descEn: 'Compact boiler connection units',
+  },
+  'termojet-mega': {
+    name: 'Серія Termojet Mega (до 2200 кВт)', desc: 'Промислові системи опалення до 2.2 МВт',
+    nameEn: 'Termojet Mega Series (up to 2200 kW)', descEn: 'Industrial heating systems up to 2.2 MW',
+  },
+  'nasosy': {
+    name: 'Насоси', desc: 'Циркуляційні насоси для систем опалення',
+    nameEn: 'Pumps', descEn: 'Circulation pumps for heating systems',
+  },
+  'klapany': {
+    name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові клапани та електричні сервоприводи',
+    nameEn: '3/4-Way & Thermostatic Valves', descEn: '3-way, 4-way valves and electric actuators',
+  },
+  'balansuval-klapany': {
+    name: 'Статичний балансувальний клапан', desc: 'Статичне балансування систем опалення',
+    nameEn: 'Static Balancing Valve', descEn: 'Static heating system balancing',
+  },
+  'separatory': {
+    name: 'Сепаратори', desc: 'Шламові та повітряні сепаратори',
+    nameEn: 'Separators', descEn: 'Sludge and air separators',
+  },
+  'zonalne-keruvannya': {
+    name: 'Термостати та зональне керування', desc: 'Термостати, програматори, центри комутації та аксесуари',
+    nameEn: 'Thermostats & Zone Control', descEn: 'Thermostats, programmers, switching centers and accessories',
+  },
+  'kolektory-pidloha': {
+    name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та шафи для теплої підлоги',
+    nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating',
+  },
+  'avtomatyka': {
+    name: 'Автоматика котельного обладнання', desc: 'Контролери та системи управління котлами',
+    nameEn: 'Boiler Equipment Automation', descEn: 'Controllers and boiler management systems',
+  },
+  'dodatkove': {
+    name: 'Додаткове обладнання', desc: 'Аксесуари і супутні товари для монтажу',
+    nameEn: 'Additional Equipment', descEn: 'Accessories and related products for installation',
+  },
+  'rozprodazh': {
+    name: 'Акція', desc: 'Обладнання Termojet за акційними цінами',
+    nameEn: 'Sale', descEn: 'Termojet equipment at special prices',
+  },
 }
 
 // Статичні сторінки — унікальні title/description (усувають дубль generic на не-товарних).
 const STATIC_META = {
+  '/': { title: 'Termojet — Виробник обладнання для котелень', desc: 'Termojet — український виробник обладнання для котелень: насосні групи, колектори, гідрострілки, сепаратори, клапани, автоматика. Виробництво з 2002 року.' },
   '/catalog': { title: 'Каталог обладнання для котелень | Termojet', desc: 'Каталог Termojet: насосні групи, колектори, гідрострілки, клапани, сепаратори, автоматика. Власне виробництво з 2002 року.' },
   '/about': { title: 'Про компанію Termojet — виробник з 2002 року', desc: 'Termojet — український виробник обладнання для котелень з 2002 року: власне виробництво, інженерна підтримка, гарантія.' },
   '/contacts': { title: 'Контакти Termojet — звʼязатися з виробником', desc: 'Контакти Termojet: телефони, адреса, форма звʼязку. Консультація з підбору обладнання для котелень.' },
@@ -313,33 +360,124 @@ const STATIC_META = {
   '/navchannya': { title: 'Навчання та тренінги Termojet для монтажників', desc: 'Навчальні матеріали й тренінги Termojet з монтажу та підбору обладнання для котелень.' },
 }
 
-// A+ per-категорія (/catalog/:cat) — title/description/H1 з CATEGORY_META.
-app.get('/catalog/:cat', (req, res, next) => {
-  const cm = CATEGORY_META[req.params.cat]
-  if (!cm) return next()
-  try {
-    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-    const title = `${cm.name} | Termojet`
-    const desc = `${cm.desc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
-    const url = `${SITE}/catalog/${encodeURIComponent(req.params.cat)}`
-    html = injectMeta(html, { title, desc, url, h1: cm.name, bodyText: cm.desc })
-    res.setHeader('Cache-Control', 'no-cache')
-    return res.type('html').send(html)
-  } catch (e) { return next() }
-})
+// ── Товари: UA + EN ───────────────────────────────────────────────────────────
+// Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
+function handleProduct(lang) {
+  return (req, res, next) => {
+    try {
+      const row = _db.prepare(
+        'SELECT name, image, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
+      ).get(req.params.slug)
+      if (!row) return next()
+      const loc = pickLang(row, lang)
+      let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+      const title = loc.seo_title || `${loc.name} | Termojet`
+      const desc = (loc.meta_description || stripHtml(loc.short_desc) || stripHtml(loc.description) || DEFAULT_TITLE).slice(0, 200)
+      const img = absImg(row.image)
+      const catEnc = encodeURIComponent(req.params.cat)
+      const slugEnc = encodeURIComponent(req.params.slug)
+      const uaUrl = `${SITE}/catalog/${catEnc}/${slugEnc}`
+      const enUrl = `${SITE}/en/catalog/${catEnc}/${slugEnc}`
+      const url = lang === 'en' ? enUrl : uaUrl
+      const bodyText = (stripHtml(loc.description) || stripHtml(loc.short_desc) || desc).slice(0, 600)
+      const h1 = loc.name
+      const alternates = buildAlternates(uaUrl, enUrl)
+      html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates })
+      res.setHeader('Cache-Control', 'no-cache')
+      return res.type('html').send(html)
+    } catch (e) { return next() }
+  }
+}
 
+app.get('/catalog/:cat/:slug', handleProduct('uk'))
+app.get('/en/catalog/:cat/:slug', handleProduct('en'))
+
+// ── Блог: UA + EN ─────────────────────────────────────────────────────────────
+function handleBlog(lang) {
+  return (req, res, next) => {
+    try {
+      const row = _db.prepare(
+        'SELECT title, excerpt, content, image, i18n FROM blog_posts WHERE slug = ? AND published = 1'
+      ).get(req.params.slug)
+      if (!row) return next()
+      const loc = pickLang(row, lang)
+      let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+      const title = `${loc.title || row.title} | Termojet`
+      const desc = (stripHtml(loc.excerpt) || stripHtml(loc.content) || DEFAULT_TITLE).slice(0, 200)
+      const img = absImg(row.image)
+      const slugEnc = encodeURIComponent(req.params.slug)
+      const uaUrl = `${SITE}/blog/${slugEnc}`
+      const enUrl = `${SITE}/en/blog/${slugEnc}`
+      const url = lang === 'en' ? enUrl : uaUrl
+      const bodyText = (stripHtml(loc.excerpt) || stripHtml(loc.content) || desc).slice(0, 600)
+      const h1 = loc.title || row.title
+      const alternates = buildAlternates(uaUrl, enUrl)
+      html = injectMeta(html, { title, desc, url, img, ogType: 'article', h1, bodyText, alternates })
+      res.setHeader('Cache-Control', 'no-cache')
+      return res.type('html').send(html)
+    } catch (e) { return next() }
+  }
+}
+
+app.get('/blog/:slug', handleBlog('uk'))
+app.get('/en/blog/:slug', handleBlog('en'))
+
+// ── Категорії: UA + EN ────────────────────────────────────────────────────────
+function handleCategory(lang) {
+  return (req, res, next) => {
+    const cm = CATEGORY_META[req.params.cat]
+    if (!cm) return next()
+    try {
+      let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+      const catEnc = encodeURIComponent(req.params.cat)
+      const uaUrl = `${SITE}/catalog/${catEnc}`
+      const enUrl = `${SITE}/en/catalog/${catEnc}`
+      if (lang === 'en') {
+        const title = `${cm.nameEn} | Termojet`
+        const desc = `${cm.descEn}. Termojet — manufacturer since 2002, delivery across Ukraine.`.slice(0, 200)
+        const alternates = buildAlternates(uaUrl, enUrl)
+        html = injectMeta(html, { title, desc, url: enUrl, h1: cm.nameEn, bodyText: cm.descEn, alternates })
+      } else {
+        const title = `${cm.name} | Termojet`
+        const desc = `${cm.desc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
+        const alternates = buildAlternates(uaUrl, enUrl)
+        html = injectMeta(html, { title, desc, url: uaUrl, h1: cm.name, bodyText: cm.desc, alternates })
+      }
+      res.setHeader('Cache-Control', 'no-cache')
+      return res.type('html').send(html)
+    } catch (e) { return next() }
+  }
+}
+
+app.get('/catalog/:cat', handleCategory('uk'))
+app.get('/en/catalog/:cat', handleCategory('en'))
+
+// ── Catch-all: статичні сторінки + SPA fallback ───────────────────────────────
 app.get('*', (req, res) => {
-  // A+ статичні сторінки — унікальні метадані з STATIC_META.
-  const sm = STATIC_META[(req.path.replace(/\/+$/, '') || '/')]
+  // Нормалізуємо шлях: /en/about → /about для пошуку в STATIC_META
+  const rawPath = req.path.replace(/\/+$/, '') || '/'
+  let lookupPath = rawPath
+  const isEn = rawPath.startsWith('/en/') || rawPath === '/en'
+  if (rawPath.startsWith('/en/')) lookupPath = rawPath.slice(3) || '/'
+  else if (rawPath === '/en') lookupPath = '/'
+
+  // UA-версія статичних сторінок: hreflang на /en
+  // EN-версія статичних сторінок: фолбек UA-title (TODO: додати EN STATIC_META якщо потрібно)
+  const sm = STATIC_META[lookupPath]
   if (sm) {
     try {
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-      const url = SITE + (req.path === '/' ? '/' : req.path.replace(/\/+$/, ''))
-      html = injectMeta(html, { title: sm.title, desc: sm.desc, url })
+      const uaUrl = SITE + lookupPath
+      const enUrl = SITE + '/en' + (lookupPath === '/' ? '' : lookupPath)
+      const url = isEn ? enUrl : uaUrl
+      const alternates = buildAlternates(uaUrl, enUrl)
+      html = injectMeta(html, { title: sm.title, desc: sm.desc, url, alternates })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { /* fall through */ }
   }
+
+
   // Неіснуючі службові файли не маскуємо SPA-заглушкою (інакше /sitemap_index.xml,
   // robots тощо віддавали б HTML і ламали валідацію). Реальні файли вже віддав express.static.
   if (/\.(xml|txt|json|map|ico)$/i.test(req.path)) {

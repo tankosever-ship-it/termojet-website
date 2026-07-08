@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { ArrowRight, ArrowUpRight, Check, Smartphone, Play, X, Star, Send, ImagePlus } from 'lucide-react'
@@ -40,7 +41,7 @@ function CategoryCard({ cat, lang }) {
   const [hovered, setHovered] = useState(false)
   const imgSrc = cat.image
   return (
-    <Link to={`/catalog/${cat.slug}`}
+    <LLink to={`/catalog/${cat.slug}`}
       className="cat-card block"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
@@ -103,7 +104,7 @@ function CategoryCard({ cat, lang }) {
           </span>
         </div>
       </div>
-    </Link>
+    </LLink>
   )
 }
 
@@ -658,16 +659,16 @@ export default function HomePage() {
               </motion.h1>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-                <Link to="/catalog"
+                <LLink to="/catalog"
                   className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:opacity-90"
                   style={{ background: 'var(--accent)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   {hc.heroBtnPrimary} <ArrowRight size={18} />
-                </Link>
-                <Link to="/contacts"
+                </LLink>
+                <LLink to="/contacts"
                   className="inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 hover:bg-white/10"
                   style={{ border: '2px solid rgba(255,255,255,0.6)', color: 'white', padding: '16px 32px', fontSize: '15px', fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   {hc.heroBtnSecondary}
-                </Link>
+                </LLink>
               </motion.div>
 
             </motion.div>
@@ -725,9 +726,9 @@ export default function HomePage() {
               </motion.h2>
             </div>
             <motion.div variants={fadeUp}>
-              <Link to="/catalog" className="btn-primary">
+              <LLink to="/catalog" className="btn-primary">
                 {cats.viewAll} <ArrowRight size={15} />
-              </Link>
+              </LLink>
             </motion.div>
           </motion.div>
 
@@ -862,9 +863,9 @@ export default function HomePage() {
 
           <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ delay:0.3 }}
             className="flex flex-wrap gap-3 mt-8">
-            <Link to="/about" className="btn-secondary">
+            <LLink to="/about" className="btn-secondary">
               {t('home.productionBtn')} <ArrowRight size={15} />
-            </Link>
+            </LLink>
             <button onClick={() => setVideoOpen(true)} className="btn-primary">
               <Play size={14} fill="white" /> {t('home.productionVideo')}
             </button>
@@ -1015,9 +1016,9 @@ export default function HomePage() {
                 <div className="eyebrow mb-2">{t('portfolio').title}</div>
                 <h2 className="section-title">{t('portfolio').subtitle}</h2>
               </div>
-              <Link to="/portfolio" className="btn-ghost hidden md:flex">
+              <LLink to="/portfolio" className="btn-ghost hidden md:flex">
                 {t('portfolio').viewAll} <ArrowRight size={14} />
-              </Link>
+              </LLink>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPortfolio.map(item => (
@@ -1046,13 +1047,13 @@ export default function HomePage() {
                 <div className="eyebrow mb-2">{t('blog').title}</div>
                 <h2 className="section-title">{t('blog').subtitle}</h2>
               </div>
-              <Link to="/blog" className="btn-ghost hidden md:flex">
+              <LLink to="/blog" className="btn-ghost hidden md:flex">
                 {t('blog').viewAll} <ArrowRight size={14} />
-              </Link>
+              </LLink>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {recentPosts.map(post => (
-                <Link key={post.id} to={`/blog/${post.slug}`} className="card card-hover overflow-hidden block group bg-white">
+                <LLink key={post.id} to={`/blog/${post.slug}`} className="card card-hover overflow-hidden block group bg-white">
                   {post.image && <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-300" />}
                   <div className="p-5">
                     {post.category && <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">{post.category}</span>}
@@ -1063,7 +1064,7 @@ export default function HomePage() {
                       {t('blog').readMore} <ArrowRight size={13} />
                     </div>
                   </div>
-                </Link>
+                </LLink>
               ))}
             </div>
           </div>
@@ -1095,12 +1096,12 @@ export default function HomePage() {
                 {hc.ctaText}
               </p>
               <div className="flex flex-col gap-3">
-                <Link to="/catalog" className="btn-primary text-base py-4 px-8 justify-center">
+                <LLink to="/catalog" className="btn-primary text-base py-4 px-8 justify-center">
                   {hc.ctaBtnPrimary} <ArrowRight size={16} />
-                </Link>
-                <Link to="/contacts" className="btn-outline-white text-base py-4 px-8 justify-center">
+                </LLink>
+                <LLink to="/contacts" className="btn-outline-white text-base py-4 px-8 justify-center">
                   {hc.ctaBtnSecondary}
-                </Link>
+                </LLink>
               </div>
             </motion.div>
           </div>
@@ -1127,9 +1128,9 @@ export default function HomePage() {
               <p className="text-white/75 text-base mb-8 max-w-xl mx-auto">
                 {hc.dealersText}
               </p>
-              <Link to="/partners" className="btn-primary px-8 py-4 text-base">
+              <LLink to="/partners" className="btn-primary px-8 py-4 text-base">
                 {t('home.dealersBtn')} <ArrowRight size={16} />
-              </Link>
+              </LLink>
             </div>
           </div>
         </div>

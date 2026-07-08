@@ -1,7 +1,9 @@
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { Home, Grid, ShoppingCart, Blocks, Phone } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
+import LLink from '../LLink'
+import { stripLangPrefix } from '../../utils/localizedPath'
 
 export default function MobileBottomNav() {
   const location = useLocation()
@@ -17,6 +19,8 @@ export default function MobileBottomNav() {
   ]
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0)
+  // Знімаємо мовний префікс для визначення активної вкладки
+  const strippedPathname = stripLangPrefix(location.pathname)
 
   return (
     <nav
@@ -30,8 +34,8 @@ export default function MobileBottomNav() {
     >
       {TABS.map(({ label, icon: Icon, path, href, external }) => {
         const isActive = !external && (path === '/'
-          ? location.pathname === '/'
-          : location.pathname.startsWith(path))
+          ? strippedPathname === '/'
+          : strippedPathname.startsWith(path))
 
         const cls = 'flex flex-col items-center justify-center gap-1 flex-1 h-full relative'
 
@@ -79,9 +83,9 @@ export default function MobileBottomNav() {
             {inner}
           </a>
         ) : (
-          <Link key={path} to={path} className={cls} style={{ textDecoration: 'none' }}>
+          <LLink key={path} to={path} className={cls} style={{ textDecoration: 'none' }}>
             {inner}
-          </Link>
+          </LLink>
         )
       })}
     </nav>

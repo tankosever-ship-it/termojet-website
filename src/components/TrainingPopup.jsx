@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { X, GraduationCap, ArrowUpRight, Check } from 'lucide-react'
 import { useT } from '../i18n/useT'
+import LLink from './LLink'
 
 const STORAGE_KEY = 'termojet_training_popup_seen'
 const REG_URL = 'https://crm.tjheatpump.com.ua/r/724d25775589ca0abf99f80a21143e4a'
@@ -93,9 +93,9 @@ export default function TrainingPopup() {
           </a>
 
           <div className="mt-4 text-center">
-            <Link to="/navchannya" onClick={close} className="text-xs text-gray-400 hover:text-gray-600">
+            <LLink to="/navchannya" onClick={close} className="text-xs text-gray-400 hover:text-gray-600">
               {t('trainingPopup.learnMore')}
-            </Link>
+            </LLink>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import LLink from '../components/LLink'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Factory, Tag, Palette, Stamp, Wrench, Package, Phone, Mail, CheckCircle } from 'lucide-react'
@@ -128,9 +129,9 @@ export default function OEMPage() {
                 <Mail size={18} /> termojet@sofievka.kiev.ua
               </a>
             </div>
-            <Link to="/contacts" className="btn-primary inline-flex">
+            <LLink to="/contacts" className="btn-primary inline-flex">
               {t('oem.ctaBtn')}
-            </Link>
+            </LLink>
           </motion.div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import LLink from '../components/LLink'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Factory, Globe, Award, ArrowRight, Check, X, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -499,9 +500,9 @@ export default function AboutPage() {
               <p className="text-white/55 mb-7 max-w-md mx-auto text-sm leading-relaxed">
                 {t('about.ctaSubtitle')}
               </p>
-              <Link to="/dealers" className="btn-primary px-8 py-3.5">
+              <LLink to="/dealers" className="btn-primary px-8 py-3.5">
                 {t('about.ctaBtn')} <ArrowRight size={16} />
-              </Link>
+              </LLink>
             </div>
           </div>
         </div>

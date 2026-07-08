@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { Calendar, ArrowLeft, ArrowRight, ChevronRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -19,7 +20,7 @@ export default function BlogPostPage() {
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <p className="text-5xl mb-4">📄</p>
         <h2 className="text-xl font-semibold text-gray-700 mb-2">{t('blogPost.notFound')}</h2>
-        <Link to="/blog" className="btn-primary mt-4">{blogT.viewAll}</Link>
+        <LLink to="/blog" className="btn-primary mt-4">{blogT.viewAll}</LLink>
       </div>
     )
   }
@@ -36,9 +37,9 @@ export default function BlogPostPage() {
       {/* Breadcrumb */}
       <div className="border-b border-gray-100 bg-white">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-1.5 text-sm text-gray-500">
-          <Link to="/blog" className="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
+          <LLink to="/blog" className="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
             <ArrowLeft size={13} /> {blogT.title}
-          </Link>
+          </LLink>
           <span>/</span>
           <span className="text-gray-700 truncate max-w-64">{title}</span>
         </div>
@@ -117,12 +118,12 @@ export default function BlogPostPage() {
 
         {/* Back + CTA */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-8">
-          <Link to="/blog" className="btn-secondary text-sm">
+          <LLink to="/blog" className="btn-secondary text-sm">
             <ArrowLeft size={14} /> {blogT.viewAll}
-          </Link>
-          <Link to="/contacts" className="btn-primary text-sm">
+          </LLink>
+          <LLink to="/contacts" className="btn-primary text-sm">
             {t('hero.ctaContact')} <ArrowRight size={14} />
-          </Link>
+          </LLink>
         </div>
 
         {/* Related */}

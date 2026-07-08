@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
@@ -92,7 +93,7 @@ export default function CartPage() {
       <div className="max-w-xl mx-auto px-4 py-20 text-center">
         <div className="text-5xl mb-4">✅</div>
         <h2 className="text-2xl font-bold mb-2">{cartT.form.success}</h2>
-        <Link to="/catalog" className="btn-primary mt-6">{cartT.toCatalog}</Link>
+        <LLink to="/catalog" className="btn-primary mt-6">{cartT.toCatalog}</LLink>
       </div>
     )
   }
@@ -103,7 +104,7 @@ export default function CartPage() {
         <ShoppingBag size={56} className="mx-auto text-gray-300 mb-4" />
         <h2 className="text-xl font-semibold text-gray-700 mb-1">{cartT.empty}</h2>
         <p className="text-gray-400 mb-6">{cartT.emptySub}</p>
-        <Link to="/catalog" className="btn-primary">{cartT.toCatalog} <ArrowRight size={16} /></Link>
+        <LLink to="/catalog" className="btn-primary">{cartT.toCatalog} <ArrowRight size={16} /></LLink>
       </div>
     )
   }

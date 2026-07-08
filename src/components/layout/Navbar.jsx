@@ -8,6 +8,8 @@ import { LANGS } from '../../i18n/translations'
 import { CATEGORIES } from '../../data/categories'
 import { assetPath } from '../../utils/assetPath'
 import CategoryIcon from '../CategoryIcon'
+import LLink from '../LLink'
+import { localizedPath, stripLangPrefix } from '../../utils/localizedPath'
 
 // ─── Mega-menu каталог (full-width) ───
 function MegaMenu({ lang, products, onClose }) {
@@ -30,13 +32,13 @@ function MegaMenu({ lang, products, onClose }) {
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
                 {t('navbar.categories')} · {CATEGORIES.length}
               </span>
-              <Link to="/catalog" onClick={onClose}
+              <LLink to="/catalog" onClick={onClose}
                 style={{ background: '#FF6B00', color: '#fff', fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', padding: '3px 10px', borderRadius: '0.4rem', whiteSpace: 'nowrap' }}>
                 {t('navbar.goTo')}
-              </Link>
+              </LLink>
             </div>
             {CATEGORIES.map((cat, i) => (
-              <Link
+              <LLink
                 key={cat.id}
                 to={`/catalog/${cat.slug}`}
                 onClick={onClose}
@@ -57,7 +59,7 @@ function MegaMenu({ lang, products, onClose }) {
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: 'rgba(255,255,255,0.25)', flexShrink: 0 }}>
                   {cat.count}
                 </span>
-              </Link>
+              </LLink>
             ))}
           </div>
 
@@ -67,11 +69,11 @@ function MegaMenu({ lang, products, onClose }) {
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)' }}>
                 {activeCat?.name[lang] || activeCat?.name.uk}
               </div>
-              <Link to={`/catalog/${activeCat?.slug}`} onClick={onClose}
+              <LLink to={`/catalog/${activeCat?.slug}`} onClick={onClose}
                 className="flex items-center gap-1 hover:gap-2 transition-all"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)' }}>
                 {t('navbar.allProducts')} <ArrowRight size={11} />
-              </Link>
+              </LLink>
             </div>
 
             {catProducts.length > 0 ? (
@@ -79,7 +81,7 @@ function MegaMenu({ lang, products, onClose }) {
                 {catProducts.map(p => {
                   const name = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
                   return (
-                    <Link key={p.id} to={`/catalog/${p.categorySlug}/${p.slug || p.id}`} onClick={onClose}
+                    <LLink key={p.id} to={`/catalog/${p.categorySlug}/${p.slug || p.id}`} onClick={onClose}
                       className="flex flex-col gap-2 p-2.5 border border-transparent hover:border-[var(--border)] hover:bg-[var(--bg-warm)] transition-all group"
                       style={{ borderRadius: '0.5rem' }}>
                       <div className="w-full aspect-square bg-[var(--bg-warm)] border border-[var(--border)] overflow-hidden group-hover:border-[var(--accent)] transition-colors"
@@ -99,7 +101,7 @@ function MegaMenu({ lang, products, onClose }) {
                           </div>
                         )}
                       </div>
-                    </Link>
+                    </LLink>
                   )
                 })}
               </div>
@@ -132,9 +134,9 @@ function MegaMenu({ lang, products, onClose }) {
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: '0.5rem' }}>
                 {t('navbar.launch')} <ArrowUpRight size={13} />
               </a>
-              <Link to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
+              <LLink to="/catalog" onClick={onClose} className="btn-primary text-center justify-center" style={{ fontSize: '11px', padding: '10px 16px' }}>
                 {t('navbar.allCatalog')}
-              </Link>
+              </LLink>
             </div>
           </div>
 
@@ -161,7 +163,7 @@ function DarkDropdown({ items, onClose }) {
               </span>
               <ExternalLink size={11} style={{ color: 'rgba(255,255,255,0.3)' }} />
             </a>
-          : <Link key={item.to} to={item.to} onClick={onClose}
+          : <LLink key={item.to} to={item.to} onClick={onClose}
               className="flex items-center gap-3 px-4 py-3 transition-all group"
               style={{ borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', borderLeft: '2px solid transparent' }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,85,0,0.10)'; e.currentTarget.style.borderLeftColor = 'var(--accent)' }}
@@ -169,7 +171,7 @@ function DarkDropdown({ items, onClose }) {
               <span style={{ fontFamily: "'Rubik', sans-serif", fontSize: '14px', fontWeight: 400, color: 'rgba(255,255,255,0.8)' }}>
                 {item.label}
               </span>
-            </Link>
+            </LLink>
       ))}
     </div>
   )
@@ -218,12 +220,22 @@ export default function Navbar() {
   function handleSearch(e) {
     e.preventDefault()
     if (searchQuery.trim()) {
-      navigate(`/catalog?q=${encodeURIComponent(searchQuery.trim())}`)
+      navigate(localizedPath(`/catalog?q=${encodeURIComponent(searchQuery.trim())}`, lang))
       setSearchOpen(false); setSearchQuery('')
     }
   }
 
-  const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
+  // Перемикання мови: змінює URL-префікс + setLang
+  function handleLangSwitch(code) {
+    setLang(code)
+    setLangOpen(false)
+    const currentPath = stripLangPrefix(location.pathname)
+    const search = location.search
+    navigate(localizedPath(currentPath + search, code))
+  }
+
+  const strippedPathname = stripLangPrefix(location.pathname)
+  const isActive = (path) => strippedPathname === path || strippedPathname.startsWith(path + '/')
 
   const navLinkStyle = { fontFamily: "'Rubik', sans-serif", fontSize: '15px', fontWeight: 500, letterSpacing: '0.01em', transition: 'color 0.3s' }
 
@@ -243,9 +255,9 @@ export default function Navbar() {
   ]
 
   // Сторінки зі світлим верхом (без темного героя) — навбар завжди світлий
-  const seg = location.pathname.split('/').filter(Boolean)
+  const seg = strippedPathname.split('/').filter(Boolean)
   const lightTop =
-    ['/cart', '/privacy', '/terms'].includes(location.pathname) ||
+    ['/cart', '/privacy', '/terms'].includes(strippedPathname) ||
     (seg[0] === 'catalog' && seg.length === 3) // картка товару
   // прозорий над темним героєм → світлий «glassmorphism» при скролі або на світлих сторінках
   const solid = scrolled || lightTop
@@ -274,9 +286,9 @@ export default function Navbar() {
           <div className="flex items-center gap-2 h-[60px]">
 
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0">
+            <LLink to="/" className="flex-shrink-0">
               <img src={assetPath(lang === 'uk' ? '/logo-orange.png' : '/logo-en-orange.png')} alt="Termojet" className="h-10 w-auto" />
-            </Link>
+            </LLink>
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center ml-1 flex-shrink-0">
@@ -371,7 +383,7 @@ export default function Navbar() {
                   <div className="absolute top-full right-0 mt-0 w-16 z-50 overflow-hidden"
                     style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
                     {LANGS.map(l => (
-                      <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false) }}
+                      <button key={l.code} onClick={() => handleLangSwitch(l.code)}
                         className="w-full flex items-center gap-1.5 px-2.5 py-2 transition-colors"
                         style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', color: lang === l.code ? 'var(--accent)' : 'rgba(255,255,255,0.6)', background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
                         onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,85,0,0.10)'}
@@ -384,7 +396,7 @@ export default function Navbar() {
               </div>
 
               {/* Cart */}
-              <Link to="/cart" className="relative p-2 mr-2 transition-all"
+              <LLink to="/cart" className="relative p-2 mr-2 transition-all"
                 style={{ color: linkColMuted }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
@@ -395,21 +407,21 @@ export default function Navbar() {
                     {cartCount > 9 ? '9+' : cartCount}
                   </span>
                 )}
-              </Link>
+              </LLink>
 
               {/* CTA — Консультація (головна, оранжева заливка) + Стати партнером (оранжева рамка) */}
-              <Link to="/partners"
+              <LLink to="/partners"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
                 {t('navbar.becomePartner')}
-              </Link>
-              <Link to="/contacts"
+              </LLink>
+              <LLink to="/contacts"
                 className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
                 style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
                 {t('navbar.consultation')}
-              </Link>
+              </LLink>
 
               {/* Mobile burger */}
               <button onClick={() => setMenuOpen(v => !v)} className="lg:hidden p-2 transition-colors" style={{ color: linkCol }}>
@@ -438,36 +450,36 @@ export default function Navbar() {
             style={{ background: 'rgba(255,255,255,0.96)', backdropFilter: 'blur(20px)' }}>
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5">
 
-              <Link to="/catalog"
+              <LLink to="/catalog"
                 className="px-3 py-2.5 transition-colors"
                 style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : '#333', borderLeft: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
                 {t('nav.catalog')}
-              </Link>
+              </LLink>
 
               <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
                 {t('navbar.aboutTermojet')}
               </div>
               {aboutItems.map(i => (
-                <Link key={i.to} to={i.to}
+                <LLink key={i.to} to={i.to}
                   className="px-5 py-2 transition-colors"
                   style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}
                   onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                   onMouseLeave={e => e.currentTarget.style.color = '#555'}>
                   {i.label}
-                </Link>
+                </LLink>
               ))}
 
               <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
                 {t('navbar.forClient')}
               </div>
               {clientItems.map(i => (
-                <Link key={i.to} to={i.to}
+                <LLink key={i.to} to={i.to}
                   className="px-5 py-2 transition-colors"
                   style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}
                   onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                   onMouseLeave={e => e.currentTarget.style.color = '#555'}>
                   {i.label}
-                </Link>
+                </LLink>
               ))}
 
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
@@ -483,21 +495,21 @@ export default function Navbar() {
               </a>
 
               <div className="flex gap-2 pt-3 border-t border-[var(--border)] mt-1">
-                <Link to="/partners"
+                <LLink to="/partners"
                   className="flex-1 py-2.5 text-center"
                   style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
                   {t('navbar.becomePartner')}
-                </Link>
-                <Link to="/contacts"
+                </LLink>
+                <LLink to="/contacts"
                   className="flex-1 py-2.5 text-white text-center"
                   style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
                   {t('navbar.consultation')}
-                </Link>
+                </LLink>
               </div>
 
               <div className="flex gap-1 pt-2 flex-wrap">
                 {LANGS.map(l => (
-                  <button key={l.code} onClick={() => setLang(l.code)}
+                  <button key={l.code} onClick={() => handleLangSwitch(l.code)}
                     className="px-3 py-1.5 transition-colors"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', borderRadius: '0.5rem', background: lang === l.code ? 'var(--accent)' : 'transparent', color: lang === l.code ? 'white' : '#555', border: lang === l.code ? 'none' : '1px solid var(--border)' }}>
                     {l.flag} {l.label}

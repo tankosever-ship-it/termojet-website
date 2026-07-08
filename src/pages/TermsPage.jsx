@@ -1,3 +1,4 @@
+import LLink from '../components/LLink'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import { useT } from '../i18n/useT'
@@ -66,7 +67,7 @@ export default function TermsPage() {
             <h2 className="text-xl font-bold text-slate-900 mb-3">{t('terms.s7.heading')}</h2>
             <p>
               {t('terms.s7.bodyBefore')}{' '}
-              <Link to="/privacy" className="text-orange-500 hover:underline">{t('terms.s7.privacyLink')}</Link>
+              <LLink to="/privacy" className="text-orange-500 hover:underline">{t('terms.s7.privacyLink')}</LLink>
               {t('terms.s7.bodyAfter')}
             </p>
           </section>

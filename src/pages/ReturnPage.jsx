@@ -1,3 +1,4 @@
+import LLink from '../components/LLink'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Package, RefreshCw, ArrowRight, CheckCircle, XCircle, Phone, Mail, Wrench, Clock, Scale } from 'lucide-react'
@@ -263,9 +264,9 @@ export default function ReturnPage() {
             <a href="mailto:termojet@sofievka.kiev.ua" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
               <Mail size={18} className="text-[var(--accent)]" /> termojet@sofievka.kiev.ua
             </a>
-            <Link to="/contacts" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+            <LLink to="/contacts" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-lg transition-colors">
               {t('returns.contactWriteUs')} <ArrowRight size={18} className="text-[var(--accent)]" />
-            </Link>
+            </LLink>
           </div>
         </motion.section>
 
