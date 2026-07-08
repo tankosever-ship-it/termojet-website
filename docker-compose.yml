@@ -17,6 +17,11 @@ services:
       # Set real values in a .env file next to this compose file (gitignored).
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+      # Forum-topic id inside the shared "Termojet Sales" group. Routes every
+      # termojet lead into the "🔵 Termojet" topic, apart from TJ Heat Pumps.
+      # Get it once via tjheatpump: /tg-create-lead-topics.php?secret=<WEBHOOK_SECRET>
+      # (use the "termojet_leads_thread_id" value from its JSON output).
+      - TELEGRAM_THREAD_ID=${TELEGRAM_THREAD_ID:-}
       # CORS allowlist override (comma-separated). Defaults in server.js cover the domain + current IP.
       - CORS_ORIGINS=${CORS_ORIGINS:-}
       # Nova Poshta API key (кабінет НП → Налаштування → Безпека → Ключі API).
