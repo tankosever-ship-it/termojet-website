@@ -66,7 +66,9 @@
 > 🔑 **Уточнення після перевірки коду:** майже всі знахідки squirrelscan (no-main, orphan-pages, thin-content, дубль-title/desc, canonical→головна, H1) — **один корінь: краулер бачить оболонку до монтування React.** Виправлення в React уже здебільшого є (main, skip-link, унікальні title/desc через Helmet, лінки). **Єдиний потрібний розв'язок — prerender (Фаза 2)**, який виносить готовий React-HTML у файли для краулерів. Ручні точкові фікси переважно зайві.
 
 ### 🔴 Фаза 2 — Prerender *(головний важіль; за планом `_zvity/ПЛАН-Prerendering-SEO.md`)*
-- [ ] Фаза 0: спайк сумісності `hydrateRoot` React 19 на 2-3 сторінках.
+- [x] Фаза 0: спайк `hydrateRoot` React 19 — **виявив hydration mismatch (#418)** через `react-helmet-async` (мутує head → подвоєні теги в snapshot). React 19 відкочується до CSR (користувачі ок), але canonical лишається generic → «як є» не годиться. *(8 лип)*
+- [ ] **Прекондиція (нова):** перевести `SEO.jsx` з `react-helmet-async` на **нативні метадані React 19** (без мутацій head) + прибрати generic-теги зі shell → чистий head, чиста гідрація, правильний canonical.
+- [ ] Повторити спайк → підтвердити чисту гідрацію.
 - [ ] `src/main.jsx`: `createRoot` → умовний `hydrateRoot`.
 - [ ] `scripts/prerender.mjs`: Puppeteer проти живого контейнера, 361 URL зі sitemap → `dist/<route>/index.html`.
 - [ ] Express: віддавати prerendered-файл першим, інакше SPA-фолбек. Прапорець-вимикач (відкат).
@@ -125,3 +127,8 @@
 | Дата | Фаза | Що зроблено | Score до/після |
 |---|---|---|---|
 | 2026-07-08 | — | Аудит, звірка 3 джерел, план створено | 73 (baseline) |
+| 2026-07-08 | 1 | Фікс подвоєння «\| Termojet» (`SEO.jsx`), коміт `309ee7f`, збірка ок | — |
+| 2026-07-08 | 2/0 | Спайк hydrateRoot → FAIL (#418, Helmet мутує head). Шлях: міграція на нативні метадані React 19. Спайк-зміни некомічені (WIP) | — |
+| 2026-07-08 | 2/0b | Міграція helmet→React19-метадані OK (structural mismatch зник). АЛЕ DOM-snapshot prerender не дає метадані не-JS краулерам (React19 metadata = runtime-only) + pre-existing Navbar hydration issues. Висновок: **DOM-snapshot prerender не годиться**. Розвилка: A=серверний ін'єкт метаданих / B=справжній SSR | — |
+| 2026-07-08 | — | **Обрано A+** (серверний ін'єкт метаданих+контенту з БД). Prerender-WIP відкочено до `309ee7f`. | — |
+| 2026-07-08 | A+ | Реалізовано ін'єкт для **товарів** (title←seo_title, canonical=self, description←meta_description, og, H1+опис у noscript) і **блогу** (title/excerpt). Локально перевірено curl-ом. `backend/server.js` | — |

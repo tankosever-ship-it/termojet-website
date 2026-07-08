@@ -204,21 +204,57 @@ const absImg = u => {
 }
 const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
 
+// A+ per-товар: серверний ін'єкт у сирий HTML (для краулерів, у т.ч. LLM-ботів без JS).
+// Метадані беремо з готових полів БД: seo_title (≤60, унікальні), meta_description.
+// Head: title/canonical(self)/description/og. Body: у <noscript> ставимо сторінковий H1 +
+// опис (React на клієнті рендерить своє в #root; <noscript> користувачам не видно → без флешу).
 app.get('/catalog/:cat/:slug', (req, res, next) => {
   try {
-    const row = _db.prepare('SELECT name, image, short_desc, description FROM products WHERE slug = ? AND is_visible = 1').get(req.params.slug)
+    const row = _db.prepare('SELECT name, image, short_desc, description, seo_title, meta_description FROM products WHERE slug = ? AND is_visible = 1').get(req.params.slug)
     if (!row) return next()
     let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-    const title = `${row.name} — Termojet`
-    const desc = (stripHtml(row.short_desc) || stripHtml(row.description) || DEFAULT_TITLE).slice(0, 200)
+    const title = row.seo_title || `${row.name} — Termojet`
+    const desc = (row.meta_description || stripHtml(row.short_desc) || stripHtml(row.description) || DEFAULT_TITLE).slice(0, 200)
     const img = absImg(row.image)
     const url = `${SITE}/catalog/${encodeURIComponent(req.params.cat)}/${encodeURIComponent(req.params.slug)}`
+    const bodyText = (stripHtml(row.description) || stripHtml(row.short_desc) || desc).slice(0, 600)
+    const noscriptH1 = `<h1>${esc(row.name)}</h1>${bodyText ? `\n        <p>${esc(bodyText)}</p>` : ''}`
     html = html
       .split(DEFAULT_OG_IMG).join(esc(img))
       .split(DEFAULT_TITLE).join(esc(title))
+      .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${esc(url)}$2`)
+      .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
       .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
       .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
       .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+      .replace(/<h1>Termojet[^<]*<\/h1>/, noscriptH1)
+    res.setHeader('Cache-Control', 'no-cache')
+    return res.type('html').send(html)
+  } catch (e) { return next() }
+})
+
+// A+ per-стаття блогу: той самий ін'єкт із blog_posts (title/excerpt).
+app.get('/blog/:slug', (req, res, next) => {
+  try {
+    const row = _db.prepare('SELECT title, excerpt, content, image FROM blog_posts WHERE slug = ? AND published = 1').get(req.params.slug)
+    if (!row) return next()
+    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+    const title = `${row.title} | Termojet`
+    const desc = (stripHtml(row.excerpt) || stripHtml(row.content) || DEFAULT_TITLE).slice(0, 200)
+    const img = absImg(row.image)
+    const url = `${SITE}/blog/${encodeURIComponent(req.params.slug)}`
+    const bodyText = (stripHtml(row.excerpt) || stripHtml(row.content) || desc).slice(0, 600)
+    const noscriptH1 = `<h1>${esc(row.title)}</h1>${bodyText ? `\n        <p>${esc(bodyText)}</p>` : ''}`
+    html = html
+      .split(DEFAULT_OG_IMG).join(esc(img))
+      .split(DEFAULT_TITLE).join(esc(title))
+      .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${esc(url)}$2`)
+      .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+      .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${esc(url)}$2`)
+      .replace(/(<meta property="og:type" content=")[^"]*(")/, `$1article$2`)
+      .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+      .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
+      .replace(/<h1>Termojet[^<]*<\/h1>/, noscriptH1)
     res.setHeader('Cache-Control', 'no-cache')
     return res.type('html').send(html)
   } catch (e) { return next() }
