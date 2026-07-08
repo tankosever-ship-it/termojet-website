@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { Headphones, FileText, Settings, Car, LayoutTemplate, Flame, Phone, Mail } from 'lucide-react'
 import SEO from '../components/SEO'
 import { useT } from '../i18n/useT'
@@ -119,9 +119,9 @@ export default function TechSupportPage() {
               </div>
             </div>
             <div className="text-center lg:text-right">
-              <Link to="/contacts" className="btn-primary inline-flex text-base px-8 py-4">
+              <LLink to="/contacts" className="btn-primary inline-flex text-base px-8 py-4">
                 {t('servicePage.contact.form.title')}
-              </Link>
+              </LLink>
             </div>
           </div>
         </motion.div>

@@ -9,6 +9,10 @@
 const SUPPORTED_LANGS = ['en', 'pl', 'de', 'fr']
 
 export function localizedPath(path, lang) {
+  // Зовнішні та спец-URL повертаємо без змін
+  if (typeof path !== 'string') return path
+  if (/^(https?:|mailto:|tel:|\/\/|#)/.test(path)) return path
+
   if (!lang || lang === 'uk') return path
   if (!SUPPORTED_LANGS.includes(lang)) return path
 

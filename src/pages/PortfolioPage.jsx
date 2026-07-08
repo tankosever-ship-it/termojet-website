@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { MapPin, Calendar, Zap, X, ChevronRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -184,10 +184,10 @@ export default function PortfolioPage() {
                         {(lang !== 'uk' && l[`label_${lang}`]) ? l[`label_${lang}`] : l.label} <ArrowUpRight size={12} />
                       </a>
                     ) : (
-                      <Link key={l.label} to={l.url} onClick={() => setSelected(null)}
+                      <LLink key={l.label} to={l.url} onClick={() => setSelected(null)}
                         className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
                         {(lang !== 'uk' && l[`label_${lang}`]) ? l[`label_${lang}`] : l.label} <ChevronRight size={12} />
-                      </Link>
+                      </LLink>
                     ))}
                   </div>
                 </div>

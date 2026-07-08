@@ -1,8 +1,9 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import LLink from '../components/LLink'
 import { Calendar, ArrowLeft, ArrowRight, ChevronRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
+import { localizeHtml } from '../utils/localizeHtml'
 import SEO from '../components/SEO'
 
 export default function BlogPostPage() {
@@ -92,7 +93,7 @@ export default function BlogPostPage() {
                 const ext = /^https?:/.test(url)
                 return `<a href="${url}" class="text-[var(--primary)] underline underline-offset-2 hover:opacity-80"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`
               })
-              return <p key={i} className="mb-4" dangerouslySetInnerHTML={{ __html: formatted }} />
+              return <p key={i} className="mb-4" dangerouslySetInnerHTML={{ __html: localizeHtml(formatted, lang) }} />
             })}
           </div>
 
@@ -106,10 +107,10 @@ export default function BlogPostPage() {
                     {l.label} <ArrowUpRight size={12} />
                   </a>
                 ) : (
-                  <Link key={l.label} to={l.url}
+                  <LLink key={l.label} to={l.url}
                     className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 hover:bg-[var(--primary)] hover:text-white text-gray-700 text-xs font-medium rounded transition-colors">
                     {l.label} <ChevronRight size={12} />
-                  </Link>
+                  </LLink>
                 ))}
               </div>
             </div>
@@ -134,7 +135,7 @@ export default function BlogPostPage() {
               {related.map(p => {
                 const rTitle = (lang !== 'uk' && p[`title_${lang}`]) ? p[`title_${lang}`] : p.title
                 return (
-                  <Link key={p.id} to={`/blog/${p.slug}`} className="card card-hover block overflow-hidden">
+                  <LLink key={p.id} to={`/blog/${p.slug}`} className="card card-hover block overflow-hidden">
                     {p.image && (
                       p.image.match(/\/images\/(blog|portfolio)\//)
                         ? <img src={p.image} alt={rTitle} className="w-full h-36 object-cover" />
@@ -143,7 +144,7 @@ export default function BlogPostPage() {
                     <div className="p-4">
                       <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">{rTitle}</h3>
                     </div>
-                  </Link>
+                  </LLink>
                 )
               })}
             </div>

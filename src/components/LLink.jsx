@@ -14,7 +14,7 @@ import { localizedPath } from '../utils/localizedPath'
  */
 const LLink = forwardRef(function LLink({ to, ...props }, ref) {
   const { lang } = useApp()
-  const resolvedTo = typeof to === 'string' && to.startsWith('/')
+  const resolvedTo = typeof to === 'string'
     ? localizedPath(to, lang)
     : to
   return <Link ref={ref} to={resolvedTo} {...props} />

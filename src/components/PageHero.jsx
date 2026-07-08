@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import { assetPath } from '../utils/assetPath'
+import LLink from './LLink'
 
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
@@ -46,7 +46,7 @@ export default function PageHero({ eyebrow = 'TERMOJET', title, subtitle, image,
               <span key={i} className="flex items-center gap-2">
                 {i > 0 && <ChevronRight size={12} />}
                 {b.to
-                  ? <Link to={b.to} className="hover:text-white/70 transition-colors">{b.name}</Link>
+                  ? <LLink to={b.to} className="hover:text-white/70 transition-colors">{b.name}</LLink>
                   : <span className="text-white/70">{b.name}</span>}
               </span>
             ))}

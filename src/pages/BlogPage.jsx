@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import LLink from '../components/LLink'
 import { Calendar, ArrowRight, Search } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -77,7 +77,7 @@ export default function BlogPage() {
         ) : (
           <>
             {featured && !search && !category && (
-              <Link to={`/blog/${featured.slug}`} className="card card-hover block overflow-hidden mb-8 md:flex">
+              <LLink to={`/blog/${featured.slug}`} className="card card-hover block overflow-hidden mb-8 md:flex">
                 {featured.image && (
                   featured.image.match(/\/images\/(blog|portfolio)\//) ? (
                     <img src={featured.image} alt={featured.title} className="w-full md:w-80 lg:w-96 h-56 md:h-auto object-cover flex-shrink-0" />
@@ -106,7 +106,7 @@ export default function BlogPage() {
                     {blogT.readMore} <ArrowRight size={13} />
                   </span>
                 </div>
-              </Link>
+              </LLink>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -114,7 +114,7 @@ export default function BlogPage() {
                 const title = (lang !== 'uk' && post[`title_${lang}`]) ? post[`title_${lang}`] : post.title
                 const excerpt = (lang !== 'uk' && post[`excerpt_${lang}`]) ? post[`excerpt_${lang}`] : post.excerpt
                 return (
-                  <Link key={post.id} to={`/blog/${post.slug}`} className="card card-hover block overflow-hidden">
+                  <LLink key={post.id} to={`/blog/${post.slug}`} className="card card-hover block overflow-hidden">
                     {post.image && (
                       post.image.match(/\/images\/(blog|portfolio)\//)
                         ? <img src={post.image} alt={title} className="w-full h-44 object-cover" />
@@ -135,7 +135,7 @@ export default function BlogPage() {
                         {blogT.readMore} <ArrowRight size={12} />
                       </div>
                     </div>
-                  </Link>
+                  </LLink>
                 )
               })}
             </div>

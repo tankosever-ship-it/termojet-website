@@ -360,6 +360,26 @@ const STATIC_META = {
   '/navchannya': { title: 'Навчання та тренінги Termojet для монтажників', desc: 'Навчальні матеріали й тренінги Termojet з монтажу та підбору обладнання для котелень.' },
 }
 
+// EN-версії статичних сторінок (для /en/...). Немає запису → фолбек на UA STATIC_META.
+const STATIC_META_EN = {
+  '/': { title: 'Termojet — Boiler Room Equipment Manufacturer', desc: 'Termojet — Ukrainian manufacturer of boiler room equipment: pump groups, manifolds, hydraulic separators, valves, automation. In production since 2002.' },
+  '/catalog': { title: 'Boiler Room Equipment Catalog | Termojet', desc: 'Termojet catalog: pump groups, manifolds, hydraulic separators, valves, separators, automation. Own production since 2002.' },
+  '/about': { title: 'About Termojet — Manufacturer Since 2002', desc: 'Termojet — Ukrainian boiler room equipment manufacturer since 2002: own production, engineering support, warranty.' },
+  '/contacts': { title: 'Contact Termojet — Reach the Manufacturer', desc: 'Termojet contacts: phone, address, contact form. Consultation on selecting boiler room equipment.' },
+  '/blog': { title: 'Termojet Blog — Heating, Boiler Rooms, Installation', desc: 'Termojet articles on heating, boiler rooms, system installation, company news and industry exhibitions.' },
+  '/service': { title: 'Service and Warranty on Termojet Equipment', desc: 'Service and warranty for Termojet boiler room equipment.' },
+  '/faq': { title: 'Frequently Asked Questions about Termojet (FAQ)', desc: 'Answers to common questions about Termojet equipment: selection, installation, delivery, warranty.' },
+  '/delivery': { title: 'Delivery and Payment for Termojet Equipment', desc: 'Delivery and payment terms for Termojet equipment across Ukraine.' },
+  '/files': { title: 'Documentation and Catalogs of Termojet Equipment', desc: 'Technical documentation, catalogs and manuals for Termojet equipment.' },
+  '/oem': { title: 'OEM Manufacturing under Private Label | Termojet', desc: 'OEM manufacturing of boiler room equipment under private label by Termojet.' },
+  '/partners': { title: 'For Dealers and Partners — Termojet Cooperation', desc: 'Cooperation with Termojet: terms for dealers, installers and partners.' },
+  '/portfolio': { title: 'Our Projects — Boiler Rooms & Heating by Termojet', desc: 'Completed boiler room and heating system projects with Termojet equipment.' },
+  '/returns': { title: 'Returns and Exchange of Termojet Equipment', desc: 'Return and exchange terms for Termojet equipment.' },
+  '/terms': { title: 'Terms of Use of the Site and Purchase | Termojet', desc: 'Terms of use of the website and purchase of Termojet equipment.' },
+  '/privacy': { title: 'Privacy Policy and Data Processing | Termojet', desc: 'Privacy policy and personal data processing at Termojet.' },
+  '/navchannya': { title: 'Training and Workshops by Termojet for Installers', desc: 'Training materials and workshops by Termojet on installation and selection of boiler room equipment.' },
+}
+
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
 function handleProduct(lang) {
@@ -461,9 +481,9 @@ app.get('*', (req, res) => {
   if (rawPath.startsWith('/en/')) lookupPath = rawPath.slice(3) || '/'
   else if (rawPath === '/en') lookupPath = '/'
 
-  // UA-версія статичних сторінок: hreflang на /en
-  // EN-версія статичних сторінок: фолбек UA-title (TODO: додати EN STATIC_META якщо потрібно)
+  // UA/EN статичні сторінки з унікальними метаданими + hreflang.
   const sm = STATIC_META[lookupPath]
+  const meta = isEn ? (STATIC_META_EN[lookupPath] || sm) : sm
   if (sm) {
     try {
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
@@ -471,7 +491,7 @@ app.get('*', (req, res) => {
       const enUrl = SITE + '/en' + (lookupPath === '/' ? '' : lookupPath)
       const url = isEn ? enUrl : uaUrl
       const alternates = buildAlternates(uaUrl, enUrl)
-      html = injectMeta(html, { title: sm.title, desc: sm.desc, url, alternates })
+      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { /* fall through */ }

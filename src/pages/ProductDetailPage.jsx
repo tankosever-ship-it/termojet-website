@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import LLink from '../components/LLink'
+import { localizeHtml } from '../utils/localizeHtml'
 import {
   ShoppingCart, Plus, Minus, ChevronRight, ChevronLeft, ChevronDown,
   Download, Phone, Package, Play, FileText, Wrench, X, ZoomIn,
@@ -37,10 +38,11 @@ function stripSpecTable(html) {
     .trim()
 }
 
-function renderDescriptionBody(desc, t) {
-  // Новий формат — готовий HTML (<p>, <ul>, <a>): рендеримо як є (наш контент)
+function renderDescriptionBody(desc, t, lang) {
+  // Новий формат — готовий HTML (<p>, <ul>, <a>): рендеримо як є (наш контент).
+  // На EN/pl/de/fr переписуємо внутрішні href у контенті на мовний префікс.
   if (/<(p|ul|ol|h[1-6]|a|strong|br)\b/i.test(desc || '')) {
-    return <div className="pdp-desc-html" dangerouslySetInnerHTML={{ __html: stripSpecTable(desc) }} />
+    return <div className="pdp-desc-html" dangerouslySetInnerHTML={{ __html: localizeHtml(stripSpecTable(desc), lang) }} />
   }
   const text = (desc || '').replace(/\s+/g, ' ').trim()
   const matches = [...text.matchAll(/(\d+)\s–\s/g)]
@@ -789,9 +791,9 @@ export default function ProductDetailPage() {
             {category && (
               <div className="hidden lg:flex items-center justify-between text-sm" style={{ paddingInline: 2 }}>
                 <span style={{ color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase' }}>{t('product.category')}</span>
-                <Link to={`/catalog/${categorySlug}`} style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 13, textDecoration: 'none' }} className="hover:underline">
+                <LLink to={`/catalog/${categorySlug}`} style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 13, textDecoration: 'none' }} className="hover:underline">
                   {category.name[lang] || category.name.uk}
-                </Link>
+                </LLink>
               </div>
             )}
 
@@ -1032,7 +1034,7 @@ export default function ProductDetailPage() {
                 <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>{t('product.descHeading')}</h2>
               </div>
               <div onClick={onDescClick}>
-                {renderDescriptionBody(desc, t)}
+                {renderDescriptionBody(desc, t, lang)}
               </div>
               {/* Video */}
               {ytId && (
@@ -1058,10 +1060,10 @@ export default function ProductDetailPage() {
                   <span className="section-num">04</span>
                   <h2 style={{ fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 23, fontWeight: 800, letterSpacing: '-.01em' }}>{pt.related || 'Схожі товари'}</h2>
                 </div>
-                <Link to={`/catalog/${categorySlug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--text-secondary)', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">
+                <LLink to={`/catalog/${categorySlug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--text-secondary)', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">
                   {t('product.allProducts')}
                   <ChevronRight size={11} />
-                </Link>
+                </LLink>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }} className="grid-cols-2 md:grid-cols-4">
@@ -1069,7 +1071,7 @@ export default function ProductDetailPage() {
                   const pName = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
                   const pPriceUAH = p.price ? Math.round(toUAH(p.price, p.currency, eurRate) || 0) : null
                   return (
-                    <Link
+                    <LLink
                       key={p.id}
                       to={`/catalog/${categorySlug}/${p.slug || p.id}`}
                       style={{
@@ -1114,7 +1116,7 @@ export default function ProductDetailPage() {
                           <ChevronRight size={14} style={{ color: 'var(--text-muted)' }} className="pdp-rel-arrow" />
                         </div>
                       </div>
-                    </Link>
+                    </LLink>
                   )
                 })}
               </div>
