@@ -113,7 +113,6 @@ export default function Footer() {
                 [footer.catValves, '/catalog/klapany'],
                 [footer.catManifolds, '/catalog/rozpodilchi-kolektory'],
                 ['TERMOJET Mega', '/catalog/termojet-mega'],
-                ['TERMOJET Mini', '/catalog/termojet-mini'],
                 ['TERMOJET BOX', '/catalog/termojet-box'],
               ].map(([label, to]) => (
                 <li key={to}>
