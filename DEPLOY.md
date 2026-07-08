@@ -4,10 +4,10 @@
 
 ```bash
 # 1. Підключись до сервера
-ssh root@<IP>
+ssh hetzner            # аліас у ~/.ssh/config → root@49.13.154.30 (ключ .hetzner_key)
 
-# 2. Клонуй репозиторій
-cd /root
+# 2. Клонуй репозиторій (live-каталог — /home/tankoseva)
+cd /home/tankoseva
 git clone https://github.com/tankosever-ship-it/termojet-website.git
 cd termojet-website
 
@@ -167,11 +167,20 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
 
 ## Оновлення сайту
 
+Live-каталог на сервері — **`/home/tankoseva/termojet-website`** (git-checkout, tracking `origin/main`).
+Флоу: локально `commit` → `git push origin main` → на сервері `git pull` + rebuild. Реальні
+значення секретів — у `.env` поряд з compose (gitignored, у репо їх нема).
+
 ```bash
-cd /root/termojet-website
+ssh hetzner            # аліас у ~/.ssh/config (49.13.154.30, ключ .hetzner_key)
+cd /home/tankoseva/termojet-website
 git pull
 docker compose up -d --build
 ```
+
+> ⚠️ `.github/workflows/deploy.yml` — це **GitHub Pages** (статичний фронт-мірор), а НЕ Hetzner.
+> Push у `main` лише збирає статику на GH Pages; прод termojet.com.ua оновлюється тільки
+> ручним `git pull` на сервері (кроки вище).
 
 ---
 
