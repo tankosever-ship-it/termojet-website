@@ -56,7 +56,10 @@ function buildBreadcrumbSchema(breadcrumbs) {
 
 export default function SEO({ title, description, image, canonical, type = 'website', product, article, breadcrumbs }) {
   const t = useT()
-  const fullTitle = title ? `${title} | Termojet` : t('seo.defaultTitle')
+  // seo_title у БД часто вже містить суфікс «… | Termojet» (а серверний рендер — «… — Termojet»).
+  // Прибираємо будь-який хвостовий «<роздільник> Termojet», щоб не було подвоєння суфікса в <title>.
+  const cleanTitle = title ? title.replace(/\s*[|–—-]\s*Termojet\s*$/i, '').trim() : ''
+  const fullTitle = cleanTitle ? `${cleanTitle} | Termojet` : t('seo.defaultTitle')
   const desc = description || t('seo.defaultDescription')
 
   const schemas = [ORGANIZATION_SCHEMA]
