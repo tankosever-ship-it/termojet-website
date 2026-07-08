@@ -143,6 +143,15 @@
 | 2026-07-08 | A+ | **#1 категорії+статичні** задеплоєно (`e13e675`), перевірено живцем: унікальні title+canonical на 15 категоріях і 15 статичних. Головна generic. | — |
 | 2026-07-08 | A+ | **#2 дедуп seo_title**: 9 рядків у **продовій БД** (колектори (200)/(240), НГ-52.150 Л). 0 груп дублів, 0 title>60. ⚠️ Зміна прямо в БД (volume), **не в git/seed** — при повній переінсталяції з seed відновиться дубль. | — |
 
+| 2026-07-08 | EN-пілот | **Мультимовне SEO /en задеплоєно** (`f35e69a`). Фронтенд: роутинг /en/* + LangSync + LLink(lang-aware посилання). Бекенд: EN-ін'єкт з i18n БД + hreflang uk↔en+x-default + sitemap 768 URL(UA+EN). Наскрізь перевірено (curl бот + puppeteer рендер): /en англійською, UK не зламано. | — |
+
+### EN-пілот — залишкові хвости (TODO)
+- [ ] **9 «голих» /catalog-посилань** на EN-товарі (частина Link не через LLink) → навігація там впаде в UK. Знайти й закрити.
+- [ ] **EN-титули статичних сторінок** (/en/about тощо) — зараз UA-фолбек. Додати `STATIC_META_EN` або `titleEn/descEn`.
+- [ ] **Google Search Console:** сабмітнути sitemap, стежити за індексацією /en.
+- [ ] Після стабілізації EN — додати **pl/de/fr** (той самий механізм; дані i18n готові).
+- [ ] `TechSupportPage.jsx` не в роутах — при підключенні використати LLink.
+
 ### Наступні інкременти A+ (TODO)
 - [x] Категорії `/catalog/:cat` — мапа 15 назв (CATEGORY_META) → title/description/H1. *(8 лип)*
 - [x] Статичні сторінки (catalog/about/contacts/blog/service/faq/delivery/files/oem/partners/portfolio/returns/terms/privacy/navchannya) — STATIC_META. *(8 лип)*
