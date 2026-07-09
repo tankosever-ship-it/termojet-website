@@ -344,13 +344,14 @@ function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyT
   let out = img ? html.split(DEFAULT_OG_IMG).join(esc(img)) : html
   out = out
     .split(DEFAULT_TITLE).join(esc(title))
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, (_, a, b) => {
-      let canon = `${a}${esc(url)}${b}`
+    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, () => {
+      // Повністю замінюємо тег canonical (включно з " />"), інакше лишається стрей-текст
+      // "/>" і перший hreflang «проковтується» в незакритий canonical.
+      let canon = `<link rel="canonical" href="${esc(url)}" />`
       if (alternates && alternates.length) {
-        const links = alternates.map(alt =>
+        canon += alternates.map(alt =>
           `\n    <link rel="alternate" hreflang="${esc(alt.hreflang)}" href="${esc(alt.href)}" />`
         ).join('')
-        canon += links
       }
       return canon
     })
