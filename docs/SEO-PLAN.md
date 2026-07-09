@@ -152,6 +152,15 @@
 - [ ] Після стабілізації EN — додати **pl/de/fr** (той самий механізм; дані i18n готові).
 - [ ] `TechSupportPage.jsx` не в роутах — при підключенні використати LLink.
 
+| 2026-07-09 | 4/дрібне | Прибрано мертвий footer-лінк termojet-mini (`f050e83`). Числові слаги (56, з них ~20 чисто-числових rozprodazh) — свідомо відкладено (ризик 301+колізії, info-severity). Orphan 491 — артефакт EN×2+ліміт краулу. | — |
+| 2026-07-09 | 5 | **JS −62%** (`169b7a3`): AppContext більше не тягне 2МБ static products (динам. import лише GH-Pages), manualChunks вендорів. Чанк 2208→43КБ, initial JS ~3.6→1.4МБ. Рендер каталогу/товару/блогу/EN перевірено (жива). | — |
+
+| 2026-07-09 | 5-img | **Зображення webp** (серверно): cwebp встановлено, 364 .webp згенеровано в `/var/www/termojet-wp/wp-content/uploads` (адитивно), nginx `map $http_accept→$webp_suffix` (`/etc/nginx/conf.d/webp.conf`) + `/wp-content/`: `try_files $uri$webp_suffix $uri @wp_old` + `Vary: Accept`. Живо: 308КБ jpeg→161КБ webp (−48%), фолбек jpeg. Бекап конфігу `sites-available/termojet.bak.webp`. | — |
+
+> **Регенерація webp** (при нових wp-content фото): на сервері `find /var/www/termojet-wp/wp-content/uploads -type f \( -iname '*.jpg' -o -iname '*.png' \) | while read f; do [ -f "$f.webp" ] || cwebp -quiet -q 82 "$f" -o "$f.webp"; done`. Варто додати в cron/після-деплой хук.
+
+**Фазу 5 завершено:** JS −62% (`169b7a3`) + зображення webp −48% (серверно).
+
 ### Наступні інкременти A+ (TODO)
 - [x] Категорії `/catalog/:cat` — мапа 15 назв (CATEGORY_META) → title/description/H1. *(8 лип)*
 - [x] Статичні сторінки (catalog/about/contacts/blog/service/faq/delivery/files/oem/partners/portfolio/returns/terms/privacy/navchannya) — STATIC_META. *(8 лип)*
