@@ -1,5 +1,39 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-07-08/09 — SEO-оверхол: серверні метадані, EN-мультимова, продуктивність
+
+> Деплой Hetzner: `ssh hetzner` → `/home/tankoseva/termojet-website` → `git pull && docker compose up -d --build`. Усе нижче задеплоєно й перевірено наживо (curl + рендер через headless Chrome). Детальний план і журнал по фазах — `docs/SEO-PLAN.md`.
+
+**Контекст:** сайт — CSR React SPA; краулер без JS бачив оболонку `index.html` з метаданими на головну (canonical→головна, generic/дубль title+description). Аудит (PDF Screaming Frog + squirrelscan) показав це як головну проблему. Обрано **серверний ін'єкт (A+)**, а не prerender/SSR (спайк довів, що DOM-snapshot prerender конфліктує з гідрацією React 19 / react-helmet).
+
+### 📞 Binotel: дзвінки в окремий ТГ-топік (коміт `b093f9a`)
+- Картки дзвінків тепер ідуть у forum-топік **168 «TJ Heat Pumps»** (колтрекінг стоїть на tjheatpump.com.ua), окремо від заявок форм termojet (топік 169 🔵 Termojet). Через наявний `notifyLead(text, threadId)`; `backend/telegram.js` не чіпали, `binotel.js` передає `CALLS_THREAD_ID`. Env: `TELEGRAM_CALLS_THREAD_ID=168` (серверний `.env`). Порожній `CALLS_THREAD_ID` → фолбек у топік форм.
+
+### 🔎 A+ серверний ін'єкт метаданих (коміти `2317a85`, `e13e675`, `100a216`)
+- `backend/server.js` per-URL підставляє в сирий HTML із БД: `<title>` (seo_title, ≤60), self-`canonical`, `<meta name=description>` (meta_description), og; у `<noscript>` — сторінковий H1 + опис. Для **товарів** (`/catalog/:cat/:slug`), **категорій** (`/catalog/:cat`, мапа `CATEGORY_META`), **блогу** (`/blog/:slug`), **статичних** (`STATIC_META`). Дані готові в БД (326/331 товарів мають seo_title+meta_description).
+- Закрито: title>60 (269→0), дубль-опис (361→~0), og:url≠canonical (331→0), title-too-short на категоріях (адаптивний падінг ≥30 симв.). Core SEO 90→99, Social 77→100.
+- Дедуп 9 seo_title товарів-варіантів (колектори (200)/(240), НГ-52.150 Л) — **прямо в продовій БД** (не в seed).
+- Фікс подвоєння суфікса «| Termojet» у `src/components/SEO.jsx`.
+
+### 🌍 EN-пілот мультимовного SEO (коміти `f35e69a`, `93f824d`)
+- **Контент каталогу вже перекладений** у БД (`products.i18n` JSON: en/pl/fr/de з name/description/seo_title/meta_description — 331/331; блог 23 en), але був невидимий пошуку (один URL, бот бачив UA). Рішення: **URL-мова `/en`**.
+- Фронтенд: роутинг `/en/*` (дзеркало публічних роутів під `PublicLayout`), мова з URL (`LangSync`/`useLangFromUrl`), lang-aware посилання (`LLink` + `localizedPath` з guard зовнішніх URL), `localizeHtml` (переписує href у HTML-контенті описів/блогу), перемикач мови міняє URL. UK без префікса — без змін.
+- Бекенд: `pickLang(row,lang)` з `i18n` → EN-ін'єкт для /en товарів/категорій/блогу/статичних (`STATIC_META_EN`); **hreflang** uk↔en+x-default на всіх; middleware редіректу 301-ить лише legacy (чинні /en проходять); `express.static index:false`.
+- Sitemap переписано (`scripts/gen-sitemap.cjs`): 768 URL (UA+EN) з `xhtml:link hreflang` + `lastmod`; стійкий до відсутності БД у Docker-builder.
+
+### ⚡ Продуктивність — Фаза 5 (коміт `169b7a3` + серверний webp)
+- **JS −62%:** `src/context/AppContext.jsx` більше не імпортує статично 2МБ `data/products.js` (+blog/portfolio/files) — на сервері дані з `/api`, у GitHub-Pages-режимі динамічний `import()`. `vite.config.js` `manualChunks`: vendor-react/icons/motion/3d. Чанк AppContext 2208→43КБ; початковий JS ~3.6→1.4МБ. Рендер каталогу/товару/блогу/EN перевірено.
+- **Зображення webp −48%** (серверно, не в репо): на Hetzner встановлено `cwebp`, згенеровано 364 `.webp` у `/var/www/termojet-wp/wp-content/uploads` (адитивно); nginx `/etc/nginx/conf.d/webp.conf` (`map $http_accept→$webp_suffix`) + `/wp-content/` `try_files $uri$webp_suffix $uri @wp_old` + `Vary: Accept`. Живо: 308КБ jpeg→161КБ webp, фолбек jpeg.
+
+### 📄 Документація
+- `docs/SEO-PLAN.md` — план по фазах + журнал виконання + before/after.
+- `docs/GSC-instrukciya.md` (+ PDF) — інструкція для відповідальної особи: сабмітнути sitemap у Google Search Console, запросити індексацію /en, моніторинг.
+
+### ⚠️ На замітку
+- **Білд Hetzner МУСИТЬ бути `VITE_BASE_URL=/`** (є в Dockerfile `build:prod`); дефолт у `vite.config.js` = `/termojet-website/` (GitHub Pages). Локальний `npm run build` без `VITE_BASE_URL=/` дає зламані асети.
+- Sitemap оновлюється локальним `node scripts/gen-sitemap.cjs` + коміт (у Docker-builder БД нема).
+- Не зроблено (опційно): числові слаги ~20 rozprodazh-товарів (301+колізії), Фаза 3 контент (описи категорій, авторство блогу), pl/de/fr (механізм готовий).
+
 ## Сесія 2026-07-01 — Binotel call-tracking → лід у CRM + Telegram
 
 > Деплой Hetzner: `ssh hetzner` → `/home/tankoseva/termojet-website` → `git pull && docker compose up -d --build`. Задеплоєно й перевірено наживо (реальні дзвінки).

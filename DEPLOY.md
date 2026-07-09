@@ -81,6 +81,17 @@ Docker-контейнер, що слухає `127.0.0.1:8080`:
 
 > Якщо додаються НОВІ товари зі старими wp-content фото — дозеркалити їх у `/var/www/termojet-wp/`.
 
+### wp-content webp-оптимізація (налаштовано 2026-07-09)
+Для швидкості віддаємо `.webp` браузерам, що підтримують (Accept: image/webp), інакше — оригінальний JPEG. Реальна економія ~48% (308КБ→161КБ), фолбек безпечний.
+- **Згенеровані webp:** `.webp` лежить поряд із кожним фото в `/var/www/termojet-wp/wp-content/uploads` (адитивно, оригінали не чіпаються). Інструмент — `cwebp` (пакет `webp`).
+- **nginx:** `map $http_accept $webp_suffix { default ""; "~*image/webp" ".webp"; }` у `/etc/nginx/conf.d/webp.conf`; у `location /wp-content/`: `try_files $uri$webp_suffix $uri @wp_old;` + `add_header Vary Accept;`. Бекап конфігу: `sites-available/termojet.bak.webp`.
+- **Регенерація** (після додавання нових wp-content фото):
+  ```bash
+  find /var/www/termojet-wp/wp-content/uploads -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) ! -name '*.webp' \
+    | while read f; do [ -f "$f.webp" ] || cwebp -quiet -q 82 "$f" -o "$f.webp"; done
+  ```
+  > Варто винести в cron / пост-деплой хук.
+
 ### SSL — Let's Encrypt
 - Сертифікат: `/etc/letsencrypt/live/termojet.com.ua/` — покриває `termojet.com.ua` + `www`.
 - **Автопродовження — автоматичне** (`authenticator = nginx`, HTTP-01). Перевірено
@@ -158,12 +169,43 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
 > підтримки Binotel. Прокидаються в контейнер через `environment:` у `docker-compose.yml`.
 > Плейсхолдери — у `.env.example`.
 
+### Telegram-топіки (оновлено 2026-07-08)
+Спільна група «Termojet Sales» `-1003809508040` — форум із топіками для обох сайтів:
+- **Заявки форм** termojet → топік **169 🔵 Termojet** (`TELEGRAM_THREAD_ID`).
+- **Дзвінки Binotel** → топік **168 TJ Heat Pumps** (`TELEGRAM_CALLS_THREAD_ID`) — колтрекінг стоїть на tjheatpump.com.ua. Порожньо → фолбек у топік форм.
+- Топіки створює PHP на tjheatpump: `/tg-create-lead-topics.php?secret=<WEBHOOK_SECRET>`.
+
 ### Діагностика
 - Роут логує кожну подію: `docker logs -f termojet-website-app-1 | grep binotel`
   (рядок `[binotel] <requestType> from <ip> ext=… disp=… bill=…`).
 - Тест гейтів без фейкових лідів: `curl` на `http://127.0.0.1:8080/api/webhooks/binotel`
   з/без заголовка `X-Forwarded-For: <IP Binotel>` — чужий IP → `403 forbidden`,
   IP Binotel + чужа компанія → `403 wrong company`, вихідний (`callType:1`) → `200` без ліда.
+
+## SEO: серверні метадані + мультимова (EN) — налаштовано 2026-07-09
+
+Сайт — CSR React SPA, тож краулер без JS бачив би оболонку `index.html`. Тому `backend/server.js`
+**серверно ін'єктить** правильні метадані в сирий HTML per-URL із БД (A+ підхід, не prerender/SSR).
+
+- **Метадані:** `<title>` (seo_title), self-`canonical`, `<meta description>` (meta_description), og,
+  H1+опис у `<noscript>` — для товарів (`/catalog/:cat/:slug`), категорій (`/catalog/:cat`, мапа
+  `CATEGORY_META`), блогу (`/blog/:slug`), статичних (`STATIC_META`). Дані — з полів БД
+  `seo_title`/`meta_description`/`i18n` (редагуються в адмінці; правки живуть у volume-БД, НЕ в seed).
+- **Мультимова EN:** URL-префікс `/en/*` (фронтенд — дзеркало роутів під `PublicLayout`, `LangSync`,
+  `LLink`/`localizedPath`). Бекенд ін'єктить EN-метадані з `i18n.en` (`pickLang`) + **hreflang**
+  uk↔en+x-default. `express.static index:false` — щоб catch-all додав hreflang головній. Middleware
+  legacy-редіректу 301-ить лише коли стрипнутий шлях є в `redirects.json` (чинні /en проходять).
+  Додати мову (pl/de/fr) — той самий механізм (дані `i18n` готові).
+- **Sitemap:** `public/sitemap.xml` генерує `scripts/gen-sitemap.cjs` з БД (UA+EN пари з `xhtml:hreflang`
+  + `lastmod`, 768 URL). Скрипт стійкий до відсутності БД у Docker-builder (лишає закомічений sitemap).
+  **Оновлення sitemap:** локально `node scripts/gen-sitemap.cjs` + коміт `public/sitemap.xml`.
+
+> ⚠️ **Білд Hetzner мусить бути `VITE_BASE_URL=/`** (є в `Dockerfile` `build:prod`). Дефолт у
+> `vite.config.js` = `/termojet-website/` (для GitHub Pages). Локально збирати теж `VITE_BASE_URL=/ npm run build`,
+> інакше асети підуть на `/termojet-website/…` і React не стартує.
+
+> Google Search Console: після змін сабмітнути `sitemap.xml` і запросити індексацію /en — див.
+> `docs/GSC-instrukciya.md`. Повний журнал SEO-робіт — `docs/SEO-PLAN.md`.
 
 ## Оновлення сайту
 
