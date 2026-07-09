@@ -1,5 +1,33 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-07-09 — SEO-доробки: structured data, FAQ, дедуп title, видимі описи категорій
+
+> Деплой Hetzner: `git pull && docker compose up -d --build`. Усе задеплоєно й перевірено наживо (curl JSON-LD + бандл). Глибокий ре-аудит: score **73→77**, усі Критичні+Високі пункти підрядника закрито. Повний звіт — `docs/SEO-звіт-2026-07-09.pdf`, деталі — `docs/SEO-PLAN.md`.
+
+### 🧩 Структуровані дані в сирий HTML (коміт `d090f79`)
+- `backend/server.js`: `ORG_SCHEMA` (Organization на всіх сторінках); `buildProductJsonLd` — **Product** (offers/price/sku/images з БД) + **BreadcrumbList** на товарах; **BreadcrumbList** на категоріях; **Article** на блозі. Escape `<`→`<`, schema опційна (`try/catch`). До цього schema була лише клієнтська (helmet) — невидима не-JS/LLM-краулерам.
+- ⚠️ `src/components/SEO.jsx` теж емітить ці schema клієнтом → після JS-рендеру дубль (безпечно, Google дедуплікує).
+
+### 🏷️ Категорійні описи + дедуп/скорочення title (коміт `d090f79`)
+- **`CATEGORY_META`** (server.js): meta-описи 15 категорій подовжено до 120–155 симв. (UA+EN).
+- **`scripts/seo-fix-titles.cjs`** (ідемпотентний, ганяється на прод-БД у контейнері): дедуп **11 пар** title (колектори к32/к42/к52 (200)/(240) + НГ-52.150 Л, UA+EN) + скорочення **52** EN seo_title >60. Результат: EN>60 61→0, UA-дубль 5→0, EN-дубль 6→0.
+
+### ❓ FAQ + FAQPage schema (коміт `ef6aca5`)
+- **21 реальний Q&A** (8 компанійних + 13 технічних: підбір насосних груп/колекторів, гідрострілка/КГС, сепаратори — шлам на зворотці/повітря на подачі/магнітні домішки, балансир, BOX/Mega, сумісність, насоси APE/APM/APM-F, титановий анод) у таблиці `faqs` через **`scripts/seed-faqs.cjs`** (UA+EN, upsert за питанням, ідемпотентний).
+- `buildFaqSchema` → **FAQPage JSON-LD** на `/faq` + `/en/faq`. `FaqPage.jsx` рендерить з таблиці (був фолбек 8 хардкод). Розблоковує FAQ-сніпети в Google.
+- Відгуки (`reviews`) лишились порожні — НЕ фабрикувати, заводити реальні через адмінку (Product-schema готова видати зірки ⭐).
+
+### 📁 Видимі описи категорій (коміт `457c89f`)
+- `src/data/categories.js`: `desc.uk/en` збагачено до rich-тексту (pl/fr/de збережено), синхронно з `CATEGORY_META`.
+- `src/pages/CatalogPage.jsx`: прибрано бляклий підзаголовок у шапці, додано **читабельний блок-абзац під шапкою** → UX + реальний on-page body-текст (лікує «thin content»).
+
+### 🟢 Фаза 6 завершена (a11y/комплаєнс/безпека)
+- `<main>`+skip-link (`App.jsx:75,79`), PrivacyPage+футер-лінк, security-заголовки (`server.js:42-45`, CSP присутній). CSP `unsafe-inline` свідомо лишено (GTM+framer-motion, non-SEO).
+
+### ⚠️ На замітку
+- **DB-скрипти** (`seo-fix-titles.cjs`, `seed-faqs.cjs`) міняють прод-БД у volume (не в seed) → після кожної переінсталяції з seed ганяти на сервері: `docker compose cp scripts/<x>.cjs app:/tmp/<x>.cjs && docker compose exec app node /tmp/<x>.cjs /app/backend/data/termojet.db --apply`. Бекапи: `data/termojet.db.bak-20260709-seo`, `-faq`.
+- Артефакти сирий-vs-рендер (no-main/thin-content/orphan/no-privacy у squirrel) — НЕ реальні: тіло рендерить React; лікуються лише повним prerender (відкладено, лише якщо LLM стане ціллю №1).
+
 ## Сесія 2026-07-08/09 — SEO-оверхол: серверні метадані, EN-мультимова, продуктивність
 
 > Деплой Hetzner: `ssh hetzner` → `/home/tankoseva/termojet-website` → `git pull && docker compose up -d --build`. Усе нижче задеплоєно й перевірено наживо (curl + рендер через headless Chrome). Детальний план і журнал по фазах — `docs/SEO-PLAN.md`.

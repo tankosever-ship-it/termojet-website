@@ -207,6 +207,28 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
 > Google Search Console: після змін сабмітнути `sitemap.xml` і запросити індексацію /en — див.
 > `docs/GSC-instrukciya.md`. Повний журнал SEO-робіт — `docs/SEO-PLAN.md`.
 
+### Structured data (JSON-LD)
+`backend/server.js` серверно ін'єктить у сирий HTML: **Organization** (усюди), **Product**+**BreadcrumbList**
+(товари, з offers/price/sku/images з БД), **BreadcrumbList** (категорії), **Article** (блог), **FAQPage**
+(`/faq`+`/en/faq`, з таблиці `faqs` через `buildFaqSchema`). Клієнтський `SEO.jsx` теж емітить частину —
+після JS-рендеру дубль, безпечно.
+
+### SEO DB-скрипти (прод-БД у volume, НЕ в seed → ганяти після переінсталяції з seed)
+```bash
+ssh hetzner && cd /home/tankoseva/termojet-website
+cp data/termojet.db data/termojet.db.bak-$(date +%Y%m%d)          # бекап
+docker compose cp scripts/seed-faqs.cjs app:/tmp/seed-faqs.cjs
+docker compose exec app node /tmp/seed-faqs.cjs /app/backend/data/termojet.db --apply       # 21 FAQ (UA+EN)
+docker compose cp scripts/seo-fix-titles.cjs app:/tmp/fix.cjs
+docker compose exec app node /tmp/fix.cjs /app/backend/data/termojet.db --apply             # дедуп+скороч. title
+```
+Обидва **ідемпотентні** (upsert). Без `--apply` — dry-run (лише показує зміни).
+
+### Описи категорій (два джерела — тримати в парі)
+- **Видимий на сторінці:** `src/data/categories.js` → `desc.{uk,en,...}` (рендерить `CatalogPage.jsx`).
+- **Meta (для Google):** `CATEGORY_META` у `backend/server.js` (бекенд CJS не імпортує `src/`).
+Змінюєш опис — онови **обидва** (текст має збігатися).
+
 ## Оновлення сайту
 
 Live-каталог на сервері — **`/home/tankoseva/termojet-website`** (git-checkout, tracking `origin/main`).
