@@ -1280,9 +1280,6 @@ export default function CatalogPage() {
               <h1 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif]">
                 {currentCategory ? (currentCategory.name[lang] || currentCategory.name.uk) : cat.title}
               </h1>
-              {currentCategory && (
-                <p className="text-white/60 mt-1.5 text-sm">{currentCategory.desc[lang] || currentCategory.desc.uk}</p>
-              )}
             </div>
             <div className="text-right flex-shrink-0">
               <div className="text-3xl font-black font-['Archivo',sans-serif]">{filtered.length}</div>
@@ -1293,6 +1290,13 @@ export default function CatalogPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6">
+
+        {/* ── Опис категорії (видимий + SEO body-текст) ── */}
+        {currentCategory && (currentCategory.desc[lang] || currentCategory.desc.uk) && (
+          <p className="text-gray-600 text-[15px] leading-relaxed max-w-3xl mb-5">
+            {currentCategory.desc[lang] || currentCategory.desc.uk}
+          </p>
+        )}
 
         {/* ── Смужка плиток-категорій (стиль Prom) — стрілки + fade + peek ── */}
         <CategoryStrip products={products} categories={CATEGORIES} catCounts={catCounts} currentCategory={currentCategory} lang={lang} />
