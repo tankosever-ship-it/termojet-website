@@ -109,10 +109,11 @@
 - [ ] 209 wp-content JPEG → webp/avif, стиснення, width/height, 19 alt.
 - [ ] Google Fonts у critical chain → self-host / preload.
 
-### 🔵 Фаза 6 — A11y / комплаєнс / безпека
-- [ ] `<main>` + skip-link (a11y + розпізнавання контенту).
-- [ ] Privacy Policy сторінка + лінк у футері; помітний Contact.
-- [ ] CSP без unsafe-inline; security-заголовки на статиці.
+### 🟢 Фаза 6 — A11y / комплаєнс / безпека — ЗАВЕРШЕНО (9 лип 2026)
+- [x] `<main>` + skip-link (a11y + розпізнавання контенту) — `App.jsx:75` skip-link, `App.jsx:79` `<main id="main">`.
+- [x] Privacy Policy сторінка + лінк у футері — `PrivacyPage.jsx`, роут `/privacy` + `/en/privacy`, 2 лінки у `Footer.jsx`, метадані в `STATIC_META`.
+- [x] Security-заголовки — `server.js:42-45`: X-Content-Type-Options: nosniff, X-Frame-Options: SAMEORIGIN, Referrer-Policy, **CSP присутній** (object-src 'none', frame-ancestors 'self', base-uri 'self', без unsafe-eval — лише wasm-unsafe-eval для 3D).
+- [~] CSP без `unsafe-inline` — **свідомо відкладено (non-SEO)**: `script-src`/`style-src` тримають `'unsafe-inline'` для GTM (`GTM-P9DW9P6D`) і framer-motion (інлайн-стилі на кожній анімації). Прибрати можна лише через nonce/hash → високий ризик зламати аналітику й анімації, нульова користь для ранжування. CSP-заголовок уже присутній (базовий захист є).
 
 ---
 
@@ -166,3 +167,43 @@
 - [x] Статичні сторінки (catalog/about/contacts/blog/service/faq/delivery/files/oem/partners/portfolio/returns/terms/privacy/navchannya) — STATIC_META. *(8 лип)*
 - [ ] (нюанс) з JS у Google-рендері canonical/description присутні двічі (сервер + React helmet, значення однакові) — нешкідливо; за бажанням прибрати клієнтський canonical на початковому рендері.
 - [ ] Решта фаз плану: 3 (контент категорій), 4 (перелінковка/orphan, /en, sitemap lastmod), 5 (JS split, зображення webp), 6 (privacy, CSP).
+
+---
+
+## Глибокий ре-аудит 9 лип 2026 (усі фази завершені) + звірка з аудитом підрядника
+
+`squirrel audit -C full --refresh` (500 сторінок, 768 у sitemap). **Score 77/C** (baseline 73). По категоріях: Core SEO **94**, URL **98**, Crawlability **98**, Security 93, Accessibility 93, Performance 90, Content 82, E-E-A-T 61, Legal 44; Analytics/i18n/Images/Mobile/Social — **100**.
+
+### Звірка з планом дій підрядника (Screaming Frog + Ahrefs, 7 лип)
+| Пункт підрядника (пріоритет) | Стан | Доказ (сирий HTML/аудит) |
+|---|---|---|
+| **Canonical→головна на 383 стор.** (Критично) | ✅ ВИПРАВЛЕНО | сирий HTML: self-canonical на товарах/категоріях/блозі UA+EN; 1 canonical |
+| **Title/meta/H1 на сервері** (Критично) | ✅ ВИПРАВЛЕНО | сирий HTML має `<title>`(seo_title)/description/og + H1 у noscript |
+| **Подвоєння «Termojet \| Termojet»** (Високий) | ✅ ВИПРАВЛЕНО | сирий title має 1 суфікс |
+| **Title ≤55–60 симв.** (Високий) | 🟡 UA=0 >60; **EN 39 стор. >60** | EN seo_title не обрізані (переклади довші) |
+| **Унікальні meta description** (Високий) | 🟡 товари ✅; **категорії ~111 закороткі** (98–113) | category description < 120 |
+| **/en польські слаги** (Середній) | ✅ вирішено | новий /en = UA-транслітерація (kolektor-k21v-125); старий /en/product/zawor… = soft-404 поза sitemap |
+| **Структуровані дані (Product/FAQ)** (Середній) | ❌ НЕ ЗРОБЛЕНО | 0 `ld+json` у сирому HTML |
+| **Size-атрибути + стиснути важкі** (Низький) | 🟡 webp −48% ✅; width/height НЕ додано | Images-категорія 100, але CLS-атрибутів нема |
+
+### Реальні залишкові доробки (fixable)
+1. **EN seo_title >60** (39 стор., усі /en) — обрізати EN `seo_title` у БД до ≤60 (як робили для UA).
+2. **Категорійні meta_description закороткі** (~111) — подовжити `CATEGORY_META` описи до 120–155.
+3. **Structured data (Product+FAQ JSON-LD)** — відсутні; найцінніше для GEO/LLM (підрядник наголошував на AI Overviews).
+4. **5 дубль-title (10 стор.)** — колектори к42/к52 (200)/(240) + НГ-52.150; лишок дедупу (робити в БД).
+5. **Числові слаги** (24 стор., 84312520a) — info; свідомо відкладено.
+
+### Артефакти сирий-vs-рендер — НЕ реальні регресії (не ганятись)
+- `no-main`, `skip-link`, `thin-content 61 слів`, `no privacy/contact link`, `orphan 491` — A+ інжектить лише `<head>`+`<noscript>`, тіло рендерить React. `<main>`, skip-link (`App.jsx:75-79`), лінк `/privacy` (Footer, `/privacy` HTTP 200) **існують у рендер-DOM** — Google (JS-рендер) і користувачі їх бачать. Прибрати з сирого HTML можна лише повним prerender/SSR — **свідомо відкладено**.
+- `CSP unsafe-inline` — свідомо (Фаза 6, GTM+framer-motion).
+- `http→https 301` (20) — коректна поведінка.
+- `unminified-js` — евристика «4 comments»; Vite мініфікує; main-чанк 469КБ вже −62%.
+
+| 2026-07-09 | ре-аудит | Глибокий full-аудит після всіх фаз (score 77). Усі Критичні+Високі пункти підрядника закрито (canonical/title/desc/H1/суфікс). Реальний залишок: EN-title>60, категорійні описи, Product/FAQ schema, 5 дубль-title. Решта попереджень — сирий-vs-рендер артефакти. | 73→77 |
+
+### Доробки 9 лип (пакет 1.3+2.1+2.2+2.3)
+- [x] **2.1 Structured data в сирий HTML** (`server.js`): `ORG_SCHEMA` (Organization на всіх сторінках), `buildProductJsonLd` (Product з offers/price/sku/images + BreadcrumbList) на товарах, BreadcrumbList на категоріях, Article на блозі. Escape `<`→`<`, `try/catch` (schema опційна). Локальний тест: 3 валідні JSON-LD на товарі (Product+Breadcrumb+Org), EN локалізований.
+- [x] **1.3 Категорійні описи** подовжено до 120–155 симв. (UA+EN) — збагачено `CATEGORY_META` 15 категорій. Приклад klapany: опис 145 симв.
+- [x] **2.2 EN seo_title >60** — скорочено 52 (правила + fit60) через `scripts/seo-fix-titles.cjs`. Було 61 >60 → 0.
+- [x] **2.3 Дедуп title** — 11 пар (колектори к32/к42/к52 (200)/(240) + НГ-52.150 Л) у UA+EN. Було: UA 5 груп, EN 6 груп → 0/0. Скрипт ідемпотентний, ганяється на прод-БД у контейнері (`docker compose cp` + exec), бо volume не в seed.
+- [ ] **1.2 Відгуки+FAQ** — контентні, потребують реальних даних (відгуки НЕ фабрикувати). Schema-інфраструктура (Product/Article) вже готова видати зірки/FAQ-сніпети коли зʼявляться дані.

@@ -244,7 +244,87 @@ function pickLang(row, lang) {
 // Спільний хелпер ін'єкту метаданих у shell (для краулерів/LLM без JS).
 // alternates: [{hreflang, href}] — список <link rel="alternate"> для hreflang.
 // Вставляємо їх одразу після canonical-тега.
-function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyText, alternates }) {
+// Organization schema (дзеркало src/components/SEO.jsx ORGANIZATION_SCHEMA) — на всіх сторінках.
+const ORG_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Termojet',
+  url: SITE,
+  logo: `${SITE}/wp-content/uploads/2023/08/logo.svg`,
+  description: 'Виробник насосних груп, колекторів, клапанів та систем для котелень. Власне виробництво в Україні з 2002 року.',
+  foundingDate: '2002',
+  address: { '@type': 'PostalAddress', addressCountry: 'UA', addressLocality: 'Київ' },
+  contactPoint: {
+    '@type': 'ContactPoint', telephone: '+380-50-718-91-65',
+    contactType: 'customer service', availableLanguage: ['Ukrainian', 'English', 'Polish'],
+  },
+}
+
+// Будує BreadcrumbList із пар {name, url}.
+function buildBreadcrumb(items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem', position: i + 1, name: it.name, item: it.url,
+    })),
+  }
+}
+
+// Серіалізує масив JSON-LD у <script>-теги. Екрануємо '<' → '<' (щоб жодне поле
+// не могло закрити <script> чи створити тег) — правильний escape для JSON усередині HTML.
+function jsonLdScripts(schemas) {
+  return (schemas || [])
+    .filter(Boolean)
+    .map(s => `<script type="application/ld+json">${JSON.stringify(s).replace(/</g, '\\u003c')}</script>`)
+    .join('\n    ')
+}
+
+// Абсолютні URL зображень товару з JSON-поля images (з фолбеком на головне фото).
+function productImages(imagesJson, fallback) {
+  try {
+    const arr = JSON.parse(imagesJson)
+    if (Array.isArray(arr) && arr.length) return arr.map(u => absImg(u))
+  } catch { /* нижче — фолбек */ }
+  return fallback ? [fallback] : []
+}
+
+// Product + BreadcrumbList + Organization для сторінки товару (дзеркало SEO.jsx, серверно з БД).
+function buildProductJsonLd(row, loc, { url, img, desc, cat, lang }) {
+  const en = lang === 'en'
+  const base = en ? `${SITE}/en` : SITE
+  const cm = CATEGORY_META[cat]
+  const product = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: loc.name,
+    description: desc,
+    sku: row.sku || undefined,
+    mpn: row.sku || undefined,
+    image: productImages(row.images, img),
+    brand: { '@type': 'Brand', name: 'Termojet' },
+    category: cm ? (en ? cm.nameEn : cm.name) : undefined,
+  }
+  if (row.price && Number(row.price) > 0) {
+    product.offers = {
+      '@type': 'Offer',
+      price: String(row.price),
+      priceCurrency: 'UAH',
+      availability: row.in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      url,
+      seller: { '@type': 'Organization', name: 'Termojet' },
+    }
+  }
+  const crumbs = [
+    { name: en ? 'Home' : 'Головна', url: base },
+    { name: en ? 'Catalog' : 'Каталог', url: `${base}/catalog` },
+  ]
+  if (cm) crumbs.push({ name: en ? cm.nameEn : cm.name, url: `${base}/catalog/${encodeURIComponent(cat)}` })
+  crumbs.push({ name: loc.name, url })
+  return [product, buildBreadcrumb(crumbs), ORG_SCHEMA]
+}
+
+function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyText, alternates, jsonLd }) {
   let out = img ? html.split(DEFAULT_OG_IMG).join(esc(img)) : html
   out = out
     .split(DEFAULT_TITLE).join(esc(title))
@@ -264,6 +344,8 @@ function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyT
     .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(desc)}$2`)
   if (h1) out = out.replace(/<h1>Termojet[^<]*<\/h1>/, `<h1>${esc(h1)}</h1>${bodyText ? `\n        <p>${esc(bodyText)}</p>` : ''}`)
+  const scripts = jsonLdScripts(jsonLd)
+  if (scripts) out = out.replace('</head>', `    ${scripts}\n  </head>`)
   return out
 }
 
@@ -279,64 +361,64 @@ function buildAlternates(uaUrl, enUrl) {
 // Назви+описи 15 категорій (uk + en; джерело — src/data/categories.js; бекенд CJS не імпортує ESM-фронт).
 const CATEGORY_META = {
   'nasosni-hrupy': {
-    name: 'Насосні групи', desc: 'Готові насосні вузли з обв’язкою для котелень',
-    nameEn: 'Pump Groups', descEn: 'Ready-made pump units with connections for boiler rooms',
+    name: 'Насосні групи', desc: 'Готові насосні вузли зі змішувачем і термостатикою для котелень та теплих підлог',
+    nameEn: 'Pump Groups', descEn: 'Ready-made pump units with mixing and thermostatic control for boiler rooms',
   },
   'hidravlichni-rozdilnyky': {
-    name: 'Роздільники гідравлічні', desc: 'Гідрострілки для котельних систем',
-    nameEn: 'Hydraulic Separators', descEn: 'Hydraulic arrows for boiler systems',
+    name: 'Роздільники гідравлічні', desc: 'Гідравлічні стрілки для балансування потоків у котельних системах опалення',
+    nameEn: 'Hydraulic Separators', descEn: 'Hydraulic separators for balancing flows in boiler heating systems',
   },
   'rozpodilchi-kolektory': {
-    name: 'Розподільчі колектори', desc: 'Колектори по потужності 60/105/175 кВт',
-    nameEn: 'Distribution Manifolds', descEn: 'Manifolds by capacity 60/105/175 kW',
+    name: 'Розподільчі колектори', desc: 'Розподільчі колектори в теплоізоляції по потужності 60, 105 та 175 кВт для котелень',
+    nameEn: 'Distribution Manifolds', descEn: 'Distribution manifolds in insulation by capacity 60, 105 and 175 kW for boiler rooms',
   },
   'kolektory-z-hidrostrilkoyu': {
-    name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою',
-    nameEn: 'Manifolds with Hydraulic Separator', descEn: 'Manifolds with integrated hydraulic separator',
+    name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою — компактний вузол розподілу для котельні',
+    nameEn: 'Manifolds with Hydraulic Separator', descEn: 'Manifolds with an integrated hydraulic separator — a compact distribution unit',
   },
   'termojet-box': {
-    name: 'Модульні системи TERMOJET BOX', desc: 'Компактні вузли обв’язки котла',
-    nameEn: 'TERMOJET BOX Modular Systems', descEn: 'Compact boiler connection units',
+    name: 'Модульні системи TERMOJET BOX', desc: 'Модульні системи TERMOJET BOX — компактні готові вузли обвʼязки котла для монтажу',
+    nameEn: 'TERMOJET BOX Modular Systems', descEn: 'TERMOJET BOX modular systems — compact ready-made boiler connection units',
   },
   'termojet-mega': {
-    name: 'Серія Termojet Mega (до 2200 кВт)', desc: 'Промислові системи опалення до 2.2 МВт',
-    nameEn: 'Termojet Mega Series (up to 2200 kW)', descEn: 'Industrial heating systems up to 2.2 MW',
+    name: 'Серія Termojet Mega (до 2200 кВт)', desc: 'Промислові системи опалення Termojet Mega потужністю до 2200 кВт для великих котелень',
+    nameEn: 'Termojet Mega Series (up to 2200 kW)', descEn: 'Termojet Mega industrial heating systems up to 2200 kW for large boiler rooms',
   },
   'nasosy': {
-    name: 'Насоси', desc: 'Циркуляційні насоси для систем опалення',
-    nameEn: 'Pumps', descEn: 'Circulation pumps for heating systems',
+    name: 'Насоси', desc: 'Циркуляційні насоси для систем опалення, теплої підлоги та котельних вузлів',
+    nameEn: 'Pumps', descEn: 'Circulation pumps for heating systems, underfloor heating and boiler units',
   },
   'klapany': {
-    name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові клапани та електричні сервоприводи',
-    nameEn: '3/4-Way & Thermostatic Valves', descEn: '3-way, 4-way valves and electric actuators',
+    name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
+    nameEn: '3/4-Way & Thermostatic Valves', descEn: '3- and 4-way rotary and thermostatic valves with electric actuators for heating',
   },
   'balansuval-klapany': {
-    name: 'Статичний балансувальний клапан', desc: 'Статичне балансування систем опалення',
-    nameEn: 'Static Balancing Valve', descEn: 'Static heating system balancing',
+    name: 'Статичний балансувальний клапан', desc: 'Статичні балансувальні клапани для рівномірного розподілу теплоносія в системі',
+    nameEn: 'Static Balancing Valve', descEn: 'Static balancing valves for even heat carrier distribution across the system',
   },
   'separatory': {
-    name: 'Сепаратори', desc: 'Шламові та повітряні сепаратори',
-    nameEn: 'Separators', descEn: 'Sludge and air separators',
+    name: 'Сепаратори', desc: 'Шламові та повітряні сепаратори для очищення теплоносія й захисту обладнання',
+    nameEn: 'Separators', descEn: 'Sludge and air separators for coolant cleaning and equipment protection',
   },
   'zonalne-keruvannya': {
-    name: 'Термостати та зональне керування', desc: 'Термостати, програматори, центри комутації та аксесуари',
-    nameEn: 'Thermostats & Zone Control', descEn: 'Thermostats, programmers, switching centers and accessories',
+    name: 'Термостати та зональне керування', desc: 'Термостати, програматори та центри комутації для зонального керування опаленням',
+    nameEn: 'Thermostats & Zone Control', descEn: 'Thermostats, programmers and switching centers for zone heating control',
   },
   'kolektory-pidloha': {
-    name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та шафи для теплої підлоги',
-    nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating',
+    name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та монтажні шафи для систем теплої підлоги',
+    nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating systems',
   },
   'avtomatyka': {
-    name: 'Автоматика котельного обладнання', desc: 'Контролери та системи управління котлами',
-    nameEn: 'Boiler Equipment Automation', descEn: 'Controllers and boiler management systems',
+    name: 'Автоматика котельного обладнання', desc: 'Контролери, датчики та системи управління котлами й котельним обладнанням',
+    nameEn: 'Boiler Equipment Automation', descEn: 'Controllers, sensors and management systems for boilers and boiler equipment',
   },
   'dodatkove': {
-    name: 'Додаткове обладнання', desc: 'Аксесуари і супутні товари для монтажу',
-    nameEn: 'Additional Equipment', descEn: 'Accessories and related products for installation',
+    name: 'Додаткове обладнання', desc: 'Аксесуари, кріплення та супутні товари для монтажу котельного обладнання',
+    nameEn: 'Additional Equipment', descEn: 'Accessories, fittings and related products for boiler equipment installation',
   },
   'rozprodazh': {
-    name: 'Акція', desc: 'Обладнання Termojet за акційними цінами',
-    nameEn: 'Sale', descEn: 'Termojet equipment at special prices',
+    name: 'Акція', desc: 'Обладнання Termojet за акційними цінами — колектори, насосні групи та клапани',
+    nameEn: 'Sale', descEn: 'Termojet equipment at special prices — manifolds, pump groups and valves',
   },
 }
 
@@ -386,7 +468,7 @@ function handleProduct(lang) {
   return (req, res, next) => {
     try {
       const row = _db.prepare(
-        'SELECT name, image, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
+        'SELECT name, image, images, sku, price, in_stock, category_slug, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
       ).get(req.params.slug)
       if (!row) return next()
       const loc = pickLang(row, lang)
@@ -402,7 +484,8 @@ function handleProduct(lang) {
       const bodyText = (stripHtml(loc.description) || stripHtml(loc.short_desc) || desc).slice(0, 600)
       const h1 = loc.name
       const alternates = buildAlternates(uaUrl, enUrl)
-      html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates })
+      const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang })
+      html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { return next() }
@@ -417,7 +500,7 @@ function handleBlog(lang) {
   return (req, res, next) => {
     try {
       const row = _db.prepare(
-        'SELECT title, excerpt, content, image, i18n FROM blog_posts WHERE slug = ? AND published = 1'
+        'SELECT title, excerpt, content, image, published_at, created_at, i18n FROM blog_posts WHERE slug = ? AND published = 1'
       ).get(req.params.slug)
       if (!row) return next()
       const loc = pickLang(row, lang)
@@ -432,7 +515,20 @@ function handleBlog(lang) {
       const bodyText = (stripHtml(loc.excerpt) || stripHtml(loc.content) || desc).slice(0, 600)
       const h1 = loc.title || row.title
       const alternates = buildAlternates(uaUrl, enUrl)
-      html = injectMeta(html, { title, desc, url, img, ogType: 'article', h1, bodyText, alternates })
+      const published = row.published_at || row.created_at || undefined
+      const article = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: (loc.title || row.title || '').slice(0, 110),
+        description: desc,
+        image: [img],
+        author: { '@type': 'Organization', name: 'Termojet' },
+        publisher: { '@type': 'Organization', name: 'Termojet', logo: { '@type': 'ImageObject', url: `${SITE}/logo-white.png` } },
+        datePublished: published,
+        dateModified: published,
+        mainEntityOfPage: url,
+      }
+      html = injectMeta(html, { title, desc, url, img, ogType: 'article', h1, bodyText, alternates, jsonLd: [article, ORG_SCHEMA] })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { return next() }
@@ -458,13 +554,23 @@ function handleCategory(lang) {
         if (title.length < 35) title = `${cm.nameEn} — boiler room equipment | Termojet`.slice(0, 60)
         const desc = `${cm.descEn}. Termojet — manufacturer since 2002, delivery across Ukraine.`.slice(0, 200)
         const alternates = buildAlternates(uaUrl, enUrl)
-        html = injectMeta(html, { title, desc, url: enUrl, h1: cm.nameEn, bodyText: cm.descEn, alternates })
+        const jsonLd = [buildBreadcrumb([
+          { name: 'Home', url: `${SITE}/en` },
+          { name: 'Catalog', url: `${SITE}/en/catalog` },
+          { name: cm.nameEn, url: enUrl },
+        ]), ORG_SCHEMA]
+        html = injectMeta(html, { title, desc, url: enUrl, h1: cm.nameEn, bodyText: cm.descEn, alternates, jsonLd })
       } else {
         let title = `${cm.name} | Termojet`
         if (title.length < 35) title = `${cm.name} — обладнання для котелень | Termojet`.slice(0, 60)
         const desc = `${cm.desc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
         const alternates = buildAlternates(uaUrl, enUrl)
-        html = injectMeta(html, { title, desc, url: uaUrl, h1: cm.name, bodyText: cm.desc, alternates })
+        const jsonLd = [buildBreadcrumb([
+          { name: 'Головна', url: SITE },
+          { name: 'Каталог', url: `${SITE}/catalog` },
+          { name: cm.name, url: uaUrl },
+        ]), ORG_SCHEMA]
+        html = injectMeta(html, { title, desc, url: uaUrl, h1: cm.name, bodyText: cm.desc, alternates, jsonLd })
       }
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
@@ -494,7 +600,7 @@ app.get('*', (req, res) => {
       const enUrl = SITE + '/en' + (lookupPath === '/' ? '' : lookupPath)
       const url = isEn ? enUrl : uaUrl
       const alternates = buildAlternates(uaUrl, enUrl)
-      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates })
+      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd: [ORG_SCHEMA] })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { /* fall through */ }
