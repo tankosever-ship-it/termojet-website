@@ -324,6 +324,22 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang }) {
   return [product, buildBreadcrumb(crumbs), ORG_SCHEMA]
 }
 
+// FAQPage schema з таблиці faqs (локалізовано). Порожня таблиця → null (нема schema).
+function buildFaqSchema(lang) {
+  try {
+    const rows = _db.prepare('SELECT question, answer, i18n FROM faqs ORDER BY sort ASC, created_at ASC').all()
+    if (!rows.length) return null
+    const mainEntity = rows.map(r => {
+      let q = r.question, a = r.answer
+      if (lang === 'en') {
+        try { const t = JSON.parse(r.i18n || '{}').en; if (t) { q = t.question || q; a = t.answer || a } } catch { /* UA-фолбек */ }
+      }
+      return { '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }
+    })
+    return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity }
+  } catch { return null }
+}
+
 function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyText, alternates, jsonLd }) {
   let out = img ? html.split(DEFAULT_OG_IMG).join(esc(img)) : html
   out = out
@@ -600,7 +616,9 @@ app.get('*', (req, res) => {
       const enUrl = SITE + '/en' + (lookupPath === '/' ? '' : lookupPath)
       const url = isEn ? enUrl : uaUrl
       const alternates = buildAlternates(uaUrl, enUrl)
-      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd: [ORG_SCHEMA] })
+      const jsonLd = [ORG_SCHEMA]
+      if (lookupPath === '/faq') { const faq = buildFaqSchema(isEn ? 'en' : 'uk'); if (faq) jsonLd.unshift(faq) }
+      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { /* fall through */ }
