@@ -463,9 +463,7 @@ export default function Navbar() {
               {aboutItems.map(i => (
                 <LLink key={i.to} to={i.to}
                   className="px-5 py-2 transition-colors"
-                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}>
                   {i.label}
                 </LLink>
               ))}
@@ -476,9 +474,7 @@ export default function Navbar() {
               {clientItems.map(i => (
                 <LLink key={i.to} to={i.to}
                   className="px-5 py-2 transition-colors"
-                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}>
                   {i.label}
                 </LLink>
               ))}

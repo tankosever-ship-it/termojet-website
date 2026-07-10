@@ -9,6 +9,7 @@ import { splitAccentToken } from '../data/homeContent'
 import { mediaSrc } from '../data/aboutContent'
 import SEO from '../components/SEO'
 import { assetPath } from '../utils/assetPath'
+import { canHover } from '../utils/canHover'
 import ReviewCard from '../components/ReviewCard'
 import ReviewFormModal from '../components/ReviewFormModal'
 import { REVIEWS } from '../data/reviews'
@@ -44,7 +45,7 @@ function CategoryCard({ cat, lang }) {
   return (
     <LLink to={`/catalog/${cat.slug}`}
       className="cat-card block"
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => canHover() && setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
 
       {/* Фото */}
@@ -614,7 +615,7 @@ export default function HomePage() {
               const isHovered = hoveredAdvantage === i
               return (
                 <motion.div key={i} variants={fadeUp}
-                  onMouseEnter={() => setHoveredAdvantage(i)}
+                  onMouseEnter={() => canHover() && setHoveredAdvantage(i)}
                   onMouseLeave={() => setHoveredAdvantage(null)}
                   animate={{ scale: isHovered ? 1.02 : 1 }}
                   transition={{ duration: 0.2 }}

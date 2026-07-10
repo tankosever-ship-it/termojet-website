@@ -18,7 +18,7 @@ export default function MobileBottomNav() {
     { label: t('nav.contacts'),          icon: Phone,        path: '/contacts' },
   ]
 
-  const cartCount = cart.reduce((s, i) => s + i.qty, 0)
+  const cartCount = cart.reduce((s, i) => s + (i.quantity || i.qty || 0), 0)
   // Знімаємо мовний префікс для визначення активної вкладки
   const strippedPathname = stripLangPrefix(location.pathname)
 
