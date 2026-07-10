@@ -32,6 +32,9 @@ const CATEGORY_BANNERS = {
   'zonalne-keruvannya': '/banner-zonalne-keruvannya.png',
 }
 
+// Обкладинка головної сторінки каталогу (коли категорія не обрана)
+const CATALOG_COVER = '/banner-catalog.webp'
+
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }
 
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
@@ -1251,9 +1254,9 @@ export default function CatalogPage() {
             linear-gradient(160deg, #080808, #111111)
           `
         }}>
-        {currentCategory && CATEGORY_BANNERS[currentCategory.slug] && (
+        {(currentCategory ? CATEGORY_BANNERS[currentCategory.slug] : CATALOG_COVER) && (
           <>
-            <img src={assetPath(CATEGORY_BANNERS[currentCategory.slug])} alt="" aria-hidden="true"
+            <img src={assetPath(currentCategory ? CATEGORY_BANNERS[currentCategory.slug] : CATALOG_COVER)} alt="" aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               style={{ objectPosition: 'center right' }} />
             <div className="absolute inset-0 pointer-events-none"
