@@ -108,14 +108,21 @@ export function AppProvider({ children }) {
       })
       .catch(() => {})
 
+    // Портфоліо: якщо в БД є записи (керовані в адмінці) — беремо їх; якщо БД
+    // порожня або API недоступний — фолбек на статичні реалізовані об'єкти
+    // (data/portfolio.js), щоб сторінка ніколи не була порожньою.
+    const loadStaticPortfolio = () =>
+      import('../data/portfolio').then(({ PORTFOLIO }) => setPortfolio(PORTFOLIO)).catch(() => {})
     fetch(`${API}/portfolio`)
       .then(r => r.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
           setPortfolio(data.map(p => ({ ...p, desc: p.description ?? p.desc ?? '', image: (p.images && p.images[0]) || p.image || '' })))
+        } else {
+          loadStaticPortfolio()
         }
       })
-      .catch(() => {})
+      .catch(loadStaticPortfolio)
 
     fetch(`${API}/reviews`)
       .then(r => r.json())
