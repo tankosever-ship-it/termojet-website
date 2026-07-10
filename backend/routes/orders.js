@@ -16,6 +16,9 @@ router.post('/', (req, res) => {
     np_city, np_city_ref, np_warehouse, np_warehouse_ref } = req.body
   const npLine = [np_city, np_warehouse].filter(Boolean).join(', ')
 
+  // Кошик фронта кладе кількість у поле `quantity`; підтримуємо й `qty` про запас
+  const itemQty = (i) => Number(i && (i.qty ?? i.quantity)) || 1
+
   // FIX 3 — recompute total server-side; never trust client-supplied price/total
   const getProduct = db.prepare('SELECT price FROM products WHERE id = ?')
   let serverTotal = 0
@@ -24,8 +27,7 @@ router.post('/', (req, res) => {
       if (!item || !item.id) continue
       const row = getProduct.get(item.id)
       if (!row) continue
-      const qty = Number(item.qty) || 1
-      serverTotal += (Number(row.price) || 0) * qty
+      serverTotal += (Number(row.price) || 0) * itemQty(item)
     }
   }
 
@@ -42,7 +44,7 @@ router.post('/', (req, res) => {
   }
 
   const itemLines = Array.isArray(items)
-    ? items.map(i => `• ${esc(i.name || i.title || 'товар')}${i.qty ? ` × ${i.qty}` : ''}`).join('\n')
+    ? items.map(i => `• ${esc(i.name || i.title || 'товар')} × ${itemQty(i)}`).join('\n')
     : ''
   notifyLead(
     `🔵 <b>Termojet — нове замовлення</b>\n` +
@@ -60,7 +62,7 @@ router.post('/', (req, res) => {
   // Пересилаємо лід у CRM (звідки прийшов: сайт · форма · UTM-канал)
   const utmStr = utmString(utm)
   const plainItems = Array.isArray(items)
-    ? items.map(i => `• ${i.name || i.title || 'товар'}${i.qty ? ` × ${i.qty}` : ''}`).join('\n')
+    ? items.map(i => `• ${i.name || i.title || 'товар'} × ${itemQty(i)}`).join('\n')
     : ''
   notifyCRM({
     type: 'order',
