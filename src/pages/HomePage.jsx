@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import LLink from '../components/LLink'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { ArrowRight, ArrowUpRight, Check, Smartphone, Play, X, Star, Send, ImagePlus } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Play, X, Star } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
@@ -10,7 +9,9 @@ import { splitAccentToken } from '../data/homeContent'
 import { mediaSrc } from '../data/aboutContent'
 import SEO from '../components/SEO'
 import { assetPath } from '../utils/assetPath'
-import { imgUrl } from '../utils/imgUrl'
+import ReviewCard from '../components/ReviewCard'
+import ReviewFormModal from '../components/ReviewFormModal'
+import { REVIEWS } from '../data/reviews'
 
 const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
@@ -255,177 +256,8 @@ function ProjectsCarousel() {
   )
 }
 
-const REVIEWS = [
-  { id: 1, name: 'Олег Марченко', role: 'Директор монтажної компанії', rating: 5, text: 'Встановили насосні групи TERMOJET на 12 об\'єктах за сезон. Жодної рекламації. Якість стабільна, документація завжди в комплекті.', date: 'Лютий 2025' },
-  { id: 2, name: 'Сергій Ковальчук', role: 'Головний інженер', rating: 5, text: 'Розподільчі колектори серії 175 кВт — відмінне рішення для великих об\'єктів. Терміни виготовлення витримали, менеджери завжди на зв\'язку.', date: 'Березень 2025' },
-  { id: 3, name: 'Андрій Федоренко', role: 'Проектувальник ОВК', rating: 5, text: 'Проектую системи опалення вже 15 років. TERMOJET BOX — найзручніший вузол обв\'язки котла на ринку. Монтується за 2 години замість цілого дня.', date: 'Квітень 2025' },
-  { id: 4, name: 'Василь Гончаренко', role: 'Власник сервісного центру', rating: 5, text: 'Гарантійні випадки — одиниці за 3 роки роботи. Сервісний відділ Termojet відповідає швидко. Рекомендую як надійного партнера.', date: 'Травень 2025' },
-  { id: 5, name: 'Ірина Павленко', role: 'Керівник проектів', rating: 4, text: 'Замовляємо обладнання для котелень промислових підприємств. Ціна/якість оптимальні. Хотілось би більше складських позицій у наявності.', date: 'Квітень 2025' },
-  { id: 6, name: 'Микола Бондаренко', role: 'Дилер TERMOJET, Харків', rating: 5, text: 'Партнеруємо 4 роки. Стабільні знижки, чітка логістика, якісні маркетингові матеріали. Продажі зростають щороку.', date: 'Березень 2025' },
-]
 
-function StarRating({ rating }) {
-  return (
-    <div className="flex gap-0.5">
-      {[1, 2, 3, 4, 5].map(i => (
-        <span key={i} style={{ color: i <= rating ? 'var(--accent)' : '#d8d8d8', fontSize: 14 }}>★</span>
-      ))}
-    </div>
-  )
-}
 
-function initials(name = '') {
-  return name.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase()
-}
-
-function ReviewCard({ review }) {
-  return (
-    <motion.div variants={fadeUp} className="flex flex-col gap-4 p-6"
-      style={{ background: '#f7f7f6', border: '1px solid #e8e8e8' }}>
-      <div className="flex items-center justify-between">
-        <StarRating rating={review.rating} />
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#bbb', letterSpacing: '0.06em' }}>
-          {review.date}
-        </span>
-      </div>
-      <p className="text-sm leading-relaxed flex-1" style={{ color: '#444' }}>
-        "{review.text}"
-      </p>
-      {review.photo && (
-        <a href={imgUrl(review.photo)} target="_blank" rel="noreferrer" className="block">
-          <img src={imgUrl(review.photo)} alt="" loading="lazy"
-            className="w-full h-40 object-cover border border-[#e0e0e0]" />
-        </a>
-      )}
-      <div className="pt-4 flex items-center gap-3" style={{ borderTop: '1px solid #e0e0e0' }}>
-        <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold"
-          style={{ background: 'var(--accent)' }}>
-          {initials(review.name)}
-        </div>
-        <div className="min-w-0">
-          <div className="font-bold text-[#1a1a1a] text-sm truncate">{review.name}</div>
-          {review.role && (
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#888', marginTop: 2, letterSpacing: '0.04em' }} className="truncate">
-              {review.role}
-            </div>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function ReviewFormModal({ onClose }) {
-  const t = useT()
-  const { submitReview } = useApp()
-  const [form, setForm] = useState({ name: '', company: '', rating: 5, text: '' })
-  const [photo, setPhoto] = useState(null)
-  const [preview, setPreview] = useState('')
-  const [state, setState] = useState('idle') // idle | sending | done | error
-  const [msg, setMsg] = useState('')
-  const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
-
-  function pickPhoto(e) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    if (file.size > 8 * 1024 * 1024) { setMsg(t('home.reviewPhotoTooBig')); setState('error'); return }
-    setPhoto(file)
-    setPreview(URL.createObjectURL(file))
-  }
-
-  async function submit(e) {
-    e.preventDefault()
-    if (!form.name.trim() || form.text.trim().length < 10) {
-      setState('error'); setMsg(t('home.reviewValidationError')); return
-    }
-    setState('sending'); setMsg('')
-    const res = await submitReview({ ...form, photo })
-    if (res?.ok) { setState('done'); setMsg(res.message || t('home.reviewSuccessMsg')) }
-    else { setState('error'); setMsg(res?.error || t('home.reviewSendError')) }
-  }
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.6)' }} onClick={onClose}>
-      <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <div className="font-black text-lg text-[#1a1a1a] font-['Archivo',sans-serif]">{t('home.leaveReview')}</div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-700"><X size={20} /></button>
-        </div>
-
-        {state === 'done' ? (
-          <div className="text-center py-12 px-6">
-            <Check size={46} className="mx-auto mb-4" style={{ color: '#22c55e' }} />
-            <div className="font-bold text-lg text-[#1a1a1a] mb-2">{t('home.reviewSentTitle')}</div>
-            <p className="text-sm text-gray-500 mb-6">{msg}</p>
-            <button onClick={onClose}
-              className="px-6 py-2.5 text-white text-sm font-bold" style={{ background: 'var(--accent)' }}>
-              {t('common.close')}
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={submit} className="p-6 space-y-4">
-            {/* Зірки */}
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">{t('home.reviewFormRating')}</label>
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map(i => (
-                  <button type="button" key={i} onClick={() => set('rating', i)} className="p-0.5">
-                    <Star size={28} style={{ color: i <= form.rating ? 'var(--accent)' : '#d8d8d8' }}
-                      fill={i <= form.rating ? 'var(--accent)' : 'none'} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormName')}</label>
-              <input value={form.name} onChange={e => set('name', e.target.value)} placeholder={t('home.reviewFormNamePlaceholder')} maxLength={80}
-                className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormCompany')}</label>
-              <input value={form.company} onChange={e => set('company', e.target.value)} placeholder={t('home.reviewFormCompanyPlaceholder')} maxLength={120}
-                className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm" />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormText')}</label>
-              <textarea value={form.text} onChange={e => set('text', e.target.value)} rows={4} maxLength={1500}
-                placeholder={t('home.reviewFormTextPlaceholder')}
-                className="w-full px-4 py-2.5 border border-gray-200 focus:outline-none focus:border-[var(--accent)] text-sm resize-none" />
-            </div>
-
-            {/* Фото */}
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">{t('home.reviewFormPhoto')}</label>
-              <label className="flex items-center gap-3 px-4 py-3 border border-dashed border-gray-300 cursor-pointer hover:border-[var(--accent)] transition-colors">
-                {preview ? (
-                  <img src={preview} alt="" className="w-14 h-14 object-cover" />
-                ) : (
-                  <ImagePlus size={22} className="text-gray-400" />
-                )}
-                <span className="text-sm text-gray-500">{photo ? photo.name : t('home.reviewFormPhotoUpload')}</span>
-                <input type="file" accept="image/jpeg,image/png,image/webp" onChange={pickPhoto} className="hidden" />
-              </label>
-            </div>
-
-            {state === 'error' && <p className="text-sm text-red-500">{msg}</p>}
-
-            <button type="submit" disabled={state === 'sending'}
-              className="w-full flex items-center justify-center gap-2 py-3 text-white font-bold disabled:opacity-60"
-              style={{ background: 'var(--accent)' }}>
-              <Send size={16} />
-              {state === 'sending' ? t('home.reviewFormSending') : t('home.reviewFormSubmit')}
-            </button>
-            <p className="text-[11px] text-gray-400 text-center">{t('home.reviewFormDisclaimer')}</p>
-          </form>
-        )}
-      </div>
-    </div>
-  )
-}
 
 function ReviewsSection() {
   const t = useT()
@@ -467,11 +299,18 @@ function ReviewsSection() {
               {t('home.reviewsTitle')}
             </motion.h2>
           </div>
-          <motion.button variants={fadeUp} onClick={() => setShowForm(true)}
-            className="inline-flex items-center gap-2 px-5 py-3 text-white text-sm font-bold self-start md:self-auto"
-            style={{ background: 'var(--accent)' }}>
-            <Star size={15} fill="white" /> {t('home.leaveReview')}
-          </motion.button>
+          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 self-start md:self-auto">
+            <button onClick={() => setShowForm(true)}
+              className="inline-flex items-center gap-2 px-5 py-3 text-white text-sm font-bold"
+              style={{ background: 'var(--accent)' }}>
+              <Star size={15} fill="white" /> {t('home.leaveReview')}
+            </button>
+            <LLink to="/reviews"
+              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold transition-colors hover:bg-[var(--accent)] hover:text-white"
+              style={{ color: 'var(--accent)', border: '1px solid var(--accent)' }}>
+              {t('home.viewMoreReviews')} <ArrowRight size={15} />
+            </LLink>
+          </motion.div>
         </motion.div>
 
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}

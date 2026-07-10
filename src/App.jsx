@@ -31,6 +31,7 @@ const OEMPage = lazy(() => import('./pages/OEMPage'))
 const ReturnPage = lazy(() => import('./pages/ReturnPage'))
 const PartnersPage = lazy(() => import('./pages/PartnersPage'))
 const TrainingPage = lazy(() => import('./pages/TrainingPage'))
+const ReviewsPage = lazy(() => import('./pages/ReviewsPage'))
 
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
@@ -149,6 +150,7 @@ function AppRoutes() {
         <Route path="/returns" element={<ReturnPage />} />
         <Route path="/partners" element={<PartnersPage />} />
         <Route path="/navchannya" element={<TrainingPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/training" element={<Navigate to="/navchannya" replace />} />
       </Route>
 
@@ -177,6 +179,7 @@ function AppRoutes() {
         <Route path="returns" element={<ReturnPage />} />
         <Route path="partners" element={<PartnersPage />} />
         <Route path="navchannya" element={<TrainingPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
         <Route path="training" element={<Navigate to="/en/navchannya" replace />} />
       </Route>
     </Routes>

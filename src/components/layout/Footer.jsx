@@ -140,6 +140,7 @@ export default function Footer() {
               {[
                 [nav.about, '/about'],
                 [nav.portfolio, '/portfolio'],
+                [nav.reviews, '/reviews'],
                 [nav.dealers, '/dealers'],
                 [nav.blog, '/blog'],
                 [nav.files, '/files'],

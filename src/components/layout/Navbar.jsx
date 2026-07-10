@@ -242,6 +242,7 @@ export default function Navbar() {
   const aboutItems = [
     { to: '/about',     label: t('navbar.aboutUs') },
     { to: '/portfolio', label: t('navbar.projects') },
+    { to: '/reviews',   label: t('navbar.reviews') },
     { to: '/blog',      label: t('navbar.blog') },
     { to: '/contacts',  label: t('navbar.contacts') },
   ]
@@ -308,7 +309,7 @@ export default function Navbar() {
               <div className="relative" ref={aboutRef}>
                 <button onClick={() => { setAboutOpen(v => !v); setCatalogOpen(false); setClientOpen(false) }}
                   className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
-                  style={{ ...navLinkStyle, color: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/about','/portfolio','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
+                  style={{ ...navLinkStyle, color: ['/about','/portfolio','/reviews','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/about','/portfolio','/reviews','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   {t('navbar.aboutTermojet')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: aboutOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
