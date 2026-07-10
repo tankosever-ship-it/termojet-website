@@ -305,7 +305,8 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang }) {
     brand: { '@type': 'Brand', name: 'Termojet' },
     category: cm ? (en ? cm.nameEn : cm.name) : undefined,
   }
-  if (row.price && Number(row.price) > 0) {
+  const hasPrice = row.price && Number(row.price) > 0
+  if (hasPrice) {
     product.offers = {
       '@type': 'Offer',
       price: String(row.price),
@@ -321,7 +322,9 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang }) {
   ]
   if (cm) crumbs.push({ name: en ? cm.nameEn : cm.name, url: `${base}/catalog/${encodeURIComponent(cat)}` })
   crumbs.push({ name: loc.name, url })
-  return [product, buildBreadcrumb(crumbs), ORG_SCHEMA]
+  // Product без offers невалідний (schema-валідатори вимагають offers/review/aggregateRating
+  // і без них rich-result неможливий) → для товарів без ціни віддаємо лише Breadcrumb+Organization.
+  return hasPrice ? [product, buildBreadcrumb(crumbs), ORG_SCHEMA] : [buildBreadcrumb(crumbs), ORG_SCHEMA]
 }
 
 // FAQPage schema з таблиці faqs (локалізовано). Порожня таблиця → null (нема schema).
