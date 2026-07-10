@@ -86,8 +86,10 @@ function setup() {
       location    TEXT,
       year        INTEGER,
       power       TEXT,
+      type        TEXT DEFAULT '',
       description TEXT DEFAULT '',
       images      TEXT DEFAULT '[]',
+      links       TEXT DEFAULT '[]',
       created_at  TEXT DEFAULT (datetime('now'))
     );
 
@@ -334,6 +336,50 @@ function migrateI18n() {
   }
 }
 
+// Міграція: колонки type / links у вже засіяну таблицю portfolio (ідемпотентно).
+function migratePortfolioCols() {
+  const cols = db.prepare('PRAGMA table_info(portfolio)').all().map(c => c.name)
+  if (!cols.includes('type')) {
+    db.exec("ALTER TABLE portfolio ADD COLUMN type TEXT DEFAULT ''")
+    console.log('Added type column to portfolio')
+  }
+  if (!cols.includes('links')) {
+    db.exec("ALTER TABLE portfolio ADD COLUMN links TEXT DEFAULT '[]'")
+    console.log('Added links column to portfolio')
+  }
+}
+
+// Засіяти реалізовані об'єкти у ПОРОЖНЮ таблицю portfolio (щоб керувати в адмінці).
+// Джерело — backend/seed-portfolio.json (згенеровано з src/data/portfolio.js).
+// Ідемпотентно: сіє лише коли записів немає — тож зникнення даних більше не залишить
+// сторінку порожньою (наступний старт відновить), а адмінські правки не перезатираються.
+function seedPortfolio() {
+  const count = db.prepare('SELECT COUNT(*) as c FROM portfolio').get().c
+  if (count > 0) return
+  const seedPath = path.join(__dirname, '..', 'seed-portfolio.json')
+  if (!fs.existsSync(seedPath)) return
+  const rows = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+  const insert = db.prepare(`
+    INSERT INTO portfolio (title, location, year, power, type, description, images, links, i18n)
+    VALUES (@title, @location, @year, @power, @type, @description, @images, @links, @i18n)
+  `)
+  const tx = db.transaction(list => {
+    for (const p of list) insert.run({
+      title: p.title,
+      location: p.location || '',
+      year: p.year ?? null,
+      power: p.power || '',
+      type: p.type || '',
+      description: p.description || '',
+      images: JSON.stringify(p.images || []),
+      links: JSON.stringify(p.links || []),
+      i18n: JSON.stringify(p.i18n || {}),
+    })
+  })
+  tx(rows)
+  console.log(`Seeded ${rows.length} portfolio projects into SQLite`)
+}
+
 setup()
 seedProducts()
 seedBlog()
@@ -341,5 +387,7 @@ migrateCurrency()
 migrateSeo()
 migrateSpecsArticle()
 migrateI18n()
+migratePortfolioCols()
+seedPortfolio()
 
 module.exports = db

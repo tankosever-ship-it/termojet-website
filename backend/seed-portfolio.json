@@ -1,0 +1,936 @@
+[
+  {
+    "title": "Колектор Termojet MEGA та насосні групи — виробниче приміщення",
+    "location": "Київська область",
+    "year": 2025,
+    "power": "",
+    "type": "Виробництво",
+    "description": "Оснащення виробничого приміщення колекторною системою Termojet MEGA з насосними групами та енергозберігаючими насосами Termojet APM-F. Рішення забезпечує рівномірний розподіл тепла по контурах і мінімальне споживання електроенергії на циркуляцію.",
+    "images": [
+      "/images/portfolio/proj-1.jpg"
+    ],
+    "links": [
+      {
+        "label": "Система Termojet MEGA",
+        "url": "/catalog/termojet-mega",
+        "label_en": "Termojet MEGA system",
+        "label_pl": "System Termojet MEGA",
+        "label_fr": "Système Termojet MEGA",
+        "label_de": "Termojet MEGA System"
+      },
+      {
+        "label": "Насоси Termojet APM-F",
+        "url": "/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-15f-250-mm",
+        "label_en": "Termojet APM-F pumps",
+        "label_pl": "Pompy Termojet APM-F",
+        "label_fr": "Pompes Termojet APM-F",
+        "label_de": "Termojet APM-F Pumpen"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Termojet MEGA manifold and pump groups — production facility",
+        "description": "Equipping a production facility with the Termojet MEGA manifold system, pump groups, and energy-efficient Termojet APM-F pumps. The solution ensures even heat distribution across circuits and minimal electricity consumption for circulation.",
+        "location": "Kyiv region",
+        "type": "Production"
+      },
+      "pl": {
+        "title": "Rozdzielacz Termojet MEGA i grupy pompowe — obiekt produkcyjny",
+        "description": "Wyposażenie obiektu produkcyjnego w system rozdzielacza Termojet MEGA z grupami pompowymi i energooszczędnymi pompami Termojet APM-F. Rozwiązanie zapewnia równomierny rozdział ciepła po obwodach i minimalne zużycie energii elektrycznej na cyrkulację.",
+        "location": "obwód kijowski",
+        "type": "Produkcja"
+      },
+      "fr": {
+        "title": "Collecteur Termojet MEGA et groupes de pompage — site de production",
+        "description": "Équipement d'un site de production avec le système de collecteur Termojet MEGA, des groupes de pompage et des pompes énergétiquement efficaces Termojet APM-F. La solution assure une répartition uniforme de la chaleur dans les circuits et une consommation électrique minimale pour la circulation.",
+        "location": "oblast de Kyiv",
+        "type": "Production"
+      },
+      "de": {
+        "title": "Termojet MEGA Verteiler und Pumpengruppen — Produktionsstätte",
+        "description": "Ausstattung einer Produktionsstätte mit dem Termojet MEGA Verteilersystem, Pumpengruppen und energieeffizienten Termojet APM-F Pumpen. Die Lösung gewährleistet eine gleichmäßige Wärmeverteilung in den Kreisen und minimalen Stromverbrauch für die Zirkulation.",
+        "location": "Oblast Kyjiw",
+        "type": "Produktion"
+      }
+    }
+  },
+  {
+    "title": "Котельня з тепловим насосом Termojet Hi Master 13 кВт",
+    "location": "Київська область",
+    "year": 2025,
+    "power": "13 кВт",
+    "type": "Приватний будинок",
+    "description": "Котельня приватного будинку на тепловому насосі Termojet Hi Master 13 кВт із буферною ємністю та бойлером непрямого нагріву Termojet. Обв'язка виконана на системі швидкого монтажу Termojet — компактно, акуратно та з мінімальними тепловтратами.",
+    "images": [
+      "/images/portfolio/proj-2.jpg"
+    ],
+    "links": [
+      {
+        "label": "Тепловий насос Termojet Hi Master",
+        "url": "https://tjheatpump.com.ua/",
+        "ext": true,
+        "label_en": "Termojet Hi Master heat pump",
+        "label_pl": "Pompa ciepła Termojet Hi Master",
+        "label_fr": "Pompe à chaleur Termojet Hi Master",
+        "label_de": "Termojet Hi Master Wärmepumpe"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      },
+      {
+        "label": "Гідравлічні розділювачі",
+        "url": "/catalog/hidravlichni-rozdilnyky",
+        "label_en": "Hydraulic separators",
+        "label_pl": "Sprzęgła hydrauliczne",
+        "label_fr": "Séparateurs hydrauliques",
+        "label_de": "Hydraulische Weichen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Boiler room with Termojet Hi Master 13 kW heat pump",
+        "description": "Boiler room of a private house with a Termojet Hi Master 13 kW heat pump, a buffer tank, and a Termojet indirect hot water boiler. The pipework is assembled on the Termojet quick-installation system — compact, neat, and with minimal heat losses.",
+        "location": "Kyiv region",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "Kotłownia z pompą ciepła Termojet Hi Master 13 kW",
+        "description": "Kotłownia domu prywatnego z pompą ciepła Termojet Hi Master 13 kW, zasobnikiem buforowym i bojlerem pośredniego podgrzewania Termojet. Instalacja wykonana w systemie szybkiego montażu Termojet — kompaktowo, starannie i z minimalnymi stratami ciepła.",
+        "location": "obwód kijowski",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Chaufferie avec pompe à chaleur Termojet Hi Master 13 kW",
+        "description": "Chaufferie d'une maison privée équipée d'une pompe à chaleur Termojet Hi Master 13 kW, d'un ballon tampon et d'un chauffe-eau indirect Termojet. La tuyauterie est réalisée avec le système de montage rapide Termojet — compact, soigné et avec des pertes thermiques minimales.",
+        "location": "oblast de Kyiv",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Heizraum mit Termojet Hi Master 13 kW Wärmepumpe",
+        "description": "Heizraum eines Privathauses mit einer Termojet Hi Master 13 kW Wärmepumpe, einem Pufferspeicher und einem Termojet Indirekt-Warmwasserbereiter. Die Verrohrung wurde mit dem Termojet Schnellmontagesystem ausgeführt — kompakt, ordentlich und mit minimalen Wärmeverlusten.",
+        "location": "Oblast Kyjiw",
+        "type": "Privathaus"
+      }
+    }
+  },
+  {
+    "title": "Адмінбудівля: каскад із трьох теплових насосів Suntide 20 кВт",
+    "location": "Містечко Хансена, Київська область",
+    "year": 2025,
+    "power": "60 кВт",
+    "type": "Адмінбудівля",
+    "description": "Адміністративна будівля на каскаді з трьох теплових насосів Suntide по 20 кВт із буферними ємностями. Розподіл тепла — через систему швидкого монтажу Termojet з енергозберігаючими насосами та автоматикою керування контурами.",
+    "images": [
+      "/images/portfolio/proj-3.jpg"
+    ],
+    "links": [
+      {
+        "label": "Теплові насоси Suntide",
+        "url": "https://tjheatpump.com.ua/",
+        "ext": true,
+        "label_en": "Suntide heat pumps",
+        "label_pl": "Pompy ciepła Suntide",
+        "label_fr": "Pompes à chaleur Suntide",
+        "label_de": "Suntide Wärmepumpen"
+      },
+      {
+        "label": "Енергозберігаючі насоси",
+        "url": "/catalog/nasosy",
+        "label_en": "Energy-efficient pumps",
+        "label_pl": "Pompy energooszczędne",
+        "label_fr": "Pompes énergétiquement efficaces",
+        "label_de": "Energieeffiziente Pumpen"
+      },
+      {
+        "label": "Автоматика",
+        "url": "/catalog/avtomatyka",
+        "label_en": "Automation",
+        "label_pl": "Automatyka",
+        "label_fr": "Automatisation",
+        "label_de": "Automatisierung"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Administrative building: cascade of three Suntide 20 kW heat pumps",
+        "description": "An administrative building heated by a cascade of three Suntide 20 kW heat pumps with buffer tanks. Heat distribution is handled via the Termojet quick-installation system with energy-efficient pumps and circuit control automation.",
+        "location": "Hansen Town, Kyiv region",
+        "type": "Administrative building"
+      },
+      "pl": {
+        "title": "Budynek administracyjny: kaskada trzech pomp ciepła Suntide 20 kW",
+        "description": "Budynek administracyjny ogrzewany kaskadą trzech pomp ciepła Suntide po 20 kW z zasobnikami buforowymi. Rozdział ciepła realizowany jest przez system szybkiego montażu Termojet z energooszczędnymi pompami i automatyką sterowania obwodami.",
+        "location": "miasteczko Hansena, obwód kijowski",
+        "type": "Budynek administracyjny"
+      },
+      "fr": {
+        "title": "Bâtiment administratif : cascade de trois pompes à chaleur Suntide 20 kW",
+        "description": "Bâtiment administratif chauffé par une cascade de trois pompes à chaleur Suntide de 20 kW chacune avec des ballons tampons. La distribution de chaleur est assurée par le système de montage rapide Termojet avec des pompes énergétiquement efficaces et une automatisation de régulation des circuits.",
+        "location": "Hansen Town, oblast de Kyiv",
+        "type": "Bâtiment administratif"
+      },
+      "de": {
+        "title": "Verwaltungsgebäude: Kaskade aus drei Suntide 20 kW Wärmepumpen",
+        "description": "Verwaltungsgebäude, beheizt durch eine Kaskade aus drei Suntide 20 kW Wärmepumpen mit Pufferspeichern. Die Wärmeverteilung erfolgt über das Termojet Schnellmontagesystem mit energieeffizienten Pumpen und Kreislaufregelungsautomatik.",
+        "location": "Hansen Town, Oblast Kyjiw",
+        "type": "Verwaltungsgebäude"
+      }
+    }
+  },
+  {
+    "title": "Система швидкого монтажу Termojet — приватний будинок",
+    "location": "Забже, Польща",
+    "year": 2024,
+    "power": "",
+    "type": "Приватний будинок",
+    "description": "Котельня приватного будинку в польському Забже, зібрана на системі швидкого монтажу Termojet із циркуляційними насосами Termojet. Готові насосні групи скорочують час монтажу обв'язки в рази та виключають помилки складання.",
+    "images": [
+      "/images/portfolio/proj-4.jpg"
+    ],
+    "links": [
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      },
+      {
+        "label": "Циркуляційні насоси",
+        "url": "/catalog/nasosy",
+        "label_en": "Circulation pumps",
+        "label_pl": "Pompy obiegowe",
+        "label_fr": "Pompes de circulation",
+        "label_de": "Umwälzpumpen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Termojet quick-installation system — private house",
+        "description": "A private house boiler room in Zabrze, Poland, assembled with the Termojet quick-installation system and Termojet circulation pumps. Ready-made pump groups drastically reduce pipework installation time and eliminate assembly errors.",
+        "location": "Zabrze, Poland",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "System szybkiego montażu Termojet — dom prywatny",
+        "description": "Kotłownia domu prywatnego w polskim Zabrzu, zmontowana w systemie szybkiego montażu Termojet z pompami obiegowymi Termojet. Gotowe grupy pompowe wielokrotnie skracają czas montażu instalacji i eliminują błędy składania.",
+        "location": "Zabrze, Polska",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Système de montage rapide Termojet — maison privée",
+        "description": "Chaufferie d'une maison privée à Zabrze, en Pologne, assemblée avec le système de montage rapide Termojet et des pompes de circulation Termojet. Les groupes de pompage préassemblés réduisent considérablement le temps d'installation de la tuyauterie et éliminent les erreurs de montage.",
+        "location": "Zabrze, Pologne",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Termojet Schnellmontagesystem — Privathaus",
+        "description": "Heizraum eines Privathauses in Zabrze, Polen, montiert mit dem Termojet Schnellmontagesystem und Termojet Umwälzpumpen. Fertige Pumpengruppen reduzieren den Zeitaufwand für die Rohrinstallation erheblich und schließen Montagefehler aus.",
+        "location": "Zabrze, Polen",
+        "type": "Privathaus"
+      }
+    }
+  },
+  {
+    "title": "Повний комплект: тепловий насос Suntide 13 кВт з бойлером і буфером",
+    "location": "Бровари, Київська область",
+    "year": 2025,
+    "power": "13 кВт",
+    "type": "Приватний будинок",
+    "description": "Повний комплект опалення приватного будинку: тепловий насос Suntide 13 кВт, бойлер та буферна ємність Termojet. Збалансована система готова до роботи «під ключ» — від джерела тепла до розподілу по контурах опалення.",
+    "images": [
+      "/images/portfolio/proj-5.jpg"
+    ],
+    "links": [
+      {
+        "label": "Тепловий насос Suntide",
+        "url": "https://tjheatpump.com.ua/",
+        "ext": true,
+        "label_en": "Suntide heat pump",
+        "label_pl": "Pompa ciepła Suntide",
+        "label_fr": "Pompe à chaleur Suntide",
+        "label_de": "Suntide Wärmepumpe"
+      },
+      {
+        "label": "Бойлери та буферні ємності",
+        "url": "https://tjheatpump.com.ua/",
+        "ext": true,
+        "label_en": "Boilers and buffer tanks",
+        "label_pl": "Bojlery i zasobniki buforowe",
+        "label_fr": "Chauffe-eaux et ballons tampons",
+        "label_de": "Warmwasserbereiter und Pufferspeicher"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Complete set: Suntide 13 kW heat pump with boiler and buffer tank",
+        "description": "A complete heating set for a private house: Suntide 13 kW heat pump, boiler and Termojet buffer tank. A balanced turnkey-ready system — from the heat source to distribution across heating circuits.",
+        "location": "Brovary, Kyiv region",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "Kompletny zestaw: pompa ciepła Suntide 13 kW z bojlerem i buforem",
+        "description": "Kompletny zestaw grzewczy dla domu prywatnego: pompa ciepła Suntide 13 kW, bojler i zasobnik buforowy Termojet. Zbilansowany system gotowy do pracy «pod klucz» — od źródła ciepła po rozdział na obwody grzewcze.",
+        "location": "Brovary, obwód kijowski",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Kit complet : pompe à chaleur Suntide 13 kW avec chauffe-eau et ballon tampon",
+        "description": "Kit de chauffage complet pour maison privée : pompe à chaleur Suntide 13 kW, chauffe-eau et ballon tampon Termojet. Un système équilibré prêt à l'emploi «clé en main» — de la source de chaleur jusqu'à la distribution dans les circuits de chauffage.",
+        "location": "Brovary, oblast de Kyiv",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Komplettpaket: Suntide 13 kW Wärmepumpe mit Warmwasserbereiter und Pufferspeicher",
+        "description": "Komplettes Heizungspaket für ein Privathaus: Suntide 13 kW Wärmepumpe, Warmwasserbereiter und Termojet Pufferspeicher. Ein ausgewogenes schlüsselfertiges System — von der Wärmequelle bis zur Verteilung in die Heizkreise.",
+        "location": "Brovary, Oblast Kyjiw",
+        "type": "Privathaus"
+      }
+    }
+  },
+  {
+    "title": "Котельня з тепловим насосом Termojet Hi Master та автоматикою",
+    "location": "Ірпінь, Київська область",
+    "year": 2025,
+    "power": "13 кВт",
+    "type": "Приватний будинок",
+    "description": "Котельня приватного будинку на тепловому насосі Termojet Hi Master 13 кВт із системою швидкого монтажу та автоматикою керування. Погодозалежне регулювання підтримує комфортну температуру й знижує витрати на опалення.",
+    "images": [
+      "/images/portfolio/proj-6.jpg"
+    ],
+    "links": [
+      {
+        "label": "Тепловий насос Termojet Hi Master",
+        "url": "https://tjheatpump.com.ua/",
+        "ext": true,
+        "label_en": "Termojet Hi Master heat pump",
+        "label_pl": "Pompa ciepła Termojet Hi Master",
+        "label_fr": "Pompe à chaleur Termojet Hi Master",
+        "label_de": "Termojet Hi Master Wärmepumpe"
+      },
+      {
+        "label": "Автоматика",
+        "url": "/catalog/avtomatyka",
+        "label_en": "Automation",
+        "label_pl": "Automatyka",
+        "label_fr": "Automatisation",
+        "label_de": "Automatisierung"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Boiler room with Termojet Hi Master heat pump and automation",
+        "description": "A private house boiler room with a Termojet Hi Master 13 kW heat pump, quick-installation system, and control automation. Weather-compensated regulation maintains a comfortable temperature and reduces heating costs.",
+        "location": "Irpin, Kyiv region",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "Kotłownia z pompą ciepła Termojet Hi Master i automatyką",
+        "description": "Kotłownia domu prywatnego z pompą ciepła Termojet Hi Master 13 kW, systemem szybkiego montażu i automatyką sterowania. Regulacja pogodozależna utrzymuje komfortową temperaturę i obniża koszty ogrzewania.",
+        "location": "Irpień, obwód kijowski",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Chaufferie avec pompe à chaleur Termojet Hi Master et automatisation",
+        "description": "Chaufferie d'une maison privée avec une pompe à chaleur Termojet Hi Master 13 kW, un système de montage rapide et une automatisation de régulation. La régulation en fonction des conditions météorologiques maintient une température confortable et réduit les coûts de chauffage.",
+        "location": "Irpin, oblast de Kyiv",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Heizraum mit Termojet Hi Master Wärmepumpe und Automatisierung",
+        "description": "Heizraum eines Privathauses mit einer Termojet Hi Master 13 kW Wärmepumpe, Schnellmontagesystem und Regelungsautomatik. Die witterungsgeführte Regelung hält eine komfortable Temperatur aufrecht und senkt die Heizkosten.",
+        "location": "Irpin, Oblast Kyjiw",
+        "type": "Privathaus"
+      }
+    }
+  },
+  {
+    "title": "Колектор до 175 кВт і насосні групи НГ-52 — комерційний об'єкт",
+    "location": "Львів",
+    "year": 2025,
+    "power": "175 кВт",
+    "type": "Комерційний об'єкт",
+    "description": "Комерційне приміщення з розподільчим колектором потужністю до 175 кВт і насосними групами Termojet НГ-52 з енергозберігаючими насосами APM. Система обслуговує кілька незалежних контурів опалення з точним балансуванням.",
+    "images": [
+      "/images/portfolio/proj-7.jpg"
+    ],
+    "links": [
+      {
+        "label": "Насосна група НГ-52",
+        "url": "/catalog/nasosni-hrupy/ng-52p-zi-zmishuvachem-1-1-4",
+        "label_en": "NG-52 pump group",
+        "label_pl": "Grupa pompowa NG-52",
+        "label_fr": "Groupe de pompage NG-52",
+        "label_de": "NG-52 Pumpengruppe"
+      },
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Насоси Termojet APM",
+        "url": "/catalog/nasosy/nasos-termojet-auto-apm-32-12-180mm",
+        "label_en": "Termojet APM pumps",
+        "label_pl": "Pompy Termojet APM",
+        "label_fr": "Pompes Termojet APM",
+        "label_de": "Termojet APM Pumpen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Manifold up to 175 kW and NG-52 pump groups — commercial property",
+        "description": "A commercial property with a distribution manifold up to 175 kW and Termojet NG-52 pump groups with energy-efficient APM pumps. The system serves several independent heating circuits with precise balancing.",
+        "location": "Lviv",
+        "type": "Commercial property"
+      },
+      "pl": {
+        "title": "Rozdzielacz do 175 kW i grupy pompowe NG-52 — obiekt komercyjny",
+        "description": "Obiekt komercyjny z rozdzielaczem o mocy do 175 kW i grupami pompowymi Termojet NG-52 z energooszczędnymi pompami APM. System obsługuje kilka niezależnych obwodów grzewczych z precyzyjnym balansowaniem.",
+        "location": "Lwów",
+        "type": "Obiekt komercyjny"
+      },
+      "fr": {
+        "title": "Collecteur jusqu'à 175 kW et groupes de pompage NG-52 — bâtiment commercial",
+        "description": "Un bâtiment commercial avec un collecteur de distribution jusqu'à 175 kW et des groupes de pompage Termojet NG-52 avec des pompes APM énergétiquement efficaces. Le système dessert plusieurs circuits de chauffage indépendants avec un équilibrage précis.",
+        "location": "Lviv",
+        "type": "Bâtiment commercial"
+      },
+      "de": {
+        "title": "Verteiler bis 175 kW und NG-52 Pumpengruppen — Gewerbeobjekt",
+        "description": "Ein Gewerbeobjekt mit einem Verteiler bis 175 kW und Termojet NG-52 Pumpengruppen mit energieeffizienten APM Pumpen. Das System versorgt mehrere unabhängige Heizkreise mit präziser Einregulierung.",
+        "location": "Lwiw",
+        "type": "Gewerbeobjekt"
+      }
+    }
+  },
+  {
+    "title": "Колектор за спецзамовленням і насосні групи — офісна будівля",
+    "location": "Харків",
+    "year": 2024,
+    "power": "",
+    "type": "Офісна будівля",
+    "description": "Офісна будівля у Харкові з розподільчим колектором Termojet, виготовленим за індивідуальним замовленням, насосними групами, автоматикою та циркуляційними насосами Termojet. Інженерне рішення під конкретну конфігурацію об'єкта.",
+    "images": [
+      "/images/portfolio/proj-8.jpg"
+    ],
+    "links": [
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      },
+      {
+        "label": "Автоматика",
+        "url": "/catalog/avtomatyka",
+        "label_en": "Automation",
+        "label_pl": "Automatyka",
+        "label_fr": "Automatisation",
+        "label_de": "Automatisierung"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Custom-made manifold and pump groups — office building",
+        "description": "An office building in Kharkiv with a custom-made Termojet distribution manifold, pump groups, automation, and Termojet circulation pumps. An engineering solution tailored to the specific configuration of the facility.",
+        "location": "Kharkiv",
+        "type": "Office building"
+      },
+      "pl": {
+        "title": "Rozdzielacz na specjalne zamówienie i grupy pompowe — budynek biurowy",
+        "description": "Budynek biurowy w Charkowie z rozdzielaczem Termojet wykonanym na indywidualne zamówienie, grupami pompowymi, automatyką i pompami obiegowymi Termojet. Rozwiązanie inżynierskie dopasowane do konkretnej konfiguracji obiektu.",
+        "location": "Charków",
+        "type": "Budynek biurowy"
+      },
+      "fr": {
+        "title": "Collecteur sur mesure et groupes de pompage — immeuble de bureaux",
+        "description": "Un immeuble de bureaux à Kharkiv avec un collecteur de distribution Termojet fabriqué sur mesure, des groupes de pompage, une automatisation et des pompes de circulation Termojet. Une solution technique adaptée à la configuration spécifique de l'objet.",
+        "location": "Kharkiv",
+        "type": "Immeuble de bureaux"
+      },
+      "de": {
+        "title": "Sonderanfertigungs-Verteiler und Pumpengruppen — Bürogebäude",
+        "description": "Ein Bürogebäude in Charkiw mit einem individuell gefertigten Termojet Verteiler, Pumpengruppen, Automatisierung und Termojet Umwälzpumpen. Eine ingenieurtechnische Lösung, angepasst an die spezifische Konfiguration des Objekts.",
+        "location": "Charkiw",
+        "type": "Bürogebäude"
+      }
+    }
+  },
+  {
+    "title": "Колекторний вузол до 175 кВт Termojet",
+    "location": "Дніпро",
+    "year": 2024,
+    "power": "175 кВт",
+    "type": "Колекторний вузол",
+    "description": "Колекторний вузол потужністю до 175 кВт виробництва Termojet (Україна). Компактна збірка розподільчого колектора з насосними групами для швидкого підключення контурів опалення великого об'єкта.",
+    "images": [
+      "/images/portfolio/proj-9.jpg"
+    ],
+    "links": [
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Termojet manifold unit up to 175 kW",
+        "description": "A Termojet (Ukraine) manifold unit with a capacity of up to 175 kW. A compact assembly of a distribution manifold with pump groups for the rapid connection of heating circuits in a large facility.",
+        "location": "Dnipro",
+        "type": "Manifold unit"
+      },
+      "pl": {
+        "title": "Węzeł rozdzielacza Termojet do 175 kW",
+        "description": "Węzeł rozdzielacza Termojet (Ukraina) o mocy do 175 kW. Kompaktowy zespół rozdzielacza z grupami pompowymi do szybkiego podłączenia obwodów grzewczych dużego obiektu.",
+        "location": "Dniepr",
+        "type": "Węzeł rozdzielacza"
+      },
+      "fr": {
+        "title": "Module collecteur Termojet jusqu'à 175 kW",
+        "description": "Un module collecteur Termojet (Ukraine) d'une puissance allant jusqu'à 175 kW. Un ensemble compact de collecteur de distribution avec des groupes de pompage pour le raccordement rapide des circuits de chauffage d'un grand bâtiment.",
+        "location": "Dnipro",
+        "type": "Module collecteur"
+      },
+      "de": {
+        "title": "Termojet Verteilerbaugruppe bis 175 kW",
+        "description": "Eine Termojet (Ukraine) Verteilerbaugruppe mit einer Leistung von bis zu 175 kW. Eine kompakte Einheit aus Verteiler und Pumpengruppen für den schnellen Anschluss der Heizkreise eines großen Objekts.",
+        "location": "Dnipro",
+        "type": "Verteilerbaugruppe"
+      }
+    }
+  },
+  {
+    "title": "Котельня приватного будинку: колектор і насосні групи Termojet",
+    "location": "Вінниця",
+    "year": 2025,
+    "power": "",
+    "type": "Приватний будинок",
+    "description": "Котельня приватного будинку з розподільчим колектором, насосними групами та циркуляційними насосами Termojet. Акуратна обв'язка забезпечує стабільну роботу всіх контурів опалення та теплої підлоги.",
+    "images": [
+      "/images/portfolio/proj-10.jpg"
+    ],
+    "links": [
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      },
+      {
+        "label": "Циркуляційні насоси",
+        "url": "/catalog/nasosy",
+        "label_en": "Circulation pumps",
+        "label_pl": "Pompy obiegowe",
+        "label_fr": "Pompes de circulation",
+        "label_de": "Umwälzpumpen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Private house boiler room: Termojet manifold and pump groups",
+        "description": "A private house boiler room with a distribution manifold, pump groups, and Termojet circulation pumps. Neat pipework ensures stable operation of all heating circuits and underfloor heating.",
+        "location": "Vinnytsia",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "Kotłownia domu prywatnego: rozdzielacz i grupy pompowe Termojet",
+        "description": "Kotłownia domu prywatnego z rozdzielaczem, grupami pompowymi i pompami obiegowymi Termojet. Staranna instalacja zapewnia stabilną pracę wszystkich obwodów grzewczych i ogrzewania podłogowego.",
+        "location": "Winnica",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Chaufferie de maison privée : collecteur et groupes de pompage Termojet",
+        "description": "Chaufferie d'une maison privée avec un collecteur de distribution, des groupes de pompage et des pompes de circulation Termojet. Une tuyauterie soignée assure le fonctionnement stable de tous les circuits de chauffage et du plancher chauffant.",
+        "location": "Vinnytsia",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Heizraum eines Privathauses: Termojet Verteiler und Pumpengruppen",
+        "description": "Heizraum eines Privathauses mit einem Verteiler, Pumpengruppen und Termojet Umwälzpumpen. Eine saubere Verrohrung gewährleistet den stabilen Betrieb aller Heizkreise und der Fußbodenheizung.",
+        "location": "Winnyzja",
+        "type": "Privathaus"
+      }
+    }
+  },
+  {
+    "title": "Освітній заклад: колектор до 200 кВт із приводами A-413",
+    "location": "Одеса",
+    "year": 2026,
+    "power": "200 кВт",
+    "type": "Освітній заклад",
+    "description": "Навчальне приміщення з потужним розподільчим колектором до 200 кВт, насосними групами та насосами Termojet. Контури керуються електроприводами з вбудованими контролерами A-413 — автоматичне підтримання заданої температури без зовнішньої автоматики.",
+    "images": [
+      "/images/portfolio/proj-11.jpg"
+    ],
+    "links": [
+      {
+        "label": "Привід-контролер A-413",
+        "url": "/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400",
+        "label_en": "A-413 actuator-controller",
+        "label_pl": "Siłownik-sterownik A-413",
+        "label_fr": "Actionneur-contrôleur A-413",
+        "label_de": "A-413 Antrieb-Regler"
+      },
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Educational institution: manifold up to 200 kW with A-413 actuators",
+        "description": "An educational facility with a high-capacity distribution manifold up to 200 kW, pump groups, and Termojet pumps. The circuits are controlled by electric actuators with built-in A-413 controllers — automatic maintenance of the set temperature without external automation.",
+        "location": "Odesa",
+        "type": "Educational institution"
+      },
+      "pl": {
+        "title": "Placówka oświatowa: rozdzielacz do 200 kW z siłownikami A-413",
+        "description": "Obiekt edukacyjny z wydajnym rozdzielaczem do 200 kW, grupami pompowymi i pompami Termojet. Obwody sterowane są siłownikami elektrycznymi z wbudowanymi sterownikami A-413 — automatyczne utrzymanie zadanej temperatury bez zewnętrznej automatyki.",
+        "location": "Odessa",
+        "type": "Placówka oświatowa"
+      },
+      "fr": {
+        "title": "Établissement scolaire : collecteur jusqu'à 200 kW avec actionneurs A-413",
+        "description": "Un établissement scolaire avec un puissant collecteur de distribution jusqu'à 200 kW, des groupes de pompage et des pompes Termojet. Les circuits sont commandés par des actionneurs électriques avec des contrôleurs A-413 intégrés — maintien automatique de la température de consigne sans automatisation externe.",
+        "location": "Odessa",
+        "type": "Établissement scolaire"
+      },
+      "de": {
+        "title": "Bildungseinrichtung: Verteiler bis 200 kW mit A-413 Antrieben",
+        "description": "Eine Bildungseinrichtung mit einem leistungsstarken Verteiler bis 200 kW, Pumpengruppen und Termojet Pumpen. Die Kreise werden durch Elektroantriebe mit integrierten A-413 Reglern gesteuert — automatische Aufrechterhaltung der Solltemperatur ohne externe Automatisierung.",
+        "location": "Odessa",
+        "type": "Bildungseinrichtung"
+      }
+    }
+  },
+  {
+    "title": "Котельня з насосними групами в EPP-ізоляції Termojet",
+    "location": "Полтава",
+    "year": 2025,
+    "power": "",
+    "type": "Приватний будинок",
+    "description": "Котельня приватного будинку з насосними групами Termojet в EPP-теплоізоляції, розподільчим колектором та енергозберігаючими насосами. EPP-кожух мінімізує тепловтрати й конденсат, зберігаючи акуратний вигляд котельні.",
+    "images": [
+      "/images/portfolio/proj-12.jpg"
+    ],
+    "links": [
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      },
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Енергозберігаючі насоси",
+        "url": "/catalog/nasosy",
+        "label_en": "Energy-efficient pumps",
+        "label_pl": "Pompy energooszczędne",
+        "label_fr": "Pompes énergétiquement efficaces",
+        "label_de": "Energieeffiziente Pumpen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Boiler room with Termojet pump groups in EPP insulation",
+        "description": "A private house boiler room with Termojet pump groups in EPP thermal insulation, a distribution manifold, and energy-efficient pumps. The EPP casing minimizes heat losses and condensation while keeping the boiler room looking neat.",
+        "location": "Poltava",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "Kotłownia z grupami pompowymi Termojet w izolacji EPP",
+        "description": "Kotłownia domu prywatnego z grupami pompowymi Termojet w izolacji termicznej EPP, rozdzielaczem i pompami energooszczędnymi. Obudowa EPP minimalizuje straty ciepła i kondensację, zachowując schludny wygląd kotłowni.",
+        "location": "Połtawa",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Chaufferie avec groupes de pompage Termojet en isolation EPP",
+        "description": "Chaufferie d'une maison privée avec des groupes de pompage Termojet en isolation thermique EPP, un collecteur de distribution et des pompes énergétiquement efficaces. Le boîtier EPP minimise les pertes thermiques et la condensation tout en préservant l'aspect soigné de la chaufferie.",
+        "location": "Poltava",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Heizraum mit Termojet Pumpengruppen in EPP-Dämmung",
+        "description": "Heizraum eines Privathauses mit Termojet Pumpengruppen in EPP-Wärmedämmung, einem Verteiler und energieeffizienten Pumpen. Das EPP-Gehäuse minimiert Wärmeverluste und Kondensation und bewahrt dabei das ordentliche Erscheinungsbild des Heizraums.",
+        "location": "Poltawa",
+        "type": "Privathaus"
+      }
+    }
+  },
+  {
+    "title": "Пелетна котельня 150 кВт із гідрострілкою та колектором",
+    "location": "Тернопіль",
+    "year": 2026,
+    "power": "150 кВт",
+    "type": "Пелетна котельня",
+    "description": "Пелетна котельня потужністю 150 кВт із розподільчим колектором та гідравлічним розділювачем (гідрострілкою) до 200 кВт. Контури обслуговують насосні групи з насосами Termojet APM і MEGA — надійний розподіл тепла між котлом і споживачами.",
+    "images": [
+      "/images/portfolio/proj-13.jpg"
+    ],
+    "links": [
+      {
+        "label": "Гідравлічні розділювачі",
+        "url": "/catalog/hidravlichni-rozdilnyky",
+        "label_en": "Hydraulic separators",
+        "label_pl": "Sprzęgła hydrauliczne",
+        "label_fr": "Séparateurs hydrauliques",
+        "label_de": "Hydraulische Weichen"
+      },
+      {
+        "label": "Насоси Termojet MEGA",
+        "url": "/catalog/termojet-mega",
+        "label_en": "Termojet MEGA pumps",
+        "label_pl": "Pompy Termojet MEGA",
+        "label_fr": "Pompes Termojet MEGA",
+        "label_de": "Termojet MEGA Pumpen"
+      },
+      {
+        "label": "Насоси Termojet APM",
+        "url": "/catalog/nasosy/nasos-termojet-auto-apm-32-12-180mm",
+        "label_en": "Termojet APM pumps",
+        "label_pl": "Pompy Termojet APM",
+        "label_fr": "Pompes Termojet APM",
+        "label_de": "Termojet APM Pumpen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "150 kW pellet boiler room with hydraulic separator and manifold",
+        "description": "A pellet boiler room with an output of 150 kW, a distribution manifold, and a hydraulic separator up to 200 kW. The circuits are served by pump groups with Termojet APM and MEGA pumps — reliable heat distribution between the boiler and the consumers.",
+        "location": "Ternopil",
+        "type": "Pellet boiler room"
+      },
+      "pl": {
+        "title": "Kotłownia na pelet 150 kW ze sprzęgłem hydraulicznym i rozdzielaczem",
+        "description": "Kotłownia na pelet o mocy 150 kW z rozdzielaczem i sprzęgłem hydraulicznym do 200 kW. Obwody obsługują grupy pompowe z pompami Termojet APM i MEGA — niezawodny rozdział ciepła między kotłem a odbiornikami.",
+        "location": "Tarnopol",
+        "type": "Kotłownia na pelet"
+      },
+      "fr": {
+        "title": "Chaufferie à granulés 150 kW avec séparateur hydraulique et collecteur",
+        "description": "Une chaufferie à granulés d'une puissance de 150 kW avec un collecteur de distribution et un séparateur hydraulique jusqu'à 200 kW. Les circuits sont desservis par des groupes de pompage équipés de pompes Termojet APM et MEGA — répartition fiable de la chaleur entre la chaudière et les consommateurs.",
+        "location": "Ternopil",
+        "type": "Chaufferie à granulés"
+      },
+      "de": {
+        "title": "150 kW Pelletheizraum mit hydraulischer Weiche und Verteiler",
+        "description": "Ein Pelletheizraum mit einer Leistung von 150 kW, einem Verteiler und einer hydraulischen Weiche bis 200 kW. Die Kreise werden von Pumpengruppen mit Termojet APM und MEGA Pumpen versorgt — zuverlässige Wärmeverteilung zwischen Kessel und Verbrauchern.",
+        "location": "Ternopil",
+        "type": "Pelletheizraum"
+      }
+    }
+  },
+  {
+    "title": "Промисловий колектор до 1000 кВт із частотними насосами APM",
+    "location": "Запоріжжя",
+    "year": 2025,
+    "power": "1000 кВт",
+    "type": "Промисловий об'єкт",
+    "description": "Промисловий розподільчий колектор потужністю до 1000 кВт, виготовлений за індивідуальним замовленням, із насосними групами та частотними енергозберігаючими насосами Termojet APM. Рішення для великих систем опалення з гнучким керуванням витратою.",
+    "images": [
+      "/images/portfolio/proj-14.jpg"
+    ],
+    "links": [
+      {
+        "label": "Розподільчі колектори",
+        "url": "/catalog/rozpodilchi-kolektory",
+        "label_en": "Distribution manifolds",
+        "label_pl": "Rozdzielacze",
+        "label_fr": "Collecteurs de distribution",
+        "label_de": "Verteiler"
+      },
+      {
+        "label": "Насоси Termojet APM",
+        "url": "/catalog/nasosy/nasos-termojet-auto-apm-32-12-180mm",
+        "label_en": "Termojet APM pumps",
+        "label_pl": "Pompy Termojet APM",
+        "label_fr": "Pompes Termojet APM",
+        "label_de": "Termojet APM Pumpen"
+      },
+      {
+        "label": "Насосні групи",
+        "url": "/catalog/nasosni-hrupy",
+        "label_en": "Pump groups",
+        "label_pl": "Grupy pompowe",
+        "label_fr": "Groupes de pompage",
+        "label_de": "Pumpengruppen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Industrial manifold up to 1000 kW with variable-frequency APM pumps",
+        "description": "A custom-made industrial distribution manifold with a capacity of up to 1000 kW, pump groups, and variable-frequency energy-efficient Termojet APM pumps. A solution for large heating systems with flexible flow control.",
+        "location": "Zaporizhzhia",
+        "type": "Industrial facility"
+      },
+      "pl": {
+        "title": "Przemysłowy rozdzielacz do 1000 kW z pompami APM o regulacji częstotliwości",
+        "description": "Przemysłowy rozdzielacz wykonany na specjalne zamówienie o mocy do 1000 kW, z grupami pompowymi i częstotliwościowymi energooszczędnymi pompami Termojet APM. Rozwiązanie dla dużych systemów grzewczych z elastycznym sterowaniem przepływem.",
+        "location": "Zaporoże",
+        "type": "Obiekt przemysłowy"
+      },
+      "fr": {
+        "title": "Collecteur industriel jusqu'à 1 000 kW avec pompes APM à variation de fréquence",
+        "description": "Un collecteur de distribution industriel fabriqué sur mesure d'une puissance allant jusqu'à 1 000 kW, avec des groupes de pompage et des pompes Termojet APM à variation de fréquence et à haute efficacité énergétique. Une solution pour les grands systèmes de chauffage avec un contrôle de débit flexible.",
+        "location": "Zaporizhzhia",
+        "type": "Site industriel"
+      },
+      "de": {
+        "title": "Industrieverteiler bis 1000 kW mit frequenzgeregelten APM Pumpen",
+        "description": "Ein individuell gefertigter industrieller Verteiler mit einer Leistung von bis zu 1000 kW, Pumpengruppen und frequenzgeregelten energieeffizienten Termojet APM Pumpen. Eine Lösung für große Heizungssysteme mit flexibler Durchflussregelung.",
+        "location": "Saporischschja",
+        "type": "Industrieobjekt"
+      }
+    }
+  },
+  {
+    "title": "Модуль Termojet BOX2 і колектори з нержавіючої сталі — тепла підлога",
+    "location": "Житомир",
+    "year": 2026,
+    "power": "",
+    "type": "Приватний будинок",
+    "description": "Приватний будинок із модулем Termojet BOX2, циркуляційними насосами та колекторами з нержавіючої сталі для теплої підлоги. Компактний модуль BOX2 поєднує гідророзділювач і колектор на 2 контури в одному корпусі.",
+    "images": [
+      "/images/portfolio/proj-15.jpg"
+    ],
+    "links": [
+      {
+        "label": "Модуль Termojet BOX2",
+        "url": "/catalog/termojet-box/modul-termojet-box2-v-teploizolyatsiyi-km2-ups",
+        "label_en": "Termojet BOX2 module",
+        "label_pl": "Moduł Termojet BOX2",
+        "label_fr": "Module Termojet BOX2",
+        "label_de": "Termojet BOX2 Modul"
+      },
+      {
+        "label": "Колектори для теплої підлоги",
+        "url": "/catalog/kolektory-pidloha",
+        "label_en": "Underfloor heating manifolds",
+        "label_pl": "Rozdzielacze do ogrzewania podłogowego",
+        "label_fr": "Collecteurs pour plancher chauffant",
+        "label_de": "Verteiler für Fußbodenheizung"
+      },
+      {
+        "label": "Циркуляційні насоси",
+        "url": "/catalog/nasosy",
+        "label_en": "Circulation pumps",
+        "label_pl": "Pompy obiegowe",
+        "label_fr": "Pompes de circulation",
+        "label_de": "Umwälzpumpen"
+      }
+    ],
+    "i18n": {
+      "en": {
+        "title": "Termojet BOX2 module and stainless steel manifolds — underfloor heating",
+        "description": "A private house with a Termojet BOX2 module, circulation pumps, and stainless steel manifolds for underfloor heating. The compact BOX2 module combines a hydraulic separator and a 2-circuit manifold in a single housing.",
+        "location": "Zhytomyr",
+        "type": "Private house"
+      },
+      "pl": {
+        "title": "Moduł Termojet BOX2 i rozdzielacze ze stali nierdzewnej — ogrzewanie podłogowe",
+        "description": "Dom prywatny z modułem Termojet BOX2, pompami obiegowymi i rozdzielaczami ze stali nierdzewnej do ogrzewania podłogowego. Kompaktowy moduł BOX2 łączy sprzęgło hydrauliczne i rozdzielacz 2-obwodowy w jednej obudowie.",
+        "location": "Żytomierz",
+        "type": "Dom prywatny"
+      },
+      "fr": {
+        "title": "Module Termojet BOX2 et collecteurs en acier inoxydable — plancher chauffant",
+        "description": "Une maison privée avec un module Termojet BOX2, des pompes de circulation et des collecteurs en acier inoxydable pour plancher chauffant. Le module compact BOX2 combine un séparateur hydraulique et un collecteur à 2 circuits dans un seul boîtier.",
+        "location": "Zhytomyr",
+        "type": "Maison privée"
+      },
+      "de": {
+        "title": "Termojet BOX2 Modul und Edelstahlverteiler — Fußbodenheizung",
+        "description": "Ein Privathaus mit einem Termojet BOX2 Modul, Umwälzpumpen und Edelstahlverteilern für Fußbodenheizung. Das kompakte BOX2 Modul vereint hydraulische Weiche und Verteiler für 2 Kreise in einem Gehäuse.",
+        "location": "Schytomyr",
+        "type": "Privathaus"
+      }
+    }
+  }
+]

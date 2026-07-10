@@ -4,7 +4,7 @@ import { ArrowLeft, Plus, Pencil, Trash2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import ImageUpload from '../../components/admin/ImageUpload'
 
-const EMPTY = { title: '', location: '', year: '', power: '', desc: '', image: '' }
+const EMPTY = { title: '', location: '', year: '', power: '', type: '', desc: '', image: '' }
 
 function Form({ item, onSave, onCancel }) {
   const [form, setForm] = useState({ ...EMPTY, ...item })
@@ -30,6 +30,11 @@ function Form({ item, onSave, onCancel }) {
         <div>
           <label className="text-xs text-gray-500 block mb-1">Потужність</label>
           <input value={form.power} onChange={e => set('power', e.target.value)} placeholder="500 кВт"
+            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
+        </div>
+        <div className="md:col-span-2">
+          <label className="text-xs text-gray-500 block mb-1">Тип об'єкту</label>
+          <input value={form.type} onChange={e => set('type', e.target.value)} placeholder="Приватний будинок / Виробництво / Адмінбудівля"
             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
         </div>
         <div className="md:col-span-2">
