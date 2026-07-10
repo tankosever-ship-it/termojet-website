@@ -37,4 +37,11 @@ services:
       - BINOTEL_ALLOWED_IPS=${BINOTEL_ALLOWED_IPS:-}
       - BINOTEL_API_KEY=${BINOTEL_API_KEY:-}
       - BINOTEL_API_SECRET=${BINOTEL_API_SECRET:-}
+      # Resend — лист-підтвердження замовлення клієнту (backend/email.js).
+      # RESEND_API_KEY з resend.com → API Keys; FROM на верифікованому домені
+      # termojet.com.ua; BCC (необов'язково) — прихована копія замовлень менеджеру.
+      # Без RESEND_API_KEY листи просто не відправляються (усе інше працює).
+      - RESEND_API_KEY=${RESEND_API_KEY:-}
+      - RESEND_FROM=${RESEND_FROM:-Termojet <zamovlennya@termojet.com.ua>}
+      - ORDER_EMAIL_BCC=${ORDER_EMAIL_BCC:-}
     restart: unless-stopped

@@ -3,6 +3,8 @@ const db = require('../db')
 const { requireAdmin } = require('./auth')
 const { notifyLead, esc } = require('../telegram')
 const { notifyCRM, utmString } = require('../crm')
+const { notifyCustomerOrder } = require('../email')
+const { getEurRate, toUAH } = require('../currency')
 
 const router = express.Router()
 
@@ -11,7 +13,7 @@ router.get('/', requireAdmin, (req, res) => {
   res.json(rows.map(r => ({ ...r, items: JSON.parse(r.items), utm: JSON.parse(r.utm || '{}') })))
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { items, name, phone, email, address, comment, payment, utm,
     np_city, np_city_ref, np_warehouse, np_warehouse_ref } = req.body
   const npLine = [np_city, np_warehouse].filter(Boolean).join(', ')
@@ -19,15 +21,23 @@ router.post('/', (req, res) => {
   // Кошик фронта кладе кількість у поле `quantity`; підтримуємо й `qty` про запас
   const itemQty = (i) => Number(i && (i.qty ?? i.quantity)) || 1
 
-  // FIX 3 — recompute total server-side; never trust client-supplied price/total
-  const getProduct = db.prepare('SELECT price FROM products WHERE id = ?')
+  // FIX 3 — recompute total server-side; never trust client-supplied price/total.
+  // Ціни EUR-товарів конвертуємо в гривню за курсом НБУ (як на фронті), інакше
+  // сума в «грн» була б числом у євро.
+  const eurRate = await getEurRate()
+  const getProduct = db.prepare('SELECT name, price, currency FROM products WHERE id = ?')
   let serverTotal = 0
+  const orderLines = [] // {name, qty, lineTotal} для листа/сповіщень
   if (Array.isArray(items)) {
     for (const item of items) {
       if (!item || !item.id) continue
       const row = getProduct.get(item.id)
       if (!row) continue
-      serverTotal += (Number(row.price) || 0) * itemQty(item)
+      const qty = itemQty(item)
+      const priceUah = toUAH(row.price, row.currency, eurRate)
+      const lineTotal = priceUah * qty
+      serverTotal += lineTotal
+      orderLines.push({ name: item.name || item.title || row.name || 'товар', qty, lineTotal })
     }
   }
 
@@ -79,6 +89,18 @@ router.post('/', (req, res) => {
       `Сума: ${serverTotal} грн`,
       utmStr ? `UTM: ${utmStr}` : '',
     ].filter(Boolean).join('\n'),
+  })
+
+  // Лист-підтвердження клієнту (Resend). Fire-and-forget: якщо email не вказано
+  // або ключ не налаштований — просто не відправиться, замовлення це не блокує.
+  notifyCustomerOrder({
+    id: result.lastInsertRowid,
+    name,
+    email,
+    lines: orderLines,
+    total: serverTotal,
+    delivery: npLine || address || '',
+    payment: payment || '',
   })
 
   res.status(201).json({ id: result.lastInsertRowid })
