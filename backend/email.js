@@ -72,7 +72,7 @@ function buildHtml(order) {
 
   const footerBits = [
     c.phone ? `тел. ${esc(c.phone)}` : '',
-    c.email ? `<a href="mailto:${esc(c.email)}" style="color:#0b63b8;text-decoration:none;">${esc(c.email)}</a>` : '',
+    c.email ? `<a href="mailto:${esc(c.email)}" style="color:#cc4400;text-decoration:none;">${esc(c.email)}</a>` : '',
   ].filter(Boolean).join(' · ')
 
   return `<!doctype html>
@@ -83,9 +83,9 @@ function buildHtml(order) {
     <tr><td align="center">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
         <!-- header -->
-        <tr><td style="background:#0b63b8;padding:26px 32px;">
+        <tr><td style="background:#FF5500;padding:26px 32px;">
           <div style="color:#ffffff;font-size:22px;font-weight:700;letter-spacing:0.3px;">Termojet</div>
-          <div style="color:#cfe1f5;font-size:14px;margin-top:2px;">Теплові насоси та обладнання</div>
+          <div style="color:#ffe0cc;font-size:14px;margin-top:2px;">Теплові насоси та обладнання</div>
         </td></tr>
         <!-- body -->
         <tr><td style="padding:32px;">
@@ -98,7 +98,7 @@ function buildHtml(order) {
             ${rows}
             <tr>
               <td style="padding:14px 0 0;color:#0f172a;font-size:17px;font-weight:700;">Разом</td>
-              <td style="padding:14px 0 0;color:#0b63b8;font-size:17px;font-weight:700;text-align:right;white-space:nowrap;">${uah(total)}</td>
+              <td style="padding:14px 0 0;color:#FF5500;font-size:17px;font-weight:700;text-align:right;white-space:nowrap;">${uah(total)}</td>
             </tr>
           </table>
 
@@ -108,7 +108,7 @@ function buildHtml(order) {
         <tr><td style="padding:20px 32px 28px;border-top:1px solid #eef1f5;">
           <p style="margin:0;color:#94a3b8;font-size:13px;line-height:1.6;">
             Питання по замовленню? ${footerBits ? footerBits + '<br>' : ''}
-            <a href="https://termojet.com.ua" style="color:#0b63b8;text-decoration:none;">termojet.com.ua</a>
+            <a href="https://termojet.com.ua" style="color:#cc4400;text-decoration:none;">termojet.com.ua</a>
           </p>
         </td></tr>
       </table>
@@ -130,6 +130,9 @@ async function sendEmail(order) {
       subject: `Termojet — замовлення №${order.id} прийнято`,
       html: buildHtml(order),
     }
+    // Відповіді клієнта → у робочу скриньку магазину (from лишається на верифікованому домені)
+    const storeEmail = (storeContacts().email || '').trim()
+    if (EMAIL_RE.test(storeEmail)) body.reply_to = storeEmail
     if (BCC) body.bcc = [BCC]
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
