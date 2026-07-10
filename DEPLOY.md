@@ -224,6 +224,12 @@ docker compose exec app node /tmp/fix.cjs /app/backend/data/termojet.db --apply 
 ```
 Обидва **ідемпотентні** (upsert). Без `--apply` — dry-run (лише показує зміни).
 
+> ⚠️ **КРИТИЧНО: ре-імпорт товарів (з 1С/WP) стирає ці зміни.** Пере-імпорт перезаписує базовий
+> `seo_title` (UA) → дедуп (200)/(240) і НГ-52.150 Л зникають, повертаються дублі-title. FAQ і
+> EN-скорочення (в `i18n`) зазвичай виживають, а UA-`seo_title` — ні. **Після КОЖНОГО ре-імпорту
+> товарів прожени `seo-fix-titles.cjs --apply`** (idempotent, безпечно). Ідеально — вбудувати виклик
+> у сам процес імпорту/синку.
+
 ### Описи категорій (два джерела — тримати в парі)
 - **Видимий на сторінці:** `src/data/categories.js` → `desc.{uk,en,...}` (рендерить `CatalogPage.jsx`).
 - **Meta (для Google):** `CATEGORY_META` у `backend/server.js` (бекенд CJS не імпортує `src/`).
