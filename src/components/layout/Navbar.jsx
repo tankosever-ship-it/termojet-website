@@ -10,6 +10,7 @@ import { assetPath } from '../../utils/assetPath'
 import CategoryIcon from '../CategoryIcon'
 import LLink from '../LLink'
 import { localizedPath, stripLangPrefix } from '../../utils/localizedPath'
+import { binotelRescan } from '../../utils/binotel'
 
 // ─── Mega-menu каталог (full-width) ───
 function MegaMenu({ lang, products, onClose }) {
@@ -205,6 +206,12 @@ export default function Navbar() {
 
   useEffect(() => { setMenuOpen(false); setCatalogOpen(false); setAboutOpen(false); setClientOpen(false) }, [location.pathname])
   useEffect(() => { if (searchOpen) searchRef.current?.focus() }, [searchOpen])
+
+  // Binotel: моб. бокове меню з шапки рендериться динамічно (номер зʼявляється в
+  // DOM лише при відкритті) — первинний скан Binotel його не бачить. Гукаємо
+  // повторний скан при відкритті меню та на зміні маршруту (напр. сторінка контактів).
+  useEffect(() => { if (menuOpen) binotelRescan() }, [menuOpen])
+  useEffect(() => { binotelRescan() }, [location.pathname])
 
   useEffect(() => {
     function handler(e) {
