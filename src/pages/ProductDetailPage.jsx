@@ -1066,7 +1066,8 @@ export default function ProductDetailPage() {
                 </LLink>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }} className="grid-cols-2 md:grid-cols-4">
+              <div className="flex gap-4 overflow-x-auto pb-3 cat-strip snap-x -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-4 md:gap-5 md:overflow-visible"
+                style={{ scrollPaddingLeft: 16, scrollPaddingRight: 40 }}>
                 {related.map(p => {
                   const pName = (lang !== 'uk' && p[`name_${lang}`]) ? p[`name_${lang}`] : (p.name || '')
                   const pPriceUAH = p.price ? Math.round(toUAH(p.price, p.currency, eurRate) || 0) : null
@@ -1080,7 +1081,7 @@ export default function ProductDetailPage() {
                         textDecoration: 'none', color: 'inherit',
                         transition: 'box-shadow .25s, transform .25s, border-color .25s',
                       }}
-                      className="pdp-rel-card"
+                      className="pdp-rel-card flex-shrink-0 w-[68%] max-w-[240px] snap-start md:w-auto md:max-w-none"
                     >
                       <div style={{
                         height: 160, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
