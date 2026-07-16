@@ -1,5 +1,22 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-07-16 — Binotel: роутинг дзвінків у Telegram по сайту-джерелу
+
+> Деплой Hetzner: `git pull && docker compose up -d --build`. Задеплоєно на прод і перевірено (curl 200 / контейнер Up). Кожен деплой підтверджувався окремо.
+
+### 🩹 fix: картки дзвінків Binotel падали в General замість топіка (коміт `848f2a9`)
+- **Проблема:** картка «🔴 Termojet — ПРОПУЩЕНИЙ дзвінок» (сторінка `termojet.com.ua`) потрапила в General («Усі») замість топіка 🔵 Termojet. Причина: роутинг через окрему env `TELEGRAM_CALLS_THREAD_ID` (реліквія, коли колтрекінг стояв на tjheatpump) — її хибне/порожнє значення давало `NaN` у `message_thread_id` → Telegram кидав повідомлення в General.
+- Прибрано залежність від `TELEGRAM_CALLS_THREAD_ID`; дзвінки пішли дефолтним `notifyLead`/`TELEGRAM_THREAD_ID` (=169). **Env `TELEGRAM_CALLS_THREAD_ID` тепер deprecated** (кодом не читається).
+
+### ✨ fix: підпис і топік дзвінка за доменом — termojet vs tjheatpump (коміт `a8e145a`)
+- **Ключове:** ОДИН Binotel-вебхук `backend/routes/binotel.js` обслуговує **обидва** сайти (один PUSH URL). Заголовок був захардкоджений «Termojet» → дзвінки з `tjheatpump.com.ua` мали чужий підпис. А фікс вище (`848f2a9`) слав **усі** дзвінки в топік Termojet (169) → tjheatpump-дзвінки йшли б не в свій топік.
+- Додано хелпер `siteFrom(callTrackingData.fullUrl)` → підпис + топік за доменом:
+  - `tjheatpump.com.ua` → «🟢/🔴 **Tjheatpump** — вхідний дзвінок» + топік 🟠 TJ Heat Pumps (`TELEGRAM_TJ_THREAD_ID`, дефолт-константа `168`)
+  - `termojet.com.ua` / невідомо → «Termojet» + дефолтний топік 🔵 (`TELEGRAM_THREAD_ID`=169)
+- Застосовано до 3 місць: миттєвий пінг (`receivedTheCall`), багата картка (`apiCallCompleted`), `source` CRM-ліда.
+- ⚠️ Пінг «дзвонить зараз» знає сайт лише якщо Binotel передає `fullUrl` у цій ранній події; інакше дефолт «Termojet» (багата картка за 1-2с приходить із правильним підписом). Точну прив'язку пінгу можна зробити за віртуальним номером кожного сайту (окреме завдання).
+- Замовлення/консультації tjheatpump **не** через цей вебхук — їх обробляє окремий PHP tjheatpump (уже мітка 🟠 TJ Heat Pumps).
+
 ## Сесія 2026-07-10 … 07-16 — Відгуки: окрема сторінка + моб-скрол «Схожі товари» + стиснення фото
 
 > Деплой Hetzner: `git pull && docker compose up -d --build`. Усе задеплоєно на прод і перевірено (curl 200 / білд / ESLint). Кожен деплой підтверджувався окремо.
