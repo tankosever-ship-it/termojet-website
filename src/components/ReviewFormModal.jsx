@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { X, Check, Star, Send, ImagePlus } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
+import { compressImage } from '../utils/compressImage'
 
 export default function ReviewFormModal({ onClose }) {
   const t = useT()
@@ -13,12 +14,18 @@ export default function ReviewFormModal({ onClose }) {
   const [msg, setMsg] = useState('')
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
-  function pickPhoto(e) {
+  async function pickPhoto(e) {
     const file = e.target.files?.[0]
     if (!file) return
-    if (file.size > 8 * 1024 * 1024) { setMsg(t('home.reviewPhotoTooBig')); setState('error'); return }
-    setPhoto(file)
-    setPreview(URL.createObjectURL(file))
+    // Запобіжник від абсурдно великих файлів (до стиснення)
+    if (file.size > 40 * 1024 * 1024) { setMsg(t('home.reviewPhotoTooBig')); setState('error'); return }
+    // Стискаємо прямо в браузері → надійний аплоад навіть на слабкій мережі
+    const compressed = await compressImage(file)
+    // Після стиснення фото майже завжди < 1 МБ; лишаємо запобіжник на 8 МБ
+    if (compressed.size > 8 * 1024 * 1024) { setMsg(t('home.reviewPhotoTooBig')); setState('error'); return }
+    if (state === 'error') { setState('idle'); setMsg('') }
+    setPhoto(compressed)
+    setPreview(URL.createObjectURL(compressed))
   }
 
   async function submit(e) {
