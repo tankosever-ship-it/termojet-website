@@ -29,11 +29,22 @@ const COMPANY_ID = String(process.env.BINOTEL_COMPANY_ID || '').trim()
 const ALLOWED_IPS = (process.env.BINOTEL_ALLOWED_IPS || '')
   .split(',').map(s => s.trim()).filter(Boolean)
 
-// Дзвінки Binotel відстежуються на termojet.com.ua → це ліди termojet, тож картка
-// дзвінка йде в той самий топік 🔵 Termojet, що й заявки з форм (дефолтний
-// TELEGRAM_THREAD_ID у notifyLead). Тому НЕ передаємо окремий threadId — раніше
-// це робилось через застарілу TELEGRAM_CALLS_THREAD_ID (епоха колтрекінгу на
-// tjheatpump), і хибне значення цієї env кидало картки в General замість топіка.
+// ОДИН Binotel-вебхук обслуговує ОБИДВА сайти (termojet + tjheatpump) — джерело
+// дзвінка визначаємо з callTrackingData.fullUrl. Кожен сайт → свій forum-топік і
+// свій підпис у заголовку, щоб одразу було видно, звідки дзвінок:
+//   • tjheatpump.com.ua → 🟠 TJ Heat Pumps (TELEGRAM_TJ_THREAD_ID, дефолт 168)
+//   • termojet.com.ua   → 🔵 Termojet (дефолтний notifyLead / TELEGRAM_THREAD_ID)
+// (Раніше все слалось із захардкодженим «Termojet» через TELEGRAM_CALLS_THREAD_ID —
+//  tjheatpump-дзвінки мали чужий підпис, а хибна env кидала картки в General.)
+const TJ_THREAD_ID = process.env.TELEGRAM_TJ_THREAD_ID || '168'
+
+// fullUrl → { label для заголовка, threadId для топіка }. Невідомий домен → termojet
+// (дефолтний топік). Ping-подія може не містити fullUrl → тоді теж дефолт termojet.
+function siteFrom(url) {
+  const u = String(url || '').toLowerCase()
+  if (u.includes('tjheatpump')) return { label: 'Tjheatpump', threadId: TJ_THREAD_ID }
+  return { label: 'Termojet', threadId: undefined }
+}
 
 function clientIp(req) {
   return String(req.ip || '').replace(/^::ffff:/, '')
@@ -102,11 +113,14 @@ router.post('/', (req, res) => {
   // Миттєвий пінг на початку дзвінка
   if (requestType === 'receivedTheCall') {
     if (callType !== '1') {
+      const ct = d.callTrackingData || body.callTrackingData || {}
+      const site = siteFrom(ct.fullUrl)
       const phone = fmtPhone(d.externalNumber ?? body.externalNumber)
       notifyLead(
-        `📞 <b>Termojet — вхідний дзвінок</b>\n` +
+        `📞 <b>${site.label} — вхідний дзвінок</b>\n` +
         `☎️ ${esc(phone)}\n` +
-        `⏳ Дзвонить зараз — підніміть слухавку`
+        `⏳ Дзвонить зараз — підніміть слухавку`,
+        site.threadId
       )
     }
     return res.json({ status: 'success' })
@@ -131,12 +145,13 @@ function handleCompleted(d, res) {
   const geo = [ct.geoipCity, ct.geoipRegion, ct.geoipCountry].filter(Boolean).join(', ')
   const rec = d.linkToCallRecordInMyBusiness || ''
   const btId = ct.id || d.generalCallID || ''
+  const site = siteFrom(ct.fullUrl)
 
   // ── Багата картка в Telegram ──
   const L = []
   L.push(answered
-    ? `🟢 <b>Termojet — вхідний дзвінок (прийнятий)</b>`
-    : `🔴 <b>Termojet — ПРОПУЩЕНИЙ дзвінок</b>`)
+    ? `🟢 <b>${site.label} — вхідний дзвінок (прийнятий)</b>`
+    : `🔴 <b>${site.label} — ПРОПУЩЕНИЙ дзвінок</b>`)
   L.push(`☎️ ${esc(phone)}`)
   if (cust.name) L.push(`👤 ${esc(cust.name)}${cust.id ? ` (#${esc(cust.id)})` : ''}`)
   L.push(answered
@@ -152,7 +167,7 @@ function handleCompleted(d, res) {
   if (ct.gaClientId || ct.gaTrackingId) L.push(`📈 GA: ${esc(ct.gaClientId || '')}${ct.gaTrackingId ? ` · ${esc(ct.gaTrackingId)}` : ''}`)
   if (rec) L.push(`🎧 <a href="${esc(rec)}">Запис розмови</a>`)
   if (btId) L.push(`🆔 binotel_id: ${esc(btId)}`)
-  notifyLead(L.join('\n'))
+  notifyLead(L.join('\n'), site.threadId)
 
   // ── Лід у CRM (деталі в message; пропущений → у CRM стає HIGH-задачею) ──
   const M = [
@@ -176,7 +191,7 @@ function handleCompleted(d, res) {
     type: 'call',
     name: cust.name ? `${cust.name} (дзвінок)` : `Дзвінок ${phone}`,
     phone: d.externalNumber || phone,
-    source: `Binotel · ${answered ? 'прийнятий' : 'ПРОПУЩЕНИЙ'} дзвінок${utm.length ? ` · ${utm[0][1]}` : ''}`,
+    source: `Binotel ${site.label} · ${answered ? 'прийнятий' : 'ПРОПУЩЕНИЙ'} дзвінок${utm.length ? ` · ${utm[0][1]}` : ''}`,
     message: M,
   })
 
