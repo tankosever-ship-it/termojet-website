@@ -15,8 +15,9 @@
 //   1) IP-allowlist серверів Binotel (req.ip коректний завдяки trust proxy у server.js).
 //   2) Звірка companyID (де він є в payload).
 // ENV (сервер, .env поряд з docker-compose): BINOTEL_COMPANY_ID, BINOTEL_ALLOWED_IPS,
-//   BINOTEL_API_KEY, BINOTEL_API_SECRET (останні два — на майбутнє: REST Binotel),
-//   TELEGRAM_CALLS_THREAD_ID (топік для карток дзвінків, окремо від форм termojet).
+//   BINOTEL_API_KEY, BINOTEL_API_SECRET (останні два — на майбутнє: REST Binotel).
+//   Колтрекінг стоїть на termojet.com.ua → дзвінок = лід termojet, тож картка йде
+//   в той самий топік 🔵 Termojet, що й форми (TELEGRAM_THREAD_ID у telegram.js).
 
 const express = require('express')
 const { notifyLead, esc } = require('../telegram')
@@ -28,11 +29,11 @@ const COMPANY_ID = String(process.env.BINOTEL_COMPANY_ID || '').trim()
 const ALLOWED_IPS = (process.env.BINOTEL_ALLOWED_IPS || '')
   .split(',').map(s => s.trim()).filter(Boolean)
 
-// Дзвінки роутимо в окремий forum-топік «TJ Heat Pumps» (колтрекінг стоїть на
-// tjheatpump.com.ua), окремо від форм termojet — ті йдуть у топік 🔵 Termojet через
-// TELEGRAM_THREAD_ID. Порожньо → падає в дефолтний топік notifyLead (як форми).
-// Майбутнє «номер/домен → свій топік»: обчислювати threadId per-call тут.
-const CALLS_THREAD_ID = process.env.TELEGRAM_CALLS_THREAD_ID || undefined
+// Дзвінки Binotel відстежуються на termojet.com.ua → це ліди termojet, тож картка
+// дзвінка йде в той самий топік 🔵 Termojet, що й заявки з форм (дефолтний
+// TELEGRAM_THREAD_ID у notifyLead). Тому НЕ передаємо окремий threadId — раніше
+// це робилось через застарілу TELEGRAM_CALLS_THREAD_ID (епоха колтрекінгу на
+// tjheatpump), і хибне значення цієї env кидало картки в General замість топіка.
 
 function clientIp(req) {
   return String(req.ip || '').replace(/^::ffff:/, '')
@@ -105,8 +106,7 @@ router.post('/', (req, res) => {
       notifyLead(
         `📞 <b>Termojet — вхідний дзвінок</b>\n` +
         `☎️ ${esc(phone)}\n` +
-        `⏳ Дзвонить зараз — підніміть слухавку`,
-        CALLS_THREAD_ID
+        `⏳ Дзвонить зараз — підніміть слухавку`
       )
     }
     return res.json({ status: 'success' })
@@ -152,7 +152,7 @@ function handleCompleted(d, res) {
   if (ct.gaClientId || ct.gaTrackingId) L.push(`📈 GA: ${esc(ct.gaClientId || '')}${ct.gaTrackingId ? ` · ${esc(ct.gaTrackingId)}` : ''}`)
   if (rec) L.push(`🎧 <a href="${esc(rec)}">Запис розмови</a>`)
   if (btId) L.push(`🆔 binotel_id: ${esc(btId)}`)
-  notifyLead(L.join('\n'), CALLS_THREAD_ID)
+  notifyLead(L.join('\n'))
 
   // ── Лід у CRM (деталі в message; пропущений → у CRM стає HIGH-задачею) ──
   const M = [
