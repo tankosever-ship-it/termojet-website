@@ -187,12 +187,15 @@ export default function CartPage() {
                 />
                 {errors.phone && <p className="text-xs text-red-500 mt-1">{t('cartPage.error.phone')}</p>}
               </div>
-              <input
-                {...register('email')}
-                placeholder={cartT.form.email}
-                type="email"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
-              />
+              <div>
+                <input
+                  {...register('email', { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })}
+                  placeholder={cartT.form.email}
+                  type="email"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm"
+                />
+                {errors.email && <p className="text-xs text-red-500 mt-1">{t('cartPage.error.email')}</p>}
+              </div>
               {/* Доставка — Нова Пошта (фолбек на поле адреси, якщо НП не налаштована) */}
               {npAvailable ? (
               <div className="space-y-2">

@@ -772,7 +772,8 @@ export const T = {
       },
       "error": {
         "name": "Введіть ім'я",
-        "phone": "Введіть телефон"
+        "phone": "Введіть телефон",
+        "email": "Введіть коректний email"
       },
       "payment": {
         "label": "Спосіб оплати",
@@ -2226,7 +2227,8 @@ export const T = {
       },
       "error": {
         "name": "Please enter your name",
-        "phone": "Please enter your phone number"
+        "phone": "Please enter your phone number",
+        "email": "Please enter a valid email"
       },
       "payment": {
         "label": "Payment method",
@@ -3680,7 +3682,8 @@ export const T = {
       },
       "error": {
         "name": "Proszę podać imię",
-        "phone": "Proszę podać numer telefonu"
+        "phone": "Proszę podać numer telefonu",
+        "email": "Proszę podać poprawny email"
       },
       "payment": {
         "label": "Metoda płatności",
@@ -5129,7 +5132,8 @@ export const T = {
       },
       "error": {
         "name": "Veuillez saisir votre nom",
-        "phone": "Veuillez saisir votre numéro de téléphone"
+        "phone": "Veuillez saisir votre numéro de téléphone",
+        "email": "Veuillez saisir un email valide"
       },
       "payment": {
         "label": "Mode de paiement",
@@ -6578,7 +6582,8 @@ export const T = {
       },
       "error": {
         "name": "Bitte Namen eingeben",
-        "phone": "Bitte Telefonnummer eingeben"
+        "phone": "Bitte Telefonnummer eingeben",
+        "email": "Bitte gültige E-Mail eingeben"
       },
       "payment": {
         "label": "Zahlungsmethode",
