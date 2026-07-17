@@ -197,6 +197,7 @@ export default function Navbar() {
   const aboutRef = useRef(null)
   const clientRef = useRef(null)
   const langRef = useRef(null)
+  const langMRef = useRef(null) // моб. перемикач мов у хедері
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
@@ -219,7 +220,8 @@ export default function Navbar() {
       if (catalogRef.current && !catalogRef.current.contains(e.target)) setCatalogOpen(false)
       if (aboutRef.current && !aboutRef.current.contains(e.target)) setAboutOpen(false)
       if (clientRef.current && !clientRef.current.contains(e.target)) setClientOpen(false)
-      if (langRef.current && !langRef.current.contains(e.target)) setLangOpen(false)
+      if (langRef.current && !langRef.current.contains(e.target) &&
+          langMRef.current && !langMRef.current.contains(e.target)) setLangOpen(false)
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -404,6 +406,29 @@ export default function Navbar() {
                 )}
               </div>
 
+              {/* Lang switcher — мобільний (біля кошика) */}
+              <div className="relative lg:hidden" ref={langMRef}>
+                <button onClick={() => setLangOpen(v => !v)}
+                  className="flex items-center gap-1 px-2 py-1.5 transition-all"
+                  style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 600, color: linkCol, border: solid ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: '0.5rem' }}>
+                  <span style={{ fontSize: '14px', lineHeight: 1 }}>{LANGS.find(l => l.code === lang)?.flag}</span>
+                  {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
+                  <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
+                </button>
+                {langOpen && (
+                  <div className="absolute top-full right-0 mt-1 w-20 z-[60] overflow-hidden"
+                    style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
+                    {LANGS.map(l => (
+                      <button key={l.code} onClick={() => handleLangSwitch(l.code)}
+                        className="w-full flex items-center gap-1.5 px-2.5 py-2.5 transition-colors"
+                        style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', color: lang === l.code ? 'var(--accent)' : 'rgba(255,255,255,0.6)', background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <span>{l.flag}</span> {l.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Cart */}
               <LLink to="/cart" className="relative p-2 mr-2 transition-all"
                 style={{ color: linkColMuted }}
@@ -455,9 +480,10 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-[var(--border)]"
-            style={{ background: 'rgba(255,255,255,0.96)', backdropFilter: 'blur(20px)' }}>
-            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5">
+          <div className="lg:hidden border-t border-[var(--border)] overflow-y-auto"
+            style={{ background: 'rgba(255,255,255,0.96)', backdropFilter: 'blur(20px)', maxHeight: 'calc(100vh - 60px)', WebkitOverflowScrolling: 'touch' }}>
+            {/* Нижній відступ, щоб CTA-кнопки й перемикач мов не ховались за моб. таб-баром */}
+            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5" style={{ paddingBottom: 'calc(96px + env(safe-area-inset-bottom))' }}>
 
               <LLink to="/catalog"
                 className="px-3 py-2.5 transition-colors"
@@ -465,24 +491,24 @@ export default function Navbar() {
                 {t('nav.catalog')}
               </LLink>
 
-              <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
+              <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
                 {t('navbar.aboutTermojet')}
               </div>
               {aboutItems.map(i => (
                 <LLink key={i.to} to={i.to}
-                  className="px-5 py-2 transition-colors"
-                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}>
+                  className="px-5 py-2.5 transition-colors"
+                  style={{ ...navLinkStyle, color: '#444', fontSize: '15px' }}>
                   {i.label}
                 </LLink>
               ))}
 
-              <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
+              <div className="px-3 py-1.5 mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--text-muted)' }}>
                 {t('navbar.forClient')}
               </div>
               {clientItems.map(i => (
                 <LLink key={i.to} to={i.to}
-                  className="px-5 py-2 transition-colors"
-                  style={{ ...navLinkStyle, color: '#555', fontSize: '10px' }}>
+                  className="px-5 py-2.5 transition-colors"
+                  style={{ ...navLinkStyle, color: '#444', fontSize: '15px' }}>
                   {i.label}
                 </LLink>
               ))}
@@ -502,12 +528,12 @@ export default function Navbar() {
               <div className="flex gap-2 pt-3 border-t border-[var(--border)] mt-1">
                 <LLink to="/partners"
                   className="flex-1 py-2.5 text-center"
-                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
+                  style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', borderRadius: '0.5rem' }}>
                   {t('navbar.becomePartner')}
                 </LLink>
                 <LLink to="/contacts"
                   className="flex-1 py-2.5 text-white text-center"
-                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '0.5rem' }}>
+                  style={{ background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', borderRadius: '0.5rem' }}>
                   {t('navbar.consultation')}
                 </LLink>
               </div>

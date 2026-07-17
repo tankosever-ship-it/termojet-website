@@ -40,6 +40,9 @@ function saveAdminToken(token) {
 export function AppProvider({ children }) {
   const [lang, setLang] = useState(() => localStorage.getItem('tj2_lang') || 'uk')
   const [products, setProducts] = useState([])
+  // false, доки список товарів ще вантажиться (API або статичний фолбек). Потрібен,
+  // щоб сторінка товару не блимала «Товар не знайдено» під час першого завантаження.
+  const [productsLoaded, setProductsLoaded] = useState(false)
   const [cart, setCart] = useState(loadCart)
   const [orders, setOrders] = useState([])
   const [consultations, setConsultations] = useState([])
@@ -76,7 +79,7 @@ export function AppProvider({ children }) {
       import('../data/products').then(async ({ PRODUCTS }) => {
         const { mergeWithEnriched } = await import('../data/mergeEnriched')
         setProducts(mergeWithEnriched(PRODUCTS))
-      }).catch(() => {})
+      }).catch(() => {}).finally(() => setProductsLoaded(true))
 
       import('../data/blog').then(({ BLOG_POSTS }) => {
         setBlog(BLOG_POSTS)
@@ -97,6 +100,7 @@ export function AppProvider({ children }) {
       .then(r => r.json())
       .then(data => { if (data.products?.length > 0) setProducts(data.products) })
       .catch(() => {})
+      .finally(() => setProductsLoaded(true))
 
     fetch(`${API}/blog`)
       .then(r => r.json())
@@ -501,7 +505,7 @@ export function AppProvider({ children }) {
     <AppContext.Provider value={{
       lang, setLang,
       eurRate,
-      products, setProducts,
+      products, setProducts, productsLoaded,
       cart, addToCart, removeFromCart, updateCartQuantity, clearCart, cartTotal, cartCount,
       orders, setOrders,
       consultations, setConsultations,

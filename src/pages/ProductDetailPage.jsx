@@ -578,7 +578,7 @@ function ImageGallery({ images, name, model3d, t }) {
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams()
   const navigate = useNavigate()
-  const { products, lang, addToCart, siteSettings, eurRate, files } = useApp()
+  const { products, productsLoaded, lang, addToCart, siteSettings, eurRate, files } = useApp()
   // Перехоплення кліків по внутрішніх лінках в описі → SPA-навігація (без перезавантаження)
   const onDescClick = e => {
     const a = e.target.closest('a')
@@ -668,6 +668,15 @@ export default function ProductDetailPage() {
 
   // ⚠️ ALL hooks above this line — safe early return (Rules of Hooks)
   if (!product) {
+    // Список товарів ще вантажиться (async) → показуємо лоадер, а не «не знайдено».
+    // Інакше на рефреші сторінка блимає «Товар не знайдено» до приходу даних.
+    if (!productsLoaded) {
+      return (
+        <div className="max-w-7xl mx-auto px-4 py-32 flex flex-col items-center justify-center text-center">
+          <div className="w-10 h-10 border-2 border-gray-200 border-t-[var(--accent)] rounded-full animate-spin" />
+        </div>
+      )
+    }
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <Package size={56} className="mx-auto text-gray-300 mb-4" />
