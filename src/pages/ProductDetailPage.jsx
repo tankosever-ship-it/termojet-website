@@ -210,7 +210,6 @@ function accordionContent(key, t) {
         body: (
           <ul style={{ listStyle: 'none', display: 'grid', gap: 13 }}>
             {[
-              [<CreditCard size={17} />, t('product.accordion.paymentMethod1Title'), t('product.accordion.paymentMethod1Desc')],
               [<span style={{ fontWeight: 800 }}>₴</span>, t('product.accordion.paymentMethod2Title'), t('product.accordion.paymentMethod2Desc')],
               [<span style={{ fontWeight: 800 }}>₴</span>, t('product.accordion.paymentMethod3Title'), t('product.accordion.paymentMethod3Desc')],
             ].map(([ic, title, desc], i) => (

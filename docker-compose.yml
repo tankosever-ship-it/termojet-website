@@ -2,7 +2,9 @@ services:
   app:
     build: .
     ports:
-      - "8080:3000"
+      # Біндимо ЛИШЕ на localhost — nginx проксує на http://127.0.0.1:8080.
+      # Без 127.0.0.1 порт стирчав би в інтернет (0.0.0.0) в обхід nginx (TLS/rate-limit).
+      - "127.0.0.1:8080:3000"
     volumes:
       # persist database and uploads between restarts
       - ./data:/app/backend/data

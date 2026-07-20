@@ -571,10 +571,6 @@ export const T = {
           {
             "title": "Передоплата",
             "desc": "При замовленні нестандартних конфігурацій або позицій під замовлення — передоплата 50%. Залишок сплачується перед відвантаженням."
-          },
-          {
-            "title": "Оплата карткою онлайн",
-            "desc": "Оплата карткою Visa / Mastercard через захищений платіжний шлюз LiqPay. Доступна при оформленні замовлення на сайті termojet.com.ua."
           }
         ]
       },
@@ -2026,10 +2022,6 @@ export const T = {
           {
             "title": "Prepayment",
             "desc": "For non-standard configurations or items made to order — 50% prepayment required. The balance is paid before dispatch."
-          },
-          {
-            "title": "Online Card Payment",
-            "desc": "Payment by Visa / Mastercard via the secure LiqPay payment gateway. Available when placing an order on termojet.com.ua."
           }
         ]
       },
@@ -3481,10 +3473,6 @@ export const T = {
           {
             "title": "Przedpłata",
             "desc": "Przy zamówieniu niestandardowych konfiguracji lub pozycji na zamówienie — przedpłata 50%. Pozostała kwota płatna przed wysyłką."
-          },
-          {
-            "title": "Płatność kartą online",
-            "desc": "Płatność kartą Visa / Mastercard przez bezpieczną bramkę płatniczą LiqPay. Dostępna przy składaniu zamówienia na stronie termojet.com.ua."
           }
         ]
       },
@@ -4927,10 +4915,6 @@ export const T = {
           {
             "title": "Virement bancaire",
             "desc": "Paiement par facture pour les entreprises et les entrepreneurs. TVA 20%."
-          },
-          {
-            "title": "Paiement par carte",
-            "desc": "Paiement en ligne par carte Visa / Mastercard lors de la commande."
           },
           {
             "title": "Espèces à la livraison",
@@ -6377,10 +6361,6 @@ export const T = {
           {
             "title": "Banküberweisung",
             "desc": "Zahlung per Rechnung für Unternehmen und Unternehmer. MwSt. 20%."
-          },
-          {
-            "title": "Kartenzahlung",
-            "desc": "Online-Zahlung per Visa / Mastercard bei der Bestellung."
           },
           {
             "title": "Barzahlung bei Lieferung",

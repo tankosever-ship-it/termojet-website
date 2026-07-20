@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
-import { Truck, Warehouse, Package, Home, CreditCard, Building2, Banknote, Info, CheckCircle } from 'lucide-react'
+import { Truck, Warehouse, Package, Home, Building2, Banknote, Info, CheckCircle } from 'lucide-react'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
 
 const DELIVERY_ICONS = [Truck, Warehouse, Package, Home]
-const PAYMENT_ICONS  = [Building2, CreditCard, Banknote]
+const PAYMENT_ICONS  = [Building2, Banknote, Banknote]
 
 const fadeUp  = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
 const stagger = { show: { transition: { staggerChildren: 0.1 } } }

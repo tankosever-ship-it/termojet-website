@@ -255,7 +255,6 @@ export default function CartPage() {
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm bg-white"
                 >
                   <option>{t('cartPage.payment.bankTransfer')}</option>
-                  <option>{t('cartPage.payment.card')}</option>
                 </select>
               </div>
               <ConsentCheckbox buttonLabel={t('cartPage.payment.placeOrder')} />
