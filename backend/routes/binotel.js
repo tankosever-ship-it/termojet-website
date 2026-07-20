@@ -4,8 +4,9 @@
 // (CallTracking). Дзеркалить потік лідів із форм сайту (crm.js / telegram.js).
 //
 // Binotel шле НА ОДИН URL кілька подій одного дзвінка (поле requestType/method):
-//   receivedTheCall   — пішов вхідний (ще не підняли) → миттєвий пінг «дзвонить зараз»
-//   answeredTheCall   — слухавку підняли (ігноруємо, щоб не дублювати пінг)
+//   receivedTheCall   — пішов вхідний (ще не підняли) → ІГНОРУЄМО (немає callTrackingData,
+//                       не можна визначити сайт → раніше пінг ішов у чужий топік)
+//   answeredTheCall   — слухавку підняли (ігноруємо)
 //   hangupTheCall     — мінімальний leg-hangup без companyID/даних (ігноруємо)
 //   apiCallCompleted  — ФІНАЛ з callDetails + callTrackingData (UTM/GA/гео/час на сайті/
 //                       запис/клієнт) → ТУТ створюємо лід + багату картку в Telegram
@@ -110,19 +111,11 @@ router.post('/', (req, res) => {
   // Реагуємо лише на вхідні (callType 0). callType 1 = вихідний.
   const callType = String(d.callType ?? body.callType ?? '0')
 
-  // Миттєвий пінг на початку дзвінка
+  // Миттєвий пінг «дзвонить зараз» ВИМКНЕНО: подія receivedTheCall не містить
+  // callTrackingData (fullUrl) → неможливо визначити сайт-джерело, тож пінг ішов
+  // у чужий топік із хибним підписом «Termojet». Лишаємо лише фінальну картку
+  // apiCallCompleted — там є fullUrl → правильний топік + підпис. Просто ACK події.
   if (requestType === 'receivedTheCall') {
-    if (callType !== '1') {
-      const ct = d.callTrackingData || body.callTrackingData || {}
-      const site = siteFrom(ct.fullUrl)
-      const phone = fmtPhone(d.externalNumber ?? body.externalNumber)
-      notifyLead(
-        `📞 <b>${site.label} — вхідний дзвінок</b>\n` +
-        `☎️ ${esc(phone)}\n` +
-        `⏳ Дзвонить зараз — підніміть слухавку`,
-        site.threadId
-      )
-    }
     return res.json({ status: 'success' })
   }
 
