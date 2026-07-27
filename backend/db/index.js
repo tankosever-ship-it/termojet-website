@@ -103,6 +103,23 @@ function setup() {
       created_at  TEXT DEFAULT (datetime('now'))
     );
 
+    -- Відгуки НА КОНКРЕТНИЙ ТОВАР (окремо від загальних reviews вище).
+    -- published=0 за замовчуванням: публічні відгуки йдуть на модерацію в адмінку.
+    -- product_* — знімок товару, щоб адмінка показувала «до якого товару» без join.
+    CREATE TABLE IF NOT EXISTS product_reviews (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      product_id    TEXT,
+      product_name  TEXT,
+      product_slug  TEXT,
+      category_slug TEXT,
+      name          TEXT,
+      rating        INTEGER DEFAULT 5,
+      text          TEXT,
+      photo         TEXT DEFAULT '',
+      published     INTEGER DEFAULT 0,
+      created_at    TEXT DEFAULT (datetime('now'))
+    );
+
     CREATE TABLE IF NOT EXISTS files (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,
       name        TEXT NOT NULL,

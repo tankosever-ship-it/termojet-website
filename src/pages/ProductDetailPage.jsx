@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import ProductReviews from '../components/ProductReviews'
 import LLink from '../components/LLink'
 import { localizeHtml } from '../utils/localizeHtml'
 import {
@@ -1059,6 +1060,9 @@ export default function ProductDetailPage() {
               )}
             </section>
           )}
+
+          {/* ── 05 · Відгуки про товар ── */}
+          <ProductReviews product={product} />
 
           {/* ── 04 · Related ── */}
           {related.length > 0 && (

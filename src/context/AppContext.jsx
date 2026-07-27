@@ -48,6 +48,7 @@ export function AppProvider({ children }) {
   const [consultations, setConsultations] = useState([])
   const [dealers, setDealers] = useState([])
   const [reviews, setReviews] = useState([])
+  const [productReviews, setProductReviews] = useState([]) // відгуки на товари (адмін-модерація)
   const [blog, setBlog] = useState([])
   const [portfolio, setPortfolio] = useState([])
   const [faq, setFaq] = useState([])
@@ -325,6 +326,7 @@ export function AppProvider({ children }) {
     // не перезаписуємо статичні пости порожнім масивом, якщо в БД блогу ще немає
     fetch(`${API}/blog?admin=1`, { headers: h }).then(r => r.json()).then(async data => { if (Array.isArray(data) && data.length) { const blogLinks = await getBlogLinks(); setBlog(mergeBlogLinks(data, blogLinks)) } }).catch(() => {})
     fetch(`${API}/reviews?admin=1`, { headers: h }).then(r => r.json()).then(setReviews).catch(() => {})
+    fetch(`${API}/product-reviews?admin=1`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data)) setProductReviews(data) }).catch(() => {})
     fetch(`${API}/subscribers`, { headers: h }).then(r => r.json()).then(data => { if (Array.isArray(data)) setSubscribers(data) }).catch(() => {})
   }, [isAdminAuth, adminToken])
 
@@ -424,6 +426,45 @@ export function AppProvider({ children }) {
       try { await fetch(`${API}/reviews/${id}`, { method: 'DELETE', headers: authHeaders() }) } catch {}
     }
     setReviews(prev => prev.filter(r => r.id !== id))
+  }
+
+  // ── Відгуки НА ТОВАР ──
+  // Публічна відправка відгуку на конкретний товар (іде на модерацію, published=0)
+  async function submitProductReview({ product_id, product_name, product_slug, category_slug, name, rating, text, photo }) {
+    if (!API) return { error: 'Відправка недоступна' }
+    const fd = new FormData()
+    fd.append('product_id', product_id || '')
+    fd.append('product_name', product_name || '')
+    fd.append('product_slug', product_slug || '')
+    fd.append('category_slug', category_slug || '')
+    fd.append('name', name || '')
+    fd.append('rating', String(rating || 5))
+    fd.append('text', text || '')
+    if (photo) fd.append('photo', photo)
+    try {
+      const r = await fetch(`${API}/product-reviews/submit`, { method: 'POST', body: fd })
+      return await r.json()
+    } catch {
+      return { error: 'Помилка зʼєднання. Спробуйте пізніше.' }
+    }
+  }
+
+  async function moderateProductReview(id, review) {
+    if (API && adminToken) {
+      try {
+        await fetch(`${API}/product-reviews/${id}`, {
+          method: 'PUT', headers: authHeaders(), body: JSON.stringify(review),
+        })
+      } catch {}
+    }
+    setProductReviews(prev => prev.map(r => r.id === id ? { ...r, ...review } : r))
+  }
+
+  async function removeProductReview(id) {
+    if (API && adminToken) {
+      try { await fetch(`${API}/product-reviews/${id}`, { method: 'DELETE', headers: authHeaders() }) } catch {}
+    }
+    setProductReviews(prev => prev.filter(r => r.id !== id))
   }
 
   async function addReview(data) {
@@ -526,6 +567,7 @@ export function AppProvider({ children }) {
       uploadFile, saveFile, removeFile,
       placeOrder, sendConsultation, sendDealerRequest, subscribe,
       submitReview, moderateReview, removeReview, addReview,
+      productReviews, setProductReviews, submitProductReview, moderateProductReview, removeProductReview,
       adminCreate, adminUpdate, adminDelete, adminUpsert,
       saveFaq, removeFaq, saveBlog, removeBlog, savePortfolio, removePortfolio,
       saveProduct, removeProduct,

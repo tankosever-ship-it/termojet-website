@@ -44,6 +44,7 @@ const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'))
 const AdminPortfolio = lazy(() => import('./pages/admin/AdminPortfolio'))
 const AdminFiles = lazy(() => import('./pages/admin/AdminFiles'))
 const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
+const AdminProductReviews = lazy(() => import('./pages/admin/AdminProductReviews'))
 const AdminFAQ = lazy(() => import('./pages/admin/AdminFAQ'))
 const AdminBanners = lazy(() => import('./pages/admin/AdminBanners'))
 const AdminPromos = lazy(() => import('./pages/admin/AdminPromos'))
@@ -114,6 +115,7 @@ function AppRoutes() {
         <Route path="/admin/portfolio" element={<AdminPortfolio />} />
         <Route path="/admin/files" element={<AdminFiles />} />
         <Route path="/admin/reviews" element={<AdminReviews />} />
+        <Route path="/admin/product-reviews" element={<AdminProductReviews />} />
         <Route path="/admin/faq" element={<AdminFAQ />} />
         <Route path="/admin/banners" element={<AdminBanners />} />
         <Route path="/admin/promos" element={<AdminPromos />} />
