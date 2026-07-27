@@ -295,6 +295,17 @@ const CATEGORY_FILTERS = {
   'rozpodilchi-kolektory': {
     groups: [
       {
+        // Друга цифра коду К[розмір][балки]… = кількість балок: 1 = однобалковий
+        // (компактний Mini-вузол), 2 = двохбалковий (класична здвоєна гребінка).
+        // Перевірено по всіх 41 товарі: чистий розподіл 7/34 без перетинів.
+        key: 'beams',
+        label: 'Конструкція',
+        options: [
+          { label: 'Однобалкові', test: p => /К\d1[ВН]/.test(p.name) },
+          { label: 'Двохбалкові', test: p => /К\d2[ВН]/.test(p.name) },
+        ],
+      },
+      {
         key: 'outlets',
         label: 'Виходів',
         options: [
@@ -684,6 +695,9 @@ const FILTER_LABEL_I18N = {
   "Каналізаційна установка": {"en": "Sewage pump unit", "pl": "Przepompownia ścieków", "fr": "Station de relevage", "de": "Abwasserhebeanlage"},
   "Колектор": {"en": "Manifold", "pl": "Rozdzielacz", "fr": "Collecteur", "de": "Verteiler"},
   "Колектор з витратомірами": {"en": "Manifold with flow meters", "pl": "Rozdzielacz z przepływomierzami", "fr": "Collecteur avec débitmètres", "de": "Verteiler mit Durchflussmessern"},
+  "Конструкція": {"en": "Construction", "pl": "Konstrukcja", "fr": "Construction", "de": "Bauform"},
+  "Однобалкові": {"en": "Single-beam", "pl": "Jednobelkowe", "fr": "Simple poutre", "de": "Einbalkig"},
+  "Двохбалкові": {"en": "Double-beam", "pl": "Dwubelkowe", "fr": "Double poutre", "de": "Zweibalkig"},
   "Колектор з кранами": {"en": "Manifold with valves", "pl": "Rozdzielacz z zaworami", "fr": "Collecteur avec robinets", "de": "Verteiler mit Ventilen"},
   "Комплектуючі": {"en": "Accessories", "pl": "Akcesoria", "fr": "Accessoires", "de": "Zubehör"},
   "Контури (BOX)": {"en": "Circuits (BOX)", "pl": "Obwody (BOX)", "fr": "Circuits (BOX)", "de": "Kreise (BOX)"},
