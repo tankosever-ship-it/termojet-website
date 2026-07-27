@@ -9,14 +9,18 @@
 //                         The shared "Termojet Sales" group serves BOTH sites,
 //                         so every termojet lead is routed into the dedicated
 //                         "🔵 Termojet — заявки/дзвінки" topic to keep it apart
-//                         from TJ Heat Pumps leads. If empty, leads go to the
-//                         group's General thread (old behaviour).
+//                         from TJ Heat Pumps leads. Defaults to 169 (the live
+//                         Termojet topic) so routing survives even if the env
+//                         var is dropped — mirrors TJ's hardcoded 168 fallback
+//                         in routes/binotel.js. Set the env var to override.
 //
 // If token or chat id is missing, notifications are silently disabled (no crash).
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID
-const THREAD_ID = process.env.TELEGRAM_THREAD_ID
+// Default to the live "🔵 Termojet — заявки/дзвінки" topic (169) so leads never
+// silently fall back to General when TELEGRAM_THREAD_ID is missing from the env.
+const THREAD_ID = process.env.TELEGRAM_THREAD_ID || '169'
 
 // Escape user-supplied text for Telegram HTML parse_mode
 function esc(v) {
