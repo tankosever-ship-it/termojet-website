@@ -97,6 +97,42 @@ function PageFallback() {
   )
 }
 
+// Дерево публічних роутів для мовного префікса (/en, /pl, /fr, /de).
+// Діти — відносні шляхи (як у UK-дереві), тож шаблон однаковий для всіх мов.
+// Раніше існував лише /en → перемикання на pl/fr/de вело на неіснуючий роут = білий екран.
+function langRoutes(lang) {
+  const p = `/${lang}`
+  return (
+    <Route key={lang} path={p} element={<PublicLayout />}>
+      <Route index element={<HomePage />} />
+      <Route path="catalog" element={<CatalogPage />} />
+      <Route path="catalog/:categorySlug" element={<CatalogPage />} />
+      <Route path="catalog/:categorySlug/:productSlug" element={<ProductDetailPage />} />
+      <Route path="cart" element={<CartPage />} />
+      <Route path="about" element={<AboutPage />} />
+      <Route path="contacts" element={<ContactPage />} />
+      <Route path="blog" element={<BlogPage />} />
+      <Route path="blog/:slug" element={<BlogPostPage />} />
+      <Route path="portfolio" element={<PortfolioPage />} />
+      <Route path="dealers" element={<Navigate to={`${p}/partners`} replace />} />
+      <Route path="service" element={<ServicePage />} />
+      <Route path="files" element={<FilesPage />} />
+      <Route path="faq" element={<FaqPage />} />
+      <Route path="delivery" element={<DeliveryPage />} />
+      <Route path="privacy" element={<PrivacyPage />} />
+      <Route path="terms" element={<TermsPage />} />
+      <Route path="oem" element={<OEMPage />} />
+      <Route path="warranty" element={<Navigate to={`${p}/service`} replace />} />
+      <Route path="support" element={<Navigate to={`${p}/service`} replace />} />
+      <Route path="returns" element={<ReturnPage />} />
+      <Route path="partners" element={<PartnersPage />} />
+      <Route path="navchannya" element={<TrainingPage />} />
+      <Route path="reviews" element={<ReviewsPage />} />
+      <Route path="training" element={<Navigate to={`${p}/navchannya`} replace />} />
+    </Route>
+  )
+}
+
 function AppRoutes() {
   return (
     <Suspense fallback={<PageFallback />}>
@@ -156,34 +192,8 @@ function AppRoutes() {
         <Route path="/training" element={<Navigate to="/navchannya" replace />} />
       </Route>
 
-      {/* Публічні сторінки (EN — префікс /en) */}
-      <Route path="/en" element={<PublicLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="catalog" element={<CatalogPage />} />
-        <Route path="catalog/:categorySlug" element={<CatalogPage />} />
-        <Route path="catalog/:categorySlug/:productSlug" element={<ProductDetailPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="contacts" element={<ContactPage />} />
-        <Route path="blog" element={<BlogPage />} />
-        <Route path="blog/:slug" element={<BlogPostPage />} />
-        <Route path="portfolio" element={<PortfolioPage />} />
-        <Route path="dealers" element={<Navigate to="/en/partners" replace />} />
-        <Route path="service" element={<ServicePage />} />
-        <Route path="files" element={<FilesPage />} />
-        <Route path="faq" element={<FaqPage />} />
-        <Route path="delivery" element={<DeliveryPage />} />
-        <Route path="privacy" element={<PrivacyPage />} />
-        <Route path="terms" element={<TermsPage />} />
-        <Route path="oem" element={<OEMPage />} />
-        <Route path="warranty" element={<Navigate to="/en/service" replace />} />
-        <Route path="support" element={<Navigate to="/en/service" replace />} />
-        <Route path="returns" element={<ReturnPage />} />
-        <Route path="partners" element={<PartnersPage />} />
-        <Route path="navchannya" element={<TrainingPage />} />
-        <Route path="reviews" element={<ReviewsPage />} />
-        <Route path="training" element={<Navigate to="/en/navchannya" replace />} />
-      </Route>
+      {/* Публічні сторінки з мовним префіксом (/en, /pl, /fr, /de) — з одного шаблону */}
+      {['en', 'pl', 'fr', 'de'].map(langRoutes)}
     </Routes>
     </Suspense>
   )
