@@ -461,6 +461,7 @@ const STATIC_META = {
   '/terms': { title: 'Умови використання сайту та придбання Termojet', desc: 'Умови використання сайту та придбання обладнання Termojet.' },
   '/privacy': { title: 'Політика конфіденційності та обробка даних | Termojet', desc: 'Політика конфіденційності та обробки персональних даних Termojet.' },
   '/navchannya': { title: 'Навчання та тренінги Termojet для монтажників', desc: 'Навчальні матеріали й тренінги Termojet з монтажу та підбору обладнання для котелень.' },
+  '/reviews': { title: 'Відгуки клієнтів про обладнання Termojet', desc: 'Реальні відгуки клієнтів про обладнання Termojet для котелень: якість, монтаж, сервіс, співпраця.' },
 }
 
 // EN-версії статичних сторінок (для /en/...). Немає запису → фолбек на UA STATIC_META.
@@ -481,6 +482,7 @@ const STATIC_META_EN = {
   '/terms': { title: 'Terms of Use of the Site and Purchase | Termojet', desc: 'Terms of use of the website and purchase of Termojet equipment.' },
   '/privacy': { title: 'Privacy Policy and Data Processing | Termojet', desc: 'Privacy policy and personal data processing at Termojet.' },
   '/navchannya': { title: 'Training and Workshops by Termojet for Installers', desc: 'Training materials and workshops by Termojet on installation and selection of boiler room equipment.' },
+  '/reviews': { title: 'Customer Reviews of Termojet Equipment', desc: 'Real customer reviews of Termojet boiler room equipment: quality, installation, service, cooperation.' },
 }
 
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
@@ -635,8 +637,18 @@ app.get('*', (req, res) => {
   if (/\.(xml|txt|json|map|ico)$/i.test(req.path)) {
     return res.status(404).type('text/plain').send('Not found')
   }
+  // SPA fallback для роутів поза STATIC_META (/cart, /pl, /fr, /de, глибокі шляхи…).
+  // Інжектимо принаймні Organization, щоб мікророзмітка Organization була на КОЖНІЙ
+  // сторінці (унікальні індексовані сторінки мають власний запис у STATIC_META вище
+  // з title/desc/canonical). canonical/title лишаємо дефолтними з index.html.
   res.setHeader('Cache-Control', 'no-cache')
-  res.sendFile(path.join(DIST, 'index.html'))
+  try {
+    const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+      .replace('</head>', `    ${jsonLdScripts([ORG_SCHEMA])}\n  </head>`)
+    return res.type('html').send(html)
+  } catch (e) {
+    return res.sendFile(path.join(DIST, 'index.html'))
+  }
 })
 
 // FIX 7 — global error handler: log server-side, never leak stack traces to client
