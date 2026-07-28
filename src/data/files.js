@@ -536,4 +536,14 @@ export const FILES = [
 
   // ── Зонний клапан ABF ──
   { id: 144, name: 'Інструкція — Зонний клапан ABF', category: 'Інструкції', format: 'PDF', url: '/files/zonnyj-klapan-abf-instrukciya.pdf', lang: 'uk', year: 2026, desc: 'Зонний 3-ходовий клапан ABF з електроприводом: характеристики, проводка, габарити' },
+
+  // ── Інструкції користувача на насоси (2026) ──
+  { id: 145, name: 'Інструкція — Насоси SILENCER', category: 'Інструкції', format: 'PDF', url: '/files/silencer-user-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача підвищувальних насосів SILENCER 300/600/900' },
+  { id: 146, name: 'Інструкція — Насос MEGA 100', category: 'Інструкції', format: 'PDF', url: '/files/mega100-user-manual.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача циркуляційного насоса MEGA 100 (UA + EN)' },
+  { id: 147, name: 'Інструкція — GRANDLIFT 20-75SW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-20-75sw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача каналізаційної станції GRANDLIFT 20-75SW' },
+  { id: 148, name: 'Інструкція — GRANDLIFT 60-75SW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-60-75sw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача каналізаційної станції GRANDLIFT 60-75SW' },
+  { id: 149, name: 'Інструкція — GRANDLIFT 120-220SW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-120-220sw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача каналізаційної станції GRANDLIFT 120-220SW' },
+  { id: 150, name: 'Інструкція — GRANDLIFT 150-370DW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-150-370dw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача двонасосної каналізаційної станції GRANDLIFT 150-370DW' },
+  { id: 151, name: 'Інструкція — Титановий анод TI 400', category: 'Інструкції', format: 'PDF', url: '/files/titanovyi-anod-instrukcia-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача титанового активного анода Termojet TI 400' },
+  { id: 152, name: 'Інструкція — Насоси TBE', category: 'Інструкції', format: 'PDF', url: '/files/tbe-instrukcia-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача інлайн-насосів з частотним керуванням TBE' },
 ]

@@ -42,10 +42,15 @@ export const DOCS_BY_NAME = [
   { match: /зональн.{0,12}клапан|ABF-ZV|ABF01-3/i, ids: [144], exclusive: true }, // зонний клапан ABF — лише власна брошура-інструкція
   { match: /413/,                       ids: [120, 121] }, // контролер/привід AQUA 413 (НГ-48A/52A + TJ413)
   { match: /84142380A/i,                ids: [120, 121] }, // НГ-38-А постачається з приводом AQUA 413
-  { match: /GRANDLIFT/i,                ids: [140] },      // брошура GRANDLIFT
-  { match: /MEGA\s*100-120/i,           ids: [141] },      // брошура MEGA (лише насос, не категорія)
-  { match: /SILENCER/i,                 ids: [142] },      // брошура SILENCER
-  { match: /\bTBE\b/i,                  ids: [143] },      // каталог TBE (інлайн з частотним керуванням)
+  { match: /GRANDLIFT/i,                ids: [140] },      // брошура GRANDLIFT (спільна)
+  { match: /GRANDLIFT\s*20-75/i,        ids: [147] },      // інструкція GRANDLIFT 20-75SW
+  { match: /GRANDLIFT\s*60-75/i,        ids: [148] },      // інструкція GRANDLIFT 60-75SW
+  { match: /GRANDLIFT\s*120-220/i,      ids: [149] },      // інструкція GRANDLIFT 120-220SW
+  { match: /GRANDLIFT\s*150-370/i,      ids: [150] },      // інструкція GRANDLIFT 150-370DW
+  { match: /MEGA\s*100-120/i,           ids: [141, 146] }, // брошура + інструкція MEGA 100 (лише насос, не категорія)
+  { match: /SILENCER/i,                 ids: [142, 145] }, // брошура + інструкція SILENCER
+  { match: /\bTBE\b/i,                  ids: [143, 152] }, // каталог + інструкція TBE (інлайн з частотним керуванням)
+  { match: /\bTI[\s-]?400\b|титанов\w*\s+акт\w*\s+анод/i, ids: [151] }, // інструкція титанового анода TI 400
   // Сепаратори — інструкції за артикулом
   { match: /TJ4F/i,                     ids: [130] },      // повітряний клапан
   { match: /TJVT6G/i,                   ids: [134] },      // повітря+бруду
