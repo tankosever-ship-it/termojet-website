@@ -290,8 +290,26 @@ function productImages(imagesJson, fallback) {
   return fallback ? [fallback] : []
 }
 
+// Курс EUR→грн для серверної SEO-розмітки (НБУ × 1.022, кеш 1 год) — дзеркало
+// src/utils/currency.js. Потрібен, щоб Product-схема EUR-товарів віддавала ціну в
+// грн (як показує сайт), а не сире число EUR з підписом «грн» (Google бачив би
+// ціну у ~52× нижчу за реальну).
+const EUR_MARKUP = 1.022
+let _eurCache = { rate: null, ts: 0 }
+async function getEurRate() {
+  const now = Date.now()
+  if (_eurCache.rate && now - _eurCache.ts < 3600 * 1000) return _eurCache.rate
+  try {
+    const res = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&json')
+    const data = await res.json()
+    const rate = data[0]?.rate
+    if (rate) { _eurCache = { rate: rate * EUR_MARKUP, ts: now }; return _eurCache.rate }
+  } catch { /* нижче — фолбек */ }
+  return _eurCache.rate || 51 * EUR_MARKUP
+}
+
 // Product + BreadcrumbList + Organization для сторінки товару (дзеркало SEO.jsx, серверно з БД).
-function buildProductJsonLd(row, loc, { url, img, desc, cat, lang }) {
+function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
   const en = lang === 'en'
   const base = en ? `${SITE}/en` : SITE
   const cm = CATEGORY_META[cat]
@@ -308,9 +326,15 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang }) {
   }
   const hasPrice = row.price && Number(row.price) > 0
   if (hasPrice) {
+    // Ціна завжди в грн: UAH-товари як є; EUR-товари конвертуємо (НБУ×1.022),
+    // так само як показує сайт (src/utils/currency.js toUAH) — інакше схема
+    // віддавала б сире число EUR із підписом «грн».
+    const priceUah = row.currency === 'EUR' && eurRate
+      ? String(Math.round(Number(row.price) * eurRate))
+      : String(row.price)
     product.offers = {
       '@type': 'Offer',
-      price: String(row.price),
+      price: priceUah,
       priceCurrency: 'UAH',
       availability: row.in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       url,
@@ -488,10 +512,10 @@ const STATIC_META_EN = {
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
 function handleProduct(lang) {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     try {
       const row = _db.prepare(
-        'SELECT name, image, images, sku, price, in_stock, category_slug, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
+        'SELECT name, image, images, sku, price, currency, in_stock, category_slug, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
       ).get(req.params.slug)
       if (!row) return next()
       const loc = pickLang(row, lang)
@@ -507,7 +531,8 @@ function handleProduct(lang) {
       const bodyText = (stripHtml(loc.description) || stripHtml(loc.short_desc) || desc).slice(0, 600)
       const h1 = loc.name
       const alternates = buildAlternates(uaUrl, enUrl)
-      const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang })
+      const eurRate = await getEurRate()
+      const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang, eurRate })
       html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
