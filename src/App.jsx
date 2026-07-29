@@ -14,6 +14,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 
 // HomePage — eager (перша/LCP сторінка), решта — code-split через lazy()
 import HomePage from './pages/HomePage'
+import NotFoundPage from './pages/NotFoundPage' // eager — 404 не має залежати від lazy-чанка
 const CatalogPage = lazy(() => import('./pages/CatalogPage'))
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'))
 const CartPage = lazy(() => import('./pages/CartPage'))
@@ -130,6 +131,7 @@ function langRoutes(lang) {
       <Route path="navchannya" element={<TrainingPage />} />
       <Route path="reviews" element={<ReviewsPage />} />
       <Route path="training" element={<Navigate to={`${p}/navchannya`} replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
 }
@@ -191,6 +193,7 @@ function AppRoutes() {
         <Route path="/navchannya" element={<TrainingPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/training" element={<Navigate to="/navchannya" replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
 
       {/* Публічні сторінки з мовним префіксом (/en, /pl, /fr, /de) — з одного шаблону */}

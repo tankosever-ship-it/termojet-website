@@ -662,11 +662,19 @@ app.get('*', (req, res) => {
   if (/\.(xml|txt|json|map|ico)$/i.test(req.path)) {
     return res.status(404).type('text/plain').send('Not found')
   }
+  // Старі WordPress-URL (лишились в індексі Google) → SPA-шелл, але з HTTP 404:
+  // користувач бачить клієнтську сторінку 404, а Google коректно деіндексує (не
+  // «soft 404»). Патерни однозначні й НЕ перетинаються з реальними роутами
+  // (реальні товари — /catalog/:cat/:slug, а не /product/…).
+  const DEAD_WP = /(^|\/)(product|product-category|author|feed|sample-page|comments|wp-json|xmlrpc\.php)(\/|$)|^\/ru(\/|$)/i
+  const statusCode = DEAD_WP.test(req.path) ? 404 : 200
+
   // SPA fallback для роутів поза STATIC_META (/cart, /pl, /fr, /de, глибокі шляхи…).
   // Інжектимо принаймні Organization, щоб мікророзмітка Organization була на КОЖНІЙ
   // сторінці (унікальні індексовані сторінки мають власний запис у STATIC_META вище
   // з title/desc/canonical). canonical/title лишаємо дефолтними з index.html.
   res.setHeader('Cache-Control', 'no-cache')
+  res.status(statusCode)
   try {
     const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
       .replace('</head>', `    ${jsonLdScripts([ORG_SCHEMA])}\n  </head>`)
