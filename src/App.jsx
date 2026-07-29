@@ -10,6 +10,7 @@ import FloatingActions from './components/FloatingActions'
 import TrainingPopup from './components/TrainingPopup'
 import MobileBottomNav from './components/layout/MobileBottomNav'
 import AdminLayout from './components/admin/AdminLayout'
+import ErrorBoundary from './components/ErrorBoundary'
 
 // HomePage — eager (перша/LCP сторінка), решта — code-split через lazy()
 import HomePage from './pages/HomePage'
@@ -205,7 +206,9 @@ export default function App() {
       <AppProvider>
         <RouterWrapper>
           <ScrollToTop />
-          <AppRoutes />
+          <ErrorBoundary>
+            <AppRoutes />
+          </ErrorBoundary>
         </RouterWrapper>
       </AppProvider>
     </HelmetProvider>
