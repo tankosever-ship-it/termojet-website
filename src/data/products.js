@@ -4731,7 +4731,7 @@ export const PRODUCTS = [
     "wpId": null,
     "name": "Електропривід  з двопозиційним управлінням \"TERMOJET\" 412N 230 V, 2P+AUX (60 сек.)",
     "slug": "aquao910-3-230-060",
-    "sku": "AQUAO910-3-230-060",
+    "sku": "AQUAO412-3-230-060",
     "price": "92.5",
     "price_uah": "",
     "categorySlug": "klapany",
@@ -4743,7 +4743,7 @@ export const PRODUCTS = [
       "Напруга": "230V AC",
       "Тип управління": "Двопозиційне (2P+AUX)",
       "Час спрацювання": "60 сек",
-      "Артикул": "AQUAO910-3-230-060"
+      "Артикул": "AQUAO412-3-230-060"
     },
     "inStock": true,
     "currency": "EUR"
