@@ -24,7 +24,7 @@ export const DOCS_BY_NAME = [
   { match: /НГ-5[12]/i,                 ids: [13] },
   { match: /APE/i,                      ids: [19, 32] },
   { match: /APM-F/i,                    ids: [100, 101] }, // APM-F власні інструкція + брошура
-  { match: /\bAPM\b(?!-F)/i,            ids: [20, 33] },   // APM різьбові (не APM-F)
+  { match: /\bAPM\b(?!-F)/i,            ids: [189, 33] },  // APM різьбові (не APM-F)
   { match: /XPS|BPS/i,                  ids: [21] },
   { match: /WT\s?400/i,                 ids: [102] },      // каналізаційна станція WT 400 (не чіпати GRANDLIFT, теж «каналізаційні»)
   { match: /SPE/i,                      ids: [103, 104] }, // SPE12 інструкція + тех.лист

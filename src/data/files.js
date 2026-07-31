@@ -138,16 +138,6 @@ export const FILES = [
     desc: 'Встановлення та обслуговування циркуляційних насосів APE',
   },
   {
-    id: 20,
-    name: 'Інструкція — Насоси APM',
-    category: 'Інструкції',
-    format: 'PDF',
-    url: `${BASE}/2024/06/instrukcziya-nasosy-apm.pdf`,
-    lang: 'uk',
-    year: 2024,
-    desc: 'Встановлення та обслуговування насосів APM',
-  },
-  {
     id: 21,
     name: 'Інструкція — Насоси XPS / BPS / XP',
     category: 'Інструкції',
@@ -557,4 +547,5 @@ export const FILES = [
   { id: 186, name: 'Інструкція — Зональні клапани ABF-ZV3 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/abf-zv3-zone-valves-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Зональні 3-ходові клапани 1\" і 1¼\" з електроприводом 230 В: проводка, монтаж, габарити · українською та англійською' },
   { id: 187, name: 'Інструкція — Титановий електронний анод (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/titanium-anode-datasheet-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Анод із покриттям MMO і блок живлення: характеристики, монтаж, застереження · українською та англійською' },
   { id: 188, name: 'Інструкція — Насоси TBE (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/tbe-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Інлайн-насоси з частотним керуванням: монтаж, пуск, панель, коди помилок, параметри · українською та англійською' },
+  { id: 189, name: 'Інструкція — Насоси APM (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/apm-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Циркуляційні насоси DN25 і DN32 з частотним регулюванням: монтаж, панель керування, зовнішнє керування ШІМ, коди помилок · українською та англійською' },
 ]
