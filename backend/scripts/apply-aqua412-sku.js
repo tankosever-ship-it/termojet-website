@@ -1,20 +1,23 @@
-#!/usr/bin/env node
-/**
- * Виправлення артикула електропривода: AQUAO910-3-230-060 → AQUAO412-3-230-060.
+/*
+ * apply-aqua412-sku.js — виправляє артикул електропривода в живій БД:
+ * AQUAO910-3-230-060 → AQUAO412-3-230-060.
  *
  * У назві товару модель уже вказана правильно — «…2P+AUX (60 сек.) 412N», —
  * а в артикулі стояло 910. Те саме число виправлено в інструкції на приводи
- * AQUA (manuals/pryvody), тож сайт і друкована документація мають збігатися.
+ * AQUA (manuals/pryvody), тож сайт і друкована документація тепер збігаються.
  *
- * Скрипт ідемпотентний: шукає товар за внутрішнім id, а не за артикулом,
- * тож повторний запуск нічого не змінює. `id` і `slug` навмисно не чіпаємо —
+ * Ідемпотентно: шукає товар за внутрішнім id, а не за артикулом, тож
+ * повторний запуск нічого не змінює. `id` і `slug` навмисно не чіпаємо —
  * id прив'язує майбутні скрипти, а slug є публічним URL, і його зміна
  * зламала б індексацію та чужі посилання.
  *
- * Запуск на сервері:
  *   docker compose exec -T app node backend/scripts/apply-aqua412-sku.js
  */
-import { db } from '../db/index.js'
+const path = require('path')
+const Database = require('better-sqlite3')
+
+const DBP = path.join(__dirname, '..', 'data', 'termojet.db')
+const db = new Database(DBP)
 
 const ID = 'new_AQUAO910_3_230_060'
 const OLD = 'AQUAO910-3-230-060'
@@ -27,7 +30,7 @@ if (!row) {
 }
 
 let specs = {}
-try { specs = JSON.parse(row.specs || '{}') } catch { specs = {} }
+try { specs = JSON.parse(row.specs || '{}') } catch (e) { specs = {} }
 
 if (row.sku === NEW && specs['Артикул'] === NEW) {
   console.log('артикул уже виправлений — змін не потрібно')
