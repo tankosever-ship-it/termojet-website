@@ -28,7 +28,7 @@ export const DOCS_BY_NAME = [
   { match: /XPS|BPS/i,                  ids: [21] },
   { match: /WT\s?400/i,                 ids: [102] },      // каналізаційна станція WT 400 (не чіпати GRANDLIFT, теж «каналізаційні»)
   { match: /SPE/i,                      ids: [103, 104] }, // SPE12 інструкція + тех.лист
-  { match: /HBS/i,                      ids: [17] },       // рециркуляційний (загальна)
+  { match: /HBS/i,                      ids: [191] },      // рециркуляційний HBS 24-12
   // Зональне керування — за моделлю
   { match: /HT102/i,                    ids: [110] },
   { match: /HT120/i,                    ids: [111] },
