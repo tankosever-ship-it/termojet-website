@@ -22,7 +22,7 @@ export const DOCS_BY_CATEGORY = {
 export const DOCS_BY_NAME = [
   { match: /НГ-4[678]|НГ-67/i,         ids: [12] },
   { match: /НГ-5[12]/i,                 ids: [13] },
-  { match: /APE/i,                      ids: [19, 32] },
+  { match: /APE/i,                      ids: [190, 32] },
   { match: /APM-F/i,                    ids: [100, 101] }, // APM-F власні інструкція + брошура
   { match: /\bAPM\b(?!-F)/i,            ids: [189, 33] },  // APM різьбові (не APM-F)
   { match: /XPS|BPS/i,                  ids: [21] },

@@ -128,16 +128,6 @@ export const FILES = [
     desc: 'Монтаж, підключення та налаштування кранів і сервоприводів',
   },
   {
-    id: 19,
-    name: 'Інструкція — Насоси APE',
-    category: 'Інструкції',
-    format: 'PDF',
-    url: `${BASE}/2024/04/instrukcziya-nasosy-ape.pdf`,
-    lang: 'uk',
-    year: 2024,
-    desc: 'Встановлення та обслуговування циркуляційних насосів APE',
-  },
-  {
     id: 21,
     name: 'Інструкція — Насоси XPS / BPS / XP',
     category: 'Інструкції',
@@ -548,4 +538,5 @@ export const FILES = [
   { id: 187, name: 'Інструкція — Титановий електронний анод (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/titanium-anode-datasheet-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Анод із покриттям MMO і блок живлення: характеристики, монтаж, застереження · українською та англійською' },
   { id: 188, name: 'Інструкція — Насоси TBE (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/tbe-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Інлайн-насоси з частотним керуванням: монтаж, пуск, панель, коди помилок, параметри · українською та англійською' },
   { id: 189, name: 'Інструкція — Насоси APM (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/apm-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Циркуляційні насоси DN25 і DN32 з частотним регулюванням: монтаж, панель керування, зовнішнє керування ШІМ, коди помилок · українською та англійською' },
+  { id: 190, name: 'Інструкція — Насоси APE (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/ape-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Циркуляційні насоси DN20–DN32 з частотним регулюванням: режими PP/CP/CS і AUTO, керування ШІМ, захисти й індикація · українською та англійською' },
 ]
