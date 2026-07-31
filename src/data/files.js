@@ -535,7 +535,7 @@ export const FILES = [
   { id: 143, name: 'Каталог — TBE', category: 'Брошури', format: 'PDF', url: '/uploads/files/brochure-tbe-ua.pdf', lang: 'uk', year: 2026, desc: 'Інлайн-насоси з частотним керуванням TBE (постійний тиск)' },
 
   // ── Зонний клапан ABF ──
-  { id: 144, name: 'Інструкція — Зонний клапан ABF', category: 'Інструкції', format: 'PDF', url: '/files/zonnyj-klapan-abf-instrukciya.pdf', lang: 'uk', year: 2026, desc: 'Зонний 3-ходовий клапан ABF з електроприводом: характеристики, проводка, габарити' },
+  { id: 144, name: 'Інструкція — Зонний клапан ABF', category: 'Інструкції', format: 'PDF', url: '/files/abf-zv3-zone-valves-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Зонний 3-ходовий клапан ABF з електроприводом: характеристики, проводка, габарити' },
 
   // ── Інструкції користувача на насоси (2026) ──
   { id: 145, name: 'Інструкція — Насоси SILENCER', category: 'Інструкції', format: 'PDF', url: '/files/silencer-user-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача підвищувальних насосів SILENCER 300/600/900' },
@@ -544,6 +544,35 @@ export const FILES = [
   { id: 148, name: 'Інструкція — GRANDLIFT 60-75SW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-60-75sw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача каналізаційної станції GRANDLIFT 60-75SW' },
   { id: 149, name: 'Інструкція — GRANDLIFT 120-220SW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-120-220sw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача каналізаційної станції GRANDLIFT 120-220SW' },
   { id: 150, name: 'Інструкція — GRANDLIFT 150-370DW', category: 'Інструкції', format: 'PDF', url: '/files/grandlift-150-370dw-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача двонасосної каналізаційної станції GRANDLIFT 150-370DW' },
-  { id: 151, name: 'Інструкція — Титановий анод TI 400', category: 'Інструкції', format: 'PDF', url: '/files/titanovyi-anod-instrukcia-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача титанового активного анода Termojet TI 400' },
-  { id: 152, name: 'Інструкція — Насоси TBE', category: 'Інструкції', format: 'PDF', url: '/files/tbe-instrukcia-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача інлайн-насосів з частотним керуванням TBE' },
+  { id: 151, name: 'Інструкція — Титановий анод TI 400', category: 'Інструкції', format: 'PDF', url: '/files/titanium-anode-datasheet-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача титанового активного анода Termojet TI 400' },
+  { id: 152, name: 'Інструкція — Насоси TBE', category: 'Інструкції', format: 'PDF', url: '/files/tbe-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Керівництво користувача інлайн-насосів з частотним керуванням TBE' },
+
+  // === ІНСТРУКЦІЇ ВЛАСНОГО ВИДАННЯ 2026 ===
+  // Верстка Termojet: manuals/<виріб>. Три варіанти на кожен виріб —
+  // українська, англійська і двомовна (українська частина, далі англійська).
+
+  { id: 160, name: 'Інструкція — Термостатичні змішувальні клапани TMV', category: 'Інструкції', format: 'PDF', url: '/files/tmv-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Клапани прямої дії 3/4\" і 1\", Kvs 1,6 і 2,5, діапазони 20–43 і 35–60 °C' },
+  { id: 170, name: 'Manual — TMV thermostatic mixing valves (EN)', category: 'Інструкції', format: 'PDF', url: '/files/tmv-manual-en.pdf', lang: 'en', year: 2026, desc: 'Direct-acting valves 3/4\" and 1\", Kvs 1.6 and 2.5, ranges 20–43 and 35–60 °C' },
+  { id: 180, name: 'Інструкція — Термостатичні змішувальні клапани TMV (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/tmv-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Клапани прямої дії 3/4\" і 1\"' },
+  { id: 161, name: 'Інструкція — Змішувальні крани RMV', category: 'Інструкції', format: 'PDF', url: '/files/rmv-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Три- і чотириходові поворотні крани DN20–DN50, Kvs 2,5–40, монтаж і схеми обв\'язки' },
+  { id: 171, name: 'Manual — RMV rotary mixing valves (EN)', category: 'Інструкції', format: 'PDF', url: '/files/rmv-manual-en.pdf', lang: 'en', year: 2026, desc: '3-way and 4-way rotary valves DN20–DN50, Kvs 2.5–40, installation and piping layouts' },
+  { id: 181, name: 'Інструкція — Змішувальні крани RMV (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/rmv-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Три- і чотириходові поворотні крани DN20–DN50' },
+  { id: 162, name: 'Інструкція — Насосно-змішувальний вузол TJ-MU-10B', category: 'Інструкції', format: 'PDF', url: '/files/tj-mu-10b-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Вузол для колектора теплої підлоги 210/235 мм, 20–43 °C, добір насоса' },
+  { id: 172, name: 'Manual — TJ-MU-10B pump and mixing unit (EN)', category: 'Інструкції', format: 'PDF', url: '/files/tj-mu-10b-manual-en.pdf', lang: 'en', year: 2026, desc: 'Unit for underfloor manifolds 210/235 mm, 20–43 °C, pump selection' },
+  { id: 182, name: 'Інструкція — Насосно-змішувальний вузол TJ-MU-10B (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/tj-mu-10b-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Вузол для колектора теплої підлоги 210/235 мм' },
+  { id: 163, name: 'Інструкція — Насосно-змішувальний вузол TJ-MU-25', category: 'Інструкції', format: 'PDF', url: '/files/tj-mu-25-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Вузол з термостатичною головкою й виносним датчиком, 210 мм, 20–60 °C' },
+  { id: 173, name: 'Manual — TJ-MU-25 pump and mixing unit (EN)', category: 'Інструкції', format: 'PDF', url: '/files/tj-mu-25-manual-en.pdf', lang: 'en', year: 2026, desc: 'Unit with thermostatic head and remote sensor, 210 mm, 20–60 °C' },
+  { id: 183, name: 'Інструкція — Насосно-змішувальний вузол TJ-MU-25 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/tj-mu-25-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Вузол з термостатичною головкою й виносним датчиком' },
+  { id: 164, name: 'Інструкція — Колектори TJ-W і TJ-R-W', category: 'Інструкції', format: 'PDF', url: '/files/manifolds-tj-w-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Колектори з нержавіючої сталі AISI 304 на 2–15 виходів: монтаж і балансування петель' },
+  { id: 174, name: 'Manual — TJ-W and TJ-R-W manifolds (EN)', category: 'Інструкції', format: 'PDF', url: '/files/manifolds-tj-w-manual-en.pdf', lang: 'en', year: 2026, desc: 'AISI 304 stainless steel manifolds, 2–15 outlets: installation and loop balancing' },
+  { id: 184, name: 'Інструкція — Колектори TJ-W і TJ-R-W (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/manifolds-tj-w-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Колектори з нержавіючої сталі AISI 304 на 2–15 виходів' },
+  { id: 165, name: 'Інструкція — Електроприводи AQUA', category: 'Інструкції', format: 'PDF', url: '/files/aqua-actuators-manual-ua.pdf', lang: 'uk', year: 2026, desc: 'Приводи поворотних кранів 230 і 24 В, 6 і 10 Н·м, схеми підключення й DIP-перемикач' },
+  { id: 175, name: 'Manual — AQUA electric actuators (EN)', category: 'Інструкції', format: 'PDF', url: '/files/aqua-actuators-manual-en.pdf', lang: 'en', year: 2026, desc: 'Actuators for rotary valves 230 and 24 V, 6 and 10 N·m, wiring diagrams and DIP switch' },
+  { id: 185, name: 'Інструкція — Електроприводи AQUA (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/aqua-actuators-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Приводи поворотних кранів 230 і 24 В' },
+  { id: 176, name: 'Manual — ABF-ZV3 zone valves (EN)', category: 'Інструкції', format: 'PDF', url: '/files/abf-zv3-zone-valves-manual-en.pdf', lang: 'en', year: 2026, desc: '3-way zone valves 1\" and 1¼\" with a 230 V actuator: wiring, installation, dimensions' },
+  { id: 186, name: 'Інструкція — Зональні клапани ABF-ZV3 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/abf-zv3-zone-valves-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Зональні 3-ходові клапани 1\" і 1¼\" з електроприводом 230 В' },
+  { id: 177, name: 'Manual — Titanium electronic anode (EN)', category: 'Інструкції', format: 'PDF', url: '/files/titanium-anode-datasheet-en.pdf', lang: 'en', year: 2026, desc: 'Anode with an MMO coating and power supply unit: data, installation, warnings' },
+  { id: 187, name: 'Інструкція — Титановий електронний анод (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/titanium-anode-datasheet-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Анод із покриттям MMO і блок живлення' },
+  { id: 178, name: 'Manual — TBE pumps (EN)', category: 'Інструкції', format: 'PDF', url: '/files/tbe-manual-en.pdf', lang: 'en', year: 2026, desc: 'Variable-frequency in-line pumps: installation, startup, panel, fault codes, parameters' },
+  { id: 188, name: 'Інструкція — Насоси TBE (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/tbe-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Двомовне видання: Інлайн-насоси з частотним керуванням' },
 ]
