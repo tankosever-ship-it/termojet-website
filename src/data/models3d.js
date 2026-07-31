@@ -236,8 +236,9 @@ export const MODELS_BY_SLUG = {
   "sep-tj4f20-10-110-20": [{ file: 'sep-tj4f.step', name: 'TJ4F.step', size: '5 МБ', glb: '/uploads/3d/sep-tj4f.glb?v=2' }],
   "sep-tj4f25-10-110-25": [{ file: 'sep-tj4f.step', name: 'TJ4F.step', size: '5 МБ', glb: '/uploads/3d/sep-tj4f.glb?v=2' }],
   // TJ7590 антифризний клапан
-  "sep-tj7590100301": [{ file: 'sep-tj7590.step', name: 'TJ7590.step', size: '12 МБ', glb: '/uploads/3d/sep-tj7590.glb' }],
-  "sep-tj7590100801": [{ file: 'sep-tj7590.step', name: 'TJ7590.step', size: '12 МБ', glb: '/uploads/3d/sep-tj7590.glb' }],
+  // 2026-07-31: замінено на нову версію з чорною Т-ручкою (STEP 7590100301, спільна на серію)
+  "sep-tj7590100301": [{ file: 'sep-tj7590-v2.step', name: 'TJ7590.step', size: '5 МБ', glb: '/uploads/3d/sep-tj7590-v2.glb' }],
+  "sep-tj7590100801": [{ file: 'sep-tj7590-v2.step', name: 'TJ7590.step', size: '5 МБ', glb: '/uploads/3d/sep-tj7590-v2.glb' }],
   // TJ5503 кран розширювального баку
   "sep-tj5503702401": [{ file: 'sep-tj5503.step', name: 'TJ5503.step', size: '13 МБ', glb: '/uploads/3d/sep-tj5503.glb' }],
   // TJ7575 сепаратор бруду для теплових насосів (пластиковий)

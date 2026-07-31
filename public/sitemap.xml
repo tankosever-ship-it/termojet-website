@@ -194,6 +194,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/portfolio" />
   </url>
   <url>
+    <loc>https://termojet.com.ua/reviews</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/reviews" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/reviews" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/reviews" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/en/reviews</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/reviews" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/reviews" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/reviews" />
+  </url>
+  <url>
     <loc>https://termojet.com.ua/returns</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -3092,22 +3108,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-20-60-130-mm" />
   </url>
   <url>
-    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm</loc>
+    <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat" />
   </url>
   <url>
-    <loc>https://termojet.com.ua/en/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm</loc>
+    <loc>https://termojet.com.ua/en/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-25-60-180-mm-kopyrovat" />
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/nasosy/nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-ape-32-80-180-mm</loc>

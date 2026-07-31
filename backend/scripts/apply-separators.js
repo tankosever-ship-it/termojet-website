@@ -52,8 +52,8 @@ const ROWS = [
   ['TJT7G32', 'Сепаратор бруду поворотний Dn32 (1 1/4") Termojet', 183.2, 'sep-dirt-rotary', 'dirt_rotary', 'separatory', 'Сепаратори бруду'],
   ['TJT7G40', 'Сепаратор бруду поворотний Dn40 (1 1/2") Termojet', 219.7, 'sep-dirt-rotary', 'dirt_rotary', 'separatory', 'Сепаратори бруду'],
   ['TJ7575055501', 'Сепаратор бруду для теплових насосів Dn25 (G1") Termojet', 86.4, 'sep-heatpump', 'heatpump', 'separatory', 'Сепаратори бруду'],
-  ['TJ7590100301', 'Антифризний клапан Dn25 (1"M) Termojet', 79.8, 'sep-antifreeze', 'antifreeze', 'dodatkove', ''],
-  ['TJ7590100801', 'Антифризний клапан Dn32 (1 1/4"M) Termojet', 82, 'sep-antifreeze', 'antifreeze', 'dodatkove', ''],
+  ['TJ7590100301', 'Антифризний клапан Dn25 (1"M) Termojet', 79.8, 'sep-antifreeze-v2', 'antifreeze', 'dodatkove', ''],
+  ['TJ7590100801', 'Антифризний клапан Dn32 (1 1/4"M) Termojet', 82, 'sep-antifreeze-v2', 'antifreeze', 'dodatkove', ''],
   ['TJ5503702401', 'Запірний кран Dn20 (3/4"M) Termojet', 14.2, 'sep-stopvalve', 'stopvalve', 'dodatkove', ''],
 ]
 
