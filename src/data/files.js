@@ -127,26 +127,6 @@ export const FILES = [
     year: 2024,
     desc: 'Технічна документація та інструкція для насосів XPS/BPS/XP',
   },
-  {
-    id: 22,
-    name: 'Інструкція — Автоматика TERMOJET Profi PLUS',
-    category: 'Інструкції',
-    format: 'PDF',
-    url: `${BASE}/2024/06/ynstrukczyya-termojet-profi-plus.pdf`,
-    lang: 'uk',
-    year: 2024,
-    desc: 'Налаштування та програмування контролера Termojet PROFI PLUS',
-  },
-  {
-    id: 23,
-    name: 'Інструкція — Автоматика TERMOJET Light',
-    category: 'Інструкції',
-    format: 'PDF',
-    url: `${BASE}/2024/06/ynstrukczyya-termojet-light.pdf`,
-    lang: 'uk',
-    year: 2024,
-    desc: 'Налаштування та програмування контролера Termojet Light',
-  },
 
   // === БРОШУРИ ===
   {
@@ -530,4 +510,6 @@ export const FILES = [
   { id: 189, name: 'Інструкція — Насоси APM (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/apm-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Циркуляційні насоси DN25 і DN32 з частотним регулюванням: монтаж, панель керування, зовнішнє керування ШІМ, коди помилок · українською та англійською' },
   { id: 190, name: 'Інструкція — Насоси APE (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/ape-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Циркуляційні насоси DN20–DN32 з частотним регулюванням: режими PP/CP/CS і AUTO, керування ШІМ, захисти й індикація · українською та англійською' },
   { id: 191, name: 'Інструкція — Рециркуляційний насос HBS 24-12 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/hbs-24-12-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Насос рециркуляції ГВП на 24 В: монтаж на кронштейні, схеми обв\'язки, режими сталої температури, пульт, захист від замерзання · українською та англійською' },
+  { id: 192, name: 'Інструкція — Автоматика PROFI PLUS (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/profi-plus-controller-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Контролер котельні на три змішувальні контури, ГВП, каскад котлів і OpenTherm: монтаж, клемна колодка, датчики, меню, додаткові контакти, тижневий графік · українською та англійською' },
+  { id: 193, name: 'Інструкція — Автоматика LIGHT (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/light-controller-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Контролер котельні на два змішувальні контури, ГВП, каскад котлів і OpenTherm: монтаж, клемна колодка, датчики, меню, додаткові контакти, тижневий графік · українською та англійською' },
 ]

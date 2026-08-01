@@ -13,7 +13,7 @@ export const DOCS_BY_CATEGORY = {
   'kolektory-z-hidrostrilkoyu': [15],         // КГС
   'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
   'separatory':               [],
-  'avtomatyka':               [22, 23],       // Profi Plus + Light
+  'avtomatyka':               [192, 193],     // Profi Plus + Light (двомовні, 2026)
   'balancing':                [],
   'dodatkove':                [],
 }
@@ -71,8 +71,8 @@ export const DOCS_BY_NAME = [
   { match: /TJ-MU-25/i,                 ids: [183] },
   { match: /84040TJ-(R-)?W-\d/i,        ids: [184] },
   { match: /AQUA\s?O?4(0[15]|11|12)/i,  ids: [185] },
-  { match: /PROFI\s*PLUS/i,            ids: [22] },
-  { match: /LIGHT/i,                    ids: [23] },
+  { match: /PROFI\s*PLUS/i,            ids: [192] },
+  { match: /LIGHT/i,                    ids: [193] },
   { match: /BOX/i,                      ids: [10] },
 ]
 
