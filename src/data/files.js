@@ -479,9 +479,8 @@ export const FILES = [
   { id: 136, name: 'Інструкція — Антифризний клапан', category: 'Інструкції', format: 'PDF', url: '/files/antifreeze-instr.pdf', lang: 'uk', year: 2025, desc: 'Встановлення антифризного клапана TJ7590' },
 
   // ── Брошури на серії насосів (#3) ──
-  { id: 140, name: 'Брошура — GRANDLIFT', category: 'Брошури', format: 'PDF', url: '/files/brochure-grandlift-ua.pdf', lang: 'uk', year: 2026, desc: 'Каналізаційні насосні станції GRANDLIFT: моделі, характеристики' },
+  { id: 140, name: 'Брошура — GRANDLIFT і SILENCER', category: 'Брошури', format: 'PDF', url: '/files/brochure-grandlift-silencer-ua.pdf', lang: 'uk', year: 2026, desc: 'Каналізаційні станції GRANDLIFT і підвищувальні насоси SILENCER: моделі, характеристики, криві Q–H, габарити, ціни' },
   { id: 141, name: 'Брошура — MEGA', category: 'Брошури', format: 'PDF', url: '/files/brochure-mega-ua.pdf', lang: 'uk', year: 2026, desc: 'Інтелектуальний циркуляційний насос MEGA 100-120F' },
-  { id: 142, name: 'Брошура — SILENCER', category: 'Брошури', format: 'PDF', url: '/files/brochure-silencer-ua.pdf', lang: 'uk', year: 2026, desc: 'Підвищувальні насоси SILENCER у шумоізоляції' },
   { id: 143, name: 'Каталог — TBE', category: 'Брошури', format: 'PDF', url: '/uploads/files/brochure-tbe-ua.pdf', lang: 'uk', year: 2026, desc: 'Інлайн-насоси з частотним керуванням TBE (постійний тиск)' },
 
   // ── Зонний клапан ABF ──
