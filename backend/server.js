@@ -509,13 +509,85 @@ const STATIC_META_EN = {
   '/reviews': { title: 'Customer Reviews of Termojet Equipment', desc: 'Real customer reviews of Termojet boiler room equipment: quality, installation, service, cooperation.' },
 }
 
+// ── SSR-lite: серверний семантичний HTML сторінки у #seo-content ────────────────
+// Ціна в грн: UAH як є, EUR конвертуємо (як SEO-схема/сайт).
+function priceToUah(price, currency, eurRate) {
+  if (!(price && Number(price) > 0)) return null
+  return currency === 'EUR' && eurRate ? Math.round(Number(price) * eurRate) : Math.round(Number(price))
+}
+
+// Навігація на основні розділи (внутрішні лінки для краулерів; локалізована).
+function seoNav(lang) {
+  const en = lang === 'en'
+  const b = en ? `${SITE}/en` : SITE
+  const links = [
+    ['/catalog', en ? 'Catalog' : 'Каталог'],
+    ['/catalog/nasosni-hrupy', en ? 'Pump groups' : 'Насосні групи'],
+    ['/catalog/rozpodilchi-kolektory', en ? 'Manifolds' : 'Розподільчі колектори'],
+    ['/catalog/hidravlichni-rozdilnyky', en ? 'Hydraulic separators' : 'Гідравлічні розділювачі'],
+    ['/catalog/separatory', en ? 'Separators' : 'Сепаратори'],
+    ['/catalog/nasosy', en ? 'Pumps' : 'Насоси'],
+    ['/blog', en ? 'Blog' : 'Блог'],
+    ['/about', en ? 'About' : 'Про компанію'],
+    ['/contacts', en ? 'Contacts' : 'Контакти'],
+  ]
+  return `<nav aria-label="${en ? 'Main sections' : 'Основні розділи'}">${links.map(([h, t]) => `<a href="${b}${h}">${esc(t)}</a>`).join('')}</nav>`
+}
+
+// Повний семантичний HTML товару → в #seo-content. Дані ті самі, що на сторінці/у JSON-LD.
+function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
+  const en = lang === 'en'
+  const base = en ? `${SITE}/en` : SITE
+  const cm = CATEGORY_META[cat]
+  const catName = cm ? (en ? cm.nameEn : cm.name) : cat
+  const catUrl = `${base}/catalog/${encodeURIComponent(cat)}`
+  const img = absImg(row.image)
+  const priceUah = priceToUah(row.price, row.currency, eurRate)
+
+  let specsHtml = ''
+  try {
+    const specs = JSON.parse(row.specs || '{}')
+    const rows = Object.entries(specs).filter(([k, v]) => k && v != null && String(v) !== '' && !/^артикул|^назва|^article|^name/i.test(k))
+    if (rows.length) {
+      specsHtml = `<h2>${en ? 'Specifications' : 'Технічні характеристики'}</h2><table><tbody>${
+        rows.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(String(v))}</td></tr>`).join('')
+      }</tbody></table>`
+    }
+  } catch { /* без таблиці */ }
+
+  let relHtml = ''
+  if (related && related.length) {
+    relHtml = `<h2>${en ? 'Related products' : 'Схожі товари'}</h2><ul>${
+      related.map(r => {
+        const rp = priceToUah(r.price, r.currency, eurRate)
+        return `<li><a href="${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(r.slug)}">${esc(r.name)}</a>${rp ? ` — ${rp} ${en ? 'UAH' : 'грн'}` : ''}</li>`
+      }).join('')
+    }</ul>`
+  }
+
+  const breadcrumb = `<nav aria-label="${en ? 'Breadcrumb' : 'Хлібні крихти'}"><a href="${base}/">${en ? 'Home' : 'Головна'}</a> / <a href="${base}/catalog">${en ? 'Catalog' : 'Каталог'}</a> / <a href="${catUrl}">${esc(catName)}</a></nav>`
+
+  return `<div id="seo-content">
+    ${breadcrumb}
+    <h1>${esc(loc.name)}</h1>
+    ${img ? `<img src="${esc(img)}" alt="${esc(loc.name)}" width="360" height="360" loading="lazy" />` : ''}
+    ${row.sku ? `<p>${en ? 'SKU' : 'Артикул'}: ${esc(row.sku)}</p>` : ''}
+    ${priceUah ? `<p><strong>${en ? 'Price' : 'Ціна'}: ${priceUah} ${en ? 'UAH' : 'грн'}</strong></p>` : ''}
+    <p>${en ? 'Availability' : 'Наявність'}: ${row.in_stock ? (en ? 'In stock' : 'В наявності') : (en ? 'On order' : 'Під замовлення')}</p>
+    ${loc.description || loc.short_desc ? `<div>${loc.description || loc.short_desc}</div>` : ''}
+    ${specsHtml}
+    ${relHtml}
+    ${seoNav(lang)}
+  </div>`
+}
+
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
 function handleProduct(lang) {
   return async (req, res, next) => {
     try {
       const row = _db.prepare(
-        'SELECT name, image, images, sku, price, currency, in_stock, category_slug, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
+        'SELECT name, image, images, sku, price, currency, in_stock, category_slug, specs, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
       ).get(req.params.slug)
       if (!row) return next()
       const loc = pickLang(row, lang)
@@ -534,6 +606,12 @@ function handleProduct(lang) {
       const eurRate = await getEurRate()
       const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang, eurRate })
       html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
+      // SSR-lite: повний семантичний HTML товару в #seo-content (бачать краулери)
+      const related = _db.prepare(
+        'SELECT name, slug, price, currency FROM products WHERE category_slug = ? AND slug != ? AND is_visible = 1 ORDER BY name LIMIT 4'
+      ).all(row.category_slug, req.params.slug)
+      const seoBlock = buildProductSeoContent(row, loc, { cat: req.params.cat, lang, eurRate, related })
+      html = html.replace('<div id="seo-content"></div>', seoBlock)
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { return next() }

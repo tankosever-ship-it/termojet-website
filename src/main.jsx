@@ -21,3 +21,8 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+// SSR-lite: після монтування React прибираємо серверний #seo-content, щоб у DOM
+// (зокрема при JS-рендері Google) лишалася лише жива React-версія. CSS уже сховав
+// його, щойно #root заповнився; це остаточне прибирання елемента.
+requestAnimationFrame(() => document.getElementById('seo-content')?.remove())

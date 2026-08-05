@@ -36,6 +36,19 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-P9DW9P6D');</script>
     <!-- End Google Tag Manager -->
+    <!-- SSR-lite: серверний семантичний контент сторінки для краулерів (#seo-content).
+         React рендериться у #root; щойно #root заповнюється — CSS ховає #seo-content
+         (а main.jsx його прибирає). Краулери без JS / перша хвиля Google бачать контент. -->
+    <style>
+      #seo-content { max-width: 1080px; margin: 0 auto; padding: 20px; font-family: 'Rubik', system-ui, sans-serif; color: #1a1a1a; line-height: 1.55; }
+      #seo-content h1 { font-size: 26px; margin: 12px 0; }
+      #seo-content h2 { font-size: 18px; margin: 22px 0 8px; }
+      #seo-content img { max-width: 360px; height: auto; }
+      #seo-content table { border-collapse: collapse; margin: 10px 0; }
+      #seo-content th, #seo-content td { border: 1px solid #ddd; padding: 5px 12px; text-align: left; }
+      #seo-content nav a { margin-right: 14px; white-space: nowrap; }
+      #root:not(:empty) ~ #seo-content { display: none; }
+    </style>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -43,9 +56,11 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
+    <!-- Серверний SEO-контент сторінки (заповнюється сервером для товарів/категорій тощо) -->
+    <div id="seo-content"></div>
     <noscript>
       <main>
-        <h1>Termojet — виробник обладнання для котелень</h1>
+        <h2>Termojet — виробник обладнання для котелень</h2>
         <p>
           Termojet — український виробник систем швидкого монтажу для котелень з 2002 року:
           насосні групи, розподільчі колектори, гідравлічні розділювачі (гідрострілки),
