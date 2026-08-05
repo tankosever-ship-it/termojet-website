@@ -581,6 +581,37 @@ function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
   </div>`
 }
 
+// Сітка товарів категорії → #seo-content (усі внутрішні лінки + ціни для краулерів).
+function buildCategorySeoContent(cm, { cat, lang, products, eurRate }) {
+  const en = lang === 'en'
+  const base = en ? `${SITE}/en` : SITE
+  const catName = en ? cm.nameEn : cm.name
+  const catDesc = en ? cm.descEn : cm.desc
+  const breadcrumb = `<nav aria-label="${en ? 'Breadcrumb' : 'Хлібні крихти'}"><a href="${base}/">${en ? 'Home' : 'Головна'}</a> / <a href="${base}/catalog">${en ? 'Catalog' : 'Каталог'}</a></nav>`
+  const grid = products && products.length
+    ? `<ul>${products.map(p => {
+        const pu = priceToUah(p.price, p.currency, eurRate)
+        return `<li><a href="${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(p.slug)}">${esc(p.name)}</a>${pu ? ` — ${pu} ${en ? 'UAH' : 'грн'}` : ''}</li>`
+      }).join('')}</ul>`
+    : ''
+  return `<div id="seo-content">
+    ${breadcrumb}
+    <h1>${esc(catName)}</h1>
+    <p>${esc(catDesc)}</p>
+    ${products && products.length ? `<h2>${en ? 'Products in this category' : 'Товари категорії'} (${products.length})</h2>${grid}` : ''}
+    ${seoNav(lang)}
+  </div>`
+}
+
+// Універсальний #seo-content для сторінки (стаття блогу / статична): H1 + контент + nav.
+function buildPageSeoContent({ lang, h1, bodyHtml }) {
+  return `<div id="seo-content">
+    <h1>${esc(h1)}</h1>
+    ${bodyHtml || ''}
+    ${seoNav(lang)}
+  </div>`
+}
+
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
 function handleProduct(lang) {
@@ -655,6 +686,8 @@ function handleBlog(lang) {
         mainEntityOfPage: url,
       }
       html = injectMeta(html, { title, desc, url, img, ogType: 'article', h1, bodyText, alternates, jsonLd: [article, ORG_SCHEMA] })
+      // SSR-lite: заголовок + текст статті в #seo-content
+      html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang, h1, bodyHtml: loc.content || `<p>${esc(desc)}</p>` }))
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { return next() }
@@ -666,7 +699,7 @@ app.get('/en/blog/:slug', handleBlog('en'))
 
 // ── Категорії: UA + EN ────────────────────────────────────────────────────────
 function handleCategory(lang) {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const cm = CATEGORY_META[req.params.cat]
     if (!cm) return next()
     try {
@@ -698,6 +731,12 @@ function handleCategory(lang) {
         ]), ORG_SCHEMA]
         html = injectMeta(html, { title, desc, url: uaUrl, h1: cm.name, bodyText: cm.desc, alternates, jsonLd })
       }
+      // SSR-lite: сітка товарів категорії в #seo-content
+      const products = _db.prepare(
+        'SELECT name, slug, price, currency FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name'
+      ).all(req.params.cat)
+      const eurRate = await getEurRate()
+      html = html.replace('<div id="seo-content"></div>', buildCategorySeoContent(cm, { cat: req.params.cat, lang, products, eurRate }))
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { return next() }
@@ -729,6 +768,9 @@ app.get('*', (req, res) => {
       const jsonLd = [ORG_SCHEMA]
       if (lookupPath === '/faq') { const faq = buildFaqSchema(isEn ? 'en' : 'uk'); if (faq) jsonLd.unshift(faq) }
       html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd })
+      // SSR-lite: H1 + опис сторінки + nav у #seo-content
+      const h1 = (meta.title || '').replace(/\s*[|–—-]\s*Termojet\s*$/i, '').trim() || 'Termojet'
+      html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang: isEn ? 'en' : 'uk', h1, bodyHtml: `<p>${esc(meta.desc)}</p>` }))
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { /* fall through */ }
