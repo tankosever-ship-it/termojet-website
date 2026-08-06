@@ -800,6 +800,30 @@ function handleCategory(lang) {
 app.get('/catalog/:cat', handleCategory('uk'))
 app.get('/en/catalog/:cat', handleCategory('en'))
 
+// Білий список реальних SPA-роутів (мовний префікс /en /pl /fr /de вже стрипнуто).
+// Усе, що НЕ тут і не валідний товар/категорія/стаття — віддаємо HTTP 404, щоб
+// прибрати «soft 404»: раніше catch-all був чорним списком (лише WP-патерни → 404),
+// тому будь-який неіснуючий URL (/catalog/фейк, /catalog/mega/фейк, /випадкове)
+// віддавав 200 + SPA-заглушку, і Google індексував порожні сторінки.
+const KNOWN_ROUTES = new Set([
+  '/', '/catalog', '/blog', '/faq', '/about', '/service', '/delivery',
+  '/oem', '/partners', '/returns', '/navchannya', '/portfolio', '/contacts',
+  '/files', '/reviews', '/privacy', '/terms', '/cart', '/dealers', '/support',
+  '/training', '/warranty',
+])
+function isKnownRoute(p) {
+  if (KNOWN_ROUTES.has(p)) return true
+  if (p === '/admin' || p.startsWith('/admin/')) return true
+  let m = p.match(/^\/catalog\/([^/]+)$/)
+  if (m) return !!CATEGORY_META[decodeURIComponent(m[1])]
+  m = p.match(/^\/catalog\/[^/]+\/([^/]+)$/)
+  // fail-open (return true) на помилці БД — краще показати сторінку, ніж хибно 404-ити реальний товар
+  if (m) { try { return !!_db.prepare('SELECT 1 FROM products WHERE slug = ? AND is_visible = 1').get(decodeURIComponent(m[1])) } catch { return true } }
+  m = p.match(/^\/blog\/([^/]+)$/)
+  if (m) { try { return !!_db.prepare('SELECT 1 FROM blog_posts WHERE slug = ? AND published = 1').get(decodeURIComponent(m[1])) } catch { return true } }
+  return false
+}
+
 // ── Catch-all: статичні сторінки + SPA fallback ───────────────────────────────
 app.get('*', (req, res) => {
   // Нормалізуємо шлях: /en/about → /about для пошуку в STATIC_META
@@ -848,7 +872,12 @@ app.get('*', (req, res) => {
   // «soft 404»). Патерни однозначні й НЕ перетинаються з реальними роутами
   // (реальні товари — /catalog/:cat/:slug, а не /product/…).
   const DEAD_WP = /(^|\/)(product|product-category|author|feed|sample-page|comments|wp-json|xmlrpc\.php)(\/|$)|^\/ru(\/|$)/i
-  const statusCode = DEAD_WP.test(req.path) ? 404 : 200
+  // Білий список: стрипаємо мовний префікс і перевіряємо, чи це реальний роут.
+  // 404 якщо: старий WP-URL АБО шлях не відповідає жодному валідному роуту/товару.
+  let probe = rawPath
+  const lm = rawPath.match(/^\/(en|pl|fr|de)(\/.*|)$/)
+  if (lm) probe = lm[2] || '/'
+  const statusCode = (DEAD_WP.test(req.path) || !isKnownRoute(probe)) ? 404 : 200
 
   // SPA fallback для роутів поза STATIC_META (/cart, /pl, /fr, /de, глибокі шляхи…).
   // Інжектимо принаймні Organization, щоб мікророзмітка Organization була на КОЖНІЙ
