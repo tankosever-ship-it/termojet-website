@@ -612,6 +612,47 @@ function buildPageSeoContent({ lang, h1, bodyHtml }) {
   </div>`
 }
 
+// Головна: інтро + сітка всіх категорій (внутрішні лінки).
+function buildHomeContent(lang) {
+  const en = lang === 'en'
+  const base = en ? `${SITE}/en` : SITE
+  const intro = en
+    ? 'Termojet — Ukrainian manufacturer of quick-assembly systems for boiler rooms since 2002: pump groups, distribution manifolds, hydraulic separators, sludge and air separators, 3- and 4-way valves, circulation pumps, BOX modules, the Mega system and control automation.'
+    : 'Termojet — український виробник систем швидкого монтажу для котелень з 2002 року: насосні групи, розподільчі колектори, гідравлічні розділювачі (гідрострілки), сепаратори шламу та повітря, 3- і 4-ходові клапани, циркуляційні насоси, модулі BOX, система Mega та автоматика керування.'
+  const cats = Object.entries(CATEGORY_META).map(([slug, cm]) => {
+    const name = en ? cm.nameEn : cm.name
+    const d = en ? cm.descEn : cm.desc
+    return `<li><a href="${base}/catalog/${encodeURIComponent(slug)}">${esc(name)}</a>${d ? ` — ${esc(d)}` : ''}</li>`
+  }).join('')
+  return `<p>${esc(intro)}</p><h2>${en ? 'Equipment catalog' : 'Каталог обладнання'}</h2><ul>${cats}</ul>`
+}
+
+// Список статей блогу (заголовок + анонс + лінк).
+function buildBlogListContent(lang) {
+  const en = lang === 'en'
+  const base = en ? `${SITE}/en` : SITE
+  const rows = _db.prepare('SELECT slug, title, excerpt, i18n FROM blog_posts WHERE published = 1 ORDER BY created_at DESC').all()
+  if (!rows.length) return ''
+  const items = rows.map(r => {
+    const loc = pickLang(r, lang)
+    const ex = stripHtml(loc.excerpt)
+    return `<li><a href="${base}/blog/${encodeURIComponent(r.slug)}">${esc(loc.title)}</a>${ex ? ` — ${esc(ex.slice(0, 180))}` : ''}</li>`
+  }).join('')
+  return `<h2>${en ? 'Articles' : 'Статті'} (${rows.length})</h2><ul>${items}</ul>`
+}
+
+// FAQ: питання + відповіді (текстом).
+function buildFaqContent(lang) {
+  const en = lang === 'en'
+  const rows = _db.prepare('SELECT question, answer, i18n FROM faqs ORDER BY sort ASC, created_at ASC').all()
+  if (!rows.length) return ''
+  return rows.map(r => {
+    let q = r.question, a = r.answer
+    if (en) { try { const t = JSON.parse(r.i18n || '{}').en; if (t) { q = t.question || q; a = t.answer || a } } catch { /* UA */ } }
+    return `<h3>${esc(q)}</h3><p>${esc(stripHtml(a))}</p>`
+  }).join('')
+}
+
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
 function handleProduct(lang) {
@@ -768,9 +809,15 @@ app.get('*', (req, res) => {
       const jsonLd = [ORG_SCHEMA]
       if (lookupPath === '/faq') { const faq = buildFaqSchema(isEn ? 'en' : 'uk'); if (faq) jsonLd.unshift(faq) }
       html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd })
-      // SSR-lite: H1 + опис сторінки + nav у #seo-content
+      // SSR-lite: H1 + контент сторінки + nav у #seo-content.
+      // Дата-керовані сторінки (головна/блог/FAQ) наповнюємо реальним контентом.
+      const lg = isEn ? 'en' : 'uk'
       const h1 = (meta.title || '').replace(/\s*[|–—-]\s*Termojet\s*$/i, '').trim() || 'Termojet'
-      html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang: isEn ? 'en' : 'uk', h1, bodyHtml: `<p>${esc(meta.desc)}</p>` }))
+      let bodyHtml = `<p>${esc(meta.desc)}</p>`
+      if (lookupPath === '/') bodyHtml += buildHomeContent(lg)
+      else if (lookupPath === '/blog') bodyHtml += buildBlogListContent(lg)
+      else if (lookupPath === '/faq') bodyHtml += buildFaqContent(lg)
+      html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang: lg, h1, bodyHtml }))
       res.setHeader('Cache-Control', 'no-cache')
       return res.type('html').send(html)
     } catch (e) { /* fall through */ }
