@@ -64,34 +64,10 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
-    <!-- Серверний SEO-контент сторінки (заповнюється сервером для товарів/категорій тощо) -->
+    <!-- Серверний SEO-контент сторінки: сервер наповнює його семантичним HTML
+         (товари/категорії/блог/статичні), краулери бачать це в raw HTML. Замінив
+         колишній статичний <noscript> — тепер контент per-page, а не загальний. -->
     <div id="seo-content"></div>
-    <noscript>
-      <main>
-        <h2>Termojet — виробник обладнання для котелень</h2>
-        <p>
-          Termojet — український виробник систем швидкого монтажу для котелень з 2002 року:
-          насосні групи, розподільчі колектори, гідравлічні розділювачі (гідрострілки),
-          сепаратори шламу та повітря, 3- і 4-ходові клапани, циркуляційні насоси APM/APE/APM-F,
-          модулі BOX, система Mega та автоматика керування.
-        </p>
-        <nav aria-label="Основні розділи">
-          <ul>
-            <li><a href="/catalog">Каталог обладнання</a></li>
-            <li><a href="/catalog/nasosni-hrupy">Насосні групи</a></li>
-            <li><a href="/catalog/rozpodilchi-kolektory">Розподільчі колектори</a></li>
-            <li><a href="/catalog/hidravlichni-rozdilnyky">Гідравлічні розділювачі</a></li>
-            <li><a href="/catalog/separatory">Сепаратори</a></li>
-            <li><a href="/catalog/nasosy">Насоси</a></li>
-            <li><a href="/blog">Блог</a></li>
-            <li><a href="/portfolio">Наші проекти</a></li>
-            <li><a href="/about">Про компанію</a></li>
-            <li><a href="/contacts">Контакти</a></li>
-            <li><a href="/privacy">Політика конфіденційності</a></li>
-          </ul>
-        </nav>
-      </main>
-    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
