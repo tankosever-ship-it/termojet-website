@@ -1,0 +1,330 @@
+{
+  "84040031F": {
+    "en": {
+      "name": "Hydraulic separator Termojet flanged in thermal insulation with base HS-31F",
+      "short_desc": "Termojet HS-31F flanged hydraulic separator in thermal insulation with base. DN 80 connection, up to 920 kW, Gmax 39.7 m³/h.",
+      "seo_title": "Flanged Hydraulic Separator HS-31F DN 80 with Base | Termojet",
+      "meta_description": "Termojet flanged hydraulic separator HS-31F DN 80 with base: up to 920 kW, Gmax 39.7 m³/h, air separator and sludge trap. Manufacturer Termojet.",
+      "subcategory": "Hydraulic separators",
+      "specs": {
+        "Connection": "DN 80 flange (GOST 12820-80, PN16)",
+        "Gmax": "39.7 m³/h",
+        "Qmax: ΔT=10°C": "450 kW",
+        "Qmax: ΔT=20°C": "920 kW",
+        "Body diameter": "270 mm",
+        "Centre-to-centre distance": "500 mm",
+        "Height (with base)": "1200 mm",
+        "Width (across flanges)": "670 mm",
+        "Depth": "350 mm",
+        "Thermal insulation": "yes",
+        "Base": "yes"
+      }
+    },
+    "pl": {
+      "name": "Separator hydrauliczny Termojet kołnierzowy w izolacji termicznej z podstawą HS-31F",
+      "short_desc": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-31F w izolacji termicznej z podstawą. Przyłącze DN 80, do 920 kW, Gmax 39,7 m³/h.",
+      "seo_title": "Sprzęgło hydrauliczne kołnierzowe HS-31F DN 80 z podstawą | Termojet",
+      "meta_description": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-31F DN 80 z podstawą: do 920 kW, Gmax 39,7 m³/h, odpowietrznik i odmulacz. Producent Termojet.",
+      "subcategory": "Rozdzielacze hydrauliczne",
+      "specs": {
+        "Przyłącze": "kołnierz DN 80 (GOST 12820-80, PN16)",
+        "Gmax": "39,7 m³/h",
+        "Qmax: ΔT=10°C": "450 kW",
+        "Qmax: ΔT=20°C": "920 kW",
+        "Średnica korpusu": "270 mm",
+        "Rozstaw osi": "500 mm",
+        "Wysokość (z podstawą)": "1200 mm",
+        "Szerokość (po kołnierzach)": "670 mm",
+        "Głębokość": "350 mm",
+        "Izolacja termiczna": "tak",
+        "Podstawa": "tak"
+      }
+    },
+    "de": {
+      "name": "Hydraulische Weiche Termojet mit Flansch in Wärmedämmung mit Sockel HS-31F",
+      "short_desc": "Hydraulische Weiche Termojet HS-31F mit Flansch, in Wärmedämmung und mit Sockel. Anschluss DN 80, bis 920 kW, Gmax 39,7 m³/h.",
+      "seo_title": "Flansch-Hydraulische Weiche HS-31F DN 80 mit Sockel | Termojet",
+      "meta_description": "Termojet Flansch-Hydraulische Weiche HS-31F DN 80 mit Sockel: bis 920 kW, Gmax 39,7 m³/h, Luftabscheider und Schlammabscheider. Hersteller Termojet.",
+      "subcategory": "Hydraulische Weichen",
+      "specs": {
+        "Anschluss": "Flansch DN 80 (GOST 12820-80, PN16)",
+        "Gmax": "39,7 m³/h",
+        "Qmax: ΔT=10°C": "450 kW",
+        "Qmax: ΔT=20°C": "920 kW",
+        "Gehäusedurchmesser": "270 mm",
+        "Achsabstand": "500 mm",
+        "Höhe (mit Sockel)": "1200 mm",
+        "Breite (über Flansche)": "670 mm",
+        "Tiefe": "350 mm",
+        "Wärmedämmung": "ja",
+        "Sockel": "ja"
+      }
+    },
+    "fr": {
+      "name": "Séparateur hydraulique Termojet à brides en isolation thermique avec socle HS-31F",
+      "short_desc": "Séparateur hydraulique Termojet HS-31F à brides, en isolation thermique et avec socle. Raccordement DN 80, jusquʼà 920 kW, Gmax 39,7 m³/h.",
+      "seo_title": "Séparateur hydraulique à brides HS-31F DN 80 avec socle | Termojet",
+      "meta_description": "Séparateur hydraulique à brides Termojet HS-31F DN 80 avec socle : jusquʼà 920 kW, Gmax 39,7 m³/h, purgeur dʼair et pot de décantation. Fabricant Termojet.",
+      "subcategory": "Séparateurs hydrauliques",
+      "specs": {
+        "Raccordement": "bride DN 80 (GOST 12820-80, PN16)",
+        "Gmax": "39,7 m³/h",
+        "Qmax : ΔT=10°C": "450 kW",
+        "Qmax : ΔT=20°C": "920 kW",
+        "Diamètre du corps": "270 mm",
+        "Entraxe": "500 mm",
+        "Hauteur (avec socle)": "1200 mm",
+        "Largeur (entre brides)": "670 mm",
+        "Profondeur": "350 mm",
+        "Isolation thermique": "oui",
+        "Socle": "oui"
+      }
+    }
+  },
+  "84040032F": {
+    "en": {
+      "name": "Hydraulic separator Termojet flanged in thermal insulation with base HS-32F",
+      "short_desc": "Termojet HS-32F flanged hydraulic separator in thermal insulation with base. DN 100 connection, up to 1300 kW, Gmax 56.8 m³/h.",
+      "seo_title": "Flanged Hydraulic Separator HS-32F DN 100 with Base | Termojet",
+      "meta_description": "Termojet flanged hydraulic separator HS-32F DN 100 with base: up to 1300 kW, Gmax 56.8 m³/h, air separator and sludge trap. Manufacturer Termojet.",
+      "subcategory": "Hydraulic separators",
+      "specs": {
+        "Connection": "DN 100 flange (GOST 12820-80, PN16)",
+        "Gmax": "56.8 m³/h",
+        "Qmax: ΔT=10°C": "650 kW",
+        "Qmax: ΔT=20°C": "1300 kW",
+        "Body diameter": "325 mm",
+        "Centre-to-centre distance": "600 mm",
+        "Height (with base)": "1350 mm",
+        "Width (across flanges)": "725 mm",
+        "Depth": "405 mm",
+        "Thermal insulation": "yes",
+        "Base": "yes"
+      }
+    },
+    "pl": {
+      "name": "Separator hydrauliczny Termojet kołnierzowy w izolacji termicznej z podstawą HS-32F",
+      "short_desc": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-32F w izolacji termicznej z podstawą. Przyłącze DN 100, do 1300 kW, Gmax 56,8 m³/h.",
+      "seo_title": "Sprzęgło hydrauliczne kołnierzowe HS-32F DN 100 z podstawą | Termojet",
+      "meta_description": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-32F DN 100 z podstawą: do 1300 kW, Gmax 56,8 m³/h, odpowietrznik i odmulacz. Producent Termojet.",
+      "subcategory": "Rozdzielacze hydrauliczne",
+      "specs": {
+        "Przyłącze": "kołnierz DN 100 (GOST 12820-80, PN16)",
+        "Gmax": "56,8 m³/h",
+        "Qmax: ΔT=10°C": "650 kW",
+        "Qmax: ΔT=20°C": "1300 kW",
+        "Średnica korpusu": "325 mm",
+        "Rozstaw osi": "600 mm",
+        "Wysokość (z podstawą)": "1350 mm",
+        "Szerokość (po kołnierzach)": "725 mm",
+        "Głębokość": "405 mm",
+        "Izolacja termiczna": "tak",
+        "Podstawa": "tak"
+      }
+    },
+    "de": {
+      "name": "Hydraulische Weiche Termojet mit Flansch in Wärmedämmung mit Sockel HS-32F",
+      "short_desc": "Hydraulische Weiche Termojet HS-32F mit Flansch, in Wärmedämmung und mit Sockel. Anschluss DN 100, bis 1300 kW, Gmax 56,8 m³/h.",
+      "seo_title": "Flansch-Hydraulische Weiche HS-32F DN 100 mit Sockel | Termojet",
+      "meta_description": "Termojet Flansch-Hydraulische Weiche HS-32F DN 100 mit Sockel: bis 1300 kW, Gmax 56,8 m³/h, Luftabscheider und Schlammabscheider. Hersteller Termojet.",
+      "subcategory": "Hydraulische Weichen",
+      "specs": {
+        "Anschluss": "Flansch DN 100 (GOST 12820-80, PN16)",
+        "Gmax": "56,8 m³/h",
+        "Qmax: ΔT=10°C": "650 kW",
+        "Qmax: ΔT=20°C": "1300 kW",
+        "Gehäusedurchmesser": "325 mm",
+        "Achsabstand": "600 mm",
+        "Höhe (mit Sockel)": "1350 mm",
+        "Breite (über Flansche)": "725 mm",
+        "Tiefe": "405 mm",
+        "Wärmedämmung": "ja",
+        "Sockel": "ja"
+      }
+    },
+    "fr": {
+      "name": "Séparateur hydraulique Termojet à brides en isolation thermique avec socle HS-32F",
+      "short_desc": "Séparateur hydraulique Termojet HS-32F à brides, en isolation thermique et avec socle. Raccordement DN 100, jusquʼà 1300 kW, Gmax 56,8 m³/h.",
+      "seo_title": "Séparateur hydraulique à brides HS-32F DN 100 avec socle | Termojet",
+      "meta_description": "Séparateur hydraulique à brides Termojet HS-32F DN 100 avec socle : jusquʼà 1300 kW, Gmax 56,8 m³/h, purgeur dʼair et pot de décantation. Fabricant Termojet.",
+      "subcategory": "Séparateurs hydrauliques",
+      "specs": {
+        "Raccordement": "bride DN 100 (GOST 12820-80, PN16)",
+        "Gmax": "56,8 m³/h",
+        "Qmax : ΔT=10°C": "650 kW",
+        "Qmax : ΔT=20°C": "1300 kW",
+        "Diamètre du corps": "325 mm",
+        "Entraxe": "600 mm",
+        "Hauteur (avec socle)": "1350 mm",
+        "Largeur (entre brides)": "725 mm",
+        "Profondeur": "405 mm",
+        "Isolation thermique": "oui",
+        "Socle": "oui"
+      }
+    }
+  },
+  "84040033F": {
+    "en": {
+      "name": "Hydraulic separator Termojet flanged in thermal insulation with base HS-33F",
+      "short_desc": "Termojet HS-33F flanged hydraulic separator in thermal insulation with base. DN 125 connection, up to 1800 kW, Gmax 76.2 m³/h.",
+      "seo_title": "Flanged Hydraulic Separator HS-33F DN 125 with Base | Termojet",
+      "meta_description": "Termojet flanged hydraulic separator HS-33F DN 125 with base: up to 1800 kW, Gmax 76.2 m³/h, air separator and sludge trap. Manufacturer Termojet.",
+      "subcategory": "Hydraulic separators",
+      "specs": {
+        "Connection": "DN 125 flange (GOST 12820-80, PN16)",
+        "Gmax": "76.2 m³/h",
+        "Qmax: ΔT=10°C": "900 kW",
+        "Qmax: ΔT=20°C": "1800 kW",
+        "Body diameter": "380 mm",
+        "Centre-to-centre distance": "750 mm",
+        "Height (with base)": "1560 mm",
+        "Width (across flanges)": "815 mm",
+        "Depth": "440 mm",
+        "Thermal insulation": "yes",
+        "Base": "yes"
+      }
+    },
+    "pl": {
+      "name": "Separator hydrauliczny Termojet kołnierzowy w izolacji termicznej z podstawą HS-33F",
+      "short_desc": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-33F w izolacji termicznej z podstawą. Przyłącze DN 125, do 1800 kW, Gmax 76,2 m³/h.",
+      "seo_title": "Sprzęgło hydrauliczne kołnierzowe HS-33F DN 125 z podstawą | Termojet",
+      "meta_description": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-33F DN 125 z podstawą: do 1800 kW, Gmax 76,2 m³/h, odpowietrznik i odmulacz. Producent Termojet.",
+      "subcategory": "Rozdzielacze hydrauliczne",
+      "specs": {
+        "Przyłącze": "kołnierz DN 125 (GOST 12820-80, PN16)",
+        "Gmax": "76,2 m³/h",
+        "Qmax: ΔT=10°C": "900 kW",
+        "Qmax: ΔT=20°C": "1800 kW",
+        "Średnica korpusu": "380 mm",
+        "Rozstaw osi": "750 mm",
+        "Wysokość (z podstawą)": "1560 mm",
+        "Szerokość (po kołnierzach)": "815 mm",
+        "Głębokość": "440 mm",
+        "Izolacja termiczna": "tak",
+        "Podstawa": "tak"
+      }
+    },
+    "de": {
+      "name": "Hydraulische Weiche Termojet mit Flansch in Wärmedämmung mit Sockel HS-33F",
+      "short_desc": "Hydraulische Weiche Termojet HS-33F mit Flansch, in Wärmedämmung und mit Sockel. Anschluss DN 125, bis 1800 kW, Gmax 76,2 m³/h.",
+      "seo_title": "Flansch-Hydraulische Weiche HS-33F DN 125 mit Sockel | Termojet",
+      "meta_description": "Termojet Flansch-Hydraulische Weiche HS-33F DN 125 mit Sockel: bis 1800 kW, Gmax 76,2 m³/h, Luftabscheider und Schlammabscheider. Hersteller Termojet.",
+      "subcategory": "Hydraulische Weichen",
+      "specs": {
+        "Anschluss": "Flansch DN 125 (GOST 12820-80, PN16)",
+        "Gmax": "76,2 m³/h",
+        "Qmax: ΔT=10°C": "900 kW",
+        "Qmax: ΔT=20°C": "1800 kW",
+        "Gehäusedurchmesser": "380 mm",
+        "Achsabstand": "750 mm",
+        "Höhe (mit Sockel)": "1560 mm",
+        "Breite (über Flansche)": "815 mm",
+        "Tiefe": "440 mm",
+        "Wärmedämmung": "ja",
+        "Sockel": "ja"
+      }
+    },
+    "fr": {
+      "name": "Séparateur hydraulique Termojet à brides en isolation thermique avec socle HS-33F",
+      "short_desc": "Séparateur hydraulique Termojet HS-33F à brides, en isolation thermique et avec socle. Raccordement DN 125, jusquʼà 1800 kW, Gmax 76,2 m³/h.",
+      "seo_title": "Séparateur hydraulique à brides HS-33F DN 125 avec socle | Termojet",
+      "meta_description": "Séparateur hydraulique à brides Termojet HS-33F DN 125 avec socle : jusquʼà 1800 kW, Gmax 76,2 m³/h, purgeur dʼair et pot de décantation. Fabricant Termojet.",
+      "subcategory": "Séparateurs hydrauliques",
+      "specs": {
+        "Raccordement": "bride DN 125 (GOST 12820-80, PN16)",
+        "Gmax": "76,2 m³/h",
+        "Qmax : ΔT=10°C": "900 kW",
+        "Qmax : ΔT=20°C": "1800 kW",
+        "Diamètre du corps": "380 mm",
+        "Entraxe": "750 mm",
+        "Hauteur (avec socle)": "1560 mm",
+        "Largeur (entre brides)": "815 mm",
+        "Profondeur": "440 mm",
+        "Isolation thermique": "oui",
+        "Socle": "oui"
+      }
+    }
+  },
+  "84040034F": {
+    "en": {
+      "name": "Hydraulic separator Termojet flanged in thermal insulation with base HS-34F",
+      "short_desc": "Termojet HS-34F flanged hydraulic separator in thermal insulation with base. DN 150 connection, up to 2200 kW, Gmax 95.1 m³/h.",
+      "seo_title": "Flanged Hydraulic Separator HS-34F DN 150 with Base | Termojet",
+      "meta_description": "Termojet flanged hydraulic separator HS-34F DN 150 with base: up to 2200 kW, Gmax 95.1 m³/h, air separator and sludge trap. Manufacturer Termojet.",
+      "subcategory": "Hydraulic separators",
+      "specs": {
+        "Connection": "DN 150 flange (GOST 12820-80, PN16)",
+        "Gmax": "95.1 m³/h",
+        "Qmax: ΔT=10°C": "1100 kW",
+        "Qmax: ΔT=20°C": "2200 kW",
+        "Body diameter": "425 mm",
+        "Centre-to-centre distance": "900 mm",
+        "Height (with base)": "1660 mm",
+        "Width (across flanges)": "825 mm",
+        "Depth": "507 mm",
+        "Thermal insulation": "yes",
+        "Base": "yes"
+      }
+    },
+    "pl": {
+      "name": "Separator hydrauliczny Termojet kołnierzowy w izolacji termicznej z podstawą HS-34F",
+      "short_desc": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-34F w izolacji termicznej z podstawą. Przyłącze DN 150, do 2200 kW, Gmax 95,1 m³/h.",
+      "seo_title": "Sprzęgło hydrauliczne kołnierzowe HS-34F DN 150 z podstawą | Termojet",
+      "meta_description": "Kołnierzowe sprzęgło hydrauliczne Termojet HS-34F DN 150 z podstawą: do 2200 kW, Gmax 95,1 m³/h, odpowietrznik i odmulacz. Producent Termojet.",
+      "subcategory": "Rozdzielacze hydrauliczne",
+      "specs": {
+        "Przyłącze": "kołnierz DN 150 (GOST 12820-80, PN16)",
+        "Gmax": "95,1 m³/h",
+        "Qmax: ΔT=10°C": "1100 kW",
+        "Qmax: ΔT=20°C": "2200 kW",
+        "Średnica korpusu": "425 mm",
+        "Rozstaw osi": "900 mm",
+        "Wysokość (z podstawą)": "1660 mm",
+        "Szerokość (po kołnierzach)": "825 mm",
+        "Głębokość": "507 mm",
+        "Izolacja termiczna": "tak",
+        "Podstawa": "tak"
+      }
+    },
+    "de": {
+      "name": "Hydraulische Weiche Termojet mit Flansch in Wärmedämmung mit Sockel HS-34F",
+      "short_desc": "Hydraulische Weiche Termojet HS-34F mit Flansch, in Wärmedämmung und mit Sockel. Anschluss DN 150, bis 2200 kW, Gmax 95,1 m³/h.",
+      "seo_title": "Flansch-Hydraulische Weiche HS-34F DN 150 mit Sockel | Termojet",
+      "meta_description": "Termojet Flansch-Hydraulische Weiche HS-34F DN 150 mit Sockel: bis 2200 kW, Gmax 95,1 m³/h, Luftabscheider und Schlammabscheider. Hersteller Termojet.",
+      "subcategory": "Hydraulische Weichen",
+      "specs": {
+        "Anschluss": "Flansch DN 150 (GOST 12820-80, PN16)",
+        "Gmax": "95,1 m³/h",
+        "Qmax: ΔT=10°C": "1100 kW",
+        "Qmax: ΔT=20°C": "2200 kW",
+        "Gehäusedurchmesser": "425 mm",
+        "Achsabstand": "900 mm",
+        "Höhe (mit Sockel)": "1660 mm",
+        "Breite (über Flansche)": "825 mm",
+        "Tiefe": "507 mm",
+        "Wärmedämmung": "ja",
+        "Sockel": "ja"
+      }
+    },
+    "fr": {
+      "name": "Séparateur hydraulique Termojet à brides en isolation thermique avec socle HS-34F",
+      "short_desc": "Séparateur hydraulique Termojet HS-34F à brides, en isolation thermique et avec socle. Raccordement DN 150, jusquʼà 2200 kW, Gmax 95,1 m³/h.",
+      "seo_title": "Séparateur hydraulique à brides HS-34F DN 150 avec socle | Termojet",
+      "meta_description": "Séparateur hydraulique à brides Termojet HS-34F DN 150 avec socle : jusquʼà 2200 kW, Gmax 95,1 m³/h, purgeur dʼair et pot de décantation. Fabricant Termojet.",
+      "subcategory": "Séparateurs hydrauliques",
+      "specs": {
+        "Raccordement": "bride DN 150 (GOST 12820-80, PN16)",
+        "Gmax": "95,1 m³/h",
+        "Qmax : ΔT=10°C": "1100 kW",
+        "Qmax : ΔT=20°C": "2200 kW",
+        "Diamètre du corps": "425 mm",
+        "Entraxe": "900 mm",
+        "Hauteur (avec socle)": "1660 mm",
+        "Largeur (entre brides)": "825 mm",
+        "Profondeur": "507 mm",
+        "Isolation thermique": "oui",
+        "Socle": "oui"
+      }
+    }
+  }
+}

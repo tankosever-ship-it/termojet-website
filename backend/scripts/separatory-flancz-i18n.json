@@ -1,0 +1,626 @@
+{
+  "TJV8F50": {
+    "en": {
+      "name": "Flanged air separator Termojet DN50 110°C/10bar",
+      "short_desc": "Termojet DN50 flanged air separator with a stainless steel spiral mesh. DN 50 flanges PN16, 12.4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Air Separator DN50 Termojet — buy online",
+      "meta_description": "Termojet DN50 flanged air separator: stainless steel spiral mesh, 12.4 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Air separators",
+      "specs": {
+        "Connection": "DN 50 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "160 mm",
+        "Nominal flow (1.5 m/s)": "12.4 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "380×487×208 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator powietrza kołnierzowy Termojet DN50 110°C/10bar",
+      "short_desc": "Kołnierzowy separator powietrza Termojet DN50 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 50 PN16, 12,4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator powietrza kołnierzowy DN50 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator powietrza Termojet DN50: spiralna siatka ze stali nierdzewnej, 12,4 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory powietrza",
+      "specs": {
+        "Przyłącze": "kołnierz DN 50 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "160 mm",
+        "Przepływ nominalny (1,5 m/s)": "12,4 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "380×487×208 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Luftabscheider Termojet DN50 110°C/10bar",
+      "short_desc": "Flansch-Luftabscheider Termojet DN50 mit Spiralgewebe aus Edelstahl. Flansche DN 50 PN16, 12,4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Luftabscheider DN50 Termojet — kaufen",
+      "meta_description": "Flansch-Luftabscheider Termojet DN50: Spiralgewebe aus Edelstahl, 12,4 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Luftabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 50 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "160 mm",
+        "Nenndurchfluss (1,5 m/s)": "12,4 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "380×487×208 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de lʼair à brides Termojet DN50 110°C/10bar",
+      "short_desc": "Séparateur de lʼair à brides Termojet DN50 avec grille spiralée en acier inoxydable. Brides DN 50 PN16, 12,4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de lʼair à brides DN50 Termojet — acheter",
+      "meta_description": "Séparateur de lʼair à brides Termojet DN50 : grille spiralée en acier inoxydable, 12,4 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs dʼair",
+      "specs": {
+        "Raccordement": "bride DN 50 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "160 mm",
+        "Débit nominal (1,5 m/s)": "12,4 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "380×487×208 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJV8F65": {
+    "en": {
+      "name": "Flanged air separator Termojet DN65 110°C/10bar",
+      "short_desc": "Termojet DN65 flanged air separator with a stainless steel spiral mesh. DN 65 flanges PN16, 19.3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Air Separator DN65 Termojet — buy online",
+      "meta_description": "Termojet DN65 flanged air separator: stainless steel spiral mesh, 19.3 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Air separators",
+      "specs": {
+        "Connection": "DN 65 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "180 mm",
+        "Nominal flow (1.5 m/s)": "19.3 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "380×487×208 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator powietrza kołnierzowy Termojet DN65 110°C/10bar",
+      "short_desc": "Kołnierzowy separator powietrza Termojet DN65 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 65 PN16, 19,3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator powietrza kołnierzowy DN65 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator powietrza Termojet DN65: spiralna siatka ze stali nierdzewnej, 19,3 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory powietrza",
+      "specs": {
+        "Przyłącze": "kołnierz DN 65 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "180 mm",
+        "Przepływ nominalny (1,5 m/s)": "19,3 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "380×487×208 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Luftabscheider Termojet DN65 110°C/10bar",
+      "short_desc": "Flansch-Luftabscheider Termojet DN65 mit Spiralgewebe aus Edelstahl. Flansche DN 65 PN16, 19,3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Luftabscheider DN65 Termojet — kaufen",
+      "meta_description": "Flansch-Luftabscheider Termojet DN65: Spiralgewebe aus Edelstahl, 19,3 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Luftabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 65 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "180 mm",
+        "Nenndurchfluss (1,5 m/s)": "19,3 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "380×487×208 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de lʼair à brides Termojet DN65 110°C/10bar",
+      "short_desc": "Séparateur de lʼair à brides Termojet DN65 avec grille spiralée en acier inoxydable. Brides DN 65 PN16, 19,3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de lʼair à brides DN65 Termojet — acheter",
+      "meta_description": "Séparateur de lʼair à brides Termojet DN65 : grille spiralée en acier inoxydable, 19,3 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs dʼair",
+      "specs": {
+        "Raccordement": "bride DN 65 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "180 mm",
+        "Débit nominal (1,5 m/s)": "19,3 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "380×487×208 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJV8F80": {
+    "en": {
+      "name": "Flanged air separator Termojet DN80 110°C/10bar",
+      "short_desc": "Termojet DN80 flanged air separator with a stainless steel spiral mesh. DN 80 flanges PN16, 27.8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Air Separator DN80 Termojet — buy online",
+      "meta_description": "Termojet DN80 flanged air separator: stainless steel spiral mesh, 27.8 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Air separators",
+      "specs": {
+        "Connection": "DN 80 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "195 mm",
+        "Nominal flow (1.5 m/s)": "27.8 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "494×586×335 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator powietrza kołnierzowy Termojet DN80 110°C/10bar",
+      "short_desc": "Kołnierzowy separator powietrza Termojet DN80 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 80 PN16, 27,8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator powietrza kołnierzowy DN80 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator powietrza Termojet DN80: spiralna siatka ze stali nierdzewnej, 27,8 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory powietrza",
+      "specs": {
+        "Przyłącze": "kołnierz DN 80 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "195 mm",
+        "Przepływ nominalny (1,5 m/s)": "27,8 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "494×586×335 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Luftabscheider Termojet DN80 110°C/10bar",
+      "short_desc": "Flansch-Luftabscheider Termojet DN80 mit Spiralgewebe aus Edelstahl. Flansche DN 80 PN16, 27,8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Luftabscheider DN80 Termojet — kaufen",
+      "meta_description": "Flansch-Luftabscheider Termojet DN80: Spiralgewebe aus Edelstahl, 27,8 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Luftabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 80 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "195 mm",
+        "Nenndurchfluss (1,5 m/s)": "27,8 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "494×586×335 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de lʼair à brides Termojet DN80 110°C/10bar",
+      "short_desc": "Séparateur de lʼair à brides Termojet DN80 avec grille spiralée en acier inoxydable. Brides DN 80 PN16, 27,8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de lʼair à brides DN80 Termojet — acheter",
+      "meta_description": "Séparateur de lʼair à brides Termojet DN80 : grille spiralée en acier inoxydable, 27,8 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs dʼair",
+      "specs": {
+        "Raccordement": "bride DN 80 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "195 mm",
+        "Débit nominal (1,5 m/s)": "27,8 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "494×586×335 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJV8F100": {
+    "en": {
+      "name": "Flanged air separator Termojet DN100 110°C/10bar",
+      "short_desc": "Termojet DN100 flanged air separator with a stainless steel spiral mesh. DN 100 flanges PN16, 43.2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Air Separator DN100 Termojet — buy online",
+      "meta_description": "Termojet DN100 flanged air separator: stainless steel spiral mesh, 43.2 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Air separators",
+      "specs": {
+        "Connection": "DN 100 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "215 mm",
+        "Nominal flow (1.5 m/s)": "43.2 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "486×586×335 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator powietrza kołnierzowy Termojet DN100 110°C/10bar",
+      "short_desc": "Kołnierzowy separator powietrza Termojet DN100 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 100 PN16, 43,2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator powietrza kołnierzowy DN100 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator powietrza Termojet DN100: spiralna siatka ze stali nierdzewnej, 43,2 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory powietrza",
+      "specs": {
+        "Przyłącze": "kołnierz DN 100 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "215 mm",
+        "Przepływ nominalny (1,5 m/s)": "43,2 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "486×586×335 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Luftabscheider Termojet DN100 110°C/10bar",
+      "short_desc": "Flansch-Luftabscheider Termojet DN100 mit Spiralgewebe aus Edelstahl. Flansche DN 100 PN16, 43,2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Luftabscheider DN100 Termojet — kaufen",
+      "meta_description": "Flansch-Luftabscheider Termojet DN100: Spiralgewebe aus Edelstahl, 43,2 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Luftabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 100 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "215 mm",
+        "Nenndurchfluss (1,5 m/s)": "43,2 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "486×586×335 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de lʼair à brides Termojet DN100 110°C/10bar",
+      "short_desc": "Séparateur de lʼair à brides Termojet DN100 avec grille spiralée en acier inoxydable. Brides DN 100 PN16, 43,2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de lʼair à brides DN100 Termojet — acheter",
+      "meta_description": "Séparateur de lʼair à brides Termojet DN100 : grille spiralée en acier inoxydable, 43,2 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs dʼair",
+      "specs": {
+        "Raccordement": "bride DN 100 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "215 mm",
+        "Débit nominal (1,5 m/s)": "43,2 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "486×586×335 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJT8F50": {
+    "en": {
+      "name": "Flanged dirt separator Termojet DN50 110°C/10bar",
+      "short_desc": "Termojet DN50 flanged dirt separator with a stainless steel spiral mesh. DN 50 flanges PN16, 12.4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Dirt Separator DN50 Termojet — buy online",
+      "meta_description": "Termojet DN50 flanged dirt separator: stainless steel spiral mesh, 12.4 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Dirt separators",
+      "specs": {
+        "Connection": "DN 50 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "160 mm",
+        "Nominal flow (1.5 m/s)": "12.4 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "380×490×208 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator zanieczyszczeń kołnierzowy Termojet DN50 110°C/10bar",
+      "short_desc": "Kołnierzowy separator zanieczyszczeń Termojet DN50 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 50 PN16, 12,4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator zanieczyszczeń kołnierzowy DN50 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator zanieczyszczeń Termojet DN50: spiralna siatka ze stali nierdzewnej, 12,4 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory zanieczyszczeń",
+      "specs": {
+        "Przyłącze": "kołnierz DN 50 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "160 mm",
+        "Przepływ nominalny (1,5 m/s)": "12,4 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "380×490×208 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Schlammabscheider Termojet DN50 110°C/10bar",
+      "short_desc": "Flansch-Schlammabscheider Termojet DN50 mit Spiralgewebe aus Edelstahl. Flansche DN 50 PN16, 12,4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Schlammabscheider DN50 Termojet — kaufen",
+      "meta_description": "Flansch-Schlammabscheider Termojet DN50: Spiralgewebe aus Edelstahl, 12,4 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Schlammabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 50 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "160 mm",
+        "Nenndurchfluss (1,5 m/s)": "12,4 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "380×490×208 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de boues à brides Termojet DN50 110°C/10bar",
+      "short_desc": "Séparateur de boues à brides Termojet DN50 avec grille spiralée en acier inoxydable. Brides DN 50 PN16, 12,4 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de boues à brides DN50 Termojet — acheter",
+      "meta_description": "Séparateur de boues à brides Termojet DN50 : grille spiralée en acier inoxydable, 12,4 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs de boues",
+      "specs": {
+        "Raccordement": "bride DN 50 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "160 mm",
+        "Débit nominal (1,5 m/s)": "12,4 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "380×490×208 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJT8F65": {
+    "en": {
+      "name": "Flanged dirt separator Termojet DN65 110°C/10bar",
+      "short_desc": "Termojet DN65 flanged dirt separator with a stainless steel spiral mesh. DN 65 flanges PN16, 19.3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Dirt Separator DN65 Termojet — buy online",
+      "meta_description": "Termojet DN65 flanged dirt separator: stainless steel spiral mesh, 19.3 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Dirt separators",
+      "specs": {
+        "Connection": "DN 65 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "180 mm",
+        "Nominal flow (1.5 m/s)": "19.3 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "380×490×208 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator zanieczyszczeń kołnierzowy Termojet DN65 110°C/10bar",
+      "short_desc": "Kołnierzowy separator zanieczyszczeń Termojet DN65 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 65 PN16, 19,3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator zanieczyszczeń kołnierzowy DN65 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator zanieczyszczeń Termojet DN65: spiralna siatka ze stali nierdzewnej, 19,3 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory zanieczyszczeń",
+      "specs": {
+        "Przyłącze": "kołnierz DN 65 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "180 mm",
+        "Przepływ nominalny (1,5 m/s)": "19,3 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "380×490×208 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Schlammabscheider Termojet DN65 110°C/10bar",
+      "short_desc": "Flansch-Schlammabscheider Termojet DN65 mit Spiralgewebe aus Edelstahl. Flansche DN 65 PN16, 19,3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Schlammabscheider DN65 Termojet — kaufen",
+      "meta_description": "Flansch-Schlammabscheider Termojet DN65: Spiralgewebe aus Edelstahl, 19,3 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Schlammabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 65 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "180 mm",
+        "Nenndurchfluss (1,5 m/s)": "19,3 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "380×490×208 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de boues à brides Termojet DN65 110°C/10bar",
+      "short_desc": "Séparateur de boues à brides Termojet DN65 avec grille spiralée en acier inoxydable. Brides DN 65 PN16, 19,3 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de boues à brides DN65 Termojet — acheter",
+      "meta_description": "Séparateur de boues à brides Termojet DN65 : grille spiralée en acier inoxydable, 19,3 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs de boues",
+      "specs": {
+        "Raccordement": "bride DN 65 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "180 mm",
+        "Débit nominal (1,5 m/s)": "19,3 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "380×490×208 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJT8F80": {
+    "en": {
+      "name": "Flanged dirt separator Termojet DN80 110°C/10bar",
+      "short_desc": "Termojet DN80 flanged dirt separator with a stainless steel spiral mesh. DN 80 flanges PN16, 27.8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Dirt Separator DN80 Termojet — buy online",
+      "meta_description": "Termojet DN80 flanged dirt separator: stainless steel spiral mesh, 27.8 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Dirt separators",
+      "specs": {
+        "Connection": "DN 80 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "195 mm",
+        "Nominal flow (1.5 m/s)": "27.8 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "494×586×335 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator zanieczyszczeń kołnierzowy Termojet DN80 110°C/10bar",
+      "short_desc": "Kołnierzowy separator zanieczyszczeń Termojet DN80 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 80 PN16, 27,8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator zanieczyszczeń kołnierzowy DN80 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator zanieczyszczeń Termojet DN80: spiralna siatka ze stali nierdzewnej, 27,8 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory zanieczyszczeń",
+      "specs": {
+        "Przyłącze": "kołnierz DN 80 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "195 mm",
+        "Przepływ nominalny (1,5 m/s)": "27,8 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "494×586×335 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Schlammabscheider Termojet DN80 110°C/10bar",
+      "short_desc": "Flansch-Schlammabscheider Termojet DN80 mit Spiralgewebe aus Edelstahl. Flansche DN 80 PN16, 27,8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Schlammabscheider DN80 Termojet — kaufen",
+      "meta_description": "Flansch-Schlammabscheider Termojet DN80: Spiralgewebe aus Edelstahl, 27,8 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Schlammabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 80 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "195 mm",
+        "Nenndurchfluss (1,5 m/s)": "27,8 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "494×586×335 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de boues à brides Termojet DN80 110°C/10bar",
+      "short_desc": "Séparateur de boues à brides Termojet DN80 avec grille spiralée en acier inoxydable. Brides DN 80 PN16, 27,8 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de boues à brides DN80 Termojet — acheter",
+      "meta_description": "Séparateur de boues à brides Termojet DN80 : grille spiralée en acier inoxydable, 27,8 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs de boues",
+      "specs": {
+        "Raccordement": "bride DN 80 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "195 mm",
+        "Débit nominal (1,5 m/s)": "27,8 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "494×586×335 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  },
+  "TJT8F100": {
+    "en": {
+      "name": "Flanged dirt separator Termojet DN100 110°C/10bar",
+      "short_desc": "Termojet DN100 flanged dirt separator with a stainless steel spiral mesh. DN 100 flanges PN16, 43.2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flanged Dirt Separator DN100 Termojet — buy online",
+      "meta_description": "Termojet DN100 flanged dirt separator: stainless steel spiral mesh, 43.2 m³/h, 10 bar, 110 °C, PN16 flanges. For boiler rooms and heat substations.",
+      "subcategory": "Dirt separators",
+      "specs": {
+        "Connection": "DN 100 flange (GOST 12820-80, PN16)",
+        "Flange outside diameter": "215 mm",
+        "Nominal flow (1.5 m/s)": "43.2 m³/h",
+        "Max. pressure": "10 bar",
+        "Max. temperature": "110 °C",
+        "Medium": "water or glycol solution up to 50%",
+        "Coalescing element": "stainless steel spiral mesh",
+        "Body material": "structural steel",
+        "Dimensions (W×H×D)": "486×586×335 mm",
+        "Manufacturer": "TERMOJET"
+      }
+    },
+    "pl": {
+      "name": "Separator zanieczyszczeń kołnierzowy Termojet DN100 110°C/10bar",
+      "short_desc": "Kołnierzowy separator zanieczyszczeń Termojet DN100 ze spiralną siatką ze stali nierdzewnej. Kołnierze DN 100 PN16, 43,2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Separator zanieczyszczeń kołnierzowy DN100 Termojet — kup online",
+      "meta_description": "Kołnierzowy separator zanieczyszczeń Termojet DN100: spiralna siatka ze stali nierdzewnej, 43,2 m³/h, 10 bar, 110 °C, kołnierze PN16. Do kotłowni i węzłów cieplnych.",
+      "subcategory": "Separatory zanieczyszczeń",
+      "specs": {
+        "Przyłącze": "kołnierz DN 100 (GOST 12820-80, PN16)",
+        "Średnica zewnętrzna kołnierza": "215 mm",
+        "Przepływ nominalny (1,5 m/s)": "43,2 m³/h",
+        "Maks. ciśnienie": "10 bar",
+        "Maks. temperatura": "110 °C",
+        "Czynnik roboczy": "woda lub roztwór glikolu do 50%",
+        "Wkład koalescencyjny": "spiralna siatka ze stali nierdzewnej",
+        "Materiał korpusu": "stal konstrukcyjna",
+        "Wymiary (S×W×G)": "486×586×335 mm",
+        "Producent": "TERMOJET"
+      }
+    },
+    "de": {
+      "name": "Flansch-Schlammabscheider Termojet DN100 110°C/10bar",
+      "short_desc": "Flansch-Schlammabscheider Termojet DN100 mit Spiralgewebe aus Edelstahl. Flansche DN 100 PN16, 43,2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Flansch-Schlammabscheider DN100 Termojet — kaufen",
+      "meta_description": "Flansch-Schlammabscheider Termojet DN100: Spiralgewebe aus Edelstahl, 43,2 m³/h, 10 bar, 110 °C, Flansche PN16. Für Heizzentralen und Übergabestationen.",
+      "subcategory": "Schlammabscheider",
+      "specs": {
+        "Anschluss": "Flansch DN 100 (GOST 12820-80, PN16)",
+        "Flansch-Außendurchmesser": "215 mm",
+        "Nenndurchfluss (1,5 m/s)": "43,2 m³/h",
+        "Max. Druck": "10 bar",
+        "Max. Temperatur": "110 °C",
+        "Medium": "Wasser oder Glykollösung bis 50 %",
+        "Koaleszenzeinsatz": "Spiralgewebe aus Edelstahl",
+        "Gehäusewerkstoff": "Baustahl",
+        "Abmessungen (B×H×T)": "486×586×335 mm",
+        "Hersteller": "TERMOJET"
+      }
+    },
+    "fr": {
+      "name": "Séparateur de boues à brides Termojet DN100 110°C/10bar",
+      "short_desc": "Séparateur de boues à brides Termojet DN100 avec grille spiralée en acier inoxydable. Brides DN 100 PN16, 43,2 m³/h, 10 bar, 110 °C.",
+      "seo_title": "Séparateur de boues à brides DN100 Termojet — acheter",
+      "meta_description": "Séparateur de boues à brides Termojet DN100 : grille spiralée en acier inoxydable, 43,2 m³/h, 10 bar, 110 °C, brides PN16. Pour chaufferies et sous-stations.",
+      "subcategory": "Séparateurs de boues",
+      "specs": {
+        "Raccordement": "bride DN 100 (GOST 12820-80, PN16)",
+        "Diamètre extérieur de bride": "215 mm",
+        "Débit nominal (1,5 m/s)": "43,2 m³/h",
+        "Pression max.": "10 bar",
+        "Température max.": "110 °C",
+        "Fluide": "eau ou solution de glycol jusquʼà 50 %",
+        "Élément coalesceur": "grille spiralée en acier inoxydable",
+        "Matériau du corps": "acier de construction",
+        "Dimensions (L×H×P)": "486×586×335 mm",
+        "Fabricant": "TERMOJET"
+      }
+    }
+  }
+}
