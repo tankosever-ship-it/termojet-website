@@ -243,6 +243,23 @@ export const MODELS_BY_SLUG = {
   "sep-tj5503702401": [{ file: 'sep-tj5503.step', name: 'TJ5503.step', size: '13 МБ', glb: '/uploads/3d/sep-tj5503.glb' }],
   // TJ7575 сепаратор бруду для теплових насосів (пластиковий)
   "sep-tj7575055501": [{ file: 'sep-tj7575.step', name: 'TJ7575.step', size: '207 МБ', glb: '/uploads/3d/sep-tj7575.glb' }],
+  // 2026-08-11: фланцеві гідрострілки ГС-31Ф…ГС-34Ф (моделі SG-3xM-F)
+  "gidrostrilka-gs-31-flanceva": [{ file: 'gidrostrilka-gs-31-f.step', name: 'SG-31M-F.step', size: '22 МБ', glb: '/uploads/3d/gidrostrilka-gs-31-f.glb' }],
+  "gidrostrilka-gs-32-flanceva": [{ file: 'gidrostrilka-gs-32-f.step', name: 'SG-32M-F.step', size: '25 МБ', glb: '/uploads/3d/gidrostrilka-gs-32-f.glb' }],
+  "gidrostrilka-gs-33-flanceva": [{ file: 'gidrostrilka-gs-33-f.step', name: 'SG-33M-F.step', size: '29 МБ', glb: '/uploads/3d/gidrostrilka-gs-33-f.glb' }],
+  "gidrostrilka-gs-34-flanceva": [{ file: 'gidrostrilka-gs-34-f.step', name: 'SG-34M-F.step', size: '31 МБ', glb: '/uploads/3d/gidrostrilka-gs-34-f.glb' }],
+// Фланцеві сепаратори повітря (TJV8F) і бруду (TJT8F) Dn50…Dn100.
+// Файли — у томі /uploads/3d/. Вставити у src/data/models3d.js всередину MODELS_BY_SLUG.
+// (2026-08-11: у Dn50 бруду власної моделі немає — тимчасово на спільній із Dn65,
+//  ім'я файла показуємо справжнє. Замінити, коли прийде модель Dn50.)
+  "separator-povitrya-flanceviy-dn50": [{ file: 'separator-as-dn50.step', name: 'TJV8F50.step', size: '4 МБ', glb: '/uploads/3d/separator-as-dn50.glb' }],
+  "separator-povitrya-flanceviy-dn65": [{ file: 'separator-as-dn65.step', name: 'TJV8F65.step', size: '4 МБ', glb: '/uploads/3d/separator-as-dn65.glb' }],
+  "separator-povitrya-flanceviy-dn80": [{ file: 'separator-as-dn80.step', name: 'TJV8F80.step', size: '3 МБ', glb: '/uploads/3d/separator-as-dn80.glb' }],
+  "separator-povitrya-flanceviy-dn100": [{ file: 'separator-as-dn100.step', name: 'TJV8F100.step', size: '3 МБ', glb: '/uploads/3d/separator-as-dn100.glb' }],
+  "separator-brudu-flanceviy-dn50": [{ file: 'separator-ds-dn65.step', name: 'TJT8F65.step', size: '4 МБ', glb: '/uploads/3d/separator-ds-dn65.glb' }],   // спільна модель Dn65
+  "separator-brudu-flanceviy-dn65": [{ file: 'separator-ds-dn65.step', name: 'TJT8F65.step', size: '4 МБ', glb: '/uploads/3d/separator-ds-dn65.glb' }],
+  "separator-brudu-flanceviy-dn80": [{ file: 'separator-ds-dn80.step', name: 'TJT8F80.step', size: '3 МБ', glb: '/uploads/3d/separator-ds-dn80.glb' }],
+  "separator-brudu-flanceviy-dn100": [{ file: 'separator-ds-dn100.step', name: 'TJT8F100.step', size: '3 МБ', glb: '/uploads/3d/separator-ds-dn100.glb' }],
 }
 
 export function getModels3D(slug) {
