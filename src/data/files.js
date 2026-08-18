@@ -451,7 +451,6 @@ export const FILES = [
   },
 
   // ── Нові документи (локальні, public/files) ──
-  { id: 100, name: 'Інструкція — Насоси APM-F', category: 'Інструкції', format: 'PDF', url: '/files/apm-f-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Монтаж та експлуатація фланцевих циркуляційних насосів APM-F' },
   { id: 101, name: 'Брошура — Насоси APM-F', category: 'Брошури', format: 'PDF', url: '/files/apm-f-broshura.pdf', lang: 'uk', year: 2025, desc: 'Лінійка фланцевих насосів APM-F — характеристики та підбір' },
   { id: 102, name: 'Інструкція — Каналізаційна станція WT 400 (Sololift)', category: 'Інструкції', format: 'PDF', url: '/files/wt400-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Встановлення та обслуговування каналізаційних установок WT 400' },
   { id: 103, name: 'Інструкція — Насоси SPE12', category: 'Інструкції', format: 'PDF', url: '/files/spe12-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Встановлення рециркуляційних насосів SPE12-1.4 / 1.4S' },
@@ -512,4 +511,6 @@ export const FILES = [
   { id: 192, name: 'Інструкція — Автоматика PROFI PLUS (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/profi-plus-controller-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Контролер котельні на три змішувальні контури, ГВП, каскад котлів і OpenTherm: монтаж, клемна колодка, датчики, меню, додаткові контакти, тижневий графік · українською та англійською' },
   { id: 193, name: 'Інструкція — Автоматика LIGHT (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/light-controller-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Контролер котельні на два змішувальні контури, ГВП, каскад котлів і OpenTherm: монтаж, клемна колодка, датчики, меню, додаткові контакти, тижневий графік · українською та англійською' },
   { id: 194, name: 'Інструкція — Частотний перетворювач PDH30 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/pdh30-pump-drive-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Блок керування насоса TBE: панель, монтаж на клемну коробку, схеми підключення давача, мережа до шести насосів по CAN, 121 параметр і коди аварій · українською та англійською' },
+  { id: 195, name: 'Інструкція — Насоси APM-F 40/12…65/15 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/apm-f-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Фланцеві циркуляційні насоси DN40–DN65 з частотним керуванням: чотири режими CS/PP/CP/SAU, панель і автоматичне видалення повітря, монтаж, поворот блока керування, коди захистів · українською та англійською' },
+  { id: 196, name: 'Інструкція — Насоси APM-F 40/8-220 і 50/8-240 (UA + EN)', category: 'Інструкції', format: 'PDF', url: '/files/apm-8f-pumps-manual-ua-en.pdf', lang: 'uk-en', year: 2026, desc: 'Фланцеві циркуляційні насоси DN40 і DN50 з частотним керуванням: режими CS/PP/CP, криві характеристик, габарити, панель, коди захистів · українською та англійською' },
 ]
