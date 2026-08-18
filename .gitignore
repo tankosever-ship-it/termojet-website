@@ -2,12 +2,19 @@ node_modules
 dist
 .env
 .DS_Store
-*.STEP
-*.STEP
-*.glb filter=lfs diff=lfs merge=lfs -text
-Знімок*
-*.glb
 .claude/worktrees/
+
+# важкі вихідні формати — у ~/CODE/assets, не в репо
+*.STEP
+*.glb
+*.psd
+
+# випадкові скріншоти
+Знімок*
+
+# службовий стан OMC — сесійний шум, не належить історії
+**/.omc/state/
+**/.omc/artifacts/
 
 # backend runtime
 backend/data/

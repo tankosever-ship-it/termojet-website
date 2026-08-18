@@ -2,7 +2,7 @@
 """Генерує чисті брендовані Termojet-брошури (укр.) для серій GRANDLIFT/MEGA/SILENCER."""
 import json, fitz, os
 
-ROOT = "/Users/pavelkucevich/CODE/termojet-website"
+ROOT = "/Users/pavelkucevich/CODE/termojet/website"
 SEED = f"{ROOT}/backend/seed-products.json"
 OUTDIR = f"{ROOT}/public/files"
 IMG = f"{ROOT}/public/images/nasosy"

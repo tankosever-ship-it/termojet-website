@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd /Users/pavelkucevich/CODE/termojet/website\\ncat > /tmp/preview-stats.mjs <<'JS'\\nimport puppeteer from 'puppeteer-core'\\nconst CHROME = '/Applications/Google Chrome.app/Contents/MacOS/G...",
-  "error": "Exit code 1\n}\n\nNode.js v24.15.0",
-  "timestamp": "2026-06-10T19:39:50.548Z",
-  "retry_count": 1
-}

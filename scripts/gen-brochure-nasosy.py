@@ -10,11 +10,12 @@
 import json, re, os, html, sqlite3, fitz
 
 ROOT = "/Users/pavelkucevich/CODE/termojet/website"
+ZVITY = "/Users/pavelkucevich/CODE/pipelines/_zvity"
 SEED = f"{ROOT}/backend/seed-products.json"
 DB = f"{ROOT}/backend/data/termojet.db"
 IMG = f"{ROOT}/public/images/nasosy"
 LOGO_WHITE = f"{ROOT}/public/logo-white.png"
-OUTDIR = f"{ROOT}/_zvity/Брошура-насоси"
+OUTDIR = f"{ZVITY}/Брошура-насоси"
 OUT = f"{OUTDIR}/Брошура-Termojet-GRANDLIFT-SILENCER.pdf"
 
 ARIAL = "/System/Library/Fonts/Supplemental/Arial.ttf"

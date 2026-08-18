@@ -1,7 +1,0 @@
-{
-  "tool_name": "WebFetch",
-  "tool_input_preview": "{\"url\":\"https://www.termoeko.com/Sterownik_do_instalacji_sterowanie_kotla_i_3_PLUS_OT_TECH_Obsluga_trzech_zaworow_i_systemu_solarnego_w_standardzie-1014.html\",\"prompt\":\"Витягни ВСІ технічні характерис...",
-  "error": "ERR_TLS_CERT_ALTNAME_INVALID fetching \"https://www.termoeko.com/Sterownik_do_instalacji_sterowanie_kotla_i_3_PLUS_OT_TECH_Obsluga_trzech_zaworow_i_systemu_solarnego_w_standardzie-1014.html\". For more information, pass `verbose: true` in the second argument to fetch()",
-  "timestamp": "2026-06-14T17:05:26.501Z",
-  "retry_count": 2
-}
