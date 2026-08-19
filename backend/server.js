@@ -220,8 +220,8 @@ const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, 
 // LANG_PREFIX → префікс шляху; langBase → базовий URL для мови.
 // Локалізований контент товарів живе в i18n (усі 331 товари мають en/pl/fr/de);
 // категорії/статика/блог мають uk+en тексти, для pl/fr/de fallback на en-мітки.
-const LANGS = ['uk', 'en', 'pl', 'fr', 'de']
-const LANG_PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de' }
+const LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
+const LANG_PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de', ro: '/ro' }
 const langBase = lang => SITE + (LANG_PREFIX[lang] || '')
 
 // Хелпер локалізації: повертає локалізовані поля для lang з фолбеком на UA-колонки.
@@ -772,7 +772,7 @@ function handleProduct(lang) {
 }
 
 app.get('/catalog/:cat/:slug', handleProduct('uk'))
-for (const lg of ['en', 'pl', 'fr', 'de']) app.get(`/${lg}/catalog/:cat/:slug`, handleProduct(lg))
+for (const lg of ['en', 'pl', 'fr', 'de', 'ro']) app.get(`/${lg}/catalog/:cat/:slug`, handleProduct(lg))
 
 // ── Блог: UA + EN ─────────────────────────────────────────────────────────────
 function handleBlog(lang) {
@@ -816,7 +816,7 @@ function handleBlog(lang) {
 }
 
 app.get('/blog/:slug', handleBlog('uk'))
-for (const lg of ['en', 'pl', 'fr', 'de']) app.get(`/${lg}/blog/:slug`, handleBlog(lg))
+for (const lg of ['en', 'pl', 'fr', 'de', 'ro']) app.get(`/${lg}/blog/:slug`, handleBlog(lg))
 
 // ── Категорії: UA + EN/PL/FR/DE ───────────────────────────────────────────────
 // Назви категорій мають uk+en; для pl/fr/de — англійський fallback (en-мітки).
@@ -868,7 +868,7 @@ function handleCategory(lang) {
 }
 
 app.get('/catalog/:cat', handleCategory('uk'))
-for (const lg of ['en', 'pl', 'fr', 'de']) app.get(`/${lg}/catalog/:cat`, handleCategory(lg))
+for (const lg of ['en', 'pl', 'fr', 'de', 'ro']) app.get(`/${lg}/catalog/:cat`, handleCategory(lg))
 
 // Білий список реальних SPA-роутів (мовний префікс /en /pl /fr /de вже стрипнуто).
 // Усе, що НЕ тут і не валідний товар/категорія/стаття — віддаємо HTTP 404, щоб
@@ -896,10 +896,10 @@ function isKnownRoute(p) {
 
 // ── Catch-all: статичні сторінки + SPA fallback ───────────────────────────────
 app.get('*', (req, res) => {
-  // Нормалізуємо шлях + визначаємо мову: /en|pl|fr|de/about → /about + lang.
+  // Нормалізуємо шлях + визначаємо мову: /en|pl|fr|de|ro/about → /about + lang.
   const rawPath = req.path.replace(/\/+$/, '') || '/'
   let lookupPath = rawPath, lang = 'uk'
-  const langMatch = rawPath.match(/^\/(en|pl|fr|de)(\/.*|)$/)
+  const langMatch = rawPath.match(/^\/(en|pl|fr|de|ro)(\/.*|)$/)
   if (langMatch) { lang = langMatch[1]; lookupPath = langMatch[2] || '/' }
   const intl = lang !== 'uk'
 

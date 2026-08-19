@@ -197,7 +197,7 @@ function AppRoutes() {
       </Route>
 
       {/* Публічні сторінки з мовним префіксом (/en, /pl, /fr, /de) — з одного шаблону */}
-      {['en', 'pl', 'fr', 'de'].map(langRoutes)}
+      {['en', 'pl', 'fr', 'de', 'ro'].map(langRoutes)}
     </Routes>
     </Suspense>
   )

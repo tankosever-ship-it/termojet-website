@@ -242,7 +242,7 @@ const RAW = [
 
 // Резолвер: додає пласкі поля <field>_<lang> із словника PORTFOLIO_I18N (ключ = UA-рядок),
 // які читає фронтенд: title_<lang>, desc_<lang>, type_<lang>, location_<lang>, links[].label_<lang>.
-const I18N_LANGS = ['en', 'pl', 'fr', 'de']
+const I18N_LANGS = ['en', 'pl', 'fr', 'de', 'ro']
 function flat(item) {
   const out = { ...item }
   for (const f of ['title', 'desc', 'type', 'location']) {

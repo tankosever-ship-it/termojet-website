@@ -24,6 +24,7 @@ const LANGS = [
   { code: 'pl', name: 'Polish' },
   { code: 'fr', name: 'French' },
   { code: 'de', name: 'German' },
+  { code: 'ro', name: 'Romanian' },
 ]
 
 // --- CLI args ---

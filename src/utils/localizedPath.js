@@ -6,7 +6,7 @@
  * localizedPath('/', 'en')                → '/en'
  */
 
-const SUPPORTED_LANGS = ['en', 'pl', 'de', 'fr']
+const SUPPORTED_LANGS = ['en', 'pl', 'de', 'fr', 'ro']
 
 export function localizedPath(path, lang) {
   // Зовнішні та спец-URL повертаємо без змін
