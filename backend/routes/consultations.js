@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
-const { notifyLead, esc } = require('../telegram')
+const { notifyLead, esc, utmLine } = require('../telegram')
 const { notifyCRM, utmString } = require('../crm')
 
 const router = express.Router()
@@ -22,7 +22,8 @@ router.post('/', (req, res) => {
     `👤 ${esc(name)}\n` +
     `📞 ${esc(phone)}` +
     (email ? `\n✉️ ${esc(email)}` : '') +
-    (message ? `\n💬 ${esc(message)}` : '')
+    (message ? `\n💬 ${esc(message)}` : '') +
+    utmLine(utm)
   )
 
   // Пересилаємо лід у CRM (звідки прийшов: сайт · форма · UTM-канал)

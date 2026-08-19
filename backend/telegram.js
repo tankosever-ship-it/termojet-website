@@ -60,4 +60,18 @@ function notifyLead(text, threadId = THREAD_ID) {
   sendTelegram(text, threadId).catch(() => {})
 }
 
-module.exports = { notifyLead, esc }
+// UTM-рядок для картки в Telegram: "\n📊 source=fb · medium=cpc · campaign=…".
+// Порожній рядок, якщо міток немає або всі «сміттєві» (direct/none/not set) —
+// тоді до повідомлення нічого не додається. Дзеркалить формат дзвінків (binotel.js)
+// і CRM (crm.js · utmString), щоб UTM з форм було видно менеджерам у чаті так само,
+// як у дзвінках. Значення екрануємо для parse_mode=HTML.
+function utmLine(utm) {
+  if (!utm || typeof utm !== 'object') return ''
+  const junk = ['(direct)', '(none)', '(not set)', '']
+  const parts = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+    .filter(k => utm[k] && !junk.includes(String(utm[k]).trim()))
+    .map(k => `${k.replace('utm_', '')}=${esc(utm[k])}`)
+  return parts.length ? `\n📊 ${parts.join(' · ')}` : ''
+}
+
+module.exports = { notifyLead, esc, utmLine }

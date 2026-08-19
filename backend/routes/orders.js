@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('../db')
 const { requireAdmin } = require('./auth')
-const { notifyLead, esc } = require('../telegram')
+const { notifyLead, esc, utmLine } = require('../telegram')
 const { notifyCRM, utmString } = require('../crm')
 const { notifyCustomerOrder } = require('../email')
 const { getEurRate, toUAH } = require('../currency')
@@ -66,7 +66,8 @@ router.post('/', async (req, res) => {
     (payment ? `\n💳 ${esc(payment)}` : '') +
     (comment ? `\n💬 ${esc(comment)}` : '') +
     (itemLines ? `\n\n${itemLines}` : '') +
-    `\n\n💰 Сума: <b>${esc(String(serverTotal))}</b> грн`
+    `\n\n💰 Сума: <b>${esc(String(serverTotal))}</b> грн` +
+    utmLine(utm)
   )
 
   // Пересилаємо лід у CRM (звідки прийшов: сайт · форма · UTM-канал)
