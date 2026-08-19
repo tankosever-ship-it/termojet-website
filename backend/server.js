@@ -216,6 +216,14 @@ const absImg = u => {
 }
 const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
 
+// Мультимовність: uk (без префікса) + en/pl/fr/de (з префіксом URL).
+// LANG_PREFIX → префікс шляху; langBase → базовий URL для мови.
+// Локалізований контент товарів живе в i18n (усі 331 товари мають en/pl/fr/de);
+// категорії/статика/блог мають uk+en тексти, для pl/fr/de fallback на en-мітки.
+const LANGS = ['uk', 'en', 'pl', 'fr', 'de']
+const LANG_PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de' }
+const langBase = lang => SITE + (LANG_PREFIX[lang] || '')
+
 // Хелпер локалізації: повертає локалізовані поля для lang з фолбеком на UA-колонки.
 // Для товарів: {name, description, short_desc, seo_title, meta_description}.
 // Для блогу: {title, excerpt, content}.
@@ -230,8 +238,11 @@ function pickLang(row, lang) {
     title: loc.title || row.title,
     description: loc.description || row.description,
     short_desc: loc.short_desc || row.short_desc,
-    seo_title: loc.seo_title || row.seo_title,
-    meta_description: loc.meta_description || row.meta_description,
+    // seo_title/meta_description БЕЗ укр-фолбеку: у i18n товарів їх немає, і фолбек
+    // на row.* давав УКРАЇНСЬКИЙ <title> на pl/en/fr/de-сторінках. null → хендлер
+    // падає на локалізований name/short_desc (title/desc тією ж мовою, що й контент).
+    seo_title: loc.seo_title || null,
+    meta_description: loc.meta_description || null,
     excerpt: loc.excerpt || row.excerpt,
     content: loc.content || row.content,
   })
@@ -310,8 +321,8 @@ async function getEurRate() {
 
 // Product + BreadcrumbList + Organization для сторінки товару (дзеркало SEO.jsx, серверно з БД).
 function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
-  const en = lang === 'en'
-  const base = en ? `${SITE}/en` : SITE
+  const en = lang !== 'uk' // мітки/назви категорій: uk або міжнародні (en як fallback для pl/fr/de)
+  const base = langBase(lang)
   const cm = CATEGORY_META[cat]
   const product = {
     '@context': 'https://schema.org',
@@ -359,7 +370,7 @@ function buildFaqSchema(lang) {
     if (!rows.length) return null
     const mainEntity = rows.map(r => {
       let q = r.question, a = r.answer
-      if (lang === 'en') {
+      if (lang !== 'uk') {
         try { const t = JSON.parse(r.i18n || '{}').en; if (t) { q = t.question || q; a = t.answer || a } } catch { /* UA-фолбек */ }
       }
       return { '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }
@@ -394,13 +405,14 @@ function injectMeta(html, { title, desc, url, img, ogType = 'website', h1, bodyT
   return out
 }
 
-// Будує пару hreflang-альтернатив uk↔en+x-default для товару/категорії/блогу.
-function buildAlternates(uaUrl, enUrl) {
-  return [
-    { hreflang: 'uk', href: uaUrl },
-    { hreflang: 'en', href: enUrl },
-    { hreflang: 'x-default', href: uaUrl },
-  ]
+// Будує hreflang-альтернативи для ВСІХ мов (uk/en/pl/fr/de) + x-default.
+// logicalPath — шлях БЕЗ мовного префікса (напр. '/catalog/termojet-box/...' або '/').
+// x-default → українська (основний ринок).
+function buildAlternates(logicalPath) {
+  const p = (!logicalPath || logicalPath === '/') ? '' : logicalPath
+  const alts = LANGS.map(lg => ({ hreflang: lg, href: langBase(lg) + p }))
+  alts.push({ hreflang: 'x-default', href: SITE + p })
+  return alts
 }
 
 // Назви+описи 15 категорій (uk + en; джерело — src/data/categories.js; бекенд CJS не імпортує ESM-фронт).
@@ -518,8 +530,8 @@ function priceToUah(price, currency, eurRate) {
 
 // Навігація на основні розділи (внутрішні лінки для краулерів; локалізована).
 function seoNav(lang) {
-  const en = lang === 'en'
-  const b = en ? `${SITE}/en` : SITE
+  const en = lang !== 'uk'
+  const b = langBase(lang)
   const links = [
     ['/catalog', en ? 'Catalog' : 'Каталог'],
     ['/catalog/nasosni-hrupy', en ? 'Pump groups' : 'Насосні групи'],
@@ -536,8 +548,8 @@ function seoNav(lang) {
 
 // Повний семантичний HTML товару → в #seo-content. Дані ті самі, що на сторінці/у JSON-LD.
 function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
-  const en = lang === 'en'
-  const base = en ? `${SITE}/en` : SITE
+  const en = lang !== 'uk'
+  const base = langBase(lang)
   const cm = CATEGORY_META[cat]
   const catName = cm ? (en ? cm.nameEn : cm.name) : cat
   const catUrl = `${base}/catalog/${encodeURIComponent(cat)}`
@@ -583,8 +595,8 @@ function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
 
 // Сітка товарів категорії → #seo-content (усі внутрішні лінки + ціни для краулерів).
 function buildCategorySeoContent(cm, { cat, lang, products, eurRate }) {
-  const en = lang === 'en'
-  const base = en ? `${SITE}/en` : SITE
+  const en = lang !== 'uk'
+  const base = langBase(lang)
   const catName = en ? cm.nameEn : cm.name
   const catDesc = en ? cm.descEn : cm.desc
   const breadcrumb = `<nav aria-label="${en ? 'Breadcrumb' : 'Хлібні крихти'}"><a href="${base}/">${en ? 'Home' : 'Головна'}</a> / <a href="${base}/catalog">${en ? 'Catalog' : 'Каталог'}</a></nav>`
@@ -614,8 +626,8 @@ function buildPageSeoContent({ lang, h1, bodyHtml }) {
 
 // Головна: інтро + сітка всіх категорій (внутрішні лінки).
 function buildHomeContent(lang) {
-  const en = lang === 'en'
-  const base = en ? `${SITE}/en` : SITE
+  const en = lang !== 'uk'
+  const base = langBase(lang)
   const intro = en
     ? 'Termojet — Ukrainian manufacturer of quick-assembly systems for boiler rooms since 2002: pump groups, distribution manifolds, hydraulic separators, sludge and air separators, 3- and 4-way valves, circulation pumps, BOX modules, the Mega system and control automation.'
     : 'Termojet — український виробник систем швидкого монтажу для котелень з 2002 року: насосні групи, розподільчі колектори, гідравлічні розділювачі (гідрострілки), сепаратори шламу та повітря, 3- і 4-ходові клапани, циркуляційні насоси, модулі BOX, система Mega та автоматика керування.'
@@ -629,8 +641,8 @@ function buildHomeContent(lang) {
 
 // Список статей блогу (заголовок + анонс + лінк).
 function buildBlogListContent(lang) {
-  const en = lang === 'en'
-  const base = en ? `${SITE}/en` : SITE
+  const en = lang !== 'uk'
+  const base = langBase(lang)
   const rows = _db.prepare('SELECT slug, title, excerpt, i18n FROM blog_posts WHERE published = 1 ORDER BY created_at DESC').all()
   if (!rows.length) return ''
   const items = rows.map(r => {
@@ -656,7 +668,7 @@ const PAGE_CONTENT = {
 
 // FAQ: питання + відповіді (текстом).
 function buildFaqContent(lang) {
-  const en = lang === 'en'
+  const en = lang !== 'uk' // pl/fr/de → en-переклад FAQ (i18n.en) як fallback
   const rows = _db.prepare('SELECT question, answer, i18n FROM faqs ORDER BY sort ASC, created_at ASC').all()
   if (!rows.length) return ''
   return rows.map(r => {
@@ -682,12 +694,11 @@ function handleProduct(lang) {
       const img = absImg(row.image)
       const catEnc = encodeURIComponent(req.params.cat)
       const slugEnc = encodeURIComponent(req.params.slug)
-      const uaUrl = `${SITE}/catalog/${catEnc}/${slugEnc}`
-      const enUrl = `${SITE}/en/catalog/${catEnc}/${slugEnc}`
-      const url = lang === 'en' ? enUrl : uaUrl
+      const logicalPath = `/catalog/${catEnc}/${slugEnc}`
+      const url = langBase(lang) + logicalPath
       const bodyText = (stripHtml(loc.description) || stripHtml(loc.short_desc) || desc).slice(0, 600)
       const h1 = loc.name
-      const alternates = buildAlternates(uaUrl, enUrl)
+      const alternates = buildAlternates(logicalPath)
       const eurRate = await getEurRate()
       const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang, eurRate })
       html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
@@ -704,7 +715,7 @@ function handleProduct(lang) {
 }
 
 app.get('/catalog/:cat/:slug', handleProduct('uk'))
-app.get('/en/catalog/:cat/:slug', handleProduct('en'))
+for (const lg of ['en', 'pl', 'fr', 'de']) app.get(`/${lg}/catalog/:cat/:slug`, handleProduct(lg))
 
 // ── Блог: UA + EN ─────────────────────────────────────────────────────────────
 function handleBlog(lang) {
@@ -720,12 +731,11 @@ function handleBlog(lang) {
       const desc = (stripHtml(loc.excerpt) || stripHtml(loc.content) || DEFAULT_TITLE).slice(0, 200)
       const img = absImg(row.image)
       const slugEnc = encodeURIComponent(req.params.slug)
-      const uaUrl = `${SITE}/blog/${slugEnc}`
-      const enUrl = `${SITE}/en/blog/${slugEnc}`
-      const url = lang === 'en' ? enUrl : uaUrl
+      const logicalPath = `/blog/${slugEnc}`
+      const url = langBase(lang) + logicalPath
       const bodyText = (stripHtml(loc.excerpt) || stripHtml(loc.content) || desc).slice(0, 600)
       const h1 = loc.title || row.title
-      const alternates = buildAlternates(uaUrl, enUrl)
+      const alternates = buildAlternates(logicalPath)
       const published = row.published_at || row.created_at || undefined
       const article = {
         '@context': 'https://schema.org',
@@ -749,41 +759,44 @@ function handleBlog(lang) {
 }
 
 app.get('/blog/:slug', handleBlog('uk'))
-app.get('/en/blog/:slug', handleBlog('en'))
+for (const lg of ['en', 'pl', 'fr', 'de']) app.get(`/${lg}/blog/:slug`, handleBlog(lg))
 
-// ── Категорії: UA + EN ────────────────────────────────────────────────────────
+// ── Категорії: UA + EN/PL/FR/DE ───────────────────────────────────────────────
+// Назви категорій мають uk+en; для pl/fr/de — англійський fallback (en-мітки).
 function handleCategory(lang) {
   return async (req, res, next) => {
     const cm = CATEGORY_META[req.params.cat]
     if (!cm) return next()
     try {
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+      const intl = lang !== 'uk'
+      const base = langBase(lang)
       const catEnc = encodeURIComponent(req.params.cat)
-      const uaUrl = `${SITE}/catalog/${catEnc}`
-      const enUrl = `${SITE}/en/catalog/${catEnc}`
-      if (lang === 'en') {
-        // Короткі назви категорій дають задовгий/закороткий title — падимо до ≥30 симв.
-        let title = `${cm.nameEn} | Termojet`
-        if (title.length < 35) title = `${cm.nameEn} — boiler room equipment | Termojet`.slice(0, 60)
-        const desc = `${cm.descEn}. Termojet — manufacturer since 2002, delivery across Ukraine.`.slice(0, 200)
-        const alternates = buildAlternates(uaUrl, enUrl)
+      const logicalPath = `/catalog/${catEnc}`
+      const url = base + logicalPath
+      const alternates = buildAlternates(logicalPath)
+      const cName = intl ? cm.nameEn : cm.name
+      const cDesc = intl ? cm.descEn : cm.desc
+      if (intl) {
+        let title = `${cName} | Termojet`
+        if (title.length < 35) title = `${cName} — boiler room equipment | Termojet`.slice(0, 60)
+        const desc = `${cDesc}. Termojet — manufacturer since 2002, delivery across Ukraine.`.slice(0, 200)
         const jsonLd = [buildBreadcrumb([
-          { name: 'Home', url: `${SITE}/en` },
-          { name: 'Catalog', url: `${SITE}/en/catalog` },
-          { name: cm.nameEn, url: enUrl },
+          { name: 'Home', url: base },
+          { name: 'Catalog', url: `${base}/catalog` },
+          { name: cName, url },
         ]), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url: enUrl, h1: cm.nameEn, bodyText: cm.descEn, alternates, jsonLd })
+        html = injectMeta(html, { title, desc, url, h1: cName, bodyText: cDesc, alternates, jsonLd })
       } else {
-        let title = `${cm.name} | Termojet`
-        if (title.length < 35) title = `${cm.name} — обладнання для котелень | Termojet`.slice(0, 60)
-        const desc = `${cm.desc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
-        const alternates = buildAlternates(uaUrl, enUrl)
+        let title = `${cName} | Termojet`
+        if (title.length < 35) title = `${cName} — обладнання для котелень | Termojet`.slice(0, 60)
+        const desc = `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
         const jsonLd = [buildBreadcrumb([
-          { name: 'Головна', url: SITE },
-          { name: 'Каталог', url: `${SITE}/catalog` },
-          { name: cm.name, url: uaUrl },
+          { name: 'Головна', url: base },
+          { name: 'Каталог', url: `${base}/catalog` },
+          { name: cName, url },
         ]), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url: uaUrl, h1: cm.name, bodyText: cm.desc, alternates, jsonLd })
+        html = injectMeta(html, { title, desc, url, h1: cName, bodyText: cDesc, alternates, jsonLd })
       }
       // SSR-lite: сітка товарів категорії в #seo-content
       const products = _db.prepare(
@@ -798,7 +811,7 @@ function handleCategory(lang) {
 }
 
 app.get('/catalog/:cat', handleCategory('uk'))
-app.get('/en/catalog/:cat', handleCategory('en'))
+for (const lg of ['en', 'pl', 'fr', 'de']) app.get(`/${lg}/catalog/:cat`, handleCategory(lg))
 
 // Білий список реальних SPA-роутів (мовний префікс /en /pl /fr /de вже стрипнуто).
 // Усе, що НЕ тут і не валідний товар/категорія/стаття — віддаємо HTTP 404, щоб
@@ -826,29 +839,28 @@ function isKnownRoute(p) {
 
 // ── Catch-all: статичні сторінки + SPA fallback ───────────────────────────────
 app.get('*', (req, res) => {
-  // Нормалізуємо шлях: /en/about → /about для пошуку в STATIC_META
+  // Нормалізуємо шлях + визначаємо мову: /en|pl|fr|de/about → /about + lang.
   const rawPath = req.path.replace(/\/+$/, '') || '/'
-  let lookupPath = rawPath
-  const isEn = rawPath.startsWith('/en/') || rawPath === '/en'
-  if (rawPath.startsWith('/en/')) lookupPath = rawPath.slice(3) || '/'
-  else if (rawPath === '/en') lookupPath = '/'
+  let lookupPath = rawPath, lang = 'uk'
+  const langMatch = rawPath.match(/^\/(en|pl|fr|de)(\/.*|)$/)
+  if (langMatch) { lang = langMatch[1]; lookupPath = langMatch[2] || '/' }
+  const intl = lang !== 'uk'
 
-  // UA/EN статичні сторінки з унікальними метаданими + hreflang.
+  // Статичні сторінки з унікальними метаданими + self-canonical + hreflang (5 мов).
+  // pl/fr/de беруть англійські title/desc як fallback (STATIC_META_EN).
   const sm = STATIC_META[lookupPath]
-  const meta = isEn ? (STATIC_META_EN[lookupPath] || sm) : sm
+  const meta = intl ? (STATIC_META_EN[lookupPath] || sm) : sm
   if (sm) {
     try {
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-      const uaUrl = SITE + lookupPath
-      const enUrl = SITE + '/en' + (lookupPath === '/' ? '' : lookupPath)
-      const url = isEn ? enUrl : uaUrl
-      const alternates = buildAlternates(uaUrl, enUrl)
+      const url = langBase(lang) + (lookupPath === '/' ? '' : lookupPath)
+      const alternates = buildAlternates(lookupPath)
       const jsonLd = [ORG_SCHEMA]
-      if (lookupPath === '/faq') { const faq = buildFaqSchema(isEn ? 'en' : 'uk'); if (faq) jsonLd.unshift(faq) }
+      if (lookupPath === '/faq') { const faq = buildFaqSchema(lang); if (faq) jsonLd.unshift(faq) }
       html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd })
       // SSR-lite: H1 + контент сторінки + nav у #seo-content.
       // Дата-керовані сторінки (головна/блог/FAQ) наповнюємо реальним контентом.
-      const lg = isEn ? 'en' : 'uk'
+      const lg = lang
       const h1 = (meta.title || '').replace(/\s*[|–—-]\s*Termojet\s*$/i, '').trim() || 'Termojet'
       let bodyHtml = `<p>${esc(meta.desc)}</p>`
       if (lookupPath === '/') bodyHtml += buildHomeContent(lg)
@@ -872,12 +884,9 @@ app.get('*', (req, res) => {
   // «soft 404»). Патерни однозначні й НЕ перетинаються з реальними роутами
   // (реальні товари — /catalog/:cat/:slug, а не /product/…).
   const DEAD_WP = /(^|\/)(product|product-category|author|feed|sample-page|comments|wp-json|xmlrpc\.php)(\/|$)|^\/ru(\/|$)/i
-  // Білий список: стрипаємо мовний префікс і перевіряємо, чи це реальний роут.
+  // Білий список: lookupPath (уже без мовного префікса) перевіряємо на реальний роут.
   // 404 якщо: старий WP-URL АБО шлях не відповідає жодному валідному роуту/товару.
-  let probe = rawPath
-  const lm = rawPath.match(/^\/(en|pl|fr|de)(\/.*|)$/)
-  if (lm) probe = lm[2] || '/'
-  const statusCode = (DEAD_WP.test(req.path) || !isKnownRoute(probe)) ? 404 : 200
+  const statusCode = (DEAD_WP.test(req.path) || !isKnownRoute(lookupPath)) ? 404 : 200
 
   // SPA fallback для роутів поза STATIC_META (/cart, /pl, /fr, /de, глибокі шляхи…).
   // Інжектимо принаймні Organization, щоб мікророзмітка Organization була на КОЖНІЙ
