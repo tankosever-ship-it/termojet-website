@@ -1,6 +1,7 @@
 // Google Shopping / Merchant Center фіди (RSS 2.0 + g:). Динамічно з БД.
 // UK:  /google-merchant.xml      EN: /google-merchant-en.xml
 // PL:  /google-merchant-pl.xml   DE: /google-merchant-de.xml   FR: /google-merchant-fr.xml
+// RO:  /google-merchant-ro.xml
 //
 // Ціни в UAH (EUR→UAH за курсом НБУ +2.2%, як у src/utils/currency.js).
 // google_product_category — числові ID Google-таксономії (однакові для всіх мов).
@@ -26,21 +27,21 @@ async function eurRate() {
 
 // Назви категорій 5 мовами (product_type)
 const CAT = {
-  'nasosni-hrupy': { uk: 'Насосні групи', en: 'Pump Groups', pl: 'Grupy pompowe', fr: 'Groupes de pompes', de: 'Pumpengruppen' },
-  'hidravlichni-rozdilnyky': { uk: 'Роздільники гідравлічні', en: 'Hydraulic Separators', pl: 'Rozdzielacze hydrauliczne', fr: 'Séparateurs hydrauliques', de: 'Hydraulische Weichen' },
-  'rozpodilchi-kolektory': { uk: 'Розподільчі колектори', en: 'Distribution Manifolds', pl: 'Kolektory rozdzielcze', fr: 'Collecteurs de distribution', de: 'Verteiler' },
-  'kolektory-z-hidrostrilkoyu': { uk: 'Розподільчі колектори з гідрострілкою', en: 'Manifolds with Hydraulic Separator', pl: 'Kolektory z rozdzielaczem hydraulicznym', fr: 'Collecteurs avec séparateur hydraulique', de: 'Verteiler mit hydraulischer Weiche' },
-  'termojet-box': { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX' },
-  'termojet-mega': { uk: 'Серія Termojet Mega', en: 'Termojet Mega Series', pl: 'Seria Termojet Mega', fr: 'Série Termojet Mega', de: 'Serie Termojet Mega' },
-  'nasosy': { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen' },
-  'klapany': { uk: '3-х/4-х ходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile' },
-  'balansuval-klapany': { uk: 'Статичний балансувальний клапан', en: 'Static Balancing Valve', pl: 'Statyczny zawór równoważący', fr: "Vanne d'équilibrage statique", de: 'Statisches Regulierventil' },
-  'separatory': { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren' },
-  'zonalne-keruvannya': { uk: 'Термостати та зональне керування', en: 'Thermostats & Zone Control', pl: 'Termostaty i sterowanie strefowe', fr: 'Thermostats et contrôle de zone', de: 'Thermostate und Zonenregelung' },
-  'kolektory-pidloha': { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem' },
-  'avtomatyka': { uk: 'Автоматика котельного обладнання', en: 'Boiler Equipment Automation', pl: 'Automatyka urządzeń kotłowych', fr: 'Automatisation des équipements de chaudière', de: 'Kesselautomatik' },
-  'dodatkove': { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung' },
-  'rozprodazh': { uk: 'Акція', en: 'Sale', pl: 'Promocja', fr: 'Promotion', de: 'Aktion' },
+  'nasosni-hrupy': { uk: 'Насосні групи', en: 'Pump Groups', pl: 'Grupy pompowe', fr: 'Groupes de pompes', de: 'Pumpengruppen', ro: 'Grupuri de pompare' },
+  'hidravlichni-rozdilnyky': { uk: 'Роздільники гідравлічні', en: 'Hydraulic Separators', pl: 'Rozdzielacze hydrauliczne', fr: 'Séparateurs hydrauliques', de: 'Hydraulische Weichen', ro: 'Separatoare hidraulice' },
+  'rozpodilchi-kolektory': { uk: 'Розподільчі колектори', en: 'Distribution Manifolds', pl: 'Kolektory rozdzielcze', fr: 'Collecteurs de distribution', de: 'Verteiler', ro: 'Colectoare de distribuție' },
+  'kolektory-z-hidrostrilkoyu': { uk: 'Розподільчі колектори з гідрострілкою', en: 'Manifolds with Hydraulic Separator', pl: 'Kolektory z rozdzielaczem hydraulicznym', fr: 'Collecteurs avec séparateur hydraulique', de: 'Verteiler mit hydraulischer Weiche', ro: 'Colectoare cu separator hidraulic' },
+  'termojet-box': { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX', ro: 'Sisteme modulare TERMOJET BOX' },
+  'termojet-mega': { uk: 'Серія Termojet Mega', en: 'Termojet Mega Series', pl: 'Seria Termojet Mega', fr: 'Série Termojet Mega', de: 'Serie Termojet Mega', ro: 'Seria Termojet Mega' },
+  'nasosy': { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen', ro: 'Pompe' },
+  'klapany': { uk: '3-х/4-х ходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și termostatice' },
+  'balansuval-klapany': { uk: 'Статичний балансувальний клапан', en: 'Static Balancing Valve', pl: 'Statyczny zawór równoważący', fr: "Vanne d'équilibrage statique", de: 'Statisches Regulierventil', ro: 'Vană statică de echilibrare' },
+  'separatory': { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren', ro: 'Separatoare' },
+  'zonalne-keruvannya': { uk: 'Термостати та зональне керування', en: 'Thermostats & Zone Control', pl: 'Termostaty i sterowanie strefowe', fr: 'Thermostats et contrôle de zone', de: 'Thermostate und Zonenregelung', ro: 'Termostate și control zonal' },
+  'kolektory-pidloha': { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem', ro: 'Sistem de încălzire prin pardoseală' },
+  'avtomatyka': { uk: 'Автоматика котельного обладнання', en: 'Boiler Equipment Automation', pl: 'Automatyka urządzeń kotłowych', fr: 'Automatisation des équipements de chaudière', de: 'Kesselautomatik', ro: 'Automatizare echipamente centrală termică' },
+  'dodatkove': { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung', ro: 'Echipamente suplimentare' },
+  'rozprodazh': { uk: 'Акція', en: 'Sale', pl: 'Promocja', fr: 'Promotion', de: 'Aktion', ro: 'Promoție' },
 }
 
 // Числові ID Google Product Taxonomy (taxonomy-with-ids.en-US.txt)

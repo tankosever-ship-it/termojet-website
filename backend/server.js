@@ -178,6 +178,7 @@ app.get('/google-merchant-en.xml', merchantFeed('en'))
 app.get('/google-merchant-pl.xml', merchantFeed('pl'))
 app.get('/google-merchant-de.xml', merchantFeed('de'))
 app.get('/google-merchant-fr.xml', merchantFeed('fr'))
+app.get('/google-merchant-ro.xml', merchantFeed('ro'))
 
 // serve React build
 const DIST = path.join(__dirname, '..', 'dist')
@@ -223,6 +224,17 @@ const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, 
 const LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
 const LANG_PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de', ro: '/ro' }
 const langBase = lang => SITE + (LANG_PREFIX[lang] || '')
+
+// Локалізований вибір із фолбеком ro → en → uk (pl/fr/de не мають власного тексту → en).
+function pickL(lang, uk, en, ro) {
+  if (lang === 'ro') return ro || en || uk
+  return lang !== 'uk' ? (en || uk) : uk
+}
+// Те саме для обʼєктів виду { uk:[...], en:[...], ro:[...] }.
+function pickArr(obj, lang) {
+  if (lang === 'ro' && obj.ro) return obj.ro
+  return lang !== 'uk' ? obj.en : obj.uk
+}
 
 // Хелпер локалізації: повертає локалізовані поля для lang з фолбеком на UA-колонки.
 // Для товарів: {name, description, short_desc, seo_title, meta_description}.
@@ -333,7 +345,7 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
     mpn: row.sku || undefined,
     image: productImages(row.images, img),
     brand: { '@type': 'Brand', name: 'Termojet' },
-    category: cm ? (en ? cm.nameEn : cm.name) : undefined,
+    category: cm ? pickL(lang, cm.name, cm.nameEn, cm.nameRo) : undefined,
   }
   const hasPrice = row.price && Number(row.price) > 0
   if (hasPrice) {
@@ -356,7 +368,7 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
     { name: en ? 'Home' : 'Головна', url: base },
     { name: en ? 'Catalog' : 'Каталог', url: `${base}/catalog` },
   ]
-  if (cm) crumbs.push({ name: en ? cm.nameEn : cm.name, url: `${base}/catalog/${encodeURIComponent(cat)}` })
+  if (cm) crumbs.push({ name: pickL(lang, cm.name, cm.nameEn, cm.nameRo), url: `${base}/catalog/${encodeURIComponent(cat)}` })
   crumbs.push({ name: loc.name, url })
   // Product без offers невалідний (schema-валідатори вимагають offers/review/aggregateRating
   // і без них rich-result неможливий) → для товарів без ціни віддаємо лише Breadcrumb+Organization.
@@ -420,62 +432,77 @@ const CATEGORY_META = {
   'nasosni-hrupy': {
     name: 'Насосні групи', desc: 'Готові насосні вузли зі змішувачем і термостатикою для котелень та теплих підлог',
     nameEn: 'Pump Groups', descEn: 'Ready-made pump units with mixing and thermostatic control for boiler rooms',
+    nameRo: 'Grupuri de pompare', descRo: 'Unități de pompare gata montate cu amestecare și control termostatic pentru centrale termice și pardoseli calde',
   },
   'hidravlichni-rozdilnyky': {
     name: 'Роздільники гідравлічні', desc: 'Гідравлічні стрілки для балансування потоків у котельних системах опалення',
     nameEn: 'Hydraulic Separators', descEn: 'Hydraulic separators for balancing flows in boiler heating systems',
+    nameRo: 'Separatoare hidraulice', descRo: 'Separatoare hidraulice pentru echilibrarea debitelor în sistemele de încălzire ale centralelor termice',
   },
   'rozpodilchi-kolektory': {
     name: 'Розподільчі колектори', desc: 'Розподільчі колектори в теплоізоляції по потужності 60, 105 та 175 кВт для котелень',
     nameEn: 'Distribution Manifolds', descEn: 'Distribution manifolds in insulation by capacity 60, 105 and 175 kW for boiler rooms',
+    nameRo: 'Colectoare de distribuție', descRo: 'Colectoare de distribuție termoizolate cu putere de 60, 105 și 175 kW pentru centrale termice',
   },
   'kolektory-z-hidrostrilkoyu': {
     name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою — компактний вузол розподілу для котельні',
     nameEn: 'Manifolds with Hydraulic Separator', descEn: 'Manifolds with an integrated hydraulic separator — a compact distribution unit',
+    nameRo: 'Colectoare cu separator hidraulic', descRo: 'Colectoare cu separator hidraulic integrat — un modul compact de distribuție pentru centrala termică',
   },
   'termojet-box': {
     name: 'Модульні системи TERMOJET BOX', desc: 'Модульні системи TERMOJET BOX — компактні готові вузли обвʼязки котла для монтажу',
     nameEn: 'TERMOJET BOX Modular Systems', descEn: 'TERMOJET BOX modular systems — compact ready-made boiler connection units',
+    nameRo: 'Sisteme modulare TERMOJET BOX', descRo: 'Sisteme modulare TERMOJET BOX — module compacte gata montate pentru racordarea centralei',
   },
   'termojet-mega': {
     name: 'Серія Termojet Mega (до 2200 кВт)', desc: 'Промислові системи опалення Termojet Mega потужністю до 2200 кВт для великих котелень',
     nameEn: 'Termojet Mega Series (up to 2200 kW)', descEn: 'Termojet Mega industrial heating systems up to 2200 kW for large boiler rooms',
+    nameRo: 'Seria Termojet Mega (până la 2200 kW)', descRo: 'Sisteme industriale de încălzire Termojet Mega cu putere de până la 2200 kW pentru centrale termice mari',
   },
   'nasosy': {
     name: 'Насоси', desc: 'Циркуляційні насоси для систем опалення, теплої підлоги та котельних вузлів',
     nameEn: 'Pumps', descEn: 'Circulation pumps for heating systems, underfloor heating and boiler units',
+    nameRo: 'Pompe', descRo: 'Pompe de circulație pentru sisteme de încălzire, pardoseală caldă și module de centrală termică',
   },
   'klapany': {
     name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
     nameEn: '3/4-Way & Thermostatic Valves', descEn: '3- and 4-way rotary and thermostatic valves with electric actuators for heating',
+    nameRo: 'Vane cu 3/4 căi și termostatice', descRo: 'Vane rotative cu 3 și 4 căi și vane termostatice cu servomotoare electrice pentru încălzire',
   },
   'balansuval-klapany': {
     name: 'Статичний балансувальний клапан', desc: 'Статичні балансувальні клапани для рівномірного розподілу теплоносія в системі',
     nameEn: 'Static Balancing Valve', descEn: 'Static balancing valves for even heat carrier distribution across the system',
+    nameRo: 'Vană statică de echilibrare', descRo: 'Vane statice de echilibrare pentru distribuția uniformă a agentului termic în sistem',
   },
   'separatory': {
     name: 'Сепаратори', desc: 'Шламові та повітряні сепаратори для очищення теплоносія й захисту обладнання',
     nameEn: 'Separators', descEn: 'Sludge and air separators for coolant cleaning and equipment protection',
+    nameRo: 'Separatoare', descRo: 'Separatoare de nămol și de aer pentru purificarea agentului termic și protecția echipamentelor',
   },
   'zonalne-keruvannya': {
     name: 'Термостати та зональне керування', desc: 'Термостати, програматори та центри комутації для зонального керування опаленням',
     nameEn: 'Thermostats & Zone Control', descEn: 'Thermostats, programmers and switching centers for zone heating control',
+    nameRo: 'Termostate și control zonal', descRo: 'Termostate, programatoare și centre de comutare pentru controlul zonal al încălzirii',
   },
   'kolektory-pidloha': {
     name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та монтажні шафи для систем теплої підлоги',
     nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating systems',
+    nameRo: 'Sistem de încălzire prin pardoseală', descRo: 'Colectoare, module de amestecare și cutii de montaj pentru sistemele de încălzire prin pardoseală',
   },
   'avtomatyka': {
     name: 'Автоматика котельного обладнання', desc: 'Контролери, датчики та системи управління котлами й котельним обладнанням',
     nameEn: 'Boiler Equipment Automation', descEn: 'Controllers, sensors and management systems for boilers and boiler equipment',
+    nameRo: 'Automatizare echipamente centrală termică', descRo: 'Controlere, senzori și sisteme de gestiune pentru centrale termice și echipamentele aferente',
   },
   'dodatkove': {
     name: 'Додаткове обладнання', desc: 'Аксесуари, кріплення та супутні товари для монтажу котельного обладнання',
     nameEn: 'Additional Equipment', descEn: 'Accessories, fittings and related products for boiler equipment installation',
+    nameRo: 'Echipamente suplimentare', descRo: 'Accesorii, elemente de fixare și produse conexe pentru montajul echipamentelor de centrală termică',
   },
   'rozprodazh': {
     name: 'Акція', desc: 'Обладнання Termojet за акційними цінами — колектори, насосні групи та клапани',
     nameEn: 'Sale', descEn: 'Termojet equipment at special prices — manifolds, pump groups and valves',
+    nameRo: 'Promoție', descRo: 'Echipamente Termojet la prețuri promoționale — colectoare, grupuri de pompare și vane',
   },
 }
 
@@ -521,6 +548,27 @@ const STATIC_META_EN = {
   '/reviews': { title: 'Customer Reviews of Termojet Equipment', desc: 'Real customer reviews of Termojet boiler room equipment: quality, installation, service, cooperation.' },
 }
 
+// RO-версії статичних сторінок (для /ro/...). Немає запису → фолбек на STATIC_META_EN, потім UA STATIC_META.
+const STATIC_META_RO = {
+  '/': { title: 'Termojet — Producător de Echipamente pentru Centrale Termice', desc: 'Termojet — producător ucrainean de echipamente pentru centrale termice: grupuri de pompare, colectoare, separatoare hidraulice, vane, automatizare. În producție din 2002.' },
+  '/catalog': { title: 'Catalog de Echipamente pentru Centrale Termice | Termojet', desc: 'Catalog Termojet: grupuri de pompare, colectoare, separatoare hidraulice, vane, separatoare, automatizare. Producție proprie din 2002.' },
+  '/about': { title: 'Despre Termojet — Producător din 2002', desc: 'Termojet — producător ucrainean de echipamente pentru centrale termice din 2002: producție proprie, suport tehnic, garanție.' },
+  '/contacts': { title: 'Contact Termojet — Legătura cu Producătorul', desc: 'Contactele Termojet: telefon, adresă, formular de contact. Consultanță pentru alegerea echipamentelor de centrală termică.' },
+  '/blog': { title: 'Blog Termojet — Încălzire, Centrale Termice, Montaj', desc: 'Articole Termojet despre încălzire, centrale termice, montajul sistemelor, noutăți ale companiei și expoziții de profil.' },
+  '/service': { title: 'Service și Garanție pentru Echipamentele Termojet', desc: 'Service și garanție pentru echipamentele de centrală termică Termojet.' },
+  '/faq': { title: 'Întrebări Frecvente despre Termojet (FAQ)', desc: 'Răspunsuri la întrebările frecvente despre echipamentele Termojet: alegere, montaj, livrare, garanție.' },
+  '/delivery': { title: 'Livrare și Plată pentru Echipamentele Termojet', desc: 'Condiții de livrare și plată pentru echipamentele Termojet pe teritoriul Ucrainei.' },
+  '/files': { title: 'Documentație și Cataloage ale Echipamentelor Termojet', desc: 'Documentație tehnică, cataloage și manuale pentru echipamentele Termojet.' },
+  '/oem': { title: 'Producție OEM sub Marcă Privată | Termojet', desc: 'Producție OEM de echipamente pentru centrale termice sub marcă privată de la Termojet.' },
+  '/partners': { title: 'Pentru Dealeri și Parteneri — Colaborare Termojet', desc: 'Colaborare cu Termojet: condiții pentru dealeri, instalatori și parteneri.' },
+  '/portfolio': { title: 'Proiectele Noastre — Centrale Termice și Încălzire Termojet', desc: 'Proiecte finalizate de centrale termice și sisteme de încălzire cu echipamente Termojet.' },
+  '/returns': { title: 'Returnare și Schimb al Echipamentelor Termojet', desc: 'Condiții de returnare și schimb pentru echipamentele Termojet.' },
+  '/terms': { title: 'Termeni de Utilizare a Site-ului și Achiziție | Termojet', desc: 'Termeni de utilizare a site-ului și de achiziție a echipamentelor Termojet.' },
+  '/privacy': { title: 'Politica de Confidențialitate și Prelucrarea Datelor | Termojet', desc: 'Politica de confidențialitate și de prelucrare a datelor cu caracter personal la Termojet.' },
+  '/navchannya': { title: 'Instruire și Ateliere Termojet pentru Instalatori', desc: 'Materiale de instruire și ateliere Termojet privind montajul și alegerea echipamentelor de centrală termică.' },
+  '/reviews': { title: 'Recenzii ale Clienților despre Echipamentele Termojet', desc: 'Recenzii reale ale clienților despre echipamentele Termojet pentru centrale termice: calitate, montaj, service, colaborare.' },
+}
+
 // ── SSR-lite: серверний семантичний HTML сторінки у #seo-content ────────────────
 // Ціна в грн: UAH як є, EUR конвертуємо (як SEO-схема/сайт).
 function priceToUah(price, currency, eurRate) {
@@ -530,20 +578,19 @@ function priceToUah(price, currency, eurRate) {
 
 // Навігація на основні розділи (внутрішні лінки для краулерів; локалізована).
 function seoNav(lang) {
-  const en = lang !== 'uk'
   const b = langBase(lang)
   const links = [
-    ['/catalog', en ? 'Catalog' : 'Каталог'],
-    ['/catalog/nasosni-hrupy', en ? 'Pump groups' : 'Насосні групи'],
-    ['/catalog/rozpodilchi-kolektory', en ? 'Manifolds' : 'Розподільчі колектори'],
-    ['/catalog/hidravlichni-rozdilnyky', en ? 'Hydraulic separators' : 'Гідравлічні розділювачі'],
-    ['/catalog/separatory', en ? 'Separators' : 'Сепаратори'],
-    ['/catalog/nasosy', en ? 'Pumps' : 'Насоси'],
-    ['/blog', en ? 'Blog' : 'Блог'],
-    ['/about', en ? 'About' : 'Про компанію'],
-    ['/contacts', en ? 'Contacts' : 'Контакти'],
+    ['/catalog', pickL(lang, 'Каталог', 'Catalog', 'Catalog')],
+    ['/catalog/nasosni-hrupy', pickL(lang, 'Насосні групи', 'Pump groups', 'Grupuri de pompare')],
+    ['/catalog/rozpodilchi-kolektory', pickL(lang, 'Розподільчі колектори', 'Manifolds', 'Colectoare')],
+    ['/catalog/hidravlichni-rozdilnyky', pickL(lang, 'Гідравлічні розділювачі', 'Hydraulic separators', 'Separatoare hidraulice')],
+    ['/catalog/separatory', pickL(lang, 'Сепаратори', 'Separators', 'Separatoare')],
+    ['/catalog/nasosy', pickL(lang, 'Насоси', 'Pumps', 'Pompe')],
+    ['/blog', pickL(lang, 'Блог', 'Blog', 'Blog')],
+    ['/about', pickL(lang, 'Про компанію', 'About', 'Despre companie')],
+    ['/contacts', pickL(lang, 'Контакти', 'Contacts', 'Contacte')],
   ]
-  return `<nav aria-label="${en ? 'Main sections' : 'Основні розділи'}">${links.map(([h, t]) => `<a href="${b}${h}">${esc(t)}</a>`).join('')}</nav>`
+  return `<nav aria-label="${esc(pickL(lang, 'Основні розділи', 'Main sections', 'Secțiuni principale'))}">${links.map(([h, t]) => `<a href="${b}${h}">${esc(t)}</a>`).join('')}</nav>`
 }
 
 // Повний семантичний HTML товару → в #seo-content. Дані ті самі, що на сторінці/у JSON-LD.
@@ -551,7 +598,7 @@ function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
   const en = lang !== 'uk'
   const base = langBase(lang)
   const cm = CATEGORY_META[cat]
-  const catName = cm ? (en ? cm.nameEn : cm.name) : cat
+  const catName = cm ? pickL(lang, cm.name, cm.nameEn, cm.nameRo) : cat
   const catUrl = `${base}/catalog/${encodeURIComponent(cat)}`
   const img = absImg(row.image)
   const priceUah = priceToUah(row.price, row.currency, eurRate)
@@ -597,8 +644,8 @@ function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
 function buildCategorySeoContent(cm, { cat, lang, products, eurRate }) {
   const en = lang !== 'uk'
   const base = langBase(lang)
-  const catName = en ? cm.nameEn : cm.name
-  const catDesc = en ? cm.descEn : cm.desc
+  const catName = pickL(lang, cm.name, cm.nameEn, cm.nameRo)
+  const catDesc = pickL(lang, cm.desc, cm.descEn, cm.descRo)
   const breadcrumb = `<nav aria-label="${en ? 'Breadcrumb' : 'Хлібні крихти'}"><a href="${base}/">${en ? 'Home' : 'Головна'}</a> / <a href="${base}/catalog">${en ? 'Catalog' : 'Каталог'}</a></nav>`
   const grid = products && products.length
     ? `<ul>${products.map(p => {
@@ -629,6 +676,7 @@ function buildPageSeoContent({ lang, h1, bodyHtml }) {
 const HOME_STATS = {
   uk: [['23 роки', 'На ринку котельного обладнання'], ['16 країн', 'Експорт у Європу — філія в Польщі'], ['50+', 'Проєктів укомплектовано'], ['70 000+', 'Виробів на рік на заводі']],
   en: [['23 years', 'In the boiler equipment market'], ['16 countries', 'Export to Europe — branch in Poland'], ['50+', 'Projects fully equipped'], ['70,000+', 'Units produced per year']],
+  ro: [['23 de ani', 'Pe piața echipamentelor pentru centrale termice'], ['16 țări', 'Export în Europa — filială în Polonia'], ['50+', 'Proiecte echipate integral'], ['70 000+', 'Produse pe an la fabrică']],
 }
 const HOME_ADVANTAGES = {
   uk: [
@@ -647,58 +695,72 @@ const HOME_ADVANTAGES = {
     ['Technical support', 'Engineering support at every stage. Selection for your project.'],
     ['Complete solutions', 'TERMOJET BOX, Mini, Mega — from 30 kW to 2 MW.'],
   ],
+  ro: [
+    ['Producție proprie', 'Fabrică de 3 000 m² la Kiev și Jîtomîr. Ciclu complet de la metal brut la ansamblul finit.'],
+    ['Garanția calității', 'Fiecare unitate trece controlul final. ISO 9001:2015, CE.'],
+    ['Disponibilitate pe stoc', 'Depozit de 2 500 m². Majoritatea produselor se expediază a doua zi.'],
+    ['Experiență internațională', 'Livrări în 15 țări din UE. Birou în Polonia din 2018.'],
+    ['Suport tehnic', 'Suport de inginerie la fiecare etapă. Selecție pentru proiectul dvs.'],
+    ['Soluții complete', 'TERMOJET BOX, Mini, Mega — de la 30 kW la 2 MW.'],
+  ],
 }
 const ABOUT_TIMELINE = [
-  [2002, 'Заснування компанії Termojet у Києві. Перша продукція — насосні групи та гідравлічні роздільники.', 'Termojet founded in Kyiv. First products — pump groups and hydraulic separators.'],
-  [2005, 'Відкрито власний виробничий цех площею 1 000 м². Початок серійного виробництва розподільчих колекторів.', 'Opened own 1,000 m² workshop. Start of serial production of distribution manifolds.'],
-  [2008, 'Перші поставки в країни Євросоюзу. Сертифікація продукції за стандартами ЄС.', 'First deliveries to EU countries. Product certification to EU standards.'],
-  [2012, 'Розширення виробництва до 3 000 м². Запуск автоматизованих ліній. Потужність — 70 000+ одиниць на рік.', 'Production expanded to 3,000 m². Automated lines launched. Capacity — 70,000+ units per year.'],
-  [2015, 'Оснащено 10 000-у котельню обладнанням Termojet. Запуск серії TERMOJET Mega для промислових об\'єктів.', '10,000th boiler room equipped by Termojet. Launch of the TERMOJET Mega series for industrial facilities.'],
-  [2018, 'Відкрито офіс у Забже (Польща) для обслуговування ринків Центральної та Східної Європи.', 'Office opened in Zabrze (Poland) to serve Central and Eastern European markets.'],
-  [2022, 'Попри повномасштабне вторгнення виробництво не зупинялось. Termojet забезпечує критичну інфраструктуру України.', 'Despite the full-scale invasion, production never stopped. Termojet supplies Ukraine\'s critical infrastructure.'],
-  [2024, '50 000+ оснащених об\'єктів. Експорт у 15 країн ЄС. ~100 працівників. Флагман українського виробництва.', '50,000+ equipped facilities. Export to 15 EU countries. ~100 employees. A flagship of Ukrainian manufacturing.'],
+  [2002, 'Заснування компанії Termojet у Києві. Перша продукція — насосні групи та гідравлічні роздільники.', 'Termojet founded in Kyiv. First products — pump groups and hydraulic separators.', 'Fondarea companiei Termojet la Kiev. Primele produse — grupuri de pompare și separatoare hidraulice.'],
+  [2005, 'Відкрито власний виробничий цех площею 1 000 м². Початок серійного виробництва розподільчих колекторів.', 'Opened own 1,000 m² workshop. Start of serial production of distribution manifolds.', 'Deschiderea propriei hale de producție de 1 000 m². Începutul producției de serie a colectoarelor de distribuție.'],
+  [2008, 'Перші поставки в країни Євросоюзу. Сертифікація продукції за стандартами ЄС.', 'First deliveries to EU countries. Product certification to EU standards.', 'Primele livrări în țările Uniunii Europene. Certificarea produselor conform standardelor UE.'],
+  [2012, 'Розширення виробництва до 3 000 м². Запуск автоматизованих ліній. Потужність — 70 000+ одиниць на рік.', 'Production expanded to 3,000 m². Automated lines launched. Capacity — 70,000+ units per year.', 'Extinderea producției la 3 000 m². Lansarea liniilor automatizate. Capacitate — peste 70 000 de unități pe an.'],
+  [2015, 'Оснащено 10 000-у котельню обладнанням Termojet. Запуск серії TERMOJET Mega для промислових об\'єктів.', '10,000th boiler room equipped by Termojet. Launch of the TERMOJET Mega series for industrial facilities.', 'A 10 000-a centrală termică echipată cu produse Termojet. Lansarea seriei TERMOJET Mega pentru obiective industriale.'],
+  [2018, 'Відкрито офіс у Забже (Польща) для обслуговування ринків Центральної та Східної Європи.', 'Office opened in Zabrze (Poland) to serve Central and Eastern European markets.', 'Deschiderea unui birou la Zabrze (Polonia) pentru deservirea piețelor din Europa Centrală și de Est.'],
+  [2022, 'Попри повномасштабне вторгнення виробництво не зупинялось. Termojet забезпечує критичну інфраструктуру України.', 'Despite the full-scale invasion, production never stopped. Termojet supplies Ukraine\'s critical infrastructure.', 'În ciuda invaziei pe scară largă, producția nu s-a oprit. Termojet asigură infrastructura critică a Ucrainei.'],
+  [2024, '50 000+ оснащених об\'єктів. Експорт у 15 країн ЄС. ~100 працівників. Флагман українського виробництва.', '50,000+ equipped facilities. Export to 15 EU countries. ~100 employees. A flagship of Ukrainian manufacturing.', 'Peste 50 000 de obiective echipate. Export în 15 țări din UE. ~100 de angajați. Un lider al producției ucrainene.'],
 ]
 const ABOUT_LEGAL = {
   uk: [['Повна назва', 'Товариство з обмеженою відповідальністю «Софіївка Монтаж»'], ['Скорочена назва', 'ТОВ «Софіївка Монтаж»'], ['Юридична адреса', '08131, Київська обл., Бучанський р-н, с. Софіївська Борщагівка, вул. Київська, буд. 3'], ['Email', 'termojet@sofievka.kiev.ua']],
   en: [['Full name', 'Sofiivka Montazh LLC'], ['Short name', 'Sofiivka Montazh LLC'], ['Registered address', '08131, Kyiv Oblast, Bucha District, Sofiivska Borshchahivka, Kyivska St., 3'], ['Email', 'termojet@sofievka.kiev.ua']],
+  ro: [['Denumire completă', 'Societatea cu Răspundere Limitată «Sofiivka Montaj»'], ['Denumire prescurtată', 'SRL «Sofiivka Montaj»'], ['Adresă juridică', '08131, regiunea Kiev, raionul Bucea, s. Sofiivska Borșciahivka, str. Kiivska, nr. 3'], ['Email', 'termojet@sofievka.kiev.ua']],
 }
 
 // Головна: інтро + сітка категорій + переваги (Чому обирають Termojet) + показники.
 function buildHomeContent(lang) {
-  const en = lang !== 'uk'
   const base = langBase(lang)
-  const intro = en
-    ? 'Termojet — Ukrainian manufacturer of quick-assembly systems for boiler rooms since 2002: pump groups, distribution manifolds, hydraulic separators, sludge and air separators, 3- and 4-way valves, circulation pumps, BOX modules, the Mega system and control automation.'
-    : 'Termojet — український виробник систем швидкого монтажу для котелень з 2002 року: насосні групи, розподільчі колектори, гідравлічні розділювачі (гідрострілки), сепаратори шламу та повітря, 3- і 4-ходові клапани, циркуляційні насоси, модулі BOX, система Mega та автоматика керування.'
+  const intro = pickL(
+    lang,
+    'Termojet — український виробник систем швидкого монтажу для котелень з 2002 року: насосні групи, розподільчі колектори, гідравлічні розділювачі (гідрострілки), сепаратори шламу та повітря, 3- і 4-ходові клапани, циркуляційні насоси, модулі BOX, система Mega та автоматика керування.',
+    'Termojet — Ukrainian manufacturer of quick-assembly systems for boiler rooms since 2002: pump groups, distribution manifolds, hydraulic separators, sludge and air separators, 3- and 4-way valves, circulation pumps, BOX modules, the Mega system and control automation.',
+    'Termojet — producător ucrainean de sisteme de montaj rapid pentru centrale termice din 2002: grupuri de pompare, colectoare de distribuție, separatoare hidraulice, separatoare de nămol și de aer, vane cu 3 și 4 căi, pompe de circulație, module BOX, sistemul Mega și automatizare de control.'
+  )
   const cats = Object.entries(CATEGORY_META).map(([slug, cm]) => {
-    const name = en ? cm.nameEn : cm.name
-    const d = en ? cm.descEn : cm.desc
+    const name = pickL(lang, cm.name, cm.nameEn, cm.nameRo)
+    const d = pickL(lang, cm.desc, cm.descEn, cm.descRo)
     return `<li><a href="${base}/catalog/${encodeURIComponent(slug)}">${esc(name)}</a>${d ? ` — ${esc(d)}` : ''}</li>`
   }).join('')
-  const stats = (en ? HOME_STATS.en : HOME_STATS.uk).map(([v, l]) => `<li><strong>${esc(v)}</strong> — ${esc(l)}</li>`).join('')
-  const advs = (en ? HOME_ADVANTAGES.en : HOME_ADVANTAGES.uk).map(([t, d]) => `<li><strong>${esc(t)}</strong> — ${esc(d)}</li>`).join('')
+  const stats = pickArr(HOME_STATS, lang).map(([v, l]) => `<li><strong>${esc(v)}</strong> — ${esc(l)}</li>`).join('')
+  const advs = pickArr(HOME_ADVANTAGES, lang).map(([t, d]) => `<li><strong>${esc(t)}</strong> — ${esc(d)}</li>`).join('')
   return `<p>${esc(intro)}</p>`
-    + `<h2>${en ? 'Equipment catalog' : 'Каталог обладнання'}</h2><ul>${cats}</ul>`
-    + `<h2>${en ? 'Termojet in numbers' : 'Termojet у цифрах'}</h2><ul>${stats}</ul>`
-    + `<h2>${en ? 'Why choose Termojet' : 'Чому обирають Termojet'}</h2><ul>${advs}</ul>`
+    + `<h2>${esc(pickL(lang, 'Каталог обладнання', 'Equipment catalog', 'Catalog de echipamente'))}</h2><ul>${cats}</ul>`
+    + `<h2>${esc(pickL(lang, 'Termojet у цифрах', 'Termojet in numbers', 'Termojet în cifre'))}</h2><ul>${stats}</ul>`
+    + `<h2>${esc(pickL(lang, 'Чому обирають Termojet', 'Why choose Termojet', 'De ce să alegeți Termojet'))}</h2><ul>${advs}</ul>`
 }
 
 // Про нас: опис + юридичні реквізити + таймлайн «22 роки розвитку».
 function buildAboutContent(lang) {
-  const en = lang !== 'uk'
-  const intro = en
-    ? '<p>Termojet — Ukrainian manufacturer of boiler room equipment with its own production in Kyiv and a full cycle under one roof: laser cutting, bending, welding, powder coating, thermal insulation and quality control. The company has operated since 2002.</p><p>Termojet products — pump groups, distribution manifolds, hydraulic separators, separators, valves and automation — comply with European standards, are presented at industry exhibitions (including ISH in Frankfurt) and come with an official manufacturer warranty.</p>'
-    : PAGE_CONTENT['/about']
-  const legal = (en ? ABOUT_LEGAL.en : ABOUT_LEGAL.uk).map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')
-  const timeline = ABOUT_TIMELINE.map(([y, uk, e]) => `<li><strong>${y}</strong> — ${esc(en ? e : uk)}</li>`).join('')
+  const intro = lang === 'uk'
+    ? PAGE_CONTENT['/about']
+    : pickL(
+        lang,
+        PAGE_CONTENT['/about'],
+        '<p>Termojet — Ukrainian manufacturer of boiler room equipment with its own production in Kyiv and a full cycle under one roof: laser cutting, bending, welding, powder coating, thermal insulation and quality control. The company has operated since 2002.</p><p>Termojet products — pump groups, distribution manifolds, hydraulic separators, separators, valves and automation — comply with European standards, are presented at industry exhibitions (including ISH in Frankfurt) and come with an official manufacturer warranty.</p>',
+        '<p>Termojet — producător ucrainean de echipamente pentru centrale termice cu producție proprie la Kiev și un ciclu complet sub același acoperiș: tăiere laser, îndoire, sudare, vopsire în câmp electrostatic, izolare termică și control al calității. Compania activează din 2002.</p><p>Produsele Termojet — grupuri de pompare, colectoare de distribuție, separatoare hidraulice, separatoare, vane și automatizare — respectă standardele europene, sunt prezentate la expoziții de profil (inclusiv ISH la Frankfurt) și beneficiază de garanția oficială a producătorului.</p>'
+      )
+  const legal = pickArr(ABOUT_LEGAL, lang).map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')
+  const timeline = ABOUT_TIMELINE.map(([y, uk, e, ro]) => `<li><strong>${y}</strong> — ${esc(pickL(lang, uk, e, ro))}</li>`).join('')
   return intro
-    + `<h2>${en ? 'Legal details' : 'Юридичні реквізити'}</h2><table><tbody>${legal}</tbody></table>`
-    + `<h2>${en ? '22 years of growth' : '22 роки розвитку та зростання'}</h2><ul>${timeline}</ul>`
+    + `<h2>${esc(pickL(lang, 'Юридичні реквізити', 'Legal details', 'Detalii juridice'))}</h2><table><tbody>${legal}</tbody></table>`
+    + `<h2>${esc(pickL(lang, '22 роки розвитку та зростання', '22 years of growth', '22 de ani de dezvoltare și creștere'))}</h2><ul>${timeline}</ul>`
 }
 
 // Список статей блогу (заголовок + анонс + лінк).
 function buildBlogListContent(lang) {
-  const en = lang !== 'uk'
   const base = langBase(lang)
   const rows = _db.prepare('SELECT slug, title, excerpt, i18n FROM blog_posts WHERE published = 1 ORDER BY created_at DESC').all()
   if (!rows.length) return ''
@@ -707,7 +769,7 @@ function buildBlogListContent(lang) {
     const ex = stripHtml(loc.excerpt)
     return `<li><a href="${base}/blog/${encodeURIComponent(r.slug)}">${esc(loc.title)}</a>${ex ? ` — ${esc(ex.slice(0, 180))}` : ''}</li>`
   }).join('')
-  return `<h2>${en ? 'Articles' : 'Статті'} (${rows.length})</h2><ul>${items}</ul>`
+  return `<h2>${esc(pickL(lang, 'Статті', 'Articles', 'Articole'))} (${rows.length})</h2><ul>${items}</ul>`
 }
 
 // Стислий контент для контентних статичних сторінок (про нас / сервіс / доставка тощо).
@@ -832,14 +894,19 @@ function handleCategory(lang) {
       const logicalPath = `/catalog/${catEnc}`
       const url = base + logicalPath
       const alternates = buildAlternates(logicalPath)
-      const cName = intl ? cm.nameEn : cm.name
-      const cDesc = intl ? cm.descEn : cm.desc
+      const cName = pickL(lang, cm.name, cm.nameEn, cm.nameRo)
+      const cDesc = pickL(lang, cm.desc, cm.descEn, cm.descRo)
       if (intl) {
+        // Обгортка title/desc/breadcrumb: ro отримує румунську, решта не-uk — англійську.
+        const wrap = lang === 'ro' ? 'echipamente pentru centrale termice' : 'boiler room equipment'
         let title = `${cName} | Termojet`
-        if (title.length < 35) title = `${cName} — boiler room equipment | Termojet`.slice(0, 60)
-        const desc = `${cDesc}. Termojet — manufacturer since 2002, delivery across Ukraine.`.slice(0, 200)
+        if (title.length < 35) title = `${cName} — ${wrap} | Termojet`.slice(0, 60)
+        const descTail = lang === 'ro'
+          ? 'Termojet — producător din 2002, livrare în toată Ucraina.'
+          : 'Termojet — manufacturer since 2002, delivery across Ukraine.'
+        const desc = `${cDesc}. ${descTail}`.slice(0, 200)
         const jsonLd = [buildBreadcrumb([
-          { name: 'Home', url: base },
+          { name: lang === 'ro' ? 'Acasă' : 'Home', url: base },
           { name: 'Catalog', url: `${base}/catalog` },
           { name: cName, url },
         ]), ORG_SCHEMA]
@@ -904,9 +971,9 @@ app.get('*', (req, res) => {
   const intl = lang !== 'uk'
 
   // Статичні сторінки з унікальними метаданими + self-canonical + hreflang (5 мов).
-  // pl/fr/de беруть англійські title/desc як fallback (STATIC_META_EN).
+  // pl/fr/de беруть англійські title/desc як fallback (STATIC_META_EN); ro має власні (STATIC_META_RO).
   const sm = STATIC_META[lookupPath]
-  const meta = intl ? (STATIC_META_EN[lookupPath] || sm) : sm
+  const meta = intl ? ((lang === 'ro' && STATIC_META_RO[lookupPath]) || STATIC_META_EN[lookupPath] || sm) : sm
   if (sm) {
     try {
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
