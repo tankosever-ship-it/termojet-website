@@ -443,9 +443,11 @@ export default function Navbar() {
                 )}
               </LLink>
 
-              {/* CTA — Консультація (головна, оранжева заливка) + Стати партнером (оранжева рамка) */}
+              {/* CTA — Консультація (головна, оранжева заливка) + Стати партнером (оранжева рамка).
+                  На довших мовах (не-uk) вторинну «Стати партнером» ховаємо до 2xl, щоб права
+                  група не переповнювала рядок і «Консультація» не виїжджала за край (напр. FR). */}
               <LLink to="/partners"
-                className="hidden xl:flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                className={`${lang === 'uk' ? 'hidden xl:flex' : 'hidden 2xl:flex'} items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap`}
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
