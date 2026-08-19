@@ -624,7 +624,46 @@ function buildPageSeoContent({ lang, h1, bodyHtml }) {
   </div>`
 }
 
-// Головна: інтро + сітка всіх категорій (внутрішні лінки).
+// ── Дані блоків головної/про-нас (дзеркало src/data/homeContent.js + about.js;
+// бекенд CJS не імпортує ESM-фронт). uk + en; pl/fr/de → en (fallback). ────────
+const HOME_STATS = {
+  uk: [['23 роки', 'На ринку котельного обладнання'], ['16 країн', 'Експорт у Європу — філія в Польщі'], ['50+', 'Проєктів укомплектовано'], ['70 000+', 'Виробів на рік на заводі']],
+  en: [['23 years', 'In the boiler equipment market'], ['16 countries', 'Export to Europe — branch in Poland'], ['50+', 'Projects fully equipped'], ['70,000+', 'Units produced per year']],
+}
+const HOME_ADVANTAGES = {
+  uk: [
+    ['Власне виробництво', 'Завод 3 000 м² у Києві та Житомирі. Повний цикл від металу до готового вузла.'],
+    ['Гарантія якості', 'Кожна одиниця проходить вихідний контроль. ISO 9001:2015, CE.'],
+    ['Наявність на складі', 'Склад 2 500 м². Більшість позицій відвантажуємо наступного дня.'],
+    ['Міжнародний досвід', 'Поставки в 15 країн ЄС. Офіс у Польщі з 2018 року.'],
+    ['Технічна підтримка', 'Інженерна підтримка на всіх етапах. Підбір під ваш проєкт.'],
+    ['Комплексні рішення', 'TERMOJET BOX, Mini, Mega — від 30 кВт до 2 МВт.'],
+  ],
+  en: [
+    ['In-house manufacturing', 'Factory of 3,000 m² in Kyiv and Zhytomyr. Full cycle from raw metal to finished unit.'],
+    ['Quality assurance', 'Every unit passes final inspection. ISO 9001:2015, CE.'],
+    ['In-stock availability', 'Warehouse of 2,500 m². Most items ship next day.'],
+    ['International experience', 'Deliveries to 15 EU countries. Office in Poland since 2018.'],
+    ['Technical support', 'Engineering support at every stage. Selection for your project.'],
+    ['Complete solutions', 'TERMOJET BOX, Mini, Mega — from 30 kW to 2 MW.'],
+  ],
+}
+const ABOUT_TIMELINE = [
+  [2002, 'Заснування компанії Termojet у Києві. Перша продукція — насосні групи та гідравлічні роздільники.', 'Termojet founded in Kyiv. First products — pump groups and hydraulic separators.'],
+  [2005, 'Відкрито власний виробничий цех площею 1 000 м². Початок серійного виробництва розподільчих колекторів.', 'Opened own 1,000 m² workshop. Start of serial production of distribution manifolds.'],
+  [2008, 'Перші поставки в країни Євросоюзу. Сертифікація продукції за стандартами ЄС.', 'First deliveries to EU countries. Product certification to EU standards.'],
+  [2012, 'Розширення виробництва до 3 000 м². Запуск автоматизованих ліній. Потужність — 70 000+ одиниць на рік.', 'Production expanded to 3,000 m². Automated lines launched. Capacity — 70,000+ units per year.'],
+  [2015, 'Оснащено 10 000-у котельню обладнанням Termojet. Запуск серії TERMOJET Mega для промислових об\'єктів.', '10,000th boiler room equipped by Termojet. Launch of the TERMOJET Mega series for industrial facilities.'],
+  [2018, 'Відкрито офіс у Забже (Польща) для обслуговування ринків Центральної та Східної Європи.', 'Office opened in Zabrze (Poland) to serve Central and Eastern European markets.'],
+  [2022, 'Попри повномасштабне вторгнення виробництво не зупинялось. Termojet забезпечує критичну інфраструктуру України.', 'Despite the full-scale invasion, production never stopped. Termojet supplies Ukraine\'s critical infrastructure.'],
+  [2024, '50 000+ оснащених об\'єктів. Експорт у 15 країн ЄС. ~100 працівників. Флагман українського виробництва.', '50,000+ equipped facilities. Export to 15 EU countries. ~100 employees. A flagship of Ukrainian manufacturing.'],
+]
+const ABOUT_LEGAL = {
+  uk: [['Повна назва', 'Товариство з обмеженою відповідальністю «Софіївка Монтаж»'], ['Скорочена назва', 'ТОВ «Софіївка Монтаж»'], ['Юридична адреса', '08131, Київська обл., Бучанський р-н, с. Софіївська Борщагівка, вул. Київська, буд. 3'], ['Email', 'termojet@sofievka.kiev.ua']],
+  en: [['Full name', 'Sofiivka Montazh LLC'], ['Short name', 'Sofiivka Montazh LLC'], ['Registered address', '08131, Kyiv Oblast, Bucha District, Sofiivska Borshchahivka, Kyivska St., 3'], ['Email', 'termojet@sofievka.kiev.ua']],
+}
+
+// Головна: інтро + сітка категорій + переваги (Чому обирають Termojet) + показники.
 function buildHomeContent(lang) {
   const en = lang !== 'uk'
   const base = langBase(lang)
@@ -636,7 +675,25 @@ function buildHomeContent(lang) {
     const d = en ? cm.descEn : cm.desc
     return `<li><a href="${base}/catalog/${encodeURIComponent(slug)}">${esc(name)}</a>${d ? ` — ${esc(d)}` : ''}</li>`
   }).join('')
-  return `<p>${esc(intro)}</p><h2>${en ? 'Equipment catalog' : 'Каталог обладнання'}</h2><ul>${cats}</ul>`
+  const stats = (en ? HOME_STATS.en : HOME_STATS.uk).map(([v, l]) => `<li><strong>${esc(v)}</strong> — ${esc(l)}</li>`).join('')
+  const advs = (en ? HOME_ADVANTAGES.en : HOME_ADVANTAGES.uk).map(([t, d]) => `<li><strong>${esc(t)}</strong> — ${esc(d)}</li>`).join('')
+  return `<p>${esc(intro)}</p>`
+    + `<h2>${en ? 'Equipment catalog' : 'Каталог обладнання'}</h2><ul>${cats}</ul>`
+    + `<h2>${en ? 'Termojet in numbers' : 'Termojet у цифрах'}</h2><ul>${stats}</ul>`
+    + `<h2>${en ? 'Why choose Termojet' : 'Чому обирають Termojet'}</h2><ul>${advs}</ul>`
+}
+
+// Про нас: опис + юридичні реквізити + таймлайн «22 роки розвитку».
+function buildAboutContent(lang) {
+  const en = lang !== 'uk'
+  const intro = en
+    ? '<p>Termojet — Ukrainian manufacturer of boiler room equipment with its own production in Kyiv and a full cycle under one roof: laser cutting, bending, welding, powder coating, thermal insulation and quality control. The company has operated since 2002.</p><p>Termojet products — pump groups, distribution manifolds, hydraulic separators, separators, valves and automation — comply with European standards, are presented at industry exhibitions (including ISH in Frankfurt) and come with an official manufacturer warranty.</p>'
+    : PAGE_CONTENT['/about']
+  const legal = (en ? ABOUT_LEGAL.en : ABOUT_LEGAL.uk).map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')
+  const timeline = ABOUT_TIMELINE.map(([y, uk, e]) => `<li><strong>${y}</strong> — ${esc(en ? e : uk)}</li>`).join('')
+  return intro
+    + `<h2>${en ? 'Legal details' : 'Юридичні реквізити'}</h2><table><tbody>${legal}</tbody></table>`
+    + `<h2>${en ? '22 years of growth' : '22 роки розвитку та зростання'}</h2><ul>${timeline}</ul>`
 }
 
 // Список статей блогу (заголовок + анонс + лінк).
@@ -864,6 +921,7 @@ app.get('*', (req, res) => {
       const h1 = (meta.title || '').replace(/\s*[|–—-]\s*Termojet\s*$/i, '').trim() || 'Termojet'
       let bodyHtml = `<p>${esc(meta.desc)}</p>`
       if (lookupPath === '/') bodyHtml += buildHomeContent(lg)
+      else if (lookupPath === '/about') bodyHtml += buildAboutContent(lg)
       else if (lookupPath === '/blog') bodyHtml += buildBlogListContent(lg)
       else if (lookupPath === '/faq') bodyHtml += buildFaqContent(lg)
       else if (PAGE_CONTENT[lookupPath]) bodyHtml += PAGE_CONTENT[lookupPath]
