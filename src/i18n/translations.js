@@ -23,6 +23,11 @@ export const LANGS = [
     "code": "de",
     "label": "DE",
     "flag": "🇩🇪"
+  },
+  {
+    "code": "ro",
+    "label": "RO",
+    "flag": "🇷🇴"
   }
 ]
 
