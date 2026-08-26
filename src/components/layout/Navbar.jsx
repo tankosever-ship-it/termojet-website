@@ -294,7 +294,7 @@ export default function Navbar() {
           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,85,0,0.4) 30%, rgba(255,85,0,0.4) 70%, transparent)' }} />}
 
         <div className="px-5 lg:px-6">
-          <div className="flex items-center gap-2 h-[60px]">
+          <div className="flex items-center gap-1.5 h-[60px]">
 
             {/* Logo */}
             <LLink to="/" className="flex-shrink-0">
@@ -307,7 +307,7 @@ export default function Navbar() {
               {/* Каталог */}
               <div className="relative" ref={catalogRef}>
                 <button onClick={() => { setCatalogOpen(v => !v); setAboutOpen(false); setClientOpen(false) }}
-                  className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap group"
+                  className="flex items-center gap-1.5 px-2 py-2 transition-all whitespace-nowrap group"
                   style={{ ...navLinkStyle, color: isActive('/catalog') ? 'var(--accent)' : linkCol, borderBottom: isActive('/catalog') ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   {t('nav.catalog')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: catalogOpen ? 'rotate(180deg)' : 'none', color: catalogOpen ? 'var(--accent)' : 'currentColor' }} />
@@ -318,7 +318,7 @@ export default function Navbar() {
               {/* Про Termojet */}
               <div className="relative" ref={aboutRef}>
                 <button onClick={() => { setAboutOpen(v => !v); setCatalogOpen(false); setClientOpen(false) }}
-                  className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                  className="flex items-center gap-1.5 px-2 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/about','/portfolio','/reviews','/blog','/contacts'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/about','/portfolio','/reviews','/blog','/contacts'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   {t('navbar.aboutTermojet')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: aboutOpen ? 'rotate(180deg)' : 'none' }} />
@@ -329,7 +329,7 @@ export default function Navbar() {
               {/* Для клієнта */}
               <div className="relative" ref={clientRef}>
                 <button onClick={() => { setClientOpen(v => !v); setCatalogOpen(false); setAboutOpen(false) }}
-                  className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                  className="flex items-center gap-1.5 px-2 py-2 transition-all whitespace-nowrap"
                   style={{ ...navLinkStyle, color: ['/service','/navchannya','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? 'var(--accent)' : linkCol, borderBottom: ['/service','/navchannya','/delivery','/returns','/oem','/warranty','/support'].some(p => isActive(p)) ? '2px solid var(--accent)' : '2px solid transparent' }}>
                   {t('navbar.forClient')}
                   <ChevronDown size={11} className="transition-transform duration-200" style={{ transform: clientOpen ? 'rotate(180deg)' : 'none' }} />
@@ -339,7 +339,7 @@ export default function Navbar() {
 
               {/* Теплові насоси */}
               <a href="https://tjheatpump.com.ua/" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                className="flex items-center gap-1.5 px-2 py-2 transition-all whitespace-nowrap"
                 style={{ ...navLinkStyle, color: linkColMuted, borderBottom: '2px solid transparent' }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkColMuted}>
@@ -348,7 +348,7 @@ export default function Navbar() {
 
               {/* Конструктор */}
               <a href="https://app.termojet.com.ua/" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap"
+                className="flex items-center gap-1.5 px-2 py-2 transition-all whitespace-nowrap"
                 style={{ ...navLinkStyle, color: 'var(--accent)', borderBottom: '2px solid transparent', fontWeight: 600 }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'white'; e.currentTarget.style.background = 'var(--accent)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.background = 'transparent' }}>
@@ -444,17 +444,17 @@ export default function Navbar() {
               </LLink>
 
               {/* CTA — Консультація (головна, оранжева заливка) + Стати партнером (оранжева рамка).
-                  На довших мовах (не-uk) вторинну «Стати партнером» ховаємо до 2xl, щоб права
-                  група не переповнювала рядок і «Консультація» не виїжджала за край (напр. FR). */}
+                  Обидві кнопки на всіх мовах з xl; навбар стиснуто (padding/gap), а номер телефону
+                  ховається до 2xl (лишається іконка-tel), щоб довші мови (FR) не переповнювали рядок. */}
               <LLink to="/partners"
-                className={`${lang === 'uk' ? 'hidden xl:flex' : 'hidden 2xl:flex'} items-center gap-1.5 px-3 py-2 transition-all whitespace-nowrap`}
+                className="hidden xl:flex items-center gap-1.5 px-2.5 py-2 transition-all whitespace-nowrap"
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
                 {t('navbar.becomePartner')}
               </LLink>
               <LLink to="/contacts"
-                className="hidden xl:flex items-center gap-1.5 px-3 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
+                className="hidden xl:flex items-center gap-1.5 px-2.5 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
                 style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
                 {t('navbar.consultation')}
               </LLink>
