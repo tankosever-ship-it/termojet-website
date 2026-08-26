@@ -368,7 +368,9 @@ export default function Navbar() {
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkCol}>
                 <Phone size={15} className="text-[var(--accent)]" />
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '13px', fontWeight: 600, letterSpacing: '0.01em' }}>
+                {/* Номер ховаємо до 2xl (лишається клікабельна іконка-tel), щоб на xl–2xl
+                    обидві CTA-кнопки влізли без обрізання на довших мовах (FR/RO). */}
+                <span className="hidden 2xl:inline" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '13px', fontWeight: 600, letterSpacing: '0.01em' }}>
                   {siteSettings.phone}
                 </span>
               </a>
