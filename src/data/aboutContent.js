@@ -62,6 +62,7 @@ const LEGACY_PHOTOS = [
       pl: 'Cięcie laserowe',
       fr: 'Découpe laser',
       de: 'Laserschneiden',
+      ro: 'Tăiere laser',
     },
   },
   {
@@ -72,6 +73,7 @@ const LEGACY_PHOTOS = [
       pl: 'Montaż podzespołów',
       fr: 'Assemblage des composants',
       de: 'Baugruppenmontage',
+      ro: 'Asamblarea subansamblurilor',
     },
   },
   {
@@ -83,6 +85,7 @@ const LEGACY_PHOTOS = [
       pl: 'Linia malowania proszkowego',
       fr: 'Ligne de peinture en poudre',
       de: 'Pulverbeschichtungslinie',
+      ro: 'Linie de vopsire electrostatică',
     },
   },
   {
@@ -94,6 +97,7 @@ const LEGACY_PHOTOS = [
       pl: 'Linia malowania proszkowego',
       fr: 'Ligne de peinture en poudre',
       de: 'Pulverbeschichtungslinie',
+      ro: 'Linie de vopsire electrostatică',
     },
   },
   {
@@ -104,6 +108,7 @@ const LEGACY_PHOTOS = [
       pl: 'Giętarka blach',
       fr: 'Plieuse de tôle',
       de: 'Blechbiegemaschine',
+      ro: 'Mașină de îndoit tablă',
     },
   },
   {
@@ -114,6 +119,7 @@ const LEGACY_PHOTOS = [
       pl: 'Maszyna laserowa',
       fr: 'Machine laser',
       de: 'Lasermaschine',
+      ro: 'Mașină laser',
     },
   },
   {
@@ -124,6 +130,7 @@ const LEGACY_PHOTOS = [
       pl: 'Linia malowania proszkowego',
       fr: 'Ligne de peinture en poudre',
       de: 'Pulverbeschichtungslinie',
+      ro: 'Linie de vopsire electrostatică',
     },
   },
   {
@@ -134,6 +141,7 @@ const LEGACY_PHOTOS = [
       pl: 'Lakiernia',
       fr: 'Atelier de peinture',
       de: 'Lackiererei',
+      ro: 'Atelier de vopsire',
     },
   },
   {
@@ -144,6 +152,7 @@ const LEGACY_PHOTOS = [
       pl: 'Produkcja gięcia blach',
       fr: 'Production de pliage de tôle',
       de: 'Blechbiegeproduktion',
+      ro: 'Producție de îndoire a tablei',
     },
   },
   {
@@ -155,6 +164,7 @@ const LEGACY_PHOTOS = [
       pl: 'Maszyna laserowa',
       fr: 'Machine laser',
       de: 'Lasermaschine',
+      ro: 'Mașină laser',
     },
   },
   {
@@ -165,6 +175,7 @@ const LEGACY_PHOTOS = [
       pl: 'Pakowanie',
       fr: 'Emballage',
       de: 'Verpackung',
+      ro: 'Ambalare',
     },
   },
   {
@@ -175,6 +186,7 @@ const LEGACY_PHOTOS = [
       pl: 'Gotowe grupy pompowe',
       fr: 'Groupes de pompes finis',
       de: 'Fertige Pumpengruppen',
+      ro: 'Grupuri de pompare finite',
     },
   },
   {
@@ -185,6 +197,7 @@ const LEGACY_PHOTOS = [
       pl: 'Gotowe wyroby',
       fr: 'Produits finis',
       de: 'Fertige Produkte',
+      ro: 'Produse finite',
     },
   },
 ]
@@ -200,6 +213,7 @@ const NEW_PHOTOS = [
       pl: 'Laserowa gilotyna do blach',
       fr: 'Découpeur laser de tôle',
       de: 'Laser-Blechschneider',
+      ro: 'Mașină laser de tăiat tablă',
     },
   },
   {
@@ -211,6 +225,7 @@ const NEW_PHOTOS = [
       pl: 'Laserowa przecinarka do rur',
       fr: 'Découpeur laser de tubes',
       de: 'Laser-Rohrschneider',
+      ro: 'Mașină laser de tăiat țevi',
     },
   },
   {
@@ -222,6 +237,7 @@ const NEW_PHOTOS = [
       pl: 'Walcarka',
       fr: 'Rouleuse',
       de: 'Walzmaschine',
+      ro: 'Mașină de rulat tablă',
     },
   },
   {
@@ -233,6 +249,7 @@ const NEW_PHOTOS = [
       pl: 'Giętarka blach',
       fr: 'Plieuse de tôle',
       de: 'Blechbiegemaschine',
+      ro: 'Mașină de îndoit tablă',
     },
   },
   {
@@ -244,6 +261,7 @@ const NEW_PHOTOS = [
       pl: 'Automatyczna tokarka CNC',
       fr: 'Tour CNC automatique',
       de: 'Automatische CNC-Drehmaschine',
+      ro: 'Strung automat CNC',
     },
   },
 ]
