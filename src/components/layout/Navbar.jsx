@@ -451,14 +451,14 @@ export default function Navbar() {
                   щоб довші мови (FR «Devenir partenaire») не переповнювали рядок — перевірено на
                   1280/1366/1440px для uk/fr/ro: обидві CTA видно, overflow немає. */}
               <LLink to="/partners"
-                className="hidden xl:flex items-center gap-1.5 px-2.5 py-2 transition-all whitespace-nowrap"
+                className="hidden xl:flex items-center gap-1.5 px-2 py-2 transition-all whitespace-nowrap"
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.color = 'white' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent)' }}>
                 {t('navbar.becomePartner')}
               </LLink>
               <LLink to="/contacts"
-                className="hidden xl:flex items-center gap-1.5 px-2.5 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
+                className="hidden xl:flex items-center gap-1.5 px-2 py-2 text-white transition-all whitespace-nowrap hover:opacity-85"
                 style={{ background: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}>
                 {t('navbar.consultation')}
               </LLink>
