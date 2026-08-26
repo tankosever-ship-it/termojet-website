@@ -361,16 +361,17 @@ export default function Navbar() {
             {/* Right actions */}
             <div className="flex items-center gap-1">
 
-              {/* Phone */}
+              {/* Phone — показуємо лише з 2xl. На xl–2xl місце віддаємо CTA-кнопкам, щоб довші
+                  мови (FR/RO) не переповнювали рядок і «Консультація» не обрізалась.
+                  ⚠️ Ховаємо на рівні <a> (не span), бо Binotel-підміна номерів (GTM) замінює
+                  внутрішній span своїм і стерла б клас на ньому. Телефон лишається у футері/контактах. */}
               <a href={`tel:${siteSettings.phone.replace(/[^\d+]/g, '')}`}
-                className="hidden lg:flex items-center gap-2 px-2.5 py-1.5 transition-all whitespace-nowrap"
+                className="hidden 2xl:flex items-center gap-2 px-2.5 py-1.5 transition-all whitespace-nowrap"
                 style={{ color: linkCol }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                 onMouseLeave={e => e.currentTarget.style.color = linkCol}>
                 <Phone size={15} className="text-[var(--accent)]" />
-                {/* Номер ховаємо до 2xl (лишається клікабельна іконка-tel), щоб на xl–2xl
-                    обидві CTA-кнопки влізли без обрізання на довших мовах (FR/RO). */}
-                <span className="hidden 2xl:inline" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '13px', fontWeight: 600, letterSpacing: '0.01em' }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '13px', fontWeight: 600, letterSpacing: '0.01em' }}>
                   {siteSettings.phone}
                 </span>
               </a>
