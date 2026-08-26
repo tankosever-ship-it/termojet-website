@@ -444,8 +444,9 @@ export default function Navbar() {
               </LLink>
 
               {/* CTA — Консультація (головна, оранжева заливка) + Стати партнером (оранжева рамка).
-                  Обидві кнопки на всіх мовах з xl; навбар стиснуто (padding/gap), а номер телефону
-                  ховається до 2xl (лишається іконка-tel), щоб довші мови (FR) не переповнювали рядок. */}
+                  Обидві кнопки на всіх мовах з xl. Навбар стиснуто (пункти px-2, CTA px-2.5, gap-1.5),
+                  щоб довші мови (FR «Devenir partenaire») не переповнювали рядок — перевірено на
+                  1280/1366/1440px для uk/fr/ro: обидві CTA видно, overflow немає. */}
               <LLink to="/partners"
                 className="hidden xl:flex items-center gap-1.5 px-2.5 py-2 transition-all whitespace-nowrap"
                 style={{ border: '2px solid var(--accent)', color: 'var(--accent)', fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, borderRadius: '0.5rem' }}
