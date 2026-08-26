@@ -239,6 +239,53 @@ const HOME_CONTENT = {
     dealersTitle: 'Werden Sie Termojet-Partner',
     dealersText: 'Wir suchen Händler in allen Regionen der Ukraine und im Ausland. Attraktive Konditionen und vollständiger technischer Support.',
   },
+
+  // ─────────────────────────────────────────────────────────────────────
+  // ROMÂNĂ
+  // ─────────────────────────────────────────────────────────────────────
+  ro: {
+    // ── HERO ──
+    heroBadge: 'PRODUCȚIE DIN 2002 · KYIV, UCRAINA',
+    heroTitle: 'Producătorul #1 de sisteme de montaj rapid pentru centrale termice din Ucraina.',
+    heroBtnPrimary: 'Răsfoiți catalogul',
+    heroBtnSecondary: 'Solicitați o consultație',
+
+    // ── STATS ──
+    stats: [
+      { num: '23', suffix: ' ani',  label: 'Pe piața echipamentelor pentru centrale termice' },
+      { num: '16', suffix: ' țări', label: 'Export în Europa — filială în Polonia' },
+      { num: '50', suffix: '',      label: 'Proiecte complet echipate' },
+      { num: '70', suffix: '',      label: 'Unități produse pe an' },
+    ],
+
+    // ── CATEGORIES ──
+    catsTitle: 'Totul pentru centrala termică —\nîntr-un singur loc.',
+
+    // ── ADVANTAGES ──
+    advantagesEyebrow: 'Avantajele noastre',
+    advantagesTitle: 'De ce să alegeți Termojet',
+    advantages: [
+      { title: 'Producție proprie',           desc: 'Fabrică de 3.000 m² la Kyiv și Jîtomîr. Ciclu complet, de la metal brut la ansamblul finit.' },
+      { title: 'Garanția calității',          desc: 'Fiecare unitate trece printr-un control de ieșire. ISO 9001:2015, CE.' },
+      { title: 'Disponibilitate în stoc',     desc: 'Depozit de 2.500 m². Majoritatea produselor sunt expediate a doua zi lucrătoare.' },
+      { title: 'Experiență internațională',   desc: 'Livrări în 15 țări UE. Birou în Polonia din 2018.' },
+      { title: 'Suport tehnic',               desc: 'Asistență inginerească în fiecare etapă. Selecție adaptată proiectului dumneavoastră.' },
+      { title: 'Soluții complete la cheie',   desc: 'TERMOJET BOX, Mini, Mega — de la 30 kW la 2 MW.' },
+    ],
+
+    // ── PRODUCTION ──
+    productionTitle: 'De la o foaie de oțel —\nla un echipament finit\ngata pentru montaj rapid.',
+    productionText: 'Mașini de tăiat cu laser, prese de îndoit, sudură semiautomată și propria linie de vopsire în câmp electrostatic. 5.500 m² de spațiu de producție.',
+
+    // ── FINAL CTA ──
+    ctaText: 'Descărcați aplicația sau deschideți catalogul. Managerii noștri vă vor ajuta să alegeți echipamentul potrivit în decurs de 1 zi lucrătoare.',
+    ctaBtnPrimary: 'Deschideți catalogul',
+    ctaBtnSecondary: 'Solicitați un apel',
+
+    // ── DEALERS CTA ──
+    dealersTitle: 'Deveniți partener Termojet',
+    dealersText: 'Căutăm dealeri în toate regiunile Ucrainei și în străinătate. Condiții avantajoase și suport tehnic complet.',
+  },
 }
 
 // Backwards-compat alias — any import of HOME_DEFAULTS still works

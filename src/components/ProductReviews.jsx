@@ -7,11 +7,11 @@ import { compressImage } from '../utils/compressImage'
 
 // Локальні переклади 2 нових рядків (решта форми — наявні ключі home.review*)
 const I18N = {
-  title: { uk: 'Відгуки про товар', en: 'Product reviews', pl: 'Opinie o produkcie', fr: 'Avis sur le produit', de: 'Produktbewertungen' },
-  empty: { uk: 'Ще немає відгуків про цей товар. Будьте першим!', en: 'No reviews for this product yet. Be the first!', pl: 'Brak opinii o tym produkcie. Bądź pierwszy!', fr: 'Aucun avis sur ce produit. Soyez le premier !', de: 'Noch keine Bewertungen für dieses Produkt. Seien Sie der Erste!' },
-  count: { uk: 'відгуків', en: 'reviews', pl: 'opinii', fr: 'avis', de: 'Bewertungen' },
+  title: { uk: 'Відгуки про товар', en: 'Product reviews', pl: 'Opinie o produkcie', fr: 'Avis sur le produit', de: 'Produktbewertungen', ro: 'Recenzii despre produs' },
+  empty: { uk: 'Ще немає відгуків про цей товар. Будьте першим!', en: 'No reviews for this product yet. Be the first!', pl: 'Brak opinii o tym produkcie. Bądź pierwszy!', fr: 'Aucun avis sur ce produit. Soyez le premier !', de: 'Noch keine Bewertungen für dieses Produkt. Seien Sie der Erste!', ro: 'Încă nu există recenzii pentru acest produs. Fiți primul!' },
+  count: { uk: 'відгуків', en: 'reviews', pl: 'opinii', fr: 'avis', de: 'Bewertungen', ro: 'recenzii' },
 }
-const DATE_LOCALE = { uk: 'uk-UA', en: 'en-US', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE' }
+const DATE_LOCALE = { uk: 'uk-UA', en: 'en-US', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE', ro: 'ro-RO' }
 
 function Stars({ value, size = 14, onPick }) {
   return (

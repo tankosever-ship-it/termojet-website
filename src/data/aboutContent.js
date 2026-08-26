@@ -14,7 +14,7 @@ export const mediaSrc = (url) => !url ? '' : (String(url).startsWith('http') ? u
 // ---------------------------------------------------------------------------
 // Текстовий контент — усі 5 мов
 // ---------------------------------------------------------------------------
-const ABOUT_CONTENT = {
+export const ABOUT_CONTENT = {
   uk: {
     manufEyebrow: 'ВИРОБНИЧИЙ ЦЕХ · КИЇВ',
     manufTitle: 'Від листа сталі —\nдо готового виробу',
@@ -39,6 +39,11 @@ const ABOUT_CONTENT = {
     manufEyebrow: 'PRODUKTIONSHALLE · KYJIW',
     manufTitle: 'Vom Stahlblech —\nzum fertigen Produkt',
     manufSubtitle: 'Der gesamte Produktionszyklus unter einem Dach: Laserschneiden, Schweißen, Pulverbeschichtung und Qualitätskontrolle',
+  },
+  ro: {
+    manufEyebrow: 'UNITATE DE PRODUCȚIE · KYIV',
+    manufTitle: 'De la o foaie de oțel —\nla un produs finit',
+    manufSubtitle: 'Întregul ciclu de producție sub un singur acoperiș: tăiere laser, sudură, vopsire electrostatică și control al calității',
   },
 }
 
