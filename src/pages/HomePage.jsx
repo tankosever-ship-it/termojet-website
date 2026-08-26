@@ -275,7 +275,7 @@ function ReviewsSection() {
       rating: r.rating || 5,
       text: (lang !== 'uk' && r[`text_${lang}`]) ? r[`text_${lang}`] : r.text,
       photo: r.photo || '',
-      date: r.created_at ? new Date(r.created_at).toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' }) : '',
+      date: r.created_at ? new Date(r.created_at).toLocaleDateString(({ uk: 'uk-UA', en: 'en-US', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE', ro: 'ro-RO' })[lang] || 'uk-UA', { month: 'long', year: 'numeric' }) : '',
     }))
 
   // Реальні відгуки ПОЧЕРГОВО витісняють намальовані: спершу реальні, далі добиваємо намальованими
