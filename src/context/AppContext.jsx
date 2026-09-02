@@ -72,6 +72,23 @@ export function AppProvider({ children }) {
   useEffect(() => { saveCart(cart) }, [cart])
   useEffect(() => { fetchEurRate().then(rate => setEurRate(rate)) }, [])
 
+  // Товари — окремим ефектом і ПОТОЧНОЮ мовою (`?lang=`).
+  // Раніше список віддавав переклади ВСІМА 5 мовами: 10.5 МБ JSON на КОЖНЕ
+  // завантаження будь-якої сторінки, з них 7.5 МБ — поля мов, які цьому
+  // відвідувачу не потрібні. Канал забивався, через що великі зображення
+  // дозавантажувались на 17–21 с (LCP) і штовхали футер (зсув 0.60 на 17.8 с).
+  // Перезапит при зміні мови: дія рідкісна, зате поля завжди збігаються з UI.
+  useEffect(() => {
+    if (!API) return
+    let cancelled = false
+    fetch(`${API}/products?limit=500&lang=${encodeURIComponent(lang)}`)
+      .then(r => r.json())
+      .then(data => { if (!cancelled && data.products?.length > 0) setProducts(data.products) })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setProductsLoaded(true) })
+    return () => { cancelled = true }
+  }, [lang])
+
   // load from API if available, otherwise load static fallback data dynamically (GitHub Pages)
   useEffect(() => {
     if (!API) {
@@ -96,12 +113,6 @@ export function AppProvider({ children }) {
 
       return
     }
-
-    fetch(`${API}/products?limit=500`)
-      .then(r => r.json())
-      .then(data => { if (data.products?.length > 0) setProducts(data.products) })
-      .catch(() => {})
-      .finally(() => setProductsLoaded(true))
 
     fetch(`${API}/blog`)
       .then(r => r.json())

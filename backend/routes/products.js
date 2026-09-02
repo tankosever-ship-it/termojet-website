@@ -1,11 +1,11 @@
 const express = require('express')
 const db = require('../db')
 const { requireAdmin, checkAdmin } = require('./auth')
-const { withI18n } = require('./_i18n')
+const { withI18n, LANGS } = require('./_i18n')
 
 const router = express.Router()
 
-function parseProduct(row) {
+function parseProduct(row, onlyLang) {
   if (!row) return null
   const obj = {
     id:           row.id,
@@ -36,7 +36,14 @@ function parseProduct(row) {
     name: 'name', desc: 'description', shortDesc: 'short_desc',
     specs: 'specs', features: 'features', subcategory: 'subcategory',
     seoTitle: 'seo_title', metaDescription: 'meta_description',
-  })
+  }, onlyLang)
+}
+
+// Мова для пласких i18n-полів. `?lang=xx` → лише ця мова; без параметра — усі
+// (сумісність: адмінка й будь-який старий виклик отримують повний набір).
+function langOf(req) {
+  const l = String(req.query.lang || '').toLowerCase()
+  return LANGS.includes(l) ? l : (l === 'uk' ? 'uk' : null)
 }
 
 // GET /api/products
@@ -63,14 +70,15 @@ router.get('/', (req, res) => {
   params.push(parseInt(limit), offset)
 
   const rows = db.prepare(query).all(...params)
-  res.json({ products: rows.map(parseProduct), total, page: parseInt(page) })
+  const lang = langOf(req)
+  res.json({ products: rows.map(r => parseProduct(r, lang)), total, page: parseInt(page) })
 })
 
 // GET /api/products/:slug
 router.get('/:slug', (req, res) => {
   const row = db.prepare('SELECT * FROM products WHERE slug = ?').get(req.params.slug)
   if (!row) return res.status(404).json({ error: 'Not found' })
-  res.json(parseProduct(row))
+  res.json(parseProduct(row, langOf(req)))
 })
 
 // POST /api/products — admin
