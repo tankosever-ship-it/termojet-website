@@ -251,17 +251,30 @@ function ImageGallery({ images, name, model3d, t }) {
   // При зміні товару (новий набір фото) — завжди показувати перше фото
   useEffect(() => { setActive(0) }, [images])
 
-  // Lazy load <model-viewer> — wait for whenDefined before rendering
+  // Lazy load <model-viewer> — wait for whenDefined before rendering.
+  // ⚠️ model-viewer.min.js важить 1 МБ і раніше тягнувся ОДРАЗУ на кожній сторінці
+  // товару з 3D-моделлю — незалежно від того, чи користувач узагалі відкривав 3D.
+  // Це найбільший скрипт сторінки (при 7.4 МБ загальної ваги) і він конкурував за
+  // канал із головним зображенням товару, через що LCP тримався ~10 с.
+  // Тепер: якщо 3D-слайд уже відкрито — вантажимо негайно; інакше чекаємо, поки
+  // браузер звільниться (requestIdleCallback), тож на критичний шлях не потрапляє.
   useEffect(() => {
     if (!model3d) return
     if (window.customElements?.get('model-viewer')) { setMv3dReady(true); return }
-    if (!document.getElementById('model-viewer-js')) {
-      const s = document.createElement('script')
-      s.id = 'model-viewer-js'; s.type = 'module'; s.src = '/vendor/model-viewer.min.js'
-      document.head.appendChild(s)
+    const load = () => {
+      if (!document.getElementById('model-viewer-js')) {
+        const s = document.createElement('script')
+        s.id = 'model-viewer-js'; s.type = 'module'; s.src = '/vendor/model-viewer.min.js'
+        document.head.appendChild(s)
+      }
+      window.customElements?.whenDefined('model-viewer').then(() => setMv3dReady(true))
     }
-    window.customElements?.whenDefined('model-viewer').then(() => setMv3dReady(true))
-  }, [model3d])
+    if (current?.type === '3d') { load(); return }   // користувач уже на 3D
+    const ric = window.requestIdleCallback || (cb => setTimeout(cb, 2500))
+    const cancel = window.cancelIdleCallback || clearTimeout
+    const id = ric(load, { timeout: 8000 })
+    return () => cancel(id)
+  }, [model3d, current?.type])
 
   const prev = useCallback(() => setActive(i => (i - 1 + total) % total), [total])
   const next = useCallback(() => setActive(i => (i + 1) % total), [total])
