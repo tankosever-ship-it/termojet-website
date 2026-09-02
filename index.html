@@ -40,20 +40,53 @@
          React рендериться у #root; щойно #root заповнюється — CSS ховає #seo-content
          (а main.jsx його прибирає). Краулери без JS / перша хвиля Google бачать контент. -->
     <style>
-      #seo-content { max-width: 940px; margin: 0 auto; padding: 28px 22px; font-family: 'Rubik', system-ui, -apple-system, sans-serif; color: #1a2330; line-height: 1.6; }
-      #seo-content h1 { font-size: 28px; line-height: 1.25; margin: 6px 0 16px; color: #1a2330; }
-      #seo-content h2 { font-size: 19px; margin: 26px 0 10px; color: #FF5500; border-bottom: 2px solid #ffe0cf; padding-bottom: 6px; }
-      #seo-content h3 { font-size: 15px; margin: 16px 0 4px; color: #1a2330; }
-      #seo-content p { margin: 9px 0; }
-      #seo-content img { max-width: 340px; height: auto; float: right; margin: 4px 0 18px 26px; border: 1px solid #eceff2; border-radius: 10px; padding: 8px; background: #fff; }
-      #seo-content table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; clear: both; }
-      #seo-content th, #seo-content td { border: 1px solid #e5e8ec; padding: 8px 12px; text-align: left; }
-      #seo-content th { background: #f6f8fa; font-weight: 600; width: 44%; }
-      #seo-content ul { padding-left: 20px; margin: 8px 0; }
-      #seo-content li { margin: 5px 0; }
-      #seo-content a { color: #0b63c4; text-decoration: none; }
+      /* ── Каркас сайту до гідратації ────────────────────────────────────────
+         Раніше #seo-content був стилізований як звичайний документ: біле тло,
+         колонка 940px, сині посилання, шрифт Rubik. На дроселі він висить на
+         екрані ~2.9 с (FCP ≈ 1.1 с, React монтується ≈ 4.0 с), і перехід до
+         справжнього дизайну виглядав як підміна сторінки.
+         Тепер повторюємо шапку застосунку: смуга навбару 60px (Navbar.jsx —
+         fixed, h-[60px], #0D0D0D), темний герой під H1 (PageHero.jsx —
+         linear-gradient(160deg,#0C0B0A,#141414), білий текст), брендові
+         шрифти (Archivo / IBM Plex Sans) і помаранчеві посилання замість синіх.
+         Логотип — текстовий, щоб не додавати запит на критичний шлях.
+         Розмітку #seo-content НЕ чіпаємо — усе робиться самим CSS. */
+      #seo-content { font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif; color: #0D0D0D; line-height: 1.6; }
+      /* смуга навбару */
+      #seo-content::before {
+        content: 'TERMOJET'; display: block; height: 60px; line-height: 60px; padding: 0 22px;
+        background: #0D0D0D; color: #FF5500;
+        font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: .14em;
+      }
+      /* темна смуга-герой: хлібні крихти + H1 читаються як один банер */
+      #seo-content > nav[aria-label="Хлібні крихти"],
+      #seo-content > nav[aria-label="Breadcrumb"] { background: #0C0B0A; color: rgba(255,255,255,.45); font-size: 13px; padding: 30px 22px 0; }
+      #seo-content > nav[aria-label="Хлібні крихти"] a,
+      #seo-content > nav[aria-label="Breadcrumb"] a { color: rgba(255,255,255,.45); }
+      #seo-content > h1 {
+        background: linear-gradient(160deg, #0C0B0A, #141414); color: #fff;
+        font-family: 'Archivo', system-ui, sans-serif; font-weight: 800;
+        font-size: clamp(27px, 3.6vw, 44px); line-height: 1.14; letter-spacing: -.01em;
+        margin: 0; padding: 26px 22px 56px; border-bottom: 1px solid rgba(232,93,4,.35);
+      }
+      #seo-content > h1:first-child { padding-top: 56px; }   /* коли крихт немає (статичні сторінки) */
+      /* решта контенту — у контейнері тієї ж ширини, що й у застосунку */
+      #seo-content > *:not(h1):not(nav[aria-label="Хлібні крихти"]):not(nav[aria-label="Breadcrumb"]) {
+        max-width: 1180px; margin-left: auto; margin-right: auto; padding-left: 22px; padding-right: 22px;
+      }
+      #seo-content > h1 + * { margin-top: 26px; }   /* відступ ПІСЛЯ героя (не між крихтами і H1) */
+      #seo-content h2 { font-family: 'Archivo', system-ui, sans-serif; font-size: 21px; font-weight: 700; margin: 30px auto 12px; color: #0D0D0D; border-bottom: 2px solid #FF5500; padding-bottom: 7px; }
+      #seo-content h3 { font-family: 'Archivo', system-ui, sans-serif; font-size: 16px; font-weight: 700; margin: 18px auto 4px; color: #0D0D0D; }
+      #seo-content p { margin: 10px auto; }
+      #seo-content img { max-width: 340px; height: auto; float: right; margin: 4px 0 18px 26px; border: 1px solid #E5E5E5; padding: 8px; background: #fff; }
+      #seo-content table { border-collapse: collapse; margin: 14px auto; font-size: 14px; clear: both; }
+      #seo-content th, #seo-content td { border: 1px solid #E5E5E5; padding: 8px 12px; text-align: left; }
+      #seo-content th { background: #F0EFEC; font-weight: 600; width: 44%; }
+      #seo-content ul { margin: 10px auto; }
+      #seo-content ul > li { margin: 5px 0 5px 20px; }
+      #seo-content a { color: #CC4400; text-decoration: none; }
       #seo-content a:hover { text-decoration: underline; }
-      #seo-content nav[aria-label="Основні розділи"], #seo-content nav[aria-label="Main sections"] { clear: both; margin-top: 30px; padding-top: 16px; border-top: 1px solid #e5e8ec; font-size: 14px; }
+      #seo-content nav[aria-label="Основні розділи"], #seo-content nav[aria-label="Main sections"] { clear: both; margin-top: 34px; padding-top: 18px; border-top: 1px solid #E5E5E5; font-size: 14px; }
       #seo-content nav[aria-label="Основні розділи"] a, #seo-content nav[aria-label="Main sections"] a { display: inline-block; margin: 4px 16px 4px 0; }
       #root:not(:empty) ~ #seo-content { display: none; }
     </style>
