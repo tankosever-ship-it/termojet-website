@@ -14,22 +14,25 @@ import ProductPrice from '../components/ProductPrice'
 import CategoryIcon from '../components/CategoryIcon'
 import { assetPath } from '../utils/assetPath'
 
-// Фонові банери для окремих категорій (slug → файл у public/)
+// Фонові банери для окремих категорій (slug → файл у public/).
+// WebP, не PNG: банери — це фотографії з плавним градієнтом, у PNG кожна важила
+// ~1 МБ (14 файлів = 14.3 МБ). Банер категорії був LCP-елементом і вантажився
+// на 17–22 с. WebP q=82 дає ті самі 2320×464 за 21–66 кБ (−97%).
 const CATEGORY_BANNERS = {
-  'klapany': '/banner-klapany.png',
-  'termojet-mega': '/banner-termojet-mega.png',
-  'nasosni-hrupy': '/banner-nasosni-hrupy.png',
-  'kolektory-pidloha': '/banner-kolektory-pidloha.png',
-  'nasosy': '/banner-nasosy.png',
-  'balansuval-klapany': '/banner-balansuval-klapany.png',
-  'separatory': '/banner-separatory.png',
-  'hidravlichni-rozdilnyky': '/banner-hidravlichni-rozdilnyky.png',
-  'avtomatyka': '/banner-avtomatyka.png',
-  'dodatkove': '/banner-dodatkove.png',
-  'rozpodilchi-kolektory': '/banner-rozpodilchi-kolektory.png',
-  'termojet-box': '/banner-termojet-box.png',
-  'kolektory-z-hidrostrilkoyu': '/banner-kolektory-z-hidrostrilkoyu.png',
-  'zonalne-keruvannya': '/banner-zonalne-keruvannya.png',
+  'klapany': '/banner-klapany.webp',
+  'termojet-mega': '/banner-termojet-mega.webp',
+  'nasosni-hrupy': '/banner-nasosni-hrupy.webp',
+  'kolektory-pidloha': '/banner-kolektory-pidloha.webp',
+  'nasosy': '/banner-nasosy.webp',
+  'balansuval-klapany': '/banner-balansuval-klapany.webp',
+  'separatory': '/banner-separatory.webp',
+  'hidravlichni-rozdilnyky': '/banner-hidravlichni-rozdilnyky.webp',
+  'avtomatyka': '/banner-avtomatyka.webp',
+  'dodatkove': '/banner-dodatkove.webp',
+  'rozpodilchi-kolektory': '/banner-rozpodilchi-kolektory.webp',
+  'termojet-box': '/banner-termojet-box.webp',
+  'kolektory-z-hidrostrilkoyu': '/banner-kolektory-z-hidrostrilkoyu.webp',
+  'zonalne-keruvannya': '/banner-zonalne-keruvannya.webp',
 }
 
 // Обкладинка головної сторінки каталогу (коли категорія не обрана)
