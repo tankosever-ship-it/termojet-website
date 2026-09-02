@@ -73,9 +73,12 @@ const isLeftVariant = name => /\sЛ$|\sЛ\s|\sL$/.test(name || '')
 
 const db = new Database(dbPath)
 if (!DRY) {
+  // ⚠️ НЕ copyFileSync: база в режимі WAL, і копія самого .db дає стан на момент
+  // останнього чекпоінта (02.09 це був тиждень відставання). VACUUM INTO бере
+  // узгоджений знімок разом із WAL. Деталі — DEPLOY.md, розділ про бекап.
   const bak = `${dbPath}.bak-seotitles-${new Date().toISOString().slice(0, 19).replace(/[:T-]/g, '')}`
-  fs.copyFileSync(dbPath, bak)
-  console.log(`бекап БД: ${bak}\n`)
+  db.exec(`VACUUM INTO '${bak.replace(/'/g, "''")}'`)
+  console.log(`бекап БД (WAL-safe): ${bak} (${(fs.statSync(bak).size / 1048576).toFixed(1)} МБ)\n`)
 }
 
 const rows = db.prepare('SELECT id, slug, name, is_visible, seo_title, meta_description, i18n FROM products').all()

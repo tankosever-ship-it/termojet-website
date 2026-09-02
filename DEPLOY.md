@@ -210,19 +210,43 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
 ### Structured data (JSON-LD)
 `backend/server.js` серверно ін'єктить у сирий HTML: **Organization** (усюди), **Product**+**BreadcrumbList**
 (товари, з offers/price/sku/images з БД), **BreadcrumbList** (категорії), **Article** (блог), **FAQPage**
-(`/faq`+`/en/faq`, з таблиці `faqs` через `buildFaqSchema`). Клієнтський `SEO.jsx` теж емітить частину —
-після JS-рендеру дубль, безпечно.
+(`/faq`+`/en/faq`, з таблиці `faqs` через `buildFaqSchema`). Клієнтський `SEO.jsx` **нічого не інжектить**
+(ні meta, ні JSON-LD) і від 02.09 не чіпає навіть `<title>` на прямому завантаженні — сервер єдине
+джерело SEO-тегів. Клієнт оновлює `document.title` лише після SPA-переходу (щоб оновлювалась вкладка).
+
+### ⛔ Бекап БД — НЕ через `cp` (база в режимі WAL)
+```bash
+docker compose exec app node backend/scripts/backup-db.cjs [суфікс]
+```
+`journal_mode=wal`: частина закомічених транзакцій живе у `termojet.db-wal`, поки не станеться чекпоінт.
+Тому `cp data/termojet.db …` і `fs.copyFileSync()` дають **НЕПОВНИЙ** знімок — стан бази на момент
+останнього чекпоінта.
+
+> **Реальний випадок 02.09.2026:** `termojet.db` не чекпоінтився з 26.08, `termojet.db-wal` розрісся до
+> 15.6 МБ (більше за саму базу — 12.5 МБ). Бекап, знятий `copyFileSync`, містив стан на 26.08 — тижня
+> правок контенту в ньому не було (напр. виправлений тиск «до 3 бар» лишався старим «до 6 бар»).
+> Відновлення з такого файлу мовчки втратило б ці дані. **Усі `data/termojet.db.bak-*`, зняті до 02.09,
+> неповні — не покладатись на них.** Валідна точка відновлення: `termojet.db.bak-walsafe-*`.
+
+`backup-db.cjs` використовує `VACUUM INTO` (онлайн-бекап SQLite): узгоджений знімок разом із WAL, одним
+самодостатнім файлом без `-wal`/`-shm`, зі звіркою кількості рядків по всіх таблицях.
 
 ### SEO DB-скрипти (прод-БД у volume, НЕ в seed → ганяти після переінсталяції з seed)
 ```bash
 ssh hetzner && cd /home/tankoseva/termojet-website
-cp data/termojet.db data/termojet.db.bak-$(date +%Y%m%d)          # бекап
+docker compose exec app node backend/scripts/backup-db.cjs pered-seo                        # бекап (WAL-safe!)
 docker compose cp scripts/seed-faqs.cjs app:/tmp/seed-faqs.cjs
 docker compose exec app node /tmp/seed-faqs.cjs /app/backend/data/termojet.db --apply       # 21 FAQ (UA+EN)
 docker compose cp scripts/seo-fix-titles.cjs app:/tmp/fix.cjs
-docker compose exec app node /tmp/fix.cjs /app/backend/data/termojet.db --apply             # дедуп+скороч. title
+docker compose exec app node /tmp/fix.cjs /app/backend/data/termojet.db --apply             # дедуп+скороч. title (UA)
+docker compose exec app node backend/scripts/fix-seo-titles-2026-09.cjs                     # усі 6 мов, див. нижче
 ```
-Обидва **ідемпотентні** (upsert). Без `--apply` — dry-run (лише показує зміни).
+Усі **ідемпотентні**. Без `--apply` — dry-run (`fix-seo-titles-2026-09.cjs` — прапорець `--dry`).
+
+> `seo-fix-titles.cjs` лікує **лише UA**. `fix-seo-titles-2026-09.cjs` покриває **всі 6 мов**: дублі
+> рахує в кожній мові окремо (набір різний — напр. пара `k32n` злипається тільки в pl/fr/de), плюс
+> прибирає обірвані розділювачі й бренд «Thermojet». Групи поза правилами не чіпає — друкує як
+> «потрібне рішення людини».
 
 > ⚠️ **КРИТИЧНО: ре-імпорт товарів (з 1С/WP) стирає ці зміни.** Пере-імпорт перезаписує базовий
 > `seo_title` (UA) → дедуп (200)/(240) і НГ-52.150 Л зникають, повертаються дублі-title. FAQ і
