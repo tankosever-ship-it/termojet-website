@@ -607,6 +607,15 @@ export default function ProductDetailPage() {
   const desc = (lang !== 'uk' && product?.[`desc_${lang}`]) ? product[`desc_${lang}`] : (product?.desc || product?.description || '')
   // Локалізовані характеристики (specs_<lang> з API), фолбек на канонічні UA
   const displaySpecs = (lang !== 'uk' && product?.[`specs_${lang}`]) ? product[`specs_${lang}`] : (product?.specs || {})
+  // SEO-поля так само локалізовані: без цього <title> на /pl /fr /de /ro лишався
+  // УКРАЇНСЬКИМ (базове product.seoTitle) і збігався з UA-версією → краулер після
+  // JS бачив однаковий title на всіх мовних URL товару. API віддає seoTitle_<lang>.
+  //
+  // ⚠️ Для не-укр мов БЕЗ укр-фолбеку — рівно як на сервері (server.js → pickLang:
+  // «seo_title/meta_description БЕЗ укр-фолбеку»). Якщо перекладу SEO-поля нема,
+  // падаємо на локалізовані name/desc нижче, а не на український текст.
+  const seoTitle = lang !== 'uk' ? (product?.[`seoTitle_${lang}`] || '') : (product?.seoTitle || '')
+  const seoDesc = lang !== 'uk' ? (product?.[`metaDescription_${lang}`] || '') : (product?.metaDescription || '')
 
   const tabs = useMemo(() => {
     if (!product) return []
@@ -747,8 +756,8 @@ export default function ProductDetailPage() {
   return (
     <>
       <SEO
-        title={product.seoTitle || name}
-        description={product.metaDescription || plainText(desc).slice(0, 160)}
+        title={seoTitle || name}
+        description={seoDesc || plainText(desc).slice(0, 160)}
         type="product"
         image={allImages[0]}
         product={{ name, description: plainText(desc), sku: product.sku, price: priceUAHunit, images: allImages }}

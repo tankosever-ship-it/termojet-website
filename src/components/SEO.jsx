@@ -16,9 +16,27 @@ import { useT } from '../i18n/useT'
 // (серверного) <title>, НЕ створюючи другий елемент. Потрібно лише щоб вкладка
 // браузера оновлювалась при SPA-навігації. Бренд «| Termojet» додаємо лише якщо
 // його ще немає (seo_title у БД уже брендовані — щоб не подвоювати «Termojet»).
+//
+// ⚠️ НЕ ЧІПАЄМО title на ПЕРШОМУ (прямому) завантаженні сторінки — саме його
+// бачить краулер після виконання JS. Сервер уже поставив локалізований per-page
+// title; клієнтський був гіршим і перетирав його:
+//   • товар    — базовий (УКРАЇНСЬКИЙ) seoTitle на /pl /fr /de /ro → однаковий
+//                title на всіх мовних URL товару = дублі в очах Google;
+//   • категорія — «Сепаратори | Termojet» замість серверного
+//                «Сепаратори — обладнання для котелень | Termojet».
+// Тому пишемо document.title лише коли користувач ПІШОВ із серверного шляху
+// (SPA-навігація) — там вкладка справді має оновлюватись, а краулера вже нема.
+const SERVER_PATH = typeof window !== 'undefined' ? window.location.pathname : ''
+let clientTookOver = false
+
 export default function SEO({ title }) {
   const t = useT()
   useEffect(() => {
+    if (!clientTookOver) {
+      // Ще на тій сторінці, яку віддав сервер → лишаємо серверний <title> як є.
+      if (window.location.pathname === SERVER_PATH) return
+      clientTookOver = true
+    }
     const base = (title || '').trim()
     const full = base
       ? (/termojet/i.test(base) ? base : `${base} | Termojet`)
