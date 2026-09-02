@@ -70,13 +70,25 @@ app.use(express.urlencoded({ extended: true }))
 // чинні /en/catalog/... і /en/blog/... маршрути.
 let REDIRECTS = {}
 try { REDIRECTS = JSON.parse(fs.readFileSync(path.join(__dirname, 'redirects.json'), 'utf8')) } catch {}
+// Аліаси РЕАКТ-роутів (не старі WP-URL, тому їх нема в redirects.json — генератор
+// бере джерело з wp-urls.txt). У App.jsx вони оголошені через <Navigate>, тобто
+// редірект стається ЛИШЕ після виконання JS: сервер віддавав HTTP 200 із дефолтним
+// title і canonical на головну → для Google це дублікати головної. Дзеркалимо їх
+// серверним 301, як уже зроблено для /dealers і /support.
+Object.assign(REDIRECTS, {
+  '/training': '/navchannya',   // App.jsx: <Navigate to="/navchannya">
+  '/warranty': '/service',      // App.jsx: <Navigate to="/service">
+})
 app.use((req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next()
   let p = req.path.replace(/\/+$/, '') || '/'
   // Шлях може приходити URL-закодованим (напр. кирилиця %D0%B0…) — розкодовуємо,
   // щоб збігалося з ключами карти редиректів.
   try { p = decodeURIComponent(p) } catch {}
-  const lng = p.match(/^\/(pl|en|de|fr)(\/.*|)$/)
+  // ro додано 02.09: під час розкату румунської цей регекс пропустили, тому
+  // /ro/dealers, /ro/warranty тощо не 301-ились, а падали в catch-all і віддавали
+  // HTTP 200 з дефолтним title і canonical на головну (дублікати для Google).
+  const lng = p.match(/^\/(pl|en|de|fr|ro)(\/.*|)$/)
   if (lng) {
     const stripped = lng[2] || '/'
     // Редіректимо тільки якщо стрипнутий шлях є в redirects.json.
@@ -948,6 +960,11 @@ const KNOWN_ROUTES = new Set([
   '/files', '/reviews', '/privacy', '/terms', '/cart', '/dealers', '/support',
   '/training', '/warranty',
 ])
+// Роути, які віддаємо з noindex: реальні сторінки застосунку, але для пошуку
+// цінності не мають (кошик — персональний і порожній для краулера). У sitemap їх
+// нема, проте вони лишались індексованими: HTTP 200 + `robots: index, follow`.
+const NOINDEX_ROUTES = new Set(['/cart'])
+
 function isKnownRoute(p) {
   if (KNOWN_ROUTES.has(p)) return true
   if (p === '/admin' || p.startsWith('/admin/')) return true
@@ -1013,15 +1030,25 @@ app.get('*', (req, res) => {
   // 404 якщо: старий WP-URL АБО шлях не відповідає жодному валідному роуту/товару.
   const statusCode = (DEAD_WP.test(req.path) || !isKnownRoute(lookupPath)) ? 404 : 200
 
-  // SPA fallback для роутів поза STATIC_META (/cart, /pl, /fr, /de, глибокі шляхи…).
+  // SPA fallback для роутів поза STATIC_META (/cart, глибокі шляхи…).
   // Інжектимо принаймні Organization, щоб мікророзмітка Organization була на КОЖНІЙ
   // сторінці (унікальні індексовані сторінки мають власний запис у STATIC_META вище
   // з title/desc/canonical). canonical/title лишаємо дефолтними з index.html.
   res.setHeader('Cache-Control', 'no-cache')
   res.status(statusCode)
   try {
-    const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
+    let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
       .replace('</head>', `    ${jsonLdScripts([ORG_SCHEMA])}\n  </head>`)
+    if (NOINDEX_ROUTES.has(lookupPath)) {
+      // Службові сторінки без пошукової цінності. Разом із noindex ОБОВʼЯЗКОВО
+      // ставимо self-canonical: дефолтний canonical з index.html вказує на головну,
+      // а noindex у парі з canonical на ІНШУ сторінку — конфліктні сигнали, і Google
+      // може перенести noindex на канонічну ціль (тобто на головну).
+      const selfUrl = langBase(lang) + lookupPath
+      html = html
+        .replace(/<meta name="robots" content="[^"]*"\s*\/?>/, '<meta name="robots" content="noindex, follow" />')
+        .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${esc(selfUrl)}" />`)
+    }
     return res.type('html').send(html)
   } catch (e) {
     return res.sendFile(path.join(DIST, 'index.html'))
