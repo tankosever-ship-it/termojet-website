@@ -717,9 +717,16 @@ export default function ProductDetailPage() {
   if (!product) {
     // Список товарів ще вантажиться (async) → показуємо лоадер, а не «не знайдено».
     // Інакше на рефреші сторінка блимає «Товар не знайдено» до приходу даних.
+    //
+    // ⚠️ min-h-[150vh] — не декор, а фікс CLS 0.60 (найбільший на сайті).
+    // Заміряно: сторінка мала 2645px (серверний #seo-content), потім на ~1 с
+    // збігалась до 900px — рівно висоти вьюпорта, бо лоадер короткий, — і аж тоді
+    // виростала до 3596px. Футер (mt-auto) через це заходив у вьюпорт і виходив
+    // назад: один зсув на 0.6044. Тримаючи заглушку вищою за екран, лишаємо футер
+    // під згином на всіх трьох станах — стрибати нема чому.
     if (!productsLoaded) {
       return (
-        <div className="max-w-7xl mx-auto px-4 py-32 flex flex-col items-center justify-center text-center">
+        <div className="max-w-7xl mx-auto px-4 py-32 min-h-[150vh] flex flex-col items-center text-center">
           <div className="w-10 h-10 border-2 border-gray-200 border-t-[var(--accent)] rounded-full animate-spin" />
         </div>
       )
