@@ -119,6 +119,29 @@ app.get(/^\/uploads\/.+\.(glb|step)$/i, (req, res, next) => {
   res.sendFile(gzPath)
 })
 
+// Фото товарів у WebP — той самий прийом, що з .gz вище, але для картинок:
+// якщо поряд із <file>.png лежить <file>.png.webp і браузер приймає webp —
+// віддаємо його. URL не змінюється, тому НЕ треба чіпати посилання в БД
+// (`products.image` / `images`), де їх 404 штуки.
+// Навіщо: фото товарів у public/images лежали в PNG — 113 файлів понад 100 кБ
+// на 41.8 МБ; на сторінці товару найважчі були 380/254/228 кБ і стояли в черзі
+// перед LCP. WebP q=82 → 9.0 МБ (−78%). Оригінали лишаються: старі браузери й
+// будь-що, що посилається на них напряму, працюють як раніше.
+// (Легасі `/wp-content/uploads` уже віддає webp через nginx — див. DEPLOY.md.)
+// (шлях рахуємо в обробнику: const DIST оголошено нижче за цей рядок)
+app.get(/^\/images\/.+\.(png|jpe?g)$/i, (req, res, next) => {
+  if (!/\bimage\/webp\b/.test(req.headers.accept || '')) return next()
+  let rel
+  try { rel = decodeURIComponent(req.path.replace(/^\/images\//, '')) } catch { return next() }
+  const distImg = path.join(DIST, 'images')
+  const webpPath = path.join(distImg, rel + '.webp')
+  if (!webpPath.startsWith(distImg + path.sep) || !fs.existsSync(webpPath)) return next()
+  res.setHeader('Content-Type', 'image/webp')
+  res.setHeader('Vary', 'Accept')
+  res.setHeader('Cache-Control', 'public, max-age=604800')
+  res.sendFile(webpPath)
+})
+
 // static uploads (3D-моделі, документи) — кеш на 7 днів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }))
 

@@ -116,73 +116,85 @@ export function AppProvider({ children }) {
       return
     }
 
-    fetch(`${API}/blog`)
-      .then(r => r.json())
-      .then(async data => {
-        if (Array.isArray(data) && data.length > 0) {
-          const blogLinks = await getBlogLinks()
-          setBlog(mergeBlogLinks(data, blogLinks))
-        }
-      })
-      .catch(() => {})
-
-    // Портфоліо: якщо в БД є записи (керовані в адмінці) — беремо їх; якщо БД
-    // порожня або API недоступний — фолбек на статичні реалізовані об'єкти
-    // (data/portfolio.js), щоб сторінка ніколи не була порожньою.
-    const loadStaticPortfolio = () =>
-      import('../data/portfolio').then(({ PORTFOLIO }) => setPortfolio(PORTFOLIO)).catch(() => {})
-    fetch(`${API}/portfolio`)
-      .then(r => r.json())
-      .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          setPortfolio(data.map(p => ({ ...p, desc: p.description ?? p.desc ?? '', image: (p.images && p.images[0]) || p.image || '' })))
-        } else {
-          loadStaticPortfolio()
-        }
-      })
-      .catch(loadStaticPortfolio)
-
-    fetch(`${API}/reviews`)
-      .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setReviews(data) })
-      .catch(() => {})
-
-    fetch(`${API}/files`)
-      .then(r => r.json())
-      // завантажені через адмінку документи — зверху, далі статичний каталог
-      .then(async data => {
-        if (Array.isArray(data) && data.length) {
-          const { FILES } = await import('../data/files')
-          setFiles([...data, ...FILES])
-        } else {
-          const { FILES } = await import('../data/files')
-          setFiles(FILES)
-        }
-      })
-      .catch(async () => {
-        const { FILES } = await import('../data/files')
-        setFiles(FILES)
-      })
-
+    // `settings` — негайно: з нього шапка й футер беруть телефон, пошту, адресу.
     fetch(`${API}/settings`)
       .then(r => r.json())
       .then(data => { if (data) setSiteSettings(s => ({ ...s, ...data })) })
       .catch(() => {})
 
-    fetch(`${API}/faq`)
-      .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setFaq(data) })
-      .catch(() => {})
+    // Решта довідників не потрібна для першого екрана — відкладаємо до простою
+    // браузера. Раніше всі 8 запитів летіли ОДРАЗУ на КОЖНІЙ сторінці: напр. блог
+    // (517 кБ) вантажився й на сторінці товару, стоячи в черзі перед її головним
+    // зображенням — а воно і є LCP-елементом. Дані знадобляться пізніше (блог,
+    // портфоліо, файли, FAQ), тож затримка непомітна, зате критичний шлях чистий.
+    const loadSecondary = () => {
+      fetch(`${API}/blog`)
+        .then(r => r.json())
+        .then(async data => {
+          if (Array.isArray(data) && data.length > 0) {
+            const blogLinks = await getBlogLinks()
+            setBlog(mergeBlogLinks(data, blogLinks))
+          }
+        })
+        .catch(() => {})
 
-    fetch(`${API}/banners`)
-      .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setBanners(data) })
-      .catch(() => {})
+      // Портфоліо: якщо в БД є записи (керовані в адмінці) — беремо їх; якщо БД
+      // порожня або API недоступний — фолбек на статичні реалізовані об'єкти
+      // (data/portfolio.js), щоб сторінка ніколи не була порожньою.
+      const loadStaticPortfolio = () =>
+        import('../data/portfolio').then(({ PORTFOLIO }) => setPortfolio(PORTFOLIO)).catch(() => {})
+      fetch(`${API}/portfolio`)
+        .then(r => r.json())
+        .then(data => {
+          if (Array.isArray(data) && data.length > 0) {
+            setPortfolio(data.map(p => ({ ...p, desc: p.description ?? p.desc ?? '', image: (p.images && p.images[0]) || p.image || '' })))
+          } else {
+            loadStaticPortfolio()
+          }
+        })
+        .catch(loadStaticPortfolio)
 
-    fetch(`${API}/promos`)
-      .then(r => r.json())
-      .then(data => { if (Array.isArray(data)) setPromos(data) })
-      .catch(() => {})
+      fetch(`${API}/reviews`)
+        .then(r => r.json())
+        .then(data => { if (Array.isArray(data)) setReviews(data) })
+        .catch(() => {})
+
+      fetch(`${API}/files`)
+        .then(r => r.json())
+        // завантажені через адмінку документи — зверху, далі статичний каталог
+        .then(async data => {
+          if (Array.isArray(data) && data.length) {
+            const { FILES } = await import('../data/files')
+            setFiles([...data, ...FILES])
+          } else {
+            const { FILES } = await import('../data/files')
+            setFiles(FILES)
+          }
+        })
+        .catch(async () => {
+          const { FILES } = await import('../data/files')
+          setFiles(FILES)
+        })
+
+      fetch(`${API}/faq`)
+        .then(r => r.json())
+        .then(data => { if (Array.isArray(data)) setFaq(data) })
+        .catch(() => {})
+
+      fetch(`${API}/banners`)
+        .then(r => r.json())
+        .then(data => { if (Array.isArray(data)) setBanners(data) })
+        .catch(() => {})
+
+      fetch(`${API}/promos`)
+        .then(r => r.json())
+        .then(data => { if (Array.isArray(data)) setPromos(data) })
+        .catch(() => {})
+    }
+    const ric = window.requestIdleCallback || (cb => setTimeout(cb, 1500))
+    const cancelRic = window.cancelIdleCallback || clearTimeout
+    const idleId = ric(loadSecondary, { timeout: 5000 })
+    return () => cancelRic(idleId)
   }, [])
 
   // helper for admin API calls
