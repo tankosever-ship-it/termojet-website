@@ -39,6 +39,41 @@ function parseProduct(row, onlyLang) {
   }, onlyLang)
 }
 
+// ── slim-режим списку (`?slim=1`) ─────────────────────────────────────────────
+// Опис товару — найважче поле: 1.82 МБ на 343 товари (плюс стільки ж на кожну
+// мову). У СПИСКУ він потрібен лише двом місцям, і обидва закриваються дешевше:
+//   1) картка каталогу показує підпис `shortDesc || description` — у 62 товарів
+//      shortDesc порожній, тож робимо для них витяг із опису (≈200 симв);
+//   2) фільтри «Призначення» тестували HTML-опис регекспами вже в браузері —
+//      рахуємо ті самі ознаки тут (та сама логіка, те саме джерело) і віддаємо
+//      трьома короткими мітками.
+// Повний опис лишається на `/api/products/:slug` — його тягне сторінка товару.
+// Обрізати опис не можна: перевірено на даних — при 1200 симв фільтри дають
+// 233 збіги замість 257, тобто результати змінюються.
+const plain = h => String(h || '').replace(/<[^>]*>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim()
+
+function purposeOf(row) {
+  const d = row.description || ''
+  const out = []
+  if (/підлог/i.test(d)) out.push('pidloha')
+  if (/радіатор/i.test(d)) out.push('radiator')
+  if (/бойлер|ГВС/i.test(d + (row.name || ''))) out.push('gvs')
+  return out
+}
+
+function slimDown(obj, row) {
+  if (!String(obj.shortDesc || '').trim()) obj.shortDesc = plain(row.description).slice(0, 200)
+  for (const lg of LANGS) {
+    if (obj[`desc_${lg}`] && !String(obj[`shortDesc_${lg}`] || '').trim()) {
+      obj[`shortDesc_${lg}`] = plain(obj[`desc_${lg}`]).slice(0, 200)
+    }
+  }
+  obj.purpose = purposeOf(row)
+  delete obj.description
+  for (const lg of LANGS) delete obj[`desc_${lg}`]
+  return obj
+}
+
 // Мова для пласких i18n-полів. `?lang=xx` → лише ця мова; без параметра — усі
 // (сумісність: адмінка й будь-який старий виклик отримують повний набір).
 function langOf(req) {
@@ -71,7 +106,9 @@ router.get('/', (req, res) => {
 
   const rows = db.prepare(query).all(...params)
   const lang = langOf(req)
-  res.json({ products: rows.map(r => parseProduct(r, lang)), total, page: parseInt(page) })
+  const slim = req.query.slim === '1'
+  const map = r => { const o = parseProduct(r, lang); return slim ? slimDown(o, r) : o }
+  res.json({ products: rows.map(map), total, page: parseInt(page) })
 })
 
 // GET /api/products/:slug

@@ -608,9 +608,34 @@ export default function ProductDetailPage() {
   const [tab, setTab] = useState('description')
   const [added, setAdded] = useState(false)
 
-  const product = products.find(p =>
+  const listProduct = products.find(p =>
     (p.slug === productSlug || p.id === productSlug) &&
     (p.categorySlug === categorySlug || !categorySlug)
+  )
+
+  // Повні дані товару (з описом) тягнемо окремим запитом.
+  // Чому: у списку в контексті описів більше немає — вони важили 1.82 МБ на мову
+  // і їхали на КОЖНУ сторінку сайту, хоча потрібні лише тут. Список лишається
+  // джерелом миттєвого рендера (назва, ціна, фото вже є), а опис і характеристики
+  // домальовуються, щойно прийде відповідь. Тому 404-логіка й далі спирається на
+  // список: сторінка не «блимає» помилкою, поки летить запит.
+  // Відповідь тримаємо разом із ключем (slug+lang) і звіряємо при читанні — так
+  // не потрібен скидальний setState на початку ефекту (він давав каскадні рендери).
+  const [fetched, setFetched] = useState(null)
+  useEffect(() => {
+    if (!productSlug) return
+    let cancelled = false
+    fetch(`/api/products/${encodeURIComponent(productSlug)}?lang=${encodeURIComponent(lang)}`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (!cancelled && d && !d.error) setFetched({ slug: productSlug, lang, data: d }) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [productSlug, lang])
+  const fullProduct = (fetched && fetched.slug === productSlug && fetched.lang === lang) ? fetched.data : null
+
+  const product = useMemo(
+    () => (listProduct ? { ...listProduct, ...(fullProduct || {}) } : fullProduct),
+    [listProduct, fullProduct]
   )
 
   const category = CATEGORIES.find(c => c.slug === categorySlug)

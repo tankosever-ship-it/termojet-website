@@ -156,9 +156,13 @@ const CATEGORY_FILTERS = {
         key: 'purpose',
         label: 'Призначення',
         options: [
-          { label: 'Тепла підлога', test: p => /підлог/i.test(p.description || '') },
-          { label: 'Радіатори',     test: p => /радіатор/i.test(p.description || '') },
-          { label: 'ГВС та бойлер', test: p => /бойлер|ГВС/i.test((p.description || '') + p.name) },
+          // `purpose` рахує сервер (slim-режим списку) тими самими регекспами й на
+          // тому самому джерелі — повний опис у список більше не їде (−1.82 МБ).
+          // Фолбек по p.description лишено для статичного режиму (GitHub Pages),
+          // де дані беруться з src/data/products.js і поля purpose немає.
+          { label: 'Тепла підлога', test: p => p.purpose ? p.purpose.includes('pidloha') : /підлог/i.test(p.description || '') },
+          { label: 'Радіатори',     test: p => p.purpose ? p.purpose.includes('radiator') : /радіатор/i.test(p.description || '') },
+          { label: 'ГВС та бойлер', test: p => p.purpose ? p.purpose.includes('gvs') : /бойлер|ГВС/i.test((p.description || '') + p.name) },
         ],
       },
       {

@@ -78,10 +78,12 @@ export function AppProvider({ children }) {
   // відвідувачу не потрібні. Канал забивався, через що великі зображення
   // дозавантажувались на 17–21 с (LCP) і штовхали футер (зсув 0.60 на 17.8 с).
   // Перезапит при зміні мови: дія рідкісна, зате поля завжди збігаються з UI.
+  // `slim=1` — без повних описів (ще −1.82 МБ): у списку вони не потрібні,
+  // сторінка товару тягне свій опис сама з /api/products/:slug.
   useEffect(() => {
     if (!API) return
     let cancelled = false
-    fetch(`${API}/products?limit=500&lang=${encodeURIComponent(lang)}`)
+    fetch(`${API}/products?limit=500&slim=1&lang=${encodeURIComponent(lang)}`)
       .then(r => r.json())
       .then(data => { if (!cancelled && data.products?.length > 0) setProducts(data.products) })
       .catch(() => {})
