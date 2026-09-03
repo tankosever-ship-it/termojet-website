@@ -29,11 +29,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet" />
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    <!-- Google Tag Manager — з відкладеним стартом.
+         GTM тягне за собою 1.06 МБ: сам gtm.js 380 кБ, gtag 566 кБ, Clarity 73 кБ
+         і Binotel (calltracking). Усе це конкурувало за канал із LCP-зображенням:
+         на сторінці товару gtag завершувався на 8987 мс, і лише потім, на 9021 мс,
+         доходило головне фото — тобто саме LCP-елемент.
+         Тепер стартуємо за найранішою з подій: перша взаємодія (pointerdown /
+         keydown / touchstart / scroll) АБО простій браузера, але не пізніше 2.5 с.
+         `dataLayer` створюємо ОДРАЗУ, тому події застосунку (analytics.js) стають
+         у чергу й обробляються, щойно GTM підвантажиться — нічого не губиться.
+         ⚠️ Через GTM іде й Binotel, який підміняє номери телефону в DOM. Жорсткий
+         стель 2.5 с саме для цього: підміна встигає до будь-якого реального
+         набору номера, інакше дзвінок втратив би атрибуцію.
+         ⚠️ Компроміс: хто закриє сторінку швидше за 2.5 с і не торкнеться її —
+         у статистику не потрапить. -->
+    <script>(function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      var started=false;
+      var EV=['pointerdown','keydown','touchstart','scroll'];
+      function start(){
+        if(started)return; started=true;
+        EV.forEach(function(e){w.removeEventListener(e,start,true)});
+        w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      }
+      EV.forEach(function(e){w.addEventListener(e,start,{once:true,passive:true,capture:true})});
+      (w.requestIdleCallback||function(cb){return setTimeout(cb,1200)})(start,{timeout:2500});
     })(window,document,'script','dataLayer','GTM-P9DW9P6D');</script>
     <!-- End Google Tag Manager -->
     <!-- SSR-lite: серверний семантичний контент сторінки для краулерів (#seo-content).
