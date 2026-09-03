@@ -286,6 +286,19 @@ function migrateCurrency() {
 }
 
 // Міграція: додати колонки seo_title / meta_description у вже засіяну БД + backfill із seed.
+//
+// ⚠️ ЛИШЕ ПОРОЖНІ ПОЛЯ. Раніше цей UPDATE був безумовний і виконувався ЩОСТАРТУ
+// контейнера, тобто кожен `docker compose up --build` мовчки відкочував
+// seo_title/meta_description до значень seed-products.json. Наслідки:
+//   • правки SEO-полів через АДМІНКУ жили до першого ж деплою;
+//   • дедуп title (кол. `seo-fix-titles.cjs` і `fix-seo-titles-2026-09.cjs`)
+//     доводилось ганяти після кожного деплою — саме про це попередження в
+//     DEPLOY.md «ре-імпорт стирає ці зміни»; насправді стирав не ре-імпорт,
+//     а звичайний рестарт.
+// Виявлено 03.09.2026: після 8 деплоїв поспіль на проді знову були 5 пар
+// однакових title і 9 обірваних заголовків — рівно ті, що виправляли напередодні,
+// і рівно в українській колонці (i18n-мови лишились цілі, бо їх seed не чіпає).
+// Backfill за назвою й задумом має ЗАПОВНЮВАТИ порожнє, а не перезаписувати живе.
 function migrateSeo() {
   const cols = db.prepare('PRAGMA table_info(products)').all().map(c => c.name)
   if (!cols.includes('seo_title')) db.exec("ALTER TABLE products ADD COLUMN seo_title TEXT DEFAULT ''")
@@ -293,9 +306,18 @@ function migrateSeo() {
   const seedPath = path.join(__dirname, '..', 'seed-products.json')
   if (fs.existsSync(seedPath)) {
     const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
-    const upd = db.prepare('UPDATE products SET seo_title = ?, meta_description = ? WHERE slug = ? AND (? <> \'\' OR ? <> \'\')')
-    const tx = db.transaction(rows => { for (const p of rows) { const t = p.seoTitle || '', m = p.metaDescription || ''; if (t || m) upd.run(t, m, p.slug, t, m) } })
+    const updTitle = db.prepare("UPDATE products SET seo_title = ? WHERE slug = ? AND COALESCE(TRIM(seo_title), '') = ''")
+    const updDesc = db.prepare("UPDATE products SET meta_description = ? WHERE slug = ? AND COALESCE(TRIM(meta_description), '') = ''")
+    let t0 = 0, d0 = 0
+    const tx = db.transaction(rows => {
+      for (const p of rows) {
+        const t = p.seoTitle || '', m = p.metaDescription || ''
+        if (t) t0 += updTitle.run(t, p.slug).changes
+        if (m) d0 += updDesc.run(m, p.slug).changes
+      }
+    })
     tx(seed)
+    if (t0 || d0) console.log(`migrateSeo: заповнено порожніх seo_title=${t0}, meta_description=${d0}`)
   }
 }
 
