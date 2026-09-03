@@ -267,6 +267,17 @@ function seedProducts() {
 
 // Міграція: для вже засіяної живої БД додати колонку currency і заповнити з seed.
 // Ідемпотентно — виконується щостарту (CREATE TABLE IF NOT EXISTS не додає колонок).
+//
+// ⚠️ ЛИШЕ ПОРОЖНІ ПОЛЯ — той самий урок, що й у migrateSeo() нижче. Раніше цей
+// UPDATE був безумовний («seed — джерело істини, самовиправляється щостарту»),
+// тобто кожен рестарт відкочував валюту товару до seed-значення. Ціна при цьому
+// НЕ відкочувалась (її не чіпає жодна міграція), і пара price+currency
+// розʼїжджалась: товар із ціною 73 000 грн отримував currency='EUR' і сторінка
+// показувала 73 000 × курс = 3.87 млн грн.
+// Реальний випадок 04.09.2026: тимчасові гривневі ціни на два насоси (переведені
+// на currency='UAH') пережили запис у БД, але перший же `docker compose up --build`
+// повернув їм 'EUR'. Так само мовчки гинула б будь-яка зміна валюти через адмінку.
+// Backfill за задумом ЗАПОВНЮЄ порожнє, а не перезаписує живе.
 function migrateCurrency() {
   const cols = db.prepare('PRAGMA table_info(products)').all().map(c => c.name)
   if (!cols.includes('currency')) {
@@ -276,10 +287,11 @@ function migrateCurrency() {
   const seedPath = path.join(__dirname, '..', 'seed-products.json')
   if (fs.existsSync(seedPath)) {
     const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
-    // безумовно проставляємо валюту з seed (джерело істини) — самовиправляється щостарту
-    const upd = db.prepare('UPDATE products SET currency = ? WHERE id = ?')
-    const tx = db.transaction(rows => { for (const p of rows) upd.run(p.currency || 'UAH', p.id) })
+    const upd = db.prepare("UPDATE products SET currency = ? WHERE id = ? AND COALESCE(TRIM(currency), '') = ''")
+    let filled = 0
+    const tx = db.transaction(rows => { for (const p of rows) filled += upd.run(p.currency || 'UAH', p.id).changes })
     tx(seed)
+    if (filled) console.log(`migrateCurrency: заповнено валюту в ${filled} товарах (були порожні)`)
   }
   // будь-що без валюти → 'UAH' (за замовчуванням)
   db.prepare("UPDATE products SET currency = 'UAH' WHERE currency IS NULL OR currency = ''").run()

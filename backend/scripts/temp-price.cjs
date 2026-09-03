@@ -119,10 +119,38 @@ function revert() {
   console.log('✅ ціни повернуто, кампанію закрито')
 }
 
-// Режим для cron: щодня перевіряє строк і мовчить, поки він не вийшов.
+// Сторож цілісності, поки кампанія активна.
+//
+// Привід: 04.09.2026 `migrateCurrency()` у backend/db/index.js безумовно
+// перезаписувала валюту зі seed щостарту. Ціну не чіпала жодна міграція, тож
+// після ребілду товар мав price=73000 і currency='EUR' — сторінка показала
+// 73 000 × курс = 3.87 млн грн. Саму міграцію виправлено, але ціна на вітрині
+// надто дорога, щоб покладатись на одну лінію захисту.
+//
+// Полагодити vs. лишити людині: якщо ціна ще кампанійна, а валюта інша — це
+// підпис машинної псувальниці (ніхто не міняє в адмінці саму лише валюту,
+// зберігши акційну суму), тож валюту повертаємо. Якщо ж змінилась і ціна —
+// це схоже на свідому правку менеджера, і ми в неї не лізем.
+function guard(st) {
+  let fixed = 0
+  for (const s of st.items) {
+    const row = selRow.get(s.slug)
+    if (!row) continue
+    if (row.price === s.set.price && row.currency !== s.set.currency) {
+      updRow.run(s.set.price, s.set.currency, s.slug)
+      fixed++
+      console.log(`⚠️  ${s.name}: валюта була ${row.currency} при кампанійній ціні ${s.set.price} ` +
+                  `(сторінка показувала б ${row.currency === 'EUR' ? '≈' + (s.set.price * 53).toLocaleString('uk-UA') + ' грн' : 'хибну суму'}) — повернув ${s.set.currency}`)
+    }
+  }
+  if (fixed) console.log(`   ↳ виправлено ${fixed}; шукай, що переписує products.currency при старті`)
+}
+
+// Режим для cron: щодня звіряє стан і мовчить, поки все гаразд і строк не вийшов.
 function auto() {
   const st = readState()
   if (!st) return
+  guard(st)
   const today = new Date().toISOString().slice(0, 10)
   if (today < CAMPAIGN.revertAt) return
   console.log(`[${today}] строк кампанії ${CAMPAIGN.id} вийшов (${CAMPAIGN.revertAt}) — повертаю ціни`)
