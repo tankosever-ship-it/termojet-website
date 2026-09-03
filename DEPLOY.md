@@ -260,6 +260,32 @@ docker compose exec app node backend/scripts/fix-seo-titles-2026-09.cjs         
 > **через адмінку**. Тепер backfill заповнює лише порожні поля
 > (`COALESCE(TRIM(...),'') = ''`) і логує, скільки заповнив.
 
+### Тимчасові ціни з автоповерненням (`backend/scripts/temp-price.cjs`)
+Ціни товарів лежать у БД у **EUR** (`products.currency='EUR'`), а на сайті рендеряться в гривні за
+курсом НБУ **+2.2 %** (`src/utils/currency.js`). Тому «поставити рівно 73 000 грн» через ціну в EUR
+неможливо — гривнева цифра щодня пливе разом із курсом. Скрипт на час акції переводить товар на
+`currency='UAH'` з фіксованою сумою, а потім повертає початкові `price`+`currency`.
+
+```bash
+docker compose exec app node backend/scripts/temp-price.cjs            # статус
+docker compose exec app node backend/scripts/temp-price.cjs --apply    # застосувати
+docker compose exec app node backend/scripts/temp-price.cjs --auto     # повернути, якщо строк вийшов (cron)
+docker compose exec app node backend/scripts/temp-price.cjs --revert   # повернути негайно
+```
+- Кампанія (товари, суми, `revertAt`) описана константою `CAMPAIGN` у самому скрипті.
+- Знімок «що з чого змінено» — `data/temp-price-<id>.json` у **змонтованому томі**, тож переживає
+  `docker compose up --build`. Поки файл є — кампанія активна; після повернення файл видаляється.
+- **Не затирає ручні правки:** якщо на момент повернення ціна в БД не та, яку виставив `--apply`
+  (хтось відредагував товар в адмінці), скрипт лишає товар як є й каже про це. Перекрити — `--force`.
+- Автоповернення — щоденний cron `root` на хості (не одноразовий, тож пропущений запуск наздоганяє):
+  ```
+  0 6 * * * cd /home/tankoseva/termojet-website && docker compose exec -T app node backend/scripts/temp-price.cjs --auto >> /var/log/termojet-temp-price.log 2>&1
+  ```
+- Нова акція: правиш `CAMPAIGN` (новий `id`!), коміт, деплой, `--apply`. Cron уже стоїть.
+
+> Ціни **не** чіпає ні `seedProducts()` (працює лише на порожній таблиці), ні `migrateSeo()`
+> (тільки seo_title/meta_description) — рестарт і ребілд для них безпечні.
+
 ### Описи категорій (два джерела — тримати в парі)
 - **Видимий на сторінці:** `src/data/categories.js` → `desc.{uk,en,...}` (рендерить `CatalogPage.jsx`).
 - **Meta (для Google):** `CATEGORY_META` у `backend/server.js` (бекенд CJS не імпортує `src/`).
