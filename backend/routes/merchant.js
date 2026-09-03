@@ -9,6 +9,12 @@
 const db = require('../db')
 const BASE = 'https://termojet.com.ua'
 
+// Мовні префікси URL — ті самі, що LANG_PREFIX у backend/server.js.
+// Посилання у фіді мусить вести на сторінку ТІЄЮ Ж мовою, що й назва/опис у ньому:
+// Merchant Center звіряє мову фіда з мовою посадкової сторінки й за розбіжність
+// відхиляє позиції. Раніше всі 6 фідів вели на україномовну URL.
+const LANG_PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de', ro: '/ro' }
+
 // ── EUR→UAH курс (НБУ), кеш 1 год ────────────────────────────────────────────
 const NBU_API = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&json'
 const MARKUP = 1.022
@@ -81,6 +87,7 @@ function absImg(img) {
 function feed(lang) {
   return async (req, res) => {
     const rate = await eurRate()
+    const langBase = BASE + (LANG_PREFIX[lang] || '')
     const rows = db.prepare('SELECT * FROM products WHERE is_visible = 1').all()
     const items = []
 
@@ -111,7 +118,7 @@ function feed(lang) {
         `      <g:id>${xmlEsc(p.sku || p.id)}</g:id>\n` +
         `      <g:title>${xmlEsc(name)}</g:title>\n` +
         `      <g:description>${xmlEsc(desc)}</g:description>\n` +
-        `      <g:link>${xmlEsc(`${BASE}/catalog/${p.category_slug}/${p.slug}`)}</g:link>\n` +
+        `      <g:link>${xmlEsc(`${langBase}/catalog/${p.category_slug}/${p.slug}`)}</g:link>\n` +
         `      <g:image_link>${xmlEsc(img)}</g:image_link>\n` +
         `      <g:availability>${p.in_stock === 1 ? 'in_stock' : 'out_of_stock'}</g:availability>\n` +
         `      <g:price>${uah.toFixed(2)} UAH</g:price>\n` +
@@ -129,7 +136,7 @@ function feed(lang) {
       '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n' +
       '  <channel>\n' +
       `    <title>Termojet — ${xmlEsc(lang.toUpperCase())}</title>\n` +
-      `    <link>${BASE}</link>\n` +
+      `    <link>${langBase}</link>\n` +
       '    <description>Каталог обладнання Termojet для Google Shopping</description>\n' +
       items.join('\n') + '\n' +
       '  </channel>\n</rss>\n'
