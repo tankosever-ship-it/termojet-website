@@ -129,13 +129,13 @@ app.get(/^\/uploads\/.+\.(glb|step)$/i, (req, res, next) => {
 // будь-що, що посилається на них напряму, працюють як раніше.
 // (Легасі `/wp-content/uploads` уже віддає webp через nginx — див. DEPLOY.md.)
 // (шлях рахуємо в обробнику: const DIST оголошено нижче за цей рядок)
-app.get(/^\/images\/.+\.(png|jpe?g)$/i, (req, res, next) => {
+// `/assets/` виключено: там збірка Vite з власними хешованими іменами.
+app.get(/^\/(?!assets\/).+\.(png|jpe?g)$/i, (req, res, next) => {
   if (!/\bimage\/webp\b/.test(req.headers.accept || '')) return next()
   let rel
-  try { rel = decodeURIComponent(req.path.replace(/^\/images\//, '')) } catch { return next() }
-  const distImg = path.join(DIST, 'images')
-  const webpPath = path.join(distImg, rel + '.webp')
-  if (!webpPath.startsWith(distImg + path.sep) || !fs.existsSync(webpPath)) return next()
+  try { rel = decodeURIComponent(req.path.replace(/^\//, '')) } catch { return next() }
+  const webpPath = path.join(DIST, rel + '.webp')
+  if (!webpPath.startsWith(DIST + path.sep) || !fs.existsSync(webpPath)) return next()
   res.setHeader('Content-Type', 'image/webp')
   res.setHeader('Vary', 'Accept')
   res.setHeader('Cache-Control', 'public, max-age=604800')

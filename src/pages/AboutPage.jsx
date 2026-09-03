@@ -398,6 +398,7 @@ export default function AboutPage() {
                 className="relative overflow-hidden rounded-xl aspect-video bg-black ring-1 ring-white/10">
                 <iframe
                   className="w-full h-full"
+                  loading="lazy"
                   src={`https://www.youtube.com/embed/${ytId}`}
                   title={t('about.youtubeTitle')}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
