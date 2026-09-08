@@ -25,6 +25,8 @@ const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage'))
 const ServicePage = lazy(() => import('./pages/ServicePage'))
 const FilesPage = lazy(() => import('./pages/FilesPage'))
+// Сторінка існує заради посилання для партнерів — лише українською: прайс гривневий.
+const PraysPage = lazy(() => import('./pages/PraysPage'))
 const FaqPage = lazy(() => import('./pages/FaqPage'))
 const DeliveryPage = lazy(() => import('./pages/DeliveryPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
@@ -181,6 +183,7 @@ function AppRoutes() {
         <Route path="/dealers" element={<Navigate to="/partners" replace />} />
         <Route path="/service" element={<ServicePage />} />
         <Route path="/files" element={<FilesPage />} />
+        <Route path="/prays" element={<PraysPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />

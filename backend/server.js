@@ -215,16 +215,16 @@ app.get('/google-merchant-de.xml', merchantFeed('de'))
 app.get('/google-merchant-fr.xml', merchantFeed('fr'))
 app.get('/google-merchant-ro.xml', merchantFeed('ro'))
 
-// Коротке посилання на прайс: termojet.com.ua/prays
+// Завантаження прайсу. Саме посилання для розсилки — це /prays (сторінка з og-картинкою,
+// бо месенджери будують прев'ю з HTML, а .xlsx ніякого HTML не має). Звідси кнопка веде
+// на /prays/faylom; /price лишається коротким прямим лінком для тих, кому треба одразу файл.
 //
 // Віддає НАЙСВІЖІШИЙ файл price-termojet-*.xlsx з uploads/files, тож оновити прайс —
 // це просто покласти туди новий файл, без правок коду й без перезбірки.
 //
-// Чому окремий маршрут, а не пряме посилання на /uploads: по-перше, адреса коротка й
-// придатна для розсилки; по-друге, express.static віддає /uploads з maxAge 7d, і під
-// сталою адресою той, хто вже качав, тиждень отримував би стару ціну. Тут кеш вимкнено
-// явно, тож партнер завжди отримує актуальну редакцію.
-app.get(['/prays', '/price'], (req, res) => {
+// Кеш вимкнено явно: express.static віддає /uploads з maxAge 7d, і під сталою адресою
+// той, хто вже качав, тиждень отримував би стару ціну.
+app.get(['/prays/faylom', '/price'], (req, res) => {
   const dir = path.join(__dirname, 'uploads', 'files')
   let newest = null
   try {
@@ -590,6 +590,13 @@ const STATIC_META = {
   '/privacy': { title: 'Політика конфіденційності та обробка даних | Termojet', desc: 'Політика конфіденційності та обробки персональних даних Termojet.' },
   '/navchannya': { title: 'Навчання та тренінги Termojet для монтажників', desc: 'Навчальні матеріали й тренінги Termojet з монтажу та підбору обладнання для котелень.' },
   '/reviews': { title: 'Відгуки клієнтів про обладнання Termojet', desc: 'Реальні відгуки клієнтів про обладнання Termojet для котелень: якість, монтаж, сервіс, співпраця.' },
+  // Єдина сторінка з власною og-картинкою: посилання на неї шлють партнерам, і в
+  // месенджері має розкриватись картка про прайс, а не загальне фото з портфоліо.
+  '/prays': {
+    title: 'Прайс-лист Termojet — завантажити актуальні ціни',
+    desc: 'Актуальний прайс-лист Termojet у форматі Excel: 417 позицій обладнання для котелень. Ціни діють з 8 вересня 2026, рекомендовані роздрібні, з ПДВ.',
+    img: `${SITE}/og-prays.png`,
+  },
 }
 
 // EN-версії статичних сторінок (для /en/...). Немає запису → фолбек на UA STATIC_META.
@@ -1011,6 +1018,7 @@ const KNOWN_ROUTES = new Set([
   '/', '/catalog', '/blog', '/faq', '/about', '/service', '/delivery',
   '/oem', '/partners', '/returns', '/navchannya', '/portfolio', '/contacts',
   '/files', '/reviews', '/privacy', '/terms', '/cart', '/dealers', '/support',
+  '/prays',
   '/training', '/warranty',
 ])
 // Роути, які віддаємо з noindex: реальні сторінки застосунку, але для пошуку
@@ -1051,7 +1059,7 @@ app.get('*', (req, res) => {
       const alternates = buildAlternates(lookupPath)
       const jsonLd = [ORG_SCHEMA]
       if (lookupPath === '/faq') { const faq = buildFaqSchema(lang); if (faq) jsonLd.unshift(faq) }
-      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, alternates, jsonLd })
+      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, img: meta.img, alternates, jsonLd })
       // SSR-lite: H1 + контент сторінки + nav у #seo-content.
       // Дата-керовані сторінки (головна/блог/FAQ) наповнюємо реальним контентом.
       const lg = lang
