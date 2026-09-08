@@ -236,9 +236,13 @@ app.get(['/prays', '/price'], (req, res) => {
   } catch { /* теки може не бути — віддамо 404 нижче */ }
   if (!newest) return res.status(404).send('Прайс тимчасово недоступний')
   res.setHeader('Cache-Control', 'no-cache, must-revalidate')
-  // Ім'я для збереження — людське, з датою редакції всередині файлу
-  const stamp = (newest.file.match(/(\d{4})-(\d{2})/) || []).slice(1).join('.')
-  res.download(path.join(dir, newest.file), `TERMOJET-прайс${stamp ? ' ' + stamp : ''}.xlsx`)
+  // Ім'я, під яким файл ляже партнеру на диск. Дату беремо з назви файлу на диску
+  // (price-termojet-РРРР-ММ-ДД-ua.xlsx) і показуємо так само, як написано на титульній
+  // сторінці самого прайсу — «ДІЙСНИЙ З 08.09.2026». Якщо дня в назві немає, лишається
+  // місяць і рік.
+  const d = newest.file.match(/(\d{4})-(\d{2})(?:-(\d{2}))?/)
+  const edition = d ? (d[3] ? `${d[3]}.${d[2]}.${d[1]}` : `${d[2]}.${d[1]}`) : ''
+  res.download(path.join(dir, newest.file), `TERMOJET Прайс-лист${edition ? ' ' + edition : ''}.xlsx`)
 })
 
 // serve React build
