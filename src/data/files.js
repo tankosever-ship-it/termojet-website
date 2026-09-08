@@ -17,13 +17,16 @@ export const FILES = [
   },
   {
     id: 2,
-    name: 'Прайс-лист TERMOJET 2026',
+    name: 'Прайс-лист TERMOJET',
     category: 'Каталоги та прайси',
     format: 'XLSX',
-    url: `${BASE}/2026/04/termojet-price-2026_03_4xlsx.xlsx`,
+    // Датована назва навмисно: /uploads кешується на 7 днів (express.static maxAge),
+    // тож під сталою адресою той, хто вже качав, тиждень отримував би стару ціну.
+    // Нова редакція — нова адреса, і оновити цей рядок.
+    url: `/uploads/files/price-termojet-2026-09-ua.xlsx`,
     lang: 'uk',
     year: 2026,
-    desc: 'Актуальні ціни на все обладнання у форматі Excel',
+    desc: 'Ціни, дійсні з 08.09.2026 — усе обладнання у форматі Excel',
   },
   {
     id: 3,
