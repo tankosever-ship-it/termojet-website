@@ -215,6 +215,32 @@ app.get('/google-merchant-de.xml', merchantFeed('de'))
 app.get('/google-merchant-fr.xml', merchantFeed('fr'))
 app.get('/google-merchant-ro.xml', merchantFeed('ro'))
 
+// Коротке посилання на прайс: termojet.com.ua/prays
+//
+// Віддає НАЙСВІЖІШИЙ файл price-termojet-*.xlsx з uploads/files, тож оновити прайс —
+// це просто покласти туди новий файл, без правок коду й без перезбірки.
+//
+// Чому окремий маршрут, а не пряме посилання на /uploads: по-перше, адреса коротка й
+// придатна для розсилки; по-друге, express.static віддає /uploads з maxAge 7d, і під
+// сталою адресою той, хто вже качав, тиждень отримував би стару ціну. Тут кеш вимкнено
+// явно, тож партнер завжди отримує актуальну редакцію.
+app.get(['/prays', '/price'], (req, res) => {
+  const dir = path.join(__dirname, 'uploads', 'files')
+  let newest = null
+  try {
+    for (const f of fs.readdirSync(dir)) {
+      if (!/^price-termojet-.*\.xlsx$/i.test(f)) continue
+      const st = fs.statSync(path.join(dir, f))
+      if (!newest || st.mtimeMs > newest.mtime) newest = { file: f, mtime: st.mtimeMs }
+    }
+  } catch { /* теки може не бути — віддамо 404 нижче */ }
+  if (!newest) return res.status(404).send('Прайс тимчасово недоступний')
+  res.setHeader('Cache-Control', 'no-cache, must-revalidate')
+  // Ім'я для збереження — людське, з датою редакції всередині файлу
+  const stamp = (newest.file.match(/(\d{4})-(\d{2})/) || []).slice(1).join('.')
+  res.download(path.join(dir, newest.file), `TERMOJET-прайс${stamp ? ' ' + stamp : ''}.xlsx`)
+})
+
 // serve React build
 const DIST = path.join(__dirname, '..', 'dist')
 app.use(express.static(DIST, {
