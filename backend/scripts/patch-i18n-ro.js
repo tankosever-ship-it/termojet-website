@@ -56,7 +56,18 @@ const tx = db.transaction(() => {
     if (rec.hash && rec.hash !== h) { mismatch.push(`${rec.sku || id} (перекл ${rec.hash} ≠ прод ${h})`); continue }
     let i18n = {}
     try { i18n = JSON.parse(row.i18n || '{}') } catch { i18n = {} }
-    i18n.ro = Object.assign({}, i18n.ro, rec.ro)
+    // `specs` у products-ro-i18n.json лежить РЯДКОМ JSON, а в i18n решти мов —
+    // обʼєктом. Записаний дослівно, він ламав сторінку товару: withI18n віддає
+    // значення як є, а фронт робить Object.entries() — для рядка це рядок таблиці
+    // на кожен символ. Розбираємо тут, щоб форма збігалась з en/pl/fr/de.
+    const ro = Object.assign({}, i18n.ro, rec.ro)
+    if (typeof ro.specs === 'string') {
+      try {
+        const parsed = JSON.parse(ro.specs)
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) ro.specs = parsed
+      } catch { /* не JSON — лишаємо як є, хай видно в даних */ }
+    }
+    i18n.ro = ro
     i18n._srcHash = i18n._srcHash || {}
     i18n._srcHash.ro = h
     upd.run(JSON.stringify(i18n), row.id)
