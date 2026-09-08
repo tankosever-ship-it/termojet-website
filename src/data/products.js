@@ -6970,7 +6970,7 @@ export const PRODUCTS = [
     "name": "Автоматика котельні Termojet LIGHT (2 контура + ГВС)",
     "slug": "avtomatyka-termojet-light",
     "sku": "903289 LT",
-    "price": "576",
+    "price": "634",
     "categorySlug": "avtomatyka",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0484-scaled.jpg",
     "images": [
@@ -6998,7 +6998,7 @@ export const PRODUCTS = [
     "name": "Автоматика котельні Termojet PROFI PLUS (3 контура + ГВС)",
     "slug": "avtomatyka-termojet-profi-plus",
     "sku": "903289 PR",
-    "price": "728.4",
+    "price": "800",
     "categorySlug": "avtomatyka",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0484-scaled.jpg",
     "images": [

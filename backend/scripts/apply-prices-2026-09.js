@@ -10,6 +10,9 @@
  * скрипт виконується в контейнері, де того репозиторію немає, а ціни мають бути
  * видні в git-історії сайту, а не приїжджати збоку файлом.
  *
+ * Окремим блоком наприкінці таблиці — дві позиції автоматики в EUR: вони не належать
+ * до серпневого підняття, це виправлення занижених цін на сайті (08.09.2026).
+ *
  * У прайсі 223 гривневі позиції, тут — 157. Решта 66 (неізольовані варіанти «L»,
  * дві комплектації Mega, розмотувач) на сайті картки не мають узагалі: вони живуть
  * лише в прайсі й підставляються ключем `--prices` при його збиранні.
@@ -27,7 +30,7 @@ const APPLY = process.argv.includes('--apply')
 const DBP = process.env.TERMOJET_DB || path.join(__dirname, '..', 'data', 'termojet.db')
 const db = new Database(DBP)
 
-// [артикул на сайті, стара ціна, нова ціна]
+// [артикул на сайті, стара ціна, нова ціна, валюта — типово UAH]
 const PRICES = [
 
   // ── Розподільчі колектори Mini 40 кВт ──
@@ -212,6 +215,15 @@ const PRICES = [
   ['84040TJ-TK-4060', 3830.00, 4022],  // Такер Termojet для скоб 40-60 мм
   ['520472', 52.47, 55],              // Труба Termojet PE-RT 16×2, 6 бар, 70°C (500м)
   ['84040TJ-FP-50', 26.40, 28],       // Фольгована плівка Termojet з розміткою
+
+  // ── Автоматика керування котельнею (EUR) ──
+  // Не частина серпневого підняття. На сайті ці дві позиції стояли заниженими
+  // (576 і 728.40), а правильні — прайсові. Помилку ховало правило
+  // HIGHER_PRICE_SHEETS у generate.py: для розділу «Автоматика» прайс бере вищу
+  // з двох цін, тож у прайсі роками стояло правильне число, а на сайті — ні.
+  // Підтвердив власник 08.09.2026.
+  ['903289 LT', 576.00, 634, 'EUR'],   // Автоматика котельні Termojet LIGHT (2 контура + ГВС)
+  ['903289 PR', 728.40, 800, 'EUR'],   // Автоматика котельні Termojet PROFI PLUS (3 контура + ГВС)
 ]
 
 // ── запобіжники ──────────────────────────────────────────────────────────────
@@ -242,11 +254,11 @@ let willChange = 0, already = 0
 const problems = []
 
 const run = db.transaction(() => {
-  for (const [sku, oldP, newP] of PRICES) {
+  for (const [sku, oldP, newP, wantCur = 'UAH'] of PRICES) {
     const r = sel.get(sku)
     if (!r) { problems.push(`${sku} — картки немає в базі`); continue }
     if (skip.has(r.slug)) { problems.push(`${sku} — під тимчасовою кампанією, не чіпаю`); continue }
-    if ((r.currency || 'UAH') !== 'UAH') { problems.push(`${sku} — валюта ${r.currency}, а не UAH`); continue }
+    if ((r.currency || 'UAH') !== wantCur) { problems.push(`${sku} — валюта ${r.currency}, а очікувалась ${wantCur}`); continue }
     const cur = Number(r.price)
     if (Math.abs(cur - newP) < 0.01) { already++; continue }
     // Ціна мала лишитись такою, якою була на момент розрахунку. Інакше хтось
@@ -263,10 +275,16 @@ const run = db.transaction(() => {
 })
 run()
 
-const sumOld = PRICES.reduce((s, p) => s + p[1], 0)
-const sumNew = PRICES.reduce((s, p) => s + p[2], 0)
-console.log(`\nу таблиці ${PRICES.length} позицій · сума ${Math.round(sumOld).toLocaleString('uk-UA')} → ` +
-            `${Math.round(sumNew).toLocaleString('uk-UA')} грн (+${((sumNew / sumOld - 1) * 100).toFixed(2)}%)`)
+// Підсумовуємо ЛИШЕ гривневі: євровим позиціям тут не місце, інакше сума
+// «в грн» мовчки вбирала б числа в іншій валюті.
+const uah = PRICES.filter(p => (p[3] || 'UAH') === 'UAH')
+const eur = PRICES.filter(p => p[3] === 'EUR')
+const sumOld = uah.reduce((s, p) => s + p[1], 0)
+const sumNew = uah.reduce((s, p) => s + p[2], 0)
+console.log(`\nу таблиці ${PRICES.length} позицій · гривневих ${uah.length}: ` +
+            `${Math.round(sumOld).toLocaleString('uk-UA')} → ${Math.round(sumNew).toLocaleString('uk-UA')} грн ` +
+            `(+${((sumNew / sumOld - 1) * 100).toFixed(2)}%)`)
+if (eur.length) console.log(`євро ${eur.length}: ` + eur.map(p => `${p[0]} ${p[1]}→${p[2]}`).join(', '))
 console.log(`${APPLY ? 'ЗАСТОСОВАНО' : 'ПОПЕРЕДНІЙ ПЕРЕГЛЯД'}: до зміни ${willChange}, уже з новою ціною ${already}`)
 if (problems.length) {
   console.log(`\n⚠️  потребує уваги — ${problems.length}:`)
