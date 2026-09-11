@@ -493,6 +493,20 @@ function buildAlternates(logicalPath) {
 }
 
 // Назви+описи 15 категорій (uk + en; джерело — src/data/categories.js; бекенд CJS не імпортує ESM-фронт).
+// Титул категорії: коротку назву доповнюємо обгорткою до SEO-мінімуму, але ріжемо
+// саме ОБГОРТКУ і по слову. Раніше тут стояв `slice(0, 60)` по всьому рядку, і на
+// категорії з трохи довшою назвою він з'їдав хвіст: «Cazane pe peleți — echipamente
+// pentru centrale termice | Ter» — у видачі лишався обрубок без бренду.
+function padCategoryTitle(name, wrap, limit = 60) {
+  const full = `${name} — ${wrap} | Termojet`
+  if (full.length <= limit) return full
+  const room = limit - name.length - ' — '.length - ' | Termojet'.length
+  if (room < 8) return `${name} | Termojet`
+  const cut = wrap.slice(0, room)
+  const sp = cut.lastIndexOf(' ')
+  return `${name} — ${(sp > 0 ? cut.slice(0, sp) : cut).replace(/[\s,–—-]+$/, '')} | Termojet`
+}
+
 const CATEGORY_META = {
   'nasosni-hrupy': {
     name: 'Насосні групи', desc: 'Готові насосні вузли зі змішувачем і термостатикою для котелень та теплих підлог',
@@ -563,6 +577,11 @@ const CATEGORY_META = {
     name: 'Додаткове обладнання', desc: 'Аксесуари, кріплення та супутні товари для монтажу котельного обладнання',
     nameEn: 'Additional Equipment', descEn: 'Accessories, fittings and related products for boiler equipment installation',
     nameRo: 'Echipamente suplimentare', descRo: 'Accesorii, elemente de fixare și produse conexe pentru montajul echipamentelor de centrală termică',
+  },
+  'peletni-kotly': {
+    name: 'Пелетні котли', desc: 'Автоматичні котли на деревні пелети класу 5 з модуляцією потужності та керуванням через Wi-Fi',
+    nameEn: 'Pellet Boilers', descEn: 'Automatic wood pellet boilers, class 5, with power modulation and Wi-Fi control',
+    nameRo: 'Cazane pe peleți', descRo: 'Cazane automate pe peleți din lemn, clasa 5, cu modulare a puterii și control Wi-Fi',
   },
   'rozprodazh': {
     name: 'Акція', desc: 'Обладнання Termojet за акційними цінами — колектори, насосні групи та клапани',
@@ -972,7 +991,7 @@ function handleCategory(lang) {
         // Обгортка title/desc/breadcrumb: ro отримує румунську, решта не-uk — англійську.
         const wrap = lang === 'ro' ? 'echipamente pentru centrale termice' : 'boiler room equipment'
         let title = `${cName} | Termojet`
-        if (title.length < 35) title = `${cName} — ${wrap} | Termojet`.slice(0, 60)
+        if (title.length < 35) title = padCategoryTitle(cName, wrap)
         const descTail = lang === 'ro'
           ? 'Termojet — producător din 2002, livrare în toată Ucraina.'
           : 'Termojet — manufacturer since 2002, delivery across Ukraine.'
@@ -985,7 +1004,7 @@ function handleCategory(lang) {
         html = injectMeta(html, { title, desc, url, h1: cName, bodyText: cDesc, alternates, jsonLd })
       } else {
         let title = `${cName} | Termojet`
-        if (title.length < 35) title = `${cName} — обладнання для котелень | Termojet`.slice(0, 60)
+        if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
         const desc = `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
         const jsonLd = [buildBreadcrumb([
           { name: 'Головна', url: base },

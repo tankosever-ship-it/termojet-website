@@ -1802,6 +1802,78 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy" />
   </url>
   <url>
+    <loc>https://termojet.com.ua/catalog/peletni-kotly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/en/catalog/peletni-kotly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/pl/catalog/peletni-kotly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/fr/catalog/peletni-kotly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/de/catalog/peletni-kotly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/ro/catalog/peletni-kotly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly" />
+  </url>
+  <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -16896,6 +16968,84 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/nasosy/pump-silencer900" />
     <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/nasosy/pump-silencer900" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/nasosy/pump-silencer900" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+  </url>
+  <url>
+    <loc>https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://termojet.com.ua/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://termojet.com.ua/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://termojet.com.ua/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://termojet.com.ua/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://termojet.com.ua/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://termojet.com.ua/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus" />
   </url>
   <url>
     <loc>https://termojet.com.ua/catalog/rozpodilchi-kolektory/84040492</loc>

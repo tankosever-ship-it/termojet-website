@@ -33,6 +33,7 @@ const CATEGORY_BANNERS = {
   'termojet-box': '/banner-termojet-box.webp',
   'kolektory-z-hidrostrilkoyu': '/banner-kolektory-z-hidrostrilkoyu.webp',
   'zonalne-keruvannya': '/banner-zonalne-keruvannya.webp',
+  'peletni-kotly': '/banner-peletni-kotly.webp',
 }
 
 // Обкладинка головної сторінки каталогу (коли категорія не обрана)

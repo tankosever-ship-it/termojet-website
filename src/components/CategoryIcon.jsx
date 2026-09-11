@@ -10,11 +10,13 @@
 import {
   Settings2, GitBranch, Share2, Network, Box, Building2, Waves, Sliders,
   Gauge, Filter, Thermometer, Grid3X3, CircuitBoard, Wrench, Percent, LayoutGrid,
+  Flame,
 } from 'lucide-react'
 
 const ICONS = {
   Settings2, GitBranch, Share2, Network, Box, Building2, Waves, Sliders,
   Gauge, Filter, Thermometer, Grid3X3, CircuitBoard, Wrench, Percent, LayoutGrid,
+  Flame,
 }
 
 export default function CategoryIcon({ name, size = 18, className = '' }) {

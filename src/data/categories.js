@@ -240,6 +240,19 @@ export const CATEGORIES = [
     color: '#0D0D0D',
   },
   {
+    id: 'pellet-boilers',
+    slug: 'peletni-kotly',
+    icon: 'Flame',
+    image: `/images/category-peletni-kotly.jpg`,
+    name: { uk: 'Пелетні котли', en: 'Pellet Boilers', pl: 'Kotły na pellet', fr: 'Chaudières à granulés', de: 'Pelletkessel', ro: 'Cazane pe peleți' },
+    desc: { uk: 'Автоматичні котли на деревні пелети класу 5 з модуляцією потужності та керуванням через Wi-Fi', en: 'Automatic wood pellet boilers, class 5, with power modulation and Wi-Fi control', pl: 'Automatyczne kotły na pellet drzewny klasy 5 z modulacją mocy i sterowaniem Wi-Fi', fr: 'Chaudières automatiques à granulés de bois, classe 5, avec modulation de puissance et pilotage Wi-Fi', de: 'Automatische Holzpelletkessel der Klasse 5 mit Leistungsmodulation und WLAN-Steuerung', ro: 'Cazane automate pe peleți din lemn, clasa 5, cu modulare a puterii și control Wi-Fi' },
+    subcategories: {
+      uk: ['15 кВт'], en: ['15 kW'], pl: ['15 kW'],
+      fr: ['15 kW'], de: ['15 kW'], ro: ['15 kW'],
+    },
+    color: '#C2410C',
+  },
+  {
     id: 'clearance',
     slug: 'rozprodazh',
     icon: 'Percent',

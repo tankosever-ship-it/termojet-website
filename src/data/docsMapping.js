@@ -16,6 +16,7 @@ export const DOCS_BY_CATEGORY = {
   'avtomatyka':               [192, 193],     // Profi Plus + Light (двомовні, 2026)
   'balancing':                [],
   'dodatkove':                [],
+  'peletni-kotly':            [197, 198],   // інструкція 64 стор. + брошура A4
 }
 
 // SKU-specific overrides (matched by substring in product name)

@@ -47,6 +47,7 @@ const CAT = {
   'kolektory-pidloha': { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem', ro: 'Sistem de încălzire prin pardoseală' },
   'avtomatyka': { uk: 'Автоматика котельного обладнання', en: 'Boiler Equipment Automation', pl: 'Automatyka urządzeń kotłowych', fr: 'Automatisation des équipements de chaudière', de: 'Kesselautomatik', ro: 'Automatizare echipamente centrală termică' },
   'dodatkove': { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung', ro: 'Echipamente suplimentare' },
+  'peletni-kotly': { uk: 'Пелетні котли', en: 'Pellet Boilers', pl: 'Kotły na pellet', fr: 'Chaudières à granulés', de: 'Pelletkessel', ro: 'Cazane pe peleți' },
   'rozprodazh': { uk: 'Акція', en: 'Sale', pl: 'Promocja', fr: 'Promotion', de: 'Aktion', ro: 'Promoție' },
 }
 
@@ -66,6 +67,7 @@ const GPC = {
   'zonalne-keruvannya': 1897,      // Hardware > HVAC > HVAC Controls > Thermostats
   'avtomatyka': 1519,              // Hardware > HVAC > HVAC Controls
   'dodatkove': 632,                // Hardware
+  'peletni-kotly': 3082,             // Home & Garden > ... > Climate Control Appliances > Furnaces & Boilers
   'rozprodazh': 632,
 }
 const GPC_DEFAULT = 133

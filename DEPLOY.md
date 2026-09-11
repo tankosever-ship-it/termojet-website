@@ -334,6 +334,30 @@ docker compose exec -T app node backend/scripts/apply-truba-spy.js --remove --ap
 > читає БД, а в Docker-білді її немає. Оновлювати треба з ЖИВОЇ бази — прогнати скрипт
 > у контейнері й забрати файл на коміт (локальна БД застаріла й поверне старі слаги).
 
+### Нова категорія каталогу — вісім місць
+Назва категорії продубльована в кількох файлах (бекенд на CJS не імпортує ESM-фронт).
+Пропустиш одне — категорія працюватиме, але десь буде порожня, англійською або 404.
+
+| # | Файл | Що |
+|---|---|---|
+| 1 | `src/data/categories.js` | елемент `CATEGORIES` (6 мов). Порядок масиву = порядок у меню й каталозі; перші **шість** показує головна |
+| 2 | `backend/server.js` → `CATEGORY_META` | uk/en/ro. **Без цього `/catalog/<slug>` віддає 404** — `isKnownRoute()` перевіряє саме цей об'єкт |
+| 3 | `src/components/CategoryIcon.jsx` | іконка в **явній мапі** (імпорт + `ICONS`); namespace-імпорт lucide заборонений — вимикає tree-shaking |
+| 4 | `backend/routes/merchant.js` → `CAT` | назва `product_type` 6 мовами |
+| 5 | `backend/routes/merchant.js` → `GPC` | числовий `google_product_category` з офіційної таксономії Google — **не вгадувати** |
+| 6 | `src/pages/CatalogPage.jsx` → `CATEGORY_BANNERS` + `public/banner-<slug>.webp` | банер 2320×464 **лише WebP**; шапка показує середню смугу, тож предмет тримати по центру висоти |
+| 7 | `src/data/docsMapping.js` → `DOCS_BY_CATEGORY` | id файлів із `files.js` |
+| 8 | `pipelines/price/generate.py` | розділ у `SECTIONS` + `section_for` + `SECTION_IMAGE` (списки паралельні) |
+
+### Товар у фіді, але не в прайсі
+У `generate.py` два різні списки винятків — плутати не можна:
+
+- **`FEED_EXCLUDE`** — відсів одразу після завантаження каталогу: товару немає ні в XLSX,
+  ні в CSV, ні у фіді (вітринні позиції, напр. труба `SPY-16X2`);
+- **`PRICE_EXCLUDE`** — відсів лише на записі XLSX і CSV: у фіді маркетплейсів товар
+  лишається, тож ціна фіду й сторінки не розходяться (напр. котел `IGNIS-PRO-15-PLUS`,
+  на який ще немає дилерської ціни).
+
 ### Описи категорій (два джерела — тримати в парі)
 - **Видимий на сторінці:** `src/data/categories.js` → `desc.{uk,en,...}` (рендерить `CatalogPage.jsx`).
 - **Meta (для Google):** `CATEGORY_META` у `backend/server.js` (бекенд CJS не імпортує `src/`).
