@@ -14,3 +14,10 @@ export function isOnSale(p) {
 export function effectivePrice(p) {
   return isOnSale(p) ? parseFloat(p.salePrice) : p.price
 }
+
+// Відсоток знижки для бейджа («−25%»). Рахується з цін, а не зберігається окремо,
+// тож нічого не розʼїдеться, якщо ціну або акцію поправлять в адмінці.
+export function salePercent(p) {
+  if (!isOnSale(p)) return 0
+  return Math.round((1 - parseFloat(p.salePrice) / parseFloat(p.price)) * 100)
+}

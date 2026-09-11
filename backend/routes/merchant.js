@@ -97,10 +97,16 @@ function feed(lang) {
       if (!img) continue
       const amount = parseFloat(p.price)
       if (!amount || amount <= 0) continue
-      let uah = null
-      if ((p.currency || 'UAH') === 'UAH') uah = amount
-      else if (p.currency === 'EUR' && rate) uah = Math.round(amount * rate)
+      const toUah = v => ((p.currency || 'UAH') === 'UAH' ? v : (p.currency === 'EUR' && rate ? Math.round(v * rate) : null))
+      const uah = toUah(amount)
       if (!uah || uah <= 0) continue
+
+      // Акційна ціна йде ОКРЕМИМ полем: g:price лишається роздрібною, g:sale_price —
+      // тією, що стоїть на сторінці. Якщо віддати у фіді лише роздрібну, Merchant
+      // побачить на посадковій сторінці меншу суму, вважатиме це розбіжністю цін
+      // і зніме позицію з показу (а самою лише g:sale_price ціну задати не можна).
+      const saleAmount = parseFloat(p.sale_price) || 0
+      const saleUah = saleAmount > 0 && saleAmount < amount ? toUah(saleAmount) : null
 
       // переклади з колонки i18n
       let tr = {}
@@ -122,6 +128,7 @@ function feed(lang) {
         `      <g:image_link>${xmlEsc(img)}</g:image_link>\n` +
         `      <g:availability>${p.in_stock === 1 ? 'in_stock' : 'out_of_stock'}</g:availability>\n` +
         `      <g:price>${uah.toFixed(2)} UAH</g:price>\n` +
+        (saleUah && saleUah > 0 ? `      <g:sale_price>${saleUah.toFixed(2)} UAH</g:sale_price>\n` : '') +
         '      <g:condition>new</g:condition>\n' +
         '      <g:brand>Termojet</g:brand>\n' +
         `      <g:mpn>${xmlEsc(p.sku || p.id)}</g:mpn>\n` +

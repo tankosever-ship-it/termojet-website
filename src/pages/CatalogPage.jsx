@@ -9,7 +9,7 @@ import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
 import { toUAH } from '../utils/currency'
-import { isOnSale, SALE_CATEGORY_SLUG } from '../utils/sale'
+import { isOnSale, salePercent, SALE_CATEGORY_SLUG } from '../utils/sale'
 import ProductPrice from '../components/ProductPrice'
 import CategoryIcon from '../components/CategoryIcon'
 import { assetPath } from '../utils/assetPath'
@@ -1426,8 +1426,9 @@ export default function CatalogPage() {
                       </LLink>
 
                       {isOnSale(product) && (
-                        <span className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
-                          {t('catalog.saleBadge')}
+                        <span title={t('catalog.saleBadge')}
+                          className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
+                          −{salePercent(product)}%
                         </span>
                       )}
                       {!product.inStock && (

@@ -19,7 +19,7 @@ import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
 import { trackViewItem } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
-import { isOnSale } from '../utils/sale'
+import { isOnSale, salePercent } from '../utils/sale'
 
 // Рендер опису: якщо є нумерована комплектація «N – ...» (en-dash) — виводимо її
 // охайним списком з номерами + примітку «Увага!» окремим виноском. Інакше — абзаци.
@@ -948,7 +948,7 @@ export default function ProductDetailPage() {
                         <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>₴</span>
                       </span>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, color: 'var(--text-muted)', textDecoration: 'line-through' }}>{priceUAH.toLocaleString('uk-UA')}</span>
-                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, padding: '3px 7px', background: 'var(--accent)', color: '#fff', letterSpacing: '.08em', textTransform: 'uppercase' }}>{t('product.saleTag')}</span>
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, padding: '3px 7px', background: 'var(--accent)', color: '#fff', letterSpacing: '.08em', textTransform: 'uppercase' }} title={t('product.saleTag')}>−{salePercent(product)}%</span>
                     </>
                   ) : (
                     <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, color: 'var(--ink-100)' }}>

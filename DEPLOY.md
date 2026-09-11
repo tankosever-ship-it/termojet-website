@@ -295,6 +295,25 @@ docker compose exec app node backend/scripts/temp-price.cjs --revert   # пов�
 > Ціни **не** чіпає ні `seedProducts()` (працює лише на порожній таблиці), ні `migrateSeo()`
 > (тільки seo_title/meta_description) — рестарт і ребілд для них безпечні.
 
+### Безстрокова акція −25% (`backend/scripts/apply-sale-2026-09.js`)
+Знижка живе в `products.sale_price`, роздрібна `price` лишається недоторканою — тому прайс
+для партнерів (`pipelines/price/generate.py` бере з `/api/products` саме `price`) далі
+роздрібний, а на сайті видно акційну ціну, закреслену стару й бейдж «−25%».
+
+```bash
+docker compose exec -T app node backend/scripts/apply-sale-2026-09.js            # показати
+docker compose exec -T app node backend/scripts/apply-sale-2026-09.js --apply    # застосувати
+docker compose exec -T app node backend/scripts/apply-sale-2026-09.js --revert --apply   # зняти акцію
+```
+- Склад акції (артикули + роздрібна ціна на момент розрахунку) — константа `ITEMS` у скрипті.
+- Автоповернення немає: акція безстрокова, знімається вручну `--revert --apply`.
+- **Не рахує наосліп:** якщо ціна в базі не збігається з тією, з якої робився розрахунок
+  (підняли ціни або правили картку в адмінці), позиція пропускається з попередженням —
+  тоді треба оновити `ITEMS` під нові ціни й прогнати ще раз.
+- Фіди Merchant (`/google-merchant*.xml`) віддають `g:price` роздрібну + `g:sale_price`
+  акційну. Ціна у фіді мусить збігатися зі сторінкою, тож статичний `termojet-feed.xml`
+  із `pipelines/price` перезбирати лише тоді, коли знижка вже стоїть у базі.
+
 ### Описи категорій (два джерела — тримати в парі)
 - **Видимий на сторінці:** `src/data/categories.js` → `desc.{uk,en,...}` (рендерить `CatalogPage.jsx`).
 - **Meta (для Google):** `CATEGORY_META` у `backend/server.js` (бекенд CJS не імпортує `src/`).
