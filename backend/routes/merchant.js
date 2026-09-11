@@ -70,6 +70,12 @@ const GPC = {
 }
 const GPC_DEFAULT = 133
 
+// Вітринні позиції: є в каталозі сайту, але НЕ рекламуються і не потрапляють
+// у партнерський прайс. Зараз це труба SPY — картка чужого бренду, додана на
+// прохання партнерів як підтвердження, що така труба продається в Україні.
+// Той самий список продубльовано в `pipelines/price/generate.py` (FEED_EXCLUDE).
+const FEED_EXCLUDE = new Set(['SPY-16X2'])
+
 function xmlEsc(s) {
   return String(s ?? '')
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -93,6 +99,7 @@ function feed(lang) {
 
     for (const p of rows) {
       if (!p.slug || !p.category_slug) continue
+      if (FEED_EXCLUDE.has(p.sku)) continue
       const img = absImg(p.image)
       if (!img) continue
       const amount = parseFloat(p.price)

@@ -314,6 +314,26 @@ docker compose exec -T app node backend/scripts/apply-sale-2026-09.js --revert -
   акційну. Ціна у фіді мусить збігатися зі сторінкою, тож статичний `termojet-feed.xml`
   із `pipelines/price` перезбирати лише тоді, коли знижка вже стоїть у базі.
 
+### Вітринні товари (є на сайті, немає в рекламі й прайсі)
+Товар, доданий «щоб показати», а не щоб продавати через канали. Зараз це труба
+`SPY-16X2` (`backend/scripts/apply-truba-spy.js`). Тримається на трьох місцях —
+міняти їх можна тільки разом:
+
+| Де | Що | Файл |
+|---|---|---|
+| Фіди Merchant | артикул у `FEED_EXCLUDE` | `backend/routes/merchant.js` |
+| Прайс + фід маркетплейсів | той самий артикул у `FEED_EXCLUDE` | `pipelines/price/generate.py` |
+| Бейдж «Власне виробництво» | характеристика «Бренд» ≠ Termojet | `src/utils/brand.js` |
+
+```bash
+docker compose exec -T app node backend/scripts/apply-truba-spy.js                  # показати
+docker compose exec -T app node backend/scripts/apply-truba-spy.js --apply          # додати
+docker compose exec -T app node backend/scripts/apply-truba-spy.js --remove --apply # прибрати
+```
+> Після додавання товар НЕ з'являється в `public/sitemap.xml` сам: `gen-sitemap.cjs`
+> читає БД, а в Docker-білді її немає. Оновлювати треба з ЖИВОЇ бази — прогнати скрипт
+> у контейнері й забрати файл на коміт (локальна БД застаріла й поверне старі слаги).
+
 ### Описи категорій (два джерела — тримати в парі)
 - **Видимий на сторінці:** `src/data/categories.js` → `desc.{uk,en,...}` (рендерить `CatalogPage.jsx`).
 - **Meta (для Google):** `CATEGORY_META` у `backend/server.js` (бекенд CJS не імпортує `src/`).

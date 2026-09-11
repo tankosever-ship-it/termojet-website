@@ -20,6 +20,7 @@ import SEO from '../components/SEO'
 import { trackViewItem } from '../utils/analytics'
 import { formatPrice, toUAH } from '../utils/currency'
 import { isOnSale, salePercent } from '../utils/sale'
+import { isOwnBrand } from '../utils/brand'
 
 // Рендер опису: якщо є нумерована комплектація «N – ...» (en-dash) — виводимо її
 // охайним списком з номерами + примітку «Увага!» окремим виноском. Інакше — абзаци.
@@ -110,10 +111,13 @@ function Accordion({ icon: Icon, title, defaultOpen, children }) {
   )
 }
 
-function TrustAccordions({ t }) {
+// skip — блоки, які не стосуються цього товару. Зараз це «Власне виробництво»
+// на картках чужого бренду: решта блоків (доставка, оплата, гарантія) чинні для
+// будь-якого товару, а цей заявляв би виробництво, якого немає.
+function TrustAccordions({ t, skip = [] }) {
   return (
     <div style={{ display: 'grid', gap: 8 }}>
-      {ACCORDION_ORDER.map((key) => {
+      {ACCORDION_ORDER.filter(key => !skip.includes(key)).map((key) => {
         const d = accordionContent(key, t)
         return (
           <Accordion key={key} icon={d.icon} title={d.title}>
@@ -861,7 +865,7 @@ export default function ProductDetailPage() {
             )}
 
             {/* Trust-блок під галереєю — акордеони (доставка / оплата / гарантія / виробництво) */}
-            <TrustAccordions t={t} />
+            <TrustAccordions t={t} skip={isOwnBrand(product) ? [] : ['production']} />
           </div>
 
           {/* RIGHT: buy panel */}
@@ -872,11 +876,14 @@ export default function ProductDetailPage() {
               {category && (
                 <span className="eyebrow">{category.name[lang] || category.name.uk}</span>
               )}
-              <span style={{
-                fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase',
-                color: 'var(--accent-dim)', background: 'rgba(255,85,0,.08)', borderLeft: '2px solid var(--accent)',
-                padding: '4px 8px', whiteSpace: 'nowrap',
-              }}>{t('product.ownProduction')}</span>
+              {/* Бейдж лише на власних товарах: на картці чужого бренду (specs.Бренд) це була б неправда */}
+              {isOwnBrand(product) && (
+                <span style={{
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase',
+                  color: 'var(--accent-dim)', background: 'rgba(255,85,0,.08)', borderLeft: '2px solid var(--accent)',
+                  padding: '4px 8px', whiteSpace: 'nowrap',
+                }}>{t('product.ownProduction')}</span>
+              )}
             </div>
 
             {/* Product name */}

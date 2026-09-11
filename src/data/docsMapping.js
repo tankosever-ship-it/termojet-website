@@ -39,6 +39,7 @@ export const DOCS_BY_NAME = [
   { match: /TRH10/i,                    ids: [116] },
   { match: /TJ03C/i,                    ids: [117] },
   { match: /TJ03RF/i,                   ids: [118] },
+  { match: /SPY-16X2/i, ids: [], exclusive: true }, // вітринна труба SPY: категорійні інструкції на колектори до неї не стосуються
   { match: /зональн.{0,12}клапан|ABF-ZV|ABF01-3/i, ids: [186], exclusive: true }, // зональні клапани ABF-ZV3 — двомовна інструкція
   { match: /413/,                       ids: [120, 121] }, // контролер/привід AQUA 413 (НГ-48A/52A + TJ413)
   { match: /84142380A/i,                ids: [120, 121] }, // НГ-38-А постачається з приводом AQUA 413
