@@ -455,7 +455,7 @@ export const FILES = [
 
   // ── Нові документи (локальні, public/files) ──
   { id: 101, name: 'Брошура — Насоси APM-F', category: 'Брошури', format: 'PDF', url: '/files/apm-f-broshura.pdf', lang: 'uk', year: 2025, desc: 'Лінійка фланцевих насосів APM-F — характеристики та підбір' },
-  { id: 102, name: 'Інструкція — Каналізаційна станція WT 400 (Sololift)', category: 'Інструкції', format: 'PDF', url: '/files/wt400-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Встановлення та обслуговування каналізаційних установок WT 400' },
+  { id: 102, name: 'Інструкція — Каналізаційні установки WT 400-A · B · C', category: 'Інструкції', format: 'PDF', url: '/files/wt400-instrukcia.pdf', lang: 'uk', year: 2026, desc: 'Монтаж, схеми обв\'язки та обслуговування каналізаційних установок з подрібнювачем WT 400-A, WT 400-B і WT 400-C. 24 сторінки' },
   { id: 103, name: 'Інструкція — Насоси SPE12', category: 'Інструкції', format: 'PDF', url: '/files/spe12-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Встановлення рециркуляційних насосів SPE12-1.4 / 1.4S' },
   { id: 104, name: 'Технічний лист — Насоси SPE12', category: 'Інструкції', format: 'PDF', url: '/files/spe12-tech.pdf', lang: 'uk', year: 2025, desc: 'Технічні характеристики насосів SPE12' },
   { id: 110, name: 'Інструкція — Програматор HT-102', category: 'Інструкції', format: 'PDF', url: '/files/ht102-instrukcia.pdf', lang: 'uk', year: 2025, desc: 'Дротовий програматор HT-102' },
