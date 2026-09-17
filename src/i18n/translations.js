@@ -1,4 +1,12 @@
-export const LANGS = [
+// HIDDEN_LANGS — мови, ЗАХОВАНІ з сайту (рішення власниці 17.09.2026: польська).
+// Переклади T.pl нижче НЕ чіпаємо — вони чекають на повернення мови.
+// ПОВЕРНУТИ МОВУ: прибрати код звідси і з HIDDEN_LANGS у backend/server.js,
+// тоді перегенерувати sitemap (node scripts/gen-sitemap.cjs на прод-БД).
+export const HIDDEN_LANGS = ['pl']
+
+// LANGS — усі мови, для яких є переклади; PUBLIC_LANGS — ті, що показуємо людям.
+// UI (перемикач, маршрути) бере саме PUBLIC_LANGS.
+export const ALL_LANGS = [
   {
     "code": "uk",
     "label": "UA",
@@ -30,6 +38,10 @@ export const LANGS = [
     "flag": "🇷🇴"
   }
 ]
+
+export const LANGS = ALL_LANGS
+export const PUBLIC_LANGS = ALL_LANGS.filter(l => !HIDDEN_LANGS.includes(l.code))
+export const PUBLIC_LANG_CODES = PUBLIC_LANGS.map(l => l.code)
 
 export const T = {
   "uk": {

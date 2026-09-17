@@ -4,7 +4,7 @@ import { ShoppingCart, Search, Menu, X, ChevronDown, Phone, Mail, ArrowRight, Ar
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
 import { imgUrl } from '../../utils/imgUrl'
-import { LANGS } from '../../i18n/translations'
+import { PUBLIC_LANGS } from '../../i18n/translations'
 import { CATEGORIES } from '../../data/categories'
 import { assetPath } from '../../utils/assetPath'
 import CategoryIcon from '../CategoryIcon'
@@ -390,13 +390,13 @@ export default function Navbar() {
                 <button onClick={() => setLangOpen(v => !v)}
                   className="flex items-center gap-1 px-2.5 py-1.5 transition-all"
                   style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 500, letterSpacing: '0.01em', color: linkCol, border: solid ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: '0.5rem', transition: 'all 0.3s' }}>
-                  {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
+                  {PUBLIC_LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {langOpen && (
                   <div className="absolute top-full right-0 mt-0 w-16 z-50 overflow-hidden"
                     style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
-                    {LANGS.map(l => (
+                    {PUBLIC_LANGS.map(l => (
                       <button key={l.code} onClick={() => handleLangSwitch(l.code)}
                         className="w-full flex items-center gap-1.5 px-2.5 py-2 transition-colors"
                         style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', color: lang === l.code ? 'var(--accent)' : 'rgba(255,255,255,0.6)', background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
@@ -414,14 +414,14 @@ export default function Navbar() {
                 <button onClick={() => setLangOpen(v => !v)}
                   className="flex items-center gap-1 px-2 py-1.5 transition-all"
                   style={{ fontFamily: "'Rubik', sans-serif", fontSize: '13px', fontWeight: 600, color: linkCol, border: solid ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)', borderRadius: '0.5rem' }}>
-                  <span style={{ fontSize: '14px', lineHeight: 1 }}>{LANGS.find(l => l.code === lang)?.flag}</span>
-                  {LANGS.find(l => l.code === lang)?.label ?? 'UA'}
+                  <span style={{ fontSize: '14px', lineHeight: 1 }}>{PUBLIC_LANGS.find(l => l.code === lang)?.flag}</span>
+                  {PUBLIC_LANGS.find(l => l.code === lang)?.label ?? 'UA'}
                   <ChevronDown size={10} style={{ transition: 'transform 0.15s', transform: langOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
                 {langOpen && (
                   <div className="absolute top-full right-0 mt-1 w-20 z-[60] overflow-hidden"
                     style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.08)', borderTop: '2px solid var(--accent)', borderRadius: '0.5rem', boxShadow: '0 16px 32px rgba(0,0,0,0.4)' }}>
-                    {LANGS.map(l => (
+                    {PUBLIC_LANGS.map(l => (
                       <button key={l.code} onClick={() => handleLangSwitch(l.code)}
                         className="w-full flex items-center gap-1.5 px-2.5 py-2.5 transition-colors"
                         style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', color: lang === l.code ? 'var(--accent)' : 'rgba(255,255,255,0.6)', background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
@@ -545,7 +545,7 @@ export default function Navbar() {
               </div>
 
               <div className="flex gap-1 pt-2 flex-wrap">
-                {LANGS.map(l => (
+                {PUBLIC_LANGS.map(l => (
                   <button key={l.code} onClick={() => handleLangSwitch(l.code)}
                     className="px-3 py-1.5 transition-colors"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', borderRadius: '0.5rem', background: lang === l.code ? 'var(--accent)' : 'transparent', color: lang === l.code ? 'white' : '#555', border: lang === l.code ? 'none' : '1px solid var(--border)' }}>

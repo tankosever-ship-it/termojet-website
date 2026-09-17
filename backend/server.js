@@ -8,6 +8,21 @@ const compression = require('compression')
 const app = express()
 const PORT = process.env.PORT || 3000
 
+// ── Мови сайту ────────────────────────────────────────────────────────────────
+// HIDDEN_LANGS — мови, ЗАХОВАНІ з публічного боку (рішення власниці 17.09.2026:
+// польська). Переклади нікуди не діваються: i18n товарів у БД і T.pl у фронті
+// лишаються недоторканими. Заховано саме показ: немає в перемикачі мов, у
+// hreflang, у sitemap і в merchant-фідах, а /pl/... віддає 301 на українську.
+//
+// ПОВЕРНУТИ МОВУ = прибрати її код звідси та з HIDDEN_LANGS у
+// src/i18n/translations.js, тоді перегенерувати sitemap:
+//   node scripts/gen-sitemap.cjs   (тільки на актуальній прод-БД!)
+const HIDDEN_LANGS = ['pl']
+const ALL_LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
+const LANGS = ALL_LANGS.filter(lg => !HIDDEN_LANGS.includes(lg))
+// Мови з префіксом у URL (усі, крім української) — джерело для SSR-роутів і catch-all.
+const INTL_LANGS = LANGS.filter(lg => lg !== 'uk')
+
 // За nginx reverse-proxy у Docker: nginx (127.0.0.1) → published-порт контейнера,
 // тож усередині контейнера peer = docker-gateway (172.x.x.x), НЕ loopback. Тому
 // довіряємо loopback + приватним діапазонам (unique-local) — Express пройде ланцюг
@@ -206,14 +221,25 @@ app.use('/api/upload', require('./routes/upload'))
 // Binotel API PUSH: вхідний дзвінок → лід у CRM + Telegram (backend/routes/binotel.js)
 app.use('/api/webhooks/binotel', binotelLimiter, require('./routes/binotel'))
 
+// Заховані мови: /pl/catalog/... → 301 на ту саму сторінку українською.
+// Стоїть ДО мовних SSR-роутів і catch-all, інакше /pl встиг би віддати 404.
+// Зникне само собою, щойно мову приберуть із HIDDEN_LANGS.
+if (HIDDEN_LANGS.length) {
+  app.get(new RegExp(`^/(${HIDDEN_LANGS.join('|')})(/.*)?$`), (req, res) => {
+    const rest = req.params[1] || ''
+    const qs = req.originalUrl.includes('?') ? req.originalUrl.slice(req.originalUrl.indexOf('?')) : ''
+    res.redirect(301, (rest || '/') + qs)
+  })
+}
+
 // Google Shopping / Merchant Center фіди (динамічні, з БД) — ДО SPA-статики
 const { feed: merchantFeed } = require('./routes/merchant')
-app.get('/google-merchant.xml', merchantFeed('uk'))
-app.get('/google-merchant-en.xml', merchantFeed('en'))
-app.get('/google-merchant-pl.xml', merchantFeed('pl'))
-app.get('/google-merchant-de.xml', merchantFeed('de'))
-app.get('/google-merchant-fr.xml', merchantFeed('fr'))
-app.get('/google-merchant-ro.xml', merchantFeed('ro'))
+// Фіди — лише для публічних мов: заховані (HIDDEN_LANGS) віддають 404, а щойно
+// мову повернуть — її фід оживає сам, без правок тут.
+// uk → /google-merchant.xml, решта → /google-merchant-<lang>.xml.
+for (const lg of LANGS) {
+  app.get(lg === 'uk' ? '/google-merchant.xml' : `/google-merchant-${lg}.xml`, merchantFeed(lg))
+}
 
 // Завантаження прайсу. Саме посилання для розсилки — це /prays (сторінка з og-картинкою,
 // бо месенджери будують прев'ю з HTML, а .xlsx ніякого HTML не має). Звідси кнопка веде
@@ -286,7 +312,6 @@ const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, 
 // LANG_PREFIX → префікс шляху; langBase → базовий URL для мови.
 // Локалізований контент товарів живе в i18n (усі 331 товари мають en/pl/fr/de);
 // категорії/статика/блог мають uk+en тексти, для pl/fr/de fallback на en-мітки.
-const LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
 const LANG_PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de', ro: '/ro' }
 const langBase = lang => SITE + (LANG_PREFIX[lang] || '')
 
@@ -925,7 +950,7 @@ function handleProduct(lang) {
 }
 
 app.get('/catalog/:cat/:slug', handleProduct('uk'))
-for (const lg of ['en', 'pl', 'fr', 'de', 'ro']) app.get(`/${lg}/catalog/:cat/:slug`, handleProduct(lg))
+for (const lg of INTL_LANGS) app.get(`/${lg}/catalog/:cat/:slug`, handleProduct(lg))
 
 // ── Блог: UA + EN ─────────────────────────────────────────────────────────────
 function handleBlog(lang) {
@@ -969,7 +994,7 @@ function handleBlog(lang) {
 }
 
 app.get('/blog/:slug', handleBlog('uk'))
-for (const lg of ['en', 'pl', 'fr', 'de', 'ro']) app.get(`/${lg}/blog/:slug`, handleBlog(lg))
+for (const lg of INTL_LANGS) app.get(`/${lg}/blog/:slug`, handleBlog(lg))
 
 // ── Категорії: UA + EN/PL/FR/DE ───────────────────────────────────────────────
 // Назви категорій мають uk+en; для pl/fr/de — англійський fallback (en-мітки).
@@ -1026,7 +1051,7 @@ function handleCategory(lang) {
 }
 
 app.get('/catalog/:cat', handleCategory('uk'))
-for (const lg of ['en', 'pl', 'fr', 'de', 'ro']) app.get(`/${lg}/catalog/:cat`, handleCategory(lg))
+for (const lg of INTL_LANGS) app.get(`/${lg}/catalog/:cat`, handleCategory(lg))
 
 // Білий список реальних SPA-роутів (мовний префікс /en /pl /fr /de вже стрипнуто).
 // Усе, що НЕ тут і не валідний товар/категорія/стаття — віддаємо HTTP 404, щоб
@@ -1060,10 +1085,10 @@ function isKnownRoute(p) {
 
 // ── Catch-all: статичні сторінки + SPA fallback ───────────────────────────────
 app.get('*', (req, res) => {
-  // Нормалізуємо шлях + визначаємо мову: /en|pl|fr|de|ro/about → /about + lang.
+  // Нормалізуємо шлях + визначаємо мову: /en|fr|de|ro/about → /about + lang (див. INTL_LANGS).
   const rawPath = req.path.replace(/\/+$/, '') || '/'
   let lookupPath = rawPath, lang = 'uk'
-  const langMatch = rawPath.match(/^\/(en|pl|fr|de|ro)(\/.*|)$/)
+  const langMatch = rawPath.match(new RegExp(`^/(${INTL_LANGS.join('|')})(/.*|)$`))
   if (langMatch) { lang = langMatch[1]; lookupPath = langMatch[2] || '/' }
   const intl = lang !== 'uk'
 

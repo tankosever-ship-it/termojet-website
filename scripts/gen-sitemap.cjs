@@ -1,6 +1,7 @@
 /*
  * gen-sitemap.cjs — генерує public/sitemap.xml з товарів + категорій + статичних сторінок.
- * Включає ВСІ 6 мовних версій (uk/en/pl/fr/de/ro) з hreflang-анотаціями
+ * Включає всі ПУБЛІЧНІ мовні версії (uk/en/fr/de/ro; pl заховано — HIDDEN_LANGS)
+ * з hreflang-анотаціями
  * і <lastmod> з дат товарів/постів.
  * Запуск: node scripts/gen-sitemap.cjs  (також виконується автоматично перед build:prod)
  *
@@ -15,7 +16,12 @@ const dbPath = path.join(__dirname, '..', 'backend', 'data', 'termojet.db')
 const outPath = path.join(__dirname, '..', 'public', 'sitemap.xml')
 
 // Мови сайту. Префікси — ті самі, що в backend/server.js (LANG_PREFIX).
-const LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
+// HIDDEN_LANGS тримаємо в синхроні з backend/server.js і src/i18n/translations.js:
+// заховані мови не потрапляють ні в <loc>, ні в hreflang-анотації, інакше Google
+// і далі індексував би сторінки, яких на сайті вже нема в перемикачі.
+const HIDDEN_LANGS = ['pl']
+const ALL_LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
+const LANGS = ALL_LANGS.filter(lg => !HIDDEN_LANGS.includes(lg))
 const PREFIX = { uk: '', en: '/en', pl: '/pl', fr: '/fr', de: '/de', ro: '/ro' }
 // x-default → українська (основний ринок), як у server.js → buildAlternates().
 const XDEFAULT = 'uk'

@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import { AppProvider } from './context/AppContext'
 import { captureUTM } from './utils/utm'
 import { useLangFromUrl } from './hooks/useLangFromUrl'
+import { PUBLIC_LANG_CODES } from './i18n/translations'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import FloatingActions from './components/FloatingActions'
@@ -199,8 +200,10 @@ function AppRoutes() {
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
-      {/* Публічні сторінки з мовним префіксом (/en, /pl, /fr, /de) — з одного шаблону */}
-      {['en', 'pl', 'fr', 'de', 'ro'].map(langRoutes)}
+      {/* Публічні сторінки з мовним префіксом (/en, /fr, /de, /ro) — з одного шаблону.
+          Список береться з PUBLIC_LANG_CODES: заховані мови (HIDDEN_LANGS) маршрутів не мають,
+          їх /pl/... ловить 301 на бекенді. */}
+      {PUBLIC_LANG_CODES.filter(c => c !== 'uk').map(langRoutes)}
     </Routes>
     </Suspense>
   )

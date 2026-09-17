@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
+import { PUBLIC_LANG_CODES } from '../i18n/translations'
 import { mergeHomeContent } from '../data/homeContent'
 import { mergeAboutContent } from '../data/aboutContent'
 import { fetchEurRate } from '../utils/currency'
@@ -38,7 +39,13 @@ function saveAdminToken(token) {
 }
 
 export function AppProvider({ children }) {
-  const [lang, setLang] = useState(() => localStorage.getItem('tj2_lang') || 'uk')
+  // Заховану мову (HIDDEN_LANGS) у localStorage могли лишити з часів, коли вона була
+  // публічною, — відкочуємо таких відвідувачів на українську, інакше вони й далі
+  // бачили б інтерфейс мовою, якої на сайті вже немає.
+  const [lang, setLang] = useState(() => {
+    const saved = localStorage.getItem('tj2_lang') || 'uk'
+    return PUBLIC_LANG_CODES.includes(saved) ? saved : 'uk'
+  })
   const [products, setProducts] = useState([])
   // false, доки список товарів ще вантажиться (API або статичний фолбек). Потрібен,
   // щоб сторінка товару не блимала «Товар не знайдено» під час першого завантаження.

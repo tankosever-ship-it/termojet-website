@@ -6,7 +6,11 @@
  * localizedPath('/', 'en')                → '/en'
  */
 
-const SUPPORTED_LANGS = ['en', 'pl', 'de', 'fr', 'ro']
+// Префікси, що вважаються мовними. Заховані мови (HIDDEN_LANGS) сюди не потрапляють,
+// тож /pl/... більше не розбирається як мова — на бекенді він і так ловить 301.
+import { PUBLIC_LANG_CODES } from '../i18n/translations'
+
+const SUPPORTED_LANGS = PUBLIC_LANG_CODES.filter(c => c !== 'uk')
 
 export function localizedPath(path, lang) {
   // Зовнішні та спец-URL повертаємо без змін
