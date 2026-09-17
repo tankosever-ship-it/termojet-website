@@ -20,10 +20,12 @@ export const FILES = [
     name: 'Прайс-лист TERMOJET',
     category: 'Каталоги та прайси',
     format: 'XLSX',
-    // /prays — маршрут у backend/server.js: віддає найсвіжіший price-termojet-*.xlsx
+    // /price — маршрут у backend/server.js: віддає найсвіжіший price-termojet-*.xlsx
     // з uploads/files і вимикає кеш. Оновити прайс = покласти туди новий файл;
     // ні цей рядок, ні перезбірку сайту чіпати не треба.
-    url: `/prays`,
+    // НЕ /prays: там HTML-сторінка з og-карткою для розсилки, і кнопка «Завантажити»
+    // зберігала б її замість Excel.
+    url: `/price`,
     lang: 'uk',
     year: 2026,
     desc: 'Ціни, дійсні з 08.09.2026 — усе обладнання у форматі Excel',
