@@ -4,7 +4,7 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
-import { imgUrl } from '../utils/imgUrl'
+import { sizedImg } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import SEO from '../components/SEO'
@@ -121,7 +121,7 @@ export default function CartPage() {
             {cart.map(item => (
               <div key={item.id} className="card p-4 flex gap-4 items-center">
                 {item.image ? (
-                  <img src={imgUrl(item.image)} alt={item.name} className="w-20 h-20 object-contain bg-gray-50 rounded-lg flex-shrink-0" />
+                  <img src={sizedImg(item.image, 160)} alt={item.name} className="w-20 h-20 object-contain bg-gray-50 rounded-lg flex-shrink-0" />
                 ) : (
                   <div className="w-20 h-20 bg-gray-50 rounded-lg flex items-center justify-center text-3xl flex-shrink-0">⚙️</div>
                 )}

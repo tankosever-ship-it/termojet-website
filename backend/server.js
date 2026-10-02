@@ -160,6 +160,9 @@ app.get(/^\/(?!assets\/).+\.(png|jpe?g)$/i, (req, res, next) => {
 // static uploads (3D-моделі, документи) — кеш на 7 днів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }))
 
+// Зменшені копії фото товарів (/img/<ширина>/<шлях>) — див. routes/img.js
+app.use('/img', require('./routes/img'))
+
 // FIX 4 — rate limiters (req.ip = real client IP via trust proxy 'loopback' set above)
 
 // Login: max 10 attempts per 15 min

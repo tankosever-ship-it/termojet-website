@@ -215,6 +215,21 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
 Локальна перевірка: `VITE_BASE_URL=/ npx vite build && VITE_BASE_URL=/ npx vite build --ssr src/entry-server.jsx`,
 потім `JWT_SECRET=<32+ симв> PORT=3311 node backend/server.js`.
 
+## Зменшені копії фото (`/img`) — 2026-10
+
+`/img/<ширина>/<шлях>` — зменшена копія фото (WebP, якщо браузер приймає), напр.
+`/img/640/wp-content/uploads/2023/08/dsc_0572-scaled.jpg`. Фронт віддає браузеру `srcset`
+(`src/utils/imgUrl.js` → `srcSet` / `sizedImg`), браузер бере найменшу достатню.
+
+- Генерує `backend/routes/img.js` (sharp) при першому запиті, далі — з кешу на диску:
+  `data/img-cache/` (volume, переживає перезбірку). Очистити = видалити теку, копії перегенеруються.
+- Ширини — лише 160/320/480/640/960/1280 (мають збігатися в `img.js` і `imgUrl.js`).
+- Джерела: `wp-content/uploads/*` (по HTTP з `WP_ORIGIN`, за замовчуванням сам домен),
+  `/images/*` з `dist/`, `/uploads/*` з адмінки. Решта (чужі домени) — як є.
+- Будь-яка помилка → 302 на оригінал, фото не зникає. Невдалі джерела 10 хв не перезапитуються.
+- Замінили фото в `wp-content` під тим самим іменем → видалити `data/img-cache/` (для
+  `/images` і `/uploads` нова копія з'явиться сама — ключ кешу містить mtime файлу).
+
 ## SEO: серверні метадані + мультимова (EN) — налаштовано 2026-07-09
 
 Сайт — CSR React SPA, тож краулер без JS бачив би оболонку `index.html`. Тому `backend/server.js`

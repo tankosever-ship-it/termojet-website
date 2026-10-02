@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
-import { imgUrl } from '../utils/imgUrl'
+import { imgUrl, sizedImg, srcSet } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
 
 import { getDocsForProduct } from '../data/docsMapping'
@@ -354,7 +354,7 @@ function ImageGallery({ images, name, model3d, t }) {
           // Мініатюри — lazy: у розмітці вони стоять ПЕРЕД головним фото, тож без цього
           // повнорозмірні файли (до 150 кБ кожен) вантажились першими, а на мобільному —
           // навіть у прихованій стрічці; головне фото (LCP) чекало за ними.
-          <img src={slide.src} alt={`фото ${idx + 1}`} loading="lazy" decoding="async"
+          <img src={sizedImg(slide.src, 160)} alt={`фото ${idx + 1}`} loading="lazy" decoding="async"
             style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
         )}
       </button>
@@ -479,6 +479,9 @@ function ImageGallery({ images, name, model3d, t }) {
               // ставить <link rel="preload"> за ПЕРШИМ <img> з цим src — а перший у розмітці
               // саме цей (десктопний), і без fetchPriority preload ішов з пріоритетом Low.
               fetchPriority={active === 0 ? 'high' : undefined}
+              // Зменшені копії (backend/routes/img.js). sizes — однаковий в обох галереях,
+              // щоб браузер обрав ту саму копію і не качав фото двічі.
+              srcSet={srcSet(main)} sizes="(min-width: 768px) 600px, 100vw"
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'contain', padding: 48, cursor: 'zoom-in',
@@ -530,7 +533,8 @@ function ImageGallery({ images, name, model3d, t }) {
             <img src={main} alt={name} className="w-full h-full object-contain p-6 cursor-zoom-in" onClick={() => setLightbox(true)} draggable={false}
               // Головне фото — LCP-елемент сторінки товару. Без цього браузер давав йому
               // пріоритет Low, і воно чекало за JS-бандлами й шрифтами (~3 с на мобільному).
-              fetchPriority={active === 0 ? 'high' : undefined} />
+              fetchPriority={active === 0 ? 'high' : undefined}
+              srcSet={srcSet(main)} sizes="(min-width: 768px) 600px, 100vw" />
           ) : (
             <div className="text-gray-200 text-8xl">⚙️</div>
           )}
@@ -1184,7 +1188,7 @@ export default function ProductDetailPage() {
                         backgroundSize: '14px 14px, 14px 14px, auto',
                       }}>
                         {p.image ? (
-                          <img src={imgUrl(p.image)} alt={pName} loading="lazy" decoding="async" style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} />
+                          <img src={sizedImg(p.image, 480)} alt={pName} loading="lazy" decoding="async" style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} />
                         ) : (
                           <span style={{ fontSize: 40, color: '#ddd' }}>⚙️</span>
                         )}

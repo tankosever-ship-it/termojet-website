@@ -4,7 +4,7 @@ import LLink from '../components/LLink'
 import { motion } from '../utils/motion'
 import { Search, ChevronRight, ChevronLeft, X, ShoppingCart, LayoutGrid, List, ArrowRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
-import { imgUrl } from '../utils/imgUrl'
+import { imgUrl, sizedImg, srcSet } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
@@ -1425,6 +1425,7 @@ export default function CatalogPage() {
                       <LLink to={href} className="block w-full h-full">
                         {product.image ? (
                           <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
+                            srcSet={srcSet(product.image, 960)} sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
                             className="pdp-card-photo group-hover:scale-[1.06] transition-transform duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>
@@ -1524,7 +1525,7 @@ export default function CatalogPage() {
                     {/* Image */}
                     <LLink to={href} className="flex-shrink-0 bg-[var(--bg)] flex items-center justify-center overflow-hidden w-[104px] sm:w-[140px] min-h-[120px]">
                       {product.image ? (
-                        <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
+                        <img src={sizedImg(product.image, 320)} alt={name} loading="lazy" decoding="async"
                           className="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" />
                       ) : (
                         <div className="text-gray-200 text-5xl">⚙️</div>
