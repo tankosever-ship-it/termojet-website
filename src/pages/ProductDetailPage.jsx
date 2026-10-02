@@ -351,7 +351,11 @@ function ImageGallery({ images, name, model3d, t }) {
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, fontWeight: 700, letterSpacing: '.1em', color: '#9CC6E0' }}>3D</span>
           </>
         ) : (
-          <img src={slide.src} alt={`фото ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+          // Мініатюри — lazy: у розмітці вони стоять ПЕРЕД головним фото, тож без цього
+          // повнорозмірні файли (до 150 кБ кожен) вантажились першими, а на мобільному —
+          // навіть у прихованій стрічці; головне фото (LCP) чекало за ними.
+          <img src={slide.src} alt={`фото ${idx + 1}`} loading="lazy" decoding="async"
+            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
         )}
       </button>
     )
@@ -471,6 +475,10 @@ function ImageGallery({ images, name, model3d, t }) {
               src={main} alt={name}
               onClick={() => setLightbox(true)}
               draggable={false}
+              // Пріоритет і тут, а не лише в мобільній картці нижче: React 19 при SSR сам
+              // ставить <link rel="preload"> за ПЕРШИМ <img> з цим src — а перший у розмітці
+              // саме цей (десктопний), і без fetchPriority preload ішов з пріоритетом Low.
+              fetchPriority={active === 0 ? 'high' : undefined}
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'contain', padding: 48, cursor: 'zoom-in',
@@ -519,7 +527,10 @@ function ImageGallery({ images, name, model3d, t }) {
               </div>
             )
           ) : main ? (
-            <img src={main} alt={name} className="w-full h-full object-contain p-6 cursor-zoom-in" onClick={() => setLightbox(true)} draggable={false} />
+            <img src={main} alt={name} className="w-full h-full object-contain p-6 cursor-zoom-in" onClick={() => setLightbox(true)} draggable={false}
+              // Головне фото — LCP-елемент сторінки товару. Без цього браузер давав йому
+              // пріоритет Low, і воно чекало за JS-бандлами й шрифтами (~3 с на мобільному).
+              fetchPriority={active === 0 ? 'high' : undefined} />
           ) : (
             <div className="text-gray-200 text-8xl">⚙️</div>
           )}

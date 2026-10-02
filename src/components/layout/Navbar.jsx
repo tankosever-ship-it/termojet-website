@@ -298,7 +298,10 @@ export default function Navbar() {
 
             {/* Logo */}
             <LLink to="/" className="flex-shrink-0">
-              <img src={assetPath(lang === 'uk' ? '/logo-orange.png' : '/logo-en-orange.png')} alt="Termojet" className="h-10 w-auto" />
+              {/* Лого під розмір шапки (96 px заввишки, ~5 кБ): оригінали 1569×546 важили 54 / 306 кБ
+                  і на мобільному забирали канал у головного фото сторінки (LCP). */}
+              <img src={assetPath(lang === 'uk' ? '/logo-orange-nav.png' : '/logo-en-orange-nav.png')} alt="Termojet"
+                width={276} height={96} className="h-10 w-auto" />
             </LLink>
 
             {/* Desktop nav */}
