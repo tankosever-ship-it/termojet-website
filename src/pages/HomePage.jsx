@@ -781,6 +781,9 @@ export default function HomePage() {
                   />
 
                   <img loading="lazy" decoding="async" src={assetPath('/app-promo-nobg.png')} alt="Termojet App"
+                    // width/height — власні пропорції файлу: місце резервується ще до
+                    // завантаження lazy-картинки, тож секція не «виростає» під час скролу
+                    width={1071} height={1080}
                     className="w-full block drop-shadow-2xl" style={{ filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }} />
                 </motion.div>
               </div>
