@@ -586,8 +586,11 @@ const CATEGORY_META = {
     nameEn: 'Pumps', descEn: 'Circulation pumps for heating systems, underfloor heating and boiler units',
     nameRo: 'Pompe', descRo: 'Pompe de circulație pentru sisteme de încălzire, pardoseală caldă și module de centrală termică',
   },
+  // name = H1 і основа <title>; metaDesc — готовий meta description (uk), коли SEO-команда
+  // дала його дослівно (ТЗ 02.10.2026), замість формули «desc. Termojet — …».
   'klapany': {
-    name: '3-х/4-х ходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
+    name: 'Триходові, чотирьохходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
+    metaDesc: 'Триходові, чотирьохходові та термостатичні клапани для систем опалення. Власне виробництво Termojet з 2002 року, доставка по Україні',
     nameEn: '3/4-Way & Thermostatic Valves', descEn: '3- and 4-way rotary and thermostatic valves with electric actuators for heating',
     nameRo: 'Vane cu 3/4 căi și termostatice', descRo: 'Vane rotative cu 3 și 4 căi și vane termostatice cu servomotoare electrice pentru încălzire',
   },
@@ -610,6 +613,12 @@ const CATEGORY_META = {
     name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та монтажні шафи для систем теплої підлоги',
     nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating systems',
     nameRo: 'Sistem de încălzire prin pardoseală', descRo: 'Colectoare, module de amestecare și cutii de montaj pentru sistemele de încălzire prin pardoseală',
+  },
+  'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': {
+    name: 'Змішувальний вузол для теплої підлоги', desc: 'Насосно-змішувальні вузли Termojet TJ-MU для колектора теплої підлоги: знижують температуру теплоносія від котла чи теплового насоса до 20–60 °C. Циркуляційний насос у комплект не входить',
+    metaDesc: 'Змішувальний вузол для теплої підлоги Termojet TJ-MU: термостатичне регулювання 20–60 °C для колектора. Власне виробництво з 2002 року, доставка по Україні',
+    nameEn: 'Underfloor Heating Mixing Unit', descEn: 'Termojet TJ-MU pump mixing units for underfloor heating manifolds: they lower the flow temperature from a boiler or heat pump to 20–60 °C. The circulation pump is not included',
+    nameRo: 'Grup de amestec pentru încălzire prin pardoseală', descRo: 'Grupuri de pompare și amestec Termojet TJ-MU pentru colectorul de încălzire prin pardoseală: coboară temperatura agentului de la cazan sau pompa de căldură la 20–60 °C. Pompa de circulație nu este inclusă',
   },
   'avtomatyka': {
     name: 'Автоматика котельного обладнання', desc: 'Контролери, датчики та системи управління котлами й котельним обладнанням',
@@ -946,13 +955,34 @@ function sendPage(req, res, html) {
 
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
+// Хибні slug-и, на які колись посилались описи товарів (переклади з помилкою
+// транслітерації) — 301 на справжні, щоб не губити вагу, якщо їх уже проіндексовано.
+const PRODUCT_SLUG_ALIASES = {
+  'gidrostrilka-gs-26-v-izolyatsiyi': 'gidrostrilka-gs-26-v-izolyacziyi',
+  'k22v-125150-kolektor-v-teploizolyatsiyi-2-vhoru-1-bokovyy-1': 'k22v-125150-kolektor-v-teploizolyatsiyi-2-1-vhoru-staryy-art-sk-211-125-mini',
+  'khs22vn-125-kolektor-z-gidrostrilkoyu-v-teploizolyatsiyi-2-vgoru-vniz-1-bokoviy-1': 'khs22vn-125150-kolektor-v-teploizolyatsiyi-1-vhoru-vnyz-1-bokovyy-staryy-art-sk-',
+  // моделі K22VN.125(150) Mini в каталозі немає — найближча наявна K22VN.125(200)
+  'k22vn-125-kolektor-v-teploizolyatsiyi-2-vgoru-vniz-1-bokovyy-1': 'kolektor-k22vn-125-200',
+  'khs31vn-125-kolektor-z-gidrostrilkoyu-v-teploizolyatsiyi-3-vgoru-1-bokoviy-1': 'khs31vn-125-kolektor-v-teploizolyatsiyi-2-vhoru-1-vnyz-staryy-art-sk-393-125',
+}
+
 function handleProduct(lang) {
   return async (req, res, next) => {
     try {
-      const row = _db.prepare(
+      const findRow = slug => _db.prepare(
         'SELECT name, image, images, sku, price, currency, in_stock, category_slug, specs, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
-      ).get(req.params.slug)
+      ).get(slug)
+      const alias = PRODUCT_SLUG_ALIASES[req.params.slug]
+      const row = findRow(alias || req.params.slug)
       if (!row) return next()
+      // Канонічна адреса товару — /catalog/<його категорія>/<slug>. Інша категорія
+      // в URL (товар перенесли, напр. TJ-MU у «Змішувальний вузол для теплої підлоги»
+      // 02.10.2026) або аліас slug-а → 301, а не дубль сторінки з HTTP 200.
+      if (alias || req.params.cat !== row.category_slug) {
+        const qs = req.originalUrl.includes('?') ? req.originalUrl.slice(req.originalUrl.indexOf('?')) : ''
+        const to = `${LANG_PREFIX[lang] || ''}/catalog/${encodeURIComponent(row.category_slug)}/${encodeURIComponent(alias || req.params.slug)}${qs}`
+        return res.redirect(301, to)
+      }
       const loc = pickLang(row, lang)
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
       const title = loc.seo_title || `${loc.name} | Termojet`
@@ -1061,7 +1091,7 @@ function handleCategory(lang) {
       } else {
         let title = `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
-        const desc = `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`.slice(0, 200)
+        const desc = (cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
         const jsonLd = [buildBreadcrumb([
           { name: 'Головна', url: base },
           { name: 'Каталог', url: `${base}/catalog` },

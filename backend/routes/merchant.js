@@ -40,11 +40,12 @@ const CAT = {
   'termojet-box': { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX', ro: 'Sisteme modulare TERMOJET BOX' },
   'termojet-mega': { uk: 'Серія Termojet Mega', en: 'Termojet Mega Series', pl: 'Seria Termojet Mega', fr: 'Série Termojet Mega', de: 'Serie Termojet Mega', ro: 'Seria Termojet Mega' },
   'nasosy': { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen', ro: 'Pompe' },
-  'klapany': { uk: '3-х/4-х ходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și termostatice' },
+  'klapany': { uk: 'Триходові, чотирьохходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și termostatice' },
   'balansuval-klapany': { uk: 'Статичний балансувальний клапан', en: 'Static Balancing Valve', pl: 'Statyczny zawór równoważący', fr: "Vanne d'équilibrage statique", de: 'Statisches Regulierventil', ro: 'Vană statică de echilibrare' },
   'separatory': { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren', ro: 'Separatoare' },
   'zonalne-keruvannya': { uk: 'Термостати та зональне керування', en: 'Thermostats & Zone Control', pl: 'Termostaty i sterowanie strefowe', fr: 'Thermostats et contrôle de zone', de: 'Thermostate und Zonenregelung', ro: 'Termostate și control zonal' },
   'kolektory-pidloha': { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem', ro: 'Sistem de încălzire prin pardoseală' },
+  'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': { uk: 'Змішувальний вузол для теплої підлоги', en: 'Underfloor Heating Mixing Unit', pl: 'Węzeł mieszający do ogrzewania podłogowego', fr: 'Groupe de mélange pour plancher chauffant', de: 'Mischeinheit für Fußbodenheizung', ro: 'Grup de amestec pentru încălzire prin pardoseală' },
   'avtomatyka': { uk: 'Автоматика котельного обладнання', en: 'Boiler Equipment Automation', pl: 'Automatyka urządzeń kotłowych', fr: 'Automatisation des équipements de chaudière', de: 'Kesselautomatik', ro: 'Automatizare echipamente centrală termică' },
   'dodatkove': { uk: 'Додаткове обладнання', en: 'Additional Equipment', pl: 'Wyposażenie dodatkowe', fr: 'Équipement supplémentaire', de: 'Zusatzausrüstung', ro: 'Echipamente suplimentare' },
   'peletni-kotly': { uk: 'Пелетні котли', en: 'Pellet Boilers', pl: 'Kotły na pellet', fr: 'Chaudières à granulés', de: 'Pelletkessel', ro: 'Cazane pe peleți' },
@@ -61,6 +62,7 @@ const GPC = {
   'termojet-mega': 133,
   'separatory': 133,
   'kolektory-pidloha': 133,
+  'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': 133,              // ті самі товари, що досі стояли в kolektory-pidloha
   'nasosy': 500096,                // Hardware > Hardware Pumps
   'klapany': 2466,                 // Hardware > Plumbing > ... > Plumbing Valves
   'balansuval-klapany': 2466,

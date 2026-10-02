@@ -125,10 +125,11 @@ export const CATEGORIES = [
     slug: 'klapany',
     icon: 'Sliders',
     image: `${BASE}/2024/04/photo_2024-04-23_21-17-36-800x800.jpg`,
-    name: { uk: '3-х/4-х ходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și vane termostatice' },
+    // uk-назва = H1 сторінки категорії і основа <title> (ТЗ SEO-команди, 02.10.2026)
+    name: { uk: 'Триходові, чотирьохходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și vane termostatice' },
     desc: { uk: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення', en: '3- and 4-way rotary and thermostatic valves with electric actuators for heating', pl: 'Zawory 3-drożne, 4-drożne i siłowniki elektryczne', fr: 'Vannes 3 voies, 4 voies et servomoteurs électriques', de: '3-Wege-, 4-Wege-Ventile und elektrische Stellantriebe', ro: 'Vane rotative cu 3 și 4 căi și vane termostatice cu servomotoare electrice pentru încălzire' },
     subcategories: {
-      uk: ['3-ходові клапани', '4-ходові клапани', 'Електричні сервоприводи'],
+      uk: ['Триходові клапани', 'Чотирьохходові клапани', 'Електричні сервоприводи'],
       en: ['3-way valves', '4-way valves', 'Electric actuators'],
       pl: ['Zawory 3-drożne', 'Zawory 4-drożne', 'Siłowniki elektryczne'],
       fr: ['Vannes 3 voies', 'Vannes 4 voies', 'Servomoteurs électriques'],
@@ -203,6 +204,18 @@ export const CATEGORIES = [
       de: ['Verteilerleisten', 'Mit Durchflussmessern', 'Mischeinheiten', 'Verteilergehäuse'],
       ro: ['Colectoare de distribuție', 'Cu debitmetre', 'Module de amestec', 'Dulapuri pentru colectoare'],
     },
+    color: '#0891b2',
+  },
+  {
+    // Окрема категорія під пошуковий запит «змішувальний вузол для теплої підлоги»
+    // (рішення 02.10.2026): сюди перенесено вузли TJ-MU з «Системи підлогового опалення».
+    id: 'floor-mixing-units',
+    slug: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy',
+    icon: 'Droplets',
+    image: `${BASE}/2023/08/dsc_0524-scaled.jpg`,
+    name: { uk: 'Змішувальний вузол для теплої підлоги', en: 'Underfloor Heating Mixing Unit', pl: 'Węzeł mieszający do ogrzewania podłogowego', fr: 'Groupe de mélange pour plancher chauffant', de: 'Mischeinheit für Fußbodenheizung', ro: 'Grup de amestec pentru încălzire prin pardoseală' },
+    desc: { uk: 'Насосно-змішувальні вузли Termojet TJ-MU для колектора теплої підлоги: знижують температуру теплоносія від котла чи теплового насоса до 20–60 °C. Циркуляційний насос у комплект не входить', en: 'Termojet TJ-MU pump mixing units for underfloor heating manifolds: they lower the flow temperature from a boiler or heat pump to 20–60 °C. The circulation pump is not included', pl: 'Węzły pompowo-mieszające Termojet TJ-MU do rozdzielacza ogrzewania podłogowego: obniżają temperaturę czynnika z kotła lub pompy ciepła do 20–60 °C. Pompa obiegowa nie wchodzi w skład zestawu', fr: 'Groupes de mélange Termojet TJ-MU pour collecteur de plancher chauffant : ils abaissent la température de départ d’une chaudière ou d’une pompe à chaleur à 20–60 °C. Le circulateur n’est pas inclus', de: 'Termojet TJ-MU Pumpen-Mischeinheiten für Fußbodenheizungsverteiler: senken die Vorlauftemperatur von Kessel oder Wärmepumpe auf 20–60 °C. Die Umwälzpumpe ist nicht im Lieferumfang enthalten', ro: 'Grupuri de pompare și amestec Termojet TJ-MU pentru colectorul de încălzire prin pardoseală: coboară temperatura agentului de la cazan sau pompa de căldură la 20–60 °C. Pompa de circulație nu este inclusă' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
     color: '#0891b2',
   },
   {
