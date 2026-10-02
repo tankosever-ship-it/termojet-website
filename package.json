@@ -8,9 +8,10 @@
     "build": "vite build",
     "build:ghpages": "VITE_BASE_URL=/termojet-website/ vite build",
     "sitemap": "node scripts/gen-sitemap.cjs",
-    "build:prod": "node scripts/gen-sitemap.cjs && VITE_BASE_URL=/ vite build",
+    "build:prod": "node scripts/gen-sitemap.cjs && VITE_BASE_URL=/ vite build && VITE_BASE_URL=/ vite build --ssr src/entry-server.jsx",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:ssr": "VITE_BASE_URL=/ vite build --ssr src/entry-server.jsx"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

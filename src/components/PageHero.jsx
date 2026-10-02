@@ -27,6 +27,9 @@ export default function PageHero({ eyebrow = 'TERMOJET', title, subtitle, image,
             alt=""
             aria-hidden="true"
             loading="eager"
+            // Банер героя — LCP-елемент сторінки. Завдяки SSR <img> є в HTML одразу,
+            // тож просимо браузер вантажити його раніше за JS-бандли.
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ objectPosition: 'center' }}
           />

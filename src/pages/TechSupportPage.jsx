@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import LLink from '../components/LLink'
 import { Headphones, FileText, Settings, Car, LayoutTemplate, Flame, Phone, Mail } from 'lucide-react'
 import SEO from '../components/SEO'

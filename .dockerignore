@@ -3,6 +3,7 @@
 .gitattributes
 **/node_modules
 dist
+dist-ssr
 
 # Інструментарій / стан
 .omc

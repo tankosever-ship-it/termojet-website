@@ -1,4 +1,5 @@
-import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
+import { useState, useMemo, useEffect, useCallback, useRef, useContext } from 'react'
+import { SsrEntryContext } from '../utils/motion'
 import { useParams, useNavigate } from 'react-router-dom'
 import ProductReviews from '../components/ProductReviews'
 import LLink from '../components/LLink'
@@ -18,7 +19,7 @@ import { getDocsForProduct } from '../data/docsMapping'
 import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
 import { trackViewItem } from '../utils/analytics'
-import { formatPrice, toUAH } from '../utils/currency'
+import { formatPrice, toUAH, groupDigits } from '../utils/currency'
 import { isOnSale, salePercent } from '../utils/sale'
 import { isOwnBrand } from '../utils/brand'
 
@@ -595,7 +596,7 @@ function ImageGallery({ images, name, model3d, t }) {
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams()
   const navigate = useNavigate()
-  const { products, productsLoaded, lang, addToCart, siteSettings, eurRate, files } = useApp()
+  const { products, productsLoaded, ssrProduct, lang, addToCart, siteSettings, eurRate, files } = useApp()
   // Перехоплення кліків по внутрішніх лінках в описі → SPA-навігація (без перезавантаження)
   const onDescClick = e => {
     const a = e.target.closest('a')
@@ -625,16 +626,23 @@ export default function ProductDetailPage() {
   // список: сторінка не «блимає» помилкою, поки летить запит.
   // Відповідь тримаємо разом із ключем (slug+lang) і звіряємо при читанні — так
   // не потрібен скидальний setState на початку ефекту (він давав каскадні рендери).
-  const [fetched, setFetched] = useState(null)
+  // SSR: сервер уже дістав повний товар → стартуємо з нього (той самий HTML, що
+  // віддав сервер, і без повторного запиту на першому екрані).
+  // Лише на сторінці першого входу: при пізнішому SPA-поверненні на цей товар
+  // знімок міг застаріти (ціна/опис) — тоді тягнемо свіжий.
+  const ssrEntry = useContext(SsrEntryContext)
+  const [fetched, setFetched] = useState(() =>
+    (ssrEntry && ssrProduct && ssrProduct.slug === productSlug && ssrProduct.lang === lang) ? ssrProduct : null)
   useEffect(() => {
     if (!productSlug) return
+    if (fetched && fetched.slug === productSlug && fetched.lang === lang) return
     let cancelled = false
     fetch(`/api/products/${encodeURIComponent(productSlug)}?lang=${encodeURIComponent(lang)}`)
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (!cancelled && d && !d.error) setFetched({ slug: productSlug, lang, data: d }) })
       .catch(() => {})
     return () => { cancelled = true }
-  }, [productSlug, lang])
+  }, [productSlug, lang]) // eslint-disable-line react-hooks/exhaustive-deps -- fetched тут лише «вже є з SSR»
   const fullProduct = (fetched && fetched.slug === productSlug && fetched.lang === lang) ? fetched.data : null
 
   const product = useMemo(
@@ -951,15 +959,15 @@ export default function ProductDetailPage() {
                   {onSale && salePriceUAH ? (
                     <>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, color: 'var(--accent)' }}>
-                        {salePriceUAH.toLocaleString('uk-UA')}
+                        {groupDigits(salePriceUAH)}
                         <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>₴</span>
                       </span>
-                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, color: 'var(--text-muted)', textDecoration: 'line-through' }}>{priceUAH.toLocaleString('uk-UA')}</span>
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, color: 'var(--text-muted)', textDecoration: 'line-through' }}>{groupDigits(priceUAH)}</span>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, padding: '3px 7px', background: 'var(--accent)', color: '#fff', letterSpacing: '.08em', textTransform: 'uppercase' }} title={t('product.saleTag')}>−{salePercent(product)}%</span>
                     </>
                   ) : (
                     <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, color: 'var(--ink-100)' }}>
-                      {priceUAH.toLocaleString('uk-UA')}
+                      {groupDigits(priceUAH)}
                       <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>₴</span>
                     </span>
                   )}
@@ -969,7 +977,7 @@ export default function ProductDetailPage() {
               )}
               {priceUAH && (
                 <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 7 }}>
-                  {t('product.perUnit')}{qty > 1 ? ` · ${Math.round((onSale && salePriceUAH ? salePriceUAH : priceUAH) / qty).toLocaleString('uk-UA')} / шт` : ''} · {t('product.paymentNote')}
+                  {t('product.perUnit')}{qty > 1 ? ` · ${groupDigits((onSale && salePriceUAH ? salePriceUAH : priceUAH) / qty)} / шт` : ''} · {t('product.paymentNote')}
                 </p>
               )}
             </div>
@@ -1182,7 +1190,7 @@ export default function ProductDetailPage() {
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--ink-200)', paddingTop: 10 }}>
                           {pPriceUAH ? (
                             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 15, fontWeight: 800, color: 'var(--ink-100)' }}>
-                              {pPriceUAH.toLocaleString('uk-UA')} <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>₴</span>
+                              {groupDigits(pPriceUAH)} <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>₴</span>
                             </span>
                           ) : (
                             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: 'var(--text-muted)' }}>{t('product.priceOnRequest')}</span>

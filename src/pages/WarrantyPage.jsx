@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { ShieldCheck, AlertTriangle, CheckCircle, Clock, Thermometer, Zap } from 'lucide-react'
 import SEO from '../components/SEO'
 import { useT } from '../i18n/useT'

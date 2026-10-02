@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import LLink from '../components/LLink'
+import { formatDateShort } from '../utils/date'
 import { Calendar, ArrowRight, Search } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -80,10 +81,10 @@ export default function BlogPage() {
               <LLink to={`/blog/${featured.slug}`} className="card card-hover block overflow-hidden mb-8 md:flex">
                 {featured.image && (
                   featured.image.match(/\/images\/(blog|portfolio)\//) ? (
-                    <img src={featured.image} alt={featured.title} className="w-full md:w-80 lg:w-96 h-56 md:h-auto object-cover flex-shrink-0" />
+                    <img loading="lazy" decoding="async" src={featured.image} alt={featured.title} className="w-full md:w-80 lg:w-96 h-56 md:h-auto object-cover flex-shrink-0" />
                   ) : (
                     <div className="w-full md:w-80 lg:w-96 h-56 md:h-auto flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-                      <img src={featured.image} alt={featured.title} className="max-h-52 md:max-h-72 max-w-full object-contain" />
+                      <img loading="lazy" decoding="async" src={featured.image} alt={featured.title} className="max-h-52 md:max-h-72 max-w-full object-contain" />
                     </div>
                   )
                 )}
@@ -92,7 +93,7 @@ export default function BlogPage() {
                     {featured.category && <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{(lang !== 'uk' && featured[`category_${lang}`]) ? featured[`category_${lang}`] : featured.category}</span>}
                     {featured.publishedAt && (
                       <span className="text-xs text-gray-400 flex items-center gap-1 ml-2">
-                        <Calendar size={11} /> {new Date(featured.publishedAt).toLocaleDateString('uk-UA')}
+                        <Calendar size={11} /> {formatDateShort(featured.publishedAt)}
                       </span>
                     )}
                   </div>
@@ -117,15 +118,15 @@ export default function BlogPage() {
                   <LLink key={post.id} to={`/blog/${post.slug}`} className="card card-hover block overflow-hidden">
                     {post.image && (
                       post.image.match(/\/images\/(blog|portfolio)\//)
-                        ? <img src={post.image} alt={title} className="w-full h-44 object-cover" />
-                        : <div className="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img src={post.image} alt={title} className="max-h-full max-w-full object-contain p-3" /></div>
+                        ? <img loading="lazy" decoding="async" src={post.image} alt={title} className="w-full h-44 object-cover" />
+                        : <div className="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img loading="lazy" decoding="async" src={post.image} alt={title} className="max-h-full max-w-full object-contain p-3" /></div>
                     )}
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2">
                         {post.category && <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{(lang !== 'uk' && post[`category_${lang}`]) ? post[`category_${lang}`] : post.category}</span>}
                         {post.publishedAt && (
                           <span className="text-xs text-gray-400 flex items-center gap-1 ml-auto">
-                            <Calendar size={11} /> {new Date(post.publishedAt).toLocaleDateString('uk-UA')}
+                            <Calendar size={11} /> {formatDateShort(post.publishedAt)}
                           </span>
                         )}
                       </div>

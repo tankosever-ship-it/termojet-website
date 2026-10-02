@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import LLink from '../components/LLink'
+import { formatDateLongUk } from '../utils/date'
 import { Calendar, ArrowLeft, ArrowRight, ChevronRight, ArrowUpRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -57,7 +58,7 @@ export default function BlogPostPage() {
             )}
             {post.publishedAt && (
               <span className="text-xs text-gray-400 flex items-center gap-1">
-                <Calendar size={11} /> {new Date(post.publishedAt).toLocaleDateString('uk-UA', { year: 'numeric', month: 'long', day: 'numeric' })}
+                <Calendar size={11} /> {formatDateLongUk(post.publishedAt)}
               </span>
             )}
           </div>
@@ -138,8 +139,8 @@ export default function BlogPostPage() {
                   <LLink key={p.id} to={`/blog/${p.slug}`} className="card card-hover block overflow-hidden">
                     {p.image && (
                       p.image.match(/\/images\/(blog|portfolio)\//)
-                        ? <img src={p.image} alt={rTitle} className="w-full h-36 object-cover" />
-                        : <div className="w-full h-36 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img src={p.image} alt={rTitle} className="max-h-full max-w-full object-contain p-2" /></div>
+                        ? <img loading="lazy" decoding="async" src={p.image} alt={rTitle} className="w-full h-36 object-cover" />
+                        : <div className="w-full h-36 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img loading="lazy" decoding="async" src={p.image} alt={rTitle} className="max-h-full max-w-full object-contain p-2" /></div>
                     )}
                     <div className="p-4">
                       <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">{rTitle}</h3>

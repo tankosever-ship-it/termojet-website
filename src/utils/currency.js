@@ -36,18 +36,34 @@ export function toUAH(price, currency, eurRate) {
   return null
 }
 
-// Локаль форматування ціни за мовою UI (uk→"7 945 грн", en→"UAH 7,945", pl/fr/de→локальний UAH)
-const PRICE_LOCALE = { uk: 'uk-UA', en: 'en-US', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE' }
+// Групування розрядів БЕЗ Intl. Чому не toLocaleString/Intl.NumberFormat:
+// сторінки рендерить і сервер (Node), і браузер, а ICU в них різні — Node 24
+// форматує uk-UA як «7 945 ₴», Chrome як «7 945 грн», Safari/Firefox можуть
+// по-своєму. Будь-яка різниця в тексті = розбіжність гідрації (React перемальовує
+// блок). Тому формат задаємо самі — рівно такий, який досі показував Chrome.
+export function groupDigits(n, sep = '\u00a0') {
+  const v = Math.round(Number(n) || 0)
+  return (v < 0 ? '-' : '') + String(Math.abs(v)).replace(/\B(?=(\d{3})+(?!\d))/g, sep)
+}
+
+// Формат ціни в ₴ за мовою UI (дзеркало колишнього Intl-виводу Chrome):
+// uk «7 945 грн», en «UAH 7,945», pl «7945 UAH» (групує лише від 10 000),
+// fr «7 945 UAH» (вузький пробіл), de «7.945 UAH». ro — як uk.
+const NB = '\u00a0'
+const PRICE_FMT = {
+  uk: n => `${groupDigits(n)}${NB}грн`,
+  en: n => `UAH${NB}${groupDigits(n, ',')}`,
+  pl: n => `${Math.abs(n) >= 10000 ? groupDigits(n) : groupDigits(n, '')}${NB}UAH`,
+  fr: n => `${groupDigits(n, '\u202f')}${NB}UAH`,
+  de: n => `${groupDigits(n, '.')}${NB}UAH`,
+}
 
 // Format price for display: locale-aware UAH (e.g. "7 945 грн" / "UAH 7,945")
 export function formatPrice(price, currency, eurRate, lang = 'uk') {
   const amount = parseFloat(price)
   if (!amount) return ''
-  const locale = PRICE_LOCALE[lang] || 'uk-UA'
-  const uah = currency === 'UAH' ? amount : (currency === 'EUR' && eurRate ? Math.round(amount * eurRate) : null)
-  if (uah !== null) {
-    return new Intl.NumberFormat(locale, { style: 'currency', currency: 'UAH', maximumFractionDigits: 0 }).format(uah)
-  }
+  const uah = currency === 'UAH' ? Math.round(amount) : (currency === 'EUR' && eurRate ? Math.round(amount * eurRate) : null)
+  if (uah !== null) return (PRICE_FMT[lang] || PRICE_FMT.uk)(uah)
   // fallback — показуємо EUR якщо курс ще не завантажений
   return `${amount} €`
 }

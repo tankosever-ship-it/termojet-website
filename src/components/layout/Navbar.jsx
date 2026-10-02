@@ -88,7 +88,7 @@ function MegaMenu({ lang, products, onClose }) {
                       <div className="w-full aspect-square bg-[var(--bg-warm)] border border-[var(--border)] overflow-hidden group-hover:border-[var(--accent)] transition-colors"
                         style={{ borderRadius: '0.5rem' }}>
                         {p.image
-                          ? <img src={imgUrl(p.image)} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
+                          ? <img loading="lazy" decoding="async" src={imgUrl(p.image)} alt={name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
                           : <span className="flex items-center justify-center w-full h-full text-gray-200"><CategoryIcon name={activeCat.icon} size={40} /></span>}
                       </div>
                       <div>
@@ -116,7 +116,7 @@ function MegaMenu({ lang, products, onClose }) {
             {/* Phones image on dark bg */}
             <div className="flex-shrink-0 flex items-center justify-center px-4 pt-5 pb-2 relative"
               style={{ background: 'radial-gradient(ellipse 120% 80% at 50% 100%, rgba(255,85,0,0.18), transparent 70%)' }}>
-              <img src={assetPath('/app-promo-nobg.png')} alt={t('navbar.appPromoAlt')}
+              <img loading="lazy" decoding="async" src={assetPath('/app-promo-nobg.png')} alt={t('navbar.appPromoAlt')}
                 className="w-full block" style={{ maxHeight: 180, objectFit: 'contain' }} />
             </div>
             <div className="p-5 flex flex-col gap-3 flex-1">

@@ -1,6 +1,5 @@
-import { BrowserRouter, HashRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useEffect, lazy, Suspense } from 'react'
-import { HelmetProvider } from 'react-helmet-async'
+import { BrowserRouter, HashRouter, StaticRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { AppProvider } from './context/AppContext'
 import { captureUTM } from './utils/utm'
 import { useLangFromUrl } from './hooks/useLangFromUrl'
@@ -12,6 +11,7 @@ import TrainingPopup from './components/TrainingPopup'
 import MobileBottomNav from './components/layout/MobileBottomNav'
 import AdminLayout from './components/admin/AdminLayout'
 import ErrorBoundary from './components/ErrorBoundary'
+import { SsrEntryContext } from './utils/motion'
 
 // HomePage — eager (перша/LCP сторінка), решта — code-split через lazy()
 import HomePage from './pages/HomePage'
@@ -61,7 +61,15 @@ const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0); captureUTM() }, [pathname])
+  const isFirstRun = useRef(true)
+  useEffect(() => {
+    // На першому запуску не скролимо: з SSR сторінка видима й прокручувана ще до JS,
+    // і гідрація інакше кидала б угору того, хто вже гортає (а також ламала б
+    // відновлення прокрутки браузером при оновленні/«назад» і переходи за #якорем).
+    if (isFirstRun.current) isFirstRun.current = false
+    else window.scrollTo(0, 0)
+    captureUTM()
+  }, [pathname])
   return null
 }
 
@@ -209,17 +217,33 @@ function AppRoutes() {
   )
 }
 
-export default function App() {
+// Позначає сторінку, яку відрендерив сервер: поки користувач на ній, анімації
+// появи вимкнені (див. utils/motion.jsx). Ключ першого запису історії однаковий
+// у StaticRouter і BrowserRouter ('default'), тож сервер і гідрація збігаються;
+// після SPA-переходу ключ інший → анімації знову працюють.
+function SsrEntryProvider({ enabled, children }) {
+  const location = useLocation()
+  const [firstKey] = useState(location.key)
+  const value = enabled && location.key === firstKey
+  return <SsrEntryContext.Provider value={value}>{children}</SsrEntryContext.Provider>
+}
+
+// initialData — дані серверного рендеру (SSR), ssrLocation — URL, який рендерить
+// сервер (src/entry-server.jsx). У браузері ssrLocation немає → BrowserRouter.
+export default function App({ initialData = null, ssrLocation = null }) {
+  const routes = (
+    <SsrEntryProvider enabled={!!initialData}>
+      <ScrollToTop />
+      <ErrorBoundary>
+        <AppRoutes />
+      </ErrorBoundary>
+    </SsrEntryProvider>
+  )
   return (
-    <HelmetProvider>
-      <AppProvider>
-        <RouterWrapper>
-          <ScrollToTop />
-          <ErrorBoundary>
-            <AppRoutes />
-          </ErrorBoundary>
-        </RouterWrapper>
-      </AppProvider>
-    </HelmetProvider>
+    <AppProvider initialData={initialData}>
+      {ssrLocation != null
+        ? <StaticRouter location={ssrLocation}>{routes}</StaticRouter>
+        : <RouterWrapper>{routes}</RouterWrapper>}
+    </AppProvider>
   )
 }

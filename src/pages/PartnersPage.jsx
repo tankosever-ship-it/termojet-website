@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { TrendingUp, Wrench, BookOpen, Truck, BarChart2, Headphones, CheckCircle, Building2, UserCheck } from 'lucide-react'
 import SEO from '../components/SEO'
 import ConsentCheckbox from '../components/ConsentCheckbox'

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
+import { formatMonthYear } from '../utils/date'
 import { Star, MessageSquare } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
@@ -25,7 +26,7 @@ export default function ReviewsPage() {
       rating: r.rating || 5,
       text: (lang !== 'uk' && r[`text_${lang}`]) ? r[`text_${lang}`] : r.text,
       photo: r.photo || '',
-      date: r.created_at ? new Date(r.created_at).toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' }) : '',
+      date: r.created_at ? formatMonthYear(r.created_at, 'uk') : '',
     }))
 
   // Тут показуємо ВСІ відгуки: спершу реальні схвалені, далі — базові, що вже були на сайті

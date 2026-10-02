@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useMemo } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo, useRef } from 'react'
 import { PUBLIC_LANG_CODES } from '../i18n/translations'
 import { mergeHomeContent } from '../data/homeContent'
 import { mergeAboutContent } from '../data/aboutContent'
@@ -6,6 +6,7 @@ import { fetchEurRate } from '../utils/currency'
 import { getUTM } from '../utils/utm'
 import { effectivePrice, isOnSale } from '../utils/sale'
 import { trackAddToCart, trackRemoveFromCart } from '../utils/analytics'
+import { mapPortfolio, blogLinksFrom, mergeBlogLinks, mergeFiles } from './normalize'
 
 // On GitHub Pages use static data; on real server use /api
 const IS_GITHUB_PAGES = import.meta.env.VITE_BASE_URL !== '/'
@@ -16,68 +17,99 @@ let _blogLinksCache = null
 async function getBlogLinks() {
   if (_blogLinksCache) return _blogLinksCache
   const { BLOG_POSTS } = await import('../data/blog')
-  _blogLinksCache = Object.fromEntries(BLOG_POSTS.filter(p => p.links?.length).map(p => [p.slug, p.links]))
+  _blogLinksCache = blogLinksFrom(BLOG_POSTS)
   return _blogLinksCache
 }
-const mergeBlogLinks = (data, blogLinks) => data.map(p => blogLinks[p.slug] ? { ...p, links: blogLinks[p.slug] } : p)
 
 const AppContext = createContext(null)
 
 function loadCart() {
   try { return JSON.parse(localStorage.getItem('tj2_cart') || '[]') } catch { return [] }
 }
+const IS_BROWSER = typeof window !== 'undefined'
 function saveCart(cart) {
   localStorage.setItem('tj2_cart', JSON.stringify(cart))
 }
 
 function loadAdminToken() {
-  return sessionStorage.getItem('tj2_admin_token') || null
+  if (!IS_BROWSER) return null
+  try { return sessionStorage.getItem('tj2_admin_token') || null } catch { return null }
 }
 function saveAdminToken(token) {
   if (token) sessionStorage.setItem('tj2_admin_token', token)
   else sessionStorage.removeItem('tj2_admin_token')
 }
 
-export function AppProvider({ children }) {
+// initialData — дані, з якими сторінку відрендерив сервер (SSR, backend/ssr.js).
+// Сервер кладе їх у window.__INITIAL_DATA__, і перший клієнтський рендер мусить
+// стартувати з ТИХ САМИХ значень — інакше гідрація розійдеться з серверним HTML
+// (React перемальовує піддерево, саме те «блимання», яке прибирає SSR).
+// Тому нічого з localStorage/sessionStorage не читаємо в ініціалізаторах станів:
+// кошик і т.п. підтягуються ефектом уже після гідрації.
+export function AppProvider({ children, initialData = null }) {
+  const init = initialData || {}
+  // Мова визначається URL-ом (LangSync); на сервері її передає initialData.
+  // Без SSR (адмінка, GH Pages) — як і раніше, з localStorage.
   // Заховану мову (HIDDEN_LANGS) у localStorage могли лишити з часів, коли вона була
-  // публічною, — відкочуємо таких відвідувачів на українську, інакше вони й далі
-  // бачили б інтерфейс мовою, якої на сайті вже немає.
+  // публічною, — відкочуємо таких відвідувачів на українську.
   const [lang, setLang] = useState(() => {
+    if (init.lang) return init.lang
+    if (!IS_BROWSER) return 'uk'
     const saved = localStorage.getItem('tj2_lang') || 'uk'
     return PUBLIC_LANG_CODES.includes(saved) ? saved : 'uk'
   })
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState(init.products || [])
   // false, доки список товарів ще вантажиться (API або статичний фолбек). Потрібен,
   // щоб сторінка товару не блимала «Товар не знайдено» під час першого завантаження.
-  const [productsLoaded, setProductsLoaded] = useState(false)
-  const [cart, setCart] = useState(loadCart)
+  const [productsLoaded, setProductsLoaded] = useState(!!init.products)
+  // Кошик живе в localStorage, якого нема на сервері → стартуємо порожнім
+  // і підтягуємо збережений ефектом нижче (cartReady захищає збережений кошик
+  // від перезапису порожнім масивом до того, як його прочитали).
+  const [cart, setCart] = useState(() => (initialData ? [] : (IS_BROWSER ? loadCart() : [])))
+  // false, доки збережений кошик не прочитано і не закомічено в стан — до того
+  // нічого не пишемо в localStorage (інакше на мить записали б порожній масив).
+  const [cartLoaded, setCartLoaded] = useState(!initialData)
+  const cartReadStarted = useRef(!initialData)
   const [orders, setOrders] = useState([])
   const [consultations, setConsultations] = useState([])
   const [dealers, setDealers] = useState([])
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState(init.reviews || [])
   const [productReviews, setProductReviews] = useState([]) // відгуки на товари (адмін-модерація)
-  const [blog, setBlog] = useState([])
-  const [portfolio, setPortfolio] = useState([])
-  const [faq, setFaq] = useState([])
-  const [files, setFiles] = useState([])
+  const [blog, setBlog] = useState(init.blog || [])
+  const [portfolio, setPortfolio] = useState(init.portfolio || [])
+  const [faq, setFaq] = useState(init.faq || [])
+  const [files, setFiles] = useState(init.files || [])
   const [banners, setBanners] = useState([])
   const [promos, setPromos] = useState([])
   const [subscribers, setSubscribers] = useState([])
   const [isAdminAuth, setIsAdminAuth] = useState(() => !!loadAdminToken())
   const [adminToken, setAdminToken] = useState(loadAdminToken)
-  const [eurRate, setEurRate] = useState(null)
-  const [siteSettings, setSiteSettings] = useState({
+  const [eurRate, setEurRate] = useState(init.eurRate || null)
+  // Повна сторінка товару (з описом), яку сервер уже дістав для SSR — щоб
+  // ProductDetailPage не чекав власного запиту й рендерив той самий HTML.
+  const ssrProduct = init.product || null
+  const [siteSettings, setSiteSettings] = useState(() => ({
     phone: '+380 (50) 450 64 24',
     email: 'termojet@sofievka.kiev.ua',
     address: 'Софіївська Борщагівка, вул. Київська 3',
     workHours: 'Пн-Пт 9:00–18:00',
     // Спільний бот @termojet_ua_bot; ?start=termojet → менеджер бачить мітку 🔵 Termojet
     telegram: 'https://t.me/termojet_ua_bot?start=termojet',
-  })
+    ...(init.settings || {}),
+  }))
 
   useEffect(() => { localStorage.setItem('tj2_lang', lang) }, [lang])
-  useEffect(() => { saveCart(cart) }, [cart])
-  useEffect(() => { fetchEurRate().then(rate => setEurRate(rate)) }, [])
+  useEffect(() => {
+    if (cartReadStarted.current) return
+    cartReadStarted.current = true
+    // Одноразове читання зовнішнього сховища після гідрації — свідомий setState в ефекті.
+    setCart(loadCart())
+    setCartLoaded(true)
+  }, [])
+  useEffect(() => { if (cartLoaded) saveCart(cart) }, [cart, cartLoaded])
+  // Курс, з яким відрендерив сервер, не перезаписуємо: браузер відвідувача може не
+  // дістатись до bank.gov.ua (блокувальник, проксі) і підставив би аварійні 51 €.
+  useEffect(() => { if (!init.eurRate) fetchEurRate().then(rate => setEurRate(rate)) }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Товари — окремим ефектом і ПОТОЧНОЮ мовою (`?lang=`).
   // Раніше список віддавав переклади ВСІМА 5 мовами: 10.5 МБ JSON на КОЖНЕ
@@ -154,7 +186,7 @@ export function AppProvider({ children }) {
         .then(r => r.json())
         .then(data => {
           if (Array.isArray(data) && data.length > 0) {
-            setPortfolio(data.map(p => ({ ...p, desc: p.description ?? p.desc ?? '', image: (p.images && p.images[0]) || p.image || '' })))
+            setPortfolio(mapPortfolio(data))
           } else {
             loadStaticPortfolio()
           }
@@ -170,13 +202,8 @@ export function AppProvider({ children }) {
         .then(r => r.json())
         // завантажені через адмінку документи — зверху, далі статичний каталог
         .then(async data => {
-          if (Array.isArray(data) && data.length) {
-            const { FILES } = await import('../data/files')
-            setFiles([...data, ...FILES])
-          } else {
-            const { FILES } = await import('../data/files')
-            setFiles(FILES)
-          }
+          const { FILES } = await import('../data/files')
+          setFiles(mergeFiles(data, FILES))
         })
         .catch(async () => {
           const { FILES } = await import('../data/files')
@@ -198,11 +225,19 @@ export function AppProvider({ children }) {
         .then(data => { if (Array.isArray(data)) setPromos(data) })
         .catch(() => {})
     }
+    // SSR віддав статті блогу без тексту (_slim) → повні тягнемо одразу, щоб перехід
+    // зі списку/головної на статтю не показав порожню сторінку.
+    if (init.blog?.some(p => p._slim)) {
+      fetch(`${API}/blog`)
+        .then(r => r.json())
+        .then(async data => { if (Array.isArray(data) && data.length > 0) setBlog(mergeBlogLinks(data, await getBlogLinks())) })
+        .catch(() => {})
+    }
     const ric = window.requestIdleCallback || (cb => setTimeout(cb, 1500))
     const cancelRic = window.cancelIdleCallback || clearTimeout
     const idleId = ric(loadSecondary, { timeout: 5000 })
     return () => cancelRic(idleId)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- лише на монтуванні; init не змінюється
 
   // helper for admin API calls
   function authHeaders() {
@@ -578,7 +613,7 @@ export function AppProvider({ children }) {
     <AppContext.Provider value={{
       lang, setLang,
       eurRate,
-      products, setProducts, productsLoaded,
+      products, setProducts, productsLoaded, ssrProduct,
       cart, addToCart, removeFromCart, updateCartQuantity, clearCart, cartTotal, cartCount,
       orders, setOrders,
       consultations, setConsultations,

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { Truck, Warehouse, Package, Home, Building2, Banknote, Info, CheckCircle } from 'lucide-react'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'

@@ -1,5 +1,7 @@
 import LLink from '../components/LLink'
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
+import { formatMonthYear } from '../utils/date'
+import { groupDigits } from '../utils/currency'
 import { useRef, useEffect, useState } from 'react'
 import { ArrowRight, ArrowUpRight, Play, X, Star } from 'lucide-react'
 import { useApp } from '../context/AppContext'
@@ -275,7 +277,7 @@ function ReviewsSection() {
       rating: r.rating || 5,
       text: (lang !== 'uk' && r[`text_${lang}`]) ? r[`text_${lang}`] : r.text,
       photo: r.photo || '',
-      date: r.created_at ? new Date(r.created_at).toLocaleDateString(({ uk: 'uk-UA', en: 'en-US', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE', ro: 'ro-RO' })[lang] || 'uk-UA', { month: 'long', year: 'numeric' }) : '',
+      date: r.created_at ? formatMonthYear(r.created_at, lang) : '',
     }))
 
   // Реальні відгуки ПОЧЕРГОВО витісняють намальовані: спершу реальні, далі добиваємо намальованими
@@ -340,7 +342,7 @@ function CountUp({ end, suffix, duration = 1600 }) {
     })
     return () => cancelAnimationFrame(rafRef.current)
   }, [end, duration])
-  return <>{val.toLocaleString('uk-UA')}{suffix && <span className="text-[var(--accent)]">{suffix}</span>}</>
+  return <>{groupDigits(val)}{suffix && <span className="text-[var(--accent)]">{suffix}</span>}</>
 }
 
 function CountUpThousands({ end, duration = 1600 }) {
@@ -587,7 +589,7 @@ export default function HomePage() {
           ADVANTAGES — Наші переваги
       ═══════════════════════════════════════════ */}
       <section className="relative overflow-hidden py-20 md:py-28 text-white">
-        <img
+        <img loading="lazy" decoding="async"
           src="https://termojet.com.ua/wp-content/uploads/2025/09/img_4674.jpg"
           alt={t('home.productionImgAlt')}
           className="absolute inset-0 w-full h-full object-cover"
@@ -682,7 +684,7 @@ export default function HomePage() {
               const photoLabel = photo.labelKey ? t(`home.${photo.labelKey}`) : (photo.label || '')
               return (
                 <div key={i} className="prod-photo aspect-square cursor-pointer" onClick={() => setPhotoLightbox({ src: photo.src, label: photoLabel })}>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={photo.src}
                     alt={`${t('home.productionImgAlt')} ${i+1}`}
                     onError={e => {
@@ -778,7 +780,7 @@ export default function HomePage() {
                     style={{ background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%)' }}
                   />
 
-                  <img src={assetPath('/app-promo-nobg.png')} alt="Termojet App"
+                  <img loading="lazy" decoding="async" src={assetPath('/app-promo-nobg.png')} alt="Termojet App"
                     className="w-full block drop-shadow-2xl" style={{ filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }} />
                 </motion.div>
               </div>
@@ -955,7 +957,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="rounded-2xl p-8 md:p-16 text-white text-center relative overflow-hidden">
             {/* Фонове фото рукостискання */}
-            <img src={assetPath('/partners-handshake.jpg')} alt="" aria-hidden="true"
+            <img loading="lazy" decoding="async" src={assetPath('/partners-handshake.jpg')} alt="" aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover" />
             {/* Затемнення під текст */}
             <div className="absolute inset-0 pointer-events-none"

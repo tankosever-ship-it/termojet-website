@@ -182,6 +182,39 @@ Microsoft 365/ukr.net) — сайт на Hetzner це не зачіпає.
   з/без заголовка `X-Forwarded-For: <IP Binotel>` — чужий IP → `403 forbidden`,
   IP Binotel + чужа компанія → `403 wrong company`, вихідний (`callType:1`) → `200` без ліда.
 
+## SSR: серверний рендер React (2026-10)
+
+Сторінки рендерить сервер **тим самим React-деревом**, що й браузер, а браузер
+лише гідрує готовий HTML (`hydrateRoot`). DOM до і після завантаження JS однаковий.
+Це замінило SSR-lite (`#seo-content`), який лишився тільки як фолбек.
+
+| Частина | Що робить |
+|---|---|
+| `src/entry-server.jsx` | `loadInitialData()` — дані сторінки з `/api`; `render()` — HTML через `prerenderToNodeStream` |
+| `backend/ssr.js` | Вантажить `dist-ssr/entry-server.mjs`, кладе HTML у `#root`, дані — у `window.__INITIAL_DATA__`, `modulepreload` на чанк сторінки |
+| `src/main.jsx` | `hydrateRoot`, якщо є `__INITIAL_DATA__`, інакше `createRoot` |
+| `src/utils/motion.jsx` | На сторінці першого входу анімації появи вимкнені (інакше сервер віддає `opacity:0`) |
+
+- **Збірка:** `build:prod` робить дві збірки — клієнт (`dist/`) і SSR (`dist-ssr/`). Dockerfile копіює обидві.
+- **Вимкнути SSR без перезбірки:** `SSR=0` в `environment` у `docker-compose.yml` → `docker compose up -d`. Сайт повернеться на SSR-lite.
+- **Фолбек:** будь-яка помилка або таймаут рендеру (4 с) → сторінка віддається як раніше (SSR-lite), у лозі `[ssr] …`.
+- **Без SSR:** `/admin/*` і `/cart` (кошик персональний, у localStorage).
+- **Перевірка після деплою:** `curl -s https://termojet.com.ua/ | grep -c __INITIAL_DATA__` → `1`;
+  `docker compose logs app | grep '\[ssr\]'` → порожньо. У браузері в консолі не має бути `[ssr] hydration mismatch`.
+
+### ⚠️ Правила для коду, який рендерить сервер
+Розбіжність тексту сервер/браузер = React перемальовує блок (те, що ми прибрали). Тому в рендері **не можна**:
+- `toLocaleString` / `Intl.NumberFormat` / `toLocaleDateString` — ICU у Node і браузерах різний
+  (Node: «7 945 ₴», Chrome: «7 945 грн»). Використовувати `formatPrice` / `groupDigits` (`utils/currency.js`)
+  і `formatDateShort` / `formatMonthYear` (`utils/date.js`);
+- `localStorage`, `window`, `Date.now()`, `Math.random()` — лише в `useEffect`;
+- нові дані з `useApp()` на сторінці → додати їх у `loadInitialData()` (`entry-server.jsx`), інакше сервер
+  відрендерить сторінку без них;
+- `import { motion } from 'framer-motion'` — лише через `../utils/motion`.
+
+Локальна перевірка: `VITE_BASE_URL=/ npx vite build && VITE_BASE_URL=/ npx vite build --ssr src/entry-server.jsx`,
+потім `JWT_SECRET=<32+ симв> PORT=3311 node backend/server.js`.
+
 ## SEO: серверні метадані + мультимова (EN) — налаштовано 2026-07-09
 
 Сайт — CSR React SPA, тож краулер без JS бачив би оболонку `index.html`. Тому `backend/server.js`

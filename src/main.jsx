@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { isChunkError, reloadForFreshChunks } from './utils/chunkReload'
@@ -16,13 +16,30 @@ window.addEventListener('unhandledrejection', (e) => {
   if (isChunkError(e.reason)) reloadForFreshChunks()
 })
 
-createRoot(document.getElementById('root')).render(
+const rootEl = document.getElementById('root')
+const app = (initialData) => (
   <StrictMode>
-    <App />
-  </StrictMode>,
+    <App initialData={initialData} />
+  </StrictMode>
 )
 
-// SSR-lite: після монтування React прибираємо серверний #seo-content, щоб у DOM
-// (зокрема при JS-рендері Google) лишалася лише жива React-версія. CSS уже сховав
-// його, щойно #root заповнився; це остаточне прибирання елемента.
+// SSR: сервер уже відрендерив сторінку тим самим <App> (src/entry-server.jsx) і
+// поклав дані рендеру в window.__INITIAL_DATA__. Тоді не малюємо заново, а
+// гідруємо — DOM лишається тим самим, що користувач уже бачить.
+// Без SSR (адмінка, GH Pages, фолбек при помилці рендеру) — звичайний createRoot.
+const initialData = window.__INITIAL_DATA__
+if (initialData && rootEl.hasChildNodes()) {
+  hydrateRoot(rootEl, app(initialData), {
+    onRecoverableError(err, info) {
+      // Розбіжність серверного й клієнтського HTML — React перемалює піддерево.
+      // Не фатально, але саме це ми й прибираємо, тож лишаємо слід у консолі.
+      console.warn('[ssr] hydration mismatch:', err?.message || err, info?.componentStack || '')
+    },
+  })
+} else {
+  createRoot(rootEl).render(app(null))
+}
+
+// SSR-lite (фолбек, коли SSR вимкнено або впав): після монтування React прибираємо
+// серверний #seo-content, щоб у DOM лишалася лише жива React-версія.
 requestAnimationFrame(() => document.getElementById('seo-content')?.remove())

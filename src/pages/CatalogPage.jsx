@@ -1,14 +1,14 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import LLink from '../components/LLink'
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { Search, ChevronRight, ChevronLeft, X, ShoppingCart, LayoutGrid, List, ArrowRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 import { imgUrl } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import { CATEGORIES } from '../data/categories'
 import SEO from '../components/SEO'
-import { toUAH } from '../utils/currency'
+import { toUAH, groupDigits } from '../utils/currency'
 import { isOnSale, salePercent, SALE_CATEGORY_SLUG } from '../utils/sale'
 import ProductPrice from '../components/ProductPrice'
 import CategoryIcon from '../components/CategoryIcon'
@@ -778,7 +778,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
   const priceActive = hasPrice && (lo > priceBounds[0] || hi < priceBounds[1])
   const filtersActive = Object.values(filters).some(v => Array.isArray(v) ? v.length : v)
   const hasAny = filtersActive || priceActive
-  const fmt = n => Math.round(n).toLocaleString('uk-UA')
+  const fmt = n => groupDigits(n)
 
   return (
     <aside className="hidden lg:block w-52 flex-shrink-0">
@@ -1041,9 +1041,13 @@ const catRank = p => (p.categorySlug in CAT_ORDER ? CAT_ORDER[p.categorySlug] : 
 function CategoryStrip({ products, categories, catCounts, currentCategory, lang }) {
   const t = useT()
   const scrollRef = useRef(null)
+  // Початкові значення — ті, що будуть після заміру: смуга з 17 плиток ширша
+  // за будь-який екран, тож праворуч є що гортати. Сервер не може виміряти
+  // ширину, і з false індикатор/фейд з'являлись лише після JS — індикатор при
+  // цьому штовхав весь каталог униз (зсув макета).
   const [canLeft, setCanLeft] = useState(false)
-  const [canRight, setCanRight] = useState(false)
-  const [bar, setBar] = useState({ scrollable: false, w: 0, x: 0 })
+  const [canRight, setCanRight] = useState(true)
+  const [bar, setBar] = useState({ scrollable: true, w: 0, x: 0 })
 
   const update = useCallback(() => {
     const el = scrollRef.current
@@ -1159,13 +1163,13 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
       )}
 
       {/* Індикатор прокрутки — лише мобільний (десктоп має стрілки) */}
-      {bar.scrollable && (
-        <div className="md:hidden mt-1.5 mx-auto h-[3px] rounded-full overflow-hidden"
-          style={{ width: '64px', background: 'var(--ink-200)' }} aria-hidden="true">
-          <div className="h-full rounded-full"
-            style={{ width: `${bar.w}%`, marginLeft: `${bar.x}%`, background: 'var(--accent)', transition: 'margin-left .08s linear' }} />
-        </div>
-      )}
+      {/* Місце під індикатор тримаємо завжди (visibility, а не умовний рендер) —
+          інакше його поява після заміру зсуває вміст нижче. */}
+      <div className="md:hidden mt-1.5 mx-auto h-[3px] rounded-full overflow-hidden"
+        style={{ width: '64px', background: 'var(--ink-200)', visibility: bar.scrollable ? 'visible' : 'hidden' }} aria-hidden="true">
+        <div className="h-full rounded-full"
+          style={{ width: `${bar.w}%`, marginLeft: `${bar.x}%`, background: 'var(--accent)', transition: 'margin-left .08s linear' }} />
+      </div>
     </div>
   )
 }
@@ -1279,6 +1283,7 @@ export default function CatalogPage() {
         {(currentCategory ? CATEGORY_BANNERS[currentCategory.slug] : CATALOG_COVER) && (
           <>
             <img src={assetPath(currentCategory ? CATEGORY_BANNERS[currentCategory.slug] : CATALOG_COVER)} alt="" aria-hidden="true"
+              fetchPriority="high" // LCP-елемент категорії — вперед за JS-бандлами
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               style={{ objectPosition: 'center right' }} />
             <div className="absolute inset-0 pointer-events-none"

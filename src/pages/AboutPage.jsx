@@ -1,6 +1,6 @@
 import LLink from '../components/LLink'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { Factory, Globe, Award, ArrowRight, Check, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
@@ -162,6 +162,7 @@ export default function AboutPage() {
         style={{ marginTop: '-60px', paddingTop: 'calc(5rem + 60px)' }}>
         {/* Фонове фото котельні */}
         <img src={assetPath('/about-hero.png')} alt="" aria-hidden="true"
+          fetchPriority="high" // LCP-елемент сторінки — вперед за JS-бандлами
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           style={{ objectPosition: 'center right' }} />
         {/* Затемнення — сильніше зліва, де текст */}

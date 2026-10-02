@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { currentYearKyiv } from '../../utils/date'
 import { Phone, Mail, MapPin, Clock, ArrowRight, ExternalLink } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useT } from '../../i18n/useT'
@@ -80,7 +81,7 @@ export default function Footer() {
           {/* Brand column */}
           <div>
             <div className="mb-4">
-              <img src={assetPath(lang === 'uk' ? '/logo-white.png' : '/logo-en-white.png')} alt="Termojet" className="h-12 w-auto" />
+              <img loading="lazy" decoding="async" src={assetPath(lang === 'uk' ? '/logo-white.png' : '/logo-en-white.png')} alt="Termojet" className="h-12 w-auto" />
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-4">{footer.company}</p>
 
@@ -269,7 +270,7 @@ export default function Footer() {
       {/* ─── Bottom bar ─── */}
       <div className="relative border-t border-white/8">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/30">
-          <span>© {new Date().getFullYear()} Termojet. {footer.rights}.</span>
+          <span>© {currentYearKyiv()} Termojet. {footer.rights}.</span>
           <div className="flex gap-5">
             <a href="https://termojet.com.ua" target="_blank" rel="noopener noreferrer"
               className="hover:text-white/60 transition-colors flex items-center gap-1">

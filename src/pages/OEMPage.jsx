@@ -1,5 +1,5 @@
 import LLink from '../components/LLink'
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { Link } from 'react-router-dom'
 import { Factory, Tag, Palette, Stamp, Wrench, Package, Phone, Mail, CheckCircle } from 'lucide-react'
 import SEO from '../components/SEO'

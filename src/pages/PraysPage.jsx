@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '../utils/motion'
 import { Link } from 'react-router-dom'
 import { Download, FileSpreadsheet, Phone, Send, ArrowRight } from 'lucide-react'
 import { useApp } from '../context/AppContext'

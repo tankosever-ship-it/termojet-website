@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Star, ImagePlus, Send, Check, MessageSquare } from 'lucide-react'
+import { formatMonthYear } from '../utils/date'
 import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { imgUrl } from '../utils/imgUrl'
@@ -11,7 +12,6 @@ const I18N = {
   empty: { uk: 'Ще немає відгуків про цей товар. Будьте першим!', en: 'No reviews for this product yet. Be the first!', pl: 'Brak opinii o tym produkcie. Bądź pierwszy!', fr: 'Aucun avis sur ce produit. Soyez le premier !', de: 'Noch keine Bewertungen für dieses Produkt. Seien Sie der Erste!', ro: 'Încă nu există recenzii pentru acest produs. Fiți primul!' },
   count: { uk: 'відгуків', en: 'reviews', pl: 'opinii', fr: 'avis', de: 'Bewertungen', ro: 'recenzii' },
 }
-const DATE_LOCALE = { uk: 'uk-UA', en: 'en-US', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE', ro: 'ro-RO' }
 
 function Stars({ value, size = 14, onPick }) {
   return (
@@ -88,7 +88,7 @@ export default function ProductReviews({ product }) {
 
   const fmtDate = (d) => {
     if (!d) return ''
-    try { return new Date(d).toLocaleDateString(DATE_LOCALE[lang] || 'uk-UA', { month: 'long', year: 'numeric' }) } catch { return '' }
+    return formatMonthYear(d, lang)
   }
 
   return (

@@ -409,17 +409,35 @@ function productImages(imagesJson, fallback) {
 // ціну у ~52× нижчу за реальну).
 const EUR_MARKUP = 1.022
 let _eurCache = { rate: null, ts: 0 }
+let _eurFailTs = 0
+let _eurInflight = null
+// Таймаут 1.5 с і пауза 5 хв після невдачі: НБУ буває недоступний з закордонного
+// IP сервера, а без цього кожен запит сторінки чекав би на зависле з'єднання.
 async function getEurRate() {
   const now = Date.now()
   if (_eurCache.rate && now - _eurCache.ts < 3600 * 1000) return _eurCache.rate
-  try {
-    const res = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&json')
-    const data = await res.json()
-    const rate = data[0]?.rate
-    if (rate) { _eurCache = { rate: rate * EUR_MARKUP, ts: now }; return _eurCache.rate }
-  } catch { /* нижче — фолбек */ }
+  if (now - _eurFailTs < 5 * 60 * 1000) return _eurCache.rate || 51 * EUR_MARKUP
+  _eurInflight ||= (async () => {
+    try {
+      const res = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&json',
+        { signal: AbortSignal.timeout(1500) })
+      const data = await res.json()
+      const rate = data[0]?.rate
+      if (rate) { _eurCache = { rate: rate * EUR_MARKUP, ts: Date.now() }; return }
+    } catch { /* нижче — фолбек */ }
+    _eurFailTs = Date.now()
+  })().finally(() => { _eurInflight = null })
+  await _eurInflight
   return _eurCache.rate || 51 * EUR_MARKUP
 }
+// Для SSR: відомий курс без очікування мережі (навіть застарілий — оновиться у фоні).
+// null лише до першого успішного запиту після старту — тоді ціни EUR-товарів
+// сервер покаже в €, як і браузер до приходу курсу.
+function peekEurRate() {
+  if (!_eurCache.rate || Date.now() - _eurCache.ts >= 3600 * 1000) getEurRate().catch(() => {})
+  return _eurCache.rate
+}
+peekEurRate() // прогрів при старті
 
 // Product + BreadcrumbList + Organization для сторінки товару (дзеркало SEO.jsx, серверно з БД).
 function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
@@ -913,6 +931,19 @@ function buildFaqContent(lang) {
   }).join('')
 }
 
+// ── SSR: справжній серверний рендер React-дерева (backend/ssr.js) ────────────
+// Кожна HTML-відповідь проходить через ssrPage: #root отримує готовий HTML
+// застосунку, а при будь-якій помилці лишається SSR-lite (#seo-content) як було.
+const { createSsr } = require('./ssr')
+const ssrPage = createSsr({ port: PORT, peekEurRate })
+// Не кидає: будь-яка помилка → сирий html (SSR-lite), щоб необроблений reject
+// не поклав процес.
+function sendPage(req, res, html) {
+  return ssrPage(req, res, html)
+    .catch(() => html)
+    .then(out => { if (!res.headersSent) res.type('html').send(out) })
+}
+
 // ── Товари: UA + EN ───────────────────────────────────────────────────────────
 // Спільний хендлер для /catalog/:cat/:slug і /en/catalog/:cat/:slug.
 function handleProduct(lang) {
@@ -944,7 +975,7 @@ function handleProduct(lang) {
       const seoBlock = buildProductSeoContent(row, loc, { cat: req.params.cat, lang, eurRate, related })
       html = html.replace('<div id="seo-content"></div>', seoBlock)
       res.setHeader('Cache-Control', 'no-cache')
-      return res.type('html').send(html)
+      return sendPage(req, res, html)
     } catch (e) { return next() }
   }
 }
@@ -988,7 +1019,7 @@ function handleBlog(lang) {
       // SSR-lite: заголовок + текст статті в #seo-content
       html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang, h1, bodyHtml: loc.content || `<p>${esc(desc)}</p>` }))
       res.setHeader('Cache-Control', 'no-cache')
-      return res.type('html').send(html)
+      return sendPage(req, res, html)
     } catch (e) { return next() }
   }
 }
@@ -1045,7 +1076,7 @@ function handleCategory(lang) {
       const eurRate = await getEurRate()
       html = html.replace('<div id="seo-content"></div>', buildCategorySeoContent(cm, { cat: req.params.cat, lang, products, eurRate }))
       res.setHeader('Cache-Control', 'no-cache')
-      return res.type('html').send(html)
+      return sendPage(req, res, html)
     } catch (e) { return next() }
   }
 }
@@ -1116,7 +1147,7 @@ app.get('*', (req, res) => {
       else if (PAGE_CONTENT[lookupPath]) bodyHtml += PAGE_CONTENT[lookupPath]
       html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang: lg, h1, bodyHtml }))
       res.setHeader('Cache-Control', 'no-cache')
-      return res.type('html').send(html)
+      return sendPage(req, res, html)
     } catch (e) { /* fall through */ }
   }
 
@@ -1154,7 +1185,7 @@ app.get('*', (req, res) => {
         .replace(/<meta name="robots" content="[^"]*"\s*\/?>/, '<meta name="robots" content="noindex, follow" />')
         .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${esc(selfUrl)}" />`)
     }
-    return res.type('html').send(html)
+    return sendPage(req, res, html)
   } catch (e) {
     return res.sendFile(path.join(DIST, 'index.html'))
   }

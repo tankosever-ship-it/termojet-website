@@ -20,6 +20,8 @@ RUN cd backend && npm ci --omit=dev
 
 # copy build artifacts
 COPY --from=builder /app/dist ./dist
+# SSR-бандл (src/entry-server.jsx) — самодостатній, node_modules фронту не потребує
+COPY --from=builder /app/dist-ssr ./dist-ssr
 COPY backend ./backend
 
 # persistent dirs
