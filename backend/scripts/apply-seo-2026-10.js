@@ -19,6 +19,7 @@
  *  3. Нова категорія «Змішувальний вузол для теплої підлоги»: переносимо туди вузли
  *     TJ-MU з «Системи підлогового опалення». Старі URL віддають 301 (server.js →
  *     handleProduct: категорія в URL ≠ категорії товару).
+ *     TJ-MU-25: два речення про «вбудований» насос переписано (6 мов) — суперечили комплектації.
  *  4. TJ-MU: в опис усіма мовами — «циркуляційний насос у комплект постачання не
  *     входить» (короткі описи не чіпаємо: частина з них обірвана на півслові).
  *
@@ -80,6 +81,34 @@ const PUMP_NOTE = {
   de: 'Die Umwälzpumpe ist nicht im Lieferumfang enthalten — sie wird separat ausgewählt.',
   ro: 'Pompa de circulație nu este inclusă în pachetul de livrare — se alege separat.',
 }
+// TJ-MU-25: опис стверджував «вбудований насос» і «не потрібно підбирати насос окремо» —
+// це суперечить комплектації (насос не входить). Точкові заміни цих двох речень у 6 мовах
+// (рішення власниці 02.10.2026).
+const TJMU25_SKU = '84040TJ-MU-25'
+const TJMU25_FIX = {
+  uk: [['вбудований циркуляційний насос забезпечує', 'циркуляційний насос (підбирається окремо) забезпечує'],
+       ['Готова збірка — не потрібно підбирати клапан, насос і датчик окремо.', 'Готова збірка — клапан, термоголовка й датчик уже змонтовані, лишається підібрати циркуляційний насос.']],
+  en: [['the built-in circulation pump ensures', 'the circulation pump (selected separately) ensures'],
+       ['Ready assembly — no need to select a valve, pump and sensor separately.', 'Ready assembly — the valve, thermostatic head and sensor are pre-mounted; only the circulation pump has to be selected.']],
+  pl: [['wbudowana pompa obiegowa zapewnia', 'pompa obiegowa (dobierana osobno) zapewnia'],
+       ['Gotowy zestaw — nie trzeba dobierać zaworu, pompy i czujnika oddzielnie.', 'Gotowy zestaw — zawór, głowica termostatyczna i czujnik są już zamontowane; pozostaje dobrać pompę obiegową.']],
+  fr: [['la pompe de circulation intégrée assure', 'la pompe de circulation (choisie séparément) assure'],
+       ["Ensemble prêt à l'emploi — inutile de sélectionner séparément la vanne, la pompe et le capteur.", "Ensemble prêt à l'emploi — la vanne, la tête thermostatique et la sonde sont déjà montées ; il reste à choisir le circulateur."]],
+  de: [['Die eingebaute Umwälzpumpe sorgt', 'Die Umwälzpumpe (separat auszuwählen) sorgt'],
+       ['Fertige Baugruppe — kein separates Auswählen von Ventil, Pumpe und Fühler erforderlich.', 'Fertige Baugruppe — Ventil, Thermostatkopf und Fühler sind vormontiert; nur die Umwälzpumpe ist separat auszuwählen.']],
+  ro: [['pompa de circulație integrată asigură', 'pompa de circulație (aleasă separat) asigură'],
+       ['Ansamblu gata montat — nu este necesară selectarea separată a vanei, pompei și senzorului.', 'Ansamblu gata montat — vana, capul termostatic și senzorul sunt deja montate; rămâne de ales pompa de circulație.']],
+}
+const tjmu25Missing = []
+function fixTjmu25(text, lang) {
+  let out = text || ''
+  for (const [from, to] of TJMU25_FIX[lang] || []) {
+    if (out.includes(from)) out = out.split(from).join(to)
+    else if (!out.includes(to)) tjmu25Missing.push(`${lang}: «${from.slice(0, 40)}…»`)
+  }
+  return out
+}
+
 const hasPumpNote = (text, lang) => String(text || '').includes(PUMP_NOTE[lang])
 const addPumpDesc = (text, lang) => hasPumpNote(text, lang) ? text : `${text || ''}\n\n<p><strong>${PUMP_NOTE[lang]}</strong></p>`
 
@@ -138,6 +167,13 @@ for (const row of rows) {
   if (TJ_MU_SKUS.includes(row.sku)) {
     if (next.category_slug !== NEW_CAT) { notes.push(`категорія ${row.category_slug} → ${NEW_CAT}`); next.category_slug = NEW_CAT; stats.moved++ }
     let pump = false
+    if (row.sku === TJMU25_SKU) {
+      const f = fixTjmu25(next.description, 'uk'); if (f !== next.description) { next.description = f; srcChanged = true; notes.push('TJ-MU-25: речення про «вбудований» насос виправлено (uk)') }
+      for (const lang of LANGS.filter(l => l !== 'uk')) {
+        const t = i18n[lang]; if (!t || !t.description) continue
+        const ft = fixTjmu25(t.description, lang); if (ft !== t.description) { t.description = ft; i18nChanged = true; notes.push(`TJ-MU-25: речення про насос виправлено (${lang})`) }
+      }
+    }
     const d = addPumpDesc(next.description, 'uk'); if (d !== next.description) { next.description = d; srcChanged = true; pump = true }
     for (const lang of LANGS.filter(l => l !== 'uk')) {
       const t = i18n[lang]; if (!t) continue
@@ -176,6 +212,7 @@ for (const row of rows) {
 
 console.log(`\nтоварів до зміни: ${plan.length} — посилання ${stats.links}, «триходовий» ${stats.triway}, ` +
   `перенесено в нову категорію ${stats.moved}, примітка про насос ${stats.pump}`)
+if (tjmu25Missing.length) console.log(`⚠️  TJ-MU-25: не знайдено речень для заміни (перевір вручну): ${[...new Set(tjmu25Missing)].join('; ')}`)
 const foundTjmu = rows.filter(r => TJ_MU_SKUS.includes(r.sku)).length
 if (foundTjmu !== TJ_MU_SKUS.length) console.log(`⚠️  знайдено TJ-MU: ${foundTjmu} з ${TJ_MU_SKUS.length}`)
 
