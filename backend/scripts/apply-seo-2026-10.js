@@ -9,7 +9,8 @@
  *   docker compose exec app node backend/scripts/backup-db.cjs seo-2026-10
  *
  * Що робить:
- *  1. БИТІ ПОСИЛАННЯ в описах. Переклади (en/pl/fr/de) деяких описів посилались на
+ *  1. ПОСИЛАННЯ в описах. Адреси перенесених TJ-MU → нова категорія (у т.ч. з мовним
+ *     префіксом, без проміжного 301). Биті: Переклади (en/pl/fr/de) деяких описів посилались на
  *     slug-и з помилкою транслітерації (…izolyatsiyi замість …izolyacziyi, hidavlichni,
  *     вигадані назви колекторів) — сторінка віддавала 404. Міняємо href на справжній;
  *     посилання на модель, якої в каталозі немає (K22VN.125(150) Mini), знімаємо,
@@ -48,10 +49,16 @@ const LINK_FIX = {
   // моделі K22VN.125(150) Mini немає в каталозі — посилання знімаємо, текст лишаємо
   '/catalog/rozpodilchi-kolektory/k22vn-125-kolektor-v-teploizolyatsiyi-2-vgoru-vniz-1-bokovyy-1': null,
 }
+// Посилання на товари, перенесені в нову категорію: старий префікс адреси → новий
+// (інакше внутрішні посилання вели б через 301, а не напряму).
+const MOVED_PREFIX = [
+  ['/catalog/kolektory-pidloha/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu', `/catalog/${NEW_CAT}/zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu`],
+]
 const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 function fixLinks(html) {
   if (!html || !html.includes('href')) return html
   let out = html
+  for (const [from, to] of MOVED_PREFIX) out = out.split(`${from}`).join(to)
   for (const [bad, good] of Object.entries(LINK_FIX)) {
     // з мовним префіксом або без: href="/en/catalog/…", href="/catalog/…", повний домен
     const hrefRe = new RegExp(`((?:https?://(?:www\\.)?termojet\\.com\\.ua)?(?:/(?:en|pl|fr|de|ro))?)${escRe(bad)}(?=["#?])`, 'g')
