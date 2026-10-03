@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect, useMemo, useRef } from 'react'
-import { PUBLIC_LANG_CODES } from '../i18n/translations'
+import { createContext, useContext, useState, useEffect, useMemo, useRef, useCallback } from 'react'
+import { PUBLIC_LANG_CODES, isLangLoaded, loadLang } from '../i18n/translations'
 import { mergeHomeContent } from '../data/homeContent'
 import { mergeAboutContent } from '../data/aboutContent'
 import { fetchEurRate } from '../utils/currency'
@@ -52,12 +52,18 @@ export function AppProvider({ children, initialData = null }) {
   // Без SSR (адмінка, GH Pages) — як і раніше, з localStorage.
   // Заховану мову (HIDDEN_LANGS) у localStorage могли лишити з часів, коли вона була
   // публічною, — відкочуємо таких відвідувачів на українську.
-  const [lang, setLang] = useState(() => {
+  const [lang, setLangState] = useState(() => {
     if (init.lang) return init.lang
     if (!IS_BROWSER) return 'uk'
     const saved = localStorage.getItem('tj2_lang') || 'uk'
     return PUBLIC_LANG_CODES.includes(saved) ? saved : 'uk'
   })
+  // Словник мови вантажиться окремим чанком (i18n/translations.js) — перемикаємо мову
+  // лише коли він уже є, інакше інтерфейс на мить показав би ключі замість тексту.
+  const setLang = useCallback(code => {
+    if (isLangLoaded(code)) setLangState(code)
+    else loadLang(code).then(() => setLangState(code)).catch(() => setLangState(code))
+  }, [])
   const [products, setProducts] = useState(init.products || [])
   // false, доки список товарів ще вантажиться (API або статичний фолбек). Потрібен,
   // щоб сторінка товару не блимала «Товар не знайдено» під час першого завантаження.

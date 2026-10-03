@@ -54,7 +54,7 @@ function manifest() {
 // <link rel=modulepreload> на lazy-чанк сторінки і його залежності: без них
 // браузер дізнається про чанк лише після виконання головного бандла, і гідрація
 // (а отже, інтерактивність) чекає на ще один круг мережі.
-function preloadLinks(srcModule, html) {
+function preloadLinks(srcModules, html) {
   const m = manifest()
   const out = new Set()
   const walk = key => {
@@ -63,7 +63,7 @@ function preloadLinks(srcModule, html) {
     out.add(e.file)
     for (const imp of e.imports || []) walk(imp)
   }
-  if (srcModule) walk(srcModule)
+  for (const m of srcModules) if (m) walk(m)
   return [...out]
     .filter(f => f.endsWith('.js') && !html.includes(`/${f}"`))
     .map(f => `<link rel="modulepreload" crossorigin href="/${f}">`)
@@ -120,7 +120,9 @@ function createSsr({ port, peekEurRate }) {
       const { html: app, errors } = await mod.render(req.originalUrl, data, { signal: ac.signal })
       if (ac.signal.aborted) throw ac.signal.reason
       if (errors.length) throw errors[0]
-      const preload = preloadLinks(mod.pageModule(pathname), html)
+      // + словник мови сторінки (не-uk мови — окремі чанки, main.jsx чекає їх до гідрації)
+      const langModule = data.lang && data.lang !== 'uk' ? `src/i18n/lang/${data.lang}.js` : null
+      const preload = preloadLinks([mod.pageModule(pathname), langModule], html)
       const script = `<script>window.__INITIAL_DATA__=${serialize(data)}</script>\n  `
       // Замінники — функції: у рядковому вигляді $&, $', $` у тексті сторінки чи JSON
       // String.replace трактував би як спецпослідовності й ламав би HTML.

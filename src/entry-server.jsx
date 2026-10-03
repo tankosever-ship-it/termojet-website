@@ -8,7 +8,15 @@
 // у HTML повністю, а не як спінер-заглушка.
 import { prerenderToNodeStream } from 'react-dom/static'
 import App from './App'
-import { PUBLIC_LANG_CODES } from './i18n/translations'
+import { PUBLIC_LANG_CODES, registerLang } from './i18n/translations'
+import en from './i18n/lang/en'
+import pl from './i18n/lang/pl'
+import fr from './i18n/lang/fr'
+import de from './i18n/lang/de'
+import ro from './i18n/lang/ro'
+
+// У браузері словники не-uk мов вантажаться окремими чанками; серверу потрібні всі й одразу.
+for (const [code, dict] of Object.entries({ en, pl, fr, de, ro })) registerLang(code, dict)
 import { CATEGORIES } from './data/categories'
 import { SALE_CATEGORY_SLUG, isOnSale } from './utils/sale'
 import { mapPortfolio, blogLinksFrom, mergeBlogLinks, mergeFiles } from './context/normalize'
