@@ -3,7 +3,7 @@
 ## Сесія 2026-10-04 — Блог: статті про зональне керування, Meta-поля статей
 
 - Дві статті (6 мов): `/blog/drotove-zonalne-keruvannya-opalennyam`, `/blog/bezdrotove-zonalne-keruvannya-opalennyam`.
-  Дані — `backend/scripts/blog-zonalne-data.js`, запис — `apply-blog-zonalne.js` (ідемпотентно, за slug, зі штампом `_srcHash`).
+  Дані — `backend/scripts/blog-zonalne-data.js`, запис — `apply-blog-posts.js blog-zonalne-data.js` (ідемпотентно, за slug, зі штампом `_srcHash`).
   Перелінковка: товари зонального керування, колектори теплої підлоги, насоси, одна стаття на одну; з «Тепла підлога чи радіатори» і «Погодозалежна автоматика» (links[] у `src/data/blog.js`).
 - Обкладинки зібрано з фото товарів (`public/images/zonalne/`), схеми з документів — у тексті статті.
 - `blog_posts.seo_title` / `meta_description` (+ ключі i18n) — сервер ставить їх у `<title>`/description; поля в адмінці. Порожні → як раніше.

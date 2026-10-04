@@ -1,6 +1,9 @@
 /*
- * apply-blog-zonalne.js — додає в блог дві статті про зональне керування опаленням
- * (дротове / бездротове), дані — blog-zonalne-data.js.
+ * apply-blog-posts.js — додає/оновлює статті блогу з файлу даних (масив статей
+ * у форматі blog-zonalne-data.js: slug, title, excerpt, content, image, category,
+ * published_at, seo_title, meta_description, i18n{en,pl,fr,de,ro}).
+ *   blog-zonalne-data.js    — дротове / бездротове зональне керування (2026-10-04)
+ *   blog-waterclima-data.js — виставка WaterClima, «Ліга майстрів» (2026-09-25)
  *
  * Ідемпотентно: шукає статтю за slug; немає → INSERT, є → UPDATE тих самих полів.
  * Інші статті не чіпає (на відміну від apply-blog.js, який перезаписує весь блог).
@@ -10,8 +13,8 @@
  * пропускаються). Без штампа наступний прогін перекладача перетер би ручний переклад.
  *
  * Без --apply лише показує, що буде зроблено.
- *   docker compose exec -T app node backend/scripts/apply-blog-zonalne.js
- *   docker compose exec -T app node backend/scripts/apply-blog-zonalne.js --apply
+ *   docker compose exec -T app node backend/scripts/apply-blog-posts.js blog-waterclima-data.js
+ *   docker compose exec -T app node backend/scripts/apply-blog-posts.js blog-waterclima-data.js --apply
  */
 const path = require('path')
 const crypto = require('crypto')
@@ -19,7 +22,9 @@ const Database = require('better-sqlite3')
 
 const APPLY = process.argv.includes('--apply')
 const DBP = process.env.TERMOJET_DB || path.join(__dirname, '..', 'data', 'termojet.db')
-const posts = require('./blog-zonalne-data')
+const dataFile = process.argv.slice(2).find(a => !a.startsWith('--'))
+if (!dataFile) { console.error('вкажіть файл даних, напр. blog-waterclima-data.js'); process.exit(1) }
+const posts = require(path.resolve(__dirname, dataFile))
 
 const HASH_FIELDS = ['title', 'excerpt', 'content', 'category', 'seo_title', 'meta_description']
 function srcHash(p) {
