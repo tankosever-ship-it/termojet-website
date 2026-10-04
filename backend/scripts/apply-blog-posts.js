@@ -4,6 +4,7 @@
  * published_at, seo_title, meta_description, i18n{en,pl,fr,de,ro}).
  *   blog-zonalne-data.js    — дротове / бездротове зональне керування (2026-10-04)
  *   blog-waterclima-data.js — виставка WaterClima, «Ліга майстрів» (2026-09-25)
+ *   blog-heating-tech-expo-data.js — Heating Tech Expo, Польща (2026-09-10)
  *
  * Ідемпотентно: шукає статтю за slug; немає → INSERT, є → UPDATE тих самих полів.
  * Інші статті не чіпає (на відміну від apply-blog.js, який перезаписує весь блог).
