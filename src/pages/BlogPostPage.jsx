@@ -6,6 +6,44 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import { localizeHtml } from '../utils/localizeHtml'
 import SEO from '../components/SEO'
+import { imgUrl, srcSet } from '../utils/imgUrl'
+
+// Розмітка тексту статті (адмінка / БД), по рядку на блок:
+//   **Підзаголовок**                    — h3
+//   - пункт                             — сусідні пункти збираються в один <ul>
+//   ![опис](/images/схема.jpg =1250x660) — фото на всю ширину; розмір (необовʼязковий)
+//                                         резервує місце, щоб текст не стрибав
+//   решта                               — абзац; усередині **жирний** і [текст](url)
+function contentBlocks(content) {
+  const blocks = []
+  for (const raw of (content || '').split('\n')) {
+    const line = raw.trim()
+    if (!line) continue
+    const img = line.match(/^!\[([^\]]*)\]\((\/[^\s)]+)(?:\s+=(\d+)x(\d+))?\)$/)
+    if (img) { blocks.push({ type: 'img', alt: img[1], src: img[2], w: img[3] ? +img[3] : undefined, h: img[4] ? +img[4] : undefined }); continue }
+    if (line.startsWith('**') && line.endsWith('**')) { blocks.push({ type: 'h', text: line.slice(2, -2) }); continue }
+    if (line.startsWith('- ')) {
+      const last = blocks[blocks.length - 1]
+      if (last?.type === 'ul') last.items.push(line.slice(2))
+      else blocks.push({ type: 'ul', items: [line.slice(2)] })
+      continue
+    }
+    blocks.push({ type: 'p', text: line })
+  }
+  return blocks
+}
+
+function inline(text) {
+  const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+  // [текст](url) → посилання (зовнішні відкриваємо у новій вкладці)
+  // FIX 9 — only allow safe URL schemes; drop javascript:/data:/vbscript: etc.
+  return formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, txt, url) => {
+    const safe = /^(https?:\/\/|mailto:|\/|#)/.test(url)
+    if (!safe) return txt
+    const ext = /^https?:/.test(url)
+    return `<a href="${url}" class="text-[var(--primary)] underline underline-offset-2 hover:opacity-80"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${txt}</a>`
+  })
+}
 
 export default function BlogPostPage() {
   const { slug } = useParams()
@@ -33,7 +71,7 @@ export default function BlogPostPage() {
 
   return (
     <>
-      <SEO title={title} description={excerpt} image={post.image} type="article"
+      <SEO title={(lang !== 'uk' ? post[`seoTitle_${lang}`] : post.seoTitle) || title} description={excerpt} image={post.image} type="article"
         article={{ author: post.author, datePublished: post.publishedAt || post.date }} />
 
       {/* Breadcrumb */}
@@ -69,10 +107,10 @@ export default function BlogPostPage() {
         {/* Cover image — реальні фото (виставки) заповнюють, фото товарів вписуємо без обрізки */}
         {post.image && (
           post.image.match(/\/images\/(blog|portfolio)\//) ? (
-            <img src={post.image} alt={title} className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8" />
+            <img src={post.image} srcSet={srcSet(post.image)} sizes="(min-width: 896px) 864px, 100vw" fetchPriority="high" alt={title} className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8" />
           ) : (
             <div className="w-full h-64 md:h-80 rounded-2xl mb-8 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-              <img src={post.image} alt={title} className="max-h-full max-w-full object-contain p-4" />
+              <img src={post.image} srcSet={srcSet(post.image, 960)} sizes="(min-width: 896px) 640px, 100vw" fetchPriority="high" alt={title} className="max-h-full max-w-full object-contain p-4" />
             </div>
           )
         )}
@@ -80,21 +118,28 @@ export default function BlogPostPage() {
         {/* Content */}
         <div className="card p-6 md:p-10">
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-            {content?.split('\n').map((para, i) => {
-              if (!para.trim()) return null
-              if (para.startsWith('**') && para.endsWith('**')) {
-                return <h3 key={i} className="text-xl font-bold text-gray-900 mt-6 mb-3">{para.slice(2, -2)}</h3>
+            {contentBlocks(content).map((b, i) => {
+              if (b.type === 'h') {
+                return <h3 key={i} className="text-xl font-bold text-gray-900 mt-6 mb-3">{b.text}</h3>
               }
-              let formatted = para.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-              // [текст](url) → посилання (зовнішні відкриваємо у новій вкладці)
-              // FIX 9 — only allow safe URL schemes; drop javascript:/data:/vbscript: etc.
-              formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
-                const safe = /^(https?:\/\/|mailto:|\/|#)/.test(url)
-                if (!safe) return text
-                const ext = /^https?:/.test(url)
-                return `<a href="${url}" class="text-[var(--primary)] underline underline-offset-2 hover:opacity-80"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`
-              })
-              return <p key={i} className="mb-4" dangerouslySetInnerHTML={{ __html: localizeHtml(formatted, lang) }} />
+              if (b.type === 'img') {
+                return (
+                  <figure key={i} className="my-6">
+                    <img src={imgUrl(b.src)} srcSet={srcSet(b.src)} sizes="(min-width: 896px) 800px, 100vw"
+                      width={b.w} height={b.h} alt={b.alt} loading="lazy" decoding="async"
+                      className="w-full h-auto rounded-xl border border-gray-100" />
+                    {b.alt && <figcaption className="text-sm text-gray-400 text-center mt-2">{b.alt}</figcaption>}
+                  </figure>
+                )
+              }
+              if (b.type === 'ul') {
+                return (
+                  <ul key={i} className="list-disc pl-6 mb-4 space-y-2 marker:text-[var(--accent)]">
+                    {b.items.map((it, j) => <li key={j} dangerouslySetInnerHTML={{ __html: localizeHtml(inline(it), lang) }} />)}
+                  </ul>
+                )
+              }
+              return <p key={i} className="mb-4" dangerouslySetInnerHTML={{ __html: localizeHtml(inline(b.text), lang) }} />
             })}
           </div>
 

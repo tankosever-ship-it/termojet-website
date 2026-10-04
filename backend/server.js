@@ -1021,13 +1021,15 @@ function handleBlog(lang) {
   return (req, res, next) => {
     try {
       const row = _db.prepare(
-        'SELECT title, excerpt, content, image, published_at, created_at, i18n FROM blog_posts WHERE slug = ? AND published = 1'
+        'SELECT title, excerpt, content, image, published_at, created_at, i18n, seo_title, meta_description FROM blog_posts WHERE slug = ? AND published = 1'
       ).get(req.params.slug)
       if (!row) return next()
       const loc = pickLang(row, lang)
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
-      const title = `${loc.title || row.title} | Termojet`
-      const desc = (stripHtml(loc.excerpt) || stripHtml(loc.content) || DEFAULT_TITLE).slice(0, 200)
+      // Власні Meta Title/Description статті (адмінка / i18n) або — заголовок і анонс.
+      // pickLang не підставляє українські seo-поля на інших мовах (null → фолбек мовою сторінки).
+      const title = loc.seo_title || `${loc.title || row.title} | Termojet`
+      const desc = (loc.meta_description || stripHtml(loc.excerpt) || stripHtml(loc.content) || DEFAULT_TITLE).slice(0, 200)
       const img = absImg(row.image)
       const slugEnc = encodeURIComponent(req.params.slug)
       const logicalPath = `/blog/${slugEnc}`

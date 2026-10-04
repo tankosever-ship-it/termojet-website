@@ -6,8 +6,10 @@ const { withI18n } = require('./_i18n')
 const router = express.Router()
 
 function parse(r) {
-  const obj = { ...r, tags: JSON.parse(r.tags || '[]'), published: r.published === 1, publishedAt: r.published_at || '' }
-  return withI18n(obj, r.i18n, { title: 'title', excerpt: 'excerpt', content: 'content', category: 'category', tags: 'tags' })
+  const obj = { ...r, tags: JSON.parse(r.tags || '[]'), published: r.published === 1, publishedAt: r.published_at || '',
+    seoTitle: r.seo_title || '', metaDescription: r.meta_description || '' }
+  return withI18n(obj, r.i18n, { title: 'title', excerpt: 'excerpt', content: 'content', category: 'category', tags: 'tags',
+    seoTitle: 'seo_title', metaDescription: 'meta_description' })
 }
 
 router.get('/', (req, res) => {
@@ -25,20 +27,23 @@ router.get('/:slug', (req, res) => {
 })
 
 router.post('/', requireAdmin, (req, res) => {
-  const { slug, title, excerpt, content, image, tags, published, category, publishedAt, i18n } = req.body
+  const { slug, title, excerpt, content, image, tags, published, category, publishedAt, i18n, seoTitle, metaDescription } = req.body
   const result = db.prepare(`
-    INSERT INTO blog_posts (slug, title, excerpt, content, image, tags, published, category, published_at, i18n)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, category||'', publishedAt||'', i18n ? JSON.stringify(i18n) : '{}')
+    INSERT INTO blog_posts (slug, title, excerpt, content, image, tags, published, category, published_at, i18n, seo_title, meta_description)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, category||'', publishedAt||'', i18n ? JSON.stringify(i18n) : '{}', seoTitle||'', metaDescription||'')
   res.status(201).json({ id: result.lastInsertRowid })
 })
 
 router.put('/:id', requireAdmin, (req, res) => {
-  const { slug, title, excerpt, content, image, tags, published, category, publishedAt, i18n } = req.body
+  const { slug, title, excerpt, content, image, tags, published, category, publishedAt, i18n, seoTitle, metaDescription } = req.body
+  // seoTitle/metaDescription не прийшли (старий клієнт) → лишаємо як є
   db.prepare(`
-    UPDATE blog_posts SET slug=?, title=?, excerpt=?, content=?, image=?, tags=?, published=?, category=?, published_at=?, i18n=COALESCE(?, i18n)
+    UPDATE blog_posts SET slug=?, title=?, excerpt=?, content=?, image=?, tags=?, published=?, category=?, published_at=?, i18n=COALESCE(?, i18n),
+      seo_title=COALESCE(?, seo_title), meta_description=COALESCE(?, meta_description)
     WHERE id=?
-  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, category||'', publishedAt||'', i18n !== undefined ? JSON.stringify(i18n) : null, req.params.id)
+  `).run(slug, title, excerpt||'', content||'', image||'', JSON.stringify(tags||[]), published ? 1 : 0, category||'', publishedAt||'', i18n !== undefined ? JSON.stringify(i18n) : null,
+    seoTitle !== undefined ? seoTitle : null, metaDescription !== undefined ? metaDescription : null, req.params.id)
   res.json({ ok: true })
 })
 

@@ -2,7 +2,7 @@ const Database = require('better-sqlite3')
 const path = require('path')
 const fs = require('fs')
 
-const DB_PATH = path.join(__dirname, '..', 'data', 'termojet.db')
+const DB_PATH = process.env.TERMOJET_DB || path.join(__dirname, '..', 'data', 'termojet.db')
 
 const db = new Database(DB_PATH)
 db.pragma('journal_mode = WAL')
@@ -199,6 +199,9 @@ function setup() {
   // Блог: категорія та дата публікації (форма адмінки їх збирає)
   try { db.exec(`ALTER TABLE blog_posts ADD COLUMN category TEXT DEFAULT ''`) } catch (e) { /* існує */ }
   try { db.exec(`ALTER TABLE blog_posts ADD COLUMN published_at TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  // Блог: власні Meta Title / Description (порожні → title + «| Termojet» і анонс)
+  try { db.exec(`ALTER TABLE blog_posts ADD COLUMN seo_title TEXT DEFAULT ''`) } catch (e) { /* існує */ }
+  try { db.exec(`ALTER TABLE blog_posts ADD COLUMN meta_description TEXT DEFAULT ''`) } catch (e) { /* існує */ }
   // Акційна ціна товару (0 = без акції)
   try { db.exec(`ALTER TABLE products ADD COLUMN sale_price REAL DEFAULT 0`) } catch (e) { /* існує */ }
   // Спосіб оплати замовлення

@@ -4,7 +4,7 @@ import { ArrowLeft, Plus, Pencil, Trash2, Eye, EyeOff } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { toSlug } from '../../utils/slug'
 
-const EMPTY_POST = { title: '', slug: '', excerpt: '', content: '', image: '', category: '', publishedAt: new Date().toISOString().slice(0,10), published: false }
+const EMPTY_POST = { title: '', slug: '', excerpt: '', content: '', image: '', category: '', publishedAt: new Date().toISOString().slice(0,10), published: false, seoTitle: '', metaDescription: '' }
 
 function PostForm({ post, onSave, onCancel }) {
   const [form, setForm] = useState({ ...EMPTY_POST, ...post })
@@ -43,7 +43,23 @@ function PostForm({ post, onSave, onCancel }) {
             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none" />
         </div>
         <div className="md:col-span-2">
-          <label className="text-xs text-gray-500 block mb-1">Текст статті</label>
+          <label className="text-xs text-gray-500 block mb-1">
+            Meta Title <span className="text-gray-400">({(form.seoTitle || '').length}/60 · порожньо → «Заголовок | Termojet»)</span>
+          </label>
+          <input value={form.seoTitle || ''} onChange={e => set('seoTitle', e.target.value)}
+            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm" />
+        </div>
+        <div className="md:col-span-2">
+          <label className="text-xs text-gray-500 block mb-1">
+            Meta Description <span className="text-gray-400">({(form.metaDescription || '').length}/160 · порожньо → короткий опис)</span>
+          </label>
+          <textarea value={form.metaDescription || ''} onChange={e => set('metaDescription', e.target.value)} rows={2}
+            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none" />
+        </div>
+        <div className="md:col-span-2">
+          <label className="text-xs text-gray-500 block mb-1">
+            Текст статті <span className="text-gray-400">(**підзаголовок**, - пункт списку, [текст](/посилання), ![опис](/images/фото.jpg =1250x660))</span>
+          </label>
           <textarea value={form.content} onChange={e => set('content', e.target.value)} rows={8}
             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none font-mono" />
         </div>

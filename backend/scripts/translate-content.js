@@ -57,6 +57,9 @@ const ENTITIES = {
       excerpt:  { col: 'excerpt',  kind: 'text' },
       content:  { col: 'content',  kind: 'html' },
       category: { col: 'category', kind: 'text' },
+      // Порожні поля в хеш не йдуть — штампи старих статей без seo-полів не змінюються
+      seo_title:        { col: 'seo_title',        kind: 'text' },
+      meta_description: { col: 'meta_description', kind: 'text' },
     },
   },
   portfolio: {
