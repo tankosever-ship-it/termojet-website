@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { formatDateTimeKyiv } from '../../utils/date'
 
 const STATUS_LABELS = { new: 'Новий', processing: 'В обробці', done: 'Виконано', cancelled: 'Скасовано' }
 const STATUS_COLORS = { new: 'bg-blue-50 text-blue-600', processing: 'bg-yellow-50 text-yellow-600', done: 'bg-green-50 text-green-600', cancelled: 'bg-red-50 text-red-500' }
@@ -50,7 +51,8 @@ export default function AdminOrders() {
           <div className="space-y-3">
             {orders.map(order => {
               const d = order.created_at || order.createdAt
-              const dateStr = d ? new Date(String(d).replace(' ', 'T')).toLocaleString('uk-UA') : ''
+              // created_at — UTC із SQLite; показуємо за Києвом
+              const dateStr = formatDateTimeKyiv(d)
               const rate = orderRateFor(order)
               const sum = order.total || (order.items || []).reduce((s, i) => s + lineUAH(i, rate), 0)
               return (

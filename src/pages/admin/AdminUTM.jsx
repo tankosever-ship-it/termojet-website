@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useApp } from '../../context/AppContext'
+import { formatDateTimeKyiv } from '../../utils/date'
 import { Target, Download, Search } from 'lucide-react'
 
 // Парсимо utm (може бути об'єктом або JSON-рядком)
@@ -9,11 +10,8 @@ function getUtm(lead) {
   return u && typeof u === 'object' ? u : {}
 }
 
-function fmtDate(s) {
-  if (!s) return ''
-  const d = new Date(s)
-  return isNaN(d) ? String(s) : d.toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
-}
+// created_at — UTC із SQLite; дата й час за Києвом
+const fmtDate = s => (s ? formatDateTimeKyiv(s) || String(s) : '')
 
 const TYPE_LABEL = { order: 'Замовлення', consultation: 'Консультація', dealer: 'Дилер' }
 const COLS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']

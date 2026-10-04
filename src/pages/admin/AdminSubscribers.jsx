@@ -2,12 +2,10 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Trash2, Mail, Download, Copy, Check, Search } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { formatDateShort } from '../../utils/date'
 
-function fmtDate(d) {
-  if (!d) return ''
-  try { return new Date(d.replace(' ', 'T')).toLocaleDateString('uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric' }) }
-  catch { return d }
-}
+// created_at — UTC із SQLite; дата за Києвом
+const fmtDate = d => (d ? formatDateShort(d) || d : '')
 
 export default function AdminSubscribers() {
   const { subscribers, removeSubscriber, isAdminAuth } = useApp()
