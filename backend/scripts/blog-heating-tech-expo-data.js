@@ -1,6 +1,6 @@
 // Heating Tech Expo (Польща, 8–10.09.2026) — дані для apply-blog-posts.js.
-// Вихідні дані від маркетингу: назва, дати, тематика, одне фото стенду. Місто не
-// вказане — у тексті його немає. Склад експозиції описано за фото стенду.
+// Вихідні дані від маркетингу: назва, дати, місто (Варшава), тематика, одне фото стенду.
+// Склад експозиції описано за фото стенду.
 
 const KOT = '/blog/kotelnya-pid-klyuch-modulna-obvyazka'
 const POZ = '/blog/vystavka-instalacje-poznan'
@@ -14,11 +14,11 @@ module.exports = [
     image: '/images/blog/exh-heating-tech-expo-2026.jpg',
     published_at: '2026-09-10T09:00:00Z',
     category: 'Виставки',
-    title: 'Termojet на виставці Heating Tech Expo 2026 у Польщі',
-    seo_title: 'Termojet на Heating Tech Expo 2026: обладнання для котелень',
-    meta_description: '8–10 вересня Termojet представив на польській виставці Heating Tech Expo насосні групи, гідрострілки, колектори, клапани та зональне керування.',
-    excerpt: '8–10 вересня ми взяли участь у Heating Tech Expo — польській виставці, повністю присвяченій опаленню, — і показали обладнання Termojet для котелень швидкого монтажу.',
-    content: `З 8 по 10 вересня Termojet узяв участь у Heating Tech Expo (Heating Technology Expo) — польській виставці, повністю присвяченій опаленню: котлам, радіаторам, тепловим насосам і автоматиці. Для нас це ще одна нагода показати польським монтажникам, проєктувальникам і дистриб'юторам, як швидко збирається котельня з готових вузлів Termojet.
+    title: 'Termojet на виставці Heating Tech Expo 2026 у Варшаві',
+    seo_title: 'Termojet на Heating Tech Expo 2026 у Варшаві',
+    meta_description: '8–10 вересня Termojet представив на виставці Heating Tech Expo у Варшаві насосні групи, гідрострілки, колектори, клапани та зональне керування.',
+    excerpt: '8–10 вересня ми взяли участь у Heating Tech Expo у Варшаві — виставці, повністю присвяченій опаленню, — і показали обладнання Termojet для котелень швидкого монтажу.',
+    content: `З 8 по 10 вересня Termojet узяв участь у Heating Tech Expo (Heating Technology Expo) — виставці у Варшаві, повністю присвяченій опаленню: котлам, радіаторам, тепловим насосам і автоматиці. Для нас це ще одна нагода показати польським монтажникам, проєктувальникам і дистриб'юторам, як швидко збирається котельня з готових вузлів Termojet.
 
 **«Wydajność Twojej kotłowni»**
 
@@ -43,11 +43,11 @@ Heating Tech Expo продовжує нашу серію польських ви
     i18n: {
       en: {
         category: 'Exhibitions',
-        title: 'Termojet at Heating Tech Expo 2026 in Poland',
-        seo_title: 'Termojet at Heating Tech Expo 2026: Boiler Room Equipment',
-        meta_description: 'On 8–10 September Termojet showed pump groups, hydraulic separators, manifolds, valves and zone control at the Heating Tech Expo in Poland.',
-        excerpt: 'On 8–10 September we took part in Heating Tech Expo — a Polish exhibition dedicated entirely to heating — and showed Termojet quick-installation boiler room equipment.',
-        content: `From 8 to 10 September, Termojet took part in Heating Tech Expo (Heating Technology Expo) — a Polish exhibition dedicated entirely to heating: boilers, radiators, heat pumps and controls. For us it was another opportunity to show Polish installers, designers and distributors how quickly a boiler room can be assembled from ready-made Termojet units.
+        title: 'Termojet at Heating Tech Expo 2026 in Warsaw',
+        seo_title: 'Termojet at Heating Tech Expo 2026 in Warsaw',
+        meta_description: 'On 8–10 September Termojet showed pump groups, hydraulic separators, manifolds, valves and zone control at Heating Tech Expo in Warsaw.',
+        excerpt: 'On 8–10 September we took part in Heating Tech Expo in Warsaw — an exhibition dedicated entirely to heating — and showed Termojet quick-installation boiler room equipment.',
+        content: `From 8 to 10 September, Termojet took part in Heating Tech Expo (Heating Technology Expo) in Warsaw — an exhibition dedicated entirely to heating: boilers, radiators, heat pumps and controls. For us it was another opportunity to show Polish installers, designers and distributors how quickly a boiler room can be assembled from ready-made Termojet units.
 
 **«Wydajność Twojej kotłowni»**
 
@@ -72,11 +72,11 @@ Thank you to everyone who visited our stand — see you at the next exhibitions!
       },
       pl: {
         category: 'Targi',
-        title: 'Termojet na targach Heating Tech Expo 2026 w Polsce',
-        seo_title: 'Termojet na Heating Tech Expo 2026: urządzenia do kotłowni',
-        meta_description: 'W dniach 8–10 września Termojet pokazał na Heating Tech Expo grupy pompowe, sprzęgła hydrauliczne, rozdzielacze, zawory i sterowanie strefowe.',
-        excerpt: 'W dniach 8–10 września wzięliśmy udział w Heating Tech Expo — targach w całości poświęconych ogrzewaniu — i pokazaliśmy urządzenia Termojet do kotłowni szybkiego montażu.',
-        content: `W dniach 8–10 września Termojet wziął udział w Heating Tech Expo (Heating Technology Expo) — polskich targach w całości poświęconych ogrzewaniu: kotłom, grzejnikom, pompom ciepła i automatyce. Była to dla nas kolejna okazja, by pokazać polskim instalatorom, projektantom i dystrybutorom, jak szybko montuje się kotłownię z gotowych węzłów Termojet.
+        title: 'Termojet na targach Heating Tech Expo 2026 w Warszawie',
+        seo_title: 'Termojet na Heating Tech Expo 2026 w Warszawie',
+        meta_description: 'W dniach 8–10 września Termojet pokazał na Heating Tech Expo w Warszawie grupy pompowe, sprzęgła hydrauliczne, rozdzielacze, zawory i sterowanie strefowe.',
+        excerpt: 'W dniach 8–10 września wzięliśmy udział w Heating Tech Expo w Warszawie — targach w całości poświęconych ogrzewaniu — i pokazaliśmy urządzenia Termojet do kotłowni szybkiego montażu.',
+        content: `W dniach 8–10 września Termojet wziął udział w Heating Tech Expo (Heating Technology Expo) w Warszawie — targach w całości poświęconych ogrzewaniu: kotłom, grzejnikom, pompom ciepła i automatyce. Była to dla nas kolejna okazja, by pokazać polskim instalatorom, projektantom i dystrybutorom, jak szybko montuje się kotłownię z gotowych węzłów Termojet.
 
 **«Wydajność Twojej kotłowni»**
 
@@ -101,11 +101,11 @@ Dziękujemy wszystkim, którzy odwiedzili nasze stoisko — do zobaczenia na kol
       },
       fr: {
         category: 'Salons',
-        title: 'Termojet au salon Heating Tech Expo 2026 en Pologne',
-        seo_title: 'Termojet à Heating Tech Expo 2026 : chaufferie',
-        meta_description: 'Du 8 au 10 septembre, Termojet a présenté au Heating Tech Expo en Pologne ses groupes de pompage, bouteilles de découplage, collecteurs et vannes.',
-        excerpt: 'Du 8 au 10 septembre, nous avons participé au Heating Tech Expo, un salon polonais entièrement consacré au chauffage, et présenté les équipements de chaufferie à montage rapide Termojet.',
-        content: `Du 8 au 10 septembre, Termojet a participé au Heating Tech Expo (Heating Technology Expo), un salon polonais entièrement consacré au chauffage : chaudières, radiateurs, pompes à chaleur et régulation. Ce fut pour nous une nouvelle occasion de montrer aux installateurs, bureaux d'études et distributeurs polonais à quel point une chaufferie se monte rapidement à partir de modules Termojet prêts à l'emploi.
+        title: 'Termojet au salon Heating Tech Expo 2026 à Varsovie',
+        seo_title: 'Termojet au Heating Tech Expo 2026 à Varsovie',
+        meta_description: 'Du 8 au 10 septembre, Termojet a présenté au Heating Tech Expo de Varsovie ses groupes de pompage, bouteilles de découplage, collecteurs et vannes.',
+        excerpt: 'Du 8 au 10 septembre, nous avons participé au Heating Tech Expo de Varsovie, un salon entièrement consacré au chauffage, et présenté les équipements de chaufferie à montage rapide Termojet.',
+        content: `Du 8 au 10 septembre, Termojet a participé au Heating Tech Expo (Heating Technology Expo) à Varsovie, un salon entièrement consacré au chauffage : chaudières, radiateurs, pompes à chaleur et régulation. Ce fut pour nous une nouvelle occasion de montrer aux installateurs, bureaux d'études et distributeurs polonais à quel point une chaufferie se monte rapidement à partir de modules Termojet prêts à l'emploi.
 
 **«Wydajność Twojej kotłowni»**
 
@@ -130,11 +130,11 @@ Merci à tous ceux qui sont venus sur notre stand — à bientôt sur les procha
       },
       de: {
         category: 'Messen',
-        title: 'Termojet auf der Heating Tech Expo 2026 in Polen',
-        seo_title: 'Termojet auf der Heating Tech Expo 2026: Heizraumtechnik',
-        meta_description: 'Vom 8. bis 10. September zeigte Termojet auf der Heating Tech Expo in Polen Pumpengruppen, hydraulische Weichen, Verteiler, Ventile und Zonenregelung.',
-        excerpt: 'Vom 8. bis 10. September waren wir auf der Heating Tech Expo — einer polnischen Messe ganz zum Thema Heizung — und haben Termojet-Heizraumtechnik zur Schnellmontage gezeigt.',
-        content: `Vom 8. bis 10. September nahm Termojet an der Heating Tech Expo (Heating Technology Expo) teil — einer polnischen Messe, die ganz dem Thema Heizung gewidmet ist: Kessel, Heizkörper, Wärmepumpen und Regelungstechnik. Für uns war es eine weitere Gelegenheit, polnischen Installateuren, Planern und Händlern zu zeigen, wie schnell sich ein Heizraum aus vormontierten Termojet-Einheiten aufbauen lässt.
+        title: 'Termojet auf der Heating Tech Expo 2026 in Warschau',
+        seo_title: 'Termojet auf der Heating Tech Expo 2026 in Warschau',
+        meta_description: 'Vom 8. bis 10. September zeigte Termojet auf der Heating Tech Expo in Warschau Pumpengruppen, hydraulische Weichen, Verteiler, Ventile und Zonenregelung.',
+        excerpt: 'Vom 8. bis 10. September waren wir auf der Heating Tech Expo in Warschau — einer Messe ganz zum Thema Heizung — und haben Termojet-Heizraumtechnik zur Schnellmontage gezeigt.',
+        content: `Vom 8. bis 10. September nahm Termojet an der Heating Tech Expo (Heating Technology Expo) in Warschau teil — einer Messe, die ganz dem Thema Heizung gewidmet ist: Kessel, Heizkörper, Wärmepumpen und Regelungstechnik. Für uns war es eine weitere Gelegenheit, polnischen Installateuren, Planern und Händlern zu zeigen, wie schnell sich ein Heizraum aus vormontierten Termojet-Einheiten aufbauen lässt.
 
 **«Wydajność Twojej kotłowni»**
 
@@ -159,11 +159,11 @@ Vielen Dank an alle, die unseren Stand besucht haben — bis zu den nächsten Me
       },
       ro: {
         category: 'Expoziții',
-        title: 'Termojet la expoziția Heating Tech Expo 2026 din Polonia',
-        seo_title: 'Termojet la Heating Tech Expo 2026: centrale termice',
-        meta_description: 'Pe 8–10 septembrie, Termojet a prezentat la Heating Tech Expo din Polonia grupuri de pompare, butelii de egalizare, distribuitoare și robinete.',
-        excerpt: 'Pe 8–10 septembrie am participat la Heating Tech Expo — o expoziție poloneză dedicată în întregime încălzirii — și am prezentat echipamentele Termojet de montaj rapid pentru centrale termice.',
-        content: `În perioada 8–10 septembrie, Termojet a participat la Heating Tech Expo (Heating Technology Expo) — o expoziție poloneză dedicată în întregime încălzirii: centrale termice, calorifere, pompe de căldură și automatizări. A fost pentru noi încă o ocazie de a le arăta instalatorilor, proiectanților și distribuitorilor polonezi cât de repede se montează o centrală termică din module Termojet gata făcute.
+        title: 'Termojet la expoziția Heating Tech Expo 2026 de la Varșovia',
+        seo_title: 'Termojet la Heating Tech Expo 2026 de la Varșovia',
+        meta_description: 'Pe 8–10 septembrie, Termojet a prezentat la Heating Tech Expo de la Varșovia grupuri de pompare, butelii de egalizare, distribuitoare și robinete.',
+        excerpt: 'Pe 8–10 septembrie am participat la Heating Tech Expo de la Varșovia — o expoziție dedicată în întregime încălzirii — și am prezentat echipamentele Termojet de montaj rapid pentru centrale termice.',
+        content: `În perioada 8–10 septembrie, Termojet a participat la Heating Tech Expo (Heating Technology Expo) de la Varșovia — o expoziție dedicată în întregime încălzirii: centrale termice, calorifere, pompe de căldură și automatizări. A fost pentru noi încă o ocazie de a le arăta instalatorilor, proiectanților și distribuitorilor polonezi cât de repede se montează o centrală termică din module Termojet gata făcute.
 
 **«Wydajność Twojej kotłowni»**
 
