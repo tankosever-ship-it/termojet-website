@@ -19,14 +19,19 @@ const MONTHS = {
 }
 
 let _kyiv = null
-function kyivParts(input) {
+function toDate(input) {
   // SQLite CURRENT_TIMESTAMP («2026-09-01 18:30:00») — це UTC без позначки зони;
   // new Date() прочитав би його як МІСЦЕВИЙ час, тобто по-різному на сервері й у браузері.
   if (typeof input === 'string' && /^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(input)) {
     input = input.replace(' ', 'T') + 'Z'
   }
   const d = input instanceof Date ? input : new Date(input)
-  if (Number.isNaN(d.getTime())) return null
+  return Number.isNaN(d.getTime()) ? null : d
+}
+
+function kyivParts(input) {
+  const d = toDate(input)
+  if (!d) return null
   try {
     // 'Europe/Kiev' — аліас, який знають і старі ICU (Europe/Kyiv з'явився пізніше)
     if (!_kyiv) _kyiv = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Kiev', year: 'numeric', month: 'numeric', day: 'numeric' })
@@ -43,6 +48,20 @@ const pad = n => String(n).padStart(2, '0')
 export function formatDateShort(input) {
   const p = kyivParts(input)
   return p ? `${pad(p.d)}.${pad(p.m + 1)}.${p.y}` : ''
+}
+
+// «01.10.2026, 09:54» — за Києвом (адмінка: коли надійшла заявка)
+let _kyivTime = null
+export function formatDateTimeKyiv(input) {
+  const d = toDate(input)
+  if (!d) return ''
+  try {
+    if (!_kyivTime) _kyivTime = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Kiev', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
+    const t = Object.fromEntries(_kyivTime.formatToParts(d).map(x => [x.type, x.value]))
+    return `${formatDateShort(d)}, ${pad(+t.hour)}:${t.minute}`
+  } catch {
+    return formatDateShort(d)
+  }
 }
 
 // «1 вересня 2026 р.»

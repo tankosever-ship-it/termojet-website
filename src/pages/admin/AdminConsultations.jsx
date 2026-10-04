@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, MessageSquare, Phone, Mail } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { formatDateTimeKyiv } from '../../utils/date'
 
 export default function AdminConsultations() {
   const { consultations, markViewed, isAdminAuth } = useApp()
@@ -49,15 +50,16 @@ export default function AdminConsultations() {
                       {c.phone && <a href={`tel:${c.phone}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Phone size={12} />{c.phone}</a>}
                       {c.email && <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-[var(--primary)]"><Mail size={12} />{c.email}</a>}
                     </div>
-                    {c.message && <p className="text-sm text-gray-600 mt-2 bg-gray-50 rounded-lg p-3">{c.message}</p>}
+                    {c.message && <p className="text-sm text-gray-600 mt-2 bg-gray-50 rounded-lg p-3 whitespace-pre-line">{c.message}</p>}
                     {c.utm && Object.keys(c.utm).length > 0 && (
                       <p className="text-xs text-gray-400 mt-2">
                         Джерело: {c.utm.utm_source || c.utm.referrer || '—'}{c.utm.utm_medium ? ' · ' + c.utm.utm_medium : ''}{c.utm.utm_campaign ? ' · ' + c.utm.utm_campaign : ''}
                       </p>
                     )}
                   </div>
-                  <span className="text-xs text-gray-400 flex-shrink-0">
-                    {c.createdAt ? new Date(c.createdAt).toLocaleDateString('uk-UA') : ''}
+                  {/* created_at — UTC із SQLite; показуємо за Києвом */}
+                  <span className="text-xs text-gray-400 flex-shrink-0 whitespace-nowrap" title="Час за Києвом">
+                    {formatDateTimeKyiv(c.created_at || c.createdAt)}
                   </span>
                 </div>
               </div>
