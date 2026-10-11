@@ -45,6 +45,9 @@ const CATALOG_COVER = '/banner-catalog.webp'
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }
 
+// Група фільтрів, яку перемикають вкладки SEO-шаблону категорії
+const LANDING_TAB_FILTER = 'cabinettype'
+
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
 const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
 
@@ -535,6 +538,21 @@ const CATEGORY_FILTERS = {
     ],
   },
 
+  // Колекторна шафа: тип (мітки — ті самі, що в specs «Тип» і FILTER_LABEL_I18N); ціна — автоматично.
+  // Вкладки SEO-шаблону (CategoryLanding) перемикають саме цю групу — див. groups[].filter у category-landing.json.
+  'shafa-kolektorna': {
+    groups: [
+      {
+        key: 'cabinettype',
+        label: 'Тип шафи',
+        options: [
+          { label: 'Внутрішня (вбудована)', test: p => /Шафа колекторна внутрішня/i.test(p.name) },
+          { label: 'Зовнішня (накладна)',   test: p => /Шафа колекторна зовнішня/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+
   'termojet-mega': {
     groups: [
       {
@@ -663,7 +681,7 @@ const FILTER_LABEL_I18N = {
   "Виходів": {"en": "Outlets", "pl": "Wyjścia", "fr": "Sorties", "de": "Ausgänge", "ro": "Ieșiri"},
   "Вниз": {"en": "Down", "pl": "Dół", "fr": "Vers le bas", "de": "Nach unten", "ro": "Jos"},
   "Внутрішня": {"en": "Female (internal)", "pl": "Wewnętrzny (żeński)", "fr": "Femelle (interne)", "de": "Innengewinde (IG)", "ro": "Interior (mamă)"},
-  "Внутрішня (вбудована)": {"en": "Internal (built-in)", "pl": "Wewnętrzna (wbudowana)", "fr": "Interne (intégrée)", "de": "Intern (eingebaut)", "ro": "Intern (încorporat)"},
+  "Внутрішня (вбудована)": {"en": "Flush-mounted (built-in)", "pl": "Podtynkowa (wbudowana)", "fr": "Encastré", "de": "Unterputz (eingebaut)", "ro": "Încastrată"},
   "ГВС та бойлер": {"en": "DHW & boiler", "pl": "CWU i bojler", "fr": "ECS et chauffe-eau", "de": "TWW & Boiler", "ro": "ACM și boiler"},
   "Гідрострілка": {"en": "Hydraulic separator", "pl": "Rozdzielacz hydrauliczny", "fr": "Séparateur hydraulique", "de": "Hydraulische Weiche", "ro": "Separator hidraulic"},
   "Датчик / приймач": {"en": "Sensor / receiver", "pl": "Czujnik / odbiornik", "fr": "Capteur / récepteur", "de": "Sensor / Empfänger", "ro": "Senzor / receptor"},
@@ -692,7 +710,7 @@ const FILTER_LABEL_I18N = {
   "Зі змішувачем": {"en": "With mixer", "pl": "Z mieszaczem", "fr": "Avec mélangeur", "de": "Mit Mischer", "ro": "Cu mixer"},
   "Змішувальний вузол": {"en": "Mixing unit", "pl": "Węzeł mieszający", "fr": "Groupe de mélange", "de": "Mischeinheit", "ro": "Grup de amestec"},
   "Зовнішня": {"en": "Male (external)", "pl": "Zewnętrzny (męski)", "fr": "Mâle (externe)", "de": "Außengewinde (AG)", "ro": "Exterior (tată)"},
-  "Зовнішня (накладна)": {"en": "External (surface-mount)", "pl": "Zewnętrzna (natynkowa)", "fr": "Externe (en saillie)", "de": "Extern (aufputz)", "ro": "Extern (aparent)"},
+  "Зовнішня (накладна)": {"en": "Surface-mounted", "pl": "Natynkowa", "fr": "En saillie", "de": "Aufputz", "ro": "Aplicată"},
   "Зональний клапан": {"en": "Zone valve", "pl": "Zawór strefowy", "fr": "Vanne de zone", "de": "Zonenventil", "ro": "Vană de zonă"},
   "Каналізаційна установка": {"en": "Sewage pump unit", "pl": "Przepompownia ścieków", "fr": "Station de relevage", "de": "Abwasserhebeanlage", "ro": "Stație de pompare a apelor uzate"},
   "Колектор": {"en": "Manifold", "pl": "Rozdzielacz", "fr": "Collecteur", "de": "Verteiler", "ro": "Distribuitor"},
@@ -1385,6 +1403,9 @@ export default function CatalogPage() {
     return list
   }, [catProducts, search, inStockOnly, sort, catFilters, categorySlug, lang, price, priceBounds, eurRate])
 
+  // Вкладка шаблону = вибрана опція фільтра типу (groups[].filter → мітка опції)
+  const landingTab = landing?.groups.find(g => g.filter && g.filter === catFilters[LANDING_TAB_FILTER])?.key || 'all'
+
   return (
     <>
       <SEO title={currentCategory ? (currentCategory.name[lang] || currentCategory.name.uk) : cat.title} />
@@ -1459,7 +1480,14 @@ export default function CatalogPage() {
 
         {landing ? (
           <div className="mt-8">
-            <CategoryLanding key={currentCategory.slug} cfg={landing} catProducts={catProducts} allProducts={products} eurRate={eurRate} Card={ProductGridCard} />
+            <CategoryLanding key={currentCategory.slug} cfg={landing} lang={lang}
+              catProducts={catProducts} shownProducts={filtered} allProducts={products} eurRate={eurRate} Card={ProductGridCard}
+              aside={<Sidebar categorySlug={categorySlug} filters={catFilters} setFilters={setCatFilters}
+                priceBounds={priceBounds} price={price} setPrice={setPrice} />}
+              tab={landingTab} onTab={key => {
+                const g = landing.groups.find(x => x.key === key)
+                setCatFilters(f => ({ ...f, [LANDING_TAB_FILTER]: g?.filter || '' }))
+              }} />
           </div>
         ) : (
         <>

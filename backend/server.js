@@ -394,7 +394,22 @@ function categoryCrumbs(cat, lang) {
 // FAQ — токени {min:<група>}/{max:<група>}, рахуємо так само, як utils/categoryLanding.js.
 let CATEGORY_LANDING = {}
 try { CATEGORY_LANDING = require(path.join(__dirname, '..', 'src', 'data', 'category-landing.json')) } catch { /* без шаблонів */ }
-const groupDigitsNbsp = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0')
+// Дзеркало PRICE_FMT із src/utils/currency.js (сума в ₴ → рядок за мовою); має збігатися з фронтом
+const groupD = (n, sep) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, sep)
+const UAH_FMT = {
+  uk: n => `${groupD(n, '\u00a0')}\u00a0грн`,
+  en: n => `UAH\u00a0${groupD(n, ',')}`,
+  pl: n => `${n >= 10000 ? groupD(n, '\u00a0') : groupD(n, '')}\u00a0UAH`,
+  fr: n => `${groupD(n, '\u202f')}\u00a0UAH`,
+  de: n => `${groupD(n, '.')}\u00a0UAH`,
+}
+const fmtUahLang = (n, lang) => (UAH_FMT[lang] || UAH_FMT.uk)(n)
+const landingCfg = (cat, lang) => CATEGORY_LANDING[cat]?.[lang] || null
+// Товари категорії для ItemList / цін FAQ (лише якщо в категорії є SEO-шаблон)
+function landingProductsFor(cat) {
+  if (!CATEGORY_LANDING[cat]) return []
+  return _db.prepare('SELECT name, slug, price, sale_price, currency, i18n FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name').all(cat)
+}
 function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
   const cfg = CATEGORY_LANDING[cat]?.[lang]
   if (!cfg) return []
@@ -411,7 +426,7 @@ function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
     const r = range(products.filter(p => (p.name || '').toLowerCase().includes(String(g.match || '').toLowerCase())))
     if (r) { ctx[`min:${g.key}`] = r[0]; ctx[`max:${g.key}`] = r[1] }
   }
-  const fill = s => String(s || '').replace(/\{([\w:]+)\}/g, (m, k) => (ctx[k] != null ? groupDigitsNbsp(ctx[k]) : m))
+  const fill = s => String(s || '').replace(/\{([\w:]+)\}/g, (m, k) => (ctx[k] != null ? fmtUahLang(ctx[k], lang) : m))
   const out = [{
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -420,7 +435,7 @@ function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: products.length,
-      itemListElement: products.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: `${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(p.slug)}` })),
+      itemListElement: products.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: pickLang(p, lang).name || p.name, url: `${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(p.slug)}` })),
     },
   }]
   // Якщо в FAQ лишився токен (немає курсу/цін) — питання не віддаємо, щоб не показати «{min:int}»
@@ -1167,31 +1182,30 @@ function handleCategory(lang) {
       if (intl) {
         // Обгортка title/desc/breadcrumb: ro отримує румунську, решта не-uk — англійську.
         const wrap = lang === 'ro' ? 'echipamente pentru centrale termice' : 'boiler room equipment'
-        let title = `${cName} | Termojet`
+        const lcfg = landingCfg(req.params.cat, lang)
+        let title = lcfg?.seo?.title || `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, wrap)
         const descTail = lang === 'ro'
           ? 'Termojet — producător din 2002, livrare în toată Ucraina.'
           : 'Termojet — manufacturer since 2002, delivery across Ukraine.'
-        const desc = `${cDesc}. ${descTail}`.slice(0, 200)
+        const desc = (lcfg?.seo?.description || `${cDesc}. ${descTail}`).slice(0, 200)
         const jsonLd = [buildBreadcrumb([
           { name: lang === 'ro' ? 'Acasă' : 'Home', url: base },
           { name: 'Catalog', url: `${base}/catalog` },
           ...categoryCrumbs(req.params.cat, lang),
-        ]), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cName, bodyText: cDesc, alternates, jsonLd })
+        ]), ...landingJsonLd(req.params.cat, lang, { url, name: cName, products: landingProductsFor(req.params.cat), eurRate: peekEurRate() }), ORG_SCHEMA]
+        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: lcfg?.h1 || cName, bodyText: cDesc, alternates, jsonLd })
       } else {
-        let title = cm.metaTitle || `${cName} | Termojet`
+        const lcfg = landingCfg(req.params.cat, lang)
+        let title = lcfg?.seo?.title || cm.metaTitle || `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
-        const desc = (cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
-        const landingProducts = _db.prepare(
-          'SELECT name, slug, price, sale_price, currency FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name'
-        ).all(req.params.cat)
+        const desc = (lcfg?.seo?.description || cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
         const jsonLd = [buildBreadcrumb([
           { name: 'Головна', url: base },
           { name: 'Каталог', url: `${base}/catalog` },
           ...categoryCrumbs(req.params.cat, lang),
-        ]), ...landingJsonLd(req.params.cat, lang, { url, name: cName, products: landingProducts, eurRate: peekEurRate() }), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cm.h1 || cName, bodyText: cDesc, alternates, jsonLd })
+        ]), ...landingJsonLd(req.params.cat, lang, { url, name: cName, products: landingProductsFor(req.params.cat), eurRate: peekEurRate() }), ORG_SCHEMA]
+        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: lcfg?.h1 || cm.h1 || cName, bodyText: cDesc, alternates, jsonLd })
       }
       // SSR-lite: сітка товарів категорії в #seo-content
       const products = _db.prepare(

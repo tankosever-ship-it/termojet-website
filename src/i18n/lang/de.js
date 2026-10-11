@@ -240,7 +240,7 @@ export default {
       "gmax": "Gmax",
       "devtype": "Gerätetyp",
       "prodtype": "Gerätetyp",
-      "cabinettype": "Schaltschranktyp",
+      "cabinettype": "Schranktyp",
       "megaType": "Gerätetyp",
       "megaDn": "Größe (DN)",
       "eqtype": "Gerätetyp"

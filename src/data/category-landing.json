@@ -1,13 +1,18 @@
 {
-  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (FAQPage / ItemList у JSON-LD, backend/server.js). Тексти поки лише uk: для інших мов сторінка категорії — звичайна. Токени в FAQ: {min:<group>} / {max:<group>} — поточна мін./макс. ціна групи в грн (з євро за курсом НБУ), {min} / {max} — по всій категорії.",
+  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки.",
   "shafa-kolektorna": {
     "uk": {
+      "seo": {
+        "title": "Колекторна шафа для теплої підлоги — купити в Termojet",
+        "description": "Внутрішні (вбудовані) та зовнішні шафи колекторні на 2–16 виходів. 7 типорозмірів, таблиця розмірів, власне виробництво з 2002 року. Доставка по Україні."
+      },
       "h1": "Колекторна шафа для теплої підлоги",
       "intro": "Шафа колекторна закриває колектор теплої підлоги або опалення та приховує підключення труб. Обирайте внутрішню (вбудовану) шафу для монтажу в нішу або зовнішню (накладну) для кріплення на стіну. 7 типорозмірів на 2–16 виходів колектора.",
       "groups": [
         {
           "key": "int",
           "match": "внутрішня",
+          "filter": "Внутрішня (вбудована)",
           "tab": "Внутрішні",
           "cardTitle": "Внутрішня шафа",
           "cardSub": "Вбудована, в нішу",
@@ -19,6 +24,7 @@
         {
           "key": "ext",
           "match": "зовнішня",
+          "filter": "Зовнішня (накладна)",
           "tab": "Зовнішні",
           "cardTitle": "Зовнішня шафа",
           "cardSub": "Накладна, на стіну",
@@ -28,7 +34,12 @@
           "column": "Зовнішня"
         }
       ],
-      "picker": { "title": "Скільки виходів у колекторі?", "sub": "Підсвітимо потрібний розмір шафи", "from": 2, "to": 16 },
+      "picker": {
+        "title": "Скільки виходів у колекторі?",
+        "sub": "Підсвітимо потрібний розмір шафи",
+        "from": 2,
+        "to": 16
+      },
       "sizes": {
         "h2": "Розміри колекторних шаф",
         "text": "Ширина шафи залежить від кількості виходів колектора. Висота та глибина однакові для всіх моделей одного типу."
@@ -40,10 +51,37 @@
       "related": {
         "h2": "Що встановити в шафу",
         "items": [
-          { "title": "Колектори з витратомірами", "category": "kolektory-pidloha", "filter": { "prodtype": "Колектор з витратомірами" }, "match": "витратомірами", "sub": "outlets" },
-          { "title": "Колектори з кранами", "category": "kolektory-pidloha", "filter": { "prodtype": "Колектор з кранами" }, "match": "кранами", "sub": "outlets" },
-          { "title": "Змішувальний вузол для теплої підлоги", "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy", "sub": "Насосно-змішувальні вузли" },
-          { "title": "Євроконуси та байпас", "category": "kolektory-pidloha", "filter": { "prodtype": "Комплектуючі" }, "sub": "Комплектуючі для колектора" }
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з витратомірами"
+            },
+            "match": "витратомірами",
+            "sub": "outlets",
+            "title": "Колектори з витратомірами"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з кранами"
+            },
+            "match": "кранами",
+            "sub": "outlets",
+            "title": "Колектори з кранами"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Змішувальний вузол для теплої підлоги",
+            "sub": "Насосно-змішувальні вузли"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Євроконуси та байпас",
+            "sub": "Комплектуючі для колектора"
+          }
         ]
       },
       "faq": {
@@ -59,13 +97,646 @@
           },
           {
             "q": "Скільки коштує колекторна шафа?",
-            "a": "Внутрішні шафи — від {min:int} до {max:int} грн, зовнішні — від {min:ext} до {max:ext} грн, залежно від розміру. Актуальна ціна кожної моделі — у картці товару."
+            "a": "Внутрішні шафи — від {min:int} до {max:int}, зовнішні — від {min:ext} до {max:ext}, залежно від розміру. Актуальна ціна кожної моделі — у картці товару."
           },
           {
             "q": "Чи є доставка по Україні?",
             "a": "Так, доставляємо по всій Україні службою «Нова Пошта». Умови й терміни — на сторінці «Доставка і оплата»."
           }
         ]
+      },
+      "ui": {
+        "models": "моделей",
+        "from": "від",
+        "all": "Всі",
+        "found": "Знайдено",
+        "sortSize": "За розміром",
+        "sortPriceAsc": "Ціна: від низької",
+        "sortPriceDesc": "Ціна: від високої",
+        "outlets": "виходів",
+        "outletsCol": "Виходів",
+        "w": "Ш",
+        "mount": "Монтаж",
+        "hd": "Висота × глибина",
+        "width": "Ширина",
+        "price": "Ціна",
+        "mm": "мм",
+        "empty": "Немає моделей за вибраними фільтрами"
+      }
+    },
+    "en": {
+      "seo": {
+        "title": "Manifold Cabinet for Underfloor Heating — Buy at Termojet",
+        "description": "Flush-mounted and surface-mounted manifold cabinets for 2–16 outlets. 7 sizes, size table, own production since 2002. Delivery across Ukraine."
+      },
+      "h1": "Manifold Cabinet for Underfloor Heating",
+      "intro": "A manifold cabinet encloses the underfloor heating or heating manifold and hides the pipe connections. Choose a flush-mounted (built-in) cabinet for installation in a wall recess or a surface-mounted cabinet for fixing to the wall. 7 sizes for manifolds with 2–16 outlets.",
+      "groups": [
+        {
+          "key": "int",
+          "match": "внутрішня",
+          "filter": "Внутрішня (вбудована)",
+          "tab": "Flush-mounted",
+          "cardTitle": "Flush-mounted cabinet",
+          "cardSub": "Built into a wall recess",
+          "h2": "Flush-mounted manifold cabinet",
+          "text": "Built-in cabinet for installation in a wall recess. Height {h} mm, depth {d} mm, width {wmin}–{wmax} mm.",
+          "mount": "Built into a recess",
+          "column": "Flush-mounted"
+        },
+        {
+          "key": "ext",
+          "match": "зовнішня",
+          "filter": "Зовнішня (накладна)",
+          "tab": "Surface-mounted",
+          "cardTitle": "Surface-mounted cabinet",
+          "cardSub": "Fixed to the wall",
+          "h2": "Surface-mounted manifold cabinet",
+          "text": "Cabinet for fixing to the wall surface. Height {h} mm, depth {d} mm, width {wmin}–{wmax} mm.",
+          "mount": "On the wall surface",
+          "column": "Surface-mounted"
+        }
+      ],
+      "picker": {
+        "title": "How many outlets does your manifold have?",
+        "sub": "We'll highlight the right cabinet size",
+        "from": 2,
+        "to": 16
+      },
+      "sizes": {
+        "h2": "Manifold cabinet sizes",
+        "text": "The cabinet width depends on the number of manifold outlets. Height and depth are the same for all models of one type."
+      },
+      "compare": {
+        "h2": "Flush-mounted or surface-mounted?",
+        "text": "The cabinet type determines how it is installed. A flush-mounted cabinet is set into a recess during renovation, while a surface-mounted one can be installed on a finished wall."
+      },
+      "related": {
+        "h2": "What to install in the cabinet",
+        "items": [
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з витратомірами"
+            },
+            "match": "витратомірами",
+            "sub": "outlets",
+            "title": "Manifolds with flow meters"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з кранами"
+            },
+            "match": "кранами",
+            "sub": "outlets",
+            "title": "Manifolds with shut-off valves"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Underfloor heating mixing unit",
+            "sub": "Pump mixing units"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurocones and bypass",
+            "sub": "Manifold accessories"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Manifold cabinet FAQ",
+        "items": [
+          {
+            "q": "How do I choose the size of a manifold cabinet?",
+            "a": "By the number of manifold outlets: No. 00 — for 2–4 outlets, No. 01 — 4–6, No. 02 — 6–8, No. 03 — 8–10, No. 04 — 10–12, No. 05 — 12–14, No. 06 — 14–16. Cabinet width ranges from 335 to 1130 mm."
+          },
+          {
+            "q": "What is the difference between flush-mounted and surface-mounted cabinets?",
+            "a": "A flush-mounted (built-in) cabinet goes into a wall recess: it is set in place during renovation, and only the frame and door remain visible. Height — 575 mm, depth — 110 mm. A surface-mounted cabinet is fixed to the surface of a finished wall, no recess is needed. Height — 600 mm, depth — 125 mm."
+          },
+          {
+            "q": "How much does a manifold cabinet cost?",
+            "a": "Flush-mounted cabinets cost from {min:int} to {max:int}, surface-mounted ones from {min:ext} to {max:ext}, depending on size. The current price of each model is on its product page."
+          },
+          {
+            "q": "Do you deliver across Ukraine?",
+            "a": "Yes, we deliver throughout Ukraine via Nova Poshta. Terms and delivery times are on the «Delivery and payment» page."
+          }
+        ]
+      },
+      "ui": {
+        "models": "models",
+        "from": "from",
+        "all": "All",
+        "found": "Found",
+        "sortSize": "By size",
+        "sortPriceAsc": "Price: low to high",
+        "sortPriceDesc": "Price: high to low",
+        "outlets": "outlets",
+        "outletsCol": "Outlets",
+        "w": "W",
+        "mount": "Installation",
+        "hd": "Height × depth",
+        "width": "Width",
+        "price": "Price",
+        "mm": "mm",
+        "empty": "No models match the selected filters"
+      }
+    },
+    "pl": {
+      "seo": {
+        "title": "Szafka do rozdzielacza podłogówki — kup w Termojet",
+        "description": "Szafki podtynkowe i natynkowe do rozdzielaczy na 2–16 wyjść. 7 rozmiarów, tabela wymiarów, własna produkcja od 2002 roku. Dostawa na terenie Ukrainy."
+      },
+      "h1": "Szafka do rozdzielacza ogrzewania podłogowego",
+      "intro": "Szafka rozdzielacza zakrywa rozdzielacz ogrzewania podłogowego lub grzejnikowego i ukrywa podłączenia rur. Wybierz szafkę podtynkową (wbudowaną) do montażu we wnęce lub natynkową do mocowania na ścianie. 7 rozmiarów do rozdzielaczy na 2–16 wyjść.",
+      "groups": [
+        {
+          "key": "int",
+          "match": "внутрішня",
+          "filter": "Внутрішня (вбудована)",
+          "tab": "Podtynkowe",
+          "cardTitle": "Szafka podtynkowa",
+          "cardSub": "Wbudowana, we wnęce",
+          "h2": "Szafka rozdzielacza podtynkowa",
+          "text": "Szafka wbudowana do montażu we wnęce ściennej. Wysokość {h} mm, głębokość {d} mm, szerokość {wmin}–{wmax} mm.",
+          "mount": "Wbudowana we wnękę",
+          "column": "Podtynkowa"
+        },
+        {
+          "key": "ext",
+          "match": "зовнішня",
+          "filter": "Зовнішня (накладна)",
+          "tab": "Natynkowe",
+          "cardTitle": "Szafka natynkowa",
+          "cardSub": "Montaż na ścianie",
+          "h2": "Szafka rozdzielacza natynkowa",
+          "text": "Szafka do mocowania na powierzchni ściany. Wysokość {h} mm, głębokość {d} mm, szerokość {wmin}–{wmax} mm.",
+          "mount": "Na ścianie",
+          "column": "Natynkowa"
+        }
+      ],
+      "picker": {
+        "title": "Ile wyjść ma rozdzielacz?",
+        "sub": "Podświetlimy odpowiedni rozmiar szafki",
+        "from": 2,
+        "to": 16
+      },
+      "sizes": {
+        "h2": "Wymiary szafek rozdzielaczy",
+        "text": "Szerokość szafki zależy od liczby wyjść rozdzielacza. Wysokość i głębokość są takie same dla wszystkich modeli danego typu."
+      },
+      "compare": {
+        "h2": "Podtynkowa czy natynkowa?",
+        "text": "Typ szafki określa sposób montażu. Szafkę podtynkową osadza się we wnęce już na etapie remontu, natynkową można zamontować na gotowej ścianie."
+      },
+      "related": {
+        "h2": "Co zamontować w szafce",
+        "items": [
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з витратомірами"
+            },
+            "match": "витратомірами",
+            "sub": "outlets",
+            "title": "Rozdzielacze z przepływomierzami"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з кранами"
+            },
+            "match": "кранами",
+            "sub": "outlets",
+            "title": "Rozdzielacze z zaworami"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Węzeł mieszający do ogrzewania podłogowego",
+            "sub": "Węzły pompowo-mieszające"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurokonusy i bypass",
+            "sub": "Akcesoria do rozdzielacza"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Pytania o szafki rozdzielaczy",
+        "items": [
+          {
+            "q": "Jak dobrać rozmiar szafki rozdzielacza?",
+            "a": "Według liczby wyjść rozdzielacza: nr 00 — na 2–4 wyjścia, nr 01 — 4–6, nr 02 — 6–8, nr 03 — 8–10, nr 04 — 10–12, nr 05 — 12–14, nr 06 — 14–16. Szerokość szafki — od 335 do 1130 mm."
+          },
+          {
+            "q": "Czym różni się szafka podtynkowa od natynkowej?",
+            "a": "Szafkę podtynkową (wbudowaną) montuje się we wnęce w ścianie: osadza się ją na etapie remontu, a na zewnątrz widać tylko ramkę i drzwiczki. Wysokość — 575 mm, głębokość — 110 mm. Szafkę natynkową mocuje się na powierzchni gotowej ściany, wnęka nie jest potrzebna. Wysokość — 600 mm, głębokość — 125 mm."
+          },
+          {
+            "q": "Ile kosztuje szafka rozdzielacza?",
+            "a": "Szafki podtynkowe kosztują od {min:int} do {max:int}, natynkowe — od {min:ext} do {max:ext}, w zależności od rozmiaru. Aktualna cena każdego modelu jest na jego stronie."
+          },
+          {
+            "q": "Czy jest dostawa na terenie Ukrainy?",
+            "a": "Tak, dostarczamy na terenie całej Ukrainy przez Nova Poshta. Warunki i terminy — na stronie «Dostawa i płatność»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modeli",
+        "from": "od",
+        "all": "Wszystkie",
+        "found": "Znaleziono",
+        "sortSize": "Według rozmiaru",
+        "sortPriceAsc": "Cena: rosnąco",
+        "sortPriceDesc": "Cena: malejąco",
+        "outlets": "wyjść",
+        "outletsCol": "Wyjścia",
+        "w": "S",
+        "mount": "Montaż",
+        "hd": "Wysokość × głębokość",
+        "width": "Szerokość",
+        "price": "Cena",
+        "mm": "mm",
+        "empty": "Brak modeli dla wybranych filtrów"
+      }
+    },
+    "fr": {
+      "seo": {
+        "title": "Coffret de collecteur plancher chauffant — Termojet",
+        "description": "Coffrets de collecteur encastrés et en saillie pour 2 à 16 sorties. 7 tailles, tableau des dimensions, fabrication propre depuis 2002. Livraison en Ukraine."
+      },
+      "h1": "Coffret de collecteur pour plancher chauffant",
+      "intro": "Le coffret de collecteur abrite le collecteur du plancher chauffant ou du chauffage et masque les raccordements des tubes. Choisissez un coffret encastré pour un montage dans une niche ou un coffret en saillie à fixer au mur. 7 tailles pour collecteurs de 2 à 16 sorties.",
+      "groups": [
+        {
+          "key": "int",
+          "match": "внутрішня",
+          "filter": "Внутрішня (вбудована)",
+          "tab": "Encastrés",
+          "cardTitle": "Coffret encastré",
+          "cardSub": "Intégré dans une niche",
+          "h2": "Coffret de collecteur encastré",
+          "text": "Coffret intégré pour un montage dans une niche murale. Hauteur {h} mm, profondeur {d} mm, largeur {wmin}–{wmax} mm.",
+          "mount": "Encastré dans une niche",
+          "column": "Encastré"
+        },
+        {
+          "key": "ext",
+          "match": "зовнішня",
+          "filter": "Зовнішня (накладна)",
+          "tab": "En saillie",
+          "cardTitle": "Coffret en saillie",
+          "cardSub": "Fixé sur le mur",
+          "h2": "Coffret de collecteur en saillie",
+          "text": "Coffret à fixer sur la surface du mur. Hauteur {h} mm, profondeur {d} mm, largeur {wmin}–{wmax} mm.",
+          "mount": "En saillie, sur le mur",
+          "column": "En saillie"
+        }
+      ],
+      "picker": {
+        "title": "Combien de sorties a votre collecteur ?",
+        "sub": "Nous mettrons en évidence la bonne taille de coffret",
+        "from": 2,
+        "to": 16
+      },
+      "sizes": {
+        "h2": "Dimensions des coffrets de collecteur",
+        "text": "La largeur du coffret dépend du nombre de sorties du collecteur. La hauteur et la profondeur sont identiques pour tous les modèles d'un même type."
+      },
+      "compare": {
+        "h2": "Encastré ou en saillie ?",
+        "text": "Le type de coffret détermine le mode de montage. Le coffret encastré se pose dans une niche dès les travaux, le coffret en saillie peut être installé sur un mur fini."
+      },
+      "related": {
+        "h2": "Quoi installer dans le coffret",
+        "items": [
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з витратомірами"
+            },
+            "match": "витратомірами",
+            "sub": "outlets",
+            "title": "Collecteurs avec débitmètres"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з кранами"
+            },
+            "match": "кранами",
+            "sub": "outlets",
+            "title": "Collecteurs avec vannes d'arrêt"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Groupe de mélange pour plancher chauffant",
+            "sub": "Groupes de pompage et de mélange"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurocônes et by-pass",
+            "sub": "Accessoires pour collecteur"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Questions sur les coffrets de collecteur",
+        "items": [
+          {
+            "q": "Comment choisir la taille du coffret de collecteur ?",
+            "a": "Selon le nombre de sorties du collecteur : n° 00 — pour 2 à 4 sorties, n° 01 — 4 à 6, n° 02 — 6 à 8, n° 03 — 8 à 10, n° 04 — 10 à 12, n° 05 — 12 à 14, n° 06 — 14 à 16. La largeur du coffret va de 335 à 1130 mm."
+          },
+          {
+            "q": "Quelle est la différence entre un coffret encastré et un coffret en saillie ?",
+            "a": "Le coffret encastré se pose dans une niche murale pendant les travaux : seuls le cadre et la porte restent visibles. Hauteur — 575 mm, profondeur — 110 mm. Le coffret en saillie se fixe sur la surface d'un mur fini, sans niche. Hauteur — 600 mm, profondeur — 125 mm."
+          },
+          {
+            "q": "Combien coûte un coffret de collecteur ?",
+            "a": "Les coffrets encastrés coûtent de {min:int} à {max:int}, les coffrets en saillie de {min:ext} à {max:ext}, selon la taille. Le prix actuel de chaque modèle figure sur sa fiche produit."
+          },
+          {
+            "q": "Livrez-vous partout en Ukraine ?",
+            "a": "Oui, nous livrons dans toute l'Ukraine via Nova Poshta. Conditions et délais sur la page « Livraison et paiement »."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modèles",
+        "from": "à partir de",
+        "all": "Tous",
+        "found": "Trouvés",
+        "sortSize": "Par taille",
+        "sortPriceAsc": "Prix croissant",
+        "sortPriceDesc": "Prix décroissant",
+        "outlets": "sorties",
+        "outletsCol": "Sorties",
+        "w": "L",
+        "mount": "Montage",
+        "hd": "Hauteur × profondeur",
+        "width": "Largeur",
+        "price": "Prix",
+        "mm": "mm",
+        "empty": "Aucun modèle ne correspond aux filtres"
+      }
+    },
+    "de": {
+      "seo": {
+        "title": "Verteilerschrank für Fußbodenheizung — bei Termojet kaufen",
+        "description": "Unterputz- und Aufputz-Verteilerschränke für 2–16 Abgänge. 7 Größen, Maßtabelle, eigene Fertigung seit 2002. Lieferung in die gesamte Ukraine."
+      },
+      "h1": "Verteilerschrank für Fußbodenheizung",
+      "intro": "Der Verteilerschrank umschließt den Fußbodenheizungs- oder Heizungsverteiler und verdeckt die Rohranschlüsse. Wählen Sie einen Unterputzschrank für den Einbau in eine Wandnische oder einen Aufputzschrank für die Wandmontage. 7 Größen für Verteiler mit 2–16 Abgängen.",
+      "groups": [
+        {
+          "key": "int",
+          "match": "внутрішня",
+          "filter": "Внутрішня (вбудована)",
+          "tab": "Unterputz",
+          "cardTitle": "Unterputzschrank",
+          "cardSub": "In die Wandnische eingebaut",
+          "h2": "Verteilerschrank Unterputz",
+          "text": "Einbauschrank für die Montage in einer Wandnische. Höhe {h} mm, Tiefe {d} mm, Breite {wmin}–{wmax} mm.",
+          "mount": "In die Nische eingebaut",
+          "column": "Unterputz"
+        },
+        {
+          "key": "ext",
+          "match": "зовнішня",
+          "filter": "Зовнішня (накладна)",
+          "tab": "Aufputz",
+          "cardTitle": "Aufputzschrank",
+          "cardSub": "Montage auf der Wand",
+          "h2": "Verteilerschrank Aufputz",
+          "text": "Schrank für die Montage auf der Wandoberfläche. Höhe {h} mm, Tiefe {d} mm, Breite {wmin}–{wmax} mm.",
+          "mount": "Auf der Wand",
+          "column": "Aufputz"
+        }
+      ],
+      "picker": {
+        "title": "Wie viele Abgänge hat Ihr Verteiler?",
+        "sub": "Wir markieren die passende Schrankgröße",
+        "from": 2,
+        "to": 16
+      },
+      "sizes": {
+        "h2": "Maße der Verteilerschränke",
+        "text": "Die Breite des Schranks hängt von der Anzahl der Verteilerabgänge ab. Höhe und Tiefe sind bei allen Modellen eines Typs gleich."
+      },
+      "compare": {
+        "h2": "Unterputz oder Aufputz?",
+        "text": "Der Schranktyp bestimmt die Montageart. Ein Unterputzschrank wird schon beim Innenausbau in eine Nische gesetzt, ein Aufputzschrank kann an einer fertigen Wand montiert werden."
+      },
+      "related": {
+        "h2": "Was in den Schrank kommt",
+        "items": [
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з витратомірами"
+            },
+            "match": "витратомірами",
+            "sub": "outlets",
+            "title": "Verteiler mit Durchflussmessern"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з кранами"
+            },
+            "match": "кранами",
+            "sub": "outlets",
+            "title": "Verteiler mit Absperrventilen"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Mischeinheit für Fußbodenheizung",
+            "sub": "Pumpen-Mischeinheiten"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurokonen und Bypass",
+            "sub": "Verteilerzubehör"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Fragen zu Verteilerschränken",
+        "items": [
+          {
+            "q": "Wie wähle ich die Größe des Verteilerschranks?",
+            "a": "Nach der Anzahl der Verteilerabgänge: Nr. 00 — für 2–4 Abgänge, Nr. 01 — 4–6, Nr. 02 — 6–8, Nr. 03 — 8–10, Nr. 04 — 10–12, Nr. 05 — 12–14, Nr. 06 — 14–16. Die Schrankbreite liegt zwischen 335 und 1130 mm."
+          },
+          {
+            "q": "Was ist der Unterschied zwischen Unterputz- und Aufputzschrank?",
+            "a": "Ein Unterputzschrank wird in eine Wandnische eingebaut: Er wird beim Innenausbau gesetzt, sichtbar bleiben nur Rahmen und Tür. Höhe — 575 mm, Tiefe — 110 mm. Ein Aufputzschrank wird auf eine fertige Wand montiert, eine Nische ist nicht nötig. Höhe — 600 mm, Tiefe — 125 mm."
+          },
+          {
+            "q": "Was kostet ein Verteilerschrank?",
+            "a": "Unterputzschränke kosten von {min:int} bis {max:int}, Aufputzschränke von {min:ext} bis {max:ext}, je nach Größe. Den aktuellen Preis jedes Modells finden Sie auf seiner Produktseite."
+          },
+          {
+            "q": "Liefern Sie in die gesamte Ukraine?",
+            "a": "Ja, wir liefern in die gesamte Ukraine mit Nova Poshta. Bedingungen und Lieferzeiten finden Sie auf der Seite «Lieferung und Zahlung»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "Modelle",
+        "from": "ab",
+        "all": "Alle",
+        "found": "Gefunden",
+        "sortSize": "Nach Größe",
+        "sortPriceAsc": "Preis: aufsteigend",
+        "sortPriceDesc": "Preis: absteigend",
+        "outlets": "Abgänge",
+        "outletsCol": "Abgänge",
+        "w": "B",
+        "mount": "Montage",
+        "hd": "Höhe × Tiefe",
+        "width": "Breite",
+        "price": "Preis",
+        "mm": "mm",
+        "empty": "Keine Modelle für die gewählten Filter"
+      }
+    },
+    "ro": {
+      "seo": {
+        "title": "Cutie distribuitor încălzire în pardoseală — Termojet",
+        "description": "Cutii încastrate și aplicate pentru distribuitoare cu 2–16 ieșiri. 7 dimensiuni, tabel de dimensiuni, producție proprie din 2002. Livrare în toată Ucraina."
+      },
+      "h1": "Cutie pentru distribuitor de încălzire în pardoseală",
+      "intro": "Cutia pentru distribuitor acoperă distribuitorul încălzirii în pardoseală sau al încălzirii și ascunde racordurile țevilor. Alegeți o cutie încastrată pentru montaj într-o nișă sau o cutie aplicată pentru fixare pe perete. 7 dimensiuni pentru distribuitoare cu 2–16 ieșiri.",
+      "groups": [
+        {
+          "key": "int",
+          "match": "внутрішня",
+          "filter": "Внутрішня (вбудована)",
+          "tab": "Încastrate",
+          "cardTitle": "Cutie încastrată",
+          "cardSub": "Montată în nișă",
+          "h2": "Cutie pentru distribuitor încastrată",
+          "text": "Cutie încorporată pentru montaj într-o nișă din perete. Înălțime {h} mm, adâncime {d} mm, lățime {wmin}–{wmax} mm.",
+          "mount": "Încastrată în nișă",
+          "column": "Încastrată"
+        },
+        {
+          "key": "ext",
+          "match": "зовнішня",
+          "filter": "Зовнішня (накладна)",
+          "tab": "Aplicate",
+          "cardTitle": "Cutie aplicată",
+          "cardSub": "Montată pe perete",
+          "h2": "Cutie pentru distribuitor aplicată",
+          "text": "Cutie pentru fixare pe suprafața peretelui. Înălțime {h} mm, adâncime {d} mm, lățime {wmin}–{wmax} mm.",
+          "mount": "Aplicată, pe perete",
+          "column": "Aplicată"
+        }
+      ],
+      "picker": {
+        "title": "Câte ieșiri are distribuitorul?",
+        "sub": "Vom evidenția dimensiunea potrivită a cutiei",
+        "from": 2,
+        "to": 16
+      },
+      "sizes": {
+        "h2": "Dimensiunile cutiilor pentru distribuitor",
+        "text": "Lățimea cutiei depinde de numărul de ieșiri ale distribuitorului. Înălțimea și adâncimea sunt aceleași pentru toate modelele de același tip."
+      },
+      "compare": {
+        "h2": "Încastrată sau aplicată?",
+        "text": "Tipul cutiei determină modul de montaj. Cutia încastrată se montează în nișă încă din etapa de renovare, cea aplicată poate fi instalată pe un perete finisat."
+      },
+      "related": {
+        "h2": "Ce se montează în cutie",
+        "items": [
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з витратомірами"
+            },
+            "match": "витратомірами",
+            "sub": "outlets",
+            "title": "Distribuitoare cu debitmetre"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Колектор з кранами"
+            },
+            "match": "кранами",
+            "sub": "outlets",
+            "title": "Distribuitoare cu robinete"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Grup de amestec pentru încălzire prin pardoseală",
+            "sub": "Grupuri de pompare și amestec"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Euroconuri și bypass",
+            "sub": "Accesorii pentru distribuitor"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Întrebări despre cutiile pentru distribuitor",
+        "items": [
+          {
+            "q": "Cum aleg dimensiunea cutiei pentru distribuitor?",
+            "a": "După numărul de ieșiri ale distribuitorului: nr. 00 — pentru 2–4 ieșiri, nr. 01 — 4–6, nr. 02 — 6–8, nr. 03 — 8–10, nr. 04 — 10–12, nr. 05 — 12–14, nr. 06 — 14–16. Lățimea cutiei — de la 335 la 1130 mm."
+          },
+          {
+            "q": "Care este diferența dintre cutia încastrată și cea aplicată?",
+            "a": "Cutia încastrată se montează într-o nișă din perete: se instalează în etapa de renovare, iar la vedere rămân doar rama și ușița. Înălțime — 575 mm, adâncime — 110 mm. Cutia aplicată se fixează pe suprafața unui perete finisat, nu este nevoie de nișă. Înălțime — 600 mm, adâncime — 125 mm."
+          },
+          {
+            "q": "Cât costă o cutie pentru distribuitor?",
+            "a": "Cutiile încastrate costă de la {min:int} la {max:int}, cele aplicate — de la {min:ext} la {max:ext}, în funcție de dimensiune. Prețul actual al fiecărui model este pe pagina produsului."
+          },
+          {
+            "q": "Livrați în toată Ucraina?",
+            "a": "Da, livrăm în toată Ucraina prin Nova Poshta. Condițiile și termenele — pe pagina «Livrare și plată»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modele",
+        "from": "de la",
+        "all": "Toate",
+        "found": "Găsite",
+        "sortSize": "După dimensiune",
+        "sortPriceAsc": "Preț crescător",
+        "sortPriceDesc": "Preț descrescător",
+        "outlets": "ieșiri",
+        "outletsCol": "Ieșiri",
+        "w": "L",
+        "mount": "Montaj",
+        "hd": "Înălțime × adâncime",
+        "width": "Lățime",
+        "price": "Preț",
+        "mm": "mm",
+        "empty": "Niciun model pentru filtrele selectate"
       }
     }
   }

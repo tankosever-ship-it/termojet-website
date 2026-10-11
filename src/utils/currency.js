@@ -58,6 +58,11 @@ const PRICE_FMT = {
   de: n => `${groupDigits(n, '.')}${NB}UAH`,
 }
 
+// Готова сума в ₴ → рядок за мовою (для текстів, де ціна вже порахована)
+export function formatUahLang(uah, lang = 'uk') {
+  return (PRICE_FMT[lang] || PRICE_FMT.uk)(uah)
+}
+
 // Format price for display: locale-aware UAH (e.g. "7 945 грн" / "UAH 7,945")
 export function formatPrice(price, currency, eurRate, lang = 'uk') {
   const amount = parseFloat(price)

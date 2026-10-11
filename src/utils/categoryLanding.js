@@ -2,7 +2,7 @@
 // Усе, що залежить від товарів (розміри, діапазони виходів, ціни), рахуємо з каталогу,
 // а не пишемо в текст: ціни йдуть з євро за курсом НБУ і змінюються щодня.
 // ⚠️ Ту саму логіку цін для JSON-LD (FAQ) дублює backend/server.js → landingPriceCtx().
-import { toUAH, groupDigits } from './currency'
+import { toUAH, formatUahLang } from './currency'
 import { effectivePrice } from './sale'
 
 // «Шафа колекторна внутрішня Termojet №03 (8-10 виходів, 715×575×110 мм)»
@@ -21,7 +21,8 @@ export function parseName(name = '') {
 }
 
 export const priceUah = (p, eurRate) => toUAH(effectivePrice(p), p.currency, eurRate) || 0
-export const fmtUah = v => groupDigits(v)
+// Сума в ₴ → «1 798 грн» / «UAH 1,798» / «1.798 UAH» — як решта цін сайту цією мовою
+export const fmtUah = (v, lang = 'uk') => formatUahLang(v, lang)
 
 const minMax = vals => {
   const v = vals.filter(x => x > 0)
@@ -36,7 +37,8 @@ const sizeRank = p => {
   return n != null ? +n : 999
 }
 
-export function buildLanding(cfg, catProducts, allProducts, eurRate) {
+export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk') {
+  const ui = cfg.ui || {}
   const groups = cfg.groups.map(g => {
     const items = byMatch(catProducts, g.match).slice().sort((a, b) => sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
     const parsed = items.map(p => parseName(p.name))
@@ -70,7 +72,7 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate) {
       const [pmin] = minMax(list.map(p => priceUah(p, eurRate)))
       const lo = outs.length ? Math.min(...outs.map(o => o[0])) : null
       const hi = outs.length ? Math.max(...outs.map(o => o[1])) : null
-      sub = [lo != null ? `${lo}–${hi} виходів` : '', pmin ? `від ${fmtUah(pmin)} грн` : ''].filter(Boolean).join(' · ')
+      sub = [lo != null ? `${lo}–${hi} ${ui.outlets || ''}`.trim() : '', pmin ? `${ui.from || ''} ${fmtUah(pmin, lang)}`.trim() : ''].filter(Boolean).join(' · ')
     }
     const qs = r.filter ? '?' + Object.entries(r.filter).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&') : ''
     return { ...r, sub, to: `/catalog/${r.category}${qs}` }
@@ -81,12 +83,12 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate) {
   return { groups, min, max, sizeRows, related, ctx }
 }
 
-// «{h}», «{min:int}» тощо → значення; ціни групуємо розрядами
-export function fillTokens(str, vars) {
+// «{h}», «{min:int}» тощо → значення; ціни — з валютою за мовою («1 798 грн»)
+export function fillTokens(str, vars, lang = 'uk') {
   return String(str || '').replace(/\{([\w:]+)\}/g, (m, k) => {
     const v = vars[k]
     if (v == null || v === '') return m
-    return /^(min|max)/.test(k) ? fmtUah(v) : String(v)
+    return /^(min|max)/.test(k) ? fmtUah(v, lang) : String(v)
   })
 }
 
