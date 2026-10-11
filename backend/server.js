@@ -367,7 +367,7 @@ const ORG_SCHEMA = {
   '@type': 'Organization',
   name: 'Termojet',
   url: SITE,
-  logo: `${SITE}/wp-content/uploads/2023/08/logo.svg`,
+  logo: `${SITE}/logo-orange.png`,
   description: 'Виробник насосних груп, колекторів, клапанів та систем для котелень. Власне виробництво в Україні з 2002 року.',
   foundingDate: '2002',
   address: { '@type': 'PostalAddress', addressCountry: 'UA', addressLocality: 'Київ' },
