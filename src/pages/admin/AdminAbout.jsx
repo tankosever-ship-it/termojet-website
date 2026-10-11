@@ -119,9 +119,10 @@ export default function AdminAbout() {
           <Field label="Підзаголовок" value={form.manufSubtitle} onChange={v => set('manufSubtitle', v)} textarea rows={2} />
         </Section>
 
-        <Section title="Відео (показуються 3 у секції «Про нас»)">
-          <VideoUpload value={form.oldVideo} onChange={v => set('oldVideo', v)} label="Архівне відео цеху (mp4)" />
+        <Section title="Відео (секція «Про нас»)">
+          <VideoUpload value={form.overviewVideo} onChange={v => set('overviewVideo', v)} label="Огляд продукції (mp4)" />
           <VideoUpload value={form.localVideo} onChange={v => set('localVideo', v)} label="Власне відео цеху (mp4)" />
+          <VideoUpload value={form.laserVideo} onChange={v => set('laserVideo', v)} label="Лазерне різання — вертикальне (mp4)" />
           <div>
             <Field label="Оглядове відео (YouTube)" value={form.youtubeUrl} onChange={v => set('youtubeUrl', v)}
               placeholder="https://youtu.be/..." />

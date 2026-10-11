@@ -400,6 +400,8 @@ export default {
     "stepQualityControl": "Quality control",
     "videoArchiveLabel": "Archive footage",
     "videoWorkshopLabel": "Production workshop",
+    "videoOverviewLabel": "Product overview",
+    "videoLaserLabel": "Laser cutting",
     "videoExpand": "Expand",
     "youtubeTitle": "Termojet production overview",
     "galleryLabel": "Production photo gallery",

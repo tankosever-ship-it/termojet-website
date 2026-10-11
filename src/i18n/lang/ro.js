@@ -400,6 +400,8 @@ export default {
     "stepQualityControl": "Control al calității",
     "videoArchiveLabel": "Imagini de arhivă",
     "videoWorkshopLabel": "Atelier de producție",
+    "videoOverviewLabel": "Prezentarea produselor",
+    "videoLaserLabel": "Tăiere cu laser",
     "videoExpand": "Extinde",
     "youtubeTitle": "Prezentarea producției Termojet",
     "galleryLabel": "Galerie foto de producție",

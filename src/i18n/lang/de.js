@@ -400,6 +400,8 @@ export default {
     "stepQualityControl": "Qualitätskontrolle",
     "videoArchiveLabel": "Archivvideo",
     "videoWorkshopLabel": "Produktionshalle",
+    "videoOverviewLabel": "Produktübersicht",
+    "videoLaserLabel": "Laserschneiden",
     "videoExpand": "Erweitern",
     "youtubeTitle": "Überblick über die Termojet-Produktion",
     "galleryLabel": "Produktionsfotogalerie",

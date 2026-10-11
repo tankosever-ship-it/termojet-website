@@ -11,8 +11,6 @@ import { youtubeId, mediaSrc } from '../data/aboutContent'
 
 const BASE = 'https://termojet.com.ua/wp-content/uploads'
 
-const MANUFACTURING_VIDEO = `${BASE}/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4`
-
 const MANUFACTURING_PHOTOS = [
   `${BASE}/2024/04/photo_2024-04-05_18-34-39.jpg`,
   `${BASE}/2024/04/photo_2024-04-05_18-34-32.jpg`,
@@ -110,7 +108,7 @@ export default function AboutPage() {
   const t     = useT()
   const about = t('about')
   const { aboutContent: ac } = useApp()
-  const [videoOpen, setVideoOpen] = useState(null) // url відкритого відео або null
+  const [videoOpen, setVideoOpen] = useState(null) // { src, vertical } відкритого відео або null
 
   const PROCESS_STEPS = [
     { num: '01', label: t('about.stepLaserCut') },
@@ -142,15 +140,19 @@ export default function AboutPage() {
   ]
 
   const fileVideos = [
-    ac.oldVideo   && { src: mediaSrc(ac.oldVideo),   label: t('about.videoArchiveLabel') },
-    ac.localVideo && { src: mediaSrc(ac.localVideo), label: t('about.videoWorkshopLabel') },
+    // Огляд — 31 МБ / 2.5 хв: у прев'ю лише кадр, вантажиться повністю тільки по кліку
+    ac.overviewVideo && { src: mediaSrc(ac.overviewVideo), label: t('about.videoOverviewLabel'), still: true,
+                          poster: ac.overviewPoster && mediaSrc(ac.overviewPoster) },
+    ac.localVideo    && { src: mediaSrc(ac.localVideo),    label: t('about.videoWorkshopLabel') },
+    ac.laserVideo    && { src: mediaSrc(ac.laserVideo),    label: t('about.videoLaserLabel'), vertical: true,
+                          poster: ac.laserPoster && mediaSrc(ac.laserPoster) },
   ].filter(Boolean)
   const photos    = ac.photos?.length ? ac.photos : MANUFACTURING_PHOTOS.map((url) => ({ url, caption: '' }))
   const ytId      = youtubeId(ac.youtubeUrl)
   const poster    = photos[0] ? mediaSrc(photos[0].url) : MANUFACTURING_PHOTOS[0]
-  // До 3 відео: старе (архівне), власне (нове) — як <video>; YouTube — як iframe
+  // Відео-файли — як <video>, YouTube — як iframe. 4 відео — сіткою 2×2, щоб не лишався «сирота»
   const videoCount = fileVideos.length + (ytId ? 1 : 0)
-  const vidCols = videoCount >= 3 ? 'lg:grid-cols-3' : videoCount === 2 ? 'lg:grid-cols-2' : ''
+  const vidCols = videoCount === 2 || videoCount === 4 ? 'md:grid-cols-2' : videoCount >= 3 ? 'lg:grid-cols-3' : ''
 
   return (
     <>
@@ -370,14 +372,16 @@ export default function AboutPage() {
             {fileVideos.map((v, i) => (
               <motion.div key={v.src} initial={{ opacity:0, scale:0.98 }} whileInView={{ opacity:1, scale:1 }}
                 viewport={{ once:true }} transition={{ duration:0.5, delay: i * 0.08 }}
-                onClick={() => setVideoOpen(v.src)}
+                onClick={() => setVideoOpen(v)}
                 className="relative overflow-hidden rounded-xl cursor-pointer group aspect-video bg-black ring-1 ring-white/10">
                 <div style={{ ...mono, fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.55)' }}
                   className="absolute top-3 left-3 z-10 uppercase bg-black/50 px-2 py-1">
                   ● {v.label}
                 </div>
-                <video autoPlay muted loop playsInline preload="metadata" poster={poster}
-                  className="w-full h-full object-cover block">
+                {/* Власний кадр-постер відео; вертикальне — цілком (object-contain), без обрізання */}
+                <video autoPlay={!v.still} muted loop playsInline preload={v.still ? 'none' : 'metadata'}
+                  poster={v.poster || poster}
+                  className={`w-full h-full block ${v.vertical ? 'object-contain' : 'object-cover'}`}>
                   <source src={v.src} type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 flex items-center justify-center transition-colors group-hover:bg-black/30">
@@ -413,9 +417,10 @@ export default function AboutPage() {
           {videoOpen && (
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setVideoOpen(null)}>
               <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
-              <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
+              <div className={`relative z-10 ${videoOpen.vertical ? 'h-[85vh] max-w-full aspect-[464/848]' : 'w-full max-w-4xl aspect-video'}`}
+                onClick={e => e.stopPropagation()}>
                 <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
-                  src={videoOpen} controls autoPlay playsInline />
+                  src={videoOpen.src} controls autoPlay playsInline />
                 <button onClick={() => setVideoOpen(null)}
                   className="absolute -top-5 -right-5 w-10 h-10 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors">
                   <X size={18} />

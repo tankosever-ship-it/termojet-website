@@ -400,6 +400,8 @@ export default {
     "stepQualityControl": "Контроль якості",
     "videoArchiveLabel": "Архівне відео",
     "videoWorkshopLabel": "Виробничий цех",
+    "videoOverviewLabel": "Огляд продукції",
+    "videoLaserLabel": "Лазерне різання",
     "videoExpand": "Розгорнути",
     "youtubeTitle": "Огляд виробництва Termojet",
     "galleryLabel": "Фотогалерея виробництва",

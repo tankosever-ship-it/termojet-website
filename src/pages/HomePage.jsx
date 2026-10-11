@@ -16,7 +16,6 @@ import ReviewCard from '../components/ReviewCard'
 import ReviewFormModal from '../components/ReviewFormModal'
 import { REVIEWS } from '../data/reviews'
 
-const MP4_URL = 'https://termojet.com.ua/wp-content/uploads/2024/04/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4'
 const YT_ID   = 'UzEOVxcS4mw'
 
 const PROD_PHOTOS = [
@@ -112,23 +111,28 @@ function CategoryCard({ cat, lang }) {
   )
 }
 
+// Фото реалізованих об'єктів (оновлено 2026-10-11; старі з wp-content недоступні)
 const PROJECT_PHOTOS = [
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436260112_1028062199320076_3448976492944701510_n-1.jpg', labelKey: 'projIndustrialBoiler' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/436346403_1028062205986742_1945016056577705001_n-1.jpg', labelKey: 'projMixingUnit' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441415989_1029207962538833_8255095048528061398_n-1.jpg', labelKey: 'projPumpStation' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/441923833_1036832648443031_6061180382749463508_n-1.jpg', labelKey: 'projManifoldUnit' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443716920_1034298352029794_8241212954317908008_n-1.jpg', labelKey: 'projEnterpriseBoiler' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/443717382_1035094698616826_2882206306103516977_n-1.jpg', labelKey: 'projSystemInstall' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445077258_1032797785513184_3472109855078885848_n-1.jpg', labelKey: 'projDistributionUnit' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/445741031_1033532898773006_7539877099138788841_n-1.jpg', labelKey: 'projCompletedObject' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448770252_1054379716688324_6993680917338285497_n-1.jpg', labelKey: 'projHeatStation' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448963173_1057194799740149_5056344012506323464_n-1.jpg', labelKey: 'projPumpGroupWork' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/448862036_1054379710021658_8530154308900725780_n-1.jpg', labelKey: 'projManifoldConnect' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/449446624_1063156462477316_8539246227030569584_n-1.jpg', labelKey: 'projIndustrialObject' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450069451_1064322915694004_2995371254833168558_n-1.jpg', labelKey: 'projReadyBoiler' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/450567120_1070326941760268_5112914741981000641_n-1.jpg', labelKey: 'projUnitInstall' },
-  { src: 'https://termojet.com.ua/wp-content/uploads/2024/08/452863875_1078280964298199_2202968223287568557_n-1.jpg', labelKey: 'projResidentialBoiler' },
-]
+  { src: '/images/projects/proekt-01.jpg', labelKey: 'projIndustrialBoiler' },
+  { src: '/images/projects/proekt-02.jpg', labelKey: 'projDistributionUnit' },
+  { src: '/images/projects/proekt-03.jpg', labelKey: 'projPumpGroupWork' },
+  { src: '/images/projects/proekt-04.jpg', labelKey: 'projManifoldUnit' },
+  { src: '/images/projects/proekt-05.jpg', labelKey: 'projSystemInstall' },
+  { src: '/images/projects/proekt-06.jpg', labelKey: 'projMixingUnit' },
+  { src: '/images/projects/proekt-07.jpg', labelKey: 'projManifoldConnect' },
+  { src: '/images/projects/proekt-08.jpg', labelKey: 'projCompletedObject' },
+  { src: '/images/projects/proekt-09.jpg', labelKey: 'projReadyBoiler' },
+  { src: '/images/projects/proekt-10.jpg', labelKey: 'projEnterpriseBoiler' },
+  { src: '/images/projects/proekt-11.jpg', labelKey: 'projIndustrialObject' },
+  { src: '/images/projects/proekt-12.jpg', labelKey: 'projHeatStation' },
+  { src: '/images/projects/proekt-13.jpg', labelKey: 'projUnitInstall' },
+  { src: '/images/projects/proekt-14.jpg', labelKey: 'projManifoldConnect' },
+  { src: '/images/projects/proekt-15.jpg', labelKey: 'projResidentialBoiler' },
+  { src: '/images/projects/proekt-16.jpg', labelKey: 'projIndustrialObject' },
+  { src: '/images/projects/proekt-17.jpg', labelKey: 'projPumpStation' },
+  { src: '/images/projects/proekt-18.jpg', labelKey: 'projSystemInstall' },
+  { src: '/images/projects/proekt-19.jpg', labelKey: 'projMixingUnit' },
+].map(p => ({ ...p, src: assetPath(p.src) }))
 
 function ProjectsCarousel() {
   const t = useT()
@@ -416,7 +420,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
           <div className="relative w-full max-w-4xl aspect-video z-10" onClick={e => e.stopPropagation()}>
             <video className="w-full h-full rounded-2xl shadow-2xl bg-black"
-              src={MP4_URL}
+              src={assetPath('/about-factory.mp4')}
               controls autoPlay playsInline
               title={t('home.productionVideoTitle')} />
             <button onClick={() => setVideoOpen(false)}
@@ -588,15 +592,17 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           ADVANTAGES — Наші переваги
       ═══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden py-20 md:py-28 text-white">
+      <section className="relative overflow-hidden py-20 md:py-28 text-white bg-[#0C0B0A]">
+        {/* Фото — фоном під картками, напівпрозоре; картки зверху з власним темним склом */}
         <img loading="lazy" decoding="async"
-          src="https://termojet.com.ua/wp-content/uploads/2025/09/img_4674.jpg"
+          src={assetPath('/images/home/perevagy-lazerne-rizannya.jpg')}
           alt={t('home.productionImgAlt')}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'brightness(0.3)' }}
+          width={1280} height={960}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          style={{ opacity: 0.45 }}
         />
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(135deg, rgba(10,20,40,0.7) 0%, rgba(0,0,0,0.5) 100%)' }} />
+          style={{ background: 'linear-gradient(180deg, rgba(12,11,10,0.55) 0%, rgba(12,11,10,0.25) 45%, rgba(12,11,10,0.6) 100%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4">
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="text-center mb-14">
@@ -621,14 +627,14 @@ export default function HomePage() {
                   onMouseLeave={() => setHoveredAdvantage(null)}
                   animate={{ scale: isHovered ? 1.02 : 1 }}
                   transition={{ duration: 0.2 }}
-                  className="relative p-6 flex flex-col gap-4 rounded-2xl cursor-default overflow-hidden"
+                  className="relative p-6 flex flex-col gap-4 rounded-2xl cursor-default overflow-hidden backdrop-blur-md"
                   style={{
                     background: isHovered
-                      ? 'linear-gradient(135deg, rgba(255,85,0,0.12), rgba(255,120,0,0.06))'
-                      : 'rgba(255,255,255,0.05)',
+                      ? 'linear-gradient(135deg, rgba(60,24,6,0.82), rgba(20,14,10,0.78))'
+                      : 'rgba(14,13,12,0.72)',
                     border: isHovered
-                      ? '1px solid rgba(255,85,0,0.35)'
-                      : '1px solid rgba(255,255,255,0.08)',
+                      ? '1px solid rgba(255,85,0,0.45)'
+                      : '1px solid rgba(255,255,255,0.12)',
                     transition: 'background 0.25s ease, border-color 0.25s ease',
                   }}>
                   {/* Animated glow on hover */}
@@ -637,7 +643,7 @@ export default function HomePage() {
                       style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,85,0,0.08), transparent 70%)' }} />
                   )}
                   <div className="relative flex items-start justify-between">
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.1em', color: isHovered ? 'var(--accent)' : 'rgba(255,255,255,0.25)', transition: 'color 0.25s' }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.1em', color: isHovered ? 'var(--accent)' : 'rgba(255,255,255,0.45)', transition: 'color 0.25s' }}>
                       {item.num}
                     </span>
                     <motion.div animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 4 }} transition={{ duration: 0.2 }}>
@@ -645,10 +651,10 @@ export default function HomePage() {
                     </motion.div>
                   </div>
                   <div className="relative">
-                    <h3 className="font-bold text-white mb-2 transition-colors" style={{ color: isHovered ? 'white' : 'rgba(255,255,255,0.85)' }}>
+                    <h3 className="font-bold text-white mb-2 transition-colors" style={{ color: 'white' }}>
                       {item.title}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: isHovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.45)', transition: 'color 0.25s' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: isHovered ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.72)', transition: 'color 0.25s' }}>
                       {item.desc}
                     </p>
                   </div>

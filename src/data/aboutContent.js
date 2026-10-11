@@ -5,8 +5,6 @@ import { assetPath } from '../utils/assetPath'
 const WP = 'https://termojet.com.ua/wp-content/uploads/2024/04'
 const wp = (n) => `${WP}/photo_2024-04-05_${n}.jpg`
 
-// Старе відео цеху (було тут раніше) — повертаємо як третє відео
-export const LEGACY_VIDEO = `${WP}/0-02-05-973ce8523dda389f497460d406b3d1195952436349faf993e798fb4d3b5d0980_7323ef3df1f7be93.mp4`
 
 // Джерело зображення: зовнішні URL віддаємо як є, локальні — через assetPath
 export const mediaSrc = (url) => !url ? '' : (String(url).startsWith('http') ? url : assetPath(url))
@@ -270,9 +268,14 @@ const NEW_PHOTOS = [
 const ALL_PHOTOS = [...NEW_PHOTOS, ...LEGACY_PHOTOS]
 
 // Медіа-ресурси — однакові для всіх мов
+// Старе відео з wp-content (oldVideo) прибрано 2026-10-11: старий хостинг
+// заблоковано, файл більше не віддається.
 const MEDIA = {
-  oldVideo: LEGACY_VIDEO,
+  overviewVideo: '/videos/termojet-oglyad-produktsiyi.mp4',
+  overviewPoster: '/videos/termojet-oglyad-produktsiyi.jpg',
   localVideo: '/about-factory.mp4',
+  laserVideo: '/videos/termojet-lazerne-rizannya-truby.mp4', // вертикальне 464×848
+  laserPoster: '/videos/termojet-lazerne-rizannya-truby.jpg',
   youtubeUrl: 'https://youtu.be/PKEpr4Zg4ks',
 }
 
