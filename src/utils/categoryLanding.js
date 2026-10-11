@@ -1,0 +1,95 @@
+// Дані для SEO-шаблону категорії (src/data/category-landing.json → CategoryLanding).
+// Усе, що залежить від товарів (розміри, діапазони виходів, ціни), рахуємо з каталогу,
+// а не пишемо в текст: ціни йдуть з євро за курсом НБУ і змінюються щодня.
+// ⚠️ Ту саму логіку цін для JSON-LD (FAQ) дублює backend/server.js → landingPriceCtx().
+import { toUAH, groupDigits } from './currency'
+import { effectivePrice } from './sale'
+
+// «Шафа колекторна внутрішня Termojet №03 (8-10 виходів, 715×575×110 мм)»
+//   → { outlets: [8, 10], dims: [715, 575, 110], num: '03' }
+// «Колектор … на 12 виходів …» → { outlets: [12, 12] }
+export function parseName(name = '') {
+  const range = name.match(/(\d+)\s*[-–]\s*(\d+)\s*вих(?:ід|од)/i)     // «2-4 виходів»
+  const single = name.match(/на\s+(\d+)\s*вих(?:ід|од)/i)               // «на 2 виходи», «на 10 виходів»
+  const dims = name.match(/(\d+)\s*[×x]\s*(\d+)\s*[×x]\s*(\d+)\s*мм/i)
+  const num = name.match(/№\s*(\d+)/)
+  return {
+    outlets: range ? [+range[1], +range[2]] : single ? [+single[1], +single[1]] : null,
+    dims: dims ? [+dims[1], +dims[2], +dims[3]] : null,
+    num: num ? num[1] : null,
+  }
+}
+
+export const priceUah = (p, eurRate) => toUAH(effectivePrice(p), p.currency, eurRate) || 0
+export const fmtUah = v => groupDigits(v)
+
+const minMax = vals => {
+  const v = vals.filter(x => x > 0)
+  return v.length ? [Math.min(...v), Math.max(...v)] : [0, 0]
+}
+
+const byMatch = (list, match) => (match ? list.filter(p => (p.name || '').toLowerCase().includes(match.toLowerCase())) : list)
+
+// Порядок усередині групи: за номером типорозміру (№00 → №06), далі за назвою
+const sizeRank = p => {
+  const n = parseName(p.name).num
+  return n != null ? +n : 999
+}
+
+export function buildLanding(cfg, catProducts, allProducts, eurRate) {
+  const groups = cfg.groups.map(g => {
+    const items = byMatch(catProducts, g.match).slice().sort((a, b) => sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
+    const parsed = items.map(p => parseName(p.name))
+    const dims = parsed.map(x => x.dims).filter(Boolean)
+    const [min, max] = minMax(items.map(p => priceUah(p, eurRate)))
+    return {
+      ...g, items, parsed, min, max,
+      h: dims[0]?.[1], d: dims[0]?.[2],
+      wmin: dims.length ? Math.min(...dims.map(x => x[0])) : null,
+      wmax: dims.length ? Math.max(...dims.map(x => x[0])) : null,
+    }
+  })
+  const [min, max] = minMax(catProducts.map(p => priceUah(p, eurRate)))
+
+  // Таблиця розмірів: рядок на типорозмір (№), колонка на групу
+  const nums = [...new Set(groups.flatMap(g => g.parsed.map(x => x.num)).filter(Boolean))].sort()
+  const sizeRows = nums.map(num => {
+    const cells = groups.map(g => {
+      const i = g.parsed.findIndex(x => x.num === num)
+      return i < 0 ? null : { width: g.parsed[i].dims?.[0], price: priceUah(g.items[i], eurRate), product: g.items[i] }
+    })
+    const outlets = groups.map(g => g.parsed.find(x => x.num === num)?.outlets).find(Boolean)
+    return { num, outlets, cells }
+  })
+
+  const related = (cfg.related?.items || []).map(r => {
+    const list = byMatch(allProducts.filter(p => p.categorySlug === r.category), r.match)
+    let sub = r.sub
+    if (r.sub === 'outlets') {
+      const outs = list.map(p => parseName(p.name).outlets).filter(Boolean)
+      const [pmin] = minMax(list.map(p => priceUah(p, eurRate)))
+      const lo = outs.length ? Math.min(...outs.map(o => o[0])) : null
+      const hi = outs.length ? Math.max(...outs.map(o => o[1])) : null
+      sub = [lo != null ? `${lo}–${hi} виходів` : '', pmin ? `від ${fmtUah(pmin)} грн` : ''].filter(Boolean).join(' · ')
+    }
+    const qs = r.filter ? '?' + Object.entries(r.filter).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&') : ''
+    return { ...r, sub, to: `/catalog/${r.category}${qs}` }
+  })
+
+  const ctx = { min, max }
+  groups.forEach(g => { ctx[`min:${g.key}`] = g.min; ctx[`max:${g.key}`] = g.max })
+  return { groups, min, max, sizeRows, related, ctx }
+}
+
+// «{h}», «{min:int}» тощо → значення; ціни групуємо розрядами
+export function fillTokens(str, vars) {
+  return String(str || '').replace(/\{([\w:]+)\}/g, (m, k) => {
+    const v = vars[k]
+    if (v == null || v === '') return m
+    return /^(min|max)/.test(k) ? fmtUah(v) : String(v)
+  })
+}
+
+export function inRange(outlets, n) {
+  return !!outlets && n >= outlets[0] && n <= outlets[1]
+}

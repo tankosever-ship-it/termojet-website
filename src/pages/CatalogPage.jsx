@@ -13,6 +13,8 @@ import { isOnSale, salePercent, SALE_CATEGORY_SLUG } from '../utils/sale'
 import ProductPrice from '../components/ProductPrice'
 import CategoryIcon from '../components/CategoryIcon'
 import { assetPath } from '../utils/assetPath'
+import CategoryLanding from '../components/CategoryLanding'
+import CATEGORY_LANDING from '../data/category-landing.json'
 
 // Фонові банери для окремих категорій (slug → файл у public/).
 // WebP, не PNG: банери — це фотографії з плавним градієнтом, у PNG кожна важила
@@ -23,6 +25,7 @@ const CATEGORY_BANNERS = {
   'termojet-mega': '/banner-termojet-mega.webp',
   'nasosni-hrupy': '/banner-nasosni-hrupy.webp',
   'kolektory-pidloha': '/banner-kolektory-pidloha.webp',
+  'shafa-kolektorna': '/banner-shafa-kolektorna.webp',
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': '/banner-zmishuvalnyj-vuzol-dlya-teployi-pidlogy.webp',
   'nasosy': '/banner-nasosy.webp',
   'balansuval-klapany': '/banner-balansuval-klapany.webp',
@@ -526,16 +529,7 @@ const CATEGORY_FILTERS = {
         options: [
           { label: 'Колектор з витратомірами', test: p => /витратомірами/i.test(p.name) },
           { label: 'Колектор з кранами',       test: p => /кранами/i.test(p.name) },
-          { label: 'Шафа колекторна',          test: p => /Шафа/i.test(p.name) },
           { label: 'Комплектуючі',             test: p => /Байпас|Євроконус|кріплення|накидн|Труба|Скоба|Плівка/i.test(p.name) },
-        ],
-      },
-      {
-        key: 'cabinettype',
-        label: 'Тип шафи',
-        options: [
-          { label: 'Внутрішня (вбудована)', test: p => /Шафа колекторна внутрішня/i.test(p.name) },
-          { label: 'Зовнішня (накладна)',   test: p => /Шафа колекторна зовнішня/i.test(p.name) },
         ],
       },
     ],
@@ -1174,6 +1168,111 @@ function CategoryStrip({ products, categories, catCounts, currentCategory, lang 
   )
 }
 
+// Картка товару в сітці. Окремий компонент, бо її рендерить і звичайна сітка,
+// і SEO-шаблон категорії (CategoryLanding: групи під H2, підсвітка за виходами).
+function ProductGridCard({ product, i = 0, highlight = false, dim = false }) {
+  const { lang, addToCart, eurRate } = useApp()
+  const t = useT()
+  const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
+  // Prefer per-lang shortDesc/desc, fall back to UA
+  const rawDesc = (lang !== 'uk' && (product[`shortDesc_${lang}`] || product[`desc_${lang}`]))
+    ? (product[`shortDesc_${lang}`] || product[`desc_${lang}`])
+    : (product.shortDesc || product.description || '')
+  const shortDesc = rawDesc.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
+  const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
+  // Prefer per-lang specs for badge display; selection stays on canonical UA specs inside extractBadges
+  const pSpecs = (lang !== 'uk' && product[`specs_${lang}`]) ? product[`specs_${lang}`] : product.specs
+  const badges = extractBadges(product, pSpecs, lang)
+  const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
+
+  return (
+    <motion.div variants={fadeUp} initial="hidden" animate="show"
+      transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.3) }}
+      className={`h-full transition-opacity ${dim ? 'opacity-40' : ''}`}
+      style={highlight ? { outline: '2px solid var(--accent)', outlineOffset: 2 } : undefined}>
+      {/* 1. Фіксована висота фото: overflow-hidden + height строго 240px */}
+      <div className="product-card-new group flex flex-col" style={{ height: '100%' }}>
+
+        <div className="relative flex-shrink-0 overflow-hidden bg-[var(--bg)]" style={{ height: '240px' }}>
+          <LLink to={href} className="block w-full h-full">
+            {product.image ? (
+              <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
+                srcSet={srcSet(product.image, 960)} sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
+                className="pdp-card-photo group-hover:scale-[1.06] transition-transform duration-500" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>
+            )}
+          </LLink>
+
+          {isOnSale(product) && (
+            <span title={t('catalog.saleBadge')}
+              className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
+              −{salePercent(product)}%
+            </span>
+          )}
+          {!product.inStock && (
+            <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-gray-700 text-white rounded-full">
+              {t('catalog.outOfStock')}
+            </span>
+          )}
+
+          <div className="quick-bar">
+            <button onClick={() => addToCart(product)}
+              className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 rounded-lg transition-colors"
+              style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
+              <ShoppingCart size={12} /> {t('catalog.buyOneClick')}
+            </button>
+            <LLink to={href}
+              className="flex items-center gap-1 px-3 h-9 border border-[var(--ink-200)] rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
+              {t('catalog.details')} <ArrowRight size={11} />
+            </LLink>
+          </div>
+        </div>
+
+        {/* Content area: flex-col з фіксованим низом */}
+        <div className="p-4 flex flex-col flex-1">
+
+          {/* Верхній блок: назва + опис + badges */}
+          <div className="flex-1">
+            {catObj && (
+              <div className="eyebrow mb-1.5 truncate">{catObj.name[lang] || catObj.name.uk}</div>
+            )}
+            <LLink to={href}>
+              <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors mb-2 leading-snug">
+                {name}
+              </h3>
+            </LLink>
+            {/* 2. Опис без слова "Опис" */}
+            {shortDesc && (
+              <p className="text-xs text-gray-400 leading-relaxed mb-2.5 line-clamp-2">{shortDesc}</p>
+            )}
+            {badges.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {badges.map((b, i) => (
+                  <span key={i} className={`spec-badge spec-badge-${b.type}`}>{b.label}</span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* 3. Ціна — завжди на одному рівні (прибита до низу) */}
+          <div className="mt-4 pt-3 border-t border-[var(--ink-200)]">
+            <div className="flex items-center justify-between mb-1.5">
+              <ProductPrice product={product} eurRate={eurRate} />
+              <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
+                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
+                {product.inStock ? t('catalog.inStock') : t('catalog.orderShort')}
+              </div>
+            </div>
+            <div className="text-[10px] font-mono text-gray-300">{product.sku || ''}</div>
+          </div>
+
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function CatalogPage() {
   const { categorySlug } = useParams()
   const [searchParams] = useSearchParams()
@@ -1184,14 +1283,35 @@ export default function CatalogPage() {
   const [search, setSearch] = useState(searchParams.get('q') || '')
   const [inStockOnly, setInStockOnly] = useState(false)
   const [sort, setSort] = useState('default')
-  const [catFilters, setCatFilters] = useState({})
+  // Початкові фільтри з адреси: ?<ключ групи>=<мітка опції>, напр. ?prodtype=Колектор з кранами
+  // (плитки «Що встановити в шафу» з SEO-шаблону ведуть сюди). Невідомі ключі/мітки ігноруємо.
+  const filtersFromUrl = () => {
+    const groups = categorySlug ? CATEGORY_FILTERS[categorySlug]?.groups || [] : []
+    const out = {}
+    for (const g of groups) {
+      const v = searchParams.get(g.key)
+      if (v && g.options.some(o => o.label === v)) out[g.key] = g.multi ? [v] : v
+    }
+    return out
+  }
+  const [catFilters, setCatFilters] = useState(filtersFromUrl)
   const [viewMode, setViewMode] = useState('grid') // 'grid' | 'list'
   const [price, setPrice] = useState(null) // [lo, hi] у ₴ або null
 
   const currentCategory = categorySlug ? CATEGORIES.find(c => c.slug === categorySlug) : null
+  const parentCategory = currentCategory?.parent ? CATEGORIES.find(c => c.slug === currentCategory.parent) : null
+  // SEO-шаблон категорії — лише для мов, для яких є тексти (поки uk)
+  const landing = currentCategory ? CATEGORY_LANDING[currentCategory.slug]?.[lang] || null : null
 
   // Скидаємо фільтри й ціну при зміні категорії
-  useMemo(() => { setCatFilters({}); setPrice(null) }, [categorySlug])
+  // Інша категорія → фільтри з її адреси, ціна скинута. Скидаємо під час рендеру
+  // (рекомендований React спосіб «стан від пропа»), а не ефектом — без зайвого кадру.
+  const [filtersFor, setFiltersFor] = useState(categorySlug)
+  if (filtersFor !== categorySlug) {
+    setFiltersFor(categorySlug)
+    setCatFilters(filtersFromUrl())
+    setPrice(null)
+  }
 
   const catProducts = useMemo(() => {
     if (!currentCategory) return products
@@ -1299,6 +1419,12 @@ export default function CatalogPage() {
               <>
                 <LLink to="/catalog" className="hover:text-white/70 transition-colors">{t('nav.catalog')}</LLink>
                 <ChevronRight size={12} />
+                {parentCategory && (
+                  <>
+                    <LLink to={`/catalog/${parentCategory.slug}`} className="hover:text-white/70 transition-colors">{parentCategory.name[lang] || parentCategory.name.uk}</LLink>
+                    <ChevronRight size={12} />
+                  </>
+                )}
                 <span className="text-white/70">{currentCategory.name[lang] || currentCategory.name.uk}</span>
               </>
             ) : (
@@ -1308,7 +1434,7 @@ export default function CatalogPage() {
           <div className="flex items-end justify-between gap-4">
             <div>
               <h1 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif]">
-                {currentCategory ? (currentCategory.name[lang] || currentCategory.name.uk) : cat.title}
+                {landing?.h1 || (currentCategory ? (currentCategory.name[lang] || currentCategory.name.uk) : cat.title)}
               </h1>
             </div>
             <div className="text-right flex-shrink-0">
@@ -1322,7 +1448,7 @@ export default function CatalogPage() {
       <div className="max-w-7xl mx-auto px-4 py-6">
 
         {/* ── Опис категорії (видимий + SEO body-текст) ── */}
-        {currentCategory && (currentCategory.desc[lang] || currentCategory.desc.uk) && (
+        {!landing && currentCategory && (currentCategory.desc[lang] || currentCategory.desc.uk) && (
           <p className="text-gray-600 text-[15px] leading-relaxed max-w-3xl mb-5">
             {currentCategory.desc[lang] || currentCategory.desc.uk}
           </p>
@@ -1331,6 +1457,12 @@ export default function CatalogPage() {
         {/* ── Смужка плиток-категорій (стиль Prom) — стрілки + fade + peek ── */}
         <CategoryStrip products={products} categories={CATEGORIES} catCounts={catCounts} currentCategory={currentCategory} lang={lang} />
 
+        {landing ? (
+          <div className="mt-8">
+            <CategoryLanding key={currentCategory.slug} cfg={landing} catProducts={catProducts} allProducts={products} eurRate={eurRate} Card={ProductGridCard} />
+          </div>
+        ) : (
+        <>
         {/* ── Основний контент: сайдбар + товари ── */}
         <div className="flex gap-6">
 
@@ -1402,104 +1534,7 @@ export default function CatalogPage() {
         ) : viewMode === 'grid' ? (
           /* ── GRID VIEW ── */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((product, i) => {
-              const name = (lang !== 'uk' && product[`name_${lang}`]) ? product[`name_${lang}`] : (product.name || '')
-              // Prefer per-lang shortDesc/desc, fall back to UA
-              const rawDesc = (lang !== 'uk' && (product[`shortDesc_${lang}`] || product[`desc_${lang}`]))
-                ? (product[`shortDesc_${lang}`] || product[`desc_${lang}`])
-                : (product.shortDesc || product.description || '')
-              const shortDesc = rawDesc.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/^Опис\s+/i, '').replace(/^(моделі|Опис моделі)\s+/i, '').replace(/\s+/g, ' ').trim()
-              const catObj = CATEGORIES.find(c => c.slug === product.categorySlug || c.id === product.categorySlug)
-              // Prefer per-lang specs for badge display; selection stays on canonical UA specs inside extractBadges
-              const pSpecs = (lang !== 'uk' && product[`specs_${lang}`]) ? product[`specs_${lang}`] : product.specs
-              const badges = extractBadges(product, pSpecs, lang)
-              const href = `/catalog/${product.categorySlug || 'products'}/${product.slug || product.id}`
-
-              return (
-                <motion.div key={product.id} variants={fadeUp} initial="hidden" animate="show"
-                  transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.3) }} className="h-full">
-                  {/* 1. Фіксована висота фото: overflow-hidden + height строго 240px */}
-                  <div className="product-card-new group flex flex-col" style={{ height: '100%' }}>
-
-                    <div className="relative flex-shrink-0 overflow-hidden bg-[var(--bg)]" style={{ height: '240px' }}>
-                      <LLink to={href} className="block w-full h-full">
-                        {product.image ? (
-                          <img src={imgUrl(product.image)} alt={name} loading="lazy" decoding="async"
-                            srcSet={srcSet(product.image, 960)} sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
-                            className="pdp-card-photo group-hover:scale-[1.06] transition-transform duration-500" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-gray-200 text-6xl">⚙️</div>
-                        )}
-                      </LLink>
-
-                      {isOnSale(product) && (
-                        <span title={t('catalog.saleBadge')}
-                          className="absolute top-2 right-2 z-10 text-[10px] font-bold px-2 py-0.5 bg-red-600 text-white rounded-full">
-                          −{salePercent(product)}%
-                        </span>
-                      )}
-                      {!product.inStock && (
-                        <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-gray-700 text-white rounded-full">
-                          {t('catalog.outOfStock')}
-                        </span>
-                      )}
-
-                      <div className="quick-bar">
-                        <button onClick={() => addToCart(product)}
-                          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-bold py-2 rounded-lg transition-colors"
-                          style={{ background: 'linear-gradient(135deg,var(--accent),#c94d00)' }}>
-                          <ShoppingCart size={12} /> {t('catalog.buyOneClick')}
-                        </button>
-                        <LLink to={href}
-                          className="flex items-center gap-1 px-3 h-9 border border-[var(--ink-200)] rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 text-xs font-semibold whitespace-nowrap">
-                          {t('catalog.details')} <ArrowRight size={11} />
-                        </LLink>
-                      </div>
-                    </div>
-
-                    {/* Content area: flex-col з фіксованим низом */}
-                    <div className="p-4 flex flex-col flex-1">
-
-                      {/* Верхній блок: назва + опис + badges */}
-                      <div className="flex-1">
-                        {catObj && (
-                          <div className="eyebrow mb-1.5 truncate">{catObj.name[lang] || catObj.name.uk}</div>
-                        )}
-                        <LLink to={href}>
-                          <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[var(--primary)] transition-colors mb-2 leading-snug">
-                            {name}
-                          </h3>
-                        </LLink>
-                        {/* 2. Опис без слова "Опис" */}
-                        {shortDesc && (
-                          <p className="text-xs text-gray-400 leading-relaxed mb-2.5 line-clamp-2">{shortDesc}</p>
-                        )}
-                        {badges.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5">
-                            {badges.map((b, i) => (
-                              <span key={i} className={`spec-badge spec-badge-${b.type}`}>{b.label}</span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* 3. Ціна — завжди на одному рівні (прибита до низу) */}
-                      <div className="mt-4 pt-3 border-t border-[var(--ink-200)]">
-                        <div className="flex items-center justify-between mb-1.5">
-                          <ProductPrice product={product} eurRate={eurRate} />
-                          <div className={`text-[10px] font-semibold flex items-center gap-1 ${product.inStock ? 'text-green-600' : 'text-gray-400'}`}>
-                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.inStock ? '#22c55e' : '#9ca3af' }} />
-                            {product.inStock ? t('catalog.inStock') : t('catalog.orderShort')}
-                          </div>
-                        </div>
-                        <div className="text-[10px] font-mono text-gray-300">{product.sku || ''}</div>
-                      </div>
-
-                    </div>
-                  </div>
-                </motion.div>
-              )
-            })}
+            {filtered.map((product, i) => <ProductGridCard key={product.id} product={product} i={i} />)}
           </div>
         ) : (
           /* ── LIST VIEW ── */
@@ -1606,6 +1641,8 @@ export default function CatalogPage() {
 
         </div>{/* end flex-1 */}
         </div>{/* end flex gap-6 */}
+        </>
+        )}
 
       </div>
     </>

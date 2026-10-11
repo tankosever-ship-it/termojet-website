@@ -666,6 +666,7 @@ export default function ProductDetailPage() {
   )
 
   const category = CATEGORIES.find(c => c.slug === categorySlug)
+  const parentCategory = category?.parent ? CATEGORIES.find(c => c.slug === category.parent) : null
   const related = products.filter(p => p.categorySlug === categorySlug && p.id !== product?.id).slice(0, 4)
 
   const name = (lang !== 'uk' && product?.[`name_${lang}`]) ? product[`name_${lang}`] : (product?.name || '')
@@ -836,6 +837,7 @@ export default function ProductDetailPage() {
         breadcrumbs={[
           { name: t('product.breadcrumbHome'), url: 'https://termojet.com.ua/' },
           { name: t('nav').catalog, url: 'https://termojet.com.ua/catalog' },
+          ...(parentCategory ? [{ name: parentCategory.name?.uk || parentCategory.name, url: `https://termojet.com.ua/catalog/${parentCategory.slug}` }] : []),
           ...(category ? [{ name: category.name?.uk || category.name, url: `https://termojet.com.ua/catalog/${categorySlug}` }] : []),
           { name, url: `https://termojet.com.ua/catalog/${categorySlug}/${productSlug}` },
         ]}
@@ -848,6 +850,14 @@ export default function ProductDetailPage() {
             <LLink to="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('product.breadcrumbHome')}</LLink>
             <span style={{ color: '#C9C6BF' }}>/</span>
             <LLink to="/catalog" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">{t('nav').catalog}</LLink>
+            {parentCategory && (
+              <>
+                <span style={{ color: '#C9C6BF' }}>/</span>
+                <LLink to={`/catalog/${parentCategory.slug}`} style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[var(--accent)] transition-colors">
+                  {parentCategory.name[lang] || parentCategory.name.uk}
+                </LLink>
+              </>
+            )}
             {category && (
               <>
                 <span style={{ color: '#C9C6BF' }}>/</span>

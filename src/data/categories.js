@@ -219,6 +219,21 @@ export const CATEGORIES = [
     color: '#0891b2',
   },
   {
+    // Окрема категорія під ключ «колекторна шафа» (SEO, 11.10.2026): сюди перенесено
+    // 14 шаф із «Системи підлогового опалення». parent — батьківська категорія в
+    // хлібних крихтах (сторінка категорії, товару і BreadcrumbList на сервері).
+    // Сторінка має SEO-шаблон: src/data/category-landing.json.
+    id: 'manifold-cabinets',
+    slug: 'shafa-kolektorna',
+    parent: 'kolektory-pidloha',
+    icon: 'Box',
+    image: '/images/cabinets/cabinet-int-1.jpg',
+    name: { uk: 'Колекторна шафа', en: 'Manifold Cabinet', pl: 'Szafka rozdzielacza', fr: 'Coffret de collecteur', de: 'Verteilerschrank', ro: 'Cutie pentru distribuitor' },
+    desc: { uk: 'Внутрішні (вбудовані) та зовнішні (накладні) колекторні шафи Termojet на 2–16 виходів для колектора теплої підлоги й опалення', en: 'Termojet flush-mounted and surface-mounted manifold cabinets for 2–16 outlets, for underfloor heating and heating manifolds', pl: 'Szafki podtynkowe i natynkowe Termojet do rozdzielaczy na 2–16 wyjść, do ogrzewania podłogowego i grzejnikowego', fr: 'Coffrets de collecteur Termojet encastrés et en saillie pour 2 à 16 sorties, pour plancher chauffant et chauffage', de: 'Termojet Unterputz- und Aufputz-Verteilerschränke für 2–16 Abgänge, für Fußbodenheizungs- und Heizungsverteiler', ro: 'Cutii Termojet încastrate și aplicate pentru distribuitoare cu 2–16 ieșiri, pentru încălzire prin pardoseală și încălzire' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
+    color: '#78716c',
+  },
+  {
     id: 'automation',
     slug: 'avtomatyka',
     icon: 'CircuitBoard',

@@ -14,6 +14,7 @@ export const DOCS_BY_CATEGORY = {
   'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
   // Вузли TJ-MU: інструкції підтягуються за назвою моделі (DOCS_BY_NAME нижче)
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': [],
+  'shafa-kolektorna':         [],
   'separatory':               [],
   'avtomatyka':               [192, 193],     // Profi Plus + Light (двомовні, 2026)
   'balancing':                [],

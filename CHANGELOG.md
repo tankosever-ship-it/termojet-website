@@ -1,5 +1,26 @@
 # Termojet Website Redesign — Журнал змін
 
+## Сесія 2026-10-11 — html lang, GTM після гідрації, прев'ю категорій, «Колекторна шафа»
+
+- `<html lang>` за мовним префіксом URL (server.js → sendPage) + `document.documentElement.lang` при перемиканні мови.
+- GTM/Binotel стартує лише після гідрації React (подія `tj:hydrated` з App.jsx, страховка 8 с): Binotel переписував
+  посилання `tel:` до гідрації → #418 і повний перерендер сторінки.
+- Прев'ю в месенджерах: `og:image` категорії — `public/og/category-<slug>.jpg` (1200×630, з банера). Новий банер →
+  перегенерувати картинку (скрипт — в історії сесії; правий фрагмент банера без водяного знака).
+- Адмінка: дати заявок/замовлень/підписників/UTM — за Києвом (`formatDateTimeKyiv`).
+- **Нова категорія «Колекторна шафа»** (`/catalog/shafa-kolektorna`, parent — `kolektory-pidloha`):
+  - 14 шаф перенесено скриптом `backend/scripts/apply-shafa-kolektorna.js` (+ посилання в описах 35 товарів, штамп `_srcHash`);
+    старі URL → 301 (handleProduct).
+  - **SEO-шаблон категорії** за макетом SEO: `src/data/category-landing.json` (тексти, групи, FAQ, плитки суміжних
+    товарів) + `src/components/CategoryLanding.jsx` + `src/utils/categoryLanding.js` (розміри/ціни з каталогу). Поки лише uk;
+    інші мови — звичайна сторінка категорії. Новий шаблон для іншої категорії = новий ключ у JSON.
+  - JSON-LD: CollectionPage + ItemList + FAQPage (server.js → `landingJsonLd`); BreadcrumbList з батьківською категорією
+    (`categoryCrumbs`) на категорії й товарі. Dockerfile копіює JSON у рантайм-образ.
+  - Плитки «Що встановити в шафу» ведуть на фільтр: `/catalog/kolektory-pidloha?prodtype=<мітка>` (CatalogPage читає
+    фільтри з адреси).
+  - Банер `public/banner-shafa-kolektorna.*` — з банера «Системи підлогового опалення», колектор замінено фото шаф.
+  - ⚠️ `src/data` під правилом `.gitignore` (`data/`): новий файл — `git add -f`, змінені — `git add -u src/data`.
+
 ## Сесія 2026-10-04 — Блог: статті про зональне керування, Meta-поля статей
 
 - Дві статті (6 мов): `/blog/drotove-zonalne-keruvannya-opalennyam`, `/blog/bezdrotove-zonalne-keruvannya-opalennyam`.

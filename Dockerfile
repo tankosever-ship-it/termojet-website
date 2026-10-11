@@ -23,6 +23,8 @@ COPY --from=builder /app/dist ./dist
 # SSR-бандл (src/entry-server.jsx) — самодостатній, node_modules фронту не потребує
 COPY --from=builder /app/dist-ssr ./dist-ssr
 COPY backend ./backend
+# SEO-шаблони категорій: тексти FAQ потрібні серверу для JSON-LD (FAQPage)
+COPY --from=builder /app/src/data/category-landing.json ./src/data/category-landing.json
 
 # persistent dirs
 RUN mkdir -p backend/data backend/uploads

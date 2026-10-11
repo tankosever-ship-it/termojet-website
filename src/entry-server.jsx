@@ -18,6 +18,7 @@ import ro from './i18n/lang/ro'
 // У браузері словники не-uk мов вантажаться окремими чанками; серверу потрібні всі й одразу.
 for (const [code, dict] of Object.entries({ en, pl, fr, de, ro })) registerLang(code, dict)
 import { CATEGORIES } from './data/categories'
+import CATEGORY_LANDING from './data/category-landing.json'
 import { SALE_CATEGORY_SLUG, isOnSale } from './utils/sale'
 import { mapPortfolio, blogLinksFrom, mergeBlogLinks, mergeFiles } from './context/normalize'
 import { BLOG_POSTS } from './data/blog'
@@ -67,6 +68,9 @@ const slimForList = p => {
 // Товари інших категорій на сторінці категорії потрібні лише для лічильників у
 // смузі категорій (catCounts) — віддаємо від них тільки поля, з яких ті рахуються.
 const countStub = p => ({ id: p.id, categorySlug: p.categorySlug, price: p.price, salePrice: p.salePrice })
+// Плитки суміжних товарів у SEO-шаблоні категорії («Що встановити в шафу») рахують
+// діапазон виходів і ціну «від» — для товарів тих категорій потрібні ще назва й валюта.
+const relatedStub = p => ({ ...countStub(p), name: p.name, currency: p.currency })
 
 const catMatches = (p, c) => p.categorySlug === c.id || p.categorySlug === c.slug
 
@@ -111,7 +115,8 @@ export async function loadInitialData(pathname, { api, eurRate }) {
         const inCat = cat?.slug === SALE_CATEGORY_SLUG
           ? p => isOnSale(p) || (cat && catMatches(p, cat))
           : p => (cat ? catMatches(p, cat) : p.categorySlug === catSlug)
-        data.products = all.map(p => (inCat(p) ? slimForList(p) : countStub(p)))
+        const relCats = new Set((CATEGORY_LANDING[cat.slug]?.[lang]?.related?.items || []).map(r => r.category))
+        data.products = all.map(p => (inCat(p) ? slimForList(p) : relCats.has(p.categorySlug) ? relatedStub(p) : countStub(p)))
       }
       if (seg[2]) {
         const slug = safeDecode(seg[2])

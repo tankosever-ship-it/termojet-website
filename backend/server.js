@@ -378,6 +378,61 @@ const ORG_SCHEMA = {
 }
 
 // Будує BreadcrumbList із пар {name, url}.
+// Крихти категорії: [батьківська, якщо є] + сама категорія (CATEGORY_META[..].parent)
+function categoryCrumbs(cat, lang) {
+  const base = langBase(lang)
+  const out = []
+  const cm = CATEGORY_META[cat]
+  const pm = cm?.parent && CATEGORY_META[cm.parent]
+  if (pm) out.push({ name: pickL(lang, pm.name, pm.nameEn, pm.nameRo), url: `${base}/catalog/${encodeURIComponent(cm.parent)}` })
+  if (cm) out.push({ name: pickL(lang, cm.name, cm.nameEn, cm.nameRo), url: `${base}/catalog/${encodeURIComponent(cat)}` })
+  return out
+}
+
+// ── SEO-шаблони категорій (src/data/category-landing.json; той самий файл читає фронт) ──
+// Для JSON-LD: CollectionPage + ItemList (товари категорії) і FAQPage. Ціни у відповідях
+// FAQ — токени {min:<група>}/{max:<група>}, рахуємо так само, як utils/categoryLanding.js.
+let CATEGORY_LANDING = {}
+try { CATEGORY_LANDING = require(path.join(__dirname, '..', 'src', 'data', 'category-landing.json')) } catch { /* без шаблонів */ }
+const groupDigitsNbsp = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0')
+function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
+  const cfg = CATEGORY_LANDING[cat]?.[lang]
+  if (!cfg) return []
+  const base = langBase(lang)
+  const uah = p => {
+    const sale = Number(p.sale_price) > 0 && (!Number(p.price) || Number(p.sale_price) < Number(p.price)) ? Number(p.sale_price) : Number(p.price)
+    if (!sale) return 0
+    return p.currency === 'EUR' ? (eurRate ? Math.round(sale * eurRate) : 0) : sale
+  }
+  const ctx = {}
+  const range = list => { const v = list.map(uah).filter(x => x > 0); return v.length ? [Math.min(...v), Math.max(...v)] : null }
+  const all = range(products); if (all) { ctx.min = all[0]; ctx.max = all[1] }
+  for (const g of cfg.groups || []) {
+    const r = range(products.filter(p => (p.name || '').toLowerCase().includes(String(g.match || '').toLowerCase())))
+    if (r) { ctx[`min:${g.key}`] = r[0]; ctx[`max:${g.key}`] = r[1] }
+  }
+  const fill = s => String(s || '').replace(/\{([\w:]+)\}/g, (m, k) => (ctx[k] != null ? groupDigitsNbsp(ctx[k]) : m))
+  const out = [{
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: cfg.h1 || name,
+    url,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: products.length,
+      itemListElement: products.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: `${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(p.slug)}` })),
+    },
+  }]
+  // Якщо в FAQ лишився токен (немає курсу/цін) — питання не віддаємо, щоб не показати «{min:int}»
+  const faq = (cfg.faq?.items || []).map(f => ({ q: f.q, a: fill(f.a) })).filter(f => !/\{[\w:]+\}/.test(f.a))
+  if (faq.length) out.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  })
+  return out
+}
+
 function buildBreadcrumb(items) {
   return {
     '@context': 'https://schema.org',
@@ -479,7 +534,7 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
     { name: en ? 'Home' : 'Головна', url: base },
     { name: en ? 'Catalog' : 'Каталог', url: `${base}/catalog` },
   ]
-  if (cm) crumbs.push({ name: pickL(lang, cm.name, cm.nameEn, cm.nameRo), url: `${base}/catalog/${encodeURIComponent(cat)}` })
+  if (cm) crumbs.push(...categoryCrumbs(cat, lang))
   crumbs.push({ name: loc.name, url })
   // Product без offers невалідний (schema-валідатори вимагають offers/review/aggregateRating
   // і без них rich-result неможливий) → для товарів без ціни віддаємо лише Breadcrumb+Organization.
@@ -622,6 +677,17 @@ const CATEGORY_META = {
     metaDesc: 'Змішувальний вузол для теплої підлоги Termojet TJ-MU: термостатичне регулювання 20–60 °C для колектора. Власне виробництво з 2002 року, доставка по Україні',
     nameEn: 'Underfloor Heating Mixing Unit', descEn: 'Termojet TJ-MU pump mixing units for underfloor heating manifolds: they lower the flow temperature from a boiler or heat pump to 20–60 °C. The circulation pump is not included',
     nameRo: 'Grup de amestec pentru încălzire prin pardoseală', descRo: 'Grupuri de pompare și amestec Termojet TJ-MU pentru colectorul de încălzire prin pardoseală: coboară temperatura agentului de la cazan sau pompa de căldură la 20–60 °C. Pompa de circulație nu este inclusă',
+  },
+  // Окрема категорія під ключ «колекторна шафа» (SEO, 11.10.2026). parent — батьківська
+  // категорія в BreadcrumbList; h1/metaTitle — для uk (SEO-шаблон, src/data/category-landing.json).
+  'shafa-kolektorna': {
+    parent: 'kolektory-pidloha',
+    name: 'Колекторна шафа', h1: 'Колекторна шафа для теплої підлоги',
+    metaTitle: 'Колекторна шафа для теплої підлоги — купити в Termojet',
+    desc: 'Внутрішні (вбудовані) та зовнішні (накладні) колекторні шафи Termojet на 2–16 виходів для колектора теплої підлоги й опалення',
+    metaDesc: 'Внутрішні (вбудовані) та зовнішні шафи колекторні на 2–16 виходів. 7 типорозмірів, таблиця розмірів, власне виробництво з 2002 року. Доставка по Україні.',
+    nameEn: 'Manifold Cabinet', descEn: 'Termojet flush-mounted and surface-mounted manifold cabinets for 2–16 outlets, for underfloor heating and heating manifolds',
+    nameRo: 'Cutie pentru distribuitor', descRo: 'Cutii Termojet încastrate și aplicate pentru distribuitoare cu 2–16 ieșiri, pentru încălzire prin pardoseală și încălzire',
   },
   'avtomatyka': {
     name: 'Автоматика котельного обладнання', desc: 'Контролери, датчики та системи управління котлами й котельним обладнанням',
@@ -1110,19 +1176,22 @@ function handleCategory(lang) {
         const jsonLd = [buildBreadcrumb([
           { name: lang === 'ro' ? 'Acasă' : 'Home', url: base },
           { name: 'Catalog', url: `${base}/catalog` },
-          { name: cName, url },
+          ...categoryCrumbs(req.params.cat, lang),
         ]), ORG_SCHEMA]
         html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cName, bodyText: cDesc, alternates, jsonLd })
       } else {
-        let title = `${cName} | Termojet`
+        let title = cm.metaTitle || `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
         const desc = (cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
+        const landingProducts = _db.prepare(
+          'SELECT name, slug, price, sale_price, currency FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name'
+        ).all(req.params.cat)
         const jsonLd = [buildBreadcrumb([
           { name: 'Головна', url: base },
           { name: 'Каталог', url: `${base}/catalog` },
-          { name: cName, url },
-        ]), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cName, bodyText: cDesc, alternates, jsonLd })
+          ...categoryCrumbs(req.params.cat, lang),
+        ]), ...landingJsonLd(req.params.cat, lang, { url, name: cName, products: landingProducts, eurRate: peekEurRate() }), ORG_SCHEMA]
+        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cm.h1 || cName, bodyText: cDesc, alternates, jsonLd })
       }
       // SSR-lite: сітка товарів категорії в #seo-content
       const products = _db.prepare(
