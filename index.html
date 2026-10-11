@@ -60,14 +60,21 @@
          ⚠️ Через GTM іде й Binotel, який підміняє номери телефону в DOM. Жорсткий
          стель 2.5 с саме для цього: підміна встигає до будь-якого реального
          набору номера, інакше дзвінок втратив би атрибуцію.
+         ⚠️ Але НЕ раніше за гідрацію React (подія tj:hydrated з App.jsx): Binotel
+         переписує вміст посилань tel:, і якщо встигав до гідрації — React бачив
+         чужий HTML і перемальовував усю сторінку. Тригери (взаємодія / простій /
+         2.5 с) до гідрації лише «запам'ятовуються». Страховка — 8 с від старту,
+         якщо гідрація з якоїсь причини не просигналила.
          ⚠️ Компроміс: хто закриє сторінку швидше за 2.5 с і не торкнеться її —
          у статистику не потрапить. -->
     <script>(function(w,d,s,l,i){
       w[l]=w[l]||[];
-      var started=false;
+      var started=false,wanted=false,hydrated=!!w.__tjHydrated;
       var EV=['pointerdown','keydown','touchstart','scroll'];
       function start(){
-        if(started)return; started=true;
+        if(started)return;
+        if(!hydrated){wanted=true;return}
+        started=true;
         EV.forEach(function(e){w.removeEventListener(e,start,true)});
         w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
         var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
@@ -75,7 +82,14 @@
         f.parentNode.insertBefore(j,f);
       }
       EV.forEach(function(e){w.addEventListener(e,start,{once:true,passive:true,capture:true})});
+      setTimeout(start,2500);
       (w.requestIdleCallback||function(cb){return setTimeout(cb,1200)})(start,{timeout:2500});
+      function onHydrated(){
+        if(hydrated&&started)return; hydrated=true;
+        if(wanted)start(); else (w.requestIdleCallback||function(cb){return setTimeout(cb,300)})(start,{timeout:1000});
+      }
+      if(hydrated)onHydrated(); else w.addEventListener('tj:hydrated',onHydrated,{once:true});
+      setTimeout(function(){hydrated=true;start()},8000);
     })(window,document,'script','dataLayer','GTM-P9DW9P6D');</script>
     <!-- End Google Tag Manager -->
     <!-- SSR-lite: серверний семантичний контент сторінки для краулерів (#seo-content).

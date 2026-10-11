@@ -147,6 +147,19 @@ function langRoutes(lang) {
   )
 }
 
+// Сигнал для GTM в index.html: React закінчив гідрацію (ефект спрацьовує, коли
+// межа Suspense зі сторінкою вже «ожила»). Binotel із GTM переписує посилання tel:
+// у DOM; якщо він встигав до гідрації — React бачив чужий HTML (#418) і
+// перемальовував усю сторінку.
+function HydratedSignal() {
+  useEffect(() => {
+    if (window.__tjHydrated) return
+    window.__tjHydrated = true
+    window.dispatchEvent(new Event('tj:hydrated'))
+  }, [])
+  return null
+}
+
 function AppRoutes() {
   return (
     <Suspense fallback={<PageFallback />}>
@@ -213,6 +226,7 @@ function AppRoutes() {
           їх /pl/... ловить 301 на бекенді. */}
       {PUBLIC_LANG_CODES.filter(c => c !== 'uk').map(langRoutes)}
     </Routes>
+    <HydratedSignal />
     </Suspense>
   )
 }
