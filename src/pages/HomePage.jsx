@@ -191,7 +191,10 @@ function ProjectsCarousel() {
         </div>
       )}
 
-      <section className="py-16 md:py-24 bg-[#0C0B0A] overflow-hidden">
+      {/* overflow-clip, не hidden: hidden лишає секцію програмно прокручуваною, і
+          scrollIntoView / Ctrl+F по каруселі (≈10 000 px) зсували її вбік — заголовок
+          з'їжджав за лівий край. clip забороняє прокрутку взагалі. */}
+      <section className="py-16 md:py-24 bg-[#0C0B0A] overflow-clip">
         <div className="max-w-7xl mx-auto px-4 mb-10">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="flex items-end justify-between">
