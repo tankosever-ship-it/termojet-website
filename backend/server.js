@@ -1070,6 +1070,18 @@ function handleBlog(lang) {
 app.get('/blog/:slug', handleBlog('uk'))
 for (const lg of INTL_LANGS) app.get(`/${lg}/blog/:slug`, handleBlog(lg))
 
+// Картинка для прев'ю в месенджерах/соцмережах (og:image) — права частина банера
+// категорії з обладнанням, 1200×630 JPG (public/og/category-<slug>.jpg; згенеровано з
+// public/banner-<slug>.*). Нема файлу (напр. «Акція») → загальна картинка сайту.
+const CATEGORY_OG = new Map()
+function categoryOgImg(slug) {
+  if (!CATEGORY_OG.has(slug)) {
+    const rel = `/og/category-${slug}.jpg`
+    CATEGORY_OG.set(slug, fs.existsSync(path.join(DIST, rel)) ? SITE + rel : undefined)
+  }
+  return CATEGORY_OG.get(slug)
+}
+
 // ── Категорії: UA + EN/PL/FR/DE ───────────────────────────────────────────────
 // Назви категорій мають uk+en; для pl/fr/de — англійський fallback (en-мітки).
 function handleCategory(lang) {
@@ -1100,7 +1112,7 @@ function handleCategory(lang) {
           { name: 'Catalog', url: `${base}/catalog` },
           { name: cName, url },
         ]), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url, h1: cName, bodyText: cDesc, alternates, jsonLd })
+        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cName, bodyText: cDesc, alternates, jsonLd })
       } else {
         let title = `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
@@ -1110,7 +1122,7 @@ function handleCategory(lang) {
           { name: 'Каталог', url: `${base}/catalog` },
           { name: cName, url },
         ]), ORG_SCHEMA]
-        html = injectMeta(html, { title, desc, url, h1: cName, bodyText: cDesc, alternates, jsonLd })
+        html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: cName, bodyText: cDesc, alternates, jsonLd })
       }
       // SSR-lite: сітка товарів категорії в #seo-content
       const products = _db.prepare(
@@ -1177,7 +1189,7 @@ app.get('*', (req, res) => {
       const alternates = buildAlternates(lookupPath)
       const jsonLd = [ORG_SCHEMA]
       if (lookupPath === '/faq') { const faq = buildFaqSchema(lang); if (faq) jsonLd.unshift(faq) }
-      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, img: meta.img, alternates, jsonLd })
+      html = injectMeta(html, { title: meta.title, desc: meta.desc, url, img: meta.img || (lookupPath === '/catalog' ? categoryOgImg('catalog') : undefined), alternates, jsonLd })
       // SSR-lite: H1 + контент сторінки + nav у #seo-content.
       // Дата-керовані сторінки (головна/блог/FAQ) наповнюємо реальним контентом.
       const lg = lang
