@@ -402,6 +402,7 @@ const UAH_FMT = {
   pl: n => `${n >= 10000 ? groupD(n, '\u00a0') : groupD(n, '')}\u00a0UAH`,
   fr: n => `${groupD(n, '\u202f')}\u00a0UAH`,
   de: n => `${groupD(n, '.')}\u00a0UAH`,
+  ro: n => `${groupD(n, '.')}\u00a0UAH`,
 }
 const fmtUahLang = (n, lang) => (UAH_FMT[lang] || UAH_FMT.uk)(n)
 const landingCfg = (cat, lang) => CATEGORY_LANDING[cat]?.[lang] || null

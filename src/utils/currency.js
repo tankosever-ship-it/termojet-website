@@ -48,7 +48,7 @@ export function groupDigits(n, sep = '\u00a0') {
 
 // Формат ціни в ₴ за мовою UI (дзеркало колишнього Intl-виводу Chrome):
 // uk «7 945 грн», en «UAH 7,945», pl «7945 UAH» (групує лише від 10 000),
-// fr «7 945 UAH» (вузький пробіл), de «7.945 UAH». ro — як uk.
+// fr «7 945 UAH» (вузький пробіл), de і ro «7.945 UAH». Іноземні мови — завжди «UAH», не «грн».
 const NB = '\u00a0'
 const PRICE_FMT = {
   uk: n => `${groupDigits(n)}${NB}грн`,
@@ -56,6 +56,7 @@ const PRICE_FMT = {
   pl: n => `${Math.abs(n) >= 10000 ? groupDigits(n) : groupDigits(n, '')}${NB}UAH`,
   fr: n => `${groupDigits(n, '\u202f')}${NB}UAH`,
   de: n => `${groupDigits(n, '.')}${NB}UAH`,
+  ro: n => `${groupDigits(n, '.')}${NB}UAH`,
 }
 
 // Готова сума в ₴ → рядок за мовою (для текстів, де ціна вже порахована)

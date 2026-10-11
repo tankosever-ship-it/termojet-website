@@ -262,7 +262,7 @@
           "tab": "Podtynkowe",
           "cardTitle": "Szafka podtynkowa",
           "cardSub": "Wbudowana, we wnęce",
-          "h2": "Szafka rozdzielacza podtynkowa",
+          "h2": "Szafka rozdzielaczowa podtynkowa",
           "text": "Szafka wbudowana do montażu we wnęce ściennej. Wysokość {h} mm, głębokość {d} mm, szerokość {wmin}–{wmax} mm.",
           "mount": "Wbudowana we wnękę",
           "column": "Podtynkowa"
@@ -274,7 +274,7 @@
           "tab": "Natynkowe",
           "cardTitle": "Szafka natynkowa",
           "cardSub": "Montaż na ścianie",
-          "h2": "Szafka rozdzielacza natynkowa",
+          "h2": "Szafka rozdzielaczowa natynkowa",
           "text": "Szafka do mocowania na powierzchni ściany. Wysokość {h} mm, głębokość {d} mm, szerokość {wmin}–{wmax} mm.",
           "mount": "Na ścianie",
           "column": "Natynkowa"

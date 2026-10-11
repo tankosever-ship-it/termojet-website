@@ -987,7 +987,7 @@ export default function ProductDetailPage() {
                     <>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, color: 'var(--accent)' }}>
                         {groupDigits(salePriceUAH)}
-                        <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>₴</span>
+                        <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>{lang === 'uk' ? '₴' : 'UAH'}</span>
                       </span>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, color: 'var(--text-muted)', textDecoration: 'line-through' }}>{groupDigits(priceUAH)}</span>
                       <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, fontWeight: 700, padding: '3px 7px', background: 'var(--accent)', color: '#fff', letterSpacing: '.08em', textTransform: 'uppercase' }} title={t('product.saleTag')}>−{salePercent(product)}%</span>
@@ -995,7 +995,7 @@ export default function ProductDetailPage() {
                   ) : (
                     <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, color: 'var(--ink-100)' }}>
                       {groupDigits(priceUAH)}
-                      <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>₴</span>
+                      <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-muted)', marginLeft: 4 }}>{lang === 'uk' ? '₴' : 'UAH'}</span>
                     </span>
                   )}
                 </div>
@@ -1217,7 +1217,7 @@ export default function ProductDetailPage() {
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--ink-200)', paddingTop: 10 }}>
                           {pPriceUAH ? (
                             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 15, fontWeight: 800, color: 'var(--ink-100)' }}>
-                              {groupDigits(pPriceUAH)} <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>₴</span>
+                              {groupDigits(pPriceUAH)} <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{lang === 'uk' ? '₴' : 'UAH'}</span>
                             </span>
                           ) : (
                             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: 'var(--text-muted)' }}>{t('product.priceOnRequest')}</span>
