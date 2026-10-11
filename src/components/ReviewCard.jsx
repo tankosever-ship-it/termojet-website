@@ -1,5 +1,5 @@
 import { motion } from '../utils/motion'
-import { imgUrl } from '../utils/imgUrl'
+import { imgUrl, sizedImg } from '../utils/imgUrl'
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } }
 
@@ -32,7 +32,8 @@ export default function ReviewCard({ review }) {
       </p>
       {review.photo && (
         <a href={imgUrl(review.photo)} target="_blank" rel="noreferrer" className="block">
-          <img src={imgUrl(review.photo)} alt="" loading="lazy"
+          {/* Мініатюра 160 px заввишки — зменшена копія; оригінал (буває 2 МБ) лише за посиланням */}
+          <img src={sizedImg(review.photo, 640)} alt="" loading="lazy"
             className="w-full h-40 object-cover border border-[#e0e0e0]" />
         </a>
       )}

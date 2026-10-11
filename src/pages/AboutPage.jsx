@@ -1,5 +1,5 @@
 import LLink from '../components/LLink'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from '../utils/motion'
 import { Factory, Globe, Award, ArrowRight, Check, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -30,6 +30,39 @@ const MANUFACTURING_PHOTOS = [
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
 const stagger = { show: { transition: { staggerChildren:0.07 } } }
+
+// Прев'ю відео в картці: файл підвантажується й грає лише поки картка у видимій зоні,
+// а при виході зі сторінки завантаження обривається. Раніше autoplay+loop тягнув
+// about-factory.mp4 (12 МБ) повністю й далі — переходи на інші сторінки стояли
+// в черзі за ним по 3–4 с (їхній код вантажився вже після відео).
+function PreviewVideo({ src, poster, className, autoplay = true }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    let io
+    if (autoplay && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          if (!v.getAttribute('src')) v.setAttribute('src', src)
+          v.play().catch(() => {})
+        } else {
+          v.pause()
+        }
+      }, { rootMargin: '200px' })
+      io.observe(v)
+    }
+    return () => {
+      io?.disconnect()
+      v.pause()
+      v.removeAttribute('src') // обриває завантаження файлу
+      v.load()
+    }
+  }, [src, autoplay])
+  return (
+    <video ref={ref} muted loop playsInline preload="none" poster={poster} className={className} />
+  )
+}
 
 function PhotoGallery({ photos, t }) {
   const [lightbox, setLightbox] = useState(null)
@@ -379,11 +412,8 @@ export default function AboutPage() {
                   ● {v.label}
                 </div>
                 {/* Власний кадр-постер відео; вертикальне — цілком (object-contain), без обрізання */}
-                <video autoPlay={!v.still} muted loop playsInline preload={v.still ? 'none' : 'metadata'}
-                  poster={v.poster || poster}
-                  className={`w-full h-full block ${v.vertical ? 'object-contain' : 'object-cover'}`}>
-                  <source src={v.src} type="video/mp4" />
-                </video>
+                <PreviewVideo src={v.src} autoplay={!v.still} poster={v.poster || poster}
+                  className={`w-full h-full block ${v.vertical ? 'object-contain' : 'object-cover'}`} />
                 <div className="absolute inset-0 flex items-center justify-center transition-colors group-hover:bg-black/30">
                   <span className="w-14 h-14 rounded-full bg-white/15 border border-white/40 backdrop-blur-sm flex items-center justify-center opacity-80 transition-all group-hover:opacity-100 group-hover:scale-110">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>

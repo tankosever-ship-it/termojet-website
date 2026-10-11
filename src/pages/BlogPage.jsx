@@ -6,6 +6,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
 import PageHero from '../components/PageHero'
+import { sizedImg } from '../utils/imgUrl'
 
 export default function BlogPage() {
   const { blog, lang } = useApp()
@@ -81,10 +82,10 @@ export default function BlogPage() {
               <LLink to={`/blog/${featured.slug}`} className="card card-hover block overflow-hidden mb-8 md:flex">
                 {featured.image && (
                   featured.image.match(/\/images\/(blog|portfolio)\//) ? (
-                    <img loading="lazy" decoding="async" src={featured.image} alt={featured.title} className="w-full md:w-80 lg:w-96 h-56 md:h-auto object-cover flex-shrink-0" />
+                    <img loading="lazy" decoding="async" src={sizedImg(featured.image, 960)} alt={featured.title} className="w-full md:w-80 lg:w-96 h-56 md:h-auto object-cover flex-shrink-0" />
                   ) : (
                     <div className="w-full md:w-80 lg:w-96 h-56 md:h-auto flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-                      <img loading="lazy" decoding="async" src={featured.image} alt={featured.title} className="max-h-52 md:max-h-72 max-w-full object-contain" />
+                      <img loading="lazy" decoding="async" src={sizedImg(featured.image, 960)} alt={featured.title} className="max-h-52 md:max-h-72 max-w-full object-contain" />
                     </div>
                   )
                 )}
@@ -118,8 +119,8 @@ export default function BlogPage() {
                   <LLink key={post.id} to={`/blog/${post.slug}`} className="card card-hover block overflow-hidden">
                     {post.image && (
                       post.image.match(/\/images\/(blog|portfolio)\//)
-                        ? <img loading="lazy" decoding="async" src={post.image} alt={title} className="w-full h-44 object-cover" />
-                        : <div className="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img loading="lazy" decoding="async" src={post.image} alt={title} className="max-h-full max-w-full object-contain p-3" /></div>
+                        ? <img loading="lazy" decoding="async" src={sizedImg(post.image, 640)} alt={title} className="w-full h-44 object-cover" />
+                        : <div className="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center"><img loading="lazy" decoding="async" src={sizedImg(post.image, 640)} alt={title} className="max-h-full max-w-full object-contain p-3" /></div>
                     )}
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2">

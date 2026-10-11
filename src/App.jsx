@@ -16,27 +16,67 @@ import { SsrEntryContext } from './utils/motion'
 // HomePage — eager (перша/LCP сторінка), решта — code-split через lazy()
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage' // eager — 404 не має залежати від lazy-чанка
-const CatalogPage = lazy(() => import('./pages/CatalogPage'))
-const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'))
-const CartPage = lazy(() => import('./pages/CartPage'))
-const AboutPage = lazy(() => import('./pages/AboutPage'))
-const ContactPage = lazy(() => import('./pages/ContactPage'))
-const BlogPage = lazy(() => import('./pages/BlogPage'))
-const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
-const PortfolioPage = lazy(() => import('./pages/PortfolioPage'))
-const ServicePage = lazy(() => import('./pages/ServicePage'))
-const FilesPage = lazy(() => import('./pages/FilesPage'))
+// Завантажувачі публічних сторінок — і для lazy(), і для фонового підвантаження
+// (prefetchPages нижче). Адмінка сюди не входить.
+const PAGE_LOADERS = {
+  CatalogPage: () => import('./pages/CatalogPage'),
+  ProductDetailPage: () => import('./pages/ProductDetailPage'),
+  CartPage: () => import('./pages/CartPage'),
+  AboutPage: () => import('./pages/AboutPage'),
+  ContactPage: () => import('./pages/ContactPage'),
+  BlogPage: () => import('./pages/BlogPage'),
+  BlogPostPage: () => import('./pages/BlogPostPage'),
+  PortfolioPage: () => import('./pages/PortfolioPage'),
+  ServicePage: () => import('./pages/ServicePage'),
+  FilesPage: () => import('./pages/FilesPage'),
+  PraysPage: () => import('./pages/PraysPage'),
+  FaqPage: () => import('./pages/FaqPage'),
+  DeliveryPage: () => import('./pages/DeliveryPage'),
+  PrivacyPage: () => import('./pages/PrivacyPage'),
+  TermsPage: () => import('./pages/TermsPage'),
+  OEMPage: () => import('./pages/OEMPage'),
+  ReturnPage: () => import('./pages/ReturnPage'),
+  PartnersPage: () => import('./pages/PartnersPage'),
+  TrainingPage: () => import('./pages/TrainingPage'),
+  ReviewsPage: () => import('./pages/ReviewsPage'),
+}
+
+// Код сторінок підвантажуємо заздалегідь, коли браузер вільний. Інакше чанк сторінки
+// (2–100 кБ) вантажився лише в момент переходу і стояв у черзі за фото/відео
+// попередньої сторінки: /files, /navchannya, /blog відкривались по 1.5–7 с.
+// Повторний import() того самого модуля бере його з кешу — подвійного запиту немає.
+function prefetchPages() {
+  if (navigator.connection?.saveData) return
+  const queue = Object.values(PAGE_LOADERS)
+  const idle = window.requestIdleCallback || (cb => setTimeout(cb, 300))
+  const next = () => {
+    const load = queue.shift()
+    if (!load) return
+    load().catch(() => {}).finally(() => idle(next))
+  }
+  idle(next)
+}
+const CatalogPage = lazy(PAGE_LOADERS.CatalogPage)
+const ProductDetailPage = lazy(PAGE_LOADERS.ProductDetailPage)
+const CartPage = lazy(PAGE_LOADERS.CartPage)
+const AboutPage = lazy(PAGE_LOADERS.AboutPage)
+const ContactPage = lazy(PAGE_LOADERS.ContactPage)
+const BlogPage = lazy(PAGE_LOADERS.BlogPage)
+const BlogPostPage = lazy(PAGE_LOADERS.BlogPostPage)
+const PortfolioPage = lazy(PAGE_LOADERS.PortfolioPage)
+const ServicePage = lazy(PAGE_LOADERS.ServicePage)
+const FilesPage = lazy(PAGE_LOADERS.FilesPage)
 // Сторінка існує заради посилання для партнерів — лише українською: прайс гривневий.
-const PraysPage = lazy(() => import('./pages/PraysPage'))
-const FaqPage = lazy(() => import('./pages/FaqPage'))
-const DeliveryPage = lazy(() => import('./pages/DeliveryPage'))
-const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
-const TermsPage = lazy(() => import('./pages/TermsPage'))
-const OEMPage = lazy(() => import('./pages/OEMPage'))
-const ReturnPage = lazy(() => import('./pages/ReturnPage'))
-const PartnersPage = lazy(() => import('./pages/PartnersPage'))
-const TrainingPage = lazy(() => import('./pages/TrainingPage'))
-const ReviewsPage = lazy(() => import('./pages/ReviewsPage'))
+const PraysPage = lazy(PAGE_LOADERS.PraysPage)
+const FaqPage = lazy(PAGE_LOADERS.FaqPage)
+const DeliveryPage = lazy(PAGE_LOADERS.DeliveryPage)
+const PrivacyPage = lazy(PAGE_LOADERS.PrivacyPage)
+const TermsPage = lazy(PAGE_LOADERS.TermsPage)
+const OEMPage = lazy(PAGE_LOADERS.OEMPage)
+const ReturnPage = lazy(PAGE_LOADERS.ReturnPage)
+const PartnersPage = lazy(PAGE_LOADERS.PartnersPage)
+const TrainingPage = lazy(PAGE_LOADERS.TrainingPage)
+const ReviewsPage = lazy(PAGE_LOADERS.ReviewsPage)
 
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
@@ -245,6 +285,13 @@ function SsrEntryProvider({ enabled, children }) {
 // initialData — дані серверного рендеру (SSR), ssrLocation — URL, який рендерить
 // сервер (src/entry-server.jsx). У браузері ssrLocation немає → BrowserRouter.
 export default function App({ initialData = null, ssrLocation = null }) {
+  // Лише в браузері й після повного завантаження першої сторінки — не конкурує з її LCP
+  useEffect(() => {
+    if (ssrLocation != null) return
+    if (document.readyState === 'complete') prefetchPages()
+    else window.addEventListener('load', prefetchPages, { once: true })
+    return () => window.removeEventListener('load', prefetchPages)
+  }, [ssrLocation])
   const routes = (
     <SsrEntryProvider enabled={!!initialData}>
       <ScrollToTop />

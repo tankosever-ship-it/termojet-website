@@ -5,6 +5,7 @@ import { useApp } from '../context/AppContext'
 import { useT } from '../i18n/useT'
 import SEO from '../components/SEO'
 import PageHero from '../components/PageHero'
+import { sizedImg } from '../utils/imgUrl'
 
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
 
@@ -64,7 +65,7 @@ export default function PortfolioPage() {
                   {/* Image */}
                   <div className="relative overflow-hidden h-52">
                     {item.image ? (
-                      <img loading="lazy" decoding="async" src={item.image} alt={item.title}
+                      <img loading="lazy" decoding="async" src={sizedImg(item.image, 640)} alt={item.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     ) : (
                       <div className="w-full h-full bg-gray-100 flex items-center justify-center text-5xl text-gray-300">🏭</div>
