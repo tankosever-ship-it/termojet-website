@@ -728,13 +728,15 @@ export default function ProductDetailPage() {
       .slice(0, 5)
   }, [displaySpecs, product?.sku])
 
-  // Documents for this product
+  // Documents for this product: інструкції, брошури, далі — сертифікати на серію
   const productDocs = useMemo(() => {
+    const ORDER = ['Інструкції', 'Брошури', 'Сертифікати та декларації']
     const ids = getDocsForProduct(categorySlug, name, product?.sku)
     return ids
       .map(id => files.find(f => f.id === id))
       .filter(Boolean)
-      .filter(f => ['Інструкції', 'Брошури'].includes(f.category))
+      .filter(f => ORDER.includes(f.category))
+      .sort((a, b) => ORDER.indexOf(a.category) - ORDER.indexOf(b.category))
   }, [categorySlug, name, product?.sku, files])
 
   // 3D models (STEP)
@@ -1073,7 +1075,7 @@ export default function ProductDetailPage() {
                     href={doc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    download
+                    download={doc.fileName || ''}
                     style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 14px', borderBottom: '1px solid var(--border)', transition: 'background .15s', textDecoration: 'none' }}
                     className="pdp-doc-row"
                   >

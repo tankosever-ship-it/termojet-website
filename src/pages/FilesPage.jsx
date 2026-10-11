@@ -172,7 +172,8 @@ export default function FilesPage() {
                           href={file.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          download
+                          // fileName — зрозуміла назва збереженого файлу (працює для своїх /files)
+                          download={file.fileName || ''}
                           className="flex items-center gap-2 px-4 py-2 border border-gray-200 hover:border-[var(--accent)] hover:text-[var(--accent)] text-gray-500 transition-all flex-shrink-0"
                           onClick={e => e.stopPropagation()}
                         >

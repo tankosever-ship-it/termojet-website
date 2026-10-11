@@ -1,16 +1,22 @@
 // Mapping: categorySlug → file IDs from files.js
 // Shows relevant brochures & instructions directly on product card
 
+// Сертифікати (files.js, «Сертифікати та декларації»): 73 — НГ/BOX; 46/44/45 —
+// колектори, ГС, КГС (експертиза типу, модуль C2, декларація D.0019-25);
+// 40–43 — циркуляційні насоси (за серією, див. PUMP_CERTS нижче)
+const KOLEKTORY_CERTS = [46, 44, 45]
+const PUMP_CERTS = [40, 41, 42, 43]
+
 export const DOCS_BY_CATEGORY = {
-  'termojet-box':             [10],           // Інструкція BOX
-  'hidravlichni-rozdilnyky':  [11],           // Інструкція ГС
+  'termojet-box':             [10, 73],       // Інструкція BOX + сертифікат НГ/BOX
+  'hidravlichni-rozdilnyky':  [11, ...KOLEKTORY_CERTS], // Інструкція ГС
   'termojet-mega':            [11],           // Інструкція ГС (для ГС-31-34 та НГ-серії)
-  'nasosni-hrupy':            [12, 13],       // НГ-47/48/46/67 + НГ-51/52
+  'nasosni-hrupy':            [12, 13, 73],   // НГ-47/48/46/67 + НГ-51/52 + сертифікат НГ/BOX
   'nasosy':                   [],             // документи — лише за серією (див. DOCS_BY_NAME)
   'klapany':                  [18, 31],       // 3-х ходові + брошура сервопривід
   'zonalne-keruvannya':       [119],          // брошура зонального керування (інструкції — за моделлю)
-  'rozpodilchi-kolektory':    [14],           // Колектори розподільчі
-  'kolektory-z-hidrostrilkoyu': [15],         // КГС
+  'rozpodilchi-kolektory':    [14, ...KOLEKTORY_CERTS], // Колектори розподільчі
+  'kolektory-z-hidrostrilkoyu': [15, ...KOLEKTORY_CERTS], // КГС
   'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
   // Вузли TJ-MU: інструкції підтягуються за назвою моделі (DOCS_BY_NAME нижче)
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': [],
@@ -30,6 +36,9 @@ export const DOCS_BY_NAME = [
   { match: /APM-F/i,                    ids: [100, 101] }, // APM-F власні інструкція + брошура
   { match: /\bAPM\b(?!-F)/i,            ids: [189, 33] },  // APM різьбові (не APM-F)
   { match: /XPS|BPS/i,                  ids: [21] },
+  // Сертифікат і декларації на циркуляційні насоси — лише на самі насоси серій із
+  // сертифіката (APE, APM, APM-F, XPS, HSB/HBS); не на кабелі й аксесуари до них, не на BPS
+  { match: /\b(APE|APM|XPS|HSB|HBS)/i, not: /кабел/i, cat: 'nasosy', ids: PUMP_CERTS },
   { match: /WT\s?400/i,                 ids: [102] },      // каналізаційна станція WT 400 (не чіпати GRANDLIFT, теж «каналізаційні»)
   { match: /SPE/i,                      ids: [103, 104] }, // SPE12 інструкція + тех.лист
   { match: /HBS/i,                      ids: [191] },      // рециркуляційний HBS 24-12
@@ -91,7 +100,10 @@ export function getDocsForProduct(categorySlug, productName = '', sku = '') {
     if (exclusive && match.test(hay)) return [...new Set(exIds)]
   }
   const ids = new Set(DOCS_BY_CATEGORY[categorySlug] || [])
-  for (const { match, ids: extraIds } of DOCS_BY_NAME) {
+  // cat — правило лише для цієї категорії; not — виняток за назвою
+  for (const { match, ids: extraIds, cat, not } of DOCS_BY_NAME) {
+    if (cat && cat !== categorySlug) continue
+    if (not && not.test(hay)) continue
     if (match.test(hay)) extraIds.forEach(id => ids.add(id))
   }
   return [...ids]
