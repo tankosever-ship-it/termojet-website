@@ -105,6 +105,8 @@ export function AppProvider({ children, initialData = null }) {
   }))
 
   useEffect(() => { localStorage.setItem('tj2_lang', lang) }, [lang])
+  // <html lang> при перемиканні мови без перезавантаження (першу сторінку ставить сервер)
+  useEffect(() => { document.documentElement.lang = lang }, [lang])
   useEffect(() => {
     if (cartReadStarted.current) return
     cartReadStarted.current = true

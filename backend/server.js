@@ -950,7 +950,15 @@ const { createSsr } = require('./ssr')
 const ssrPage = createSsr({ port: PORT, peekEurRate })
 // Не кидає: будь-яка помилка → сирий html (SSR-lite), щоб необроблений reject
 // не поклав процес.
+// <html lang> — за мовним префіксом URL (/en/…, /de/…). index.html має жорстке
+// lang="uk", і раніше всі мовні версії віддавались як українські.
+const LANG_PREFIX_RE = new RegExp(`^/(${ALL_LANGS.filter(lg => lg !== 'uk').join('|')})(?:/|$)`)
+function withHtmlLang(req, html) {
+  const lang = (req.path.match(LANG_PREFIX_RE) || [])[1] || 'uk'
+  return html.replace(/<html lang="[^"]*"/, `<html lang="${lang}"`)
+}
 function sendPage(req, res, html) {
+  html = withHtmlLang(req, html)
   return ssrPage(req, res, html)
     .catch(() => html)
     .then(out => { if (!res.headersSent) res.type('html').send(out) })
