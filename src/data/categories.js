@@ -207,10 +207,26 @@ export const CATEGORIES = [
     color: '#0891b2',
   },
   {
+    // Окрема категорія під ключ «колектор для теплої підлоги» (SEO, 16.10.2026): сюди
+    // перенесено 14 колекторів з витратомірами TJ-W із «Системи підлогового опалення»
+    // (колектори з кранами TJ-R-W лишились там). SEO-шаблон: src/data/category-landing.json.
+    id: 'floor-manifolds',
+    slug: 'kolektor-dlya-teployi-pidlogy',
+    parent: 'kolektory-pidloha',
+    icon: 'Grid3X3',
+    image: '/images/kolektory/kolektor-v-05.jpg',
+    name: { uk: 'Колектор для теплої підлоги', en: 'Underfloor Heating Manifold', pl: 'Rozdzielacz do ogrzewania podłogowego', fr: 'Collecteur pour plancher chauffant', de: 'Fußbodenheizungsverteiler', ro: 'Distribuitor pentru încălzire prin pardoseală' },
+    desc: { uk: 'Колектори Termojet з витратомірами з нержавіючої сталі AISI 304 на 2–15 виходів для теплої підлоги', en: 'Termojet stainless steel AISI 304 manifolds with flow meters for 2–15 underfloor heating circuits', pl: 'Rozdzielacze Termojet ze stali nierdzewnej AISI 304 z przepływomierzami na 2–15 obwodów ogrzewania podłogowego', fr: 'Collecteurs Termojet en inox AISI 304 avec débitmètres pour 2 à 15 circuits de plancher chauffant', de: 'Termojet Edelstahlverteiler AISI 304 mit Durchflussmessern für 2–15 Fußbodenheizkreise', ro: 'Distribuitoare Termojet din oțel inoxidabil AISI 304 cu debitmetre pentru 2–15 circuite de încălzire prin pardoseală' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
+    color: '#0891b2',
+  },
+  {
     // Окрема категорія під пошуковий запит «змішувальний вузол для теплої підлоги»
     // (рішення 02.10.2026): сюди перенесено вузли TJ-MU з «Системи підлогового опалення».
+    // parent — з 16.10.2026, коли сторінка отримала SEO-шаблон (хлібні крихти як у макеті).
     id: 'floor-mixing-units',
     slug: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy',
+    parent: 'kolektory-pidloha',
     icon: 'Droplets',
     image: `${BASE}/2023/08/dsc_0524-scaled.jpg`,
     name: { uk: 'Змішувальний вузол для теплої підлоги', en: 'Underfloor Heating Mixing Unit', pl: 'Węzeł mieszający do ogrzewania podłogowego', fr: 'Groupe de mélange pour plancher chauffant', de: 'Mischeinheit für Fußbodenheizung', ro: 'Grup de amestec pentru încălzire prin pardoseală' },

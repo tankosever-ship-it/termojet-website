@@ -1,7 +1,9 @@
-// SEO-шаблон категорії (макет SEO-команди, жовтень 2026; перша категорія —
-// «Колекторна шафа»). Вступ з ключами, картки типів з якорями до H2, підбір за
-// кількістю виходів, групи товарів під власними H2, таблиця розмірів, порівняння,
-// плитки суміжних товарів і FAQ. Тексти й підписи (усі мови) — src/data/category-landing.json,
+// SEO-шаблон категорії (макети SEO-команди, жовтень 2026: «Колекторна шафа»,
+// «Колектор для теплої підлоги», «Змішувальний вузол для теплої підлоги»). Вступ з ключами,
+// картки типів з якорями до H2, підбір за кількістю виходів, групи товарів під власними H2,
+// таблиця моделей, характеристики, таблиця розмірів, порівняння, плитки суміжних товарів
+// і FAQ. Кожен блок необовʼязковий: сторінка показує лише те, що є в її конфігу; картки
+// типів і вкладки — лише коли груп більше однієї. Тексти й підписи (усі мови) — src/data/category-landing.json,
 // числа (розміри, ціни) — з каталогу (utils/categoryLanding.js).
 //
 // Ліворуч — той самий сайдбар фільтрів, що в інших категоріях (aside, передає CatalogPage):
@@ -37,13 +39,14 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
     .map(g => ({ ...g, visible: g.items.filter(p => shownIds.has(p.id)) }))
   const shownCount = shownGroups.reduce((n, g) => n + g.visible.length, 0)
   const picker = cfg.picker
+  const multi = data.groups.length > 1
 
   return (
     <div className="space-y-10">
       {/* ── Вступ + картки типів (якорі до H2) ── */}
-      <section className="grid lg:grid-cols-[1.15fr_1fr] gap-6 items-start">
-        <p className="text-gray-600 text-[17px] leading-relaxed">{cfg.intro}</p>
-        <div className="grid sm:grid-cols-2 gap-3">
+      <section className={multi ? 'grid lg:grid-cols-[1.15fr_1fr] gap-6 items-start' : ''}>
+        <p className="text-gray-600 text-[17px] leading-relaxed max-w-4xl">{fillTokens(cfg.intro, data.ctx, lang)}</p>
+        {multi && <div className="grid sm:grid-cols-2 gap-3">
           {data.groups.map(g => (
             <a key={g.key} href={`#grp-${g.key}`}
               className="group flex items-center gap-3 p-3 bg-white border border-[var(--ink-200)] hover:border-[var(--accent)] transition-colors">
@@ -62,7 +65,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
               </span>
             </a>
           ))}
-        </div>
+        </div>}
       </section>
 
       {/* ── Сайдбар фільтрів (як в інших категоріях) + усе інше ── */}
@@ -92,15 +95,15 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
               </div>
             )}
 
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="inline-flex bg-white border border-[var(--ink-200)] p-1" role="tablist">
+            <div className={`flex flex-wrap items-center gap-3 ${multi ? 'justify-between' : 'justify-end'}`}>
+              {multi && <div className="inline-flex bg-white border border-[var(--ink-200)] p-1" role="tablist">
                 {[{ key: 'all', tab: ui.all, n: catProducts.length }, ...data.groups.map(g => ({ key: g.key, tab: g.tab, n: g.items.length }))].map(o => (
                   <button key={o.key} type="button" role="tab" aria-selected={tab === o.key} onClick={() => onTab?.(o.key)}
                     className={`px-4 py-1.5 text-sm font-semibold transition-colors ${tab === o.key ? 'bg-[var(--primary)] text-white' : 'text-gray-600 hover:text-gray-900'}`}>
                     {o.tab} <span className={tab === o.key ? 'text-white/60' : 'text-gray-400'}>{o.n}</span>
                   </button>
                 ))}
-              </div>
+              </div>}
               <div className="flex items-center gap-3 text-sm text-gray-500">
                 <span>{ui.found}: <b className="text-gray-700">{shownCount}</b></span>
                 <select value={sort} onChange={e => setSort(e.target.value)} aria-label={ui.sortSize}
@@ -116,10 +119,12 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
           {/* Групи товарів під власними H2 */}
           {shownGroups.map(g => (
             <section key={g.key} className="space-y-4">
-              <div>
-                <H2 id={`grp-${g.key}`}>{g.h2}</H2>
-                <p className="text-gray-600 mt-2 max-w-3xl">{fillTokens(g.text, g, lang)}</p>
-              </div>
+              {g.h2 && (
+                <div>
+                  <H2 id={`grp-${g.key}`}>{g.h2}</H2>
+                  {g.text && <p className="text-gray-600 mt-2 max-w-3xl">{fillTokens(g.text, g, lang)}</p>}
+                </div>
+              )}
               {g.visible.length ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                   {sorted(g.visible).map(p => {
@@ -133,6 +138,52 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
               )}
             </section>
           ))}
+
+          {/* Таблиця моделей: модель (посилання) — параметр із конфігу — ціна з каталогу */}
+          {cfg.models && data.modelRows.length > 0 && (
+            <section className="space-y-3 max-w-3xl">
+              <H2 id="models">{cfg.models.h2}</H2>
+              {cfg.models.text && <p className="text-gray-600">{cfg.models.text}</p>}
+              <div className="overflow-x-auto bg-white border border-[var(--ink-200)]">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left text-[11px] uppercase tracking-wider text-gray-500 border-b border-[var(--ink-200)]">
+                      <th className="px-4 py-3 font-semibold">{cfg.models.cols.model}</th>
+                      <th className="px-4 py-3 font-semibold">{cfg.models.cols.param}</th>
+                      <th className="px-4 py-3 font-semibold">{cfg.models.cols.price}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.modelRows.map(r => (
+                      <tr key={r.product.id} className="border-b border-[var(--ink-200)] last:border-0">
+                        <td className="px-4 py-2.5 font-semibold text-gray-900 whitespace-nowrap">
+                          <LLink to={`/catalog/${r.product.categorySlug}/${r.product.slug}`} className="hover:text-[var(--accent)]">{r.model}</LLink>
+                        </td>
+                        <td className="px-4 py-2.5 text-gray-700 font-mono whitespace-nowrap">{r.param}</td>
+                        <td className="px-4 py-2.5 text-gray-700 whitespace-nowrap">{r.price > 0 ? fmt(r.price) : '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          {/* Характеристики серії: пари «параметр — значення» */}
+          {cfg.specs?.items?.length > 0 && (
+            <section className="space-y-3 max-w-4xl">
+              <H2 id="specs">{cfg.specs.h2}</H2>
+              {cfg.specs.text && <p className="text-gray-600">{cfg.specs.text}</p>}
+              <dl className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 bg-white border border-[var(--ink-200)]">
+                {cfg.specs.items.map(s => (
+                  <div key={s.k} className="px-4 py-3.5 border-b border-[var(--ink-200)] xl:border-b-0">
+                    <dt className="text-[11px] text-gray-400">{s.k}</dt>
+                    <dd className="font-semibold text-gray-900 mt-0.5">{s.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
 
           {/* Таблиця розмірів + порівняння типів */}
           <section className="grid 2xl:grid-cols-2 gap-8 items-start">

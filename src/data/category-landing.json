@@ -1,5 +1,5 @@
 {
-  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки.",
+  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок.",
   "shafa-kolektorna": {
     "uk": {
       "seo": {
@@ -52,10 +52,7 @@
         "h2": "Що встановити в шафу",
         "items": [
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Колектор з витратомірами"
-            },
+            "category": "kolektor-dlya-teployi-pidlogy",
             "match": "витратомірами",
             "sub": "outlets",
             "title": "Колектори з витратомірами"
@@ -175,10 +172,7 @@
         "h2": "What to install in the cabinet",
         "items": [
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Колектор з витратомірами"
-            },
+            "category": "kolektor-dlya-teployi-pidlogy",
             "match": "витратомірами",
             "sub": "outlets",
             "title": "Manifolds with flow meters"
@@ -298,10 +292,7 @@
         "h2": "Co zamontować w szafce",
         "items": [
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Колектор з витратомірами"
-            },
+            "category": "kolektor-dlya-teployi-pidlogy",
             "match": "витратомірами",
             "sub": "outlets",
             "title": "Rozdzielacze z przepływomierzami"
@@ -421,10 +412,7 @@
         "h2": "Quoi installer dans le coffret",
         "items": [
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Колектор з витратомірами"
-            },
+            "category": "kolektor-dlya-teployi-pidlogy",
             "match": "витратомірами",
             "sub": "outlets",
             "title": "Collecteurs avec débitmètres"
@@ -544,10 +532,7 @@
         "h2": "Was in den Schrank kommt",
         "items": [
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Колектор з витратомірами"
-            },
+            "category": "kolektor-dlya-teployi-pidlogy",
             "match": "витратомірами",
             "sub": "outlets",
             "title": "Verteiler mit Durchflussmessern"
@@ -667,10 +652,7 @@
         "h2": "Ce se montează în cutie",
         "items": [
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Колектор з витратомірами"
-            },
+            "category": "kolektor-dlya-teployi-pidlogy",
             "match": "витратомірами",
             "sub": "outlets",
             "title": "Distribuitoare cu debitmetre"
@@ -736,6 +718,1186 @@
         "width": "Lățime",
         "price": "Preț",
         "mm": "mm",
+        "empty": "Niciun model pentru filtrele selectate"
+      }
+    }
+  },
+  "kolektor-dlya-teployi-pidlogy": {
+    "uk": {
+      "seo": {
+        "title": "Колектор для теплої підлоги з витратомірами — купити в Termojet",
+        "description": "Колектори з витратомірами з нержавіючої сталі AISI 304 на 2–15 виходів. Власне виробництво з 2002 року, усі моделі в наявності. Доставка по Україні."
+      },
+      "h1": "Колектор для теплої підлоги",
+      "intro": "Колектор розподіляє теплоносій по контурах теплої підлоги й дозволяє налаштувати кожен контур окремо. Колектори Termojet виготовлені з нержавіючої сталі AISI 304 зі стінкою 1,6 мм, підключення 1\" – ¾\". 14 моделей на 2–15 контурів, від {min}.",
+      "groups": [
+        {
+          "key": "w",
+          "match": "витратомірами",
+          "h2": "Колектор з витратомірами",
+          "text": "Вбудовані витратоміри 0–5 л/хв на кожному виході дозволяють точно збалансувати витрату в кожному контурі теплої підлоги."
+        }
+      ],
+      "specs": {
+        "h2": "Характеристики колекторів TJ-W",
+        "items": [
+          {
+            "k": "Матеріал",
+            "v": "Нерж. сталь AISI 304"
+          },
+          {
+            "k": "Товщина стінки",
+            "v": "1,6 мм"
+          },
+          {
+            "k": "Підключення",
+            "v": "G1\" – G3/4\""
+          },
+          {
+            "k": "Витратоміри",
+            "v": "0–5 л/хв"
+          },
+          {
+            "k": "Кількість контурів",
+            "v": "2–15"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Що потрібно разом із колектором",
+        "items": [
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Змішувальний вузол для теплої підлоги",
+            "sub": "TJ-MU · від {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Колекторна шафа",
+            "sub": "Внутрішні та зовнішні, від {min}"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "match": "Євроконус",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Євроконуси та байпас",
+            "sub": "Комплектуючі для колектора · від {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Питання про колектори",
+        "items": [
+          {
+            "q": "Як підібрати колектор для теплої підлоги?",
+            "a": "За кількістю контурів: кожен контур теплої підлоги підключається до окремого виходу колектора. Termojet виготовляє колектори з витратомірами на 2–15 виходів."
+          },
+          {
+            "q": "Навіщо потрібні витратоміри на колекторі?",
+            "a": "Витратоміри 0–5 л/хв на кожному виході показують витрату теплоносія в контурі й дозволяють збалансувати контури різної довжини."
+          },
+          {
+            "q": "З якого матеріалу виготовлені колектори?",
+            "a": "З нержавіючої сталі AISI 304 товщиною стінки 1,6 мм. Підключення G1\" – G3/4\"."
+          },
+          {
+            "q": "Чи є доставка по Україні?",
+            "a": "Так. Termojet — власне виробництво з 2002 року, доставляємо по всій Україні. Деталі — на сторінці «Доставка і оплата»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "моделей",
+        "from": "від",
+        "all": "Всі",
+        "found": "Знайдено",
+        "sortSize": "За кількістю виходів",
+        "sortPriceAsc": "Ціна: від низької",
+        "sortPriceDesc": "Ціна: від високої",
+        "outlets": "виходів",
+        "price": "Ціна",
+        "empty": "Немає моделей за вибраними фільтрами"
+      }
+    },
+    "en": {
+      "seo": {
+        "title": "Underfloor Heating Manifold with Flow Meters — Buy at Termojet",
+        "description": "AISI 304 stainless steel manifolds with flow meters, 2–15 outlets. Own manufacturing since 2002, all models in stock. Delivery across Ukraine."
+      },
+      "h1": "Underfloor Heating Manifold",
+      "intro": "A manifold distributes the heating medium between the underfloor heating circuits and lets you adjust each circuit separately. Termojet manifolds are made of AISI 304 stainless steel with a 1.6 mm wall, 1\" – ¾\" connection. 14 models for 2–15 circuits, from {min}.",
+      "groups": [
+        {
+          "key": "w",
+          "match": "витратомірами",
+          "h2": "Manifold with flow meters",
+          "text": "Built-in flow meters of 0–5 l/min on every outlet let you balance the flow in each underfloor heating circuit precisely."
+        }
+      ],
+      "specs": {
+        "h2": "TJ-W manifold specifications",
+        "items": [
+          {
+            "k": "Material",
+            "v": "AISI 304 stainless steel"
+          },
+          {
+            "k": "Wall thickness",
+            "v": "1.6 mm"
+          },
+          {
+            "k": "Connection",
+            "v": "G1\" – G3/4\""
+          },
+          {
+            "k": "Flow meters",
+            "v": "0–5 l/min"
+          },
+          {
+            "k": "Number of circuits",
+            "v": "2–15"
+          }
+        ]
+      },
+      "related": {
+        "h2": "What you need together with the manifold",
+        "items": [
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Underfloor Heating Mixing Unit",
+            "sub": "TJ-MU · from {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Manifold Cabinet",
+            "sub": "Flush-mounted and surface-mounted, from {min}"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "match": "Євроконус",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurocones and bypass",
+            "sub": "Manifold accessories · from {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Manifold FAQ",
+        "items": [
+          {
+            "q": "How do I choose an underfloor heating manifold?",
+            "a": "By the number of circuits: each underfloor heating circuit is connected to a separate manifold outlet. Termojet makes manifolds with flow meters for 2–15 outlets."
+          },
+          {
+            "q": "Why does a manifold need flow meters?",
+            "a": "Flow meters of 0–5 l/min on every outlet show the coolant flow in the circuit and let you balance circuits of different lengths."
+          },
+          {
+            "q": "What are the manifolds made of?",
+            "a": "AISI 304 stainless steel with a 1.6 mm wall. Connection G1\" – G3/4\"."
+          },
+          {
+            "q": "Do you deliver across Ukraine?",
+            "a": "Yes. Termojet has been manufacturing its own products since 2002, and we deliver throughout Ukraine. Details are on the «Delivery and payment» page."
+          }
+        ]
+      },
+      "ui": {
+        "models": "models",
+        "from": "from",
+        "all": "All",
+        "found": "Found",
+        "sortSize": "By number of outlets",
+        "sortPriceAsc": "Price: low to high",
+        "sortPriceDesc": "Price: high to low",
+        "outlets": "outlets",
+        "price": "Price",
+        "empty": "No models match the selected filters"
+      }
+    },
+    "pl": {
+      "seo": {
+        "title": "Rozdzielacz do ogrzewania podłogowego z przepływomierzami — Termojet",
+        "description": "Rozdzielacze ze stali nierdzewnej AISI 304 z przepływomierzami, 2–15 wyjść. Własna produkcja od 2002 roku, wszystkie modele dostępne. Dostawa po Ukrainie."
+      },
+      "h1": "Rozdzielacz do ogrzewania podłogowego",
+      "intro": "Rozdzielacz rozprowadza czynnik grzewczy po obwodach ogrzewania podłogowego i pozwala wyregulować każdy obwód osobno. Rozdzielacze Termojet są wykonane ze stali nierdzewnej AISI 304 o grubości ścianki 1,6 mm, przyłącze 1\" – ¾\". 14 modeli na 2–15 obwodów, od {min}.",
+      "groups": [
+        {
+          "key": "w",
+          "match": "витратомірами",
+          "h2": "Rozdzielacz z przepływomierzami",
+          "text": "Wbudowane przepływomierze 0–5 l/min na każdym wyjściu pozwalają dokładnie zrównoważyć przepływ w każdym obwodzie ogrzewania podłogowego."
+        }
+      ],
+      "specs": {
+        "h2": "Parametry rozdzielaczy TJ-W",
+        "items": [
+          {
+            "k": "Materiał",
+            "v": "Stal nierdzewna AISI 304"
+          },
+          {
+            "k": "Grubość ścianki",
+            "v": "1,6 mm"
+          },
+          {
+            "k": "Przyłącze",
+            "v": "G1\" – G3/4\""
+          },
+          {
+            "k": "Przepływomierze",
+            "v": "0–5 l/min"
+          },
+          {
+            "k": "Liczba obwodów",
+            "v": "2–15"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Co jest potrzebne razem z rozdzielaczem",
+        "items": [
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Węzeł mieszający do ogrzewania podłogowego",
+            "sub": "TJ-MU · od {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Szafka rozdzielacza",
+            "sub": "Podtynkowe i natynkowe, od {min}"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "match": "Євроконус",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurokonusy i bypass",
+            "sub": "Akcesoria do rozdzielacza · od {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Pytania o rozdzielacze",
+        "items": [
+          {
+            "q": "Jak dobrać rozdzielacz do ogrzewania podłogowego?",
+            "a": "Według liczby obwodów: każdy obwód ogrzewania podłogowego podłącza się do osobnego wyjścia rozdzielacza. Termojet produkuje rozdzielacze z przepływomierzami na 2–15 wyjść."
+          },
+          {
+            "q": "Po co na rozdzielaczu przepływomierze?",
+            "a": "Przepływomierze 0–5 l/min na każdym wyjściu pokazują przepływ czynnika w obwodzie i pozwalają zrównoważyć obwody o różnej długości."
+          },
+          {
+            "q": "Z jakiego materiału wykonane są rozdzielacze?",
+            "a": "Ze stali nierdzewnej AISI 304 o grubości ścianki 1,6 mm. Przyłącze G1\" – G3/4\"."
+          },
+          {
+            "q": "Czy jest dostawa po Ukrainie?",
+            "a": "Tak. Termojet to własna produkcja od 2002 roku, dostarczamy na terenie całej Ukrainy. Szczegóły — na stronie «Dostawa i płatność»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modeli",
+        "from": "od",
+        "all": "Wszystkie",
+        "found": "Znaleziono",
+        "sortSize": "Według liczby wyjść",
+        "sortPriceAsc": "Cena: rosnąco",
+        "sortPriceDesc": "Cena: malejąco",
+        "outlets": "wyjść",
+        "price": "Cena",
+        "empty": "Brak modeli dla wybranych filtrów"
+      }
+    },
+    "fr": {
+      "seo": {
+        "title": "Collecteur plancher chauffant à débitmètres — Termojet",
+        "description": "Collecteurs en inox AISI 304 avec débitmètres, 2 à 15 sorties. Fabrication propre depuis 2002, tous les modèles en stock. Livraison en Ukraine."
+      },
+      "h1": "Collecteur pour plancher chauffant",
+      "intro": "Le collecteur répartit le fluide caloporteur entre les circuits du plancher chauffant et permet de régler chaque circuit séparément. Les collecteurs Termojet sont fabriqués en inox AISI 304 avec une paroi de 1,6 mm, raccordement 1\" – ¾\". 14 modèles pour 2 à 15 circuits, à partir de {min}.",
+      "groups": [
+        {
+          "key": "w",
+          "match": "витратомірами",
+          "h2": "Collecteur avec débitmètres",
+          "text": "Les débitmètres intégrés de 0–5 l/min sur chaque sortie permettent d'équilibrer avec précision le débit de chaque circuit du plancher chauffant."
+        }
+      ],
+      "specs": {
+        "h2": "Caractéristiques des collecteurs TJ-W",
+        "items": [
+          {
+            "k": "Matériau",
+            "v": "Inox AISI 304"
+          },
+          {
+            "k": "Épaisseur de paroi",
+            "v": "1,6 mm"
+          },
+          {
+            "k": "Raccordement",
+            "v": "G1\" – G3/4\""
+          },
+          {
+            "k": "Débitmètres",
+            "v": "0–5 l/min"
+          },
+          {
+            "k": "Nombre de circuits",
+            "v": "2–15"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Ce qu'il faut avec le collecteur",
+        "items": [
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Groupe de mélange pour plancher chauffant",
+            "sub": "TJ-MU · à partir de {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Coffret de collecteur",
+            "sub": "Encastrés et en saillie, à partir de {min}"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "match": "Євроконус",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurocônes et by-pass",
+            "sub": "Accessoires pour collecteur · à partir de {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Questions sur les collecteurs",
+        "items": [
+          {
+            "q": "Comment choisir un collecteur pour plancher chauffant ?",
+            "a": "Selon le nombre de circuits : chaque circuit du plancher chauffant se raccorde à une sortie distincte du collecteur. Termojet fabrique des collecteurs à débitmètres de 2 à 15 sorties."
+          },
+          {
+            "q": "À quoi servent les débitmètres sur le collecteur ?",
+            "a": "Les débitmètres de 0–5 l/min sur chaque sortie indiquent le débit du fluide dans le circuit et permettent d'équilibrer des circuits de longueurs différentes."
+          },
+          {
+            "q": "En quel matériau sont fabriqués les collecteurs ?",
+            "a": "En inox AISI 304 avec une paroi de 1,6 mm. Raccordement G1\" – G3/4\"."
+          },
+          {
+            "q": "Livrez-vous dans toute l'Ukraine ?",
+            "a": "Oui. Termojet est une fabrication propre depuis 2002, nous livrons dans toute l'Ukraine. Détails sur la page « Livraison et paiement »."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modèles",
+        "from": "à partir de",
+        "all": "Tous",
+        "found": "Trouvés",
+        "sortSize": "Par nombre de sorties",
+        "sortPriceAsc": "Prix croissant",
+        "sortPriceDesc": "Prix décroissant",
+        "outlets": "sorties",
+        "price": "Prix",
+        "empty": "Aucun modèle ne correspond aux filtres"
+      }
+    },
+    "de": {
+      "seo": {
+        "title": "Fußbodenheizungsverteiler mit Durchflussmessern — Termojet",
+        "description": "Edelstahlverteiler AISI 304 mit Durchflussmessern, 2–15 Abgänge. Eigene Fertigung seit 2002, alle Modelle lieferbar. Lieferung in die gesamte Ukraine."
+      },
+      "h1": "Fußbodenheizungsverteiler",
+      "intro": "Der Verteiler verteilt das Heizmedium auf die Heizkreise der Fußbodenheizung und ermöglicht die Einstellung jedes Kreises einzeln. Termojet-Verteiler bestehen aus Edelstahl AISI 304 mit 1,6 mm Wandstärke, Anschluss 1\" – ¾\". 14 Modelle für 2–15 Heizkreise, ab {min}.",
+      "groups": [
+        {
+          "key": "w",
+          "match": "витратомірами",
+          "h2": "Verteiler mit Durchflussmessern",
+          "text": "Integrierte Durchflussmesser von 0–5 l/min an jedem Abgang ermöglichen den genauen hydraulischen Abgleich jedes Fußbodenheizkreises."
+        }
+      ],
+      "specs": {
+        "h2": "Technische Daten der TJ-W-Verteiler",
+        "items": [
+          {
+            "k": "Material",
+            "v": "Edelstahl AISI 304"
+          },
+          {
+            "k": "Wandstärke",
+            "v": "1,6 mm"
+          },
+          {
+            "k": "Anschluss",
+            "v": "G1\" – G3/4\""
+          },
+          {
+            "k": "Durchflussmesser",
+            "v": "0–5 l/min"
+          },
+          {
+            "k": "Anzahl der Heizkreise",
+            "v": "2–15"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Was Sie zusammen mit dem Verteiler brauchen",
+        "items": [
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Mischeinheit für Fußbodenheizung",
+            "sub": "TJ-MU · ab {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Verteilerschrank",
+            "sub": "Unterputz und Aufputz, ab {min}"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "match": "Євроконус",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Eurokonen und Bypass",
+            "sub": "Verteilerzubehör · ab {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Fragen zu Verteilern",
+        "items": [
+          {
+            "q": "Wie wähle ich einen Fußbodenheizungsverteiler aus?",
+            "a": "Nach der Anzahl der Heizkreise: Jeder Fußbodenheizkreis wird an einen eigenen Abgang des Verteilers angeschlossen. Termojet fertigt Verteiler mit Durchflussmessern für 2–15 Abgänge."
+          },
+          {
+            "q": "Wozu braucht ein Verteiler Durchflussmesser?",
+            "a": "Durchflussmesser von 0–5 l/min an jedem Abgang zeigen den Durchfluss im Heizkreis an und ermöglichen den Abgleich unterschiedlich langer Kreise."
+          },
+          {
+            "q": "Aus welchem Material bestehen die Verteiler?",
+            "a": "Aus Edelstahl AISI 304 mit 1,6 mm Wandstärke. Anschluss G1\" – G3/4\"."
+          },
+          {
+            "q": "Liefern Sie in die gesamte Ukraine?",
+            "a": "Ja. Termojet ist seit 2002 eigene Fertigung, wir liefern in die gesamte Ukraine. Details finden Sie auf der Seite «Lieferung und Zahlung»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "Modelle",
+        "from": "ab",
+        "all": "Alle",
+        "found": "Gefunden",
+        "sortSize": "Nach Anzahl der Abgänge",
+        "sortPriceAsc": "Preis: aufsteigend",
+        "sortPriceDesc": "Preis: absteigend",
+        "outlets": "Abgänge",
+        "price": "Preis",
+        "empty": "Keine Modelle für die gewählten Filter"
+      }
+    },
+    "ro": {
+      "seo": {
+        "title": "Distribuitor pentru încălzire în pardoseală cu debitmetre — Termojet",
+        "description": "Distribuitoare din oțel inoxidabil AISI 304 cu debitmetre, 2–15 ieșiri. Producție proprie din 2002, toate modelele în stoc. Livrare în toată Ucraina."
+      },
+      "h1": "Distribuitor pentru încălzire prin pardoseală",
+      "intro": "Distribuitorul repartizează agentul termic pe circuitele încălzirii în pardoseală și permite reglarea fiecărui circuit separat. Distribuitoarele Termojet sunt realizate din oțel inoxidabil AISI 304 cu grosimea peretelui de 1,6 mm, racord 1\" – ¾\". 14 modele pentru 2–15 circuite, de la {min}.",
+      "groups": [
+        {
+          "key": "w",
+          "match": "витратомірами",
+          "h2": "Distribuitor cu debitmetre",
+          "text": "Debitmetrele integrate de 0–5 l/min pe fiecare ieșire permit echilibrarea precisă a debitului în fiecare circuit al încălzirii în pardoseală."
+        }
+      ],
+      "specs": {
+        "h2": "Caracteristicile distribuitoarelor TJ-W",
+        "items": [
+          {
+            "k": "Material",
+            "v": "Oțel inoxidabil AISI 304"
+          },
+          {
+            "k": "Grosimea peretelui",
+            "v": "1,6 mm"
+          },
+          {
+            "k": "Racord",
+            "v": "G1\" – G3/4\""
+          },
+          {
+            "k": "Debitmetre",
+            "v": "0–5 l/min"
+          },
+          {
+            "k": "Număr de circuite",
+            "v": "2–15"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Ce este necesar împreună cu distribuitorul",
+        "items": [
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Grup de amestec pentru încălzire prin pardoseală",
+            "sub": "TJ-MU · de la {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Cutie pentru distribuitor",
+            "sub": "Încastrate și aplicate, de la {min}"
+          },
+          {
+            "category": "kolektory-pidloha",
+            "match": "Євроконус",
+            "filter": {
+              "prodtype": "Комплектуючі"
+            },
+            "title": "Euroconuri și bypass",
+            "sub": "Accesorii pentru distribuitor · de la {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Întrebări despre distribuitoare",
+        "items": [
+          {
+            "q": "Cum aleg un distribuitor pentru încălzire prin pardoseală?",
+            "a": "După numărul de circuite: fiecare circuit al încălzirii în pardoseală se racordează la o ieșire separată a distribuitorului. Termojet produce distribuitoare cu debitmetre pentru 2–15 ieșiri."
+          },
+          {
+            "q": "De ce are nevoie distribuitorul de debitmetre?",
+            "a": "Debitmetrele de 0–5 l/min de pe fiecare ieșire arată debitul agentului termic în circuit și permit echilibrarea circuitelor de lungimi diferite."
+          },
+          {
+            "q": "Din ce material sunt realizate distribuitoarele?",
+            "a": "Din oțel inoxidabil AISI 304 cu grosimea peretelui de 1,6 mm. Racord G1\" – G3/4\"."
+          },
+          {
+            "q": "Livrați în toată Ucraina?",
+            "a": "Da. Termojet este producție proprie din 2002, livrăm în toată Ucraina. Detalii — pe pagina «Livrare și plată»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modele",
+        "from": "de la",
+        "all": "Toate",
+        "found": "Găsite",
+        "sortSize": "După numărul de ieșiri",
+        "sortPriceAsc": "Preț crescător",
+        "sortPriceDesc": "Preț descrescător",
+        "outlets": "ieșiri",
+        "price": "Preț",
+        "empty": "Niciun model pentru filtrele selectate"
+      }
+    }
+  },
+  "zmishuvalnyj-vuzol-dlya-teployi-pidlogy": {
+    "uk": {
+      "seo": {
+        "title": "Змішувальний вузол для теплої підлоги — купити в Termojet",
+        "description": "Насосно-змішувальні вузли TJ-MU для колектора: термостатичне регулювання 20–60 °C. 3 моделі в наявності, власне виробництво з 2002 року. Доставка по Україні."
+      },
+      "h1": "Змішувальний вузол для теплої підлоги",
+      "intro": "Насосно-змішувальний вузол Termojet TJ-MU встановлюють перед колектором теплої підлоги. Вузол змішування знижує температуру теплоносія від котла чи теплового насоса до 20–60 °C і створює окремий циркуляційний контур. 3 моделі, ціна від {min}. Циркуляційний насос у комплект не входить.",
+      "groups": [
+        {
+          "key": "mu",
+          "match": ""
+        }
+      ],
+      "models": {
+        "h2": "Ціни та характеристики моделей TJ-MU",
+        "text": "Моделі відрізняються діапазоном регулювання температури подачі в контур теплої підлоги.",
+        "cols": {
+          "model": "Модель",
+          "param": "Діапазон температур",
+          "price": "Ціна"
+        },
+        "rows": [
+          {
+            "match": "TJ-MU-25",
+            "param": "20–60 °C"
+          },
+          {
+            "match": "TJ-MU-10B",
+            "param": "20–43 °C"
+          },
+          {
+            "match": "TJ-MU-40А",
+            "param": "25–55 °C"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Що потрібно разом із вузлом",
+        "items": [
+          {
+            "category": "nasosy",
+            "title": "Насоси",
+            "sub": "Циркуляційний насос для вузла"
+          },
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Колектор теплої підлоги",
+            "sub": "З витратомірами, від {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Колекторна шафа",
+            "sub": "Внутрішні та зовнішні, від {min}"
+          },
+          {
+            "category": "zonalne-keruvannya",
+            "title": "Термостати та зональне керування",
+            "sub": "Керування контурами"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Питання про змішувальні вузли",
+        "items": [
+          {
+            "q": "Для чого потрібен змішувальний вузол для теплої підлоги?",
+            "a": "Вузол знижує температуру теплоносія від котла чи теплового насоса до потрібної для теплої підлоги та створює окремий циркуляційний контур."
+          },
+          {
+            "q": "Чи входить насос у комплект?",
+            "a": "Ні, циркуляційний насос у комплект не входить. Його можна підібрати в категорії «Насоси»."
+          },
+          {
+            "q": "Яку модель обрати?",
+            "a": "Моделі відрізняються діапазоном регулювання: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+          },
+          {
+            "q": "Чим змішувальний вузол відрізняється від змішувача для теплої підлоги?",
+            "a": "Це одне й те саме обладнання. Вузол змішує гарячий теплоносій від котла з охолодженим зворотним потоком, щоб подати в контур теплої підлоги воду потрібної температури."
+          },
+          {
+            "q": "Чи є доставка по Україні?",
+            "a": "Так. Termojet — власне виробництво з 2002 року, доставляємо по всій Україні. Деталі — на сторінці «Доставка і оплата»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "моделей",
+        "from": "від",
+        "all": "Всі",
+        "found": "Знайдено",
+        "sortSize": "За замовчуванням",
+        "sortPriceAsc": "Ціна: від низької",
+        "sortPriceDesc": "Ціна: від високої",
+        "price": "Ціна",
+        "empty": "Немає моделей за вибраними фільтрами"
+      }
+    },
+    "en": {
+      "seo": {
+        "title": "Underfloor Heating Mixing Unit — Buy at Termojet",
+        "description": "TJ-MU pump mixing units for manifolds: thermostatic control 20–60 °C. 3 models in stock, own manufacturing since 2002. Delivery across Ukraine."
+      },
+      "h1": "Underfloor Heating Mixing Unit",
+      "intro": "The Termojet TJ-MU pump mixing unit is installed in front of the underfloor heating manifold. The mixing unit lowers the temperature of the heating medium from a boiler or heat pump to 20–60 °C and creates a separate circulation circuit. 3 models, price from {min}. The circulation pump is not included.",
+      "groups": [
+        {
+          "key": "mu",
+          "match": ""
+        }
+      ],
+      "models": {
+        "h2": "Prices and specifications of TJ-MU models",
+        "text": "The models differ in the supply temperature control range for the underfloor heating circuit.",
+        "cols": {
+          "model": "Model",
+          "param": "Temperature range",
+          "price": "Price"
+        },
+        "rows": [
+          {
+            "match": "TJ-MU-25",
+            "param": "20–60 °C"
+          },
+          {
+            "match": "TJ-MU-10B",
+            "param": "20–43 °C"
+          },
+          {
+            "match": "TJ-MU-40А",
+            "param": "25–55 °C"
+          }
+        ]
+      },
+      "related": {
+        "h2": "What you need together with the unit",
+        "items": [
+          {
+            "category": "nasosy",
+            "title": "Pumps",
+            "sub": "Circulation pump for the unit"
+          },
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Underfloor Heating Manifold",
+            "sub": "With flow meters, from {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Manifold Cabinet",
+            "sub": "Flush-mounted and surface-mounted, from {min}"
+          },
+          {
+            "category": "zonalne-keruvannya",
+            "title": "Thermostats & Zone Control",
+            "sub": "Circuit control"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Mixing unit FAQ",
+        "items": [
+          {
+            "q": "What is an underfloor heating mixing unit for?",
+            "a": "The unit lowers the temperature of the heating medium from a boiler or heat pump to the level required for underfloor heating and creates a separate circulation circuit."
+          },
+          {
+            "q": "Is the pump included?",
+            "a": "No, the circulation pump is not included. You can choose one in the «Pumps» category."
+          },
+          {
+            "q": "Which model should I choose?",
+            "a": "The models differ in control range: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+          },
+          {
+            "q": "How is a mixing unit different from an underfloor heating mixing valve?",
+            "a": "It is the same equipment. The unit mixes hot heating medium from the boiler with the cooled return flow to supply water at the required temperature to the underfloor heating circuit."
+          },
+          {
+            "q": "Do you deliver across Ukraine?",
+            "a": "Yes. Termojet has been manufacturing its own products since 2002, and we deliver throughout Ukraine. Details are on the «Delivery and payment» page."
+          }
+        ]
+      },
+      "ui": {
+        "models": "models",
+        "from": "from",
+        "all": "All",
+        "found": "Found",
+        "sortSize": "Default order",
+        "sortPriceAsc": "Price: low to high",
+        "sortPriceDesc": "Price: high to low",
+        "price": "Price",
+        "empty": "No models match the selected filters"
+      }
+    },
+    "pl": {
+      "seo": {
+        "title": "Węzeł mieszający do ogrzewania podłogowego — Termojet",
+        "description": "Węzły pompowo-mieszające TJ-MU do rozdzielacza: regulacja termostatyczna 20–60 °C. 3 modele dostępne, własna produkcja od 2002 roku. Dostawa po Ukrainie."
+      },
+      "h1": "Węzeł mieszający do ogrzewania podłogowego",
+      "intro": "Węzeł pompowo-mieszający Termojet TJ-MU montuje się przed rozdzielaczem ogrzewania podłogowego. Węzeł obniża temperaturę czynnika z kotła lub pompy ciepła do 20–60 °C i tworzy oddzielny obwód cyrkulacyjny. 3 modele, cena od {min}. Pompa obiegowa nie wchodzi w skład zestawu.",
+      "groups": [
+        {
+          "key": "mu",
+          "match": ""
+        }
+      ],
+      "models": {
+        "h2": "Ceny i parametry modeli TJ-MU",
+        "text": "Modele różnią się zakresem regulacji temperatury zasilania obwodu ogrzewania podłogowego.",
+        "cols": {
+          "model": "Model",
+          "param": "Zakres temperatur",
+          "price": "Cena"
+        },
+        "rows": [
+          {
+            "match": "TJ-MU-25",
+            "param": "20–60 °C"
+          },
+          {
+            "match": "TJ-MU-10B",
+            "param": "20–43 °C"
+          },
+          {
+            "match": "TJ-MU-40А",
+            "param": "25–55 °C"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Co jest potrzebne razem z węzłem",
+        "items": [
+          {
+            "category": "nasosy",
+            "title": "Pompy",
+            "sub": "Pompa obiegowa do węzła"
+          },
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Rozdzielacz do ogrzewania podłogowego",
+            "sub": "Z przepływomierzami, od {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Szafka rozdzielacza",
+            "sub": "Podtynkowe i natynkowe, od {min}"
+          },
+          {
+            "category": "zonalne-keruvannya",
+            "title": "Termostaty i sterowanie strefowe",
+            "sub": "Sterowanie obwodami"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Pytania o węzły mieszające",
+        "items": [
+          {
+            "q": "Do czego służy węzeł mieszający do ogrzewania podłogowego?",
+            "a": "Węzeł obniża temperaturę czynnika z kotła lub pompy ciepła do wartości wymaganej dla ogrzewania podłogowego i tworzy oddzielny obwód cyrkulacyjny."
+          },
+          {
+            "q": "Czy pompa wchodzi w skład zestawu?",
+            "a": "Nie, pompa obiegowa nie wchodzi w skład zestawu. Można ją dobrać w kategorii «Pompy»."
+          },
+          {
+            "q": "Który model wybrać?",
+            "a": "Modele różnią się zakresem regulacji: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+          },
+          {
+            "q": "Czym węzeł mieszający różni się od zaworu mieszającego do ogrzewania podłogowego?",
+            "a": "To to samo urządzenie. Węzeł miesza gorący czynnik z kotła z ochłodzonym powrotem, aby dostarczyć do obwodu ogrzewania podłogowego wodę o wymaganej temperaturze."
+          },
+          {
+            "q": "Czy jest dostawa po Ukrainie?",
+            "a": "Tak. Termojet to własna produkcja od 2002 roku, dostarczamy na terenie całej Ukrainy. Szczegóły — na stronie «Dostawa i płatność»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modeli",
+        "from": "od",
+        "all": "Wszystkie",
+        "found": "Znaleziono",
+        "sortSize": "Domyślnie",
+        "sortPriceAsc": "Cena: rosnąco",
+        "sortPriceDesc": "Cena: malejąco",
+        "price": "Cena",
+        "empty": "Brak modeli dla wybranych filtrów"
+      }
+    },
+    "fr": {
+      "seo": {
+        "title": "Groupe de mélange pour plancher chauffant — Termojet",
+        "description": "Groupes de mélange à pompe TJ-MU pour collecteur : régulation thermostatique 20–60 °C. 3 modèles en stock, fabrication propre depuis 2002. Livraison en Ukraine."
+      },
+      "h1": "Groupe de mélange pour plancher chauffant",
+      "intro": "Le groupe de mélange à pompe Termojet TJ-MU s'installe en amont du collecteur du plancher chauffant. Il abaisse la température du fluide d'une chaudière ou d'une pompe à chaleur à 20–60 °C et crée un circuit de circulation distinct. 3 modèles, prix à partir de {min}. Le circulateur n'est pas inclus.",
+      "groups": [
+        {
+          "key": "mu",
+          "match": ""
+        }
+      ],
+      "models": {
+        "h2": "Prix et caractéristiques des modèles TJ-MU",
+        "text": "Les modèles se distinguent par la plage de réglage de la température de départ du circuit de plancher chauffant.",
+        "cols": {
+          "model": "Modèle",
+          "param": "Plage de température",
+          "price": "Prix"
+        },
+        "rows": [
+          {
+            "match": "TJ-MU-25",
+            "param": "20–60 °C"
+          },
+          {
+            "match": "TJ-MU-10B",
+            "param": "20–43 °C"
+          },
+          {
+            "match": "TJ-MU-40А",
+            "param": "25–55 °C"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Ce qu'il faut avec le groupe",
+        "items": [
+          {
+            "category": "nasosy",
+            "title": "Pompes",
+            "sub": "Circulateur pour le groupe"
+          },
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Collecteur pour plancher chauffant",
+            "sub": "Avec débitmètres, à partir de {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Coffret de collecteur",
+            "sub": "Encastrés et en saillie, à partir de {min}"
+          },
+          {
+            "category": "zonalne-keruvannya",
+            "title": "Thermostats et contrôle de zone",
+            "sub": "Pilotage des circuits"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Questions sur les groupes de mélange",
+        "items": [
+          {
+            "q": "À quoi sert un groupe de mélange pour plancher chauffant ?",
+            "a": "Le groupe abaisse la température du fluide d'une chaudière ou d'une pompe à chaleur au niveau requis pour le plancher chauffant et crée un circuit de circulation distinct."
+          },
+          {
+            "q": "Le circulateur est-il inclus ?",
+            "a": "Non, le circulateur n'est pas inclus. Vous pouvez le choisir dans la catégorie « Pompes »."
+          },
+          {
+            "q": "Quel modèle choisir ?",
+            "a": "Les modèles se distinguent par la plage de réglage : TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+          },
+          {
+            "q": "En quoi un groupe de mélange diffère-t-il d'une vanne de mélange pour plancher chauffant ?",
+            "a": "C'est le même équipement. Le groupe mélange le fluide chaud de la chaudière avec le retour refroidi afin d'envoyer au circuit de plancher chauffant de l'eau à la température voulue."
+          },
+          {
+            "q": "Livrez-vous dans toute l'Ukraine ?",
+            "a": "Oui. Termojet est une fabrication propre depuis 2002, nous livrons dans toute l'Ukraine. Détails sur la page « Livraison et paiement »."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modèles",
+        "from": "à partir de",
+        "all": "Tous",
+        "found": "Trouvés",
+        "sortSize": "Par défaut",
+        "sortPriceAsc": "Prix croissant",
+        "sortPriceDesc": "Prix décroissant",
+        "price": "Prix",
+        "empty": "Aucun modèle ne correspond aux filtres"
+      }
+    },
+    "de": {
+      "seo": {
+        "title": "Mischeinheit für Fußbodenheizung — kaufen bei Termojet",
+        "description": "Pumpen-Mischeinheiten TJ-MU für Verteiler: thermostatische Regelung 20–60 °C. 3 Modelle lieferbar, eigene Fertigung seit 2002. Lieferung in die gesamte Ukraine."
+      },
+      "h1": "Mischeinheit für Fußbodenheizung",
+      "intro": "Die Termojet Pumpen-Mischeinheit TJ-MU wird vor dem Fußbodenheizungsverteiler installiert. Die Mischeinheit senkt die Temperatur des Heizmediums von Kessel oder Wärmepumpe auf 20–60 °C und schafft einen separaten Umwälzkreis. 3 Modelle, Preis ab {min}. Die Umwälzpumpe ist nicht im Lieferumfang enthalten.",
+      "groups": [
+        {
+          "key": "mu",
+          "match": ""
+        }
+      ],
+      "models": {
+        "h2": "Preise und Daten der TJ-MU-Modelle",
+        "text": "Die Modelle unterscheiden sich im Regelbereich der Vorlauftemperatur für den Fußbodenheizkreis.",
+        "cols": {
+          "model": "Modell",
+          "param": "Temperaturbereich",
+          "price": "Preis"
+        },
+        "rows": [
+          {
+            "match": "TJ-MU-25",
+            "param": "20–60 °C"
+          },
+          {
+            "match": "TJ-MU-10B",
+            "param": "20–43 °C"
+          },
+          {
+            "match": "TJ-MU-40А",
+            "param": "25–55 °C"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Was Sie zusammen mit der Mischeinheit brauchen",
+        "items": [
+          {
+            "category": "nasosy",
+            "title": "Pumpen",
+            "sub": "Umwälzpumpe für die Mischeinheit"
+          },
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Fußbodenheizungsverteiler",
+            "sub": "Mit Durchflussmessern, ab {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Verteilerschrank",
+            "sub": "Unterputz und Aufputz, ab {min}"
+          },
+          {
+            "category": "zonalne-keruvannya",
+            "title": "Thermostate und Zonenregelung",
+            "sub": "Regelung der Heizkreise"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Fragen zu Mischeinheiten",
+        "items": [
+          {
+            "q": "Wozu dient eine Mischeinheit für Fußbodenheizung?",
+            "a": "Die Mischeinheit senkt die Temperatur des Heizmediums von Kessel oder Wärmepumpe auf den für die Fußbodenheizung erforderlichen Wert und schafft einen separaten Umwälzkreis."
+          },
+          {
+            "q": "Ist die Pumpe im Lieferumfang enthalten?",
+            "a": "Nein, die Umwälzpumpe ist nicht im Lieferumfang enthalten. Sie können sie in der Kategorie «Pumpen» auswählen."
+          },
+          {
+            "q": "Welches Modell soll ich wählen?",
+            "a": "Die Modelle unterscheiden sich im Regelbereich: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+          },
+          {
+            "q": "Worin unterscheidet sich eine Mischeinheit von einem Mischer für Fußbodenheizung?",
+            "a": "Es handelt sich um dieselbe Technik. Die Einheit mischt das heiße Heizmedium vom Kessel mit dem abgekühlten Rücklauf, um dem Fußbodenheizkreis Wasser mit der gewünschten Temperatur zuzuführen."
+          },
+          {
+            "q": "Liefern Sie in die gesamte Ukraine?",
+            "a": "Ja. Termojet ist seit 2002 eigene Fertigung, wir liefern in die gesamte Ukraine. Details finden Sie auf der Seite «Lieferung und Zahlung»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "Modelle",
+        "from": "ab",
+        "all": "Alle",
+        "found": "Gefunden",
+        "sortSize": "Standardreihenfolge",
+        "sortPriceAsc": "Preis: aufsteigend",
+        "sortPriceDesc": "Preis: absteigend",
+        "price": "Preis",
+        "empty": "Keine Modelle für die gewählten Filter"
+      }
+    },
+    "ro": {
+      "seo": {
+        "title": "Grup de amestec pentru încălzire prin pardoseală — Termojet",
+        "description": "Grupuri de pompare și amestec TJ-MU pentru distribuitor: reglaj termostatic 20–60 °C. 3 modele în stoc, producție proprie din 2002. Livrare în toată Ucraina."
+      },
+      "h1": "Grup de amestec pentru încălzire prin pardoseală",
+      "intro": "Grupul de pompare și amestec Termojet TJ-MU se montează înaintea distribuitorului încălzirii prin pardoseală. Grupul coboară temperatura agentului de la cazan sau pompa de căldură la 20–60 °C și creează un circuit de circulație separat. 3 modele, preț de la {min}. Pompa de circulație nu este inclusă.",
+      "groups": [
+        {
+          "key": "mu",
+          "match": ""
+        }
+      ],
+      "models": {
+        "h2": "Prețuri și caracteristici ale modelelor TJ-MU",
+        "text": "Modelele diferă prin intervalul de reglare a temperaturii de tur în circuitul încălzirii prin pardoseală.",
+        "cols": {
+          "model": "Model",
+          "param": "Interval de temperatură",
+          "price": "Preț"
+        },
+        "rows": [
+          {
+            "match": "TJ-MU-25",
+            "param": "20–60 °C"
+          },
+          {
+            "match": "TJ-MU-10B",
+            "param": "20–43 °C"
+          },
+          {
+            "match": "TJ-MU-40А",
+            "param": "25–55 °C"
+          }
+        ]
+      },
+      "related": {
+        "h2": "Ce este necesar împreună cu grupul",
+        "items": [
+          {
+            "category": "nasosy",
+            "title": "Pompe",
+            "sub": "Pompă de circulație pentru grup"
+          },
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Distribuitor pentru încălzire prin pardoseală",
+            "sub": "Cu debitmetre, de la {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Cutie pentru distribuitor",
+            "sub": "Încastrate și aplicate, de la {min}"
+          },
+          {
+            "category": "zonalne-keruvannya",
+            "title": "Termostate și control zonal",
+            "sub": "Controlul circuitelor"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Întrebări despre grupurile de amestec",
+        "items": [
+          {
+            "q": "La ce folosește un grup de amestec pentru încălzire prin pardoseală?",
+            "a": "Grupul coboară temperatura agentului de la cazan sau pompa de căldură până la valoarea necesară încălzirii prin pardoseală și creează un circuit de circulație separat."
+          },
+          {
+            "q": "Pompa este inclusă în set?",
+            "a": "Nu, pompa de circulație nu este inclusă. O puteți alege din categoria «Pompe»."
+          },
+          {
+            "q": "Ce model să aleg?",
+            "a": "Modelele diferă prin intervalul de reglare: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+          },
+          {
+            "q": "Prin ce diferă un grup de amestec de un amestecător pentru încălzire prin pardoseală?",
+            "a": "Este același echipament. Grupul amestecă agentul termic fierbinte de la cazan cu returul răcit, pentru a furniza circuitului încălzirii prin pardoseală apă la temperatura necesară."
+          },
+          {
+            "q": "Livrați în toată Ucraina?",
+            "a": "Da. Termojet este producție proprie din 2002, livrăm în toată Ucraina. Detalii — pe pagina «Livrare și plată»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modele",
+        "from": "de la",
+        "all": "Toate",
+        "found": "Găsite",
+        "sortSize": "Implicit",
+        "sortPriceAsc": "Preț crescător",
+        "sortPriceDesc": "Preț descrescător",
+        "price": "Preț",
         "empty": "Niciun model pentru filtrele selectate"
       }
     }

@@ -688,7 +688,16 @@ const CATEGORY_META = {
     nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating systems',
     nameRo: 'Sistem de încălzire prin pardoseală', descRo: 'Colectoare, module de amestecare și cutii de montaj pentru sistemele de încălzire prin pardoseală',
   },
+  // Окрема категорія під ключ «колектор для теплої підлоги» (SEO, 16.10.2026): колектори
+  // з витратомірами TJ-W. title/description/H1 — з SEO-шаблону (src/data/category-landing.json).
+  'kolektor-dlya-teployi-pidlogy': {
+    parent: 'kolektory-pidloha',
+    name: 'Колектор для теплої підлоги', desc: 'Колектори Termojet з витратомірами з нержавіючої сталі AISI 304 на 2–15 виходів для теплої підлоги',
+    nameEn: 'Underfloor Heating Manifold', descEn: 'Termojet stainless steel AISI 304 manifolds with flow meters for 2–15 underfloor heating circuits',
+    nameRo: 'Distribuitor pentru încălzire prin pardoseală', descRo: 'Distribuitoare Termojet din oțel inoxidabil AISI 304 cu debitmetre pentru 2–15 circuite de încălzire prin pardoseală',
+  },
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': {
+    parent: 'kolektory-pidloha',
     name: 'Змішувальний вузол для теплої підлоги', desc: 'Насосно-змішувальні вузли Termojet TJ-MU для колектора теплої підлоги: знижують температуру теплоносія від котла чи теплового насоса до 20–60 °C. Циркуляційний насос у комплект не входить',
     metaDesc: 'Змішувальний вузол для теплої підлоги Termojet TJ-MU: термостатичне регулювання 20–60 °C для колектора. Власне виробництво з 2002 року, доставка по Україні',
     nameEn: 'Underfloor Heating Mixing Unit', descEn: 'Termojet TJ-MU pump mixing units for underfloor heating manifolds: they lower the flow temperature from a boiler or heat pump to 20–60 °C. The circulation pump is not included',
@@ -1051,6 +1060,8 @@ function sendPage(req, res, html) {
 // Хибні slug-и, на які колись посилались описи товарів (переклади з помилкою
 // транслітерації) — 301 на справжні, щоб не губити вагу, якщо їх уже проіндексовано.
 const PRODUCT_SLUG_ALIASES = {
+  // TJ-MU-40А жив на адресі, успадкованій з WP від TJ-MU-10B; нормальний slug — з 16.10.2026
+  'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b-2': 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-40a',
   'gidrostrilka-gs-26-v-izolyatsiyi': 'gidrostrilka-gs-26-v-izolyacziyi',
   'k22v-125150-kolektor-v-teploizolyatsiyi-2-vhoru-1-bokovyy-1': 'k22v-125150-kolektor-v-teploizolyatsiyi-2-1-vhoru-staryy-art-sk-211-125-mini',
   'khs22vn-125-kolektor-z-gidrostrilkoyu-v-teploizolyatsiyi-2-vgoru-vniz-1-bokoviy-1': 'khs22vn-125150-kolektor-v-teploizolyatsiyi-1-vhoru-vnyz-1-bokovyy-staryy-art-sk-',

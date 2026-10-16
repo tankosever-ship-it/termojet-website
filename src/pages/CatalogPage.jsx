@@ -26,6 +26,7 @@ const CATEGORY_BANNERS = {
   'nasosni-hrupy': '/banner-nasosni-hrupy.webp',
   'kolektory-pidloha': '/banner-kolektory-pidloha.webp',
   'shafa-kolektorna': '/banner-shafa-kolektorna.webp',
+  'kolektor-dlya-teployi-pidlogy': '/banner-kolektory-pidloha.webp',   // на банері — саме колектор з витратомірами
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': '/banner-zmishuvalnyj-vuzol-dlya-teployi-pidlogy.webp',
   'nasosy': '/banner-nasosy.webp',
   'balansuval-klapany': '/banner-balansuval-klapany.webp',
@@ -530,7 +531,7 @@ const CATEGORY_FILTERS = {
         key: 'prodtype',
         label: 'Тип обладнання',
         options: [
-          { label: 'Колектор з витратомірами', test: p => /витратомірами/i.test(p.name) },
+          // колектори з витратомірами — окрема категорія kolektor-dlya-teployi-pidlogy (16.10.2026)
           { label: 'Колектор з кранами',       test: p => /кранами/i.test(p.name) },
           { label: 'Комплектуючі',             test: p => /Байпас|Євроконус|кріплення|накидн|Труба|Скоба|Плівка/i.test(p.name) },
         ],

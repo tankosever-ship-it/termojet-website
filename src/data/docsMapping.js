@@ -18,6 +18,7 @@ export const DOCS_BY_CATEGORY = {
   'rozpodilchi-kolektory':    [14, ...KOLEKTORY_CERTS], // Колектори розподільчі
   'kolektory-z-hidrostrilkoyu': [15, ...KOLEKTORY_CERTS], // КГС
   'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
+  'kolektor-dlya-teployi-pidlogy': [16, 30],  // ті самі, що в kolektory-pidloha (колектори TJ-W)
   // Вузли TJ-MU: інструкції підтягуються за назвою моделі (DOCS_BY_NAME нижче)
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': [],
   'shafa-kolektorna':         [],

@@ -31,10 +31,11 @@ const minMax = vals => {
 
 const byMatch = (list, match) => (match ? list.filter(p => (p.name || '').toLowerCase().includes(match.toLowerCase())) : list)
 
-// Порядок усередині групи: за номером типорозміру (№00 → №06), далі за назвою
+// Порядок усередині групи: за номером типорозміру (№00 → №06) або кількістю виходів
+// (колектори «на 2 … на 15 виходів»), далі за назвою
 const sizeRank = p => {
-  const n = parseName(p.name).num
-  return n != null ? +n : 999
+  const { num, outlets } = parseName(p.name)
+  return num != null ? +num : outlets ? outlets[0] : 999
 }
 
 export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk') {
@@ -64,9 +65,24 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
     return { num, outlets, cells }
   })
 
+  // Таблиця моделей (cfg.models.rows: { match — підрядок артикула або назви, param — значення
+  // колонки параметра }); ціна — з каталогу. Рядки без товару в категорії пропускаємо.
+  const modelRows = (cfg.models?.rows || []).map(r => {
+    const m = r.match.toLowerCase()
+    const product = catProducts.find(p => (p.sku || '').toLowerCase().includes(m) || (p.name || '').toLowerCase().includes(m))
+    return product && { model: r.model || r.match, param: r.param, price: priceUah(product, eurRate), product }
+  }).filter(Boolean)
+
+  // Плитки суміжних товарів: r.to — готова адреса, інакше /catalog/<category>?<filter>.
+  // r.sub: 'outlets' — діапазон виходів і ціна «від»; токен {min} — мін. ціна товарів плитки.
   const related = (cfg.related?.items || []).map(r => {
     const list = byMatch(allProducts.filter(p => p.categorySlug === r.category), r.match)
     let sub = r.sub
+    if (sub && sub.includes('{min}')) {
+      const [pmin] = minMax(list.map(p => priceUah(p, eurRate)))
+      // немає цін (ще не прийшов курс) — прибираємо «· від {min}» разом із роздільником
+      sub = pmin ? sub.replace('{min}', fmtUah(pmin, lang)) : sub.replace(/\s*[·,]?\s*[^·,]*\{min\}/, '')
+    }
     if (r.sub === 'outlets') {
       const outs = list.map(p => parseName(p.name).outlets).filter(Boolean)
       const [pmin] = minMax(list.map(p => priceUah(p, eurRate)))
@@ -75,12 +91,12 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
       sub = [lo != null ? `${lo}–${hi} ${ui.outlets || ''}`.trim() : '', pmin ? `${ui.from || ''} ${fmtUah(pmin, lang)}`.trim() : ''].filter(Boolean).join(' · ')
     }
     const qs = r.filter ? '?' + Object.entries(r.filter).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&') : ''
-    return { ...r, sub, to: `/catalog/${r.category}${qs}` }
+    return { ...r, sub, to: r.to || `/catalog/${r.category}${qs}` }
   })
 
   const ctx = { min, max }
   groups.forEach(g => { ctx[`min:${g.key}`] = g.min; ctx[`max:${g.key}`] = g.max })
-  return { groups, min, max, sizeRows, related, ctx }
+  return { groups, min, max, sizeRows, modelRows, related, ctx }
 }
 
 // «{h}», «{min:int}» тощо → значення; ціни — з валютою за мовою («1 798 грн»)
