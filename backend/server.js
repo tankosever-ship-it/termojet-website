@@ -411,10 +411,10 @@ function landingProductsFor(cat) {
   if (!CATEGORY_LANDING[cat]) return []
   return _db.prepare('SELECT name, slug, price, sale_price, currency, i18n FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name').all(cat)
 }
-function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
+// Ціни шаблону для токенів {min} / {max} / {min:<група>}: з євро за курсом, валюта — за мовою.
+// Повертає fill(s) — підставляє відомі токени, невідомі лишає як є.
+function landingFill(cat, lang, products, eurRate) {
   const cfg = CATEGORY_LANDING[cat]?.[lang]
-  if (!cfg) return []
-  const base = langBase(lang)
   const uah = p => {
     const sale = Number(p.sale_price) > 0 && (!Number(p.price) || Number(p.sale_price) < Number(p.price)) ? Number(p.sale_price) : Number(p.price)
     if (!sale) return 0
@@ -427,7 +427,20 @@ function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
     const r = range(products.filter(p => (p.name || '').toLowerCase().includes(String(g.match || '').toLowerCase())))
     if (r) { ctx[`min:${g.key}`] = r[0]; ctx[`max:${g.key}`] = r[1] }
   }
-  const fill = s => String(s || '').replace(/\{([\w:]+)\}/g, (m, k) => (ctx[k] != null ? fmtUahLang(ctx[k], lang) : m))
+  return s => String(s || '').replace(/\{([\w:]+)\}/g, (m, k) => (ctx[k] != null ? fmtUahLang(ctx[k], lang) : m))
+}
+// title шаблону: seo.title з токеном ціни («Купити … від {min} | Termojet»); немає ціни (курс ще
+// не прийшов) — seo.titleFallback, щоб у видачу не потрапив сирий токен
+function landingTitle(cat, lang, cfg) {
+  if (!cfg?.seo?.title) return null
+  const t = landingFill(cat, lang, landingProductsFor(cat), peekEurRate())(cfg.seo.title)
+  return /\{[\w:]+\}/.test(t) ? (cfg.seo.titleFallback || t.replace(/\{[\w:]+\}/g, '').replace(/\s+\|/, ' |')) : t
+}
+function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
+  const cfg = CATEGORY_LANDING[cat]?.[lang]
+  if (!cfg) return []
+  const base = langBase(lang)
+  const fill = landingFill(cat, lang, products, eurRate)
   const out = [{
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -1199,11 +1212,13 @@ function handleCategory(lang) {
       const alternates = buildAlternates(logicalPath)
       const cName = pickL(lang, cm.name, cm.nameEn, cm.nameRo)
       const cDesc = pickL(lang, cm.desc, cm.descEn, cm.descRo)
+      // ціна «від …» у title / FAQ шаблону — курс має бути в кеші вже до injectMeta
+      if (CATEGORY_LANDING[req.params.cat]) await getEurRate().catch(() => {})
       if (intl) {
         // Обгортка title/desc/breadcrumb: ro отримує румунську, решта не-uk — англійську.
         const wrap = lang === 'ro' ? 'echipamente pentru centrale termice' : 'boiler room equipment'
         const lcfg = landingCfg(req.params.cat, lang)
-        let title = lcfg?.seo?.title || `${cName} | Termojet`
+        let title = landingTitle(req.params.cat, lang, lcfg) || `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, wrap)
         const descTail = lang === 'ro'
           ? 'Termojet — producător din 2002, livrare în toată Ucraina.'
@@ -1217,7 +1232,7 @@ function handleCategory(lang) {
         html = injectMeta(html, { title, desc, url, img: categoryOgImg(req.params.cat), h1: lcfg?.h1 || cName, bodyText: cDesc, alternates, jsonLd })
       } else {
         const lcfg = landingCfg(req.params.cat, lang)
-        let title = lcfg?.seo?.title || cm.metaTitle || `${cName} | Termojet`
+        let title = landingTitle(req.params.cat, lang, lcfg) || cm.metaTitle || `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
         const desc = (lcfg?.seo?.description || cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
         const jsonLd = [buildBreadcrumb([

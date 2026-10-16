@@ -1,5 +1,5 @@
 {
-  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок. tabs: false — кілька груп під власними H2 без карток типів і вкладок.",
+  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок. tabs: false — кілька груп під власними H2 без карток типів і вкладок. seo.title може мати токен {min} (ціна «від» за курсом, сервер — landingTitle); seo.titleFallback — title без ціни, якщо курсу ще нема.",
   "shafa-kolektorna": {
     "uk": {
       "seo": {
@@ -707,7 +707,8 @@
   "kolektor-dlya-teployi-pidlogy": {
     "uk": {
       "seo": {
-        "title": "Колектор для теплої підлоги з витратомірами — купити в Termojet",
+        "title": "Купити колектор для теплої підлоги від {min} | Termojet",
+        "titleFallback": "Колектор для теплої підлоги з витратомірами — купити в Termojet",
         "description": "Колектори з витратомірами з нержавіючої сталі AISI 304 на 2–15 виходів. Власне виробництво з 2002 року, усі моделі в наявності. Доставка по Україні."
       },
       "h1": "Колектор для теплої підлоги",
@@ -807,7 +808,8 @@
     },
     "en": {
       "seo": {
-        "title": "Underfloor Heating Manifold with Flow Meters — Buy at Termojet",
+        "title": "Buy underfloor heating manifold from {min} | Termojet",
+        "titleFallback": "Underfloor Heating Manifold with Flow Meters — Buy at Termojet",
         "description": "AISI 304 stainless steel manifolds with flow meters, 2–15 outlets. Own manufacturing since 2002, all models in stock. Delivery across Ukraine."
       },
       "h1": "Underfloor Heating Manifold",
@@ -907,7 +909,8 @@
     },
     "pl": {
       "seo": {
-        "title": "Rozdzielacz do ogrzewania podłogowego z przepływomierzami — Termojet",
+        "title": "Kup rozdzielacz do ogrzewania podłogowego od {min} | Termojet",
+        "titleFallback": "Rozdzielacz do ogrzewania podłogowego z przepływomierzami — Termojet",
         "description": "Rozdzielacze ze stali nierdzewnej AISI 304 z przepływomierzami, 2–15 wyjść. Własna produkcja od 2002 roku, wszystkie modele dostępne. Dostawa po Ukrainie."
       },
       "h1": "Rozdzielacz do ogrzewania podłogowego",
@@ -1007,7 +1010,8 @@
     },
     "fr": {
       "seo": {
-        "title": "Collecteur plancher chauffant à débitmètres — Termojet",
+        "title": "Acheter un collecteur pour plancher chauffant dès {min} | Termojet",
+        "titleFallback": "Collecteur plancher chauffant à débitmètres — Termojet",
         "description": "Collecteurs en inox AISI 304 avec débitmètres, 2 à 15 sorties. Fabrication propre depuis 2002, tous les modèles en stock. Livraison en Ukraine."
       },
       "h1": "Collecteur pour plancher chauffant",
@@ -1107,7 +1111,8 @@
     },
     "de": {
       "seo": {
-        "title": "Fußbodenheizungsverteiler mit Durchflussmessern — Termojet",
+        "title": "Fußbodenheizungsverteiler kaufen ab {min} | Termojet",
+        "titleFallback": "Fußbodenheizungsverteiler mit Durchflussmessern — Termojet",
         "description": "Edelstahlverteiler AISI 304 mit Durchflussmessern, 2–15 Abgänge. Eigene Fertigung seit 2002, alle Modelle lieferbar. Lieferung in die gesamte Ukraine."
       },
       "h1": "Fußbodenheizungsverteiler",
@@ -1207,7 +1212,8 @@
     },
     "ro": {
       "seo": {
-        "title": "Distribuitor pentru încălzire în pardoseală cu debitmetre — Termojet",
+        "title": "Cumpără distribuitor pentru încălzire prin pardoseală de la {min} | Termojet",
+        "titleFallback": "Distribuitor pentru încălzire în pardoseală cu debitmetre — Termojet",
         "description": "Distribuitoare din oțel inoxidabil AISI 304 cu debitmetre, 2–15 ieșiri. Producție proprie din 2002, toate modelele în stoc. Livrare în toată Ucraina."
       },
       "h1": "Distribuitor pentru încălzire prin pardoseală",
@@ -1309,7 +1315,8 @@
   "zmishuvalnyj-vuzol-dlya-teployi-pidlogy": {
     "uk": {
       "seo": {
-        "title": "Змішувальний вузол для теплої підлоги — купити в Termojet",
+        "title": "Купити змішувальний вузол для теплої підлоги від {min} | Termojet",
+        "titleFallback": "Змішувальний вузол для теплої підлоги — купити в Termojet",
         "description": "Насосно-змішувальні вузли TJ-MU для колектора: термостатичне регулювання 20–60 °C. 3 моделі в наявності, власне виробництво з 2002 року. Доставка по Україні."
       },
       "h1": "Змішувальний вузол для теплої підлоги",
@@ -1449,7 +1456,8 @@
     },
     "en": {
       "seo": {
-        "title": "Underfloor Heating Mixing Unit — Buy at Termojet",
+        "title": "Buy underfloor heating mixing unit from {min} | Termojet",
+        "titleFallback": "Underfloor Heating Mixing Unit — Buy at Termojet",
         "description": "TJ-MU pump mixing units for manifolds: thermostatic control 20–60 °C. 3 models in stock, own manufacturing since 2002. Delivery across Ukraine."
       },
       "h1": "Underfloor Heating Mixing Unit",
@@ -1589,7 +1597,8 @@
     },
     "pl": {
       "seo": {
-        "title": "Węzeł mieszający do ogrzewania podłogowego — Termojet",
+        "title": "Kup węzeł mieszający do ogrzewania podłogowego od {min} | Termojet",
+        "titleFallback": "Węzeł mieszający do ogrzewania podłogowego — Termojet",
         "description": "Węzły pompowo-mieszające TJ-MU do rozdzielacza: regulacja termostatyczna 20–60 °C. 3 modele dostępne, własna produkcja od 2002 roku. Dostawa po Ukrainie."
       },
       "h1": "Węzeł mieszający do ogrzewania podłogowego",
@@ -1729,7 +1738,8 @@
     },
     "fr": {
       "seo": {
-        "title": "Groupe de mélange pour plancher chauffant — Termojet",
+        "title": "Acheter un groupe de mélange pour plancher chauffant dès {min} | Termojet",
+        "titleFallback": "Groupe de mélange pour plancher chauffant — Termojet",
         "description": "Groupes de mélange à pompe TJ-MU pour collecteur : régulation thermostatique 20–60 °C. 3 modèles en stock, fabrication propre depuis 2002. Livraison en Ukraine."
       },
       "h1": "Groupe de mélange pour plancher chauffant",
@@ -1869,7 +1879,8 @@
     },
     "de": {
       "seo": {
-        "title": "Mischeinheit für Fußbodenheizung — kaufen bei Termojet",
+        "title": "Mischeinheit für Fußbodenheizung kaufen ab {min} | Termojet",
+        "titleFallback": "Mischeinheit für Fußbodenheizung — kaufen bei Termojet",
         "description": "Pumpen-Mischeinheiten TJ-MU für Verteiler: thermostatische Regelung 20–60 °C. 3 Modelle lieferbar, eigene Fertigung seit 2002. Lieferung in die gesamte Ukraine."
       },
       "h1": "Mischeinheit für Fußbodenheizung",
@@ -2009,7 +2020,8 @@
     },
     "ro": {
       "seo": {
-        "title": "Grup de amestec pentru încălzire prin pardoseală — Termojet",
+        "title": "Cumpără grup de amestec pentru încălzire prin pardoseală de la {min} | Termojet",
+        "titleFallback": "Grup de amestec pentru încălzire prin pardoseală — Termojet",
         "description": "Grupuri de pompare și amestec TJ-MU pentru distribuitor: reglaj termostatic 20–60 °C. 3 modele în stoc, producție proprie din 2002. Livrare în toată Ucraina."
       },
       "h1": "Grup de amestec pentru încălzire prin pardoseală",
@@ -2151,7 +2163,8 @@
   "yevrokonusy-ta-bajpas": {
     "uk": {
       "seo": {
-        "title": "Євроконуси та байпас для опалення — купити в Termojet",
+        "title": "Купити євроконус і байпас для опалення від {min} | Termojet",
+        "titleFallback": "Євроконуси та байпас для опалення — купити в Termojet",
         "description": "Євроконуси 16×2.0 та 20×2.0 і байпас для колектора теплої підлоги. Власне виробництво з 2002 року, усі моделі в наявності. Доставка по Україні."
       },
       "h1": "Євроконуси та байпас для колектора",
@@ -2226,7 +2239,8 @@
     },
     "en": {
       "seo": {
-        "title": "Eurocones and Bypass for Heating — Buy from Termojet",
+        "title": "Buy eurocone and bypass for heating from {min} | Termojet",
+        "titleFallback": "Eurocones and Bypass for Heating — Buy from Termojet",
         "description": "Eurocones 16×2.0 and 20×2.0 and a bypass for underfloor heating manifolds. Own production since 2002, all models in stock. Delivery across Ukraine."
       },
       "h1": "Eurocones and Bypass for Manifolds",
@@ -2301,7 +2315,8 @@
     },
     "pl": {
       "seo": {
-        "title": "Eurokonusy i bajpas do ogrzewania — kup w Termojet",
+        "title": "Kup eurokonus i bajpas do ogrzewania od {min} | Termojet",
+        "titleFallback": "Eurokonusy i bajpas do ogrzewania — kup w Termojet",
         "description": "Eurokonusy 16×2.0 i 20×2.0 oraz bajpas do rozdzielacza ogrzewania podłogowego. Własna produkcja od 2002 roku, wszystkie modele dostępne. Dostawa po Ukrainie."
       },
       "h1": "Eurokonusy i bajpas do rozdzielacza",
@@ -2376,7 +2391,8 @@
     },
     "fr": {
       "seo": {
-        "title": "Eurocônes et by-pass pour chauffage — achat chez Termojet",
+        "title": "Acheter raccord eurocône et by-pass dès {min} | Termojet",
+        "titleFallback": "Eurocônes et by-pass pour chauffage — achat chez Termojet",
         "description": "Raccords eurocône 16×2.0 et 20×2.0 et by-pass pour collecteur de plancher chauffant. Fabrication propre depuis 2002, tous les modèles en stock. Livraison en Ukraine."
       },
       "h1": "Eurocônes et by-pass pour collecteur",
@@ -2451,7 +2467,8 @@
     },
     "de": {
       "seo": {
-        "title": "Eurokonus und Bypass für Heizung — kaufen bei Termojet",
+        "title": "Eurokonus und Bypass für Heizung kaufen ab {min} | Termojet",
+        "titleFallback": "Eurokonus und Bypass für Heizung — kaufen bei Termojet",
         "description": "Eurokonus 16×2.0 und 20×2.0 sowie Bypass für Fußbodenheizungsverteiler. Eigene Fertigung seit 2002, alle Modelle lieferbar. Lieferung in die gesamte Ukraine."
       },
       "h1": "Eurokonus und Bypass für den Verteiler",
@@ -2526,7 +2543,8 @@
     },
     "ro": {
       "seo": {
-        "title": "Euroconuri și bypass pentru încălzire — cumpără de la Termojet",
+        "title": "Cumpără eurocon și bypass pentru încălzire de la {min} | Termojet",
+        "titleFallback": "Euroconuri și bypass pentru încălzire — cumpără de la Termojet",
         "description": "Euroconuri 16×2.0 și 20×2.0 și bypass pentru distribuitor de încălzire prin pardoseală. Producție proprie din 2002, toate modelele în stoc. Livrare în Ucraina."
       },
       "h1": "Euroconuri și bypass pentru distribuitor",
