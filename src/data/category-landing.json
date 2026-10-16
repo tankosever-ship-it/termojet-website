@@ -1364,24 +1364,40 @@
       ],
       "models": {
         "h2": "Ціни та характеристики моделей TJ-MU",
-        "text": "Моделі відрізняються діапазоном регулювання температури подачі в контур теплої підлоги.",
+        "text": "Моделі відрізняються площею теплої підлоги, яку обслуговує вузол, пропускною здатністю Kvs і діапазоном температури подачі.",
         "cols": {
           "model": "Модель",
-          "param": "Діапазон температур",
+          "params": [
+            "Діапазон температур",
+            "Площа опалення",
+            "Kvs"
+          ],
           "price": "Ціна"
         },
         "rows": [
           {
-            "match": "TJ-MU-25",
-            "param": "20–60 °C"
+            "match": "TJ-MU-10B",
+            "params": [
+              "20–43 °C",
+              "до 120 м²",
+              "2,5 м³/год"
+            ]
           },
           {
-            "match": "TJ-MU-10B",
-            "param": "20–43 °C"
+            "match": "TJ-MU-25",
+            "params": [
+              "20–60 °C",
+              "до 150 м²",
+              "3 м³/год"
+            ]
           },
           {
             "match": "TJ-MU-40А",
-            "param": "25–55 °C"
+            "params": [
+              "25–55 °C",
+              "до 200 м²",
+              "3,5 м³/год"
+            ]
           }
         ]
       },
@@ -1423,7 +1439,11 @@
           },
           {
             "q": "Яку модель обрати?",
-            "a": "Моделі відрізняються діапазоном регулювання: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+            "a": "Залежно від площі теплої підлоги: TJ-MU-10B — до 120 м² (Kvs 2,5 м³/год), TJ-MU-25 — до 150 м² (Kvs 3 м³/год), TJ-MU-40А — до 200 м² (Kvs 3,5 м³/год)."
+          },
+          {
+            "q": "Що означає Kvs вузла?",
+            "a": "Kvs — пропускна здатність змішувального клапана: витрата теплоносія в м³/год при перепаді тиску 1 бар. Що більший Kvs, то більшу площу теплої підлоги обслуговує вузол."
           },
           {
             "q": "Чим змішувальний вузол відрізняється від змішувача для теплої підлоги?",
@@ -1447,24 +1467,24 @@
         "empty": "Немає моделей за вибраними фільтрами"
       },
       "quick": {
-        "title": "Для чого вузол?",
-        "sub": "Оберіть джерело тепла",
-        "group": "heatsource",
+        "title": "Площа теплої підлоги",
+        "sub": "Оберіть площу, яку опалює вузол",
+        "group": "area",
         "items": [
           {
-            "label": "Тепловий насос",
-            "text": "Тепловий насос",
-            "sub": "20–43 °C · TJ-MU-10B"
+            "label": "До 120 м²",
+            "text": "До 120 м²",
+            "sub": "Kvs 2,5 м³/год · TJ-MU-10B"
           },
           {
-            "label": "Газовий або електрокотел",
-            "text": "Газовий або електрокотел",
-            "sub": "25–55 °C · TJ-MU-40А"
+            "label": "120–150 м²",
+            "text": "120–150 м²",
+            "sub": "Kvs 3 м³/год · TJ-MU-25"
           },
           {
-            "label": "Твердопаливний котел",
-            "text": "Твердопаливний котел",
-            "sub": "20–60 °C · TJ-MU-25"
+            "label": "150–200 м²",
+            "text": "150–200 м²",
+            "sub": "Kvs 3,5 м³/год · TJ-MU-40А"
           }
         ]
       }
@@ -1484,24 +1504,40 @@
       ],
       "models": {
         "h2": "Prices and specifications of TJ-MU models",
-        "text": "The models differ in the supply temperature control range for the underfloor heating circuit.",
+        "text": "The models differ in the underfloor heating area served, the Kvs flow coefficient and the supply temperature range.",
         "cols": {
           "model": "Model",
-          "param": "Temperature range",
+          "params": [
+            "Temperature range",
+            "Heating area",
+            "Kvs"
+          ],
           "price": "Price"
         },
         "rows": [
           {
-            "match": "TJ-MU-25",
-            "param": "20–60 °C"
+            "match": "TJ-MU-10B",
+            "params": [
+              "20–43 °C",
+              "up to 120 m²",
+              "2.5 m³/h"
+            ]
           },
           {
-            "match": "TJ-MU-10B",
-            "param": "20–43 °C"
+            "match": "TJ-MU-25",
+            "params": [
+              "20–60 °C",
+              "up to 150 m²",
+              "3 m³/h"
+            ]
           },
           {
             "match": "TJ-MU-40А",
-            "param": "25–55 °C"
+            "params": [
+              "25–55 °C",
+              "up to 200 m²",
+              "3.5 m³/h"
+            ]
           }
         ]
       },
@@ -1543,7 +1579,11 @@
           },
           {
             "q": "Which model should I choose?",
-            "a": "The models differ in control range: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+            "a": "It depends on the underfloor heating area: TJ-MU-10B — up to 120 m² (Kvs 2.5 m³/h), TJ-MU-25 — up to 150 m² (Kvs 3 m³/h), TJ-MU-40А — up to 200 m² (Kvs 3.5 m³/h)."
+          },
+          {
+            "q": "What does the Kvs of a unit mean?",
+            "a": "Kvs is the flow coefficient of the mixing valve: the flow rate in m³/h at a pressure drop of 1 bar. The higher the Kvs, the larger the underfloor heating area the unit can serve."
           },
           {
             "q": "How is a mixing unit different from an underfloor heating mixing valve?",
@@ -1567,24 +1607,24 @@
         "empty": "No models match the selected filters"
       },
       "quick": {
-        "title": "What is the unit for?",
-        "sub": "Choose the heat source",
-        "group": "heatsource",
+        "title": "Underfloor heating area",
+        "sub": "Choose the area the unit will heat",
+        "group": "area",
         "items": [
           {
-            "label": "Тепловий насос",
-            "text": "Heat pump",
-            "sub": "20–43 °C · TJ-MU-10B"
+            "label": "До 120 м²",
+            "text": "Up to 120 m²",
+            "sub": "Kvs 2.5 m³/h · TJ-MU-10B"
           },
           {
-            "label": "Газовий або електрокотел",
-            "text": "Gas or electric boiler",
-            "sub": "25–55 °C · TJ-MU-40А"
+            "label": "120–150 м²",
+            "text": "120–150 m²",
+            "sub": "Kvs 3 m³/h · TJ-MU-25"
           },
           {
-            "label": "Твердопаливний котел",
-            "text": "Solid fuel boiler",
-            "sub": "20–60 °C · TJ-MU-25"
+            "label": "150–200 м²",
+            "text": "150–200 m²",
+            "sub": "Kvs 3.5 m³/h · TJ-MU-40А"
           }
         ]
       }
@@ -1604,24 +1644,40 @@
       ],
       "models": {
         "h2": "Ceny i parametry modeli TJ-MU",
-        "text": "Modele różnią się zakresem regulacji temperatury zasilania obwodu ogrzewania podłogowego.",
+        "text": "Modele różnią się obsługiwaną powierzchnią ogrzewania podłogowego, przepustowością Kvs i zakresem temperatury zasilania.",
         "cols": {
           "model": "Model",
-          "param": "Zakres temperatur",
+          "params": [
+            "Zakres temperatur",
+            "Powierzchnia ogrzewania",
+            "Kvs"
+          ],
           "price": "Cena"
         },
         "rows": [
           {
-            "match": "TJ-MU-25",
-            "param": "20–60 °C"
+            "match": "TJ-MU-10B",
+            "params": [
+              "20–43 °C",
+              "do 120 m²",
+              "2,5 m³/h"
+            ]
           },
           {
-            "match": "TJ-MU-10B",
-            "param": "20–43 °C"
+            "match": "TJ-MU-25",
+            "params": [
+              "20–60 °C",
+              "do 150 m²",
+              "3 m³/h"
+            ]
           },
           {
             "match": "TJ-MU-40А",
-            "param": "25–55 °C"
+            "params": [
+              "25–55 °C",
+              "do 200 m²",
+              "3,5 m³/h"
+            ]
           }
         ]
       },
@@ -1663,7 +1719,11 @@
           },
           {
             "q": "Który model wybrać?",
-            "a": "Modele różnią się zakresem regulacji: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+            "a": "Zależnie od powierzchni ogrzewania podłogowego: TJ-MU-10B — do 120 m² (Kvs 2,5 m³/h), TJ-MU-25 — do 150 m² (Kvs 3 m³/h), TJ-MU-40А — do 200 m² (Kvs 3,5 m³/h)."
+          },
+          {
+            "q": "Co oznacza Kvs węzła?",
+            "a": "Kvs to przepustowość zaworu mieszającego: przepływ w m³/h przy spadku ciśnienia 1 bar. Im wyższy Kvs, tym większą powierzchnię ogrzewania podłogowego obsłuży węzeł."
           },
           {
             "q": "Czym węzeł mieszający różni się od zaworu mieszającego do ogrzewania podłogowego?",
@@ -1687,24 +1747,24 @@
         "empty": "Brak modeli dla wybranych filtrów"
       },
       "quick": {
-        "title": "Do czego węzeł?",
-        "sub": "Wybierz źródło ciepła",
-        "group": "heatsource",
+        "title": "Powierzchnia ogrzewania podłogowego",
+        "sub": "Wybierz powierzchnię, którą ogrzewa węzeł",
+        "group": "area",
         "items": [
           {
-            "label": "Тепловий насос",
-            "text": "Pompa ciepła",
-            "sub": "20–43 °C · TJ-MU-10B"
+            "label": "До 120 м²",
+            "text": "Do 120 m²",
+            "sub": "Kvs 2,5 m³/h · TJ-MU-10B"
           },
           {
-            "label": "Газовий або електрокотел",
-            "text": "Kocioł gazowy lub elektryczny",
-            "sub": "25–55 °C · TJ-MU-40А"
+            "label": "120–150 м²",
+            "text": "120–150 m²",
+            "sub": "Kvs 3 m³/h · TJ-MU-25"
           },
           {
-            "label": "Твердопаливний котел",
-            "text": "Kocioł na paliwo stałe",
-            "sub": "20–60 °C · TJ-MU-25"
+            "label": "150–200 м²",
+            "text": "150–200 m²",
+            "sub": "Kvs 3,5 m³/h · TJ-MU-40А"
           }
         ]
       }
@@ -1724,24 +1784,40 @@
       ],
       "models": {
         "h2": "Prix et caractéristiques des modèles TJ-MU",
-        "text": "Les modèles se distinguent par la plage de réglage de la température de départ du circuit de plancher chauffant.",
+        "text": "Les modèles diffèrent par la surface de plancher chauffant desservie, le coefficient Kvs et la plage de température de départ.",
         "cols": {
           "model": "Modèle",
-          "param": "Plage de température",
+          "params": [
+            "Plage de température",
+            "Surface chauffée",
+            "Kvs"
+          ],
           "price": "Prix"
         },
         "rows": [
           {
-            "match": "TJ-MU-25",
-            "param": "20–60 °C"
+            "match": "TJ-MU-10B",
+            "params": [
+              "20–43 °C",
+              "jusqu'à 120 m²",
+              "2,5 m³/h"
+            ]
           },
           {
-            "match": "TJ-MU-10B",
-            "param": "20–43 °C"
+            "match": "TJ-MU-25",
+            "params": [
+              "20–60 °C",
+              "jusqu'à 150 m²",
+              "3 m³/h"
+            ]
           },
           {
             "match": "TJ-MU-40А",
-            "param": "25–55 °C"
+            "params": [
+              "25–55 °C",
+              "jusqu'à 200 m²",
+              "3,5 m³/h"
+            ]
           }
         ]
       },
@@ -1783,7 +1859,11 @@
           },
           {
             "q": "Quel modèle choisir ?",
-            "a": "Les modèles se distinguent par la plage de réglage : TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+            "a": "Selon la surface de plancher chauffant : TJ-MU-10B — jusqu'à 120 m² (Kvs 2,5 m³/h), TJ-MU-25 — jusqu'à 150 m² (Kvs 3 m³/h), TJ-MU-40А — jusqu'à 200 m² (Kvs 3,5 m³/h)."
+          },
+          {
+            "q": "Que signifie le Kvs d'un groupe ?",
+            "a": "Le Kvs est le coefficient de débit de la vanne de mélange : le débit en m³/h pour une perte de charge de 1 bar. Plus le Kvs est élevé, plus la surface de plancher chauffant desservie est grande."
           },
           {
             "q": "En quoi un groupe de mélange diffère-t-il d'une vanne de mélange pour plancher chauffant ?",
@@ -1807,24 +1887,24 @@
         "empty": "Aucun modèle ne correspond aux filtres"
       },
       "quick": {
-        "title": "Pour quelle installation ?",
-        "sub": "Choisissez la source de chaleur",
-        "group": "heatsource",
+        "title": "Surface de plancher chauffant",
+        "sub": "Choisissez la surface chauffée par le groupe",
+        "group": "area",
         "items": [
           {
-            "label": "Тепловий насос",
-            "text": "Pompe à chaleur",
-            "sub": "20–43 °C · TJ-MU-10B"
+            "label": "До 120 м²",
+            "text": "Jusqu'à 120 m²",
+            "sub": "Kvs 2,5 m³/h · TJ-MU-10B"
           },
           {
-            "label": "Газовий або електрокотел",
-            "text": "Chaudière gaz ou électrique",
-            "sub": "25–55 °C · TJ-MU-40А"
+            "label": "120–150 м²",
+            "text": "120–150 m²",
+            "sub": "Kvs 3 m³/h · TJ-MU-25"
           },
           {
-            "label": "Твердопаливний котел",
-            "text": "Chaudière à combustible solide",
-            "sub": "20–60 °C · TJ-MU-25"
+            "label": "150–200 м²",
+            "text": "150–200 m²",
+            "sub": "Kvs 3,5 m³/h · TJ-MU-40А"
           }
         ]
       }
@@ -1844,24 +1924,40 @@
       ],
       "models": {
         "h2": "Preise und Daten der TJ-MU-Modelle",
-        "text": "Die Modelle unterscheiden sich im Regelbereich der Vorlauftemperatur für den Fußbodenheizkreis.",
+        "text": "Die Modelle unterscheiden sich in der versorgten Fußbodenheizfläche, dem Kvs-Wert und dem Vorlauftemperaturbereich.",
         "cols": {
           "model": "Modell",
-          "param": "Temperaturbereich",
+          "params": [
+            "Temperaturbereich",
+            "Heizfläche",
+            "Kvs"
+          ],
           "price": "Preis"
         },
         "rows": [
           {
-            "match": "TJ-MU-25",
-            "param": "20–60 °C"
+            "match": "TJ-MU-10B",
+            "params": [
+              "20–43 °C",
+              "bis 120 m²",
+              "2,5 m³/h"
+            ]
           },
           {
-            "match": "TJ-MU-10B",
-            "param": "20–43 °C"
+            "match": "TJ-MU-25",
+            "params": [
+              "20–60 °C",
+              "bis 150 m²",
+              "3 m³/h"
+            ]
           },
           {
             "match": "TJ-MU-40А",
-            "param": "25–55 °C"
+            "params": [
+              "25–55 °C",
+              "bis 200 m²",
+              "3,5 m³/h"
+            ]
           }
         ]
       },
@@ -1903,7 +1999,11 @@
           },
           {
             "q": "Welches Modell soll ich wählen?",
-            "a": "Die Modelle unterscheiden sich im Regelbereich: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+            "a": "Je nach Fläche der Fußbodenheizung: TJ-MU-10B — bis 120 m² (Kvs 2,5 m³/h), TJ-MU-25 — bis 150 m² (Kvs 3 m³/h), TJ-MU-40А — bis 200 m² (Kvs 3,5 m³/h)."
+          },
+          {
+            "q": "Was bedeutet der Kvs-Wert der Mischeinheit?",
+            "a": "Kvs ist der Durchflusskoeffizient des Mischventils: der Durchfluss in m³/h bei 1 bar Druckverlust. Je höher der Kvs-Wert, desto größer die Fußbodenheizfläche, die die Mischeinheit versorgen kann."
           },
           {
             "q": "Worin unterscheidet sich eine Mischeinheit von einem Mischer für Fußbodenheizung?",
@@ -1927,24 +2027,24 @@
         "empty": "Keine Modelle für die gewählten Filter"
       },
       "quick": {
-        "title": "Wofür ist die Mischeinheit?",
-        "sub": "Wählen Sie die Wärmequelle",
-        "group": "heatsource",
+        "title": "Fläche der Fußbodenheizung",
+        "sub": "Wählen Sie die Fläche, die die Mischeinheit beheizt",
+        "group": "area",
         "items": [
           {
-            "label": "Тепловий насос",
-            "text": "Wärmepumpe",
-            "sub": "20–43 °C · TJ-MU-10B"
+            "label": "До 120 м²",
+            "text": "Bis 120 m²",
+            "sub": "Kvs 2,5 m³/h · TJ-MU-10B"
           },
           {
-            "label": "Газовий або електрокотел",
-            "text": "Gas- oder Elektrokessel",
-            "sub": "25–55 °C · TJ-MU-40А"
+            "label": "120–150 м²",
+            "text": "120–150 m²",
+            "sub": "Kvs 3 m³/h · TJ-MU-25"
           },
           {
-            "label": "Твердопаливний котел",
-            "text": "Festbrennstoffkessel",
-            "sub": "20–60 °C · TJ-MU-25"
+            "label": "150–200 м²",
+            "text": "150–200 m²",
+            "sub": "Kvs 3,5 m³/h · TJ-MU-40А"
           }
         ]
       }
@@ -1964,24 +2064,40 @@
       ],
       "models": {
         "h2": "Prețuri și caracteristici ale modelelor TJ-MU",
-        "text": "Modelele diferă prin intervalul de reglare a temperaturii de tur în circuitul încălzirii prin pardoseală.",
+        "text": "Modelele diferă prin suprafața de încălzire prin pardoseală deservită, coeficientul Kvs și intervalul temperaturii de tur.",
         "cols": {
           "model": "Model",
-          "param": "Interval de temperatură",
+          "params": [
+            "Interval de temperatură",
+            "Suprafață încălzită",
+            "Kvs"
+          ],
           "price": "Preț"
         },
         "rows": [
           {
-            "match": "TJ-MU-25",
-            "param": "20–60 °C"
+            "match": "TJ-MU-10B",
+            "params": [
+              "20–43 °C",
+              "până la 120 m²",
+              "2,5 m³/h"
+            ]
           },
           {
-            "match": "TJ-MU-10B",
-            "param": "20–43 °C"
+            "match": "TJ-MU-25",
+            "params": [
+              "20–60 °C",
+              "până la 150 m²",
+              "3 m³/h"
+            ]
           },
           {
             "match": "TJ-MU-40А",
-            "param": "25–55 °C"
+            "params": [
+              "25–55 °C",
+              "până la 200 m²",
+              "3,5 m³/h"
+            ]
           }
         ]
       },
@@ -2023,7 +2139,11 @@
           },
           {
             "q": "Ce model să aleg?",
-            "a": "Modelele diferă prin intervalul de reglare: TJ-MU-10B — 20–43 °C, TJ-MU-40А — 25–55 °C, TJ-MU-25 — 20–60 °C."
+            "a": "În funcție de suprafața încălzirii prin pardoseală: TJ-MU-10B — până la 120 m² (Kvs 2,5 m³/h), TJ-MU-25 — până la 150 m² (Kvs 3 m³/h), TJ-MU-40А — până la 200 m² (Kvs 3,5 m³/h)."
+          },
+          {
+            "q": "Ce înseamnă Kvs al grupului?",
+            "a": "Kvs este coeficientul de debit al ventilului de amestec: debitul în m³/h la o cădere de presiune de 1 bar. Cu cât Kvs este mai mare, cu atât grupul deservește o suprafață mai mare de încălzire prin pardoseală."
           },
           {
             "q": "Prin ce diferă un grup de amestec de un amestecător pentru încălzire prin pardoseală?",
@@ -2047,24 +2167,24 @@
         "empty": "Niciun model pentru filtrele selectate"
       },
       "quick": {
-        "title": "Pentru ce este grupul?",
-        "sub": "Alegeți sursa de căldură",
-        "group": "heatsource",
+        "title": "Suprafața încălzirii prin pardoseală",
+        "sub": "Alegeți suprafața încălzită de grup",
+        "group": "area",
         "items": [
           {
-            "label": "Тепловий насос",
-            "text": "Pompă de căldură",
-            "sub": "20–43 °C · TJ-MU-10B"
+            "label": "До 120 м²",
+            "text": "Până la 120 m²",
+            "sub": "Kvs 2,5 m³/h · TJ-MU-10B"
           },
           {
-            "label": "Газовий або електрокотел",
-            "text": "Centrală pe gaz sau electrică",
-            "sub": "25–55 °C · TJ-MU-40А"
+            "label": "120–150 м²",
+            "text": "120–150 m²",
+            "sub": "Kvs 3 m³/h · TJ-MU-25"
           },
           {
-            "label": "Твердопаливний котел",
-            "text": "Cazan pe combustibil solid",
-            "sub": "20–60 °C · TJ-MU-25"
+            "label": "150–200 м²",
+            "text": "150–200 m²",
+            "sub": "Kvs 3,5 m³/h · TJ-MU-40А"
           }
         ]
       }

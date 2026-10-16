@@ -574,20 +574,23 @@ const CATEGORY_FILTERS = {
     ],
   },
 
-  // Змішувальний вузол (3 моделі): фільтр «джерело тепла» показуємо не в сайдбарі, а кнопками
+  // Змішувальний вузол (3 моделі): фільтр «площа опалення» показуємо не в сайдбарі, а кнопками
   // над товарами (CategoryLanding → quick, category-landing.json → quick.group) — hidden; повзунок
   // ціни при трьох цінах у вузькому діапазоні лише заважає — noPrice.
+  // Площа за моделлю — дані техспеціаліста Termojet (16.10.2026): 10B — до 120 м², 25 — до 150 м²,
+  // 40 — до 200 м² (те саме в specs «Площа опалення», backend/scripts/apply-vuzol-kvs.js).
+  // Кожен діапазон веде на найменший вузол, якого вистачає на цю площу.
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': {
     noPrice: true,
     groups: [
       {
-        key: 'heatsource',
-        label: 'Джерело тепла',
+        key: 'area',
+        label: 'Площа опалення',
         hidden: true,
         options: [
-          { label: 'Тепловий насос',           test: p => /TJ-MU-10B/i.test(p.name) },
-          { label: 'Газовий або електрокотел', test: p => /TJ-MU-40/i.test(p.name) },
-          { label: 'Твердопаливний котел',     test: p => /TJ-MU-25/i.test(p.name) },
+          { label: 'До 120 м²',  test: p => /TJ-MU-10B/i.test(p.name) },
+          { label: '120–150 м²', test: p => /TJ-MU-25/i.test(p.name) },
+          { label: '150–200 м²', test: p => /TJ-MU-40/i.test(p.name) },
         ],
       },
     ],
@@ -970,6 +973,7 @@ const BADGE_PREFERRED = {
   'hidravlichni-rozdilnyky':    ['діаметр', ['qmax', '10'], ['qmax', '20'], "об'єм"],
   'kolektory-pidloha':          ['кількість виход', 'підключ', 'матеріал', 'витратомір', 'температура'],
   'balansuval-klapany':         ['dn', 'kvs', 'pn', 'функці'],
+  'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': ['площа', 'kvs', 'температура'],
   'termojet-mega':              ['dn', 'діаметр', 'розмір', ['qmax', '10'], ['qmax', '20'], 'kvs', 'gmax', 'підключ'],
   'rozprodazh':                 ['розмір', 'dn', 'діаметр'],
 }
@@ -1008,6 +1012,8 @@ function extractBadges(product, displaySpecs, lang = 'uk') {
     // голі числа → осмислена мітка за змістом ключа (DN15, «2 виходи»)
     const fmtVal = (lk, v) => {
       if (/пропускна|здатн/.test(lk)) return v + uw('flow')
+      // вузли TJ-MU: голе «2,5 м³/год» на картці незрозуміле — підписуємо
+      if (lk === 'kvs' && cat === 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy') return 'Kvs ' + v
       if (/^\d+$/.test(v)) {
         if (/\bdn\b|діаметр|розмір/.test(lk)) return 'DN' + v
         if (/контур/.test(lk)) return v + uw('circuits')

@@ -65,12 +65,12 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
     return { num, outlets, cells }
   })
 
-  // Таблиця моделей (cfg.models.rows: { match — підрядок артикула або назви, param — значення
-  // колонки параметра }); ціна — з каталогу. Рядки без товару в категорії пропускаємо.
+  // Таблиця моделей (cfg.models.rows: { match — підрядок артикула або назви, params — значення
+  // колонок параметрів, або param — одне значення }); ціна — з каталогу. Рядки без товару пропускаємо.
   const modelRows = (cfg.models?.rows || []).map(r => {
     const m = r.match.toLowerCase()
     const product = catProducts.find(p => (p.sku || '').toLowerCase().includes(m) || (p.name || '').toLowerCase().includes(m))
-    return product && { model: r.model || r.match, param: r.param, price: priceUah(product, eurRate), product }
+    return product && { model: r.model || r.match, params: r.params || [r.param], price: priceUah(product, eurRate), product }
   }).filter(Boolean)
 
   // Плитки суміжних товарів: r.to — готова адреса, інакше /catalog/<category>?<filter>.

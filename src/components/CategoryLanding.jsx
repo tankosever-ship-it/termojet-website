@@ -44,6 +44,8 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
   const shownCount = shownGroups.reduce((n, g) => n + g.visible.length, 0)
   const picker = cfg.picker
   const quick = cfg.quick
+  // Колонки параметрів таблиці моделей: cols.params (кілька) або cols.param (одна)
+  const modelParamCols = cfg.models ? (cfg.models.cols.params || [cfg.models.cols.param]) : []
   const multi = data.groups.length > 1
 
   return (
@@ -169,7 +171,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
 
           {/* Таблиця моделей: модель (посилання) — параметр із конфігу — ціна з каталогу */}
           {cfg.models && data.modelRows.length > 0 && (
-            <section className="space-y-3 max-w-3xl">
+            <section className="space-y-3 max-w-4xl">
               <H2 id="models">{cfg.models.h2}</H2>
               {cfg.models.text && <p className="text-gray-600">{cfg.models.text}</p>}
               <div className="overflow-x-auto bg-white border border-[var(--ink-200)]">
@@ -177,7 +179,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
                   <thead>
                     <tr className="text-left text-[11px] uppercase tracking-wider text-gray-500 border-b border-[var(--ink-200)]">
                       <th className="px-4 py-3 font-semibold">{cfg.models.cols.model}</th>
-                      <th className="px-4 py-3 font-semibold">{cfg.models.cols.param}</th>
+                      {modelParamCols.map(c => <th key={c} className="px-4 py-3 font-semibold">{c}</th>)}
                       <th className="px-4 py-3 font-semibold">{cfg.models.cols.price}</th>
                     </tr>
                   </thead>
@@ -187,7 +189,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
                         <td className="px-4 py-2.5 font-semibold text-gray-900 whitespace-nowrap">
                           <LLink to={`/catalog/${r.product.categorySlug}/${r.product.slug}`} className="hover:text-[var(--accent)]">{r.model}</LLink>
                         </td>
-                        <td className="px-4 py-2.5 text-gray-700 font-mono whitespace-nowrap">{r.param}</td>
+                        {r.params.map((v, i) => <td key={i} className="px-4 py-2.5 text-gray-700 font-mono whitespace-nowrap">{v}</td>)}
                         <td className="px-4 py-2.5 text-gray-700 whitespace-nowrap">{r.price > 0 ? fmt(r.price) : '—'}</td>
                       </tr>
                     ))}
