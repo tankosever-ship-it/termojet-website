@@ -3376,7 +3376,7 @@ export const PRODUCTS = [
       "Споживана потужність": "5-80 W"
     },
     "inStock": true,
-    "currency": "EUR"
+    "currency": "UAH"
   },
   {
     "id": "wp_20516",
@@ -3849,7 +3849,7 @@ export const PRODUCTS = [
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
     "inStock": true,
-    "currency": "EUR"
+    "currency": "UAH"
   },
   {
     "id": "wp_20456",
