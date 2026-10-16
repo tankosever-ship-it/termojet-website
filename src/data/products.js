@@ -3357,7 +3357,7 @@ export const PRODUCTS = [
     "name": "Насос циркуляційний Termojet AUTO енергозберігаючий APM 25/8/180 мм",
     "slug": "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-25-8-180-mm",
     "sku": "30401225",
-    "price": "1108",
+    "price": 63830,
     "categorySlug": "nasosy",
     "image": "https://termojet.com.ua/wp-content/uploads/2023/11/dsc_0471-scaled.jpg",
     "images": [
@@ -3820,7 +3820,7 @@ export const PRODUCTS = [
     "name": "Насос циркуляційний Termojet AUTO енергозберігаючий APM-F 65/12-340 мм",
     "slug": "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-65-12f-340-mm",
     "sku": "30651234",
-    "price": "1340",
+    "price": 73000,
     "categorySlug": "nasosy",
     "image": "https://termojet.com.ua/wp-content/uploads/2025/03/1741202799707659.jpg",
     "images": [
@@ -7995,7 +7995,7 @@ export const PRODUCTS = [
     "name": "Насос циркуляційний Termojet AUTO енергозберігаючий APM-F 40/12-250 мм",
     "slug": "nasos-czyrkulyaczijnyj-termojet-auto-energozberigayuchyj-apm-40-12f-250-mm",
     "sku": "30401225",
-    "price": "1180",
+    "price": 63830,
     "categorySlug": "nasosy",
     "image": "/images/nasosy/apm-f.png",
     "images": [
@@ -8024,7 +8024,7 @@ export const PRODUCTS = [
       "Встановлення": "вал двигуна повинен знаходитися в горизонтальному положенні"
     },
     "inStock": true,
-    "currency": "EUR",
+    "currency": "UAH",
     "seoTitle": "Насос Termojet APM-F 40/12 DN40 фланець — ЕСМ купити",
     "metaDescription": "Фланцевий насос Termojet AUTO APM-F 40/12-250 мм: ЕСМ, 25–670 Вт, Hmax 12 м, Qmax 24 м³/год, DN40, IP44, 0–110°C. Для котелень і систем опалення."
   },
