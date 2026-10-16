@@ -234,7 +234,7 @@ const RAW = [
     images: ['/images/portfolio/proj-15.jpg'],
     links: [
       { label: 'Модуль Termojet BOX2', url: '/catalog/termojet-box/modul-termojet-box2-v-teploizolyatsiyi-km2-ups' },
-      { label: 'Колектори для теплої підлоги', url: '/catalog/kolektory-pidloha' },
+      { label: 'Колектори для теплої підлоги', url: '/catalog/kolektor-dlya-teployi-pidlogy' },
       { label: 'Циркуляційні насоси', url: '/catalog/nasosy' },
     ],
   },
