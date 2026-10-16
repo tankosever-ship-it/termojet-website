@@ -15,6 +15,7 @@ import CategoryIcon from '../components/CategoryIcon'
 import { assetPath } from '../utils/assetPath'
 import CategoryLanding from '../components/CategoryLanding'
 import CATEGORY_LANDING from '../data/category-landing.json'
+import { parseName } from '../utils/categoryLanding'
 
 // Фонові банери для окремих категорій (slug → файл у public/).
 // WebP, не PNG: банери — це фотографії з плавним градієнтом, у PNG кожна важила
@@ -48,6 +49,8 @@ const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }
 
 // Група фільтрів, яку перемикають вкладки SEO-шаблону категорії
 const LANDING_TAB_FILTER = 'cabinettype'
+// Колектор «на N виходів» (або шафа «A-B виходів»): кількість виходів у межах [lo, hi]
+const outletsIn = (p, lo, hi) => { const o = parseName(p.name).outlets; return !!o && o[0] >= lo && o[1] <= hi }
 
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
 const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
@@ -539,6 +542,57 @@ const CATEGORY_FILTERS = {
     ],
   },
 
+  // Колектор для теплої підлоги (TJ-W, 2–15 виходів): решта характеристик у всіх моделей однакова,
+  // тож фільтруємо лише за кількістю виходів — діапазонами під типові задачі і за сумісністю з
+  // колекторною шафою (діапазони виходів — з назв шаф №00–№06, категорія shafa-kolektorna).
+  'kolektor-dlya-teployi-pidlogy': {
+    groups: [
+      {
+        key: 'outletrange',
+        label: 'Кількість виходів',
+        multi: true,
+        options: [
+          { label: '2–4 виходи',   test: p => outletsIn(p, 2, 4) },
+          { label: '5–8 виходів',  test: p => outletsIn(p, 5, 8) },
+          { label: '9–12 виходів', test: p => outletsIn(p, 9, 12) },
+          { label: '13–15 виходів', test: p => outletsIn(p, 13, 15) },
+        ],
+      },
+      {
+        key: 'fitcabinet',
+        label: 'Вміщається в шафу',
+        options: [
+          { label: '№00 (2–4 виходи)',   test: p => outletsIn(p, 2, 4) },
+          { label: '№01 (4–6 виходів)',  test: p => outletsIn(p, 4, 6) },
+          { label: '№02 (6–8 виходів)',  test: p => outletsIn(p, 6, 8) },
+          { label: '№03 (8–10 виходів)', test: p => outletsIn(p, 8, 10) },
+          { label: '№04 (10–12 виходів)', test: p => outletsIn(p, 10, 12) },
+          { label: '№05 (12–14 виходів)', test: p => outletsIn(p, 12, 14) },
+          { label: '№06 (14–16 виходів)', test: p => outletsIn(p, 14, 16) },
+        ],
+      },
+    ],
+  },
+
+  // Змішувальний вузол (3 моделі): фільтр «джерело тепла» показуємо не в сайдбарі, а кнопками
+  // над товарами (CategoryLanding → quick, category-landing.json → quick.group) — hidden; повзунок
+  // ціни при трьох цінах у вузькому діапазоні лише заважає — noPrice.
+  'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': {
+    noPrice: true,
+    groups: [
+      {
+        key: 'heatsource',
+        label: 'Джерело тепла',
+        hidden: true,
+        options: [
+          { label: 'Тепловий насос',           test: p => /TJ-MU-10B/i.test(p.name) },
+          { label: 'Газовий або електрокотел', test: p => /TJ-MU-40/i.test(p.name) },
+          { label: 'Твердопаливний котел',     test: p => /TJ-MU-25/i.test(p.name) },
+        ],
+      },
+    ],
+  },
+
   // Колекторна шафа: тип (мітки — ті самі, що в specs «Тип» і FILTER_LABEL_I18N); ціна — автоматично.
   // Вкладки SEO-шаблону (CategoryLanding) перемикають саме цю групу — див. groups[].filter у category-landing.json.
   'shafa-kolektorna': {
@@ -641,6 +695,20 @@ const FILTER_GROUP_LABEL_KEYS = {
 
 // Авто-згенерована мапа перекладу значень фільтрів (показ; ключ=канонічний UA для матчингу).
 const FILTER_LABEL_I18N = {
+  // Колектор для теплої підлоги: кількість виходів / сумісність із шафою (16.10.2026)
+  "Кількість виходів": {"en": "Number of outlets", "pl": "Liczba wyjść", "fr": "Nombre de sorties", "de": "Anzahl der Abgänge", "ro": "Număr de ieșiri"},
+  "Вміщається в шафу": {"en": "Fits cabinet", "pl": "Pasuje do szafki", "fr": "Convient au coffret", "de": "Passt in Schrank", "ro": "Încape în cutie"},
+  "2–4 виходи": {"en": "2–4 outlets", "pl": "2–4 wyjścia", "fr": "2–4 sorties", "de": "2–4 Abgänge", "ro": "2–4 ieșiri"},
+  "5–8 виходів": {"en": "5–8 outlets", "pl": "5–8 wyjść", "fr": "5–8 sorties", "de": "5–8 Abgänge", "ro": "5–8 ieșiri"},
+  "9–12 виходів": {"en": "9–12 outlets", "pl": "9–12 wyjść", "fr": "9–12 sorties", "de": "9–12 Abgänge", "ro": "9–12 ieșiri"},
+  "13–15 виходів": {"en": "13–15 outlets", "pl": "13–15 wyjść", "fr": "13–15 sorties", "de": "13–15 Abgänge", "ro": "13–15 ieșiri"},
+  "№00 (2–4 виходи)": {"en": "No.00 (2–4 outlets)", "pl": "Nr 00 (2–4 wyjścia)", "fr": "N°00 (2–4 sorties)", "de": "Nr. 00 (2–4 Abgänge)", "ro": "Nr. 00 (2–4 ieșiri)"},
+  "№01 (4–6 виходів)": {"en": "No.01 (4–6 outlets)", "pl": "Nr 01 (4–6 wyjść)", "fr": "N°01 (4–6 sorties)", "de": "Nr. 01 (4–6 Abgänge)", "ro": "Nr. 01 (4–6 ieșiri)"},
+  "№02 (6–8 виходів)": {"en": "No.02 (6–8 outlets)", "pl": "Nr 02 (6–8 wyjść)", "fr": "N°02 (6–8 sorties)", "de": "Nr. 02 (6–8 Abgänge)", "ro": "Nr. 02 (6–8 ieșiri)"},
+  "№03 (8–10 виходів)": {"en": "No.03 (8–10 outlets)", "pl": "Nr 03 (8–10 wyjść)", "fr": "N°03 (8–10 sorties)", "de": "Nr. 03 (8–10 Abgänge)", "ro": "Nr. 03 (8–10 ieșiri)"},
+  "№04 (10–12 виходів)": {"en": "No.04 (10–12 outlets)", "pl": "Nr 04 (10–12 wyjść)", "fr": "N°04 (10–12 sorties)", "de": "Nr. 04 (10–12 Abgänge)", "ro": "Nr. 04 (10–12 ieșiri)"},
+  "№05 (12–14 виходів)": {"en": "No.05 (12–14 outlets)", "pl": "Nr 05 (12–14 wyjść)", "fr": "N°05 (12–14 sorties)", "de": "Nr. 05 (12–14 Abgänge)", "ro": "Nr. 05 (12–14 ieșiri)"},
+  "№06 (14–16 виходів)": {"en": "No.06 (14–16 outlets)", "pl": "Nr 06 (14–16 wyjść)", "fr": "N°06 (14–16 sorties)", "de": "Nr. 06 (14–16 Abgänge)", "ro": "Nr. 06 (14–16 ieșiri)"},
   "1-фазне (220–230 В)": {"en": "Single-phase (220–230 V)", "pl": "Jednofazowe (220–230 V)", "fr": "Monophasé (220–230 V)", "de": "Einphasig (220–230 V)", "ro": "Monofazat (220–230 V)"},
   "100 мм": {"en": "100 mm", "pl": "100 mm", "fr": "100 mm", "de": "100 mm", "ro": "100 mm"},
   "10–15 м³/год": {"en": "10–15 m³/h", "pl": "10–15 m³/h", "fr": "10–15 m³/h", "de": "10–15 m³/h", "ro": "10–15 m³/h"},
@@ -782,8 +850,10 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
   // Показ значення фільтра перекладеною мовою; ключ opt.label лишається UA для матчингу.
   const flabel = (label) => (lang !== 'uk' && FILTER_LABEL_I18N[label]?.[lang]) || label
   const config = CATEGORY_FILTERS[categorySlug]
-  const hasPrice = priceBounds && priceBounds[1] > priceBounds[0]
-  if (!config && !hasPrice) return null
+  // hidden-групи керуються з іншого місця (кнопки над товарами в SEO-шаблоні), noPrice — без повзунка ціни
+  const groups = (config?.groups || []).filter(g => !g.hidden)
+  const hasPrice = !config?.noPrice && priceBounds && priceBounds[1] > priceBounds[0]
+  if (!groups.length && !hasPrice) return null
 
   const mono = { fontFamily: "'JetBrains Mono', monospace" }
   const lo = price ? price[0] : (priceBounds ? priceBounds[0] : 0)
@@ -835,7 +905,7 @@ function Sidebar({ categorySlug, filters, setFilters, priceBounds, price, setPri
           )}
 
           {/* Filter groups */}
-          {config && config.groups.map(group => (
+          {groups.map(group => (
             <div key={group.key}>
               <div className="mb-2 px-1"
                 style={{ ...mono, fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
@@ -1488,7 +1558,9 @@ export default function CatalogPage() {
               tab={landingTab} onTab={key => {
                 const g = landing.groups.find(x => x.key === key)
                 setCatFilters(f => ({ ...f, [LANDING_TAB_FILTER]: g?.filter || '' }))
-              }} />
+              }}
+              quickValue={landing.quick ? catFilters[landing.quick.group] || '' : ''}
+              onQuick={label => landing.quick && setCatFilters(f => ({ ...f, [landing.quick.group]: label }))} />
           </div>
         ) : (
         <>

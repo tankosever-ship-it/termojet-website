@@ -6,6 +6,10 @@
 // типів і вкладки — лише коли груп більше однієї. Тексти й підписи (усі мови) — src/data/category-landing.json,
 // числа (розміри, ціни) — з каталогу (utils/categoryLanding.js).
 //
+// quick — кнопки швидкого вибору над товарами (напр. «Для чого вузол?»): перемикають групу
+// фільтра CATEGORY_FILTERS (quick.group, зазвичай hidden у сайдбарі); items[].label — UA-мітка
+// опції фільтра, text/sub — підписи мовою сторінки. Видно й на мобільному, де сайдбару нема.
+//
 // Ліворуч — той самий сайдбар фільтрів, що в інших категоріях (aside, передає CatalogPage):
 // ціна «від–до» і тип. Вкладки над товарами — це той самий фільтр типу (tab / onTab),
 // тож вони не можуть суперечити сайдбару. Усе це — лише стан React, без зміни URL:
@@ -20,7 +24,7 @@ const H2 = ({ id, children }) => (
   <h2 id={id} className="text-2xl md:text-[28px] font-black text-gray-900 font-['Archivo',sans-serif] leading-tight scroll-mt-24">{children}</h2>
 )
 
-export default function CategoryLanding({ cfg, lang, catProducts, shownProducts, allProducts, eurRate, Card, aside, tab = 'all', onTab }) {
+export default function CategoryLanding({ cfg, lang, catProducts, shownProducts, allProducts, eurRate, Card, aside, tab = 'all', onTab, quickValue = '', onQuick }) {
   const ui = cfg.ui || {}
   const data = useMemo(() => buildLanding(cfg, catProducts, allProducts, eurRate, lang), [cfg, catProducts, allProducts, eurRate, lang])
   const [picked, setPicked] = useState(null)   // кількість виходів, яку підсвічуємо
@@ -39,6 +43,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
     .map(g => ({ ...g, visible: g.items.filter(p => shownIds.has(p.id)) }))
   const shownCount = shownGroups.reduce((n, g) => n + g.visible.length, 0)
   const picker = cfg.picker
+  const quick = cfg.quick
   const multi = data.groups.length > 1
 
   return (
@@ -91,6 +96,29 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
                       {n}
                     </button>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {quick?.items?.length > 0 && (
+              <div className="flex flex-col xl:flex-row xl:items-center gap-3 p-4 bg-white border border-[var(--ink-200)]">
+                <div className="xl:w-56 flex-shrink-0">
+                  <div className="font-bold text-gray-900 text-sm">{quick.title}</div>
+                  {quick.sub && <div className="text-xs text-gray-500">{quick.sub}</div>}
+                </div>
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                  {[{ label: '', text: ui.all }, ...quick.items].map(q => {
+                    const on = quickValue === q.label
+                    return (
+                      <button key={q.label || 'all'} type="button" aria-pressed={on} onClick={() => onQuick?.(q.label)}
+                        className={`px-3.5 py-2 text-left border transition-colors ${on
+                          ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
+                          : 'bg-white border-[var(--ink-200)] text-gray-700 hover:border-[var(--accent)]'}`}>
+                        <span className="block text-sm font-semibold leading-tight">{q.text}</span>
+                        {q.sub && <span className={`block text-[11px] mt-0.5 ${on ? 'text-white/80' : 'text-gray-400'}`}>{q.sub}</span>}
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
             )}

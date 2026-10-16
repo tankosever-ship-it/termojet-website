@@ -819,6 +819,12 @@
         "outlets": "виходів",
         "price": "Ціна",
         "empty": "Немає моделей за вибраними фільтрами"
+      },
+      "picker": {
+        "title": "Скільки контурів теплої підлоги?",
+        "sub": "Підсвітимо колектор з потрібною кількістю виходів",
+        "from": 2,
+        "to": 15
       }
     },
     "en": {
@@ -917,6 +923,12 @@
         "outlets": "outlets",
         "price": "Price",
         "empty": "No models match the selected filters"
+      },
+      "picker": {
+        "title": "How many underfloor heating circuits?",
+        "sub": "We'll highlight the manifold with the right number of outlets",
+        "from": 2,
+        "to": 15
       }
     },
     "pl": {
@@ -1015,6 +1027,12 @@
         "outlets": "wyjść",
         "price": "Cena",
         "empty": "Brak modeli dla wybranych filtrów"
+      },
+      "picker": {
+        "title": "Ile obwodów ogrzewania podłogowego?",
+        "sub": "Podświetlimy rozdzielacz z odpowiednią liczbą wyjść",
+        "from": 2,
+        "to": 15
       }
     },
     "fr": {
@@ -1113,6 +1131,12 @@
         "outlets": "sorties",
         "price": "Prix",
         "empty": "Aucun modèle ne correspond aux filtres"
+      },
+      "picker": {
+        "title": "Combien de circuits de plancher chauffant ?",
+        "sub": "Nous mettrons en évidence le collecteur avec le bon nombre de sorties",
+        "from": 2,
+        "to": 15
       }
     },
     "de": {
@@ -1211,6 +1235,12 @@
         "outlets": "Abgänge",
         "price": "Preis",
         "empty": "Keine Modelle für die gewählten Filter"
+      },
+      "picker": {
+        "title": "Wie viele Fußbodenheizkreise?",
+        "sub": "Wir heben den Verteiler mit der passenden Anzahl an Abgängen hervor",
+        "from": 2,
+        "to": 15
       }
     },
     "ro": {
@@ -1309,6 +1339,12 @@
         "outlets": "ieșiri",
         "price": "Preț",
         "empty": "Niciun model pentru filtrele selectate"
+      },
+      "picker": {
+        "title": "Câte circuite de încălzire prin pardoseală?",
+        "sub": "Evidențiem distribuitorul cu numărul potrivit de ieșiri",
+        "from": 2,
+        "to": 15
       }
     }
   },
@@ -1409,6 +1445,28 @@
         "sortPriceDesc": "Ціна: від високої",
         "price": "Ціна",
         "empty": "Немає моделей за вибраними фільтрами"
+      },
+      "quick": {
+        "title": "Для чого вузол?",
+        "sub": "Оберіть джерело тепла",
+        "group": "heatsource",
+        "items": [
+          {
+            "label": "Тепловий насос",
+            "text": "Тепловий насос",
+            "sub": "20–43 °C · TJ-MU-10B"
+          },
+          {
+            "label": "Газовий або електрокотел",
+            "text": "Газовий або електрокотел",
+            "sub": "25–55 °C · TJ-MU-40А"
+          },
+          {
+            "label": "Твердопаливний котел",
+            "text": "Твердопаливний котел",
+            "sub": "20–60 °C · TJ-MU-25"
+          }
+        ]
       }
     },
     "en": {
@@ -1507,6 +1565,28 @@
         "sortPriceDesc": "Price: high to low",
         "price": "Price",
         "empty": "No models match the selected filters"
+      },
+      "quick": {
+        "title": "What is the unit for?",
+        "sub": "Choose the heat source",
+        "group": "heatsource",
+        "items": [
+          {
+            "label": "Тепловий насос",
+            "text": "Heat pump",
+            "sub": "20–43 °C · TJ-MU-10B"
+          },
+          {
+            "label": "Газовий або електрокотел",
+            "text": "Gas or electric boiler",
+            "sub": "25–55 °C · TJ-MU-40А"
+          },
+          {
+            "label": "Твердопаливний котел",
+            "text": "Solid fuel boiler",
+            "sub": "20–60 °C · TJ-MU-25"
+          }
+        ]
       }
     },
     "pl": {
@@ -1605,6 +1685,28 @@
         "sortPriceDesc": "Cena: malejąco",
         "price": "Cena",
         "empty": "Brak modeli dla wybranych filtrów"
+      },
+      "quick": {
+        "title": "Do czego węzeł?",
+        "sub": "Wybierz źródło ciepła",
+        "group": "heatsource",
+        "items": [
+          {
+            "label": "Тепловий насос",
+            "text": "Pompa ciepła",
+            "sub": "20–43 °C · TJ-MU-10B"
+          },
+          {
+            "label": "Газовий або електрокотел",
+            "text": "Kocioł gazowy lub elektryczny",
+            "sub": "25–55 °C · TJ-MU-40А"
+          },
+          {
+            "label": "Твердопаливний котел",
+            "text": "Kocioł na paliwo stałe",
+            "sub": "20–60 °C · TJ-MU-25"
+          }
+        ]
       }
     },
     "fr": {
@@ -1703,6 +1805,28 @@
         "sortPriceDesc": "Prix décroissant",
         "price": "Prix",
         "empty": "Aucun modèle ne correspond aux filtres"
+      },
+      "quick": {
+        "title": "Pour quelle installation ?",
+        "sub": "Choisissez la source de chaleur",
+        "group": "heatsource",
+        "items": [
+          {
+            "label": "Тепловий насос",
+            "text": "Pompe à chaleur",
+            "sub": "20–43 °C · TJ-MU-10B"
+          },
+          {
+            "label": "Газовий або електрокотел",
+            "text": "Chaudière gaz ou électrique",
+            "sub": "25–55 °C · TJ-MU-40А"
+          },
+          {
+            "label": "Твердопаливний котел",
+            "text": "Chaudière à combustible solide",
+            "sub": "20–60 °C · TJ-MU-25"
+          }
+        ]
       }
     },
     "de": {
@@ -1801,6 +1925,28 @@
         "sortPriceDesc": "Preis: absteigend",
         "price": "Preis",
         "empty": "Keine Modelle für die gewählten Filter"
+      },
+      "quick": {
+        "title": "Wofür ist die Mischeinheit?",
+        "sub": "Wählen Sie die Wärmequelle",
+        "group": "heatsource",
+        "items": [
+          {
+            "label": "Тепловий насос",
+            "text": "Wärmepumpe",
+            "sub": "20–43 °C · TJ-MU-10B"
+          },
+          {
+            "label": "Газовий або електрокотел",
+            "text": "Gas- oder Elektrokessel",
+            "sub": "25–55 °C · TJ-MU-40А"
+          },
+          {
+            "label": "Твердопаливний котел",
+            "text": "Festbrennstoffkessel",
+            "sub": "20–60 °C · TJ-MU-25"
+          }
+        ]
       }
     },
     "ro": {
@@ -1899,6 +2045,28 @@
         "sortPriceDesc": "Preț descrescător",
         "price": "Preț",
         "empty": "Niciun model pentru filtrele selectate"
+      },
+      "quick": {
+        "title": "Pentru ce este grupul?",
+        "sub": "Alegeți sursa de căldură",
+        "group": "heatsource",
+        "items": [
+          {
+            "label": "Тепловий насос",
+            "text": "Pompă de căldură",
+            "sub": "20–43 °C · TJ-MU-10B"
+          },
+          {
+            "label": "Газовий або електрокотел",
+            "text": "Centrală pe gaz sau electrică",
+            "sub": "25–55 °C · TJ-MU-40А"
+          },
+          {
+            "label": "Твердопаливний котел",
+            "text": "Cazan pe combustibil solid",
+            "sub": "20–60 °C · TJ-MU-25"
+          }
+        ]
       }
     }
   }
