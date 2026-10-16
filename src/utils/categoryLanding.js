@@ -29,6 +29,12 @@ const minMax = vals => {
   return v.length ? [Math.min(...v), Math.max(...v)] : [0, 0]
 }
 
+// Рядок таблиці моделей (match — підрядок артикула або назви) ↔ товар
+const modelHit = (p, match) => {
+  const m = String(match || '').toLowerCase()
+  return !!m && ((p.sku || '').toLowerCase().includes(m) || (p.name || '').toLowerCase().includes(m))
+}
+
 const byMatch = (list, match) => (match ? list.filter(p => (p.name || '').toLowerCase().includes(match.toLowerCase())) : list)
 
 // Порядок усередині групи: за номером типорозміру (№00 → №06) або кількістю виходів
@@ -40,8 +46,16 @@ const sizeRank = p => {
 
 export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk') {
   const ui = cfg.ui || {}
+  // Є таблиця моделей — сітка за замовчуванням іде в її порядку (вузли TJ-MU: за площею 120 → 200 м²);
+  // товари поза таблицею — після, за розміром
+  const rowRank = p => {
+    const rows = cfg.models?.rows || []
+    const i = rows.findIndex(r => modelHit(p, r.match))
+    return i < 0 ? rows.length : i
+  }
   const groups = cfg.groups.map(g => {
-    const items = byMatch(catProducts, g.match).slice().sort((a, b) => sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
+    const items = byMatch(catProducts, g.match).slice()
+      .sort((a, b) => rowRank(a) - rowRank(b) || sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
     const parsed = items.map(p => parseName(p.name))
     const dims = parsed.map(x => x.dims).filter(Boolean)
     const [min, max] = minMax(items.map(p => priceUah(p, eurRate)))
@@ -68,8 +82,7 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
   // Таблиця моделей (cfg.models.rows: { match — підрядок артикула або назви, params — значення
   // колонок параметрів, або param — одне значення }); ціна — з каталогу. Рядки без товару пропускаємо.
   const modelRows = (cfg.models?.rows || []).map(r => {
-    const m = r.match.toLowerCase()
-    const product = catProducts.find(p => (p.sku || '').toLowerCase().includes(m) || (p.name || '').toLowerCase().includes(m))
+    const product = catProducts.find(p => modelHit(p, r.match))
     return product && { model: r.model || r.match, params: r.params || [r.param], price: priceUah(product, eurRate), product }
   }).filter(Boolean)
 
