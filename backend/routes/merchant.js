@@ -114,7 +114,8 @@ function feed(lang) {
       if (!img) continue
       const amount = parseFloat(p.price)
       if (!amount || amount <= 0) continue
-      const toUah = v => ((p.currency || 'UAH') === 'UAH' ? v : (p.currency === 'EUR' && rate ? Math.round(v * rate) : null))
+      // ціна у фіді має збігатися з ціною на сторінці — там гривні показано без копійок
+      const toUah = v => ((p.currency || 'UAH') === 'UAH' ? Math.round(v) : (p.currency === 'EUR' && rate ? Math.round(v * rate) : null))
       const uah = toUah(amount)
       if (!uah || uah <= 0) continue
 

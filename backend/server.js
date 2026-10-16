@@ -542,14 +542,14 @@ function buildProductJsonLd(row, loc, { url, img, desc, cat, lang, eurRate }) {
     brand: { '@type': 'Brand', name: 'Termojet' },
     category: cm ? pickL(lang, cm.name, cm.nameEn, cm.nameRo) : undefined,
   }
-  const hasPrice = row.price && Number(row.price) > 0
+  const hasPrice = effPrice(row) > 0
   if (hasPrice) {
     // Ціна завжди в грн: UAH-товари як є; EUR-товари конвертуємо (НБУ×1.022),
     // так само як показує сайт (src/utils/currency.js toUAH) — інакше схема
     // віддавала б сире число EUR із підписом «грн».
     const priceUah = row.currency === 'EUR' && eurRate
-      ? String(Math.round(Number(row.price) * eurRate))
-      : String(row.price)
+      ? String(Math.round(effPrice(row) * eurRate))
+      : String(Math.round(effPrice(row)))   // UAH з копійками (17467.8) — округлено, як на картці
     product.offers = {
       '@type': 'Offer',
       price: priceUah,
@@ -829,6 +829,12 @@ const STATIC_META_RO = {
 
 // ── SSR-lite: серверний семантичний HTML сторінки у #seo-content ────────────────
 // Ціна в грн: UAH як є, EUR конвертуємо (як SEO-схема/сайт).
+// Ціна, за якою товар реально продається: акційна, якщо sale_price > 0 і менша за звичайну —
+// дзеркало src/utils/sale.js → effectivePrice (інакше розмітка/SSR показували б не ту ціну, що сайт)
+function effPrice(row) {
+  const base = Number(row.price), sale = Number(row.sale_price)
+  return sale > 0 && (!base || sale < base) ? sale : base
+}
 function priceToUah(price, currency, eurRate) {
   if (!(price && Number(price) > 0)) return null
   return currency === 'EUR' && eurRate ? Math.round(Number(price) * eurRate) : Math.round(Number(price))
@@ -859,7 +865,7 @@ function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
   const catName = cm ? pickL(lang, cm.name, cm.nameEn, cm.nameRo) : cat
   const catUrl = `${base}/catalog/${encodeURIComponent(cat)}`
   const img = absImg(row.image)
-  const priceUah = priceToUah(row.price, row.currency, eurRate)
+  const priceUah = priceToUah(effPrice(row), row.currency, eurRate)
 
   let specsHtml = ''
   try {
@@ -876,7 +882,7 @@ function buildProductSeoContent(row, loc, { cat, lang, eurRate, related }) {
   if (related && related.length) {
     relHtml = `<h2>${en ? 'Related products' : 'Схожі товари'}</h2><ul>${
       related.map(r => {
-        const rp = priceToUah(r.price, r.currency, eurRate)
+        const rp = priceToUah(effPrice(r), r.currency, eurRate)
         return `<li><a href="${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(r.slug)}">${esc(r.name)}</a>${rp ? ` — ${rp} ${en ? 'UAH' : 'грн'}` : ''}</li>`
       }).join('')
     }</ul>`
@@ -907,7 +913,7 @@ function buildCategorySeoContent(cm, { cat, lang, products, eurRate }) {
   const breadcrumb = `<nav aria-label="${en ? 'Breadcrumb' : 'Хлібні крихти'}"><a href="${base}/">${en ? 'Home' : 'Головна'}</a> / <a href="${base}/catalog">${en ? 'Catalog' : 'Каталог'}</a></nav>`
   const grid = products && products.length
     ? `<ul>${products.map(p => {
-        const pu = priceToUah(p.price, p.currency, eurRate)
+        const pu = priceToUah(effPrice(p), p.currency, eurRate)
         return `<li><a href="${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(p.slug)}">${esc(p.name)}</a>${pu ? ` — ${pu} ${en ? 'UAH' : 'грн'}` : ''}</li>`
       }).join('')}</ul>`
     : ''
@@ -1095,7 +1101,7 @@ function handleProduct(lang) {
   return async (req, res, next) => {
     try {
       const findRow = slug => _db.prepare(
-        'SELECT name, image, images, sku, price, currency, in_stock, category_slug, specs, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
+        'SELECT name, image, images, sku, price, sale_price, currency, in_stock, category_slug, specs, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
       ).get(slug)
       const alias = PRODUCT_SLUG_ALIASES[req.params.slug]
       const row = findRow(alias || req.params.slug)
@@ -1125,7 +1131,7 @@ function handleProduct(lang) {
       html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
       // SSR-lite: повний семантичний HTML товару в #seo-content (бачать краулери)
       const related = _db.prepare(
-        'SELECT name, slug, price, currency FROM products WHERE category_slug = ? AND slug != ? AND is_visible = 1 ORDER BY name LIMIT 4'
+        'SELECT name, slug, price, sale_price, currency FROM products WHERE category_slug = ? AND slug != ? AND is_visible = 1 ORDER BY name LIMIT 4'
       ).all(row.category_slug, req.params.slug)
       const seoBlock = buildProductSeoContent(row, loc, { cat: req.params.cat, lang, eurRate, related })
       html = html.replace('<div id="seo-content"></div>', seoBlock)
@@ -1244,7 +1250,7 @@ function handleCategory(lang) {
       }
       // SSR-lite: сітка товарів категорії в #seo-content
       const products = _db.prepare(
-        'SELECT name, slug, price, currency FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name'
+        'SELECT name, slug, price, sale_price, currency FROM products WHERE category_slug = ? AND is_visible = 1 ORDER BY name'
       ).all(req.params.cat)
       const eurRate = await getEurRate()
       html = html.replace('<div id="seo-content"></div>', buildCategorySeoContent(cm, { cat: req.params.cat, lang, products, eurRate }))
