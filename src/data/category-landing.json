@@ -3,7 +3,8 @@
   "shafa-kolektorna": {
     "uk": {
       "seo": {
-        "title": "Колекторна шафа для теплої підлоги — купити в Termojet",
+        "title": "Купити колекторну шафу від {min} | Termojet",
+        "titleFallback": "Колекторна шафа для теплої підлоги — купити в Termojet",
         "description": "Внутрішні (вбудовані) та зовнішні шафи колекторні на 2–16 виходів. 7 типорозмірів, таблиця розмірів, власне виробництво з 2002 року. Доставка по Україні."
       },
       "h1": "Колекторна шафа для теплої підлоги",
@@ -120,7 +121,8 @@
     },
     "en": {
       "seo": {
-        "title": "Manifold Cabinet for Underfloor Heating — Buy at Termojet",
+        "title": "Buy manifold cabinet from {min} | Termojet",
+        "titleFallback": "Manifold Cabinet for Underfloor Heating — Buy at Termojet",
         "description": "Flush-mounted and surface-mounted manifold cabinets for 2–16 outlets. 7 sizes, size table, own production since 2002. Delivery across Ukraine."
       },
       "h1": "Manifold Cabinet for Underfloor Heating",
@@ -237,7 +239,8 @@
     },
     "pl": {
       "seo": {
-        "title": "Szafka do rozdzielacza podłogówki — kup w Termojet",
+        "title": "Kup szafkę rozdzielacza od {min} | Termojet",
+        "titleFallback": "Szafka do rozdzielacza podłogówki — kup w Termojet",
         "description": "Szafki podtynkowe i natynkowe do rozdzielaczy na 2–16 wyjść. 7 rozmiarów, tabela wymiarów, własna produkcja od 2002 roku. Dostawa na terenie Ukrainy."
       },
       "h1": "Szafka do rozdzielacza ogrzewania podłogowego",
@@ -354,7 +357,8 @@
     },
     "fr": {
       "seo": {
-        "title": "Coffret de collecteur plancher chauffant — Termojet",
+        "title": "Acheter un coffret de collecteur dès {min} | Termojet",
+        "titleFallback": "Coffret de collecteur plancher chauffant — Termojet",
         "description": "Coffrets de collecteur encastrés et en saillie pour 2 à 16 sorties. 7 tailles, tableau des dimensions, fabrication propre depuis 2002. Livraison en Ukraine."
       },
       "h1": "Coffret de collecteur pour plancher chauffant",
@@ -471,7 +475,8 @@
     },
     "de": {
       "seo": {
-        "title": "Verteilerschrank für Fußbodenheizung — bei Termojet kaufen",
+        "title": "Verteilerschrank kaufen ab {min} | Termojet",
+        "titleFallback": "Verteilerschrank für Fußbodenheizung — bei Termojet kaufen",
         "description": "Unterputz- und Aufputz-Verteilerschränke für 2–16 Abgänge. 7 Größen, Maßtabelle, eigene Fertigung seit 2002. Lieferung in die gesamte Ukraine."
       },
       "h1": "Verteilerschrank für Fußbodenheizung",
@@ -588,7 +593,8 @@
     },
     "ro": {
       "seo": {
-        "title": "Cutie distribuitor încălzire în pardoseală — Termojet",
+        "title": "Cumpără cutie pentru distribuitor de la {min} | Termojet",
+        "titleFallback": "Cutie distribuitor încălzire în pardoseală — Termojet",
         "description": "Cutii încastrate și aplicate pentru distribuitoare cu 2–16 ieșiri. 7 dimensiuni, tabel de dimensiuni, producție proprie din 2002. Livrare în toată Ucraina."
       },
       "h1": "Cutie pentru distribuitor de încălzire în pardoseală",
