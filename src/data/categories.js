@@ -221,6 +221,20 @@ export const CATEGORIES = [
     color: '#0891b2',
   },
   {
+    // Окрема категорія під ключі «євроконус» і «байпас для опалення» (SEO, 16.10.2026): сюди
+    // перенесено євроконуси TJ-EC-162/202 і байпас TJ-B-1 із «Системи підлогового опалення».
+    // SEO-шаблон: src/data/category-landing.json.
+    id: 'floor-fittings',
+    slug: 'yevrokonusy-ta-bajpas',
+    parent: 'kolektory-pidloha',
+    icon: 'Wrench',
+    image: `${BASE}/2023/08/dsc_0519-scaled.jpg`,
+    name: { uk: 'Євроконуси та байпас', en: 'Eurocones and Bypass', pl: 'Eurokonusy i bajpas', fr: 'Eurocônes et by-pass', de: 'Eurokonus und Bypass', ro: 'Euroconuri și bypass' },
+    desc: { uk: 'Євроконуси Termojet 16×2.0 та 20×2.0 і байпас для колектора теплої підлоги', en: 'Termojet 16×2.0 and 20×2.0 eurocones and a bypass for underfloor heating manifolds', pl: 'Eurokonusy Termojet 16×2.0 i 20×2.0 oraz bajpas do rozdzielacza ogrzewania podłogowego', fr: 'Raccords eurocône Termojet 16×2.0 et 20×2.0 et by-pass pour collecteur de plancher chauffant', de: 'Termojet Eurokonus 16×2.0 und 20×2.0 und Bypass für Fußbodenheizungsverteiler', ro: 'Euroconuri Termojet 16×2.0 și 20×2.0 și bypass pentru distribuitorul de încălzire prin pardoseală' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
+    color: '#0891b2',
+  },
+  {
     // Окрема категорія під пошуковий запит «змішувальний вузол для теплої підлоги»
     // (рішення 02.10.2026): сюди перенесено вузли TJ-MU з «Системи підлогового опалення».
     // parent — з 16.10.2026, коли сторінка отримала SEO-шаблон (хлібні крихти як у макеті).

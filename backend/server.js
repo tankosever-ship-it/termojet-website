@@ -696,6 +696,14 @@ const CATEGORY_META = {
     nameEn: 'Underfloor Heating Manifold', descEn: 'Termojet stainless steel AISI 304 manifolds with flow meters for 2–15 underfloor heating circuits',
     nameRo: 'Distribuitor pentru încălzire prin pardoseală', descRo: 'Distribuitoare Termojet din oțel inoxidabil AISI 304 cu debitmetre pentru 2–15 circuite de încălzire prin pardoseală',
   },
+  // Окрема категорія під ключі «євроконус» / «байпас для опалення» (SEO, 16.10.2026).
+  // title/description/H1 — з SEO-шаблону (src/data/category-landing.json).
+  'yevrokonusy-ta-bajpas': {
+    parent: 'kolektory-pidloha',
+    name: 'Євроконуси та байпас', desc: 'Євроконуси Termojet 16×2.0 та 20×2.0 і байпас для колектора теплої підлоги',
+    nameEn: 'Eurocones and Bypass', descEn: 'Termojet 16×2.0 and 20×2.0 eurocones and a bypass for underfloor heating manifolds',
+    nameRo: 'Euroconuri și bypass', descRo: 'Euroconuri Termojet 16×2.0 și 20×2.0 și bypass pentru distribuitorul de încălzire prin pardoseală',
+  },
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': {
     parent: 'kolektory-pidloha',
     name: 'Змішувальний вузол для теплої підлоги', desc: 'Насосно-змішувальні вузли Termojet TJ-MU для колектора теплої підлоги: знижують температуру теплоносія від котла чи теплового насоса до 20–60 °C. Циркуляційний насос у комплект не входить',

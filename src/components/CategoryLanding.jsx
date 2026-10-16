@@ -46,7 +46,8 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
   const quick = cfg.quick
   // Колонки параметрів таблиці моделей: cols.params (кілька) або cols.param (одна)
   const modelParamCols = cfg.models ? (cfg.models.cols.params || [cfg.models.cols.param]) : []
-  const multi = data.groups.length > 1
+  // tabs: false — кілька груп під власними H2, але без карток типів і вкладок (євроконуси та байпас)
+  const multi = data.groups.length > 1 && cfg.tabs !== false
 
   return (
     <div className="space-y-10">

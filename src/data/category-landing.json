@@ -1,5 +1,5 @@
 {
-  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок.",
+  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок. tabs: false — кілька груп під власними H2 без карток типів і вкладок.",
   "shafa-kolektorna": {
     "uk": {
       "seo": {
@@ -72,10 +72,7 @@
             "sub": "Насосно-змішувальні вузли"
           },
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
+            "category": "yevrokonusy-ta-bajpas",
             "title": "Євроконуси та байпас",
             "sub": "Комплектуючі для колектора"
           }
@@ -192,11 +189,8 @@
             "sub": "Pump mixing units"
           },
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
-            "title": "Eurocones and bypass",
+            "category": "yevrokonusy-ta-bajpas",
+            "title": "Eurocones and Bypass",
             "sub": "Manifold accessories"
           }
         ]
@@ -312,11 +306,8 @@
             "sub": "Węzły pompowo-mieszające"
           },
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
-            "title": "Eurokonusy i bypass",
+            "category": "yevrokonusy-ta-bajpas",
+            "title": "Eurokonusy i bajpas",
             "sub": "Akcesoria do rozdzielacza"
           }
         ]
@@ -432,10 +423,7 @@
             "sub": "Groupes de pompage et de mélange"
           },
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
+            "category": "yevrokonusy-ta-bajpas",
             "title": "Eurocônes et by-pass",
             "sub": "Accessoires pour collecteur"
           }
@@ -552,11 +540,8 @@
             "sub": "Pumpen-Mischeinheiten"
           },
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
-            "title": "Eurokonen und Bypass",
+            "category": "yevrokonusy-ta-bajpas",
+            "title": "Eurokonus und Bypass",
             "sub": "Verteilerzubehör"
           }
         ]
@@ -672,10 +657,7 @@
             "sub": "Grupuri de pompare și amestec"
           },
           {
-            "category": "kolektory-pidloha",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
+            "category": "yevrokonusy-ta-bajpas",
             "title": "Euroconuri și bypass",
             "sub": "Accesorii pentru distribuitor"
           }
@@ -777,11 +759,7 @@
             "sub": "Внутрішні та зовнішні, від {min}"
           },
           {
-            "category": "kolektory-pidloha",
-            "match": "Євроконус",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
+            "category": "yevrokonusy-ta-bajpas",
             "title": "Євроконуси та байпас",
             "sub": "Комплектуючі для колектора · від {min}"
           }
@@ -881,12 +859,8 @@
             "sub": "Flush-mounted and surface-mounted, from {min}"
           },
           {
-            "category": "kolektory-pidloha",
-            "match": "Євроконус",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
-            "title": "Eurocones and bypass",
+            "category": "yevrokonusy-ta-bajpas",
+            "title": "Eurocones and Bypass",
             "sub": "Manifold accessories · from {min}"
           }
         ]
@@ -985,12 +959,8 @@
             "sub": "Podtynkowe i natynkowe, od {min}"
           },
           {
-            "category": "kolektory-pidloha",
-            "match": "Євроконус",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
-            "title": "Eurokonusy i bypass",
+            "category": "yevrokonusy-ta-bajpas",
+            "title": "Eurokonusy i bajpas",
             "sub": "Akcesoria do rozdzielacza · od {min}"
           }
         ]
@@ -1089,11 +1059,7 @@
             "sub": "Encastrés et en saillie, à partir de {min}"
           },
           {
-            "category": "kolektory-pidloha",
-            "match": "Євроконус",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
+            "category": "yevrokonusy-ta-bajpas",
             "title": "Eurocônes et by-pass",
             "sub": "Accessoires pour collecteur · à partir de {min}"
           }
@@ -1193,12 +1159,8 @@
             "sub": "Unterputz und Aufputz, ab {min}"
           },
           {
-            "category": "kolektory-pidloha",
-            "match": "Євроконус",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
-            "title": "Eurokonen und Bypass",
+            "category": "yevrokonusy-ta-bajpas",
+            "title": "Eurokonus und Bypass",
             "sub": "Verteilerzubehör · ab {min}"
           }
         ]
@@ -1297,11 +1259,7 @@
             "sub": "Încastrate și aplicate, de la {min}"
           },
           {
-            "category": "kolektory-pidloha",
-            "match": "Євроконус",
-            "filter": {
-              "prodtype": "Комплектуючі"
-            },
+            "category": "yevrokonusy-ta-bajpas",
             "title": "Euroconuri și bypass",
             "sub": "Accesorii pentru distribuitor · de la {min}"
           }
@@ -2187,6 +2145,458 @@
             "sub": "Kvs 3,5 m³/h · TJ-MU-40А"
           }
         ]
+      }
+    }
+  },
+  "yevrokonusy-ta-bajpas": {
+    "uk": {
+      "seo": {
+        "title": "Євроконуси та байпас для опалення — купити в Termojet",
+        "description": "Євроконуси 16×2.0 та 20×2.0 і байпас для колектора теплої підлоги. Власне виробництво з 2002 року, усі моделі в наявності. Доставка по Україні."
+      },
+      "h1": "Євроконуси та байпас для колектора",
+      "intro": "Комплектуючі для підключення колектора теплої підлоги. Євроконуси Termojet з'єднують труби PEX-AL, PE-AL, PE-RT і PERT-AL з колектором, байпас на опалення зберігає циркуляцію теплоносія, коли контури перекриті. Ціна від {min}, усі товари в наявності.",
+      "tabs": false,
+      "groups": [
+        {
+          "key": "ec",
+          "match": "Євроконус",
+          "h2": "Євроконус",
+          "text": "Латунні обтискні фітинги для роз'ємного підключення труби до колектора. Розміри під трубу 16×2.0 та 20×2.0 мм, різьба 3/4″."
+        },
+        {
+          "key": "bp",
+          "match": "Байпас",
+          "h2": "Байпас для опалення",
+          "text": "Байпас для колектора зберігає циркуляцію теплоносія навіть при повністю перекритих петлях і захищає насосно-змішувальний вузол і насос котла від перевантажень."
+        }
+      ],
+      "related": {
+        "h2": "Що потрібно разом із комплектуючими",
+        "items": [
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Колектор для теплої підлоги",
+            "sub": "З витратомірами · від {min}"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Змішувальний вузол для теплої підлоги",
+            "sub": "TJ-MU · від {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Колекторна шафа",
+            "sub": "Внутрішні та зовнішні, від {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Питання про євроконуси та байпас",
+        "items": [
+          {
+            "q": "Що таке байпас в системі опалення?",
+            "a": "Байпас — обвідна лінія між подачею та зворотом. У колекторі теплої підлоги він зберігає циркуляцію теплоносія, коли всі петлі перекриті, і захищає насосно-змішувальний вузол від перевантажень."
+          },
+          {
+            "q": "Для чого потрібен євроконус?",
+            "a": "Євроконус — обтискний фітинг для роз'ємного з'єднання труби з колектором. Підходить для труб PEX-AL, PE-AL, PE-RT і PERT-AL."
+          },
+          {
+            "q": "Який євроконус обрати?",
+            "a": "За діаметром труби: TJ-EC-162 — для труби 16×2.0 мм, TJ-EC-202 — для труби 20×2.0 мм. Обидва мають різьбу 3/4″."
+          },
+          {
+            "q": "Чи є доставка по Україні?",
+            "a": "Так. Termojet — власне виробництво з 2002 року, доставляємо по всій Україні. Деталі — на сторінці «Доставка і оплата»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "моделей",
+        "from": "від",
+        "all": "Всі",
+        "found": "Знайдено",
+        "sortSize": "За замовчуванням",
+        "sortPriceAsc": "Ціна: від низької",
+        "sortPriceDesc": "Ціна: від високої",
+        "price": "Ціна",
+        "empty": "Немає моделей за вибраними фільтрами"
+      }
+    },
+    "en": {
+      "seo": {
+        "title": "Eurocones and Bypass for Heating — Buy from Termojet",
+        "description": "Eurocones 16×2.0 and 20×2.0 and a bypass for underfloor heating manifolds. Own production since 2002, all models in stock. Delivery across Ukraine."
+      },
+      "h1": "Eurocones and Bypass for Manifolds",
+      "intro": "Components for connecting an underfloor heating manifold. Termojet eurocones connect PEX-AL, PE-AL, PE-RT and PERT-AL pipes to the manifold, and the heating bypass maintains coolant circulation when the circuits are closed. Prices from {min}, all items in stock.",
+      "tabs": false,
+      "groups": [
+        {
+          "key": "ec",
+          "match": "Євроконус",
+          "h2": "Eurocone",
+          "text": "Brass compression fittings for a detachable pipe-to-manifold connection. Sizes for 16×2.0 and 20×2.0 mm pipe, 3/4″ thread."
+        },
+        {
+          "key": "bp",
+          "match": "Байпас",
+          "h2": "Heating bypass",
+          "text": "A manifold bypass maintains coolant circulation even when all loops are fully closed and protects the pump mixing unit and the boiler pump from overload."
+        }
+      ],
+      "related": {
+        "h2": "What you need together with the components",
+        "items": [
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Underfloor Heating Manifold",
+            "sub": "With flow meters, from {min}"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Underfloor Heating Mixing Unit",
+            "sub": "TJ-MU · from {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Manifold Cabinet",
+            "sub": "Flush-mounted and surface-mounted, from {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Questions about eurocones and bypass",
+        "items": [
+          {
+            "q": "What is a bypass in a heating system?",
+            "a": "A bypass is a line connecting the supply and return. In an underfloor heating manifold it maintains coolant circulation when all loops are closed and protects the pump mixing unit from overload."
+          },
+          {
+            "q": "What is a eurocone used for?",
+            "a": "A eurocone is a compression fitting for a detachable connection of a pipe to a manifold. It suits PEX-AL, PE-AL, PE-RT and PERT-AL pipes."
+          },
+          {
+            "q": "Which eurocone should I choose?",
+            "a": "By pipe diameter: TJ-EC-162 for 16×2.0 mm pipe, TJ-EC-202 for 20×2.0 mm pipe. Both have a 3/4″ thread."
+          },
+          {
+            "q": "Do you deliver across Ukraine?",
+            "a": "Yes. Termojet has been manufacturing its own products since 2002, and we deliver throughout Ukraine. Details are on the «Delivery and payment» page."
+          }
+        ]
+      },
+      "ui": {
+        "models": "models",
+        "from": "from",
+        "all": "All",
+        "found": "Found",
+        "sortSize": "Default order",
+        "sortPriceAsc": "Price: low to high",
+        "sortPriceDesc": "Price: high to low",
+        "price": "Price",
+        "empty": "No models match the selected filters"
+      }
+    },
+    "pl": {
+      "seo": {
+        "title": "Eurokonusy i bajpas do ogrzewania — kup w Termojet",
+        "description": "Eurokonusy 16×2.0 i 20×2.0 oraz bajpas do rozdzielacza ogrzewania podłogowego. Własna produkcja od 2002 roku, wszystkie modele dostępne. Dostawa po Ukrainie."
+      },
+      "h1": "Eurokonusy i bajpas do rozdzielacza",
+      "intro": "Elementy do podłączenia rozdzielacza ogrzewania podłogowego. Złączki eurokonus Termojet łączą rury PEX-AL, PE-AL, PE-RT i PERT-AL z rozdzielaczem, a bajpas ogrzewania utrzymuje obieg czynnika, gdy obwody są zamknięte. Cena od {min}, wszystkie produkty dostępne.",
+      "tabs": false,
+      "groups": [
+        {
+          "key": "ec",
+          "match": "Євроконус",
+          "h2": "Eurokonus",
+          "text": "Mosiężne złączki zaciskowe do rozłącznego podłączenia rury do rozdzielacza. Rozmiary do rury 16×2.0 i 20×2.0 mm, gwint 3/4″."
+        },
+        {
+          "key": "bp",
+          "match": "Байпас",
+          "h2": "Bajpas do ogrzewania",
+          "text": "Bajpas rozdzielacza utrzymuje obieg czynnika grzewczego nawet przy całkowicie zamkniętych pętlach i chroni węzeł pompowo-mieszający oraz pompę kotła przed przeciążeniem."
+        }
+      ],
+      "related": {
+        "h2": "Co jest potrzebne razem z akcesoriami",
+        "items": [
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Rozdzielacz do ogrzewania podłogowego",
+            "sub": "Z przepływomierzami, od {min}"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Węzeł mieszający do ogrzewania podłogowego",
+            "sub": "TJ-MU · od {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Szafka rozdzielacza",
+            "sub": "Podtynkowe i natynkowe, od {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Pytania o eurokonusy i bajpas",
+        "items": [
+          {
+            "q": "Czym jest bajpas w instalacji grzewczej?",
+            "a": "Bajpas to linia obejściowa między zasilaniem a powrotem. W rozdzielaczu ogrzewania podłogowego utrzymuje obieg czynnika, gdy wszystkie pętle są zamknięte, i chroni węzeł pompowo-mieszający przed przeciążeniem."
+          },
+          {
+            "q": "Do czego służy eurokonus?",
+            "a": "Eurokonus to złączka zaciskowa do rozłącznego połączenia rury z rozdzielaczem. Pasuje do rur PEX-AL, PE-AL, PE-RT i PERT-AL."
+          },
+          {
+            "q": "Jaki eurokonus wybrać?",
+            "a": "Według średnicy rury: TJ-EC-162 do rury 16×2.0 mm, TJ-EC-202 do rury 20×2.0 mm. Oba mają gwint 3/4″."
+          },
+          {
+            "q": "Czy dostarczacie towar po całej Ukrainie?",
+            "a": "Tak. Termojet to własna produkcja od 2002 roku, dostarczamy po całej Ukrainie. Szczegóły na stronie «Dostawa i płatność»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modeli",
+        "from": "od",
+        "all": "Wszystkie",
+        "found": "Znaleziono",
+        "sortSize": "Domyślnie",
+        "sortPriceAsc": "Cena: rosnąco",
+        "sortPriceDesc": "Cena: malejąco",
+        "price": "Cena",
+        "empty": "Brak modeli dla wybranych filtrów"
+      }
+    },
+    "fr": {
+      "seo": {
+        "title": "Eurocônes et by-pass pour chauffage — achat chez Termojet",
+        "description": "Raccords eurocône 16×2.0 et 20×2.0 et by-pass pour collecteur de plancher chauffant. Fabrication propre depuis 2002, tous les modèles en stock. Livraison en Ukraine."
+      },
+      "h1": "Eurocônes et by-pass pour collecteur",
+      "intro": "Composants pour le raccordement d'un collecteur de plancher chauffant. Les raccords eurocône Termojet relient les tubes PEX-AL, PE-AL, PE-RT et PERT-AL au collecteur, et le by-pass de chauffage maintient la circulation du fluide lorsque les circuits sont fermés. Prix à partir de {min}, tous les articles en stock.",
+      "tabs": false,
+      "groups": [
+        {
+          "key": "ec",
+          "match": "Євроконус",
+          "h2": "Eurocône",
+          "text": "Raccords à serrage en laiton pour le raccordement démontable du tube au collecteur. Tailles pour tube 16×2.0 et 20×2.0 mm, filetage 3/4″."
+        },
+        {
+          "key": "bp",
+          "match": "Байпас",
+          "h2": "By-pass de chauffage",
+          "text": "Le by-pass du collecteur maintient la circulation du fluide même lorsque toutes les boucles sont fermées et protège le groupe de mélange à pompe et le circulateur de la chaudière contre la surcharge."
+        }
+      ],
+      "related": {
+        "h2": "Ce qu'il faut avec ces composants",
+        "items": [
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Collecteur pour plancher chauffant",
+            "sub": "Avec débitmètres, à partir de {min}"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Groupe de mélange pour plancher chauffant",
+            "sub": "TJ-MU · à partir de {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Coffret de collecteur",
+            "sub": "Encastrés et en saillie, à partir de {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Questions sur les eurocônes et le by-pass",
+        "items": [
+          {
+            "q": "Qu'est-ce qu'un by-pass dans un système de chauffage ?",
+            "a": "Le by-pass est une conduite de dérivation entre le départ et le retour. Dans un collecteur de plancher chauffant, il maintient la circulation du fluide lorsque toutes les boucles sont fermées et protège le groupe de mélange à pompe contre la surcharge."
+          },
+          {
+            "q": "À quoi sert un raccord eurocône ?",
+            "a": "Le raccord eurocône est un raccord à serrage pour la connexion démontable d'un tube au collecteur. Il convient aux tubes PEX-AL, PE-AL, PE-RT et PERT-AL."
+          },
+          {
+            "q": "Quel eurocône choisir ?",
+            "a": "Selon le diamètre du tube : TJ-EC-162 pour un tube 16×2.0 mm, TJ-EC-202 pour un tube 20×2.0 mm. Les deux ont un filetage 3/4″."
+          },
+          {
+            "q": "Livrez-vous dans toute l'Ukraine ?",
+            "a": "Oui. Termojet est une fabrication propre depuis 2002, nous livrons dans toute l'Ukraine. Détails sur la page « Livraison et paiement »."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modèles",
+        "from": "à partir de",
+        "all": "Tous",
+        "found": "Trouvés",
+        "sortSize": "Par défaut",
+        "sortPriceAsc": "Prix croissant",
+        "sortPriceDesc": "Prix décroissant",
+        "price": "Prix",
+        "empty": "Aucun modèle ne correspond aux filtres"
+      }
+    },
+    "de": {
+      "seo": {
+        "title": "Eurokonus und Bypass für Heizung — kaufen bei Termojet",
+        "description": "Eurokonus 16×2.0 und 20×2.0 sowie Bypass für Fußbodenheizungsverteiler. Eigene Fertigung seit 2002, alle Modelle lieferbar. Lieferung in die gesamte Ukraine."
+      },
+      "h1": "Eurokonus und Bypass für den Verteiler",
+      "intro": "Zubehör für den Anschluss eines Fußbodenheizungsverteilers. Termojet-Eurokonus-Verschraubungen verbinden PEX-AL-, PE-AL-, PE-RT- und PERT-AL-Rohre mit dem Verteiler, der Heizungs-Bypass erhält die Zirkulation des Heizmediums, wenn die Kreise geschlossen sind. Preis ab {min}, alle Artikel auf Lager.",
+      "tabs": false,
+      "groups": [
+        {
+          "key": "ec",
+          "match": "Євроконус",
+          "h2": "Eurokonus",
+          "text": "Messing-Klemmverschraubungen für den lösbaren Anschluss des Rohrs an den Verteiler. Größen für Rohr 16×2.0 und 20×2.0 mm, Gewinde 3/4″."
+        },
+        {
+          "key": "bp",
+          "match": "Байпас",
+          "h2": "Heizungs-Bypass",
+          "text": "Der Verteiler-Bypass erhält die Zirkulation des Heizmediums auch bei vollständig geschlossenen Heizkreisen und schützt die Pumpen-Mischeinheit sowie die Kesselpumpe vor Überlastung."
+        }
+      ],
+      "related": {
+        "h2": "Was zusammen mit dem Zubehör benötigt wird",
+        "items": [
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Fußbodenheizungsverteiler",
+            "sub": "Mit Durchflussmessern, ab {min}"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Mischeinheit für Fußbodenheizung",
+            "sub": "TJ-MU · ab {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Verteilerschrank",
+            "sub": "Unterputz und Aufputz, ab {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Fragen zu Eurokonus und Bypass",
+        "items": [
+          {
+            "q": "Was ist ein Bypass in einer Heizungsanlage?",
+            "a": "Ein Bypass ist eine Umgehungsleitung zwischen Vor- und Rücklauf. Im Fußbodenheizungsverteiler erhält er die Zirkulation des Heizmediums, wenn alle Heizkreise geschlossen sind, und schützt die Pumpen-Mischeinheit vor Überlastung."
+          },
+          {
+            "q": "Wofür wird ein Eurokonus benötigt?",
+            "a": "Der Eurokonus ist eine Klemmverschraubung für den lösbaren Anschluss eines Rohrs an den Verteiler. Er passt für PEX-AL-, PE-AL-, PE-RT- und PERT-AL-Rohre."
+          },
+          {
+            "q": "Welchen Eurokonus soll ich wählen?",
+            "a": "Nach dem Rohrdurchmesser: TJ-EC-162 für Rohr 16×2.0 mm, TJ-EC-202 für Rohr 20×2.0 mm. Beide haben ein 3/4″-Gewinde."
+          },
+          {
+            "q": "Liefern Sie in die gesamte Ukraine?",
+            "a": "Ja. Termojet ist seit 2002 eigene Fertigung, wir liefern in die gesamte Ukraine. Details finden Sie auf der Seite «Lieferung und Zahlung»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "Modelle",
+        "from": "ab",
+        "all": "Alle",
+        "found": "Gefunden",
+        "sortSize": "Standardreihenfolge",
+        "sortPriceAsc": "Preis: aufsteigend",
+        "sortPriceDesc": "Preis: absteigend",
+        "price": "Preis",
+        "empty": "Keine Modelle für die gewählten Filter"
+      }
+    },
+    "ro": {
+      "seo": {
+        "title": "Euroconuri și bypass pentru încălzire — cumpără de la Termojet",
+        "description": "Euroconuri 16×2.0 și 20×2.0 și bypass pentru distribuitor de încălzire prin pardoseală. Producție proprie din 2002, toate modelele în stoc. Livrare în Ucraina."
+      },
+      "h1": "Euroconuri și bypass pentru distribuitor",
+      "intro": "Componente pentru conectarea distribuitorului de încălzire prin pardoseală. Euroconurile Termojet leagă conductele PEX-AL, PE-AL, PE-RT și PERT-AL de distribuitor, iar bypass-ul de încălzire menține circulația agentului termic când circuitele sunt închise. Preț de la {min}, toate produsele în stoc.",
+      "tabs": false,
+      "groups": [
+        {
+          "key": "ec",
+          "match": "Євроконус",
+          "h2": "Eurocon",
+          "text": "Fitinguri de strângere din alamă pentru conectarea demontabilă a conductei la distribuitor. Dimensiuni pentru conductă 16×2.0 și 20×2.0 mm, filet 3/4″."
+        },
+        {
+          "key": "bp",
+          "match": "Байпас",
+          "h2": "Bypass pentru încălzire",
+          "text": "Bypass-ul distribuitorului menține circulația agentului termic chiar și cu buclele complet închise și protejează grupul de pompare și amestec și pompa centralei de suprasarcină."
+        }
+      ],
+      "related": {
+        "h2": "Ce este necesar împreună cu componentele",
+        "items": [
+          {
+            "category": "kolektor-dlya-teployi-pidlogy",
+            "title": "Distribuitor pentru încălzire prin pardoseală",
+            "sub": "Cu debitmetre, de la {min}"
+          },
+          {
+            "category": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy",
+            "title": "Grup de amestec pentru încălzire prin pardoseală",
+            "sub": "TJ-MU · de la {min}"
+          },
+          {
+            "category": "shafa-kolektorna",
+            "title": "Cutie pentru distribuitor",
+            "sub": "Încastrate și aplicate, de la {min}"
+          }
+        ]
+      },
+      "faq": {
+        "h2": "Întrebări despre euroconuri și bypass",
+        "items": [
+          {
+            "q": "Ce este bypass-ul într-un sistem de încălzire?",
+            "a": "Bypass-ul este o conductă de ocolire între tur și retur. În distribuitorul de încălzire prin pardoseală menține circulația agentului termic când toate buclele sunt închise și protejează grupul de pompare și amestec de suprasarcină."
+          },
+          {
+            "q": "La ce folosește euroconul?",
+            "a": "Euroconul este un fiting de strângere pentru conectarea demontabilă a conductei la distribuitor. Se potrivește conductelor PEX-AL, PE-AL, PE-RT și PERT-AL."
+          },
+          {
+            "q": "Ce eurocon să aleg?",
+            "a": "După diametrul conductei: TJ-EC-162 pentru conductă 16×2.0 mm, TJ-EC-202 pentru conductă 20×2.0 mm. Ambele au filet 3/4″."
+          },
+          {
+            "q": "Livrați în toată Ucraina?",
+            "a": "Da. Termojet este producție proprie din 2002, livrăm în toată Ucraina. Detalii — pe pagina «Livrare și plată»."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modele",
+        "from": "de la",
+        "all": "Toate",
+        "found": "Găsite",
+        "sortSize": "Implicit",
+        "sortPriceAsc": "Preț crescător",
+        "sortPriceDesc": "Preț descrescător",
+        "price": "Preț",
+        "empty": "Niciun model pentru filtrele selectate"
       }
     }
   }

@@ -27,7 +27,8 @@ const CATEGORY_BANNERS = {
   'nasosni-hrupy': '/banner-nasosni-hrupy.webp',
   'kolektory-pidloha': '/banner-kolektory-pidloha.webp',
   'shafa-kolektorna': '/banner-shafa-kolektorna.webp',
-  'kolektor-dlya-teployi-pidlogy': '/banner-kolektory-pidloha.webp',   // на банері — саме колектор з витратомірами
+  'kolektor-dlya-teployi-pidlogy': '/banner-kolektory-pidloha.webp',
+  'yevrokonusy-ta-bajpas': '/banner-kolektory-pidloha.webp',   // на банері — саме колектор з витратомірами
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': '/banner-zmishuvalnyj-vuzol-dlya-teployi-pidlogy.webp',
   'nasosy': '/banner-nasosy.webp',
   'balansuval-klapany': '/banner-balansuval-klapany.webp',
@@ -536,7 +537,8 @@ const CATEGORY_FILTERS = {
         options: [
           // колектори з витратомірами — окрема категорія kolektor-dlya-teployi-pidlogy (16.10.2026)
           { label: 'Колектор з кранами',       test: p => /кранами/i.test(p.name) },
-          { label: 'Комплектуючі',             test: p => /Байпас|Євроконус|кріплення|накидн|Труба|Скоба|Плівка/i.test(p.name) },
+          // євроконуси й байпас — окрема категорія yevrokonusy-ta-bajpas (16.10.2026)
+          { label: 'Комплектуючі',             test: p => /кріплення|накидн|Труба|Скоба|Плівка/i.test(p.name) },
         ],
       },
     ],
@@ -595,6 +597,9 @@ const CATEGORY_FILTERS = {
       },
     ],
   },
+
+  // Євроконуси та байпас: 3 товари під двома H2 — сайдбар не потрібен (як у макеті), без повзунка ціни
+  'yevrokonusy-ta-bajpas': { noPrice: true, groups: [] },
 
   // Колекторна шафа: тип (мітки — ті самі, що в specs «Тип» і FILTER_LABEL_I18N); ціна — автоматично.
   // Вкладки SEO-шаблону (CategoryLanding) перемикають саме цю групу — див. groups[].filter у category-landing.json.
@@ -974,6 +979,7 @@ const BADGE_PREFERRED = {
   'kolektory-pidloha':          ['кількість виход', 'підключ', 'матеріал', 'витратомір', 'температура'],
   'balansuval-klapany':         ['dn', 'kvs', 'pn', 'функці'],
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': ['площа', 'kvs', 'температура'],
+  'yevrokonusy-ta-bajpas':      ['розмір труби', 'різьба', 'матеріал'],
   'termojet-mega':              ['dn', 'діаметр', 'розмір', ['qmax', '10'], ['qmax', '20'], 'kvs', 'gmax', 'підключ'],
   'rozprodazh':                 ['розмір', 'dn', 'діаметр'],
 }
