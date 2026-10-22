@@ -1,0 +1,1310 @@
+[
+  {
+    "sku": "84040393",
+    "lang": "uk",
+    "field": "description",
+    "from": "максимальна витрата 5,1 м³/год,",
+    "to": "максимальна витрата 2,1 м³/год (обмежена вбудованим гідравлічним сепаратором ГС-25),"
+  },
+  {
+    "sku": "84040393",
+    "lang": "en",
+    "field": "description",
+    "from": "maximum flow rate 5,1 m³/h,",
+    "to": "maximum flow rate 2,1 m³/h (limited by the built-in hydraulic separator GS-25),"
+  },
+  {
+    "sku": "84040393",
+    "lang": "pl",
+    "field": "description",
+    "from": "maksymalny przepływ 5,1 m³/h,",
+    "to": "maksymalny przepływ 2,1 m³/h (ograniczony przez wbudowany rozdzielacz hydrauliczny GS-25),"
+  },
+  {
+    "sku": "84040393",
+    "lang": "fr",
+    "field": "description",
+    "from": "débit maximal 5,1 m³/h,",
+    "to": "débit maximal 2,1 m³/h (limité par le séparateur hydraulique GS-25 intégré),"
+  },
+  {
+    "sku": "84040393",
+    "lang": "de",
+    "field": "description",
+    "from": "maximaler Volumenstrom 5,1 m³/h,",
+    "to": "maximaler Volumenstrom 2,1 m³/h (begrenzt durch die eingebaute Hydraulikweiche GS-25),"
+  },
+  {
+    "sku": "84040393",
+    "lang": "ro",
+    "field": "description",
+    "from": "debit maxim 5,1 m³/h,",
+    "to": "debit maxim 2,1 m³/h (limitat de separatorul hidraulic GS-25 integrat),"
+  },
+  {
+    "sku": "84040393",
+    "lang": "uk",
+    "spec": "Витрата макс.",
+    "value": "2.1 м³/год"
+  },
+  {
+    "sku": "84040393",
+    "lang": "en",
+    "spec": "Max. flow rate",
+    "value": "2.1 m³/h"
+  },
+  {
+    "sku": "84040393",
+    "lang": "pl",
+    "spec": "Maks. przepływ",
+    "value": "2.1 m³/h"
+  },
+  {
+    "sku": "84040393",
+    "lang": "fr",
+    "spec": "Débit max.",
+    "value": "2.1 m³/h"
+  },
+  {
+    "sku": "84040393",
+    "lang": "de",
+    "spec": "Max. Durchfluss",
+    "value": "2.1 m³/h"
+  },
+  {
+    "sku": "84040393",
+    "lang": "ro",
+    "spec": "Debit max.",
+    "value": "2.1 m³/h"
+  },
+  {
+    "sku": "84130670",
+    "lang": "uk",
+    "field": "description",
+    "from": "349×264",
+    "to": "346×264"
+  },
+  {
+    "sku": "84130670",
+    "lang": "uk",
+    "spec": "Висота",
+    "value": "346 мм"
+  },
+  {
+    "sku": "84130670",
+    "lang": "en",
+    "field": "description",
+    "from": "349×264",
+    "to": "346×264"
+  },
+  {
+    "sku": "84130670",
+    "lang": "en",
+    "spec": "Height",
+    "value": "346 mm"
+  },
+  {
+    "sku": "84130670",
+    "lang": "pl",
+    "field": "description",
+    "from": "349×264",
+    "to": "346×264"
+  },
+  {
+    "sku": "84130670",
+    "lang": "pl",
+    "spec": "Wysokość",
+    "value": "346 mm"
+  },
+  {
+    "sku": "84130670",
+    "lang": "fr",
+    "field": "description",
+    "from": "349×264",
+    "to": "346×264"
+  },
+  {
+    "sku": "84130670",
+    "lang": "fr",
+    "spec": "Hauteur",
+    "value": "346 mm"
+  },
+  {
+    "sku": "84130670",
+    "lang": "de",
+    "field": "description",
+    "from": "349×264",
+    "to": "346×264"
+  },
+  {
+    "sku": "84130670",
+    "lang": "de",
+    "spec": "Höhe",
+    "value": "346 mm"
+  },
+  {
+    "sku": "84130670",
+    "lang": "ro",
+    "field": "description",
+    "from": "349×264",
+    "to": "346×264"
+  },
+  {
+    "sku": "84130670",
+    "lang": "ro",
+    "spec": "Înălțime",
+    "value": "346 mm"
+  },
+  {
+    "sku": "84040262",
+    "lang": "uk",
+    "field": "description",
+    "from": "Це найпотужніша версія серед колекторів 2+1:",
+    "to": "Це потужна версія колекторів 2+1:"
+  },
+  {
+    "sku": "84040262",
+    "lang": "uk",
+    "field": "description",
+    "from": "завдяки збільшеному підключенню котла 1½″.",
+    "to": "завдяки збільшеному підключенню котла 1½″. Для ще більших навантажень є <a href=\"/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300\">К22Н.150(300)</a> — до 175 кВт при ΔT=10 °C і до 350 кВт при ΔT=20 °C."
+  },
+  {
+    "sku": "84040262",
+    "lang": "en",
+    "field": "description",
+    "from": "This is the most powerful version among 2+1 manifolds:",
+    "to": "This is a high-capacity version of the 2+1 manifolds:"
+  },
+  {
+    "sku": "84040262",
+    "lang": "en",
+    "field": "description",
+    "from": "thanks to the enlarged 1½″ boiler connection.",
+    "to": "thanks to the enlarged 1½″ boiler connection. For even higher loads there is the <a href=\"/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300\">K22N.150(300)</a> — up to 175 kW at ΔT=10 °C and up to 350 kW at ΔT=20 °C."
+  },
+  {
+    "sku": "84040262",
+    "lang": "pl",
+    "field": "description",
+    "from": "To najwydajniejsza wersja wśród kolektorów 2+1:",
+    "to": "To wydajna wersja kolektorów 2+1:"
+  },
+  {
+    "sku": "84040262",
+    "lang": "pl",
+    "field": "description",
+    "from": "dzięki powiększonemu przyłączu kotła 1½″.",
+    "to": "dzięki powiększonemu przyłączu kotła 1½″. Dla jeszcze większych obciążeń dostępny jest <a href=\"/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300\">K22N.150(300)</a> — do 175 kW przy ΔT=10 °C i do 350 kW przy ΔT=20 °C."
+  },
+  {
+    "sku": "84040262",
+    "lang": "fr",
+    "field": "description",
+    "from": "Il s'agit de la version la plus puissante parmi les collecteurs 2+1 :",
+    "to": "Il s'agit d'une version de forte puissance des collecteurs 2+1 :"
+  },
+  {
+    "sku": "84040262",
+    "lang": "fr",
+    "field": "description",
+    "from": "grâce au raccordement chaudière agrandi 1½″.",
+    "to": "grâce au raccordement chaudière agrandi 1½″. Pour des charges encore plus élevées, il existe le <a href=\"/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300\">K22N.150(300)</a> — jusqu'à 175 kW à ΔT=10 °C et jusqu'à 350 kW à ΔT=20 °C."
+  },
+  {
+    "sku": "84040262",
+    "lang": "de",
+    "field": "description",
+    "from": "Dies ist die leistungsstärkste Version unter den 2+1-Sammlern:",
+    "to": "Dies ist eine leistungsstarke Version unter den 2+1-Sammlern:"
+  },
+  {
+    "sku": "84040262",
+    "lang": "de",
+    "field": "description",
+    "from": "dank des vergrößerten Kesselanschlusses 1½″.",
+    "to": "dank des vergrößerten Kesselanschlusses 1½″. Für noch höhere Lasten gibt es den <a href=\"/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300\">K22N.150(300)</a> — bis zu 175 kW bei ΔT=10 °C und bis zu 350 kW bei ΔT=20 °C."
+  },
+  {
+    "sku": "84040262",
+    "lang": "ro",
+    "field": "description",
+    "from": "Este cea mai puternică versiune dintre colectoarele 2+1:",
+    "to": "Este o versiune de mare putere a colectoarelor 2+1:"
+  },
+  {
+    "sku": "84040262",
+    "lang": "ro",
+    "field": "description",
+    "from": "datorită racordării mărite a cazanului de 1½″.",
+    "to": "datorită racordării mărite a cazanului de 1½″. Pentru sarcini și mai mari există <a href=\"/catalog/rozpodilchi-kolektory/kolektor-k22n-150-300\">К22Н.150(300)</a> — până la 175 kW la ΔT=10 °C și până la 350 kW la ΔT=20 °C."
+  },
+  {
+    "sku": "84040031",
+    "lang": "uk",
+    "field": "description",
+    "from": "Менший типорозмір серії — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">ГС-33 до 1800 кВт</a>",
+    "to": "Більший типорозмір серії — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">ГС-33 до 900 кВт при ΔT=10 °C (до 1800 кВт при ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040033",
+    "lang": "uk",
+    "field": "description",
+    "from": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">ГС-31 до 920 кВт</a>",
+    "to": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">ГС-31 до 450 кВт при ΔT=10 °C (до 920 кВт при ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040031",
+    "lang": "en",
+    "field": "description",
+    "from": "The smaller size in the series — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 up to 1800 kW</a>",
+    "to": "The larger size in the series — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 up to 900 kW at ΔT=10 °C (up to 1800 kW at ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040033",
+    "lang": "en",
+    "field": "description",
+    "from": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 up to 920 kW</a>",
+    "to": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 up to 450 kW at ΔT=10 °C (up to 920 kW at ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040031",
+    "lang": "pl",
+    "field": "description",
+    "from": "Mniejszy rozmiar w serii — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 do 1800 kW</a>",
+    "to": "Większy rozmiar w serii — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 do 900 kW przy ΔT=10 °C (do 1800 kW przy ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040033",
+    "lang": "pl",
+    "field": "description",
+    "from": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 do 920 kW</a>",
+    "to": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 do 450 kW przy ΔT=10 °C (do 920 kW przy ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040031",
+    "lang": "fr",
+    "field": "description",
+    "from": "Le modèle de taille inférieure dans la série — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 jusqu'à 1800 kW</a>",
+    "to": "Le modèle de taille supérieure dans la série — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 jusqu'à 900 kW à ΔT=10 °C (jusqu'à 1800 kW à ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040033",
+    "lang": "fr",
+    "field": "description",
+    "from": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 jusqu'à 920 kW</a>",
+    "to": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 jusqu'à 450 kW à ΔT=10 °C (jusqu'à 920 kW à ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040031",
+    "lang": "de",
+    "field": "description",
+    "from": "Die kleinere Baugröße der Serie — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 bis 1800 kW</a>",
+    "to": "Die größere Baugröße der Serie — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">GS-33 bis 900 kW bei ΔT=10 °C (bis 1800 kW bei ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040033",
+    "lang": "de",
+    "field": "description",
+    "from": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 bis 920 kW</a>",
+    "to": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">GS-31 bis 450 kW bei ΔT=10 °C (bis 920 kW bei ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040031",
+    "lang": "ro",
+    "field": "description",
+    "from": "Dimensiunea mai mică din serie — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">ГС-33 până la 1800 kW</a>",
+    "to": "Dimensiunea mai mare din serie — <a href=\"/catalog/termojet-mega/gidrostrilka-gs-33\">ГС-33 până la 900 kW la ΔT=10 °C (până la 1800 kW la ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84040033",
+    "lang": "ro",
+    "field": "description",
+    "from": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">ГС-31 până la 920 kW</a>",
+    "to": "<a href=\"/catalog/termojet-mega/gidrostrilka-gs-31\">ГС-31 până la 450 kW la ΔT=10 °C (până la 920 kW la ΔT=20 °C)</a>"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "field": "meta_description",
+    "from": "60/120 кВт",
+    "to": "90/175 кВт"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "field": "description",
+    "from": "60 кВт",
+    "to": "90 кВт"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "field": "description",
+    "from": "120 кВт",
+    "to": "175 кВт"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "field": "description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "field": "meta_description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "spec": "Qmax: △Т=10°С",
+    "value": "90 кВт"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "spec": "Qmax: △Т=20°С",
+    "value": "175 кВт"
+  },
+  {
+    "sku": "84030620",
+    "lang": "uk",
+    "spec": "KVS",
+    "value": "25 м³/год"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "field": "meta_description",
+    "from": "60/120 kW",
+    "to": "90/175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "field": "description",
+    "from": "60 kW",
+    "to": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "field": "description",
+    "from": "120 kW",
+    "to": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "field": "description",
+    "from": "Kvs 19.1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "field": "meta_description",
+    "from": "Kvs 19.1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "en",
+    "spec": "KVS",
+    "value": "25 m³/h"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "field": "meta_description",
+    "from": "60/120 kW",
+    "to": "90/175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "field": "description",
+    "from": "60 kW",
+    "to": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "field": "description",
+    "from": "120 kW",
+    "to": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "field": "description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "field": "meta_description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "pl",
+    "spec": "KVS",
+    "value": "25 m³/h"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "field": "meta_description",
+    "from": "60/120 kW",
+    "to": "90/175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "field": "description",
+    "from": "60 kW",
+    "to": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "field": "description",
+    "from": "120 kW",
+    "to": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "field": "description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "field": "meta_description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "fr",
+    "spec": "KVS",
+    "value": "25 m³/h"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "field": "meta_description",
+    "from": "60/120 kW",
+    "to": "90/175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "field": "description",
+    "from": "60 kW",
+    "to": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "field": "description",
+    "from": "120 kW",
+    "to": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "field": "description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "field": "meta_description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "de",
+    "spec": "KVS",
+    "value": "25 m³/h"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "field": "meta_description",
+    "from": "60/120 kW",
+    "to": "90/175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "field": "description",
+    "from": "60 kW",
+    "to": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "field": "description",
+    "from": "120 kW",
+    "to": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "field": "description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "field": "meta_description",
+    "from": "Kvs 19,1",
+    "to": "Kvs 25"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "spec": "Qmax: △Т=10°С",
+    "value": "90 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "spec": "Qmax: △Т=20°С",
+    "value": "175 kW"
+  },
+  {
+    "sku": "84030620",
+    "lang": "ro",
+    "spec": "KVS",
+    "value": "25 m³/h"
+  },
+  {
+    "sku": "84030720",
+    "lang": "uk",
+    "field": "meta_description",
+    "from": "120/220 кВт",
+    "to": "130/265 кВт"
+  },
+  {
+    "sku": "84030720",
+    "lang": "uk",
+    "field": "description",
+    "from": "120 кВт",
+    "to": "130 кВт"
+  },
+  {
+    "sku": "84030720",
+    "lang": "uk",
+    "field": "description",
+    "from": "220 кВт",
+    "to": "265 кВт"
+  },
+  {
+    "sku": "84030720",
+    "lang": "uk",
+    "spec": "Qmax: △Т=10°С",
+    "value": "130 кВт"
+  },
+  {
+    "sku": "84030720",
+    "lang": "uk",
+    "spec": "Qmax: △Т=20°С",
+    "value": "265 кВт"
+  },
+  {
+    "sku": "84030720",
+    "lang": "en",
+    "field": "meta_description",
+    "from": "120/220 kW",
+    "to": "130/265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "en",
+    "field": "description",
+    "from": "120 kW",
+    "to": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "en",
+    "field": "description",
+    "from": "220 kW",
+    "to": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "en",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "en",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "pl",
+    "field": "meta_description",
+    "from": "120/220 kW",
+    "to": "130/265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "pl",
+    "field": "description",
+    "from": "120 kW",
+    "to": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "pl",
+    "field": "description",
+    "from": "220 kW",
+    "to": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "pl",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "pl",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "fr",
+    "field": "meta_description",
+    "from": "120/220 kW",
+    "to": "130/265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "fr",
+    "field": "description",
+    "from": "120 kW",
+    "to": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "fr",
+    "field": "description",
+    "from": "220 kW",
+    "to": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "fr",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "fr",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "de",
+    "field": "meta_description",
+    "from": "120/220 kW",
+    "to": "130/265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "de",
+    "field": "description",
+    "from": "120 kW",
+    "to": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "de",
+    "field": "description",
+    "from": "220 kW",
+    "to": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "de",
+    "spec": "Qmax: ΔT=10°C",
+    "value": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "de",
+    "spec": "Qmax: ΔT=20°C",
+    "value": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "ro",
+    "field": "meta_description",
+    "from": "120/220 kW",
+    "to": "130/265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "ro",
+    "field": "description",
+    "from": "120 kW",
+    "to": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "ro",
+    "field": "description",
+    "from": "220 kW",
+    "to": "265 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "ro",
+    "spec": "Qmax: △Т=10°С",
+    "value": "130 kW"
+  },
+  {
+    "sku": "84030720",
+    "lang": "ro",
+    "spec": "Qmax: △Т=20°С",
+    "value": "265 kW"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "uk",
+    "field": "description",
+    "from": "&lt; 35 дБ",
+    "to": "макс. 40 дБ (на відстані 100 мм)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "uk",
+    "spec": "Рівень шуму",
+    "value": "макс. 40 дБ (на відстані 100 мм)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "en",
+    "field": "description",
+    "from": "&lt; 35 dB",
+    "to": "max. 40 dB (at a distance of 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "en",
+    "spec": "Noise level",
+    "value": "max. 40 dB (at a distance of 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "pl",
+    "field": "description",
+    "from": "&lt; 35 dB",
+    "to": "maks. 40 dB (w odległości 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "pl",
+    "spec": "Poziom hałasu",
+    "value": "maks. 40 dB (w odległości 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "fr",
+    "field": "description",
+    "from": "&lt; 35 dB",
+    "to": "max. 40 dB (à 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "fr",
+    "spec": "Niveau sonore",
+    "value": "max. 40 dB (à une distance de 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "de",
+    "field": "description",
+    "from": "&lt; 35 dB",
+    "to": "max. 40 dB (bei 100 mm Abstand)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "de",
+    "spec": "Geräuschpegel",
+    "value": "max. 40 dB (im Abstand von 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "ro",
+    "field": "description",
+    "from": "&lt; 35 dB",
+    "to": "max. 40 dB (la distanța de 100 mm)"
+  },
+  {
+    "sku": "AQUAO405-3-230-060",
+    "lang": "ro",
+    "spec": "Nivel de zgomot",
+    "value": "max. 40 dB (la distanța de 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "uk",
+    "field": "description",
+    "from": "&gt; 35 дБ",
+    "to": "макс. 40 дБ (на відстані 100 мм)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "uk",
+    "spec": "Рівень шуму",
+    "value": "макс. 40 дБ (на відстані 100 мм)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "en",
+    "field": "description",
+    "from": "&gt; 35 dB",
+    "to": "max. 40 dB (at a distance of 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "en",
+    "spec": "Noise level",
+    "value": "max. 40 dB (at a distance of 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "pl",
+    "field": "description",
+    "from": "&gt; 35 dB",
+    "to": "maks. 40 dB (w odległości 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "pl",
+    "spec": "Poziom hałasu",
+    "value": "maks. 40 dB (w odległości 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "fr",
+    "field": "description",
+    "from": "&gt; 35 dB",
+    "to": "max. 40 dB (à 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "fr",
+    "spec": "Niveau sonore",
+    "value": "max. 40 dB (à une distance de 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "de",
+    "field": "description",
+    "from": "&gt; 35 dB",
+    "to": "max. 40 dB (bei 100 mm Abstand)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "de",
+    "spec": "Geräuschpegel",
+    "value": "max. 40 dB (im Abstand von 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "ro",
+    "field": "description",
+    "from": "&gt; 35 dB",
+    "to": "max. 40 dB (la distanța de 100 mm)"
+  },
+  {
+    "sku": "AQUA411-0-10-24",
+    "lang": "ro",
+    "spec": "Nivel de zgomot",
+    "value": "max. 40 dB (la distanța de 100 mm)"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "uk",
+    "field": "description",
+    "from": "Датчик — виносний, кабель 5 м.",
+    "to": "Датчик Ø5 мм на кабелі 0,5 м; кабель живлення з вилкою — 1,5 м."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "uk",
+    "field": "description",
+    "from": "<td>Кабель датчика</td><td>5 м (діаметр 4 мм)</td>",
+    "to": "<td>Кабель датчика</td><td>0,5 м (діаметр 5 мм)</td>"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "uk",
+    "field": "description",
+    "from": "Датчик 5 м — достатня довжина для монтажу на трубопроводі котла або контуру.",
+    "to": "Датчик Ø5 мм на кабелі 0,5 м — для монтажу на трубопроводі котла або контуру."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "uk",
+    "spec": "Довжина кабелю",
+    "value": "євровилка – 1,5 м, датчик – Ø5 мм на кабелі 0,5 м."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "en",
+    "field": "description",
+    "from": "Sensor — remote, cable 5 m.",
+    "to": "Sensor Ø5 mm on a 0.5 m cable; power cable with plug — 1.5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "en",
+    "field": "description",
+    "from": "<td>Sensor cable</td><td>5 m (diameter 4 mm)</td>",
+    "to": "<td>Sensor cable</td><td>0.5 m (diameter 5 mm)</td>"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "en",
+    "field": "description",
+    "from": "5 m sensor — sufficient length for installation on the boiler or circuit pipeline.",
+    "to": "Ø5 mm sensor on a 0.5 m cable — for installation on the boiler or circuit pipeline."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "en",
+    "spec": "Cable length",
+    "value": "Euro plug – 1,5 m, sensor – Ø5 mm on a 0,5 m cable."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "pl",
+    "field": "description",
+    "from": "Czujnik — zewnętrzny, kabel 5 m.",
+    "to": "Czujnik Ø5 mm na kablu 0,5 m; kabel zasilający z wtyczką — 1,5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "pl",
+    "field": "description",
+    "from": "<td>Kabel czujnika</td><td>5 m (średnica 4 mm)</td>",
+    "to": "<td>Kabel czujnika</td><td>0,5 m (średnica 5 mm)</td>"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "pl",
+    "field": "description",
+    "from": "Czujnik 5 m — wystarczająca długość do montażu na rurociągu kotła lub obwodu.",
+    "to": "Czujnik Ø5 mm na kablu 0,5 m — do montażu na rurociągu kotła lub obwodu."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "pl",
+    "spec": "Długość kabla",
+    "value": "Wtyczka europejska – 1,5 m, czujnik – Ø5 mm na kablu 0,5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "fr",
+    "field": "description",
+    "from": "Capteur — déporté, câble 5 m.",
+    "to": "Capteur Ø5 mm sur câble de 0,5 m ; câble d'alimentation avec fiche — 1,5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "fr",
+    "field": "description",
+    "from": "<td>Câble du capteur</td><td>5 m (diamètre 4 mm)</td>",
+    "to": "<td>Câble du capteur</td><td>0,5 m (diamètre 5 mm)</td>"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "fr",
+    "field": "description",
+    "from": "Capteur 5 m — longueur suffisante pour l'installation sur la canalisation de la chaudière ou du circuit.",
+    "to": "Capteur Ø5 mm sur câble de 0,5 m — pour l'installation sur la canalisation de la chaudière ou du circuit."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "fr",
+    "spec": "Longueur du câble",
+    "value": "Fiche euro – 1,5 m, capteur – Ø5 mm sur câble de 0,5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "de",
+    "field": "description",
+    "from": "Sensor — extern, Kabel 5 m.",
+    "to": "Sensor Ø5 mm an einem 0,5 m langen Kabel; Netzkabel mit Stecker — 1,5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "de",
+    "field": "description",
+    "from": "<td>Sensorkabel</td><td>5 m (Durchmesser 4 mm)</td>",
+    "to": "<td>Sensorkabel</td><td>0,5 m (Durchmesser 5 mm)</td>"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "de",
+    "field": "description",
+    "from": "Sensor 5 m — ausreichende Länge für die Montage an der Kessel- oder Kreisrohrleitung.",
+    "to": "Sensor Ø5 mm an 0,5 m Kabel — für die Montage an der Kessel- oder Kreisrohrleitung."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "de",
+    "spec": "Kabellänge",
+    "value": "Euro-Stecker – 1,5 m, Fühler – Ø5 mm an 0,5 m Kabel."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "ro",
+    "field": "description",
+    "from": "Senzorul este exterior, cablu de 5 m.",
+    "to": "Senzor Ø5 mm pe cablu de 0,5 m; cablu de alimentare cu ștecăr — 1,5 m."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "ro",
+    "field": "description",
+    "from": "<td>Cablul senzorului</td><td>5 m (diametru 4 mm)</td>",
+    "to": "<td>Cablul senzorului</td><td>0,5 m (diametru 5 mm)</td>"
+  },
+  {
+    "sku": "TJ413",
+    "lang": "ro",
+    "field": "description",
+    "from": "Senzor cu cablu de 5 m — lungime suficientă pentru montarea pe conducta cazanului sau a circuitului.",
+    "to": "Senzor Ø5 mm pe cablu de 0,5 m — pentru montarea pe conducta cazanului sau a circuitului."
+  },
+  {
+    "sku": "TJ413",
+    "lang": "ro",
+    "spec": "Lungime cablu",
+    "value": "ștecăr euro – 1,5 m, senzor – Ø5 mm pe cablu de 0,5 m."
+  },
+  {
+    "sku": "TMV121",
+    "lang": "uk",
+    "spec": "Діапазон температур",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV121",
+    "lang": "en",
+    "spec": "Temperature range",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV121",
+    "lang": "pl",
+    "spec": "Zakres temperatur",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV121",
+    "lang": "fr",
+    "spec": "Plage de températures",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV121",
+    "lang": "de",
+    "spec": "Temperaturbereich",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV121",
+    "lang": "ro",
+    "spec": "Interval de temperatură",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV131",
+    "lang": "uk",
+    "spec": "Діапазон температур",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV131",
+    "lang": "en",
+    "spec": "Temperature range",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV131",
+    "lang": "pl",
+    "spec": "Zakres temperatur",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV131",
+    "lang": "fr",
+    "spec": "Plage de températures",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV131",
+    "lang": "de",
+    "spec": "Temperaturbereich",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV131",
+    "lang": "ro",
+    "spec": "Interval de temperatură",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV231",
+    "lang": "uk",
+    "spec": "Діапазон температур",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV231",
+    "lang": "en",
+    "spec": "Temperature range",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV231",
+    "lang": "pl",
+    "spec": "Zakres temperatur",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV231",
+    "lang": "fr",
+    "spec": "Plage de températures",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV231",
+    "lang": "de",
+    "spec": "Temperaturbereich",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "TMV231",
+    "lang": "ro",
+    "spec": "Interval de temperatură",
+    "value": "20-43 °C"
+  },
+  {
+    "sku": "RMV03100-200",
+    "lang": "uk",
+    "field": "description",
+    "from": "Rp — це паралельна трубна різьба з ущільненням на торці фітинга (через прокладку або герметик). G — конічна різьба з ущільненням по нитках. Клапан DN50 має Rp 2\" (внутрішня паралельна) — підключайте відповідний штуцер або американку з плоским торцем.",
+    "to": "Rp — циліндрична внутрішня трубна різьба (ISO 7-1): ущільнення по нитках — льон, стрічка або анаеробний герметик — у парі з конічною зовнішньою різьбою R. G — також циліндрична трубна різьба (ISO 228-1), але сама вона не ущільнює: герметичність дає прокладка на торці. Конічна різьба позначається R (зовнішня) та Rc (внутрішня). Клапан DN50 має Rp 2\" (внутрішня) — підключайте штуцер із зовнішньою різьбою R 2\" на ущільнювачі або американку."
+  },
+  {
+    "sku": "RMV03100-200",
+    "lang": "en",
+    "field": "description",
+    "from": "Rp is a parallel pipe thread with sealing at the face of the fitting (via gasket or sealant). G is a tapered thread with sealing on the threads. The DN50 valve has Rp 2\" (internal parallel) — connect the appropriate union or fitting with a flat face.",
+    "to": "Rp is a cylindrical (parallel) internal pipe thread (ISO 7-1): it seals on the threads — hemp, PTFE tape or anaerobic sealant — together with a tapered external R thread. G is also a cylindrical pipe thread (ISO 228-1), but it does not seal by itself: tightness comes from a gasket at the face. Tapered threads are designated R (external) and Rc (internal). The DN50 valve has Rp 2\" (internal) — connect a fitting with an external R 2\" thread and sealant, or a union."
+  },
+  {
+    "sku": "RMV03100-200",
+    "lang": "pl",
+    "field": "description",
+    "from": "Rp to równoległy gwint rurowy z uszczelnieniem na czole złączki (przez uszczelkę lub uszczelniacz). G to gwint stożkowy z uszczelnieniem na zwojach. Zawór DN50 posiada gwint Rp 2\" (wewnętrzny równoległy) — podłączać odpowiedni śrubunek lub złączkę z płaskim czołem.",
+    "to": "Rp to cylindryczny (równoległy) wewnętrzny gwint rurowy (ISO 7-1): uszczelnienie na zwojach — pakuły, taśma PTFE lub uszczelniacz anaerobowy — w parze ze stożkowym gwintem zewnętrznym R. G to również cylindryczny gwint rurowy (ISO 228-1), ale sam nie uszczelnia: szczelność zapewnia uszczelka na czole. Gwint stożkowy oznacza się R (zewnętrzny) i Rc (wewnętrzny). Zawór DN50 ma gwint Rp 2\" (wewnętrzny) — podłączać złączkę z gwintem zewnętrznym R 2\" na uszczelniaczu lub śrubunek."
+  },
+  {
+    "sku": "RMV03100-200",
+    "lang": "fr",
+    "field": "description",
+    "from": "Rp est un filetage de tuyauterie parallèle avec étanchéité en about du raccord (par joint ou produit d'étanchéité). G est un filetage conique avec étanchéité sur les filets. La vanne DN50 a un filetage Rp 2\" (intérieur parallèle) — raccorder le manchon ou le raccord union approprié avec face plane.",
+    "to": "Rp est un filetage de tuyauterie intérieur cylindrique (parallèle) (ISO 7-1) : l'étanchéité se fait sur les filets — filasse, ruban PTFE ou produit anaérobie — avec un filetage extérieur conique R. G est aussi un filetage de tuyauterie cylindrique (ISO 228-1), mais il n'assure pas l'étanchéité lui-même : elle est obtenue par un joint en about. Le filetage conique se désigne par R (extérieur) et Rc (intérieur). La vanne DN50 a un filetage Rp 2\" (intérieur) — raccorder un raccord à filetage extérieur R 2\" avec produit d'étanchéité, ou un raccord union."
+  },
+  {
+    "sku": "RMV03100-200",
+    "lang": "de",
+    "field": "description",
+    "from": "Rp ist ein paralleles Rohrgewinde mit Abdichtung an der Stirnfläche des Fittings (über Dichtung oder Dichtmittel). G ist ein kegeliges Gewinde mit Abdichtung auf den Gewindegängen. Das DN50-Ventil hat Rp 2\" (Innengewinde, parallel) — schließen Sie den entsprechenden Stutzen oder die Überwurfmutter mit planer Stirnfläche an.",
+    "to": "Rp ist ein zylindrisches (paralleles) Rohr-Innengewinde (ISO 7-1): Die Abdichtung erfolgt im Gewinde — Hanf, PTFE-Band oder anaerobes Dichtmittel — zusammen mit einem kegeligen Außengewinde R. G ist ebenfalls ein zylindrisches Rohrgewinde (ISO 228-1), dichtet aber selbst nicht: Die Dichtheit entsteht durch eine Flachdichtung an der Stirnfläche. Kegelige Gewinde werden mit R (außen) und Rc (innen) bezeichnet. Das DN50-Ventil hat Rp 2\" (Innengewinde) — schließen Sie einen Anschluss mit Außengewinde R 2\" mit Dichtmittel oder eine Verschraubung an."
+  },
+  {
+    "sku": "RMV03100-200",
+    "lang": "ro",
+    "field": "description",
+    "from": "Rp este un filet cilindric paralel, cu etanșare pe fața frontală a fitingului (prin garnitură sau chit). G este un filet conic, cu etanșare pe fir. Supapa DN50 are Rp 2\" (interior, paralel) — racordați un ștuț corespunzător sau un racord olandez cu față plană.",
+    "to": "Rp este un filet interior cilindric (paralel) pentru țevi (ISO 7-1): etanșarea se face pe fir — cânepă, bandă PTFE sau etanșant anaerob — în pereche cu un filet exterior conic R. G este tot un filet cilindric pentru țevi (ISO 228-1), dar nu etanșează singur: etanșeitatea o asigură garnitura de pe fața frontală. Filetul conic se notează R (exterior) și Rc (interior). Supapa DN50 are Rp 2\" (interior) — racordați un fiting cu filet exterior R 2\" cu etanșant sau un racord olandez."
+  }
+]

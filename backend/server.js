@@ -649,9 +649,9 @@ const CATEGORY_META = {
     nameRo: 'Separatoare hidraulice', descRo: 'Separatoare hidraulice pentru echilibrarea debitelor în sistemele de încălzire ale centralelor termice',
   },
   'rozpodilchi-kolektory': {
-    name: 'Розподільчі колектори', desc: 'Розподільчі колектори в теплоізоляції по потужності 60, 105 та 175 кВт для котелень',
-    nameEn: 'Distribution Manifolds', descEn: 'Distribution manifolds in insulation by capacity 60, 105 and 175 kW for boiler rooms',
-    nameRo: 'Colectoare de distribuție', descRo: 'Colectoare de distribuție termoizolate cu putere de 60, 105 și 175 kW pentru centrale termice',
+    name: 'Розподільчі колектори', desc: 'Розподільчі колектори в теплоізоляції по потужності 25, 72, 105 та 175 кВт для котелень',
+    nameEn: 'Distribution Manifolds', descEn: 'Distribution manifolds in insulation by capacity 25, 72, 105 and 175 kW for boiler rooms',
+    nameRo: 'Colectoare de distribuție', descRo: 'Colectoare de distribuție termoizolate cu putere de 25, 72, 105 și 175 kW pentru centrale termice',
   },
   'kolektory-z-hidrostrilkoyu': {
     name: 'Розподільчі колектори з гідрострілкою', desc: 'Колектори з вбудованою гідрострілкою — компактний вузол розподілу для котельні',

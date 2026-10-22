@@ -740,7 +740,7 @@ export default function ProductDetailPage() {
   }, [categorySlug, name, product?.sku, files])
 
   // 3D models (STEP)
-  const productModels = useMemo(() => getModels3D(product?.slug), [product?.slug])
+  const productModels = useMemo(() => getModels3D(product?.sku), [product?.sku])
   const model3dUrl = useMemo(() => productModels.find(m => m.glb)?.glb || null, [productModels])
 
   // ⚠️ ALL hooks above this line — safe early return (Rules of Hooks)

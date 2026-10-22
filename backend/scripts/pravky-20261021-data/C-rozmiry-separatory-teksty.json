@@ -1,0 +1,702 @@
+[
+ {
+  "sku": "84040BOX3",
+  "lang": "uk",
+  "field": "description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "uk",
+  "field": "meta_description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "en",
+  "field": "description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "en",
+  "field": "meta_description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "pl",
+  "field": "description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "pl",
+  "field": "meta_description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "fr",
+  "field": "description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "fr",
+  "field": "meta_description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "de",
+  "field": "description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "de",
+  "field": "meta_description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "ro",
+  "field": "description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "84040BOX3",
+  "lang": "ro",
+  "field": "meta_description",
+  "from": "600×500",
+  "to": "492×676"
+ },
+ {
+  "sku": "46011556",
+  "lang": "uk",
+  "field": "meta_description",
+  "from": "до 150 кг",
+  "to": "до 260 кг"
+ },
+ {
+  "sku": "46011556",
+  "lang": "en",
+  "field": "seo_title",
+  "from": "up to 150 kg",
+  "to": "up to 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "en",
+  "field": "meta_description",
+  "from": "up to 150 kg",
+  "to": "up to 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "pl",
+  "field": "seo_title",
+  "from": "do 150 kg",
+  "to": "do 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "pl",
+  "field": "meta_description",
+  "from": "do 150 kg",
+  "to": "do 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "fr",
+  "field": "seo_title",
+  "from": "jusqu'à 150 kg",
+  "to": "jusqu'à 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "fr",
+  "field": "meta_description",
+  "from": "jusqu'à 150 kg",
+  "to": "jusqu'à 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "de",
+  "field": "seo_title",
+  "from": "bis 150 kg",
+  "to": "bis 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "de",
+  "field": "meta_description",
+  "from": "bis 150 kg",
+  "to": "bis 260 kg"
+ },
+ {
+  "sku": "46011556",
+  "lang": "ro",
+  "field": "meta_description",
+  "from": "până la 150 kg",
+  "to": "până la 260 kg"
+ },
+ {
+  "sku": "520472",
+  "lang": "uk",
+  "field": "description",
+  "from": "п'ятикратним запасом",
+  "to": "дворазовим запасом"
+ },
+ {
+  "sku": "520472",
+  "lang": "en",
+  "field": "description",
+  "from": "fivefold temperature",
+  "to": "twofold temperature"
+ },
+ {
+  "sku": "520472",
+  "lang": "pl",
+  "field": "description",
+  "from": "pięciokrotnym zapasem",
+  "to": "dwukrotnym zapasem"
+ },
+ {
+  "sku": "520472",
+  "lang": "fr",
+  "field": "description",
+  "from": "marge de cinq fois la température",
+  "to": "marge de deux fois la température"
+ },
+ {
+  "sku": "520472",
+  "lang": "de",
+  "field": "description",
+  "from": "fünffachen Temperatursicherheitsabstand",
+  "to": "zweifachen Temperatursicherheitsabstand"
+ },
+ {
+  "sku": "520472",
+  "lang": "ro",
+  "field": "description",
+  "from": "marjă de temperatură de cinci ori mai mare",
+  "to": "marjă de temperatură de două ori mai mare"
+ },
+ {
+  "sku": "TJ4F25-10/110-25",
+  "lang": "uk",
+  "field": "description",
+  "from": "встановлюється у будь-якому положенні",
+  "to": "встановлюється вертикально"
+ },
+ {
+  "sku": "TJ4F25-10/110-25",
+  "lang": "en",
+  "field": "description",
+  "from": "can be installed in any orientation",
+  "to": "should be installed vertically"
+ },
+ {
+  "sku": "TJ4F25-10/110-25",
+  "lang": "pl",
+  "field": "description",
+  "from": "można montować w dowolnej pozycji",
+  "to": "montuje się pionowo"
+ },
+ {
+  "sku": "TJ4F25-10/110-25",
+  "lang": "fr",
+  "field": "description",
+  "from": "peut être installé dans n'importe quelle position",
+  "to": "se monte à la verticale"
+ },
+ {
+  "sku": "TJ4F25-10/110-25",
+  "lang": "de",
+  "field": "description",
+  "from": "in jeder Lage montierbar",
+  "to": "wird senkrecht montiert"
+ },
+ {
+  "sku": "TJ4F25-10/110-25",
+  "lang": "ro",
+  "field": "description",
+  "from": "se instalează în orice poziție",
+  "to": "se instalează vertical"
+ },
+ {
+  "sku": "TJV6G25",
+  "lang": "uk",
+  "field": "description",
+  "from": "Доведено дослідженнями: одночасне використання сепараторів повітря і бруду дає до 13% економії газу.",
+  "to": "Повітря і шлам погіршують теплопередачу та спричиняють корозію — разом два сепаратори захищають систему від обох чинників."
+ },
+ {
+  "sku": "TJV6G25",
+  "lang": "en",
+  "field": "description",
+  "from": "Research has proven: simultaneous use of air and dirt separators saves up to 13% on gas.",
+  "to": "Air and sludge impair heat transfer and cause corrosion — together the two separators protect the system from both."
+ },
+ {
+  "sku": "TJV6G25",
+  "lang": "pl",
+  "field": "description",
+  "from": "Badania dowiodły: jednoczesne stosowanie separatorów powietrza i zanieczyszczeń daje oszczędność gazu do 13%.",
+  "to": "Powietrze i szlam pogarszają wymianę ciepła i powodują korozję — razem oba separatory chronią instalację przed obydwoma czynnikami."
+ },
+ {
+  "sku": "TJV6G25",
+  "lang": "fr",
+  "field": "description",
+  "from": "Des études ont prouvé : l'utilisation simultanée de séparateurs d'air et de boues permet d'économiser jusqu'à 13% de gaz.",
+  "to": "L'air et les boues dégradent le transfert de chaleur et provoquent la corrosion — ensemble, les deux séparateurs protègent le système contre ces deux facteurs."
+ },
+ {
+  "sku": "TJV6G25",
+  "lang": "de",
+  "field": "description",
+  "from": "Studien belegen: der gleichzeitige Einsatz von Luft- und Schlammabscheidern spart bis zu 13% Gas.",
+  "to": "Luft und Schlamm verschlechtern die Wärmeübertragung und verursachen Korrosion — gemeinsam schützen die beiden Abscheider die Anlage vor beidem."
+ },
+ {
+  "sku": "TJV6G25",
+  "lang": "ro",
+  "field": "description",
+  "from": "Dovedit prin studii: utilizarea simultană a separatoarelor de aer și impurități aduce până la 13% economie de gaz.",
+  "to": "Aerul și nămolul înrăutățesc transferul de căldură și provoacă coroziune — împreună, cele două separatoare protejează sistemul împotriva ambelor."
+ },
+ {
+  "sku": "TJV6G32",
+  "lang": "uk",
+  "field": "description",
+  "from": "За результатами галузевих досліджень (TNO + Kiwa GASTEC, Нідерланди) видалення повітря з теплоносія разом із видаленням бруду дає до 13% економії газу — навіть без будь-яких інших змін у системі.",
+  "to": "Повітря і шлам у теплоносії погіршують теплопередачу та спричиняють корозію — їх видалення допомагає зберегти ефективність системи."
+ },
+ {
+  "sku": "TJV6G32",
+  "lang": "en",
+  "field": "description",
+  "from": "According to industry research (TNO + Kiwa GASTEC, Netherlands), removing air from the heat-transfer fluid combined with dirt removal saves up to 13% on gas — even without any other changes to the system.",
+  "to": "Air and sludge in the heat-transfer fluid impair heat transfer and cause corrosion — removing them helps maintain system efficiency."
+ },
+ {
+  "sku": "TJV6G32",
+  "lang": "pl",
+  "field": "description",
+  "from": "Według wyników badań branżowych (TNO + Kiwa GASTEC, Holandia) usuwanie powietrza z czynnika grzewczego w połączeniu z usuwaniem zanieczyszczeń daje do 13% oszczędności gazu — nawet bez żadnych innych zmian w instalacji.",
+  "to": "Powietrze i szlam w czynniku grzewczym pogarszają wymianę ciepła i powodują korozję — ich usunięcie pomaga zachować sprawność instalacji."
+ },
+ {
+  "sku": "TJV6G32",
+  "lang": "fr",
+  "field": "description",
+  "from": "Selon les résultats de recherches sectorielles (TNO + Kiwa GASTEC, Pays-Bas), l'élimination de l'air du fluide caloporteur combinée à l'élimination des boues permet d'économiser jusqu'à 13% de gaz — même sans aucun autre changement dans l'installation.",
+  "to": "L'air et les boues dans le fluide caloporteur dégradent le transfert de chaleur et provoquent la corrosion — leur élimination aide à préserver l'efficacité du système."
+ },
+ {
+  "sku": "TJV6G32",
+  "lang": "de",
+  "field": "description",
+  "from": "Laut Ergebnissen von Branchenstudien (TNO + Kiwa GASTEC, Niederlande) spart die Entfernung von Luft aus dem Wärmeträger in Kombination mit der Schlamment­fernung bis zu 13% Gas — sogar ohne sonstige Änderungen an der Anlage.",
+  "to": "Luft und Schlamm im Wärmeträger verschlechtern die Wärmeübertragung und verursachen Korrosion — ihre Entfernung hilft, die Effizienz der Anlage zu erhalten."
+ },
+ {
+  "sku": "TJV6G32",
+  "lang": "ro",
+  "field": "description",
+  "from": "Conform rezultatelor studiilor de specialitate (TNO + Kiwa GASTEC, Olanda), eliminarea aerului din agentul termic împreună cu eliminarea impurităților aduce până la 13% economie de gaz — chiar și fără alte modificări în sistem.",
+  "to": "Aerul și nămolul din agentul termic înrăutățesc transferul de căldură și provoacă coroziune — eliminarea lor ajută la menținerea eficienței sistemului."
+ },
+ {
+  "sku": "TJV6G40",
+  "lang": "uk",
+  "field": "description",
+  "from": "Галузеві дослідження вказують, що деаерація системи опалення може давати до <strong>13% економії газу</strong> (у поєднанні з очищенням від бруду) — за рахунок відновлення повної теплопровідності теплоносія та захисту теплообмінника від наростань.",
+  "to": "Повітря в теплоносії погіршує теплопередачу та спричиняє корозію, тому його видалення разом з очищенням від бруду допомагає зберегти ефективність системи та захистити теплообмінник від наростань."
+ },
+ {
+  "sku": "TJV6G40",
+  "lang": "en",
+  "field": "description",
+  "from": "Industry studies indicate that deaeration of a heating system can yield up to <strong>13% gas savings</strong> (in combination with dirt removal) — by restoring the full thermal conductivity of the heat carrier and protecting the heat exchanger from scale build-up.",
+  "to": "Air in the heat-transfer fluid impairs heat transfer and causes corrosion, so removing it together with dirt helps maintain system efficiency and protects the heat exchanger from scale build-up."
+ },
+ {
+  "sku": "TJV6G40",
+  "lang": "pl",
+  "field": "description",
+  "from": "Badania branżowe wskazują, że odgazowanie instalacji grzewczej może przynieść oszczędności gazu do <strong>13%</strong> (w połączeniu z usuwaniem zanieczyszczeń) — poprzez przywrócenie pełnej przewodności cieplnej czynnika i ochronę wymiennika przed osadami.",
+  "to": "Powietrze w czynniku grzewczym pogarsza wymianę ciepła i powoduje korozję, dlatego jego usunięcie wraz z zanieczyszczeniami pomaga zachować sprawność instalacji i chroni wymiennik przed osadami."
+ },
+ {
+  "sku": "TJV6G40",
+  "lang": "fr",
+  "field": "description",
+  "from": "Des études sectorielles indiquent que la désaération d'un système de chauffage peut permettre des économies de gaz allant jusqu'à <strong>13%</strong> (en combinaison avec l'élimination des impuretés) — en restaurant la conductivité thermique totale du fluide caloporteur et en protégeant l'échangeur contre le tartre.",
+  "to": "L'air présent dans le fluide caloporteur dégrade le transfert de chaleur et provoque la corrosion ; l'éliminer avec les impuretés aide à préserver l'efficacité du système et protège l'échangeur contre le tartre."
+ },
+ {
+  "sku": "TJV6G40",
+  "lang": "de",
+  "field": "description",
+  "from": "Branchenstudien zeigen, dass die Entgasung einer Heizungsanlage Gaseinsparungen von bis zu <strong>13%</strong> erzielen kann (in Kombination mit der Schmutzentfernung) — durch Wiederherstellung der vollen Wärmeleitfähigkeit des Wärmeträgers und Schutz des Wärmetauschers vor Ablagerungen.",
+  "to": "Luft im Wärmeträger verschlechtert die Wärmeübertragung und verursacht Korrosion; ihre Entfernung zusammen mit dem Schmutz hilft, die Effizienz der Anlage zu erhalten und den Wärmetauscher vor Ablagerungen zu schützen."
+ },
+ {
+  "sku": "TJV6G40",
+  "lang": "ro",
+  "field": "description",
+  "from": "Studiile de specialitate arată că dezaerarea sistemului de încălzire poate aduce până la <strong>13% economie de gaz</strong> (combinată cu curățarea de impurități) — datorită restabilirii conductivității termice depline a agentului termic și protecției schimbătorului de căldură împotriva depunerilor.",
+  "to": "Aerul din agentul termic înrăutățește transferul de căldură și provoacă coroziune, de aceea eliminarea lui împreună cu impuritățile ajută la menținerea eficienței sistemului și protejează schimbătorul de căldură împotriva depunerilor."
+ },
+ {
+  "sku": "TJVT6G32",
+  "lang": "uk",
+  "field": "description",
+  "from": "Галузеві дані вказують, що спільне видалення повітря і бруду може давати до <strong>13% економії газу</strong> — за рахунок відновлення теплопровідності і захисту від наростань у теплообміннику.",
+  "to": "Повітря і шлам погіршують теплопередачу та спричиняють корозію, тому їх спільне видалення допомагає зберегти ефективність системи та захистити теплообмінник від наростань."
+ },
+ {
+  "sku": "TJVT6G32",
+  "lang": "en",
+  "field": "description",
+  "from": "Industry data indicate that combined air and dirt removal can deliver up to <strong>13% gas savings</strong> — by restoring thermal conductivity and preventing scale build-up in the heat exchanger.",
+  "to": "Air and sludge impair heat transfer and cause corrosion, so removing them together helps maintain system efficiency and protects the heat exchanger from scale build-up."
+ },
+ {
+  "sku": "TJVT6G32",
+  "lang": "pl",
+  "field": "description",
+  "from": "Dane branżowe wskazują, że łączne usuwanie powietrza i brudu może zapewnić do <strong>13% oszczędności gazu</strong> — poprzez przywrócenie przewodności cieplnej i ochronę przed nalotami w wymienniku ciepła.",
+  "to": "Powietrze i szlam pogarszają wymianę ciepła i powodują korozję, dlatego ich łączne usuwanie pomaga zachować sprawność instalacji i chroni wymiennik ciepła przed osadami."
+ },
+ {
+  "sku": "TJVT6G32",
+  "lang": "fr",
+  "field": "description",
+  "from": "Les données sectorielles indiquent que l'élimination combinée de l'air et des boues peut permettre jusqu'à <strong>13 % d'économies de gaz</strong> — en restaurant la conductivité thermique et en prévenant les dépôts dans l'échangeur de chaleur.",
+  "to": "L'air et les boues dégradent le transfert de chaleur et provoquent la corrosion ; les éliminer ensemble aide à préserver l'efficacité du système et protège l'échangeur de chaleur contre les dépôts."
+ },
+ {
+  "sku": "TJVT6G32",
+  "lang": "de",
+  "field": "description",
+  "from": "Branchendaten zeigen, dass die kombinierte Luft- und Schmutzabscheidung bis zu <strong>13 % Gaseinsparung</strong> ermöglichen kann — durch Wiederherstellung der Wärmeleitfähigkeit und Schutz vor Ablagerungen im Wärmetauscher.",
+  "to": "Luft und Schlamm verschlechtern die Wärmeübertragung und verursachen Korrosion; ihre gemeinsame Abscheidung hilft, die Effizienz der Anlage zu erhalten und den Wärmetauscher vor Ablagerungen zu schützen."
+ },
+ {
+  "sku": "TJVT6G32",
+  "lang": "ro",
+  "field": "description",
+  "from": "Datele din domeniu arată că eliminarea combinată a aerului și impurităților poate genera până la <strong>13% economie de gaz</strong> — datorită restabilirii conductivității termice și protecției împotriva depunerilor din schimbătorul de căldură.",
+  "to": "Aerul și nămolul înrăutățesc transferul de căldură și provoacă coroziune, de aceea eliminarea lor combinată ajută la menținerea eficienței sistemului și protejează schimbătorul de căldură împotriva depunerilor."
+ },
+ {
+  "sku": "TJVT6G50",
+  "lang": "uk",
+  "field": "description",
+  "from": "Доведено дослідженнями: одночасне видалення повітря і бруду з теплоносія дає до 13% економії палива — значущий ефект при великих об'ємах споживання.",
+  "to": "Повітря і шлам погіршують теплопередачу та спричиняють корозію — їх одночасне видалення захищає систему та допомагає зберегти її ефективність."
+ },
+ {
+  "sku": "TJVT6G50",
+  "lang": "en",
+  "field": "description",
+  "from": "Research-proven: simultaneous removal of air and dirt from the heat carrier provides up to 13% fuel savings — a significant effect at large consumption volumes.",
+  "to": "Air and sludge impair heat transfer and cause corrosion — removing both at once protects the system and helps maintain its efficiency."
+ },
+ {
+  "sku": "TJVT6G50",
+  "lang": "pl",
+  "field": "description",
+  "from": "Potwierdzone badaniami: jednoczesne usuwanie powietrza i zanieczyszczeń z czynnika grzewczego zapewnia do 13% oszczędności paliwa — znaczący efekt przy dużym zużyciu.",
+  "to": "Powietrze i szlam pogarszają wymianę ciepła i powodują korozję — jednoczesne usuwanie obu chroni instalację i pomaga zachować jej sprawność."
+ },
+ {
+  "sku": "TJVT6G50",
+  "lang": "fr",
+  "field": "description",
+  "from": "Prouvé par des études : l'élimination simultanée de l'air et des boues du fluide caloporteur permet jusqu'à 13 % d'économies de carburant — un effet significatif pour les grands volumes de consommation.",
+  "to": "L'air et les boues dégradent le transfert de chaleur et provoquent la corrosion — les éliminer simultanément protège le système et aide à préserver son efficacité."
+ },
+ {
+  "sku": "TJVT6G50",
+  "lang": "de",
+  "field": "description",
+  "from": "Forschungsbelegt: Die gleichzeitige Entfernung von Luft und Schmutz aus dem Wärmeträger ergibt bis zu 13 % Kraftstoffeinsparung — ein bedeutsamer Effekt bei hohem Verbrauchsvolumen.",
+  "to": "Luft und Schlamm verschlechtern die Wärmeübertragung und verursachen Korrosion — ihre gleichzeitige Entfernung schützt die Anlage und hilft, ihre Effizienz zu erhalten."
+ },
+ {
+  "sku": "TJVT6G50",
+  "lang": "ro",
+  "field": "description",
+  "from": "Dovedit prin studii: eliminarea simultană a aerului și impurităților din agentul termic oferă până la 13% economie de combustibil — un efect semnificativ la volume mari de consum.",
+  "to": "Aerul și nămolul înrăutățesc transferul de căldură și provoacă coroziune — eliminarea lor simultană protejează sistemul și ajută la menținerea eficienței."
+ },
+ {
+  "sku": "84040025",
+  "lang": "uk",
+  "field": "description",
+  "from": "\n\n<p>Гідрострілка розв’язує котловий контур із контурами опалення, коли їх кілька — наприклад, в обв'язці <a href=\"/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">пелетного котла Termojet Ignis Pro 15 Plus</a> на 15 кВт.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040025",
+  "lang": "en",
+  "field": "description",
+  "from": "\n\n<p>A hydraulic separator decouples the boiler circuit from the heating circuits when there is more than one — for example in the hookup of the 15 kW <a href=\"/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Termojet Ignis Pro 15 Plus pellet boiler</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040025",
+  "lang": "pl",
+  "field": "description",
+  "from": "\n\n<p>Sprzęgło hydrauliczne rozdziela obieg kotła od obiegów grzewczych, gdy jest ich kilka — na przykład w obiegu <a href=\"/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">kotła na pellet Termojet Ignis Pro 15 Plus</a> o mocy 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040025",
+  "lang": "fr",
+  "field": "description",
+  "from": "\n\n<p>Une bouteille de découplage sépare le circuit chaudière des circuits de chauffage lorsqu’ils sont plusieurs — par exemple dans le raccordement de la <a href=\"/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">chaudière à granulés Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040025",
+  "lang": "de",
+  "field": "description",
+  "from": "\n\n<p>Eine hydraulische Weiche entkoppelt den Kesselkreis von mehreren Heizkreisen — etwa in der Einbindung des 15-kW-<a href=\"/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Pelletkessels Termojet Ignis Pro 15 Plus</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040025",
+  "lang": "ro",
+  "field": "description",
+  "from": "\n\n<p>Un separator hidraulic decuplează circuitul cazanului de circuitele de încălzire, când sunt mai multe — de exemplu la racordarea <a href=\"/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">cazanului pe peleți Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040211",
+  "lang": "uk",
+  "field": "description",
+  "from": "\n\n<p>Колектор 2+1 розводить два контури опалення від одного джерела тепла — наприклад, в обв'язці <a href=\"/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">пелетного котла Termojet Ignis Pro 15 Plus</a> на 15 кВт.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040211",
+  "lang": "en",
+  "field": "description",
+  "from": "\n\n<p>A 2+1 manifold distributes two heating circuits from a single heat source — for example in the hookup of the 15 kW <a href=\"/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Termojet Ignis Pro 15 Plus pellet boiler</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040211",
+  "lang": "pl",
+  "field": "description",
+  "from": "\n\n<p>Kolektor 2+1 rozprowadza dwa obiegi grzewcze z jednego źródła ciepła — na przykład w obiegu <a href=\"/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">kotła na pellet Termojet Ignis Pro 15 Plus</a> o mocy 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040211",
+  "lang": "fr",
+  "field": "description",
+  "from": "\n\n<p>Un collecteur 2+1 répartit deux circuits de chauffage depuis une seule source de chaleur — par exemple dans le raccordement de la <a href=\"/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">chaudière à granulés Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040211",
+  "lang": "de",
+  "field": "description",
+  "from": "\n\n<p>Ein Verteiler 2+1 versorgt zwei Heizkreise aus einer Wärmequelle — etwa in der Einbindung des 15-kW-<a href=\"/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Pelletkessels Termojet Ignis Pro 15 Plus</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "84040211",
+  "lang": "ro",
+  "field": "description",
+  "from": "\n\n<p>Un colector 2+1 distribuie două circuite de încălzire de la o singură sursă de căldură — de exemplu la racordarea <a href=\"/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">cazanului pe peleți Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TJT6G25",
+  "lang": "uk",
+  "field": "description",
+  "from": "\n\n<p>Сепаратор бруду ставлять перед котлом, щоб шлам не доходив до теплообмінника й насоса — наприклад, в обв'язці <a href=\"/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">пелетного котла Termojet Ignis Pro 15 Plus</a> на 15 кВт.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TJT6G25",
+  "lang": "en",
+  "field": "description",
+  "from": "\n\n<p>A dirt separator goes in front of the boiler so that sludge never reaches the heat exchanger or the pump — for example in the hookup of the 15 kW <a href=\"/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Termojet Ignis Pro 15 Plus pellet boiler</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TJT6G25",
+  "lang": "pl",
+  "field": "description",
+  "from": "\n\n<p>Separator zanieczyszczeń montuje się przed kotłem, aby szlam nie dotarł do wymiennika i pompy — na przykład w obiegu <a href=\"/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">kotła na pellet Termojet Ignis Pro 15 Plus</a> o mocy 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TJT6G25",
+  "lang": "fr",
+  "field": "description",
+  "from": "\n\n<p>Un séparateur de boues se place devant la chaudière pour que les boues n’atteignent ni l’échangeur ni la pompe — par exemple dans le raccordement de la <a href=\"/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">chaudière à granulés Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TJT6G25",
+  "lang": "de",
+  "field": "description",
+  "from": "\n\n<p>Ein Schlammabscheider sitzt vor dem Kessel, damit Schlamm weder Wärmetauscher noch Pumpe erreicht — etwa in der Einbindung des 15-kW-<a href=\"/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Pelletkessels Termojet Ignis Pro 15 Plus</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TJT6G25",
+  "lang": "ro",
+  "field": "description",
+  "from": "\n\n<p>Un separator de impurități se montează înaintea cazanului, ca nămolul să nu ajungă la schimbător și la pompă — de exemplu la racordarea <a href=\"/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">cazanului pe peleți Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TMV132",
+  "lang": "uk",
+  "field": "description",
+  "from": "\n\n<p>Такий клапан тримає температуру звороту не нижчою ніж 55 °C і захищає теплообмінник від конденсату — наприклад, в обв'язці <a href=\"/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">пелетного котла Termojet Ignis Pro 15 Plus</a> на 15 кВт.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TMV132",
+  "lang": "en",
+  "field": "description",
+  "from": "\n\n<p>A valve like this keeps the return line at or above 55 °C and protects the heat exchanger from condensate — for example in the hookup of the 15 kW <a href=\"/en/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Termojet Ignis Pro 15 Plus pellet boiler</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TMV132",
+  "lang": "pl",
+  "field": "description",
+  "from": "\n\n<p>Taki zawór utrzymuje temperaturę powrotu nie niższą niż 55 °C i chroni wymiennik przed kondensatem — na przykład w obiegu <a href=\"/pl/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">kotła na pellet Termojet Ignis Pro 15 Plus</a> o mocy 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TMV132",
+  "lang": "fr",
+  "field": "description",
+  "from": "\n\n<p>Une telle vanne maintient le retour à 55 °C minimum et protège l’échangeur du condensat — par exemple dans le raccordement de la <a href=\"/fr/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">chaudière à granulés Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TMV132",
+  "lang": "de",
+  "field": "description",
+  "from": "\n\n<p>Ein solches Ventil hält den Rücklauf bei mindestens 55 °C und schützt den Wärmetauscher vor Kondensat — etwa in der Einbindung des 15-kW-<a href=\"/de/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">Pelletkessels Termojet Ignis Pro 15 Plus</a>.</p>",
+  "to": ""
+ },
+ {
+  "sku": "TMV132",
+  "lang": "ro",
+  "field": "description",
+  "from": "\n\n<p>O astfel de vană menține returul la cel puțin 55 °C și protejează schimbătorul de condens — de exemplu la racordarea <a href=\"/ro/catalog/peletni-kotly/kotel-peletnyi-termojet-ignis-pro-15-plus\">cazanului pe peleți Termojet Ignis Pro 15 Plus</a> de 15 kW.</p>",
+  "to": ""
+ },
+ {
+  "sku": "47025230",
+  "lang": "uk",
+  "field": "short_desc",
+  "from": "ABF01-3-100M",
+  "to": "ABF-ZV3-100"
+ },
+ {
+  "sku": "47025230",
+  "lang": "en",
+  "field": "short_desc",
+  "from": "ABF01-3-100M",
+  "to": "ABF-ZV3-100"
+ },
+ {
+  "sku": "47025230",
+  "lang": "pl",
+  "field": "short_desc",
+  "from": "ABF01-3-100M",
+  "to": "ABF-ZV3-100"
+ },
+ {
+  "sku": "47025230",
+  "lang": "fr",
+  "field": "short_desc",
+  "from": "ABF01-3-100M",
+  "to": "ABF-ZV3-100"
+ },
+ {
+  "sku": "47025230",
+  "lang": "de",
+  "field": "short_desc",
+  "from": "ABF01-3-100M",
+  "to": "ABF-ZV3-100"
+ },
+ {
+  "sku": "47025230",
+  "lang": "ro",
+  "field": "short_desc",
+  "from": "ABF01-3-100M",
+  "to": "ABF-ZV3-100"
+ },
+ {
+  "sku": "47032230",
+  "lang": "uk",
+  "field": "short_desc",
+  "from": "ABF01-3-114M",
+  "to": "ABF-ZV3-114"
+ },
+ {
+  "sku": "47032230",
+  "lang": "en",
+  "field": "short_desc",
+  "from": "ABF01-3-114M",
+  "to": "ABF-ZV3-114"
+ },
+ {
+  "sku": "47032230",
+  "lang": "pl",
+  "field": "short_desc",
+  "from": "ABF01-3-114M",
+  "to": "ABF-ZV3-114"
+ },
+ {
+  "sku": "47032230",
+  "lang": "fr",
+  "field": "short_desc",
+  "from": "ABF01-3-114M",
+  "to": "ABF-ZV3-114"
+ },
+ {
+  "sku": "47032230",
+  "lang": "de",
+  "field": "short_desc",
+  "from": "ABF01-3-114M",
+  "to": "ABF-ZV3-114"
+ },
+ {
+  "sku": "47032230",
+  "lang": "ro",
+  "field": "short_desc",
+  "from": "ABF01-3-114M",
+  "to": "ABF-ZV3-114"
+ }
+]

@@ -36,7 +36,7 @@ module.exports = [
 
 **Гідрострілки та колектори**
 
-На демо-столі учасники розглядали [гідравлічні розділювачі](/catalog/hidravlichni-rozdilnyky) та [розподільчі колектори](/catalog/rozpodilchi-kolektory) у фірмовій теплоізоляції. Колектори випускаються на 60, 105 і 175 кВт, а [колектори з вбудованою гідрострілкою](/catalog/kolektory-z-hidrostrilkoyu) збирають розподіл котельні в один компактний вузол. Для котелень промислових об'єктів і багатоквартирних будинків є [серія Termojet Mega](/catalog/termojet-mega) потужністю до 2200 кВт. Коли потрібна гідрострілка, а коли достатньо колектора, — пояснюємо в окремій [статті](${GS}).
+На демо-столі учасники розглядали [гідравлічні розділювачі](/catalog/hidravlichni-rozdilnyky) та [розподільчі колектори](/catalog/rozpodilchi-kolektory) у фірмовій теплоізоляції. Колектори випускаються на 25, 72, 105 і 175 кВт, а [колектори з вбудованою гідрострілкою](/catalog/kolektory-z-hidrostrilkoyu) збирають розподіл котельні в один компактний вузол. Для котелень промислових об'єктів і багатоквартирних будинків є [серія Termojet Mega](/catalog/termojet-mega) потужністю до 2200 кВт. Коли потрібна гідрострілка, а коли достатньо колектора, — пояснюємо в окремій [статті](${GS}).
 
 **Насосні групи та циркуляційні насоси**
 
@@ -80,7 +80,7 @@ The main topic was the Termojet heat distribution system — everything between 
 
 **Hydraulic separators and manifolds**
 
-On the demo table, attendees examined [hydraulic separators](/catalog/hidravlichni-rozdilnyky) and [distribution manifolds](/catalog/rozpodilchi-kolektory) in our branded insulation. Manifolds come in 60, 105 and 175 kW versions, while [manifolds with an integrated hydraulic separator](/catalog/kolektory-z-hidrostrilkoyu) bring boiler-room distribution into one compact unit. For industrial sites and apartment buildings there is the [Termojet Mega series](/catalog/termojet-mega) of up to 2200 kW. When you need a hydraulic separator and when a manifold is enough is covered in a separate [article](${GS}).
+On the demo table, attendees examined [hydraulic separators](/catalog/hidravlichni-rozdilnyky) and [distribution manifolds](/catalog/rozpodilchi-kolektory) in our branded insulation. Manifolds come in 25, 72, 105 and 175 kW versions, while [manifolds with an integrated hydraulic separator](/catalog/kolektory-z-hidrostrilkoyu) bring boiler-room distribution into one compact unit. For industrial sites and apartment buildings there is the [Termojet Mega series](/catalog/termojet-mega) of up to 2200 kW. When you need a hydraulic separator and when a manifold is enough is covered in a separate [article](${GS}).
 
 **Pump groups and circulation pumps**
 
@@ -124,7 +124,7 @@ Głównym tematem był system rozdziału ciepła Termojet — wszystko, co znajd
 
 **Sprzęgła hydrauliczne i rozdzielacze**
 
-Na stole demonstracyjnym uczestnicy oglądali [sprzęgła hydrauliczne](/catalog/hidravlichni-rozdilnyky) i [rozdzielacze](/catalog/rozpodilchi-kolektory) w firmowej izolacji termicznej. Rozdzielacze produkujemy w wersjach 60, 105 i 175 kW, a [rozdzielacze ze zintegrowanym sprzęgłem](/catalog/kolektory-z-hidrostrilkoyu) łączą rozdział kotłowni w jeden kompaktowy zespół. Dla obiektów przemysłowych i budynków wielorodzinnych jest [seria Termojet Mega](/catalog/termojet-mega) o mocy do 2200 kW. Kiedy potrzebne jest sprzęgło, a kiedy wystarczy rozdzielacz — wyjaśniamy w osobnym [artykule](${GS}).
+Na stole demonstracyjnym uczestnicy oglądali [sprzęgła hydrauliczne](/catalog/hidravlichni-rozdilnyky) i [rozdzielacze](/catalog/rozpodilchi-kolektory) w firmowej izolacji termicznej. Rozdzielacze produkujemy w wersjach 25, 72, 105 i 175 kW, a [rozdzielacze ze zintegrowanym sprzęgłem](/catalog/kolektory-z-hidrostrilkoyu) łączą rozdział kotłowni w jeden kompaktowy zespół. Dla obiektów przemysłowych i budynków wielorodzinnych jest [seria Termojet Mega](/catalog/termojet-mega) o mocy do 2200 kW. Kiedy potrzebne jest sprzęgło, a kiedy wystarczy rozdzielacz — wyjaśniamy w osobnym [artykule](${GS}).
 
 **Grupy pompowe i pompy obiegowe**
 
@@ -168,7 +168,7 @@ Le thème principal était le système de distribution de chaleur Termojet — t
 
 **Bouteilles de découplage et collecteurs**
 
-Sur la table de démonstration, les participants ont examiné les [bouteilles de découplage hydraulique](/catalog/hidravlichni-rozdilnyky) et les [collecteurs de distribution](/catalog/rozpodilchi-kolektory) dans notre isolation thermique. Les collecteurs existent en 60, 105 et 175 kW, et les [collecteurs avec bouteille intégrée](/catalog/kolektory-z-hidrostrilkoyu) regroupent la distribution de la chaufferie en un seul module compact. Pour les sites industriels et les immeubles collectifs, il existe la [série Termojet Mega](/catalog/termojet-mega) jusqu’à 2200 kW. Quand faut-il une bouteille de découplage et quand un collecteur suffit-il ? Réponse dans un [article dédié](${GS}).
+Sur la table de démonstration, les participants ont examiné les [bouteilles de découplage hydraulique](/catalog/hidravlichni-rozdilnyky) et les [collecteurs de distribution](/catalog/rozpodilchi-kolektory) dans notre isolation thermique. Les collecteurs existent en 25, 72, 105 et 175 kW, et les [collecteurs avec bouteille intégrée](/catalog/kolektory-z-hidrostrilkoyu) regroupent la distribution de la chaufferie en un seul module compact. Pour les sites industriels et les immeubles collectifs, il existe la [série Termojet Mega](/catalog/termojet-mega) jusqu’à 2200 kW. Quand faut-il une bouteille de découplage et quand un collecteur suffit-il ? Réponse dans un [article dédié](${GS}).
 
 **Groupes de pompage et circulateurs**
 
@@ -212,7 +212,7 @@ Hauptthema war das Wärmeverteilsystem von Termojet — alles zwischen Wärmeerz
 
 **Hydraulische Weichen und Verteiler**
 
-Am Demotisch sahen sich die Teilnehmer [Hydraulische Weichen](/catalog/hidravlichni-rozdilnyky) und [Heizkreisverteiler](/catalog/rozpodilchi-kolektory) in unserer Markendämmung an. Die Verteiler gibt es für 60, 105 und 175 kW, und [Verteiler mit integrierter Weiche](/catalog/kolektory-z-hidrostrilkoyu) fassen die Verteilung des Heizraums in einer kompakten Einheit zusammen. Für Industrieobjekte und Mehrfamilienhäuser gibt es die [Serie Termojet Mega](/catalog/termojet-mega) mit bis zu 2200 kW. Wann eine Hydraulische Weiche nötig ist und wann ein Verteiler genügt, erklärt ein eigener [Artikel](${GS}).
+Am Demotisch sahen sich die Teilnehmer [Hydraulische Weichen](/catalog/hidravlichni-rozdilnyky) und [Heizkreisverteiler](/catalog/rozpodilchi-kolektory) in unserer Markendämmung an. Die Verteiler gibt es für 25, 72, 105 und 175 kW, und [Verteiler mit integrierter Weiche](/catalog/kolektory-z-hidrostrilkoyu) fassen die Verteilung des Heizraums in einer kompakten Einheit zusammen. Für Industrieobjekte und Mehrfamilienhäuser gibt es die [Serie Termojet Mega](/catalog/termojet-mega) mit bis zu 2200 kW. Wann eine Hydraulische Weiche nötig ist und wann ein Verteiler genügt, erklärt ein eigener [Artikel](${GS}).
 
 **Pumpengruppen und Umwälzpumpen**
 
@@ -256,7 +256,7 @@ Tema principală a fost sistemul Termojet de distribuție a căldurii — tot ce
 
 **Butelii de egalizare și distribuitoare**
 
-Pe masa demonstrativă, participanții au examinat [buteliile de egalizare hidraulică](/catalog/hidravlichni-rozdilnyky) și [distribuitoarele](/catalog/rozpodilchi-kolektory) cu izolația termică proprie. Distribuitoarele se produc în variante de 60, 105 și 175 kW, iar [distribuitoarele cu butelie integrată](/catalog/kolektory-z-hidrostrilkoyu) reunesc distribuția centralei termice într-un singur modul compact. Pentru obiective industriale și blocuri de locuințe există [seria Termojet Mega](/catalog/termojet-mega), cu puteri de până la 2200 kW. Când este nevoie de o butelie de egalizare și când este suficient un distribuitor explicăm într-un [articol separat](${GS}).
+Pe masa demonstrativă, participanții au examinat [buteliile de egalizare hidraulică](/catalog/hidravlichni-rozdilnyky) și [distribuitoarele](/catalog/rozpodilchi-kolektory) cu izolația termică proprie. Distribuitoarele se produc în variante de 25, 72, 105 și 175 kW, iar [distribuitoarele cu butelie integrată](/catalog/kolektory-z-hidrostrilkoyu) reunesc distribuția centralei termice într-un singur modul compact. Pentru obiective industriale și blocuri de locuințe există [seria Termojet Mega](/catalog/termojet-mega), cu puteri de până la 2200 kW. Când este nevoie de o butelie de egalizare și când este suficient un distribuitor explicăm într-un [articol separat](${GS}).
 
 **Grupuri de pompare și pompe de circulație**
 
