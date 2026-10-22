@@ -1130,6 +1130,8 @@ export default {
           "googleAds": "(remarketing, Conversion Tracking, Enhanced Conversions) — publicitate personalizată în rețelele Google. Enhanced Conversions: emailul, numărul de telefon și numele sunt transmise în format hash SHA-256.",
           "gtm": "un instrument de gestionare a etichetelor. Nu colectează în mod independent date cu caracter personal.",
           "merchantCenter": "listarea produselor în Google Shopping.",
+          "gcr": "cu acordul dvs. în fereastra afișată după plasarea comenzii, Google primește adresa de e-mail, numărul comenzii și data estimată a livrării pentru a trimite un scurt sondaj despre achiziție (programul Recenzii clienți Google). Fără acord, datele nu sunt transmise.",
+          "gcrName": "Recenzii clienți Google",
           "recaptcha": "protecția formularelor Site-ului împotriva boților. Temei juridic: interesul legitim.",
           "googleMaps": "afișarea unei hărți interactive cu locația biroului.",
           "metaPixel": "măsurarea eficienței publicității pe Facebook/Instagram, crearea de Custom Audiences. Perioadă de păstrare: până la 180 de zile.",

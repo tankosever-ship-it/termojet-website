@@ -10,13 +10,15 @@ import ConsentCheckbox from '../components/ConsentCheckbox'
 import SEO from '../components/SEO'
 import { toUAH } from '../utils/currency'
 import { trackBeginCheckout, trackPurchase } from '../utils/analytics'
+import GoogleReviewsOptIn from '../components/GoogleReviewsOptIn'
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateCartQuantity, cartTotal, placeOrder, eurRate } = useApp()
+  const { cart, removeFromCart, updateCartQuantity, cartTotal, placeOrder, eurRate, lang } = useApp()
   const t = useT()
   const cartT = t('cart')
   const common = t('common')
   const [success, setSuccess] = useState(false)
+  const [gcr, setGcr] = useState(null) // вікно «Відгуки клієнтів Google» після замовлення
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
 
   // ── Нова Пошта (Етап 1): місто + відділення ───────────────────────────
@@ -83,6 +85,7 @@ export default function CartPage() {
       : {}
     const order = await placeOrder({ ...data, ...npFields })
     if (order) trackPurchase({ id: order.id, items: order.items, total: order.total, affiliation: 'cart' })
+    setGcr(order?.gcr || null)
     setSuccess(true)
     reset()
     setNpCity(null); setNpWarehouse(null); setCityQuery(''); setWarehouses([])
@@ -94,6 +97,7 @@ export default function CartPage() {
         <div className="text-5xl mb-4">✅</div>
         <h2 className="text-2xl font-bold mb-2">{cartT.form.success}</h2>
         <LLink to="/catalog" className="btn-primary mt-6">{cartT.toCatalog}</LLink>
+        <GoogleReviewsOptIn data={gcr} lang={lang} />
       </div>
     )
   }

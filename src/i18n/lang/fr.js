@@ -1125,6 +1125,8 @@ export default {
           "googleAds": "(remarketing, Conversion Tracking, Enhanced Conversions) — publicité personnalisée sur les réseaux Google. Enhanced Conversions : e-mail, numéro de téléphone et nom sont transmis au format de hachage SHA-256.",
           "gtm": "outil de gestion des balises. Ne collecte pas de données personnelles de manière autonome.",
           "merchantCenter": "référencement de produits dans Google Shopping.",
+          "gcr": "avec votre accord dans la fenêtre affichée après la commande, Google reçoit votre e-mail, le numéro de commande et la date de livraison estimée afin d'envoyer une courte enquête sur l'achat (programme Avis clients Google). Aucune donnée n'est transmise sans accord.",
+          "gcrName": "Avis clients Google",
           "recaptcha": "protection des formulaires du Site contre les robots. Base juridique : intérêt légitime.",
           "googleMaps": "affichage d'une carte interactive indiquant l'emplacement du bureau.",
           "metaPixel": "mesure de l'efficacité des publicités sur Facebook/Instagram, création de Custom Audiences. Durée de conservation : jusqu'à 180 jours.",

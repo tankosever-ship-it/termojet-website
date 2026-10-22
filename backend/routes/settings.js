@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
 
 router.put('/', requireAdmin, (req, res) => {
   // FIX 2 — adminPassword is handled separately: hash it, and only if non-empty
-  const allowed = ['phone', 'email', 'address', 'workHours', 'telegram', 'homeContent', 'aboutContent']
+  const allowed = ['phone', 'email', 'address', 'workHours', 'telegram', 'homeContent', 'aboutContent',
+    'gcrEnabled', 'gcrDeliveryDays'] // Відгуки клієнтів Google — див. routes/orders.js
   const update = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)')
   const tx = db.transaction(() => {
     for (const key of allowed) {

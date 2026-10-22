@@ -105,6 +105,7 @@ export default function PrivacyPage() {
               <Li><strong>Google Ads</strong> {t('privacy.sections.analyticsServices.items.googleAds')}</Li>
               <Li><strong>Google Tag Manager</strong> — {t('privacy.sections.analyticsServices.items.gtm')}</Li>
               <Li><strong>Google Merchant Center / Shopping</strong> — {t('privacy.sections.analyticsServices.items.merchantCenter')}</Li>
+              <Li><strong>{t('privacy.sections.analyticsServices.items.gcrName')}</strong> — {t('privacy.sections.analyticsServices.items.gcr')}</Li>
               <Li><strong>Google reCAPTCHA</strong> — {t('privacy.sections.analyticsServices.items.recaptcha')}</Li>
               <Li><strong>Google Maps</strong> — {t('privacy.sections.analyticsServices.items.googleMaps')}</Li>
               <Li><strong>Meta Pixel</strong> — {t('privacy.sections.analyticsServices.items.metaPixel')}</Li>

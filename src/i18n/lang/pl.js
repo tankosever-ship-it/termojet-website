@@ -1130,6 +1130,8 @@ export default {
           "googleAds": "(remarketing, Conversion Tracking, Enhanced Conversions) — spersonalizowana reklama w sieciach Google. Enhanced Conversions: adres e-mail, telefon i imię są przekazywane w formacie skrótu SHA-256.",
           "gtm": "narzędzie do zarządzania tagami. Samodzielnie nie gromadzi danych osobowych.",
           "merchantCenter": "umieszczanie produktów w Google Shopping.",
+          "gcr": "za Twoją zgodą w oknie po złożeniu zamówienia Google otrzymuje e-mail, numer zamówienia i szacowaną datę dostawy, aby wysłać krótką ankietę o zakupie (program Opinie konsumenckie Google). Bez zgody dane nie są przekazywane.",
+          "gcrName": "Opinie konsumenckie Google",
           "recaptcha": "ochrona formularzy Serwisu przed botami. Podstawa: uzasadniony interes.",
           "googleMaps": "wyświetlanie interaktywnej mapy z lokalizacją biura.",
           "metaPixel": "pomiar skuteczności reklamy na Facebooku/Instagramie, tworzenie Custom Audiences. Okres przechowywania: do 180 dni.",

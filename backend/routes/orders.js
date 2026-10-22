@@ -8,6 +8,31 @@ const { getEurRate, toUAH } = require('../currency')
 
 const router = express.Router()
 
+// Відгуки клієнтів Google (Merchant Center): дані для вікна згоди на сторінці підтвердження.
+// Вимикач — налаштування gcrEnabled = '1' (вмикати після прийняття умов програми в
+// Merchant Center); gcrDeliveryDays — скільки днів від замовлення до отримання (опитування
+// Google надсилає після цієї дати). Без валідного email вікно не показуємо — опитування
+// приходить саме на нього.
+const GCR_MERCHANT_ID = 5815263749
+const getSetting = db.prepare('SELECT value FROM settings WHERE key = ?')
+function gcrOptIn(orderId, email) {
+  if (getSetting.get('gcrEnabled')?.value !== '1') return null
+  const mail = String(email || '').trim()
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return null
+  const days = parseInt(getSetting.get('gcrDeliveryDays')?.value, 10) || 7
+  // Дата за київським часом, щоб замовлення після півночі UTC не зсувалось на день
+  const kyivToday = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' }))
+  kyivToday.setDate(kyivToday.getDate() + days)
+  const pad = n => String(n).padStart(2, '0')
+  return {
+    merchant_id: GCR_MERCHANT_ID,
+    order_id: String(orderId),
+    email: mail,
+    delivery_country: 'UA', // доставка лише Новою Поштою по Україні
+    estimated_delivery_date: `${kyivToday.getFullYear()}-${pad(kyivToday.getMonth() + 1)}-${pad(kyivToday.getDate())}`,
+  }
+}
+
 router.get('/', requireAdmin, (req, res) => {
   const rows = db.prepare('SELECT * FROM orders ORDER BY created_at DESC').all()
   res.json(rows.map(r => ({ ...r, items: JSON.parse(r.items), utm: JSON.parse(r.utm || '{}') })))
@@ -104,7 +129,7 @@ router.post('/', async (req, res) => {
     payment: payment || '',
   })
 
-  res.status(201).json({ id: result.lastInsertRowid })
+  res.status(201).json({ id: result.lastInsertRowid, gcr: gcrOptIn(result.lastInsertRowid, email) })
 })
 
 router.put('/:id', requireAdmin, (req, res) => {

@@ -417,6 +417,7 @@ export function AppProvider({ children, initialData = null }) {
         })
         const data = await res.json()
         order.id = data.id
+        order.gcr = data.gcr || null // вікно згоди «Відгуки клієнтів Google» (null — вимкнено)
       } catch {}
     }
     setOrders(prev => [{ ...order, id: order.id || Date.now() }, ...prev])
