@@ -8,9 +8,24 @@ const SCRIPT_SRC = 'https://apis.google.com/js/platform.js?onload=renderOptIn'
 // Мова вікна — як на сайті; коди мов Google збігаються з нашими
 const GCR_LANGS = ['uk', 'en', 'pl', 'fr', 'de', 'ro']
 
+// Один показ на замовлення: номери вже показаних — у sessionStorage (перемикання мови на
+// екрані подяки чи повторний рендер не викличуть вікно вдруге). Після оновлення сторінки
+// екрана подяки вже немає (кошик порожній), тож і там повтору не буде.
+const SHOWN_KEY = 'tj2_gcr_shown'
+function alreadyShown(orderId) {
+  try { return JSON.parse(sessionStorage.getItem(SHOWN_KEY) || '[]').includes(orderId) } catch { return false }
+}
+function markShown(orderId) {
+  try {
+    const ids = JSON.parse(sessionStorage.getItem(SHOWN_KEY) || '[]')
+    sessionStorage.setItem(SHOWN_KEY, JSON.stringify([...ids, orderId].slice(-20)))
+  } catch { /* приватний режим — не критично */ }
+}
+
 export default function GoogleReviewsOptIn({ data, lang }) {
   useEffect(() => {
-    if (!data) return
+    if (!data || alreadyShown(data.order_id)) return
+    markShown(data.order_id)
     window.___gcfg = { lang: GCR_LANGS.includes(lang) ? lang : 'uk' }
     const render = () => {
       window.gapi.load('surveyoptin', () => {
@@ -27,7 +42,7 @@ export default function GoogleReviewsOptIn({ data, lang }) {
       s.defer = true
       document.body.appendChild(s)
     }
-  }, [data, lang])
+  }, [data]) // eslint-disable-line react-hooks/exhaustive-deps -- мова береться на момент показу
 
   return null
 }

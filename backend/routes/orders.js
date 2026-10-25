@@ -15,7 +15,28 @@ const router = express.Router()
 // приходить саме на нього.
 const GCR_MERCHANT_ID = 5815263749
 const getSetting = db.prepare('SELECT value FROM settings WHERE key = ?')
-function gcrOptIn(orderId, email) {
+const getSpecs = db.prepare('SELECT specs FROM products WHERE id = ?')
+// Штрихкод товару — характеристика «GTIN» / «EAN» / «Штрихкод» (зараз ні в кого немає; коли
+// з'являться коди GS1, достатньо додати характеристику в адмінці). Беремо лише валідні
+// GTIN-8/12/13/14 з правильною контрольною цифрою — внутрішні артикули сюди не потрапляють.
+const GTIN_KEYS = ['GTIN', 'EAN', 'Штрихкод']
+function validGtin(code) {
+  if (!/^(\d{8}|\d{12,14})$/.test(code)) return false
+  const d = code.split('').map(Number)
+  const check = d.pop()
+  const sum = d.reverse().reduce((acc, n, i) => acc + n * (i % 2 === 0 ? 3 : 1), 0)
+  return (10 - (sum % 10)) % 10 === check
+}
+function itemGtin(productId) {
+  let specs = {}
+  try { specs = JSON.parse(getSpecs.get(productId)?.specs || '{}') } catch {}
+  for (const k of GTIN_KEYS) {
+    const code = String(specs[k] ?? '').replace(/\s+/g, '')
+    if (validGtin(code)) return code
+  }
+  return null
+}
+function gcrOptIn(orderId, email, items) {
   if (getSetting.get('gcrEnabled')?.value !== '1') return null
   const mail = String(email || '').trim()
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return null
@@ -24,13 +45,17 @@ function gcrOptIn(orderId, email) {
   const kyivToday = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' }))
   kyivToday.setDate(kyivToday.getDate() + days)
   const pad = n => String(n).padStart(2, '0')
-  return {
+  const gcr = {
     merchant_id: GCR_MERCHANT_ID,
     order_id: String(orderId),
     email: mail,
     delivery_country: 'UA', // доставка лише Новою Поштою по Україні
     estimated_delivery_date: `${kyivToday.getFullYear()}-${pad(kyivToday.getMonth() + 1)}-${pad(kyivToday.getDate())}`,
   }
+  // products — лише товари зі штрихкодом; якщо штрихкоду немає в жодного, поля немає зовсім
+  const gtins = [...new Set((Array.isArray(items) ? items : []).map(i => i && i.id && itemGtin(i.id)).filter(Boolean))]
+  if (gtins.length) gcr.products = gtins.map(gtin => ({ gtin }))
+  return gcr
 }
 
 router.get('/', requireAdmin, (req, res) => {
@@ -129,7 +154,7 @@ router.post('/', async (req, res) => {
     payment: payment || '',
   })
 
-  res.status(201).json({ id: result.lastInsertRowid, gcr: gcrOptIn(result.lastInsertRowid, email) })
+  res.status(201).json({ id: result.lastInsertRowid, gcr: gcrOptIn(result.lastInsertRowid, email, items) })
 })
 
 router.put('/:id', requireAdmin, (req, res) => {
