@@ -7,10 +7,11 @@ import { effectivePrice } from './sale'
 
 // «Шафа колекторна внутрішня Termojet №03 (8-10 виходів, 715×575×110 мм)»
 //   → { outlets: [8, 10], dims: [715, 575, 110], num: '03' }
-// «Колектор … на 12 виходів …» → { outlets: [12, 12] }
+// «Колектор … на 12 виходів …» / «Колектор для теплої підлоги на 12 контурів …» → { outlets: [12, 12] }
+// (колектори TJ-W з 28.10.2026 названо за контурами: контур = вихід)
 export function parseName(name = '') {
   const range = name.match(/(\d+)\s*[-–]\s*(\d+)\s*вих(?:ід|од)/i)     // «2-4 виходів»
-  const single = name.match(/на\s+(\d+)\s*вих(?:ід|од)/i)               // «на 2 виходи», «на 10 виходів»
+  const single = name.match(/на\s+(\d+)\s*(?:вих(?:ід|од)|контур)/i)     // «на 2 виходи», «на 10 контурів»
   const dims = name.match(/(\d+)\s*[×x]\s*(\d+)\s*[×x]\s*(\d+)\s*мм/i)
   const num = name.match(/№\s*(\d+)/)
   return {

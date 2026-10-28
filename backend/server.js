@@ -1117,7 +1117,14 @@ function handleProduct(lang) {
       const loc = pickLang(row, lang)
       let html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
       const title = loc.seo_title || `${loc.name} | Termojet`
-      const desc = (loc.meta_description || stripHtml(loc.short_desc) || stripHtml(loc.description) || DEFAULT_TITLE).slice(0, 200)
+      const eurRate = await getEurRate()
+      // {price} у meta_description — актуальна ціна товару в грн (за курсом, акційна, якщо є),
+      // як на картці; немає ціни — прибираємо разом зі словом перед токеном («Ціна {price},»)
+      const priceUah = priceToUah(effPrice(row), row.currency, eurRate)
+      const fillPrice = s => (priceUah
+        ? s.replace(/\{price\}/g, fmtUahLang(priceUah, lang))
+        : s.replace(/\s*\S+\s\{price\}[,.]?/g, ''))
+      const desc = fillPrice(loc.meta_description || stripHtml(loc.short_desc) || stripHtml(loc.description) || DEFAULT_TITLE).slice(0, 200)
       const img = absImg(row.image)
       const catEnc = encodeURIComponent(req.params.cat)
       const slugEnc = encodeURIComponent(req.params.slug)
@@ -1126,7 +1133,6 @@ function handleProduct(lang) {
       const bodyText = (stripHtml(loc.description) || stripHtml(loc.short_desc) || desc).slice(0, 600)
       const h1 = loc.name
       const alternates = buildAlternates(logicalPath)
-      const eurRate = await getEurRate()
       const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang, eurRate })
       html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
       // SSR-lite: повний семантичний HTML товару в #seo-content (бачать краулери)

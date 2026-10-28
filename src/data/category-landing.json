@@ -780,6 +780,10 @@
             "a": "За кількістю контурів: кожен контур теплої підлоги підключається до окремого виходу колектора. Termojet виготовляє колектори з витратомірами на 2–15 виходів."
           },
           {
+            "q": "Скільки виходів має бути на колекторі?",
+            "a": "Стільки, скільки контурів теплої підлоги у вашій системі: кожен контур підключається до одного виходу на подавальній і одного на зворотній гребінці. Один контур із труби 16 мм зазвичай розраховують на 10–15 м², щоб довжина петлі не перевищувала 80–100 м, тому кімнати понад 15–20 м² ділять на 2 контури. Наприклад, для 120 м² теплої підлоги знадобиться 8–10 контурів, тобто колектор на 8–10 виходів. Termojet виготовляє колектори на 2–15 виходів, а колекторну шафу підбирають під довжину колектора."
+          },
+          {
             "q": "Навіщо потрібні витратоміри на колекторі?",
             "a": "Витратоміри 0–5 л/хв на кожному виході показують витрату теплоносія в контурі й дозволяють збалансувати контури різної довжини."
           },
@@ -879,6 +883,10 @@
           {
             "q": "How do I choose an underfloor heating manifold?",
             "a": "By the number of circuits: each underfloor heating circuit is connected to a separate manifold outlet. Termojet makes manifolds with flow meters for 2–15 outlets."
+          },
+          {
+            "q": "How many outlets should a manifold have?",
+            "a": "As many as there are underfloor heating circuits in your system: each circuit connects to one outlet on the supply bar and one on the return bar. One circuit of 16 mm pipe usually covers 10–15 m², so that the loop length does not exceed 80–100 m; rooms over 15–20 m² are therefore split into 2 circuits. For example, 120 m² of underfloor heating needs 8–10 circuits, i.e. a manifold with 8–10 outlets. Termojet makes manifolds with 2–15 outlets, and the manifold cabinet is chosen to match the manifold length."
           },
           {
             "q": "Why does a manifold need flow meters?",
@@ -982,6 +990,10 @@
             "a": "Według liczby obwodów: każdy obwód ogrzewania podłogowego podłącza się do osobnego wyjścia rozdzielacza. Termojet produkuje rozdzielacze z przepływomierzami na 2–15 wyjść."
           },
           {
+            "q": "Ile wyjść powinien mieć rozdzielacz?",
+            "a": "Tyle, ile obwodów ogrzewania podłogowego jest w instalacji: każdy obwód podłącza się do jednego wyjścia na belce zasilającej i jednego na powrotnej. Jeden obwód z rury 16 mm zwykle przypada na 10–15 m², aby długość pętli nie przekraczała 80–100 m, dlatego pomieszczenia powyżej 15–20 m² dzieli się na 2 obwody. Na przykład dla 120 m² ogrzewania podłogowego potrzeba 8–10 obwodów, czyli rozdzielacza na 8–10 wyjść. Termojet produkuje rozdzielacze na 2–15 wyjść, a szafkę rozdzielacza dobiera się do jego długości."
+          },
+          {
             "q": "Po co na rozdzielaczu przepływomierze?",
             "a": "Przepływomierze 0–5 l/min na każdym wyjściu pokazują przepływ czynnika w obwodzie i pozwalają zrównoważyć obwody o różnej długości."
           },
@@ -1081,6 +1093,10 @@
           {
             "q": "Comment choisir un collecteur pour plancher chauffant ?",
             "a": "Selon le nombre de circuits : chaque circuit du plancher chauffant se raccorde à une sortie distincte du collecteur. Termojet fabrique des collecteurs à débitmètres de 2 à 15 sorties."
+          },
+          {
+            "q": "Combien de sorties doit avoir un collecteur ?",
+            "a": "Autant que de circuits de plancher chauffant dans votre installation : chaque circuit se raccorde à une sortie sur la barre de départ et à une sur la barre de retour. Un circuit en tube de 16 mm couvre généralement 10 à 15 m², afin que la boucle ne dépasse pas 80 à 100 m ; les pièces de plus de 15 à 20 m² sont donc divisées en 2 circuits. Par exemple, 120 m² de plancher chauffant nécessitent 8 à 10 circuits, soit un collecteur de 8 à 10 sorties. Termojet fabrique des collecteurs de 2 à 15 sorties, et l'armoire de collecteur est choisie selon la longueur du collecteur."
           },
           {
             "q": "À quoi servent les débitmètres sur le collecteur ?",
@@ -1184,6 +1200,10 @@
             "a": "Nach der Anzahl der Heizkreise: Jeder Fußbodenheizkreis wird an einen eigenen Abgang des Verteilers angeschlossen. Termojet fertigt Verteiler mit Durchflussmessern für 2–15 Abgänge."
           },
           {
+            "q": "Wie viele Abgänge sollte ein Verteiler haben?",
+            "a": "So viele, wie Fußbodenheizkreise in Ihrer Anlage vorhanden sind: Jeder Heizkreis wird an einen Abgang am Vorlauf- und einen am Rücklaufbalken angeschlossen. Ein Heizkreis aus 16-mm-Rohr wird meist für 10–15 m² ausgelegt, damit die Schleifenlänge 80–100 m nicht überschreitet; Räume über 15–20 m² werden daher auf 2 Heizkreise aufgeteilt. Für 120 m² Fußbodenheizung braucht man zum Beispiel 8–10 Heizkreise, also einen Verteiler mit 8–10 Abgängen. Termojet fertigt Verteiler mit 2–15 Abgängen, der Verteilerschrank wird passend zur Verteilerlänge gewählt."
+          },
+          {
             "q": "Wozu braucht ein Verteiler Durchflussmesser?",
             "a": "Durchflussmesser von 0–5 l/min an jedem Abgang zeigen den Durchfluss im Heizkreis an und ermöglichen den Abgleich unterschiedlich langer Kreise."
           },
@@ -1283,6 +1303,10 @@
           {
             "q": "Cum aleg un distribuitor pentru încălzire prin pardoseală?",
             "a": "După numărul de circuite: fiecare circuit al încălzirii în pardoseală se racordează la o ieșire separată a distribuitorului. Termojet produce distribuitoare cu debitmetre pentru 2–15 ieșiri."
+          },
+          {
+            "q": "Câte ieșiri trebuie să aibă distribuitorul?",
+            "a": "Atâtea câte circuite de încălzire prin pardoseală are instalația: fiecare circuit se racordează la o ieșire pe bara de tur și la una pe bara de retur. Un circuit din țeavă de 16 mm acoperă de obicei 10–15 m², astfel încât lungimea buclei să nu depășească 80–100 m; de aceea camerele de peste 15–20 m² se împart în 2 circuite. De exemplu, pentru 120 m² de încălzire prin pardoseală sunt necesare 8–10 circuite, adică un distribuitor cu 8–10 ieșiri. Termojet produce distribuitoare cu 2–15 ieșiri, iar dulapul pentru distribuitor se alege după lungimea distribuitorului."
           },
           {
             "q": "De ce are nevoie distribuitorul de debitmetre?",
