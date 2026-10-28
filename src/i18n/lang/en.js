@@ -291,6 +291,7 @@ export default {
     "allProducts": "All products",
     "accordion": {
       "productionTitle": "Own production",
+      "productionHint": "Ukrainian manufacturer since 2002",
       "productionDesc1": "Termojet is a Ukrainian manufacturer of boiler room equipment since 2002. Full cycle — from design and metalworking to final assembly, thermal insulation and quality control — at our own facilities in Kyiv and Zhytomyr.",
       "productionDesc2": "Own production means quality control at every stage, reliable lead times and a warranty on all products.",
       "productionStat1": "production area",
@@ -313,6 +314,7 @@ export default {
       "deliveryMethod3Title": "Self-pickup",
       "deliveryMethod3Desc": "From offices/warehouses in Kyiv and Zhytomyr.",
       "paymentTitle": "Payment",
+      "paymentHint": "Invoice with or without VAT",
       "paymentMethod1Title": "Online card payment",
       "paymentMethod1Desc": "Visa / Mastercard via secure payment.",
       "paymentMethod2Title": "Bank transfer with VAT",

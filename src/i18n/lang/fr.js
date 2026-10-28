@@ -291,6 +291,7 @@ export default {
     "allProducts": "Tous les produits",
     "accordion": {
       "productionTitle": "Production propre",
+      "productionHint": "Fabricant ukrainien depuis 2002",
       "productionDesc1": "Termojet est un fabricant ukrainien d'équipements de chaufferies depuis 2002. Cycle complet — de la conception et de la métallurgie jusqu'à l'assemblage final, l'isolation thermique et le contrôle qualité — dans nos propres installations à Kyiv et Zhytomyr.",
       "productionDesc2": "La production propre garantit le contrôle qualité à chaque étape, des délais fiables et une garantie sur tous les produits.",
       "productionStat1": "surface de production",
@@ -313,6 +314,7 @@ export default {
       "deliveryMethod3Title": "Retrait en personne",
       "deliveryMethod3Desc": "Dans nos bureaux/entrepôts à Kyiv et Zhytomyr.",
       "paymentTitle": "Paiement",
+      "paymentHint": "Facture avec ou sans TVA",
       "paymentMethod1Title": "Paiement en ligne par carte",
       "paymentMethod1Desc": "Visa / Mastercard via paiement sécurisé.",
       "paymentMethod2Title": "Virement bancaire avec TVA",

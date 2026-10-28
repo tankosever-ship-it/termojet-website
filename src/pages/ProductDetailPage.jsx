@@ -92,20 +92,44 @@ function renderDescriptionBody(desc, t, lang) {
 }
 
 // ── Trust-блок (під галереєю): акордеони як на оригінальному сайті ───────────────
-const ACCORDION_ORDER = ['production', 'delivery', 'payment', 'warranty']
+// Гарантія — першою і виділена (запит маркетингу 28.10.2026): найсильніший аргумент довіри
+const ACCORDION_ORDER = ['warranty', 'production', 'delivery', 'payment']
 
-function Accordion({ icon: Icon, title, defaultOpen, children }) {
+// hint — коротка суть під заголовком, щоб аргумент було видно без розкриття;
+// highlight — акцентна картка (тонований фон, помаранчева рамка, заливна іконка)
+function Accordion({ icon: Icon, title, hint, highlight, defaultOpen, children }) {
   const [open, setOpen] = useState(!!defaultOpen)
+  const [hover, setHover] = useState(false)
   return (
-    <div style={{ border: '1px solid var(--border)', borderRadius: 10, background: '#fff', overflow: 'hidden' }}>
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        border: `1px solid ${highlight || hover || open ? 'var(--accent)' : 'var(--border)'}`,
+        borderLeft: '4px solid var(--accent)',
+        borderRadius: 10,
+        background: highlight ? '#FFF4EC' : '#fff',
+        overflow: 'hidden',
+        boxShadow: hover ? '0 4px 14px rgba(255, 85, 0, .14)' : 'none',
+        transition: 'border-color .2s, box-shadow .2s',
+      }}
+    >
       <button
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
-        style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 12, padding: '15px 18px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+        style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
       >
-        <span style={{ color: 'var(--accent)', flexShrink: 0, display: 'flex' }}><Icon size={18} /></span>
-        <span style={{ flex: 1, fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 15.5, fontWeight: 700, color: 'var(--ink-100)' }}>{title}</span>
-        <ChevronDown size={18} style={{ color: 'var(--text-muted)', flexShrink: 0, transition: 'transform .2s', transform: open ? 'rotate(180deg)' : 'none' }} />
+        <span style={{
+          width: 38, height: 38, borderRadius: '50%', flexShrink: 0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: highlight ? 'var(--accent)' : 'rgba(255, 85, 0, .1)',
+          color: highlight ? '#fff' : 'var(--accent)',
+        }}><Icon size={19} /></span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontFamily: "'Archivo', system-ui, sans-serif", fontSize: 15.5, fontWeight: 800, color: 'var(--ink-100)', lineHeight: 1.25 }}>{title}</span>
+          {hint && !open && <span style={{ display: 'block', fontSize: 13, color: highlight ? 'var(--accent)' : 'var(--text-muted)', fontWeight: highlight ? 600 : 400, marginTop: 3, lineHeight: 1.35 }}>{hint}</span>}
+        </span>
+        <ChevronDown size={18} style={{ color: 'var(--accent)', flexShrink: 0, transition: 'transform .2s', transform: open ? 'rotate(180deg)' : 'none' }} />
       </button>
       {open && <div style={{ padding: '2px 18px 18px' }}>{children}</div>}
     </div>
@@ -121,7 +145,7 @@ function TrustAccordions({ t, skip = [] }) {
       {ACCORDION_ORDER.filter(key => !skip.includes(key)).map((key) => {
         const d = accordionContent(key, t)
         return (
-          <Accordion key={key} icon={d.icon} title={d.title}>
+          <Accordion key={key} icon={d.icon} title={d.title} hint={d.hint} highlight={key === 'warranty'}>
             {d.body}
           </Accordion>
         )
@@ -136,6 +160,7 @@ function accordionContent(key, t) {
     case 'production':
       return {
         title: t('product.accordion.productionTitle'),
+        hint: t('product.accordion.productionHint'),
         icon: Factory,
         body: (
           <>
@@ -166,6 +191,7 @@ function accordionContent(key, t) {
     case 'warranty':
       return {
         title: t('product.accordion.warrantyTitle'),
+        hint: t('product.accordion.warrantyItem1'),
         icon: ShieldCheck,
         body: (
           <>
@@ -190,6 +216,7 @@ function accordionContent(key, t) {
     case 'delivery':
       return {
         title: t('product.accordion.deliveryTitle'),
+        hint: [t('product.accordion.deliveryMethod1Title'), t('product.accordion.deliveryMethod2Title'), t('product.accordion.deliveryMethod3Title')].join(' · '),
         icon: Truck,
         body: (
           <ul style={{ listStyle: 'none', display: 'grid', gap: 13 }}>
@@ -212,6 +239,7 @@ function accordionContent(key, t) {
     case 'payment':
       return {
         title: t('product.accordion.paymentTitle'),
+        hint: t('product.accordion.paymentHint'),
         icon: CreditCard,
         body: (
           <ul style={{ listStyle: 'none', display: 'grid', gap: 13 }}>

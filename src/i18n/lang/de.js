@@ -291,6 +291,7 @@ export default {
     "allProducts": "Alle Produkte",
     "accordion": {
       "productionTitle": "Eigenproduktion",
+      "productionHint": "Ukrainischer Hersteller seit 2002",
       "productionDesc1": "Termojet ist seit 2002 ein ukrainischer Hersteller von Kesselraumausrüstungen. Vollständiger Zyklus — von Design und Metallbearbeitung bis zur Endmontage, Wärmedämmung und Qualitätskontrolle — in eigenen Produktionsstätten in Kyiv und Zhytomyr.",
       "productionDesc2": "Eigenproduktion bedeutet Qualitätskontrolle auf jeder Stufe, zuverlässige Lieferzeiten und Garantie auf alle Produkte.",
       "productionStat1": "Produktionsfläche",
@@ -313,6 +314,7 @@ export default {
       "deliveryMethod3Title": "Selbstabholung",
       "deliveryMethod3Desc": "Aus Büros/Lagern in Kyiv und Zhytomyr.",
       "paymentTitle": "Zahlung",
+      "paymentHint": "Rechnung mit oder ohne MwSt.",
       "paymentMethod1Title": "Online-Kartenzahlung",
       "paymentMethod1Desc": "Visa / Mastercard über sichere Zahlung.",
       "paymentMethod2Title": "Banküberweisung mit MwSt.",

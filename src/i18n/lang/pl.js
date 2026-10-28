@@ -291,6 +291,7 @@ export default {
     "allProducts": "Wszystkie produkty",
     "accordion": {
       "productionTitle": "Własna produkcja",
+      "productionHint": "Ukraiński producent od 2002 roku",
       "productionDesc1": "Termojet to ukraiński producent urządzeń do kotłowni od 2002 roku. Pełny cykl — od projektowania i obróbki metali po montaż końcowy, izolację termiczną i kontrolę jakości — we własnych obiektach w Kijowie i Żytomierzu.",
       "productionDesc2": "Własna produkcja to kontrola jakości na każdym etapie, stabilne terminy i gwarancja na wszystkie produkty.",
       "productionStat1": "powierzchnia produkcyjna",
@@ -313,6 +314,7 @@ export default {
       "deliveryMethod3Title": "Odbiór własny",
       "deliveryMethod3Desc": "Z biur/magazynów w Kijowie i Żytomierzu.",
       "paymentTitle": "Płatność",
+      "paymentHint": "Faktura z VAT lub bez VAT",
       "paymentMethod1Title": "Płatność kartą online",
       "paymentMethod1Desc": "Visa / Mastercard przez bezpieczną płatność.",
       "paymentMethod2Title": "Przelew bankowy z VAT",

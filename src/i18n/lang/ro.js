@@ -291,6 +291,7 @@ export default {
     "allProducts": "Toate produsele",
     "accordion": {
       "productionTitle": "Producție proprie",
+      "productionHint": "Producător ucrainean din 2002",
       "productionDesc1": "Termojet este un producător ucrainean de echipamente pentru centrale termice din 2002. Ciclu complet — de la proiectare și prelucrarea metalelor până la asamblarea finală, izolarea termică și controlul calității — în unitățile noastre proprii din Kiev și Jîtomîr.",
       "productionDesc2": "Producția proprie înseamnă control al calității la fiecare etapă, termene de livrare fiabile și garanție pentru toate produsele.",
       "productionStat1": "suprafață de producție",
@@ -313,6 +314,7 @@ export default {
       "deliveryMethod3Title": "Ridicare personală",
       "deliveryMethod3Desc": "De la birourile/depozitele din Kiev și Jîtomîr.",
       "paymentTitle": "Plată",
+      "paymentHint": "Factură cu sau fără TVA",
       "paymentMethod1Title": "Plată online cu cardul",
       "paymentMethod1Desc": "Visa / Mastercard prin plată securizată.",
       "paymentMethod2Title": "Transfer bancar cu TVA",
