@@ -8,7 +8,7 @@ import { sizedImg } from '../utils/imgUrl'
 import { useT } from '../i18n/useT'
 import ConsentCheckbox from '../components/ConsentCheckbox'
 import SEO from '../components/SEO'
-import { toUAH } from '../utils/currency'
+import { toUAH, groupDigits } from '../utils/currency'
 import { trackBeginCheckout, trackPurchase } from '../utils/analytics'
 import GoogleReviewsOptIn from '../components/GoogleReviewsOptIn'
 
@@ -165,7 +165,7 @@ export default function CartPage() {
           <div className="card p-6 h-fit">
             <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-100">
               <span className="font-semibold">{cartT.total}</span>
-              <span className="text-xl font-black">{cartTotal.toLocaleString()} {common.uah}</span>
+              <span className="text-xl font-black">{groupDigits(cartTotal)} {common.uah}</span>
             </div>
 
             <h3 className="font-semibold mb-4">{cartT.form.title}</h3>

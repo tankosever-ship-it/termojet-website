@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useMemo, useRef, useCal
 import { PUBLIC_LANG_CODES, isLangLoaded, loadLang } from '../i18n/translations'
 import { mergeHomeContent } from '../data/homeContent'
 import { mergeAboutContent } from '../data/aboutContent'
-import { fetchEurRate } from '../utils/currency'
+import { fetchEurRate, toUAH } from '../utils/currency'
 import { getUTM } from '../utils/utm'
 import { effectivePrice, isOnSale } from '../utils/sale'
 import { trackAddToCart, trackRemoveFromCart } from '../utils/analytics'
@@ -345,11 +345,9 @@ export function AppProvider({ children, initialData = null }) {
   }
   function clearCart() { setCart([]) }
 
-  const cartTotal = cart.reduce((sum, i) => {
-    const price = parseFloat(i.price) || 0
-    const inUah = i.currency === 'EUR' && eurRate ? price * eurRate : price
-    return sum + inUah * i.quantity
-  }, 0)
+  // Сума в цілих гривнях: ціну одиниці округлюємо так само, як у рядку кошика й на сервері
+  // (toUAH), інакше «Разом» показувало копійки (EUR × курс = 7 535,788 грн)
+  const cartTotal = cart.reduce((sum, i) => sum + Math.round(toUAH(i.price, i.currency || 'UAH', eurRate) ?? (parseFloat(i.price) || 0)) * i.quantity, 0)
   const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0)
 
   // Admin auth
