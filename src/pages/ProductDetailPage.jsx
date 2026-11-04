@@ -16,6 +16,7 @@ import { imgUrl, sizedImg, srcSet } from '../utils/imgUrl'
 import { CATEGORIES } from '../data/categories'
 
 import { getDocsForProduct } from '../data/docsMapping'
+import { getVideosForProduct } from '../data/productVideos'
 import { getModels3D } from '../data/models3d'
 import SEO from '../components/SEO'
 import { trackViewItem } from '../utils/analytics'
@@ -264,7 +265,34 @@ function accordionContent(key, t) {
 }
 
 // ── ImageGallery ───────────────────────────────────────────────────────────────
-function ImageGallery({ images, name, model3d, t }) {
+// Слайд галереї з YouTube: до кліку лише постер, плеєр вантажиться на вимогу — сторінка
+// не тягне скрипти YouTube, поки відео не запустили (LCP головного фото не страждає).
+function VideoSlide({ video, label }) {
+  const [playing, setPlaying] = useState(false)
+  if (playing) {
+    return (
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`}
+        title={video.title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, background: '#000', zIndex: 4 }}
+      />
+    )
+  }
+  return (
+    <button type="button" onClick={() => setPlaying(true)} aria-label={`${label}: ${video.title}`}
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', padding: 0, border: 0, background: '#0D0D0D', cursor: 'pointer' }}>
+      <img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} />
+      <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: 72, height: 72, borderRadius: '50%', background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 24px rgba(0,0,0,.35)' }}>
+        <Play size={30} fill="currentColor" style={{ marginLeft: 4 }} />
+      </span>
+    </button>
+  )
+}
+
+function ImageGallery({ images, name, model3d, videos = [], t }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const [mv3dReady, setMv3dReady] = useState(false)
@@ -275,8 +303,10 @@ function ImageGallery({ images, name, model3d, t }) {
   const slides = useMemo(() => {
     const s = (images?.length > 0 ? images : []).map(src => ({ type: 'img', src }))
     if (model3d) s.splice(s.length > 0 ? 1 : 0, 0, { type: '3d', src: model3d })
+    // Відео — одразу після головного фото, щоб його було видно серед перших мініатюр
+    s.splice(s.length > 0 ? 1 : 0, 0, ...videos.map(video => ({ type: 'video', video })))
     return s
-  }, [images, model3d])
+  }, [images, model3d, videos])
   const total = slides.length
   const current = slides[active] || null
   const main = current?.type === 'img' ? current.src : null
@@ -360,13 +390,14 @@ function ImageGallery({ images, name, model3d, t }) {
     return (
       <button
         onClick={() => setActive(idx)}
-        aria-label={slide.type === '3d' ? t('product.gallery.model3dLabel') : `${t('product.gallery.photoLabel')} ${idx + 1}`}
+        aria-label={slide.type === '3d' ? t('product.gallery.model3dLabel') : slide.type === 'video' ? t('product.gallery.videoLabel') : `${t('product.gallery.photoLabel')} ${idx + 1}`}
         style={{
           width: dim, height: dim, flexShrink: 0,
           border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border)'}`,
           boxShadow: isActive ? '0 0 0 1px var(--accent)' : 'none',
-          background: slide.type === '3d' ? '#0E3A57' : '#fff',
-          padding: 5,
+          background: slide.type === '3d' ? '#0E3A57' : slide.type === 'video' ? '#0D0D0D' : '#fff',
+          padding: slide.type === 'video' ? 0 : 5,
+          position: 'relative', overflow: 'hidden',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexDirection: 'column', gap: 3,
           transition: 'border-color .2s, box-shadow .2s',
@@ -377,6 +408,14 @@ function ImageGallery({ images, name, model3d, t }) {
           <>
             <Box size={20} style={{ color: '#9CC6E0' }} />
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, fontWeight: 700, letterSpacing: '.1em', color: '#9CC6E0' }}>3D</span>
+          </>
+        ) : slide.type === 'video' ? (
+          <>
+            <img src={`https://i.ytimg.com/vi/${slide.video.id}/mqdefault.jpg`} alt="" loading="lazy" decoding="async"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: .75 }} />
+            <span style={{ position: 'relative', width: 26, height: 26, borderRadius: '50%', background: 'var(--accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Play size={12} fill="currentColor" style={{ marginLeft: 1 }} />
+            </span>
           </>
         ) : (
           // Мініатюри — lazy: у розмітці вони стоять ПЕРЕД головним фото, тож без цього
@@ -423,7 +462,7 @@ function ImageGallery({ images, name, model3d, t }) {
           onTouchEnd={onTouchEnd}
         >
           {/* Stock badge */}
-          <span style={{
+          {current?.type !== 'video' && <span style={{
             position: 'absolute', top: 14, left: 14, zIndex: 3,
             display: 'inline-flex', alignItems: 'center', gap: 6,
             fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase',
@@ -432,10 +471,10 @@ function ImageGallery({ images, name, model3d, t }) {
           }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#16A34A', boxShadow: '0 0 0 3px rgba(22,163,74,.15)', flexShrink: 0 }} />
             {t('product.inStock')}
-          </span>
+          </span>}
 
           {/* 3D badge */}
-          {model3d && (
+          {model3d && current?.type !== 'video' && (
             <span style={{
               position: 'absolute', top: 14, right: 14, zIndex: 3,
               display: 'inline-flex', alignItems: 'center', gap: 5,
@@ -498,6 +537,8 @@ function ImageGallery({ images, name, model3d, t }) {
                 </>
               )}
             </div>
+          ) : current?.type === 'video' ? (
+            <VideoSlide key={current.video.id} video={current.video} label={t('product.gallery.videoLabel')} />
           ) : main ? (
             <img
               src={main} alt={name}
@@ -557,6 +598,8 @@ function ImageGallery({ images, name, model3d, t }) {
                 <span className="text-xs font-medium">{t('product.gallery.loading3d')}</span>
               </div>
             )
+          ) : current?.type === 'video' ? (
+            <VideoSlide key={current.video.id} video={current.video} label={t('product.gallery.videoLabel')} />
           ) : main ? (
             <img src={main} alt={name} className="w-full h-full object-contain p-6 cursor-zoom-in" onClick={() => setLightbox(true)} draggable={false}
               // Головне фото — LCP-елемент сторінки товару. Без цього браузер давав йому
@@ -613,6 +656,10 @@ function ImageGallery({ images, name, model3d, t }) {
             <img src={main} alt={name} className="max-h-[82vh] max-w-[82vw] object-contain" onClick={e => e.stopPropagation()} draggable={false} />
           ) : current?.type === '3d' && mv3dReady ? (
             <model-viewer src={current.src} camera-controls="" auto-rotate="" style={{ width: '82vw', height: '82vh' }} onClick={e => e.stopPropagation()} />
+          ) : current?.type === 'video' ? (
+            <div style={{ position: 'relative', width: '82vw', maxWidth: 1100, aspectRatio: '16/9' }} onClick={e => e.stopPropagation()}>
+              <VideoSlide key={current.video.id} video={current.video} label={t('product.gallery.videoLabel')} />
+            </div>
           ) : null}
           {total > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 overflow-x-auto max-w-[80vw] px-2">
@@ -622,6 +669,8 @@ function ImageGallery({ images, name, model3d, t }) {
                   style={{ borderColor: active === i ? 'var(--accent)' : 'rgba(255,255,255,0.3)' }}>
                   {s.type === '3d' ? (
                     <span className="w-full h-full flex items-center justify-center text-sky-300 bg-white/10"><Box size={16} /></span>
+                  ) : s.type === 'video' ? (
+                    <span className="w-full h-full flex items-center justify-center text-white bg-white/10"><Play size={16} /></span>
                   ) : (
                     <img src={s.src} alt="" className="w-full h-full object-contain bg-white/10" />
                   )}
@@ -716,8 +765,6 @@ export default function ProductDetailPage() {
     const list = [{ key: 'description', label: pt.description || 'Опис', icon: FileText }]
     if (product.specs && Object.keys(product.specs).length > 0)
       list.push({ key: 'specs', label: pt.specs || 'Характеристики', icon: Wrench })
-    if (product.video)
-      list.push({ key: 'video', label: 'Відео', icon: Play })
     if (product.docs?.length > 0)
       list.push({ key: 'docs', label: pt.docs || 'Документи', icon: Download })
     if (!list.find(t => t.key === 'specs'))
@@ -759,13 +806,21 @@ export default function ProductDetailPage() {
   // Documents for this product: інструкції, брошури, далі — сертифікати на серію
   const productDocs = useMemo(() => {
     const ORDER = ['Інструкції', 'Брошури', 'Сертифікати та декларації']
-    const ids = getDocsForProduct(categorySlug, name, product?.sku)
+    // Завжди українська назва: правила підбору написані під неї й не мають залежати від мови
+    const ids = getDocsForProduct(categorySlug, product?.name || '', product?.sku)
     return ids
       .map(id => files.find(f => f.id === id))
       .filter(Boolean)
       .filter(f => ORDER.includes(f.category))
       .sort((a, b) => ORDER.indexOf(a.category) - ORDER.indexOf(b.category))
-  }, [categorySlug, name, product?.sku, files])
+  }, [categorySlug, product?.name, product?.sku, files])
+  // Сертифікати згортаємо в один рядок: у насосів їх четверо, і вони витісняли інструкцію
+  const certDocs = productDocs.filter(d => d.category === 'Сертифікати та декларації')
+  const mainDocs = productDocs.filter(d => d.category !== 'Сертифікати та декларації')
+
+  const productVideos = useMemo(
+    () => (product ? getVideosForProduct(categorySlug, product.name, product.sku) : []),
+    [categorySlug, product?.name, product?.sku]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // 3D models (STEP)
   const productModels = useMemo(() => getModels3D(product?.sku), [product?.sku])
@@ -799,9 +854,36 @@ export default function ProductDetailPage() {
     )
   }
 
-  const ytId = product.video ? (
-    product.video.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/\s]{11})/)?.[1]
-  ) : null
+  const renderDocRow = doc => (
+    <a
+      key={doc.id}
+      href={doc.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      download={doc.fileName || ''}
+      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 14px', borderBottom: '1px solid var(--border)', transition: 'background .15s', textDecoration: 'none' }}
+      className="pdp-doc-row"
+    >
+      <span style={{ width: 36, height: 36, border: '1px solid var(--border)', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', flexShrink: 0 }}>
+        <FileDown size={16} />
+      </span>
+      <span style={{ flex: 1, minWidth: 0 }}>
+        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink-100)', lineHeight: 1.3, display: 'block' }}>
+          {doc.name.replace(/^(Інструкція|Брошура)\s*—\s*/i, '')}
+        </span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, fontWeight: 600, letterSpacing: '.04em', color: 'var(--text-muted)', display: 'block', marginTop: 2 }}>
+          {doc.category} · {doc.format} · {doc.year}
+        </span>
+      </span>
+      <span style={{
+        flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 5,
+        fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: '.06em',
+        color: 'var(--accent-dim)', border: '1px solid rgba(255,85,0,.4)', padding: '5px 9px',
+      }}>
+        <Download size={10} />PDF
+      </span>
+    </a>
+  )
 
   const activeTab = tabs.find(t => t.key === tab) ? tab : tabs[0]?.key
 
@@ -915,7 +997,7 @@ export default function ProductDetailPage() {
 
           {/* LEFT: gallery + 3D STEP (desktop) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <ImageGallery images={allImages} name={name} model3d={model3dUrl} t={t} />
+            <ImageGallery images={allImages} name={name} model3d={model3dUrl} videos={productVideos} t={t} />
 
             {/* Category meta — desktop */}
             {category && (
@@ -1097,36 +1179,21 @@ export default function ProductDetailPage() {
                   <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-100)' }}>{t('product.docsTitle')}</span>
                   <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, color: 'var(--text-muted)' }}>{productDocs.length} {t('product.filesCount')}</span>
                 </div>
-                {productDocs.map(doc => (
-                  <a
-                    key={doc.id}
-                    href={doc.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download={doc.fileName || ''}
-                    style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 14px', borderBottom: '1px solid var(--border)', transition: 'background .15s', textDecoration: 'none' }}
-                    className="pdp-doc-row"
-                  >
-                    <span style={{ width: 36, height: 36, border: '1px solid var(--border)', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', flexShrink: 0 }}>
-                      <FileDown size={16} />
-                    </span>
-                    <span style={{ flex: 1, minWidth: 0 }}>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink-100)', lineHeight: 1.3, display: 'block' }}>
-                        {doc.name.replace(/^(Інструкція|Брошура)\s*—\s*/i, '')}
+                {mainDocs.map(renderDocRow)}
+                {certDocs.length > 0 && (
+                  <details className="pdp-doc-certs">
+                    <summary style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 14px', cursor: 'pointer', listStyle: 'none', borderBottom: '1px solid var(--border)' }}>
+                      <span style={{ width: 36, height: 36, border: '1px solid var(--border)', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--text-secondary)' }}>
+                        <ShieldCheck size={16} />
                       </span>
-                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, fontWeight: 600, letterSpacing: '.04em', color: 'var(--text-muted)', display: 'block', marginTop: 2 }}>
-                        {doc.category} · {doc.format} · {doc.year}
+                      <span style={{ flex: 1, minWidth: 0, fontSize: 13, fontWeight: 600, color: 'var(--ink-100)', lineHeight: 1.3 }}>
+                        {t('files.catCertificates')} ({certDocs.length})
                       </span>
-                    </span>
-                    <span style={{
-                      flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 5,
-                      fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: '.06em',
-                      color: 'var(--accent-dim)', border: '1px solid rgba(255,85,0,.4)', padding: '5px 9px',
-                    }}>
-                      <Download size={10} />PDF
-                    </span>
-                  </a>
-                ))}
+                      <ChevronDown size={16} className="pdp-doc-certs-chevron" style={{ flexShrink: 0, color: 'var(--text-muted)', transition: 'transform .2s' }} />
+                    </summary>
+                    {certDocs.map(renderDocRow)}
+                  </details>
+                )}
               </div>
             )}
 
@@ -1169,19 +1236,6 @@ export default function ProductDetailPage() {
               <div onClick={onDescClick}>
                 {renderDescriptionBody(desc, t, lang)}
               </div>
-              {/* Video */}
-              {ytId && (
-                <div style={{ marginTop: 32, aspectRatio: '16/9', maxWidth: 720 }}>
-                  <iframe
-                    src={`https://www.youtube.com/embed/${ytId}`}
-                    title={t('product.videoTitle')}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    style={{ width: '100%', height: '100%', border: '1px solid var(--border)' }}
-                  />
-                </div>
-              )}
             </section>
           )}
 

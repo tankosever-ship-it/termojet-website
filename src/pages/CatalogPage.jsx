@@ -54,7 +54,7 @@ const LANDING_TAB_FILTER = 'cabinettype'
 const outletsIn = (p, lo, hi) => { const o = parseName(p.name).outlets; return !!o && o[0] >= lo && o[1] <= hi }
 
 // ── Фільтри для кожної категорії ─────────────────────────────────────────────
-const kvsNum = p => { const m = p.name.match(/kvs-?([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
+const kvsNum = p => { const m = p.name.match(/kvs[-\s]*([\d]+[,.]?[\d]*)/i); return m ? parseFloat(m[1].replace(',','.')) : null }
 
 // Продуктивність насоса (м³/год) зі specs; л/хв → м³/год
 const qmaxNum = p => {
@@ -90,9 +90,10 @@ const CATEGORY_FILTERS = {
         key: 'type',
         label: 'Тип клапана',
         options: [
-          { label: 'Триходові',       test: p => /триход|3-ход/i.test(p.name) && !/чотирьох/i.test(p.name) && !/електропривід/i.test(p.name) },
-          { label: 'Чотирьохходові',  test: p => /чотирьохход|4-ход/i.test(p.name) },
-          { label: 'Зональний клапан',test: p => /зональн/i.test(p.name) },
+          { label: 'Триходові',       test: p => /триход|3-ход/i.test(p.name) && !/чотири/i.test(p.name) && !/електропривід/i.test(p.name) },
+          { label: 'Чотириходові',    test: p => /чотириход|4-ход/i.test(p.name) },
+          // Привід 412N «для зонального клапана» — це привід, а не клапан
+          { label: 'Зональний клапан',test: p => /зональн/i.test(p.name) && !/електропривід/i.test(p.name) },
           { label: 'Електропривід',   test: p => /електропривід/i.test(p.name) },
         ],
       },
@@ -116,7 +117,7 @@ const CATEGORY_FILTERS = {
         key: 'dn',
         label: 'Діаметр',
         options: [
-          { label: 'DN20 / 3/4"', test: p => /DN20/i.test(p.name) || /3\/4"/.test(p.name) },
+          { label: 'DN20 / 3/4"', test: p => /DN20/i.test(p.name) || /3\/4"|¾"/.test(p.name) },
           { label: 'DN25 / 1"',   test: p => /DN25/i.test(p.name) || (/\b1"/.test(p.name) && !/1 1\//.test(p.name) && !/DN20/.test(p.name)) },
           { label: 'DN32 / 1¼"',  test: p => /DN32/i.test(p.name) || /1 1\/4"/.test(p.name) },
           { label: 'DN40 / 1½"',  test: p => /DN40/i.test(p.name) || /1 1\/2"/.test(p.name) },
@@ -137,8 +138,8 @@ const CATEGORY_FILTERS = {
         key: 'temprange',
         label: 'Діапазон темп.',
         options: [
-          { label: '20–45°C (санітарна)', test: p => /20-4[35]/i.test(p.name) },
-          { label: '35–60°C (опалення)',  test: p => /35-60/i.test(p.name) },
+          { label: '20–43°C (санітарна)', test: p => /20[-–]43/i.test(p.name) },
+          { label: '35–60°C (опалення)',  test: p => /35[-–]60/i.test(p.name) },
         ],
       },
     ],
@@ -729,7 +730,7 @@ const FILTER_LABEL_I18N = {
   "2 виходи": {"en": "2 outlets", "pl": "2 wyjścia", "fr": "2 sorties", "de": "2 Ausgänge", "ro": "2 ieșiri"},
   "2 контури": {"en": "2 circuits", "pl": "2 obwody", "fr": "2 circuits", "de": "2 Kreise", "ro": "2 circuite"},
   "200 мм": {"en": "200 mm", "pl": "200 mm", "fr": "200 mm", "de": "200 mm", "ro": "200 mm"},
-  "20–45°C (санітарна)": {"en": "20–45°C (sanitary)", "pl": "20–45°C (sanitarna)", "fr": "20–45°C (sanitaire)", "de": "20–45°C (sanitär)", "ro": "20–45°C (sanitară)"},
+  "20–43°C (санітарна)": {"en": "20–43°C (sanitary)", "pl": "20–43°C (sanitarna)", "fr": "20–43°C (sanitaire)", "de": "20–43°C (sanitär)", "ro": "20–43°C (sanitară)"},
   "220–250 мм": {"en": "220–250 mm", "pl": "220–250 mm", "fr": "220–250 mm", "de": "220–250 mm", "ro": "220–250 mm"},
   "240 мм": {"en": "240 mm", "pl": "240 mm", "fr": "240 mm", "de": "240 mm", "ro": "240 mm"},
   "250+ кВт": {"en": "250+ kW", "pl": "250+ kW", "fr": "250+ kW", "de": "250+ kW", "ro": "250+ kW"},
@@ -741,7 +742,7 @@ const FILTER_LABEL_I18N = {
   "300 мм": {"en": "300 mm", "pl": "300 mm", "fr": "300 mm", "de": "300 mm", "ro": "300 mm"},
   "35–60°C (опалення)": {"en": "35–60°C (heating)", "pl": "35–60°C (ogrzewanie)", "fr": "35–60°C (chauffage)", "de": "35–60°C (Heizung)", "ro": "35–60°C (încălzire)"},
   "4 виходи": {"en": "4 outlets", "pl": "4 wyjścia", "fr": "4 sorties", "de": "4 Ausgänge", "ro": "4 ieșiri"},
-  "Чотирьохходові": {"en": "4-way", "pl": "4-drożne", "fr": "4 voies", "de": "4-Wege", "ro": "4 căi"},
+  "Чотириходові": {"en": "4-way", "pl": "4-drożne", "fr": "4 voies", "de": "4-Wege", "ro": "4 căi"},
   "5+ виходів": {"en": "5+ outlets", "pl": "5+ wyjść", "fr": "5+ sorties", "de": "5+ Ausgänge", "ro": "5+ ieșiri"},
   "5–10 м³/год": {"en": "5–10 m³/h", "pl": "5–10 m³/h", "fr": "5–10 m³/h", "de": "5–10 m³/h", "ro": "5–10 m³/h"},
   "80 мм": {"en": "80 mm", "pl": "80 mm", "fr": "80 mm", "de": "80 mm", "ro": "80 mm"},

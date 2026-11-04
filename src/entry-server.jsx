@@ -125,9 +125,8 @@ export async function loadInitialData(pathname, { api, eurRate }) {
         if (full && !full.error && full.isVisible !== false) {
           data.product = { slug, lang, data: full }
           // Документи товару — лише ті, що показує ця сторінка (той самий підбір,
-          // що й у ProductDetailPage: за категорією, назвою мовою UI та артикулом)
-          const name = (lang !== 'uk' && full[`name_${lang}`]) || full.name || ''
-          const ids = new Set(getDocsForProduct(catSlug, name, full.sku))
+          // що й у ProductDetailPage: за категорією, українською назвою та артикулом)
+          const ids = new Set(getDocsForProduct(catSlug, full.name || '', full.sku))
           const files = await api('/files')
           data.files = mergeFiles(files, FILES).filter(f => ids.has(f.id))
         }

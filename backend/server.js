@@ -406,6 +406,27 @@ const UAH_FMT = {
 }
 const fmtUahLang = (n, lang) => (UAH_FMT[lang] || UAH_FMT.uk)(n)
 const landingCfg = (cat, lang) => CATEGORY_LANDING[cat]?.[lang] || null
+// Відео товарів: правила ті самі, що в галереї (src/data/productVideos.js → product-videos.json)
+let PRODUCT_VIDEOS = []
+try { PRODUCT_VIDEOS = require(path.join(__dirname, '..', 'src', 'data', 'product-videos.json')).videos } catch { /* без відео */ }
+function productVideoJsonLd(row, cat) {
+  const hay = `${row.name} ${row.sku || ''}`
+  return PRODUCT_VIDEOS.filter(v =>
+    (!v.cats || v.cats.includes(cat)) &&
+    (!v.match || new RegExp(v.match, 'i').test(hay)) &&
+    (!v.not || !new RegExp(v.not, 'i').test(hay))
+  ).map(v => ({
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: v.title,
+    description: v.title,
+    thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`,
+    uploadDate: v.date,
+    duration: `PT${v.duration}S`,
+    embedUrl: `https://www.youtube.com/embed/${v.id}`,
+    contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+  }))
+}
 // Товари категорії для ItemList / цін FAQ (лише якщо в категорії є SEO-шаблон)
 function landingProductsFor(cat) {
   if (!CATEGORY_LANDING[cat]) return []
@@ -436,6 +457,12 @@ function landingTitle(cat, lang, cfg) {
   const t = landingFill(cat, lang, landingProductsFor(cat), peekEurRate())(cfg.seo.title)
   return /\{[\w:]+\}/.test(t) ? (cfg.seo.titleFallback || t.replace(/\{[\w:]+\}/g, '').replace(/\s+\|/, ' |')) : t
 }
+// description шаблону: токен ціни, як у title; немає курсу — seo.descriptionFallback
+function landingDescription(cat, lang, cfg) {
+  if (!cfg?.seo?.description) return null
+  const d = landingFill(cat, lang, landingProductsFor(cat), peekEurRate())(cfg.seo.description)
+  return /\{[\w:]+\}/.test(d) ? (cfg.seo.descriptionFallback || d.replace(/\{[\w:]+\}/g, '')) : d
+}
 function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
   const cfg = CATEGORY_LANDING[cat]?.[lang]
   if (!cfg) return []
@@ -457,7 +484,8 @@ function landingJsonLd(cat, lang, { url, name, products, eurRate }) {
   if (faq.length) out.push({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    // [текст](/адреса) — посилання в тексті сторінки; у розмітці лишаємо сам текст
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') } })),
   })
   return out
 }
@@ -676,8 +704,8 @@ const CATEGORY_META = {
   // name = H1 і основа <title>; metaDesc — готовий meta description (uk), коли SEO-команда
   // дала його дослівно (ТЗ 02.10.2026), замість формули «desc. Termojet — …».
   'klapany': {
-    name: 'Триходові, чотирьохходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
-    metaDesc: 'Триходові, чотирьохходові та термостатичні клапани для систем опалення. Власне виробництво Termojet з 2002 року, доставка по Україні',
+    name: 'Триходові, чотириходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
+    metaDesc: 'Триходові, чотириходові та термостатичні клапани для систем опалення. Власне виробництво Termojet з 2002 року, доставка по Україні',
     nameEn: '3/4-Way & Thermostatic Valves', descEn: '3- and 4-way rotary and thermostatic valves with electric actuators for heating',
     nameRo: 'Vane cu 3/4 căi și termostatice', descRo: 'Vane rotative cu 3 și 4 căi și vane termostatice cu servomotoare electrice pentru încălzire',
   },
@@ -1133,7 +1161,7 @@ function handleProduct(lang) {
       const bodyText = (stripHtml(loc.description) || stripHtml(loc.short_desc) || desc).slice(0, 600)
       const h1 = loc.name
       const alternates = buildAlternates(logicalPath)
-      const jsonLd = buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang, eurRate })
+      const jsonLd = [...buildProductJsonLd(row, loc, { url, img, desc, cat: req.params.cat, lang, eurRate }), ...productVideoJsonLd(row, req.params.cat)]
       html = injectMeta(html, { title, desc, url, img, h1, bodyText, alternates, jsonLd })
       // SSR-lite: повний семантичний HTML товару в #seo-content (бачать краулери)
       const related = _db.prepare(
@@ -1235,7 +1263,7 @@ function handleCategory(lang) {
         const descTail = lang === 'ro'
           ? 'Termojet — producător din 2002, livrare în toată Ucraina.'
           : 'Termojet — manufacturer since 2002, delivery across Ukraine.'
-        const desc = (lcfg?.seo?.description || `${cDesc}. ${descTail}`).slice(0, 200)
+        const desc = (landingDescription(req.params.cat, lang, lcfg) || `${cDesc}. ${descTail}`).slice(0, 200)
         const jsonLd = [buildBreadcrumb([
           { name: lang === 'ro' ? 'Acasă' : 'Home', url: base },
           { name: 'Catalog', url: `${base}/catalog` },
@@ -1246,7 +1274,7 @@ function handleCategory(lang) {
         const lcfg = landingCfg(req.params.cat, lang)
         let title = landingTitle(req.params.cat, lang, lcfg) || cm.metaTitle || `${cName} | Termojet`
         if (title.length < 35) title = padCategoryTitle(cName, 'обладнання для котелень')
-        const desc = (lcfg?.seo?.description || cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
+        const desc = (landingDescription(req.params.cat, lang, lcfg) || cm.metaDesc || `${cDesc}. Termojet — власне виробництво з 2002 року, доставка по Україні.`).slice(0, 200)
         const jsonLd = [buildBreadcrumb([
           { name: 'Головна', url: base },
           { name: 'Каталог', url: `${base}/catalog` },

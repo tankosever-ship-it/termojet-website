@@ -24,6 +24,20 @@ const H2 = ({ id, children }) => (
   <h2 id={id} className="text-2xl md:text-[28px] font-black text-gray-900 font-['Archivo',sans-serif] leading-tight scroll-mt-24">{children}</h2>
 )
 
+const H3 = ({ children }) => <h3 className="text-lg font-bold text-gray-900 font-['Archivo',sans-serif]">{children}</h3>
+
+// Текст із посиланнями [текст](/адреса) і абзацами через порожній рядок
+function RichText({ text, className = 'text-gray-600 leading-relaxed' }) {
+  return String(text || '').split('\n\n').map((para, i) => (
+    <p key={i} className={className}>
+      {para.split(/(\[[^\]]+\]\([^)]+\))/).map((part, j) => {
+        const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+        return m ? <LLink key={j} to={m[2]} className="text-[var(--accent)] hover:underline">{m[1]}</LLink> : part
+      })}
+    </p>
+  ))
+}
+
 export default function CategoryLanding({ cfg, lang, catProducts, shownProducts, allProducts, eurRate, Card, aside, tab = 'all', onTab, quickValue = '', onQuick }) {
   const ui = cfg.ui || {}
   const data = useMemo(() => buildLanding(cfg, catProducts, allProducts, eurRate, lang), [cfg, catProducts, allProducts, eurRate, lang])
@@ -170,10 +184,24 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
             </section>
           ))}
 
+          {/* Як підібрати: H2 + підрозділи H3 (таблиця моделей із models.h3 — останній із них) */}
+          {cfg.guide && (
+            <section className="space-y-3 max-w-4xl">
+              <H2 id="guide">{cfg.guide.h2}</H2>
+              <RichText text={cfg.guide.text} />
+              {cfg.guide.items?.map(g => (
+                <div key={g.h3} className="space-y-2 pt-2">
+                  <H3>{g.h3}</H3>
+                  <RichText text={g.text} />
+                </div>
+              ))}
+            </section>
+          )}
+
           {/* Таблиця моделей: модель (посилання) — параметр із конфігу — ціна з каталогу */}
           {cfg.models && data.modelRows.length > 0 && (
             <section className="space-y-3 max-w-4xl">
-              <H2 id="models">{cfg.models.h2}</H2>
+              {cfg.models.h3 ? <H3>{cfg.models.h3}</H3> : <H2 id="models">{cfg.models.h2}</H2>}
               {cfg.models.text && <p className="text-gray-600">{cfg.models.text}</p>}
               <div className="overflow-x-auto bg-white border border-[var(--ink-200)]">
                 <table className="w-full text-sm">
@@ -286,6 +314,31 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
             )}
           </section>
 
+          {/* Довільні таблиці під власними H2 (порівняння типів, вибір приводу) */}
+          {cfg.tables?.map(tb => (
+            <section key={tb.h2} className="space-y-3 max-w-4xl">
+              <H2>{tb.h2}</H2>
+              {tb.before && <RichText text={tb.before} />}
+              <div className="overflow-x-auto bg-white border border-[var(--ink-200)]">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left text-[11px] uppercase tracking-wider text-gray-500 border-b border-[var(--ink-200)]">
+                      {tb.head.map((h, i) => <th key={i} className="px-4 py-3 font-semibold">{h}</th>)}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tb.rows.map((row, i) => (
+                      <tr key={i} className="border-b border-[var(--ink-200)] last:border-0">
+                        {row.map((c, j) => <td key={j} className={`px-4 py-2.5 ${j === 0 ? 'font-semibold text-gray-900 whitespace-nowrap' : 'text-gray-700'}`}>{c}</td>)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {tb.after && <RichText text={tb.after} />}
+            </section>
+          ))}
+
           {/* Що встановити в шафу: плитки → фільтр суміжної категорії */}
           {data.related.length > 0 && (
             <section className="space-y-4">
@@ -316,7 +369,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
                       {f.q}
                       <span className="text-[var(--accent)] text-xl leading-none group-open:rotate-45 transition-transform">+</span>
                     </summary>
-                    <p className="pb-4 text-gray-600 leading-relaxed">{fillTokens(f.a, data.ctx, lang)}</p>
+                    <RichText text={fillTokens(f.a, data.ctx, lang)} className="pb-4 text-gray-600 leading-relaxed" />
                   </details>
                 ))}
               </div>

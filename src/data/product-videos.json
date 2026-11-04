@@ -1,0 +1,273 @@
+{
+ "_doc": "Відео з YouTube-каналу @termojetofficial у галереї товару (ProductDetailPage) і VideoObject у JSON-LD (backend/server.js). Товар отримує відео, якщо його категорія є в cats (коли cats задано) і match — регулярний вираз без врахування регістру — знаходиться в «українська назва + артикул», а not — ні. Порядок у списку = порядок у галереї: спершу відео саме про товар, далі оглядове.",
+ "videos": [
+  {
+   "id": "nxQNZ-iYQaY",
+   "title": "Termojet BOX2 і BOX3 — котельня на стіні з насосними групами НГ: вибір, монтаж, пуск",
+   "date": "2026-11-02T13:32:12-08:00",
+   "duration": 380,
+   "match": "BOX[23]"
+  },
+  {
+   "id": "ERhz3S2lvoQ",
+   "title": "Колектори з гідрострілкою Termojet КГС — як працюють, як вибрати і змонтувати",
+   "date": "2026-11-02T13:31:24-08:00",
+   "duration": 429,
+   "cats": [
+    "kolektory-z-hidrostrilkoyu"
+   ]
+  },
+  {
+   "id": "bxxt4Ebwqgo",
+   "title": "Розподільчі колектори Termojet К — як вибрати типорозмір і змонтувати",
+   "date": "2026-11-02T13:30:31-08:00",
+   "duration": 376,
+   "cats": [
+    "rozpodilchi-kolektory"
+   ]
+  },
+  {
+   "id": "gGyQvvaHTp0",
+   "title": "Насосні групи Termojet в ізоляції EPP BLACK — як зняти кожух, змонтувати і запустити",
+   "date": "2026-11-02T13:27:47-08:00",
+   "duration": 327,
+   "cats": [
+    "nasosni-hrupy"
+   ],
+   "match": "EPP BLACK"
+  },
+  {
+   "id": "PTEA2Ti8gmQ",
+   "title": "Насосні групи Termojet НГ-47, НГ-46, НГ-48, НГ-48А в металевому кожусі — вибір, монтаж, пуск",
+   "date": "2026-11-02T13:26:53-08:00",
+   "duration": 356,
+   "cats": [
+    "nasosni-hrupy"
+   ],
+   "match": "НГ-(46|47|48)",
+   "not": "EPP BLACK"
+  },
+  {
+   "id": "J1lAZ6wardI",
+   "title": "Навіщо потрібна гідрострілка і як вона працює — пояснює Termojet на схемі",
+   "date": "2026-10-31T23:56:36-07:00",
+   "duration": 105,
+   "cats": [
+    "hidravlichni-rozdilnyky",
+    "termojet-mega"
+   ],
+   "match": "Гідрострілка"
+  },
+  {
+   "id": "BOfhGHE14NQ",
+   "title": "Титановий анод Termojet TI 400 для бойлера — встановлення і підключення",
+   "date": "2026-10-31T23:56:03-07:00",
+   "duration": 220,
+   "match": "\\bTI[\\s-]?400\\b|215001(68|69)"
+  },
+  {
+   "id": "kaFEiOuI9MQ",
+   "title": "Фланцеві сепаратори повітря і бруду Termojet Ду50–Ду100 — як працюють і монтаж",
+   "date": "2026-10-31T23:55:34-07:00",
+   "duration": 395,
+   "cats": [
+    "separatory"
+   ],
+   "match": "TJ(T|V|VT)8F"
+  },
+  {
+   "id": "AKCN0TW126c",
+   "title": "Різьбові сепаратори повітря і бруду Termojet — як працюють, де ставити, як чистити",
+   "date": "2026-10-31T23:55:08-07:00",
+   "duration": 427,
+   "cats": [
+    "separatory"
+   ],
+   "match": "TJ(T|V|VT)[67]G"
+  },
+  {
+   "id": "xmHQZzECOpo",
+   "title": "Каналізаційна установка Termojet WT 400 з подрібнювачем — монтаж і підключення",
+   "date": "2026-10-31T23:54:40-07:00",
+   "duration": 246,
+   "match": "WT\\s?400"
+  },
+  {
+   "id": "g9vD-bjDz5U",
+   "title": "Каналізаційні насосні станції Termojet GRANDLIFT — монтаж і підключення",
+   "date": "2026-10-31T23:54:14-07:00",
+   "duration": 302,
+   "match": "GRANDLIFT"
+  },
+  {
+   "id": "zYO8frZnX5g",
+   "title": "Насоси підвищення тиску Termojet SILENCER 300 і 900 — монтаж, запуск, помилки",
+   "date": "2026-10-31T23:53:47-07:00",
+   "duration": 444,
+   "match": "SILENCER"
+  },
+  {
+   "id": "VntNTPVrWG8",
+   "title": "Насоси рециркуляції ГВП Termojet SPE12 — монтаж і налаштування",
+   "date": "2026-10-31T23:53:20-07:00",
+   "duration": 295,
+   "match": "SPE12"
+  },
+  {
+   "id": "KXirUjI3Azc",
+   "title": "Насос рециркуляції гарячої води Termojet HBS 24-12 — де ставити і режими",
+   "date": "2026-10-31T23:52:51-07:00",
+   "duration": 302,
+   "match": "HBS 24-12"
+  },
+  {
+   "id": "_cyO0tiVEe0",
+   "title": "Насос Termojet TBE in-line з частотником PDH30 — монтаж і налаштування",
+   "date": "2026-10-31T23:52:23-07:00",
+   "duration": 347,
+   "match": "\\bTBE\\b"
+  },
+  {
+   "id": "TdRfIno9yKk",
+   "title": "Циркуляційний насос Termojet MEGA 100 — монтаж, підключення, режими",
+   "date": "2026-10-31T23:51:54-07:00",
+   "duration": 390,
+   "match": "MEGA 100-120"
+  },
+  {
+   "id": "1SjEBLcfeMk",
+   "title": "Фланцеві циркуляційні насоси Termojet APM-F — монтаж, підключення, режими",
+   "date": "2026-10-31T23:51:27-07:00",
+   "duration": 391,
+   "match": "APM-F"
+  },
+  {
+   "id": "vLVPx49Z1Pg",
+   "title": "Циркуляційний насос Termojet APM — монтаж, підключення, режими, коди помилок",
+   "date": "2026-10-31T23:50:59-07:00",
+   "duration": 444,
+   "match": "\\bAPM\\b(?!-F)"
+  },
+  {
+   "id": "k7lJvg2VSGU",
+   "title": "Циркуляційний насос Termojet APE — монтаж, підключення, режими роботи",
+   "date": "2026-10-31T23:50:30-07:00",
+   "duration": 407,
+   "cats": [
+    "nasosy"
+   ],
+   "match": "\\bAPE\\b",
+   "not": "Кабель"
+  },
+  {
+   "id": "WB8Mrhxeg4o",
+   "title": "Циркуляційний насос Termojet XPS 25/6 — монтаж, підключення, швидкості",
+   "date": "2026-10-31T23:50:04-07:00",
+   "duration": 274,
+   "match": "XPS 25/6"
+  },
+  {
+   "id": "sjNyRD3cALc",
+   "title": "Хаб Termojet EGW-100 — додавання в Smart Life",
+   "date": "2026-10-31T23:49:34-07:00",
+   "duration": 108,
+   "match": "EGW100"
+  },
+  {
+   "id": "lNn9z4brEUo",
+   "title": "Розумна термоголовка Termojet TRH-10 — встановлення і підключення через хаб",
+   "date": "2026-10-31T23:49:07-07:00",
+   "duration": 269,
+   "match": "TRH10"
+  },
+  {
+   "id": "JIi4_J9gqSo",
+   "title": "Wi-Fi термостат Termojet HT-130 — монтаж, підключення, Smart Life",
+   "date": "2026-10-31T23:48:06-07:00",
+   "duration": 274,
+   "match": "HT130"
+  },
+  {
+   "id": "GoBjN3WbiFE",
+   "title": "Wi-Fi програматор Termojet HT-120 — монтаж, підключення, Smart Life",
+   "date": "2026-10-31T23:47:37-07:00",
+   "duration": 218,
+   "match": "HT120"
+  },
+  {
+   "id": "Hkt-QdgdKgQ",
+   "title": "Програматор Termojet HT-102 для котла — підключення і налаштування",
+   "date": "2026-10-31T23:47:10-07:00",
+   "duration": 224,
+   "match": "HT102"
+  },
+  {
+   "id": "jFSZewHuHL8",
+   "title": "Приймач Termojet R06 — підключення до котла, сполучення і Smart Life",
+   "date": "2026-10-31T23:46:41-07:00",
+   "duration": 243,
+   "match": "R06|RO6"
+  },
+  {
+   "id": "MoOJcIXEPfw",
+   "title": "Термостат Termojet WT-102 з приймачем R06 — підключення до котла і налаштування",
+   "date": "2026-10-31T23:45:50-07:00",
+   "duration": 275,
+   "match": "WT102"
+  },
+  {
+   "id": "MXne9A5KcCc",
+   "title": "Термостат Termojet WT-150 — бездротовий, E-Ink: підключення і налаштування",
+   "date": "2026-10-31T23:43:51-07:00",
+   "duration": 357,
+   "match": "WT150"
+  },
+  {
+   "id": "6NDrPeFMS1E",
+   "title": "Датчик підлоги Termojet NTC10KSN — встановлення і підключення",
+   "date": "2026-10-31T06:52:25-07:00",
+   "duration": 86,
+   "match": "NTC10KSN"
+  },
+  {
+   "id": "yJjV-cnji1w",
+   "title": "Термоелектропривід Termojet 920018TJ M30×1,5 — встановлення і підключення",
+   "date": "2026-10-31T06:50:46-07:00",
+   "duration": 107,
+   "match": "920018TJ"
+  },
+  {
+   "id": "xAwbKVPvQiQ",
+   "title": "Termojet TJ-03-RF — бездротовий центр комутації на 8 зон: монтаж і підключення",
+   "date": "2026-10-31T06:49:04-07:00",
+   "duration": 260,
+   "match": "TJ03RF"
+  },
+  {
+   "id": "GKRXmKW7tQ0",
+   "title": "Termojet TJ-03-C — дротовий центр комутації на 8 зон: монтаж і підключення",
+   "date": "2026-10-31T06:47:15-07:00",
+   "duration": 234,
+   "match": "TJ03C"
+  },
+  {
+   "id": "30TMK6jV6PQ",
+   "title": "Зональне керування теплою підлогою Termojet: як це працює (огляд)",
+   "date": "2026-10-31T06:45:24-07:00",
+   "duration": 117,
+   "cats": [
+    "zonalne-keruvannya"
+   ]
+  },
+  {
+   "id": "TTReWQgvRmg",
+   "title": "Новинки TERMOJET: 3-ходові крани та сервоприводи",
+   "date": "2026-10-31T05:53:57-07:00",
+   "duration": 148,
+   "cats": [
+    "klapany"
+   ],
+   "match": "RMV03|AQUAO?4|TJ413"
+  }
+ ]
+}

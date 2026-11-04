@@ -40,7 +40,7 @@ const CAT = {
   'termojet-box': { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX', ro: 'Sisteme modulare TERMOJET BOX' },
   'termojet-mega': { uk: 'Серія Termojet Mega', en: 'Termojet Mega Series', pl: 'Seria Termojet Mega', fr: 'Série Termojet Mega', de: 'Serie Termojet Mega', ro: 'Seria Termojet Mega' },
   'nasosy': { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen', ro: 'Pompe' },
-  'klapany': { uk: 'Триходові, чотирьохходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și termostatice' },
+  'klapany': { uk: 'Триходові, чотириходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și termostatice' },
   'balansuval-klapany': { uk: 'Статичний балансувальний клапан', en: 'Static Balancing Valve', pl: 'Statyczny zawór równoważący', fr: "Vanne d'équilibrage statique", de: 'Statisches Regulierventil', ro: 'Vană statică de echilibrare' },
   'separatory': { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren', ro: 'Separatoare' },
   'zonalne-keruvannya': { uk: 'Термостати та зональне керування', en: 'Thermostats & Zone Control', pl: 'Termostaty i sterowanie strefowe', fr: 'Thermostats et contrôle de zone', de: 'Thermostate und Zonenregelung', ro: 'Termostate și control zonal' },

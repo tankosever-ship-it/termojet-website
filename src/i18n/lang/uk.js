@@ -262,6 +262,7 @@ export default {
     "kitContents": "Комплектація",
     "gallery": {
       "model3dLabel": "3D-модель",
+      "videoLabel": "Відео",
       "photoLabel": "Фото",
       "zoomIn": "Збільшити",
       "loading3d": "3D · завантаження",

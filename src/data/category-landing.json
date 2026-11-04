@@ -1,5 +1,5 @@
 {
-  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок. tabs: false — кілька груп під власними H2 без карток типів і вкладок. seo.title може мати токен {min} (ціна «від» за курсом, сервер — landingTitle); seo.titleFallback — title без ціни, якщо курсу ще нема.",
+  "_doc": "SEO-шаблон категорії (CatalogPage → CategoryLanding). Читають і фронт, і сервер (title/description/H1, FAQPage / ItemList у JSON-LD — backend/server.js). Ключ першого рівня — slug категорії, другого — мова; немає мови → звичайна сторінка категорії. Токени: у текстах груп {h} {d} {wmin} {wmax} (мм, з назв товарів); у FAQ {min:<група>} / {max:<група>} — поточна мін./макс. ціна групи разом із валютою за мовою (з євро за курсом НБУ), {min} / {max} — по всій категорії. groups[].match — підрядок УКРАЇНСЬКОЇ назви товару; groups[].filter — мітка опції фільтра cabinettype (CatalogPage → CATEGORY_FILTERS), її перемикають вкладки. Необовʼязкові блоки: models (таблиця «модель — параметр — ціна», rows[].match — підрядок артикула/назви), specs (пари k/v), related.items[].to (готова адреса), токен {min} в intro й related.items[].sub (мін. ціна). Одна група без h2 — просто сітка товарів, без карток типів і вкладок. tabs: false — кілька груп під власними H2 без карток типів і вкладок. order — явний порядок артикулів у групах. guide (H2 + items[].h3/text) і tables (h2, before, head, rows, after) — текстові блоки під товарами; models.h3 робить таблицю моделей підрозділом guide; у текстах цих блоків і у FAQ працюють посилання [текст](/адреса). seo.description теж може мати {min}, seo.descriptionFallback — без ціни. seo.title може мати токен {min} (ціна «від» за курсом, сервер — landingTitle); seo.titleFallback — title без ціни, якщо курсу ще нема.",
   "shafa-kolektorna": {
     "uk": {
       "seo": {
@@ -2645,6 +2645,1778 @@
         "sortPriceDesc": "Preț descrescător",
         "price": "Preț",
         "empty": "Niciun model pentru filtrele selectate"
+      }
+    }
+  },
+  "klapany": {
+    "uk": {
+      "seo": {
+        "title": "Купити триходовий клапан від {min} | Termojet",
+        "titleFallback": "Купити триходовий клапан | Termojet",
+        "description": "Триходові та чотириходові клапани Termojet: змішувальні DN20–DN50, термостатичні, зональні з електроприводом. Ціни від {min}, доставка по Україні.",
+        "descriptionFallback": "Триходові та чотириходові клапани Termojet: змішувальні DN20–DN50, термостатичні, зональні з електроприводом. Доставка по Україні."
+      },
+      "h1": "Триходовий клапан для опалення",
+      "intro": "Триходовий клапан Termojet змішує або розподіляє потоки теплоносія, щоб підтримувати задану температуру в контурі радіаторів, теплої підлоги чи гарячої води. У каталозі — поворотні змішувальні клапани (крани) DN20–DN50, термостатичні та зональні клапани, чотириходові клапани для захисту котла й електроприводи до них. Власне виробництво з 2002 року, ціни від {min}, доставка по Україні.",
+      "tabs": false,
+      "order": [
+        "RMV03110-034",
+        "RMV03100-034",
+        "RMV03110-100",
+        "RMV03100-100",
+        "RMV03110-114",
+        "RMV03100-114",
+        "RMV03110-112",
+        "RMV03100-112",
+        "RMV03100-200",
+        "TMV121",
+        "TMV122",
+        "TMV131",
+        "TMV132",
+        "TMV231",
+        "TMV232",
+        "47025230",
+        "47032230",
+        "RMV04110-100",
+        "RMV04110-114",
+        "AQUAO401-3-230-120",
+        "AQUAO405-3-230-060",
+        "AQUA411-0-10-24",
+        "AQUAO412-3-230-060",
+        "TJ413"
+      ],
+      "groups": [
+        {
+          "key": "mix",
+          "match": "Триходовий змішувальний кран",
+          "h2": "Триходовий змішувальний клапан",
+          "text": "Поворотні клапани (крани) · DN20–DN50 · Kvs 2,5–40 м³/год · PN 10 бар · під електропривід"
+        },
+        {
+          "key": "thermo",
+          "match": "термостатичний клапан",
+          "h2": "Триходовий термостатичний клапан",
+          "text": "Змішування без приводу · 20–43 °C і 35–60 °C · точність ±2 °C · ¾\" і 1\" · гаряча вода, душові, ванні кімнати"
+        },
+        {
+          "key": "zone",
+          "match": "зональний клапан",
+          "h2": "Триходовий зональний клапан з електроприводом",
+          "text": "Розподільні клапани для зонального керування опаленням і ГВП · DN25 і DN32 · Kvs 8 і 13 м³/год · 230 В · 8 с на 60°"
+        },
+        {
+          "key": "four",
+          "match": "Чотириходовий",
+          "h2": "Чотириходовий клапан",
+          "text": "Захист котла від конденсаційної корозії · DN25 і DN32 · Kvs 12 і 18 м³/год · латунь CW617N · під електропривід"
+        },
+        {
+          "key": "drive",
+          "match": "Електропривід",
+          "h2": "Електропривід для триходового клапана",
+          "text": "Для 3- і 4-ходових поворотних клапанів · 230 В або 24 В · 3-точкове, двопозиційне або 0–10 В керування"
+        }
+      ],
+      "guide": {
+        "h2": "Як підібрати триходовий клапан",
+        "text": "Клапан підбирають за трьома параметрами: задачею (змішування, розподіл потоку чи термостатичне змішування без приводу), діаметром підключення і пропускною здатністю Kvs.",
+        "items": [
+          {
+            "h3": "Триходовий клапан для теплої підлоги",
+            "text": "Для змішувального контуру теплої підлоги в приватному будинку зазвичай встановлюють поворотний змішувальний кран DN20 або DN25 з електроприводом. Привід за сигналом контролера знижує температуру подачі до тієї, що потрібна для стяжки. Якщо потрібне готове рішення з насосом і клапаном в одному блоці, підійде [змішувальний вузол для теплої підлоги](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "h3": "Триходовий клапан для котла",
+            "text": "Змішувальний триходовий клапан з електроприводом ставлять на контур котла, щоб подавати в систему теплоносій потрібної температури. Зональний клапан перемикає потік між опаленням і бойлером гарячої води.\n\nДля захисту котла від конденсаційної корозії Termojet пропонує чотириходові клапани DN25 і DN32. Вони підмішують гарячу подачу до звороту, тож у котел не повертається холодна вода — так роблять антиконденсаційний захист твердопаливних котлів."
+          }
+        ]
+      },
+      "models": {
+        "h3": "Діаметр і Kvs: таблиця моделей",
+        "text": "Kvs — витрата води через клапан у м³/год при перепаді тиску 1 бар. Чим потужніший контур, тим більший Kvs потрібен; точний розрахунок зробить інженер Termojet.",
+        "cols": {
+          "model": "Діаметр",
+          "params": [
+            "Різьба",
+            "Kvs, м³/год"
+          ],
+          "price": "Ціна"
+        },
+        "rows": [
+          {
+            "match": "RMV03110-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "зовнішня",
+              "2,5"
+            ]
+          },
+          {
+            "match": "RMV03100-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "внутрішня",
+              "6,3"
+            ]
+          },
+          {
+            "match": "RMV03110-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "зовнішня",
+              "6"
+            ]
+          },
+          {
+            "match": "RMV03100-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "внутрішня",
+              "10"
+            ]
+          },
+          {
+            "match": "RMV03110-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "зовнішня",
+              "12"
+            ]
+          },
+          {
+            "match": "RMV03100-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "внутрішня",
+              "16"
+            ]
+          },
+          {
+            "match": "RMV03110-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "зовнішня",
+              "18"
+            ]
+          },
+          {
+            "match": "RMV03100-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "внутрішня",
+              "25"
+            ]
+          },
+          {
+            "match": "RMV03100-200",
+            "model": "DN50 (2\")",
+            "params": [
+              "внутрішня",
+              "40"
+            ]
+          }
+        ]
+      },
+      "tables": [
+        {
+          "h2": "Триходовий чи чотириходовий клапан: що обрати",
+          "head": [
+            "",
+            "Триходовий змішувальний",
+            "Чотириходовий змішувальний"
+          ],
+          "rows": [
+            [
+              "Задача",
+              "змішує подачу і зворот в одному контурі",
+              "змішує контур і підмішує гарячу подачу у зворот котла"
+            ],
+            [
+              "Де ставлять",
+              "контур радіаторів, теплої підлоги, ГВП",
+              "біля котла, зокрема твердопаливного, для захисту від конденсату"
+            ],
+            [
+              "Діаметри Termojet",
+              "DN20–DN50",
+              "DN25, DN32"
+            ],
+            [
+              "Kvs, м³/год",
+              "2,5–40",
+              "12, 18"
+            ],
+            [
+              "Електропривід",
+              "401N, 405N, 411, 413",
+              "401N, 405N, 411, 413"
+            ]
+          ],
+          "after": "Якщо котел газовий або тепловий насос, достатньо триходового клапана. Для твердопаливного котла без окремого антиконденсаційного захисту обирають чотириходовий."
+        },
+        {
+          "h2": "Як обрати електропривід для клапана",
+          "before": "Усі приводи Termojet 401N, 405N, 411 і 413 підходять до три- і чотириходових поворотних клапанів, 412N — до зональних і регулювальних. Керувати ними можна від [термостатів і контролерів зонального керування](/catalog/zonalne-keruvannya).",
+          "head": [
+            "Модель",
+            "Живлення",
+            "Керування",
+            "Час повороту",
+            "Коли обирати"
+          ],
+          "rows": [
+            [
+              "401N",
+              "230 В",
+              "3-точкове",
+              "120 с",
+              "змішувальний контур із зовнішнім контролером"
+            ],
+            [
+              "405N",
+              "230 В",
+              "3-точкове",
+              "60 с",
+              "те саме, коли потрібна швидша реакція"
+            ],
+            [
+              "411",
+              "24 В",
+              "0–10 В, пропорційне",
+              "60 / 120 с",
+              "автоматика з аналоговим сигналом"
+            ],
+            [
+              "412N",
+              "230 В",
+              "двопозиційне, 2P+AUX",
+              "60 с",
+              "зональні клапани, перемикання потоку"
+            ],
+            [
+              "413",
+              "230 В",
+              "вбудований контролер і датчик, 5–90 °C",
+              "120 с",
+              "постійна температура без окремого контролера"
+            ]
+          ]
+        }
+      ],
+      "faq": {
+        "h2": "Питання про клапани",
+        "items": [
+          {
+            "q": "Який триходовий клапан потрібен для теплої підлоги?",
+            "a": "Для приватного будинку зазвичай достатньо поворотного змішувального крана DN20 або DN25 з електроприводом. Якщо потрібне рішення «під ключ» з насосом, оберіть [змішувальний вузол для теплої підлоги](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "q": "Який клапан обрати для твердопаливного котла?",
+            "a": "Чотириходовий змішувальний кран DN25 або DN32. Він підмішує гарячу подачу до звороту й захищає котел від конденсаційної корозії."
+          },
+          {
+            "q": "Чим термостатичний клапан відрізняється від змішувального з електроприводом?",
+            "a": "Термостатичний клапан працює без живлення: вбудований термоелемент тримає 20–43 °C або 35–60 °C на виході з точністю ±2 °C — це рішення для гарячої води й санвузлів. Змішувальний клапан з електроприводом керується контролером і регулює температуру контуру опалення."
+          },
+          {
+            "q": "Чи можна поставити електропривід на клапан Termojet?",
+            "a": "Так. На три- і чотириходові поворотні клапани ставляться приводи 401N, 405N, 411 і 413, на зональні — 412N. Термостатичним клапанам привід не потрібен."
+          },
+          {
+            "q": "Чим відрізняються клапани з внутрішньою і зовнішньою різьбою?",
+            "a": "Способом підключення та пропускною здатністю: при тому самому діаметрі модель з внутрішньою різьбою має більший Kvs. Наприклад, DN25 із зовнішньою різьбою — Kvs 6, з внутрішньою — Kvs 10."
+          },
+          {
+            "q": "Чи є доставка по Україні?",
+            "a": "Так. Termojet — це власне виробництво з 2002 року. Доставляємо по всій Україні. Умови — на сторінці [доставки й оплати](/delivery)."
+          }
+        ]
+      },
+      "ui": {
+        "models": "моделей",
+        "from": "від",
+        "all": "Всі",
+        "found": "Знайдено",
+        "sortSize": "За типорозміром",
+        "sortPriceAsc": "Ціна: від низької",
+        "sortPriceDesc": "Ціна: від високої",
+        "price": "Ціна",
+        "empty": "Немає моделей за вибраними фільтрами"
+      }
+    },
+    "en": {
+      "seo": {
+        "title": "Buy a three-way valve from {min} | Termojet",
+        "titleFallback": "Buy a three-way valve | Termojet",
+        "description": "Termojet three-way and four-way valves: DN20–DN50 mixing valves, thermostatic valves and zone valves with actuators. Prices from {min}, delivery across Ukraine.",
+        "descriptionFallback": "Termojet three-way and four-way valves: DN20–DN50 mixing valves, thermostatic valves and zone valves with actuators. Delivery across Ukraine."
+      },
+      "h1": "Three-way valve for heating",
+      "intro": "The Termojet three-way valve mixes or diverts the flow of heat carrier to maintain a set temperature in a radiator, underfloor heating or hot water circuit. The catalog includes DN20–DN50 rotary three-way mixing valves, thermostatic and zone valves, four-way valves for boiler protection and the actuators for them. Own manufacturing since 2002, prices from {min}, delivery across Ukraine.",
+      "tabs": false,
+      "order": [
+        "RMV03110-034",
+        "RMV03100-034",
+        "RMV03110-100",
+        "RMV03100-100",
+        "RMV03110-114",
+        "RMV03100-114",
+        "RMV03110-112",
+        "RMV03100-112",
+        "RMV03100-200",
+        "TMV121",
+        "TMV122",
+        "TMV131",
+        "TMV132",
+        "TMV231",
+        "TMV232",
+        "47025230",
+        "47032230",
+        "RMV04110-100",
+        "RMV04110-114",
+        "AQUAO401-3-230-120",
+        "AQUAO405-3-230-060",
+        "AQUA411-0-10-24",
+        "AQUAO412-3-230-060",
+        "TJ413"
+      ],
+      "groups": [
+        {
+          "key": "mix",
+          "match": "Триходовий змішувальний кран",
+          "h2": "Three-way mixing valve",
+          "text": "Rotary valves · DN20–DN50 · Kvs 2.5–40 m³/h · PN 10 bar · for actuator"
+        },
+        {
+          "key": "thermo",
+          "match": "термостатичний клапан",
+          "h2": "Three-way thermostatic valve",
+          "text": "Mixing without an actuator · 20–43 °C and 35–60 °C · accuracy ±2 °C · ¾\" and 1\" · hot water, showers, bathrooms"
+        },
+        {
+          "key": "zone",
+          "match": "зональний клапан",
+          "h2": "3-way zone valve with actuator",
+          "text": "Diverting valves for zone control of heating and DHW · DN25 and DN32 · Kvs 8 and 13 m³/h · 230 V · 8 s per 60°"
+        },
+        {
+          "key": "four",
+          "match": "Чотириходовий",
+          "h2": "Four-way mixing valve",
+          "text": "Protects the boiler from condensation corrosion · DN25 and DN32 · Kvs 12 and 18 m³/h · CW617N brass · for actuator"
+        },
+        {
+          "key": "drive",
+          "match": "Електропривід",
+          "h2": "Actuator for a three-way valve",
+          "text": "For 3-way and 4-way rotary valves · 230 V or 24 V · 3-point, on/off or 0–10 V control"
+        }
+      ],
+      "guide": {
+        "h2": "How to choose a three-way valve",
+        "text": "A valve is selected by three parameters: the task (mixing, flow diverting or thermostatic mixing without an actuator), the connection diameter and the flow Kvs.",
+        "items": [
+          {
+            "h3": "Three-way valve for underfloor heating",
+            "text": "For an underfloor heating mixing circuit in a private house, a DN20 or DN25 rotary three-way mixing valve with an actuator is usually installed. On a signal from the controller, the actuator lowers the supply temperature to the level the screed requires. If you need a ready-made solution with a pump and valve in one unit, an [underfloor heating mixing unit](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy) is a good fit."
+          },
+          {
+            "h3": "Three-way valve for a boiler",
+            "text": "A three-way mixing valve with an actuator is installed on the boiler circuit to supply the system with heat carrier at the required temperature. A zone valve switches the flow between heating and the DHW cylinder.\n\nTo protect the boiler from condensation corrosion, Termojet offers DN25 and DN32 four-way valves. They blend hot supply water into the return line, so cold water never returns to the boiler — this is how anti-condensation protection for solid fuel boilers is built."
+          }
+        ]
+      },
+      "models": {
+        "h3": "Diameter and Kvs: model table",
+        "text": "Kvs is the water flow through the valve in m³/h at a pressure drop of 1 bar. The more powerful the circuit, the higher the Kvs required; a Termojet engineer will make the exact calculation.",
+        "cols": {
+          "model": "Diameter",
+          "params": [
+            "Thread",
+            "Kvs, m³/h"
+          ],
+          "price": "Price"
+        },
+        "rows": [
+          {
+            "match": "RMV03110-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "male thread",
+              "2.5"
+            ]
+          },
+          {
+            "match": "RMV03100-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "female thread",
+              "6.3"
+            ]
+          },
+          {
+            "match": "RMV03110-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "male thread",
+              "6"
+            ]
+          },
+          {
+            "match": "RMV03100-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "female thread",
+              "10"
+            ]
+          },
+          {
+            "match": "RMV03110-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "male thread",
+              "12"
+            ]
+          },
+          {
+            "match": "RMV03100-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "female thread",
+              "16"
+            ]
+          },
+          {
+            "match": "RMV03110-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "male thread",
+              "18"
+            ]
+          },
+          {
+            "match": "RMV03100-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "female thread",
+              "25"
+            ]
+          },
+          {
+            "match": "RMV03100-200",
+            "model": "DN50 (2\")",
+            "params": [
+              "female thread",
+              "40"
+            ]
+          }
+        ]
+      },
+      "tables": [
+        {
+          "h2": "Three-way or four-way valve: which to choose",
+          "head": [
+            "",
+            "Three-way mixing valve",
+            "Four-way mixing valve"
+          ],
+          "rows": [
+            [
+              "Purpose",
+              "mixes supply and return in a single circuit",
+              "mixes the circuit and blends hot supply into the boiler return"
+            ],
+            [
+              "Where installed",
+              "radiator, underfloor heating and DHW circuits",
+              "next to the boiler, including a solid fuel boiler, for protection against condensation"
+            ],
+            [
+              "Termojet diameters",
+              "DN20–DN50",
+              "DN25, DN32"
+            ],
+            [
+              "Kvs, m³/h",
+              "2.5–40",
+              "12, 18"
+            ],
+            [
+              "Actuator",
+              "401N, 405N, 411, 413",
+              "401N, 405N, 411, 413"
+            ]
+          ],
+          "after": "For a gas boiler or a heat pump, a three-way valve is enough. For a solid fuel boiler without separate anti-condensation protection, choose a four-way valve."
+        },
+        {
+          "h2": "How to choose an actuator for a valve",
+          "before": "All Termojet actuators 401N, 405N, 411 and 413 fit three-way and four-way rotary valves; 412N fits zone and control valves. They can be controlled by [zone control thermostats and controllers](/catalog/zonalne-keruvannya).",
+          "head": [
+            "Model",
+            "Power supply",
+            "Control",
+            "Rotation time",
+            "When to choose"
+          ],
+          "rows": [
+            [
+              "401N",
+              "230 V",
+              "3-point",
+              "120 s",
+              "mixing circuit with an external controller"
+            ],
+            [
+              "405N",
+              "230 V",
+              "3-point",
+              "60 s",
+              "same, when a faster response is needed"
+            ],
+            [
+              "411",
+              "24 V",
+              "0–10 V, proportional",
+              "60 / 120 s",
+              "automation with an analog signal"
+            ],
+            [
+              "412N",
+              "230 V",
+              "on/off, 2P+AUX",
+              "60 s",
+              "zone valves, flow switching"
+            ],
+            [
+              "413",
+              "230 V",
+              "built-in controller and sensor, 5–90 °C",
+              "120 s",
+              "constant temperature without a separate controller"
+            ]
+          ]
+        }
+      ],
+      "faq": {
+        "h2": "Questions about valves",
+        "items": [
+          {
+            "q": "Which three-way valve do I need for underfloor heating?",
+            "a": "For a private house, a DN20 or DN25 rotary mixing valve with an actuator is usually enough. If you need a turnkey solution with a pump, choose an [underfloor heating mixing unit](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "q": "Which valve should I choose for a solid fuel boiler?",
+            "a": "A DN25 or DN32 four-way mixing valve. It blends hot supply water into the return line and protects the boiler from condensation corrosion."
+          },
+          {
+            "q": "How does a thermostatic valve differ from a mixing valve with an actuator?",
+            "a": "A thermostatic valve works without power: the built-in thermal element holds 20–43 °C or 35–60 °C at the outlet with ±2 °C accuracy — a solution for hot water and bathrooms. A mixing valve with an actuator is operated by a controller and regulates the temperature of the heating circuit."
+          },
+          {
+            "q": "Can an actuator be fitted to a Termojet valve?",
+            "a": "Yes. Actuators 401N, 405N, 411 and 413 fit three-way and four-way rotary valves, and 412N fits zone valves. Thermostatic valves do not need an actuator."
+          },
+          {
+            "q": "What is the difference between valves with female and male thread?",
+            "a": "The connection method and the flow capacity: at the same diameter, the female thread model has a higher Kvs. For example, a DN25 with male thread has Kvs 6, with female thread — Kvs 10."
+          },
+          {
+            "q": "Is delivery across Ukraine available?",
+            "a": "Yes. Termojet is own manufacturing since 2002. We deliver all over Ukraine. See the terms on the [delivery and payment](/delivery) page."
+          }
+        ]
+      },
+      "ui": {
+        "models": "models",
+        "from": "from",
+        "all": "All",
+        "found": "Found",
+        "sortSize": "By size",
+        "sortPriceAsc": "Price: low to high",
+        "sortPriceDesc": "Price: high to low",
+        "price": "Price",
+        "empty": "No models match the selected filters"
+      }
+    },
+    "pl": {
+      "seo": {
+        "title": "Kup trójdrogowy zawór od {min} | Termojet",
+        "titleFallback": "Kup trójdrogowy zawór | Termojet",
+        "description": "Zawory trójdrogowe i czterodrogowe Termojet: mieszające DN20–DN50, termostatyczne, strefowe z siłownikiem. Ceny od {min}, dostawa na terenie Ukrainy.",
+        "descriptionFallback": "Zawory trójdrogowe i czterodrogowe Termojet: mieszające DN20–DN50, termostatyczne, strefowe z siłownikiem. Dostawa na terenie Ukrainy."
+      },
+      "h1": "Trójdrogowy zawór do ogrzewania",
+      "intro": "Trójdrogowy zawór Termojet miesza lub rozdziela strumienie czynnika grzewczego, aby utrzymać zadaną temperaturę w obiegu grzejników, ogrzewania podłogowego lub ciepłej wody. W katalogu znajdziesz obrotowe trójdrogowe zawory mieszające DN20–DN50, zawory termostatyczne i strefowe, czterodrogowe zawory do ochrony kotła oraz siłowniki do nich. Własna produkcja od 2002 roku, ceny od {min}, dostawa na terenie Ukrainy.",
+      "tabs": false,
+      "order": [
+        "RMV03110-034",
+        "RMV03100-034",
+        "RMV03110-100",
+        "RMV03100-100",
+        "RMV03110-114",
+        "RMV03100-114",
+        "RMV03110-112",
+        "RMV03100-112",
+        "RMV03100-200",
+        "TMV121",
+        "TMV122",
+        "TMV131",
+        "TMV132",
+        "TMV231",
+        "TMV232",
+        "47025230",
+        "47032230",
+        "RMV04110-100",
+        "RMV04110-114",
+        "AQUAO401-3-230-120",
+        "AQUAO405-3-230-060",
+        "AQUA411-0-10-24",
+        "AQUAO412-3-230-060",
+        "TJ413"
+      ],
+      "groups": [
+        {
+          "key": "mix",
+          "match": "Триходовий змішувальний кран",
+          "h2": "Trójdrogowy zawór mieszający",
+          "text": "Zawory obrotowe · DN20–DN50 · Kvs 2,5–40 m³/h · PN 10 bar · pod siłownik"
+        },
+        {
+          "key": "thermo",
+          "match": "термостатичний клапан",
+          "h2": "Trójdrogowy zawór termostatyczny",
+          "text": "Mieszanie bez siłownika · 20–43 °C i 35–60 °C · dokładność ±2 °C · ¾\" i 1\" · ciepła woda, prysznice, łazienki"
+        },
+        {
+          "key": "zone",
+          "match": "зональний клапан",
+          "h2": "3-drogowy zawór strefowy z siłownikiem",
+          "text": "Zawory rozdzielające do sterowania strefowego ogrzewaniem i CWU · DN25 i DN32 · Kvs 8 i 13 m³/h · 230 V · 8 s na 60°"
+        },
+        {
+          "key": "four",
+          "match": "Чотириходовий",
+          "h2": "Czterodrogowy zawór mieszający",
+          "text": "Ochrona kotła przed korozją kondensacyjną · DN25 i DN32 · Kvs 12 i 18 m³/h · mosiądz CW617N · pod siłownik"
+        },
+        {
+          "key": "drive",
+          "match": "Електропривід",
+          "h2": "Siłownik do zaworu trójdrogowego",
+          "text": "Do 3- i 4-drogowych zaworów obrotowych · 230 V lub 24 V · sterowanie 3-punktowe, dwupołożeniowe lub 0–10 V"
+        }
+      ],
+      "guide": {
+        "h2": "Jak dobrać trójdrogowy zawór",
+        "text": "Zawór dobiera się według trzech parametrów: zadania (mieszanie, rozdział strumienia lub mieszanie termostatyczne bez siłownika), średnicy przyłącza i przepustowości Kvs.",
+        "items": [
+          {
+            "h3": "Trójdrogowy zawór do ogrzewania podłogowego",
+            "text": "Do mieszającego obiegu ogrzewania podłogowego w domu prywatnym zwykle montuje się obrotowy zawór mieszający DN20 lub DN25 z siłownikiem. Siłownik na sygnał regulatora obniża temperaturę zasilania do poziomu wymaganego dla wylewki. Jeśli potrzebujesz gotowego rozwiązania z pompą i zaworem w jednym bloku, sprawdzi się [węzeł mieszający do ogrzewania podłogowego](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "h3": "Trójdrogowy zawór do kotła",
+            "text": "Trójdrogowy zawór mieszający z siłownikiem montuje się na obiegu kotła, aby dostarczać do instalacji czynnik o wymaganej temperaturze. Zawór strefowy przełącza przepływ między ogrzewaniem a zasobnikiem CWU.\n\nDo ochrony kotła przed korozją kondensacyjną Termojet oferuje czterodrogowe zawory DN25 i DN32. Domieszują one gorące zasilanie do powrotu, dzięki czemu do kotła nie wraca zimna woda — tak buduje się ochronę antykondensacyjną kotłów na paliwo stałe."
+          }
+        ]
+      },
+      "models": {
+        "h3": "Średnica i Kvs: tabela modeli",
+        "text": "Kvs to przepływ wody przez zawór w m³/h przy spadku ciśnienia 1 bar. Im mocniejszy obieg, tym większy potrzebny Kvs; dokładne obliczenia wykona inżynier Termojet.",
+        "cols": {
+          "model": "Średnica",
+          "params": [
+            "Gwint",
+            "Kvs, m³/h"
+          ],
+          "price": "Cena"
+        },
+        "rows": [
+          {
+            "match": "RMV03110-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "zewnętrzny",
+              "2,5"
+            ]
+          },
+          {
+            "match": "RMV03100-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "wewnętrzny",
+              "6,3"
+            ]
+          },
+          {
+            "match": "RMV03110-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "zewnętrzny",
+              "6"
+            ]
+          },
+          {
+            "match": "RMV03100-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "wewnętrzny",
+              "10"
+            ]
+          },
+          {
+            "match": "RMV03110-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "zewnętrzny",
+              "12"
+            ]
+          },
+          {
+            "match": "RMV03100-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "wewnętrzny",
+              "16"
+            ]
+          },
+          {
+            "match": "RMV03110-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "zewnętrzny",
+              "18"
+            ]
+          },
+          {
+            "match": "RMV03100-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "wewnętrzny",
+              "25"
+            ]
+          },
+          {
+            "match": "RMV03100-200",
+            "model": "DN50 (2\")",
+            "params": [
+              "wewnętrzny",
+              "40"
+            ]
+          }
+        ]
+      },
+      "tables": [
+        {
+          "h2": "Zawór trójdrogowy czy czterodrogowy: który wybrać",
+          "head": [
+            "",
+            "Trójdrogowy zawór mieszający",
+            "Czterodrogowy zawór mieszający"
+          ],
+          "rows": [
+            [
+              "Zadanie",
+              "miesza zasilanie i powrót w jednym obiegu",
+              "miesza obieg i domieszuje gorące zasilanie do powrotu kotła"
+            ],
+            [
+              "Gdzie montować",
+              "obieg grzejników, ogrzewania podłogowego, CWU",
+              "przy kotle, w tym na paliwo stałe, dla ochrony przed kondensatem"
+            ],
+            [
+              "Średnice Termojet",
+              "DN20–DN50",
+              "DN25, DN32"
+            ],
+            [
+              "Kvs, m³/h",
+              "2,5–40",
+              "12, 18"
+            ],
+            [
+              "Siłownik",
+              "401N, 405N, 411, 413",
+              "401N, 405N, 411, 413"
+            ]
+          ],
+          "after": "Jeśli kocioł jest gazowy lub masz pompę ciepła, wystarczy zawór trójdrogowy. Do kotła na paliwo stałe bez osobnej ochrony antykondensacyjnej wybiera się zawór czterodrogowy."
+        },
+        {
+          "h2": "Jak wybrać siłownik do zaworu",
+          "before": "Wszystkie siłowniki Termojet 401N, 405N, 411 i 413 pasują do trój- i czterodrogowych zaworów obrotowych, a 412N — do zaworów strefowych i regulacyjnych. Można nimi sterować za pomocą [termostatów i regulatorów sterowania strefowego](/catalog/zonalne-keruvannya).",
+          "head": [
+            "Model",
+            "Zasilanie",
+            "Sterowanie",
+            "Czas obrotu",
+            "Kiedy wybrać"
+          ],
+          "rows": [
+            [
+              "401N",
+              "230 V",
+              "3-punktowe",
+              "120 s",
+              "obieg mieszający z zewnętrznym regulatorem"
+            ],
+            [
+              "405N",
+              "230 V",
+              "3-punktowe",
+              "60 s",
+              "to samo, gdy potrzebna szybsza reakcja"
+            ],
+            [
+              "411",
+              "24 V",
+              "0–10 V, proporcjonalne",
+              "60 / 120 s",
+              "automatyka z sygnałem analogowym"
+            ],
+            [
+              "412N",
+              "230 V",
+              "dwupołożeniowe, 2P+AUX",
+              "60 s",
+              "zawory strefowe, przełączanie przepływu"
+            ],
+            [
+              "413",
+              "230 V",
+              "wbudowany regulator i czujnik, 5–90 °C",
+              "120 s",
+              "stała temperatura bez osobnego regulatora"
+            ]
+          ]
+        }
+      ],
+      "faq": {
+        "h2": "Pytania o zawory",
+        "items": [
+          {
+            "q": "Jaki trójdrogowy zawór jest potrzebny do ogrzewania podłogowego?",
+            "a": "Do domu prywatnego zwykle wystarczy obrotowy zawór mieszający DN20 lub DN25 z siłownikiem. Jeśli potrzebne jest rozwiązanie „pod klucz” z pompą, wybierz [węzeł mieszający do ogrzewania podłogowego](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "q": "Jaki zawór wybrać do kotła na paliwo stałe?",
+            "a": "Czterodrogowy zawór mieszający DN25 lub DN32. Domieszuje gorące zasilanie do powrotu i chroni kocioł przed korozją kondensacyjną."
+          },
+          {
+            "q": "Czym zawór termostatyczny różni się od mieszającego z siłownikiem?",
+            "a": "Zawór termostatyczny działa bez zasilania: wbudowany element termiczny utrzymuje na wyjściu 20–43 °C lub 35–60 °C z dokładnością ±2 °C — to rozwiązanie dla ciepłej wody i łazienek. Zawór mieszający z siłownikiem jest sterowany regulatorem i reguluje temperaturę obiegu grzewczego."
+          },
+          {
+            "q": "Czy można zamontować siłownik na zaworze Termojet?",
+            "a": "Tak. Na trój- i czterodrogowe zawory obrotowe montuje się siłowniki 401N, 405N, 411 i 413, na strefowe — 412N. Zawory termostatyczne nie potrzebują siłownika."
+          },
+          {
+            "q": "Czym różnią się zawory z gwintem wewnętrznym i zewnętrznym?",
+            "a": "Sposobem podłączenia i przepustowością: przy tej samej średnicy model z gwintem wewnętrznym ma większy Kvs. Na przykład DN25 z gwintem zewnętrznym — Kvs 6, z wewnętrznym — Kvs 10."
+          },
+          {
+            "q": "Czy jest dostawa na terenie Ukrainy?",
+            "a": "Tak. Termojet to własna produkcja od 2002 roku. Dostarczamy na terenie całej Ukrainy. Warunki znajdziesz na stronie [dostawa i płatność](/delivery)."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modeli",
+        "from": "od",
+        "all": "Wszystkie",
+        "found": "Znaleziono",
+        "sortSize": "Według rozmiaru",
+        "sortPriceAsc": "Cena: od najniższej",
+        "sortPriceDesc": "Cena: od najwyższej",
+        "price": "Cena",
+        "empty": "Brak modeli dla wybranych filtrów"
+      }
+    },
+    "fr": {
+      "seo": {
+        "title": "Acheter une vanne trois voies dès {min} | Termojet",
+        "titleFallback": "Acheter une vanne trois voies | Termojet",
+        "description": "Vannes trois voies et quatre voies Termojet : vannes mélangeuses DN20–DN50, thermostatiques, vannes de zone avec actionneur. Prix à partir de {min}, livraison dans toute l'Ukraine.",
+        "descriptionFallback": "Vannes trois voies et quatre voies Termojet : vannes mélangeuses DN20–DN50, thermostatiques, vannes de zone avec actionneur. Livraison dans toute l'Ukraine."
+      },
+      "h1": "Vanne trois voies pour le chauffage",
+      "intro": "La vanne trois voies Termojet mélange ou répartit les flux de fluide caloporteur afin de maintenir la température souhaitée dans le circuit de radiateurs, de plancher chauffant ou d'eau chaude. Le catalogue comprend des vannes mélangeuses rotatives DN20–DN50, des vannes thermostatiques et de zone, des vannes quatre voies pour la protection de la chaudière et les actionneurs correspondants. Fabrication propre depuis 2002, prix à partir de {min}, livraison dans toute l'Ukraine.",
+      "tabs": false,
+      "order": [
+        "RMV03110-034",
+        "RMV03100-034",
+        "RMV03110-100",
+        "RMV03100-100",
+        "RMV03110-114",
+        "RMV03100-114",
+        "RMV03110-112",
+        "RMV03100-112",
+        "RMV03100-200",
+        "TMV121",
+        "TMV122",
+        "TMV131",
+        "TMV132",
+        "TMV231",
+        "TMV232",
+        "47025230",
+        "47032230",
+        "RMV04110-100",
+        "RMV04110-114",
+        "AQUAO401-3-230-120",
+        "AQUAO405-3-230-060",
+        "AQUA411-0-10-24",
+        "AQUAO412-3-230-060",
+        "TJ413"
+      ],
+      "groups": [
+        {
+          "key": "mix",
+          "match": "Триходовий змішувальний кран",
+          "h2": "Vanne mélangeuse trois voies",
+          "text": "Vannes rotatives · DN20–DN50 · Kvs 2,5–40 m³/h · PN 10 bar · pour actionneur"
+        },
+        {
+          "key": "thermo",
+          "match": "термостатичний клапан",
+          "h2": "Vanne thermostatique trois voies",
+          "text": "Mélange sans actionneur · 20–43 °C et 35–60 °C · précision ±2 °C · ¾\" et 1\" · eau chaude, douches, salles de bains"
+        },
+        {
+          "key": "zone",
+          "match": "зональний клапан",
+          "h2": "Vanne de zone 3 voies avec actionneur",
+          "text": "Vannes de répartition pour la régulation par zones du chauffage et de l'ECS · DN25 et DN32 · Kvs 8 et 13 m³/h · 230 V · 8 s pour 60°"
+        },
+        {
+          "key": "four",
+          "match": "Чотириходовий",
+          "h2": "Vanne mélangeuse quatre voies",
+          "text": "Protège la chaudière de la corrosion par condensation · DN25 et DN32 · Kvs 12 et 18 m³/h · laiton CW617N · pour actionneur"
+        },
+        {
+          "key": "drive",
+          "match": "Електропривід",
+          "h2": "Actionneur pour vanne trois voies",
+          "text": "Pour vannes rotatives 3 et 4 voies · 230 V ou 24 V · commande 3 points, tout ou rien ou 0–10 V"
+        }
+      ],
+      "guide": {
+        "h2": "Comment choisir une vanne trois voies",
+        "text": "Le choix d'une vanne repose sur trois critères : la fonction (mélange, répartition du flux ou mélange thermostatique sans actionneur), le diamètre de raccordement et le débit Kvs.",
+        "items": [
+          {
+            "h3": "Vanne trois voies pour plancher chauffant",
+            "text": "Pour le circuit mélangé d'un plancher chauffant dans une maison individuelle, on installe généralement une vanne mélangeuse rotative DN20 ou DN25 avec actionneur. Sur signal du régulateur, l'actionneur abaisse la température de départ à celle qu'exige la chape. Si vous souhaitez une solution prête à l'emploi avec pompe et vanne dans un seul bloc, l'[unité de mélange pour plancher chauffant](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy) convient."
+          },
+          {
+            "h3": "Vanne trois voies pour chaudière",
+            "text": "Une vanne mélangeuse trois voies avec actionneur se place sur le circuit de la chaudière afin d'alimenter l'installation en fluide à la température voulue. La vanne de zone commute le flux entre le chauffage et le ballon d'ECS.\n\nPour protéger la chaudière de la corrosion par condensation, Termojet propose des vannes quatre voies DN25 et DN32. Elles mélangent le départ chaud au retour, de sorte que l'eau froide ne revient pas dans la chaudière — c'est ainsi que se réalise la protection anticondensation des chaudières à combustible solide."
+          }
+        ]
+      },
+      "models": {
+        "h3": "Diamètre et Kvs : tableau des modèles",
+        "text": "Le Kvs est le débit d'eau à travers la vanne en m³/h pour une perte de charge de 1 bar. Plus le circuit est puissant, plus le Kvs requis est élevé ; un ingénieur Termojet effectuera le calcul exact.",
+        "cols": {
+          "model": "Diamètre",
+          "params": [
+            "Filetage",
+            "Kvs, m³/h"
+          ],
+          "price": "Prix"
+        },
+        "rows": [
+          {
+            "match": "RMV03110-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "filetage mâle",
+              "2,5"
+            ]
+          },
+          {
+            "match": "RMV03100-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "filetage femelle",
+              "6,3"
+            ]
+          },
+          {
+            "match": "RMV03110-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "filetage mâle",
+              "6"
+            ]
+          },
+          {
+            "match": "RMV03100-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "filetage femelle",
+              "10"
+            ]
+          },
+          {
+            "match": "RMV03110-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "filetage mâle",
+              "12"
+            ]
+          },
+          {
+            "match": "RMV03100-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "filetage femelle",
+              "16"
+            ]
+          },
+          {
+            "match": "RMV03110-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "filetage mâle",
+              "18"
+            ]
+          },
+          {
+            "match": "RMV03100-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "filetage femelle",
+              "25"
+            ]
+          },
+          {
+            "match": "RMV03100-200",
+            "model": "DN50 (2\")",
+            "params": [
+              "filetage femelle",
+              "40"
+            ]
+          }
+        ]
+      },
+      "tables": [
+        {
+          "h2": "Vanne trois voies ou quatre voies : laquelle choisir",
+          "head": [
+            "",
+            "Vanne mélangeuse trois voies",
+            "Vanne mélangeuse quatre voies"
+          ],
+          "rows": [
+            [
+              "Fonction",
+              "mélange le départ et le retour dans un même circuit",
+              "mélange le circuit et ajoute du départ chaud au retour de la chaudière"
+            ],
+            [
+              "Où l'installer",
+              "circuit de radiateurs, de plancher chauffant, d'ECS",
+              "près de la chaudière, notamment à combustible solide, pour la protéger du condensat"
+            ],
+            [
+              "Diamètres Termojet",
+              "DN20–DN50",
+              "DN25, DN32"
+            ],
+            [
+              "Kvs, m³/h",
+              "2,5–40",
+              "12, 18"
+            ],
+            [
+              "Actionneur",
+              "401N, 405N, 411, 413",
+              "401N, 405N, 411, 413"
+            ]
+          ],
+          "after": "Pour une chaudière à gaz ou une pompe à chaleur, une vanne trois voies suffit. Pour une chaudière à combustible solide sans protection anticondensation séparée, on choisit une vanne quatre voies."
+        },
+        {
+          "h2": "Comment choisir l'actionneur d'une vanne",
+          "before": "Tous les actionneurs Termojet 401N, 405N, 411 et 413 conviennent aux vannes rotatives trois et quatre voies, le 412N aux vannes de zone et de régulation. Ils peuvent être pilotés par des [thermostats et régulateurs de commande par zones](/catalog/zonalne-keruvannya).",
+          "head": [
+            "Modèle",
+            "Alimentation",
+            "Commande",
+            "Temps de rotation",
+            "Quand le choisir"
+          ],
+          "rows": [
+            [
+              "401N",
+              "230 V",
+              "3 points",
+              "120 s",
+              "circuit mélangé avec régulateur externe"
+            ],
+            [
+              "405N",
+              "230 V",
+              "3 points",
+              "60 s",
+              "idem, lorsqu'une réaction plus rapide est nécessaire"
+            ],
+            [
+              "411",
+              "24 V",
+              "0–10 V, proportionnelle",
+              "60 / 120 s",
+              "automatisme avec signal analogique"
+            ],
+            [
+              "412N",
+              "230 V",
+              "tout ou rien, 2P+AUX",
+              "60 s",
+              "vannes de zone, commutation du flux"
+            ],
+            [
+              "413",
+              "230 V",
+              "régulateur et sonde intégrés, 5–90 °C",
+              "120 s",
+              "température constante sans régulateur séparé"
+            ]
+          ]
+        }
+      ],
+      "faq": {
+        "h2": "Questions sur les vannes",
+        "items": [
+          {
+            "q": "Quelle vanne trois voies faut-il pour un plancher chauffant ?",
+            "a": "Pour une maison individuelle, une vanne mélangeuse rotative DN20 ou DN25 avec actionneur suffit généralement. Si vous voulez une solution clé en main avec pompe, choisissez une [unité de mélange pour plancher chauffant](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "q": "Quelle vanne choisir pour une chaudière à combustible solide ?",
+            "a": "Une vanne mélangeuse quatre voies DN25 ou DN32. Elle mélange le départ chaud au retour et protège la chaudière de la corrosion par condensation."
+          },
+          {
+            "q": "En quoi une vanne thermostatique diffère-t-elle d'une vanne mélangeuse avec actionneur ?",
+            "a": "La vanne thermostatique fonctionne sans alimentation : l'élément thermostatique intégré maintient 20–43 °C ou 35–60 °C en sortie avec une précision de ±2 °C — une solution pour l'eau chaude et les salles d'eau. La vanne mélangeuse avec actionneur est pilotée par un régulateur et règle la température du circuit de chauffage."
+          },
+          {
+            "q": "Peut-on monter un actionneur sur une vanne Termojet ?",
+            "a": "Oui. Les actionneurs 401N, 405N, 411 et 413 se montent sur les vannes rotatives trois et quatre voies, le 412N sur les vannes de zone. Les vannes thermostatiques n'ont pas besoin d'actionneur."
+          },
+          {
+            "q": "Quelle est la différence entre les vannes à filetage femelle et mâle ?",
+            "a": "Le mode de raccordement et le débit : à diamètre égal, le modèle à filetage femelle a un Kvs plus élevé. Par exemple, une DN25 à filetage mâle a un Kvs de 6, à filetage femelle un Kvs de 10."
+          },
+          {
+            "q": "Livrez-vous dans toute l'Ukraine ?",
+            "a": "Oui. Termojet, c'est une fabrication propre depuis 2002. Nous livrons dans toute l'Ukraine. Les conditions sont sur la page [livraison et paiement](/delivery)."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modèles",
+        "from": "dès",
+        "all": "Tous",
+        "found": "Trouvé",
+        "sortSize": "Par taille",
+        "sortPriceAsc": "Prix : croissant",
+        "sortPriceDesc": "Prix : décroissant",
+        "price": "Prix",
+        "empty": "Aucun modèle ne correspond aux filtres sélectionnés"
+      }
+    },
+    "de": {
+      "seo": {
+        "title": "Dreiwegeventil kaufen ab {min} | Termojet",
+        "titleFallback": "Dreiwegeventil kaufen | Termojet",
+        "description": "Drei- und Vierwegeventile von Termojet: Mischventile DN20–DN50, thermostatische Ventile, Zonenventile mit Stellantrieb. Preise ab {min}, Lieferung in der gesamten Ukraine.",
+        "descriptionFallback": "Drei- und Vierwegeventile von Termojet: Mischventile DN20–DN50, thermostatische Ventile, Zonenventile mit Stellantrieb. Lieferung in der gesamten Ukraine."
+      },
+      "h1": "Dreiwegeventil für die Heizung",
+      "intro": "Das Dreiwegeventil von Termojet mischt oder verteilt die Heizmittelströme, um die gewünschte Temperatur im Heizkörper-, Fußbodenheizungs- oder Warmwasserkreis zu halten. Im Katalog finden Sie Dreh-Dreiweg-Mischventile DN20–DN50, thermostatische Ventile und Zonenventile, Vierwegeventile zum Kesselschutz sowie passende Stellantriebe. Eigene Herstellung seit 2002, Preise ab {min}, Lieferung in der gesamten Ukraine.",
+      "tabs": false,
+      "order": [
+        "RMV03110-034",
+        "RMV03100-034",
+        "RMV03110-100",
+        "RMV03100-100",
+        "RMV03110-114",
+        "RMV03100-114",
+        "RMV03110-112",
+        "RMV03100-112",
+        "RMV03100-200",
+        "TMV121",
+        "TMV122",
+        "TMV131",
+        "TMV132",
+        "TMV231",
+        "TMV232",
+        "47025230",
+        "47032230",
+        "RMV04110-100",
+        "RMV04110-114",
+        "AQUAO401-3-230-120",
+        "AQUAO405-3-230-060",
+        "AQUA411-0-10-24",
+        "AQUAO412-3-230-060",
+        "TJ413"
+      ],
+      "groups": [
+        {
+          "key": "mix",
+          "match": "Триходовий змішувальний кран",
+          "h2": "Dreiweg-Mischventil",
+          "text": "Drehventile · DN20–DN50 · Kvs 2,5–40 m³/h · PN 10 bar · für Stellantrieb"
+        },
+        {
+          "key": "thermo",
+          "match": "термостатичний клапан",
+          "h2": "Thermostatisches Dreiwegeventil",
+          "text": "Mischen ohne Stellantrieb · 20–43 °C und 35–60 °C · Genauigkeit ±2 °C · ¾\" und 1\" · Warmwasser, Duschen, Badezimmer"
+        },
+        {
+          "key": "zone",
+          "match": "зональний клапан",
+          "h2": "3-Wege-Zonenventil mit Stellantrieb",
+          "text": "Umschaltventile zur zonenweisen Steuerung von Heizung und Warmwasser · DN25 und DN32 · Kvs 8 und 13 m³/h · 230 V · 8 s pro 60°"
+        },
+        {
+          "key": "four",
+          "match": "Чотириходовий",
+          "h2": "Vierweg-Mischventil",
+          "text": "Schutz des Kessels vor Kondensationskorrosion · DN25 und DN32 · Kvs 12 und 18 m³/h · Messing CW617N · für Stellantrieb"
+        },
+        {
+          "key": "drive",
+          "match": "Електропривід",
+          "h2": "Stellantrieb für Dreiwegeventil",
+          "text": "Für 3- und 4-Wege-Drehventile · 230 V oder 24 V · 3-Punkt-, Zweipunkt- oder 0–10-V-Steuerung"
+        }
+      ],
+      "guide": {
+        "h2": "So wählen Sie ein Dreiwegeventil aus",
+        "text": "Ein Ventil wird nach drei Kriterien ausgewählt: Aufgabe (Mischen, Strömungsverteilung oder thermostatisches Mischen ohne Stellantrieb), Anschlussdurchmesser und Durchflusswert Kvs.",
+        "items": [
+          {
+            "h3": "Dreiwegeventil für Fußbodenheizung",
+            "text": "Für den Mischkreis einer Fußbodenheizung im Einfamilienhaus wird üblicherweise ein Dreh-Mischventil DN20 oder DN25 mit Stellantrieb eingebaut. Auf das Signal des Reglers senkt der Stellantrieb die Vorlauftemperatur auf den für den Estrich erforderlichen Wert. Wenn Sie eine fertige Lösung mit Pumpe und Ventil in einem Block benötigen, eignet sich eine [Mischeinheit für Fußbodenheizung](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "h3": "Dreiwegeventil für den Kessel",
+            "text": "Ein Dreiweg-Mischventil mit Stellantrieb wird im Kesselkreis eingebaut, um der Anlage Heizmittel mit der erforderlichen Temperatur zuzuführen. Ein Zonenventil schaltet den Durchfluss zwischen Heizung und Warmwasserspeicher um.\n\nZum Schutz des Kessels vor Kondensationskorrosion bietet Termojet Vierwegeventile DN25 und DN32 an. Sie mischen heißen Vorlauf in den Rücklauf, sodass kein kaltes Wasser in den Kessel zurückkehrt — so wird der Rücklaufanhebungsschutz für Festbrennstoffkessel umgesetzt."
+          }
+        ]
+      },
+      "models": {
+        "h3": "Durchmesser und Kvs: Modelltabelle",
+        "text": "Kvs ist der Wasserdurchfluss durch das Ventil in m³/h bei einem Druckverlust von 1 bar. Je leistungsstärker der Kreis, desto größer der benötigte Kvs; die genaue Berechnung übernimmt ein Termojet-Ingenieur.",
+        "cols": {
+          "model": "Durchmesser",
+          "params": [
+            "Gewinde",
+            "Kvs, m³/h"
+          ],
+          "price": "Preis"
+        },
+        "rows": [
+          {
+            "match": "RMV03110-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "Außengewinde",
+              "2,5"
+            ]
+          },
+          {
+            "match": "RMV03100-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "Innengewinde",
+              "6,3"
+            ]
+          },
+          {
+            "match": "RMV03110-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "Außengewinde",
+              "6"
+            ]
+          },
+          {
+            "match": "RMV03100-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "Innengewinde",
+              "10"
+            ]
+          },
+          {
+            "match": "RMV03110-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "Außengewinde",
+              "12"
+            ]
+          },
+          {
+            "match": "RMV03100-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "Innengewinde",
+              "16"
+            ]
+          },
+          {
+            "match": "RMV03110-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "Außengewinde",
+              "18"
+            ]
+          },
+          {
+            "match": "RMV03100-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "Innengewinde",
+              "25"
+            ]
+          },
+          {
+            "match": "RMV03100-200",
+            "model": "DN50 (2\")",
+            "params": [
+              "Innengewinde",
+              "40"
+            ]
+          }
+        ]
+      },
+      "tables": [
+        {
+          "h2": "Dreiweg- oder Vierwegeventil: was wählen",
+          "head": [
+            "",
+            "Dreiweg-Mischventil",
+            "Vierweg-Mischventil"
+          ],
+          "rows": [
+            [
+              "Aufgabe",
+              "mischt Vor- und Rücklauf in einem Kreis",
+              "mischt den Kreis und führt heißen Vorlauf in den Kesselrücklauf bei"
+            ],
+            [
+              "Einbauort",
+              "Heizkörper-, Fußbodenheizungs-, Warmwasserkreis",
+              "am Kessel, besonders am Festbrennstoffkessel, als Schutz vor Kondensat"
+            ],
+            [
+              "Termojet-Durchmesser",
+              "DN20–DN50",
+              "DN25, DN32"
+            ],
+            [
+              "Kvs, m³/h",
+              "2,5–40",
+              "12, 18"
+            ],
+            [
+              "Stellantrieb",
+              "401N, 405N, 411, 413",
+              "401N, 405N, 411, 413"
+            ]
+          ],
+          "after": "Bei einem Gaskessel oder einer Wärmepumpe genügt ein Dreiwegeventil. Für einen Festbrennstoffkessel ohne separaten Rücklaufanhebungsschutz wählt man ein Vierwegeventil."
+        },
+        {
+          "h2": "So wählen Sie den Stellantrieb für ein Ventil",
+          "before": "Alle Termojet-Stellantriebe 401N, 405N, 411 und 413 passen zu Drei- und Vierwege-Drehventilen, der 412N zu Zonen- und Regelventilen. Sie können über [Thermostate und Regler zur Zonensteuerung](/catalog/zonalne-keruvannya) angesteuert werden.",
+          "head": [
+            "Modell",
+            "Versorgung",
+            "Steuerung",
+            "Laufzeit",
+            "Wann wählen"
+          ],
+          "rows": [
+            [
+              "401N",
+              "230 V",
+              "3-Punkt",
+              "120 s",
+              "Mischkreis mit externem Regler"
+            ],
+            [
+              "405N",
+              "230 V",
+              "3-Punkt",
+              "60 s",
+              "wie oben, wenn eine schnellere Reaktion nötig ist"
+            ],
+            [
+              "411",
+              "24 V",
+              "0–10 V, proportional",
+              "60 / 120 s",
+              "Automatisierung mit Analogsignal"
+            ],
+            [
+              "412N",
+              "230 V",
+              "Zweipunkt, 2P+AUX",
+              "60 s",
+              "Zonenventile, Durchflussumschaltung"
+            ],
+            [
+              "413",
+              "230 V",
+              "integrierter Regler und Fühler, 5–90 °C",
+              "120 s",
+              "konstante Temperatur ohne separaten Regler"
+            ]
+          ]
+        }
+      ],
+      "faq": {
+        "h2": "Fragen zu Ventilen",
+        "items": [
+          {
+            "q": "Welches Dreiwegeventil wird für die Fußbodenheizung benötigt?",
+            "a": "Für ein Einfamilienhaus genügt in der Regel ein Dreh-Mischventil DN20 oder DN25 mit Stellantrieb. Wenn eine Komplettlösung mit Pumpe gewünscht ist, wählen Sie eine [Mischeinheit für Fußbodenheizung](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "q": "Welches Ventil eignet sich für einen Festbrennstoffkessel?",
+            "a": "Ein Vierweg-Mischventil DN25 oder DN32. Es führt heißen Vorlauf in den Rücklauf bei und schützt den Kessel vor Kondensationskorrosion."
+          },
+          {
+            "q": "Wie unterscheidet sich ein thermostatisches Ventil von einem Mischventil mit Stellantrieb?",
+            "a": "Das thermostatische Ventil arbeitet ohne Hilfsenergie: Das eingebaute Thermoelement hält am Ausgang 20–43 °C oder 35–60 °C mit einer Genauigkeit von ±2 °C — eine Lösung für Warmwasser und Bäder. Das Mischventil mit Stellantrieb wird von einem Regler gesteuert und regelt die Temperatur des Heizkreises."
+          },
+          {
+            "q": "Kann an einem Termojet-Ventil ein Stellantrieb montiert werden?",
+            "a": "Ja. An Drei- und Vierwege-Drehventile werden die Stellantriebe 401N, 405N, 411 und 413 montiert, an Zonenventile der 412N. Thermostatische Ventile benötigen keinen Stellantrieb."
+          },
+          {
+            "q": "Worin unterscheiden sich Ventile mit Innen- und Außengewinde?",
+            "a": "In der Anschlussart und im Durchfluss: Bei gleichem Durchmesser hat das Modell mit Innengewinde einen größeren Kvs. Zum Beispiel hat ein DN25 mit Außengewinde Kvs 6, mit Innengewinde Kvs 10."
+          },
+          {
+            "q": "Gibt es eine Lieferung in der gesamten Ukraine?",
+            "a": "Ja. Termojet ist eigene Herstellung seit 2002. Wir liefern in die gesamte Ukraine. Die Bedingungen finden Sie auf der Seite [Lieferung und Zahlung](/delivery)."
+          }
+        ]
+      },
+      "ui": {
+        "models": "Modelle",
+        "from": "ab",
+        "all": "Alle",
+        "found": "Gefunden",
+        "sortSize": "Nach Größe",
+        "sortPriceAsc": "Preis: aufsteigend",
+        "sortPriceDesc": "Preis: absteigend",
+        "price": "Preis",
+        "empty": "Keine Modelle für die gewählten Filter"
+      }
+    },
+    "ro": {
+      "seo": {
+        "title": "Cumpără vană cu trei căi de la {min} | Termojet",
+        "titleFallback": "Cumpără vană cu trei căi | Termojet",
+        "description": "Vane cu trei și patru căi Termojet: vane de amestec DN20–DN50, termostatice, zonale cu servomotor. Prețuri de la {min}, livrare în toată Ucraina.",
+        "descriptionFallback": "Vane cu trei și patru căi Termojet: vane de amestec DN20–DN50, termostatice, zonale cu servomotor. Livrare în toată Ucraina."
+      },
+      "h1": "Vană cu trei căi pentru încălzire",
+      "intro": "Vana cu trei căi Termojet amestecă sau distribuie fluxurile de agent termic pentru a menține temperatura setată în circuitul de radiatoare, de încălzire prin pardoseală sau de apă caldă. În catalog găsiți robinete de amestec rotative cu trei căi DN20–DN50, vane termostatice și zonale, vane cu patru căi pentru protecția cazanului și servomotoarele pentru ele. Producție proprie din 2002, prețuri de la {min}, livrare în toată Ucraina.",
+      "tabs": false,
+      "order": [
+        "RMV03110-034",
+        "RMV03100-034",
+        "RMV03110-100",
+        "RMV03100-100",
+        "RMV03110-114",
+        "RMV03100-114",
+        "RMV03110-112",
+        "RMV03100-112",
+        "RMV03100-200",
+        "TMV121",
+        "TMV122",
+        "TMV131",
+        "TMV132",
+        "TMV231",
+        "TMV232",
+        "47025230",
+        "47032230",
+        "RMV04110-100",
+        "RMV04110-114",
+        "AQUAO401-3-230-120",
+        "AQUAO405-3-230-060",
+        "AQUA411-0-10-24",
+        "AQUAO412-3-230-060",
+        "TJ413"
+      ],
+      "groups": [
+        {
+          "key": "mix",
+          "match": "Триходовий змішувальний кран",
+          "h2": "Robinet de amestec cu trei căi",
+          "text": "Vane rotative · DN20–DN50 · Kvs 2,5–40 m³/h · PN 10 bar · pentru servomotor"
+        },
+        {
+          "key": "thermo",
+          "match": "термостатичний клапан",
+          "h2": "Vană termostatică cu trei căi",
+          "text": "Amestec fără servomotor · 20–43 °C și 35–60 °C · precizie ±2 °C · ¾\" și 1\" · apă caldă, dușuri, băi"
+        },
+        {
+          "key": "zone",
+          "match": "зональний клапан",
+          "h2": "Vană zonală cu 3 căi cu servomotor",
+          "text": "Vane de distribuție pentru controlul zonal al încălzirii și ACM · DN25 și DN32 · Kvs 8 și 13 m³/h · 230 V · 8 s pe 60°"
+        },
+        {
+          "key": "four",
+          "match": "Чотириходовий",
+          "h2": "Robinet amestecător cu patru căi",
+          "text": "Protecția cazanului împotriva coroziunii prin condensare · DN25 și DN32 · Kvs 12 și 18 m³/h · alamă CW617N · pentru servomotor"
+        },
+        {
+          "key": "drive",
+          "match": "Електропривід",
+          "h2": "Servomotor pentru vana cu trei căi",
+          "text": "Pentru vane rotative cu 3 și 4 căi · 230 V sau 24 V · comandă în 3 puncte, bipoziționată sau 0–10 V"
+        }
+      ],
+      "guide": {
+        "h2": "Cum alegeți o vană cu trei căi",
+        "text": "Vana se alege după trei parametri: sarcina (amestec, distribuirea fluxului sau amestec termostatic fără servomotor), diametrul de racordare și capacitatea de debit Kvs.",
+        "items": [
+          {
+            "h3": "Vană cu trei căi pentru încălzire prin pardoseală",
+            "text": "Pentru circuitul de amestec al încălzirii prin pardoseală într-o casă particulară se montează de obicei un robinet de amestec rotativ DN20 sau DN25 cu servomotor. La semnalul controlerului, servomotorul reduce temperatura de tur la cea necesară pentru șapă. Dacă aveți nevoie de o soluție gata făcută, cu pompă și vană într-un singur bloc, se potrivește un [modul de amestec pentru încălzire prin pardoseală](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "h3": "Vană cu trei căi pentru cazan",
+            "text": "O vană de amestec cu trei căi și servomotor se montează pe circuitul cazanului pentru a furniza instalației agent termic la temperatura necesară. Vana zonală comută fluxul între încălzire și boilerul de ACM.\n\nPentru protecția cazanului împotriva coroziunii prin condensare, Termojet oferă vane cu patru căi DN25 și DN32. Acestea amestecă tur-ul cald în retur, astfel încât în cazan nu revine apă rece — așa se realizează protecția anticondens a cazanelor pe combustibil solid."
+          }
+        ]
+      },
+      "models": {
+        "h3": "Diametru și Kvs: tabelul modelelor",
+        "text": "Kvs este debitul de apă prin vană în m³/h la o cădere de presiune de 1 bar. Cu cât circuitul este mai puternic, cu atât este nevoie de un Kvs mai mare; calculul exact îl face un inginer Termojet.",
+        "cols": {
+          "model": "Diametru",
+          "params": [
+            "Filet",
+            "Kvs, m³/h"
+          ],
+          "price": "Preț"
+        },
+        "rows": [
+          {
+            "match": "RMV03110-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "filet exterior",
+              "2,5"
+            ]
+          },
+          {
+            "match": "RMV03100-034",
+            "model": "DN20 (¾\")",
+            "params": [
+              "filet interior",
+              "6,3"
+            ]
+          },
+          {
+            "match": "RMV03110-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "filet exterior",
+              "6"
+            ]
+          },
+          {
+            "match": "RMV03100-100",
+            "model": "DN25 (1\")",
+            "params": [
+              "filet interior",
+              "10"
+            ]
+          },
+          {
+            "match": "RMV03110-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "filet exterior",
+              "12"
+            ]
+          },
+          {
+            "match": "RMV03100-114",
+            "model": "DN32 (1¼\")",
+            "params": [
+              "filet interior",
+              "16"
+            ]
+          },
+          {
+            "match": "RMV03110-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "filet exterior",
+              "18"
+            ]
+          },
+          {
+            "match": "RMV03100-112",
+            "model": "DN40 (1½\")",
+            "params": [
+              "filet interior",
+              "25"
+            ]
+          },
+          {
+            "match": "RMV03100-200",
+            "model": "DN50 (2\")",
+            "params": [
+              "filet interior",
+              "40"
+            ]
+          }
+        ]
+      },
+      "tables": [
+        {
+          "h2": "Vană cu trei sau cu patru căi: ce alegeți",
+          "head": [
+            "",
+            "Vană de amestec cu trei căi",
+            "Vană de amestec cu patru căi"
+          ],
+          "rows": [
+            [
+              "Sarcina",
+              "amestecă turul și returul într-un singur circuit",
+              "amestecă circuitul și adaugă tur cald în returul cazanului"
+            ],
+            [
+              "Unde se montează",
+              "circuit de radiatoare, de încălzire prin pardoseală, de ACM",
+              "lângă cazan, inclusiv pe combustibil solid, pentru protecție împotriva condensului"
+            ],
+            [
+              "Diametre Termojet",
+              "DN20–DN50",
+              "DN25, DN32"
+            ],
+            [
+              "Kvs, m³/h",
+              "2,5–40",
+              "12, 18"
+            ],
+            [
+              "Servomotor",
+              "401N, 405N, 411, 413",
+              "401N, 405N, 411, 413"
+            ]
+          ],
+          "after": "Dacă cazanul este pe gaz sau aveți o pompă de căldură, este suficientă o vană cu trei căi. Pentru un cazan pe combustibil solid fără protecție anticondens separată se alege o vană cu patru căi."
+        },
+        {
+          "h2": "Cum alegeți servomotorul pentru vană",
+          "before": "Toate servomotoarele Termojet 401N, 405N, 411 și 413 se potrivesc vanelor rotative cu trei și patru căi, iar 412N — vanelor zonale și de reglare. Acestea pot fi comandate de la [termostate și controlere pentru controlul zonal](/catalog/zonalne-keruvannya).",
+          "head": [
+            "Model",
+            "Alimentare",
+            "Comandă",
+            "Timp de rotire",
+            "Când se alege"
+          ],
+          "rows": [
+            [
+              "401N",
+              "230 V",
+              "în 3 puncte",
+              "120 s",
+              "circuit de amestec cu controler extern"
+            ],
+            [
+              "405N",
+              "230 V",
+              "în 3 puncte",
+              "60 s",
+              "la fel, când este nevoie de o reacție mai rapidă"
+            ],
+            [
+              "411",
+              "24 V",
+              "0–10 V, proporțională",
+              "60 / 120 s",
+              "automatizare cu semnal analogic"
+            ],
+            [
+              "412N",
+              "230 V",
+              "bipoziționată, 2P+AUX",
+              "60 s",
+              "vane zonale, comutarea fluxului"
+            ],
+            [
+              "413",
+              "230 V",
+              "controler și senzor încorporate, 5–90 °C",
+              "120 s",
+              "temperatură constantă fără controler separat"
+            ]
+          ]
+        }
+      ],
+      "faq": {
+        "h2": "Întrebări despre vane",
+        "items": [
+          {
+            "q": "Ce vană cu trei căi este necesară pentru încălzirea prin pardoseală?",
+            "a": "Pentru o casă particulară este de obicei suficient un robinet de amestec rotativ DN20 sau DN25 cu servomotor. Dacă aveți nevoie de o soluție la cheie, cu pompă, alegeți un [modul de amestec pentru încălzire prin pardoseală](/catalog/zmishuvalnyj-vuzol-dlya-teployi-pidlogy)."
+          },
+          {
+            "q": "Ce vană să aleg pentru un cazan pe combustibil solid?",
+            "a": "Un robinet amestecător cu patru căi DN25 sau DN32. Acesta amestecă turul cald în retur și protejează cazanul de coroziunea prin condensare."
+          },
+          {
+            "q": "Prin ce diferă o vană termostatică de o vană de amestec cu servomotor?",
+            "a": "Vana termostatică funcționează fără alimentare: elementul termostatic încorporat menține la ieșire 20–43 °C sau 35–60 °C cu o precizie de ±2 °C — o soluție pentru apă caldă și băi. Vana de amestec cu servomotor este comandată de un controler și reglează temperatura circuitului de încălzire."
+          },
+          {
+            "q": "Se poate monta un servomotor pe o vană Termojet?",
+            "a": "Da. Pe vanele rotative cu trei și patru căi se montează servomotoarele 401N, 405N, 411 și 413, pe cele zonale — 412N. Vanele termostatice nu au nevoie de servomotor."
+          },
+          {
+            "q": "Prin ce diferă vanele cu filet interior de cele cu filet exterior?",
+            "a": "Prin modul de racordare și prin debit: la același diametru, modelul cu filet interior are un Kvs mai mare. De exemplu, DN25 cu filet exterior are Kvs 6, cu filet interior — Kvs 10."
+          },
+          {
+            "q": "Există livrare în toată Ucraina?",
+            "a": "Da. Termojet înseamnă producție proprie din 2002. Livrăm în toată Ucraina. Condițiile sunt pe pagina [livrare și plată](/delivery)."
+          }
+        ]
+      },
+      "ui": {
+        "models": "modele",
+        "from": "de la",
+        "all": "Toate",
+        "found": "Găsite",
+        "sortSize": "După dimensiune",
+        "sortPriceAsc": "Preț: crescător",
+        "sortPriceDesc": "Preț: descrescător",
+        "price": "Preț",
+        "empty": "Nu există modele pentru filtrele selectate"
       }
     }
   }

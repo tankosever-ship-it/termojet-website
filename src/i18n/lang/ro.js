@@ -262,6 +262,7 @@ export default {
     "kitContents": "Conținutul pachetului",
     "gallery": {
       "model3dLabel": "Model 3D",
+      "videoLabel": "Video",
       "photoLabel": "Fotografie",
       "zoomIn": "Mărește",
       "loading3d": "3D · se încarcă",

@@ -54,9 +54,14 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
     const i = rows.findIndex(r => modelHit(p, r.match))
     return i < 0 ? rows.length : i
   }
+  // cfg.order — явний порядок артикулів, коли порядок не виводиться з назв (клапани)
+  const orderRank = p => {
+    const i = (cfg.order || []).indexOf(p.sku)
+    return i < 0 ? Infinity : i
+  }
   const groups = cfg.groups.map(g => {
     const items = byMatch(catProducts, g.match).slice()
-      .sort((a, b) => rowRank(a) - rowRank(b) || sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
+      .sort((a, b) => (orderRank(a) === orderRank(b) ? 0 : orderRank(a) - orderRank(b)) || rowRank(a) - rowRank(b) || sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
     const parsed = items.map(p => parseName(p.name))
     const dims = parsed.map(x => x.dims).filter(Boolean)
     const [min, max] = minMax(items.map(p => priceUah(p, eurRate)))

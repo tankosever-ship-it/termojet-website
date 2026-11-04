@@ -262,6 +262,7 @@ export default {
     "kitContents": "Lieferumfang",
     "gallery": {
       "model3dLabel": "3D-Modell",
+      "videoLabel": "Video",
       "photoLabel": "Foto",
       "zoomIn": "Vergrößern",
       "loading3d": "3D · Laden",

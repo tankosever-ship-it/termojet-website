@@ -262,6 +262,7 @@ export default {
     "kitContents": "Contenu de l'emballage",
     "gallery": {
       "model3dLabel": "Modèle 3D",
+      "videoLabel": "Vidéo",
       "photoLabel": "Photo",
       "zoomIn": "Agrandir",
       "loading3d": "3D · chargement",

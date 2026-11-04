@@ -841,6 +841,8 @@
       background: var(--ink-100);
       color: #fff;
     }
+    .pdp-doc-certs summary::-webkit-details-marker { display: none; }
+    .pdp-doc-certs[open] .pdp-doc-certs-chevron { transform: rotate(180deg); }
     .pdp-doc-row:hover {
       background: var(--bg-warm);
     }
