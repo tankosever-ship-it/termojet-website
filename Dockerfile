@@ -25,6 +25,7 @@ COPY --from=builder /app/dist-ssr ./dist-ssr
 COPY backend ./backend
 # SEO-шаблони категорій: тексти FAQ потрібні серверу для JSON-LD (FAQPage)
 COPY --from=builder /app/src/data/category-landing.json ./src/data/category-landing.json
+COPY --from=builder /app/src/data/product-videos.json ./src/data/product-videos.json
 
 # persistent dirs
 RUN mkdir -p backend/data backend/uploads
