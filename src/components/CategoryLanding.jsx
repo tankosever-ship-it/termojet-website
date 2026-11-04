@@ -162,7 +162,9 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
           </section>
 
           {/* Групи товарів під власними H2 */}
-          {shownGroups.map(g => (
+          {/* Група без товарів після фільтрів ховається разом із H2; порожньо всюди — одне повідомлення */}
+          {shownCount === 0 && <p className="text-sm text-gray-400 py-6">{ui.empty}</p>}
+          {shownGroups.filter(g => g.visible.length > 0).map(g => (
             <section key={g.key} className="space-y-4">
               {g.h2 && (
                 <div>
@@ -170,17 +172,13 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
                   {g.text && <p className="text-gray-600 mt-2 max-w-3xl">{fillTokens(g.text, g, lang)}</p>}
                 </div>
               )}
-              {g.visible.length ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-                  {sorted(g.visible).map(p => {
-                    const outlets = parseName(p.name).outlets
-                    const hit = picked != null && inRange(outlets, picked)
-                    return <Card key={p.id} product={p} highlight={hit} dim={picked != null && !hit} />
-                  })}
-                </div>
-              ) : (
-                <p className="text-sm text-gray-400 py-6">{ui.empty}</p>
-              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                {sorted(g.visible).map(p => {
+                  const outlets = parseName(p.name).outlets
+                  const hit = picked != null && inRange(outlets, picked)
+                  return <Card key={p.id} product={p} highlight={hit} dim={picked != null && !hit} />
+                })}
+              </div>
             </section>
           ))}
 
