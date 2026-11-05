@@ -58,7 +58,7 @@ function PostForm({ post, onSave, onCancel }) {
         </div>
         <div className="md:col-span-2">
           <label className="text-xs text-gray-500 block mb-1">
-            Текст статті <span className="text-gray-400">(**підзаголовок**, - пункт списку, [текст](/посилання), ![опис](/images/фото.jpg =1250x660))</span>
+            Текст статті <span className="text-gray-400">(**підзаголовок**, - пункт списку, [текст](/посилання), ![опис](/images/фото.jpg =1250x660), @[назва відео](https://youtu.be/ID))</span>
           </label>
           <textarea value={form.content} onChange={e => set('content', e.target.value)} rows={8}
             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[var(--primary)] text-sm resize-none font-mono" />

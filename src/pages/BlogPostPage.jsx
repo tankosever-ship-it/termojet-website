@@ -7,12 +7,14 @@ import { useT } from '../i18n/useT'
 import { localizeHtml } from '../utils/localizeHtml'
 import SEO from '../components/SEO'
 import { imgUrl, srcSet } from '../utils/imgUrl'
+import YouTubeEmbed, { ytIdFrom } from '../components/YouTubeEmbed'
 
 // Розмітка тексту статті (адмінка / БД), по рядку на блок:
 //   **Підзаголовок**                    — h3
 //   - пункт                             — сусідні пункти збираються в один <ul>
 //   ![опис](/images/схема.jpg =1250x660) — фото на всю ширину; розмір (необовʼязковий)
 //                                         резервує місце, щоб текст не стрибав
+//   @[назва відео](https://youtu.be/ID)  — відео YouTube (постер, плеєр по кліку)
 //   решта                               — абзац; усередині **жирний** і [текст](url)
 function contentBlocks(content) {
   const blocks = []
@@ -21,6 +23,8 @@ function contentBlocks(content) {
     if (!line) continue
     const img = line.match(/^!\[([^\]]*)\]\((\/[^\s)]+)(?:\s+=(\d+)x(\d+))?\)$/)
     if (img) { blocks.push({ type: 'img', alt: img[1], src: img[2], w: img[3] ? +img[3] : undefined, h: img[4] ? +img[4] : undefined }); continue }
+    const vid = line.match(/^@\[([^\]]*)\]\(([^\s)]+)\)$/)
+    if (vid && ytIdFrom(vid[2])) { blocks.push({ type: 'video', title: vid[1], id: ytIdFrom(vid[2]) }); continue }
     if (line.startsWith('**') && line.endsWith('**')) { blocks.push({ type: 'h', text: line.slice(2, -2) }); continue }
     if (line.startsWith('- ')) {
       const last = blocks[blocks.length - 1]
@@ -129,6 +133,14 @@ export default function BlogPostPage() {
                       width={b.w} height={b.h} alt={b.alt} loading="lazy" decoding="async"
                       className="w-full h-auto rounded-xl border border-gray-100" />
                     {b.alt && <figcaption className="text-sm text-gray-400 text-center mt-2">{b.alt}</figcaption>}
+                  </figure>
+                )
+              }
+              if (b.type === 'video') {
+                return (
+                  <figure key={i} className="my-6">
+                    <YouTubeEmbed id={b.id} title={b.title} className="border border-gray-100" />
+                    {b.title && <figcaption className="text-sm text-gray-400 text-center mt-2">{b.title}</figcaption>}
                   </figure>
                 )
               }

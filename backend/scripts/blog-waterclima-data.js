@@ -13,6 +13,7 @@ const W = '/blog/drotove-zonalne-keruvannya-opalennyam'
 const R = '/blog/bezdrotove-zonalne-keruvannya-opalennyam'
 const KOT = '/blog/kotelnya-pid-klyuch-modulna-obvyazka'
 const SEM = '/blog/seminar-teplovi-nasosy-2026'
+const VIDEO = 'https://youtu.be/MnDIy6zcMGM' // інтерв'ю з виставки, YouTube @termojetofficial (додано 05.11.2026)
 
 module.exports = [
   {
@@ -34,7 +35,7 @@ module.exports = [
 
 - [насосні групи](/catalog/nasosni-hrupy) у теплоізоляції — готові вузли для контурів радіаторів і теплої підлоги;
 - [гідравлічні розділювачі](/catalog/hidravlichni-rozdilnyky) та [розподільчі колектори](/catalog/rozpodilchi-kolektory), що збирають обв'язку котельні в один вузол;
-- [колектори для теплої підлоги](/catalog/kolektory-pidloha) разом із термостатами та [зональним керуванням](/catalog/zonalne-keruvannya).
+- [колектори для теплої підлоги](/catalog/kolektor-dlya-teployi-pidlogy) разом із термостатами та [зональним керуванням](/catalog/zonalne-keruvannya).
 
 Чому модульна обв'язка вигідніша за класичну «з труб і фітингів», розповідаємо в статті [«Котельня "під ключ" за день»](${KOT}). А як працює зональне керування, яке ми показували поруч із колекторами, — у статтях про [дротову](${W}) та [бездротову](${R}) системи.
 
@@ -51,6 +52,10 @@ module.exports = [
 Найцінніше на виставці — розмови. Наша команда консультувала монтажників і проєктувальників щодо підбору обладнання, обв'язки котельні й теплового насоса та реальних об'єктів.
 
 ![Консультація на стенді Termojet: бойлер з нержавіючої сталі та насосна група](${IMG_KONS})
+
+Про теплові насоси, гідрострілки й насосні групи, які ми показували на стенді, коротко розповіли на камеру — дивіться інтерв'ю з виставки на нашому YouTube-каналі:
+
+@[Termojet на виставці WaterClima: теплові насоси, гідрострілки, насосні групи — інтерв'ю](${VIDEO})
 
 Дякуємо організаторам WaterClima та «Ліги майстрів» за подію і всім, хто завітав на наш стенд!
 
@@ -76,7 +81,7 @@ A separate stand brought together Termojet boiler room equipment under the sloga
 
 - insulated [pump groups](/catalog/nasosni-hrupy) — ready-made units for radiator and underfloor heating circuits;
 - [hydraulic separators](/catalog/hidravlichni-rozdilnyky) and [distribution manifolds](/catalog/rozpodilchi-kolektory) that bring the boiler room pipework together into one unit;
-- [underfloor heating manifolds](/catalog/kolektory-pidloha) together with thermostats and [zone control](/catalog/zonalne-keruvannya).
+- [underfloor heating manifolds](/catalog/kolektor-dlya-teployi-pidlogy) together with thermostats and [zone control](/catalog/zonalne-keruvannya).
 
 Why modular pipework beats the classic «pipes and fittings» approach is explained in our article [«A turnkey boiler room in a day»](${KOT}). And how the zone control we showed next to the manifolds works is covered in our articles on [wired](${W}) and [wireless](${R}) systems.
 
@@ -93,6 +98,10 @@ The centre of the stand was taken by [Termojet heat pumps](${HP}/) for heating, 
 The most valuable part of any exhibition is the conversations. Our team advised installers and designers on equipment selection, boiler room and heat pump pipework, and real projects.
 
 ![Consultation at the Termojet stand: stainless steel DHW cylinder and pump group](${IMG_KONS})
+
+We also talked on camera about the heat pumps, hydraulic separators and pump groups shown at our stand — watch the interview from the exhibition on our YouTube channel:
+
+@[Termojet at WaterClima: heat pumps, hydraulic separators, pump groups — interview](${VIDEO})
 
 Thank you to the organisers of WaterClima and Liga Maistriv for the event, and to everyone who visited our stand!
 
@@ -118,7 +127,7 @@ Osobne stoisko zgromadziło urządzenia Termojet do kotłowni pod hasłem «Szyb
 
 - [grupy pompowe](/catalog/nasosni-hrupy) w izolacji termicznej — gotowe węzły do obiegów grzejnikowych i ogrzewania podłogowego;
 - [sprzęgła hydrauliczne](/catalog/hidravlichni-rozdilnyky) i [rozdzielacze](/catalog/rozpodilchi-kolektory), które łączą orurowanie kotłowni w jeden węzeł;
-- [rozdzielacze do ogrzewania podłogowego](/catalog/kolektory-pidloha) wraz z termostatami i [sterowaniem strefowym](/catalog/zonalne-keruvannya).
+- [rozdzielacze do ogrzewania podłogowego](/catalog/kolektor-dlya-teployi-pidlogy) wraz z termostatami i [sterowaniem strefowym](/catalog/zonalne-keruvannya).
 
 Dlaczego modułowe orurowanie jest korzystniejsze od klasycznego «z rur i kształtek», wyjaśniamy w artykule [«Kotłownia "pod klucz" w jeden dzień»](${KOT}). A jak działa sterowanie strefowe, które pokazywaliśmy obok rozdzielaczy, opisujemy w artykułach o systemie [przewodowym](${W}) i [bezprzewodowym](${R}).
 
@@ -135,6 +144,10 @@ Centrum stoiska zajmowały [pompy ciepła Termojet](${HP}/) do ogrzewania, chło
 Najcenniejsze na targach są rozmowy. Nasz zespół doradzał instalatorom i projektantom w doborze urządzeń, orurowaniu kotłowni i pompy ciepła oraz w realnych projektach.
 
 ![Konsultacja na stoisku Termojet: zasobnik ze stali nierdzewnej i grupa pompowa](${IMG_KONS})
+
+O pompach ciepła, separatorach hydraulicznych i grupach pompowych, które pokazywaliśmy na stoisku, opowiedzieliśmy też przed kamerą — obejrzyj wywiad z targów na naszym kanale YouTube:
+
+@[Termojet na targach WaterClima: pompy ciepła, separatory hydrauliczne, grupy pompowe — wywiad](${VIDEO})
 
 Dziękujemy organizatorom WaterClima i «Ligi Mistrzów» za wydarzenie oraz wszystkim, którzy odwiedzili nasze stoisko!
 
@@ -160,7 +173,7 @@ Un stand dédié réunissait les équipements de chaufferie Termojet sous le slo
 
 - [groupes de pompage](/catalog/nasosni-hrupy) isolés — modules prêts à l'emploi pour les circuits de radiateurs et de plancher chauffant ;
 - [bouteilles de découplage](/catalog/hidravlichni-rozdilnyky) et [collecteurs de distribution](/catalog/rozpodilchi-kolektory), qui regroupent la tuyauterie de la chaufferie en un seul module ;
-- [collecteurs de plancher chauffant](/catalog/kolektory-pidloha) avec thermostats et [régulation par zones](/catalog/zonalne-keruvannya).
+- [collecteurs de plancher chauffant](/catalog/kolektor-dlya-teployi-pidlogy) avec thermostats et [régulation par zones](/catalog/zonalne-keruvannya).
 
 Pourquoi la tuyauterie modulaire est plus avantageuse que la méthode classique «tubes et raccords» : nous l'expliquons dans l'article [«Une chaufferie clé en main en une journée»](${KOT}). Et le fonctionnement de la régulation par zones, présentée à côté des collecteurs, est détaillé dans nos articles sur les systèmes [filaire](${W}) et [sans fil](${R}).
 
@@ -177,6 +190,10 @@ Le centre du stand était occupé par les [pompes à chaleur Termojet](${HP}/) p
 Le plus précieux sur un salon, ce sont les échanges. Notre équipe a conseillé installateurs et bureaux d'études sur le choix des équipements, le raccordement de la chaufferie et de la pompe à chaleur, ainsi que sur des projets concrets.
 
 ![Conseil sur le stand Termojet : ballon en acier inoxydable et groupe de pompage](${IMG_KONS})
+
+Nous avons aussi présenté devant la caméra les pompes à chaleur, séparateurs hydrauliques et groupes de pompage exposés sur notre stand — regardez l'interview du salon sur notre chaîne YouTube :
+
+@[Termojet au salon WaterClima : pompes à chaleur, séparateurs hydrauliques, groupes de pompage — interview](${VIDEO})
 
 Merci aux organisateurs de WaterClima et de la «Ligue des maîtres» pour cet événement, et à tous ceux qui sont venus sur notre stand !
 
@@ -202,7 +219,7 @@ Ein eigener Stand zeigte die Termojet-Heizraumtechnik unter dem Motto «Schnell.
 
 - gedämmte [Pumpengruppen](/catalog/nasosni-hrupy) — fertige Einheiten für Heizkörper- und Fußbodenheizkreise;
 - [hydraulische Weichen](/catalog/hidravlichni-rozdilnyky) und [Verteiler](/catalog/rozpodilchi-kolektory), die die Verrohrung des Heizraums zu einer Einheit zusammenfassen;
-- [Fußbodenheizungsverteiler](/catalog/kolektory-pidloha) samt Thermostaten und [Einzelraumregelung](/catalog/zonalne-keruvannya).
+- [Fußbodenheizungsverteiler](/catalog/kolektor-dlya-teployi-pidlogy) samt Thermostaten und [Einzelraumregelung](/catalog/zonalne-keruvannya).
 
 Warum eine modulare Verrohrung günstiger ist als die klassische Lösung «aus Rohren und Fittings», erklären wir im Artikel [«Heizraum schlüsselfertig an einem Tag»](${KOT}). Wie die Einzelraumregelung funktioniert, die wir neben den Verteilern gezeigt haben, lesen Sie in unseren Artikeln über das [kabelgebundene](${W}) und das [funkbasierte](${R}) System.
 
@@ -219,6 +236,10 @@ Im Mittelpunkt des Stands standen [Termojet-Wärmepumpen](${HP}/) für Heizung, 
 Das Wertvollste auf einer Messe sind die Gespräche. Unser Team beriet Installateure und Planer zur Geräteauswahl, zur Einbindung von Heizraum und Wärmepumpe sowie zu konkreten Projekten.
 
 ![Beratung am Termojet-Stand: Edelstahl-Warmwasserspeicher und Pumpengruppe](${IMG_KONS})
+
+Über die Wärmepumpen, hydraulischen Weichen und Pumpengruppen an unserem Stand haben wir auch vor der Kamera gesprochen — sehen Sie das Messeinterview auf unserem YouTube-Kanal:
+
+@[Termojet auf der WaterClima: Wärmepumpen, hydraulische Weichen, Pumpengruppen — Interview](${VIDEO})
 
 Vielen Dank an die Veranstalter der WaterClima und der «Liga der Meister» und an alle, die unseren Stand besucht haben!
 
@@ -244,7 +265,7 @@ Un stand separat a reunit echipamentele Termojet pentru centrale termice sub slo
 
 - [grupuri de pompare](/catalog/nasosni-hrupy) izolate termic — module gata pentru circuitele de calorifere și de încălzire în pardoseală;
 - [butelii de egalizare hidraulică](/catalog/hidravlichni-rozdilnyky) și [distribuitoare](/catalog/rozpodilchi-kolektory), care reunesc instalația centralei într-un singur modul;
-- [distribuitoare pentru încălzire în pardoseală](/catalog/kolektory-pidloha) împreună cu termostate și [control zonal](/catalog/zonalne-keruvannya).
+- [distribuitoare pentru încălzire în pardoseală](/catalog/kolektor-dlya-teployi-pidlogy) împreună cu termostate și [control zonal](/catalog/zonalne-keruvannya).
 
 De ce instalația modulară este mai avantajoasă decât cea clasică «din țevi și fitinguri» explicăm în articolul [«Centrală termică la cheie într-o zi»](${KOT}). Iar cum funcționează controlul zonal pe care l-am prezentat lângă distribuitoare aflați din articolele despre sistemul [cu fir](${W}) și cel [wireless](${R}).
 
@@ -261,6 +282,10 @@ Centrul standului a fost ocupat de [pompele de căldură Termojet](${HP}/) pentr
 Cel mai valoros la o expoziție sunt discuțiile. Echipa noastră i-a consiliat pe instalatori și proiectanți privind alegerea echipamentelor, racordarea centralei termice și a pompei de căldură, precum și proiecte reale.
 
 ![Consultanță la standul Termojet: boiler din oțel inoxidabil și grup de pompare](${IMG_KONS})
+
+Despre pompele de căldură, separatoarele hidraulice și grupurile de pompare expuse la stand am vorbit și în fața camerei — urmăriți interviul de la expoziție pe canalul nostru YouTube:
+
+@[Termojet la expoziția WaterClima: pompe de căldură, separatoare hidraulice, grupuri de pompare — interviu](${VIDEO})
 
 Mulțumim organizatorilor WaterClima și ai «Ligii Meșterilor» pentru eveniment și tuturor celor care ne-au vizitat standul!
 

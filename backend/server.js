@@ -375,6 +375,7 @@ const ORG_SCHEMA = {
     '@type': 'ContactPoint', telephone: '+380-50-718-91-65',
     contactType: 'customer service', availableLanguage: ['Ukrainian', 'English', 'Polish'],
   },
+  sameAs: ['https://www.facebook.com/Termojet.ukr/', 'https://www.instagram.com/termojetua/', 'https://www.youtube.com/@termojetofficial'],
 }
 
 // Будує BreadcrumbList із пар {name, url}.
@@ -408,24 +409,37 @@ const fmtUahLang = (n, lang) => (UAH_FMT[lang] || UAH_FMT.uk)(n)
 const landingCfg = (cat, lang) => CATEGORY_LANDING[cat]?.[lang] || null
 // Відео товарів: правила ті самі, що в галереї (src/data/productVideos.js → product-videos.json)
 let PRODUCT_VIDEOS = []
-try { PRODUCT_VIDEOS = require(path.join(__dirname, '..', 'src', 'data', 'product-videos.json')).videos } catch { /* без відео */ }
+let VIDEO_META = new Map() // id → {title, date, duration}: відео товарів + other (блог, «Про нас»)
+try {
+  const pv = require(path.join(__dirname, '..', 'src', 'data', 'product-videos.json'))
+  PRODUCT_VIDEOS = pv.videos
+  VIDEO_META = new Map([...pv.videos, ...(pv.other || [])].map(v => [v.id, v]))
+} catch { /* без відео */ }
+const videoObject = (v, name = v.title) => ({
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name,
+  description: v.title,
+  thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`,
+  uploadDate: v.date,
+  duration: `PT${v.duration}S`,
+  embedUrl: `https://www.youtube.com/embed/${v.id}`,
+  contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+})
 function productVideoJsonLd(row, cat) {
   const hay = `${row.name} ${row.sku || ''}`
   return PRODUCT_VIDEOS.filter(v =>
     (!v.cats || v.cats.includes(cat)) &&
     (!v.match || new RegExp(v.match, 'i').test(hay)) &&
     (!v.not || !new RegExp(v.not, 'i').test(hay))
-  ).map(v => ({
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    name: v.title,
-    description: v.title,
-    thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`,
-    uploadDate: v.date,
-    duration: `PT${v.duration}S`,
-    embedUrl: `https://www.youtube.com/embed/${v.id}`,
-    contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
-  }))
+  ).map(v => videoObject(v))
+}
+// Відео в тексті статті — рядок «@[назва](https://youtu.be/ID)» (розмітка BlogPostPage)
+const BLOG_VIDEO_RE = /^@\[([^\]]*)\]\((?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})[^\s)]*\)\s*$/gm
+function blogVideoJsonLd(content) {
+  return [...String(content || '').matchAll(BLOG_VIDEO_RE)]
+    .filter(m => VIDEO_META.has(m[2]))
+    .map(m => videoObject(VIDEO_META.get(m[2]), m[1] || VIDEO_META.get(m[2]).title))
 }
 // Товари категорії для ItemList / цін FAQ (лише якщо в категорії є SEO-шаблон)
 function landingProductsFor(cat) {
@@ -1212,9 +1226,12 @@ function handleBlog(lang) {
         dateModified: published,
         mainEntityOfPage: url,
       }
-      html = injectMeta(html, { title, desc, url, img, ogType: 'article', h1, bodyText, alternates, jsonLd: [article, ORG_SCHEMA] })
-      // SSR-lite: заголовок + текст статті в #seo-content
-      html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang, h1, bodyHtml: loc.content || `<p>${esc(desc)}</p>` }))
+      html = injectMeta(html, { title, desc, url, img, ogType: 'article', h1, bodyText, alternates, jsonLd: [article, ...blogVideoJsonLd(loc.content || row.content), ORG_SCHEMA] })
+      // SSR-lite: заголовок + текст статті в #seo-content (рядок відео → посилання на YouTube)
+      const bodyHtml = loc.content
+        ? String(loc.content).replace(BLOG_VIDEO_RE, (m, t, id) => `<p><a href="https://www.youtube.com/watch?v=${id}">${esc(t || 'YouTube')}</a></p>`)
+        : `<p>${esc(desc)}</p>`
+      html = html.replace('<div id="seo-content"></div>', buildPageSeoContent({ lang, h1, bodyHtml }))
       res.setHeader('Cache-Control', 'no-cache')
       return sendPage(req, res, html)
     } catch (e) { return next() }
@@ -1347,6 +1364,8 @@ app.get('*', (req, res) => {
       const alternates = buildAlternates(lookupPath)
       const jsonLd = [ORG_SCHEMA]
       if (lookupPath === '/faq') { const faq = buildFaqSchema(lang); if (faq) jsonLd.unshift(faq) }
+      // «Про нас»: блок «Наш YouTube-канал» (AboutPage → YT_VIDEOS)
+      if (lookupPath === '/about') for (const id of ['joBhzJgfT5M', 'J1lAZ6wardI']) if (VIDEO_META.has(id)) jsonLd.unshift(videoObject(VIDEO_META.get(id)))
       html = injectMeta(html, { title: meta.title, desc: meta.desc, url, img: meta.img || (lookupPath === '/catalog' ? categoryOgImg('catalog') : undefined), alternates, jsonLd })
       // SSR-lite: H1 + контент сторінки + nav у #seo-content.
       // Дата-керовані сторінки (головна/блог/FAQ) наповнюємо реальним контентом.

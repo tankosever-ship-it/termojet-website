@@ -8,6 +8,7 @@ import { useT } from '../i18n/useT'
 import { assetPath } from '../utils/assetPath'
 import { useApp } from '../context/AppContext'
 import { youtubeId, mediaSrc } from '../data/aboutContent'
+import YouTubeEmbed from '../components/YouTubeEmbed'
 
 const BASE = 'https://termojet.com.ua/wp-content/uploads'
 
@@ -28,6 +29,13 @@ const MANUFACTURING_PHOTOS = [
 ]
 
 const mono = { fontFamily: "'JetBrains Mono', monospace" }
+
+// Відео з YouTube-каналу в блоці «Наш YouTube-канал»; підпис веде на статтю блогу з цим відео
+const YT_CHANNEL = 'https://www.youtube.com/@termojetofficial'
+const YT_VIDEOS = [
+  { id: 'joBhzJgfT5M', title: 'about.ytVideoKotelnya', post: '/blog/termojet-youtube-kanal' },
+  { id: 'J1lAZ6wardI', title: 'about.ytVideoHidrostrilka', post: '/blog/navishcho-potribna-hidrostrilka-yak-pratsyuye' },
+]
 const fadeUp  = { hidden: { opacity:0, y:20 }, show: { opacity:1, y:0, transition:{ duration:0.45 } } }
 const stagger = { show: { transition: { staggerChildren:0.07 } } }
 
@@ -469,6 +477,36 @@ export default function AboutPage() {
 
           {/* Photo grid */}
           <PhotoGallery photos={photos} t={t} />
+        </div>
+      </section>
+
+      {/* ═══ YOUTUBE-КАНАЛ ═══════════════════════════════════════════════ */}
+      <section className="py-16 md:py-20 section-gradient-light">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="mb-10 text-center">
+            <span style={{ ...mono, fontSize: '10px', letterSpacing: '0.18em', color: 'var(--accent)' }} className="uppercase">
+              {t('about.ytEyebrow')}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black font-['Archivo',sans-serif] text-gray-900 mt-3 mb-3 leading-tight">
+              {t('about.ytTitle')}
+            </h2>
+            <p className="text-gray-500 text-sm max-w-xl mx-auto">{t('about.ytSubtitle')}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {YT_VIDEOS.map(v => (
+              <figure key={v.id}>
+                <YouTubeEmbed id={v.id} title={t(v.title)} className="ring-1 ring-black/5 shadow-sm" />
+                <figcaption className="mt-3 text-sm font-semibold text-gray-800 leading-snug">
+                  <LLink to={v.post} className="hover:text-[var(--primary)] transition-colors">{t(v.title)}</LLink>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <a href={YT_CHANNEL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              {t('about.ytCta')} <ArrowRight size={16} />
+            </a>
+          </div>
         </div>
       </section>
 
