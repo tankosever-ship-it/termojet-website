@@ -5789,7 +5789,7 @@ export const PRODUCTS = [
   {
     "id": "wp_9192",
     "wpId": 9192,
-    "name": "TJ-MU-10B Змішувальний термостатичний вузел Termojet для колектора теплої підлоги",
+    "name": "Змішувальний вузол для теплої підлоги до 120 м² Termojet TJ-MU-10B",
     "slug": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b",
     "sku": "TJ-MU-10B",
     "price": "115.5",
@@ -5814,7 +5814,7 @@ export const PRODUCTS = [
   {
     "id": "wp_9178",
     "wpId": 9178,
-    "name": "TJ-MU-25 Змішувальний вузел Termojet для колектора теплої підлоги",
+    "name": "Змішувальний вузол для теплої підлоги до 150 м² Termojet TJ-MU-25",
     "slug": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-25",
     "sku": "84040TJ-MU-25",
     "price": "128",
@@ -5839,7 +5839,7 @@ export const PRODUCTS = [
   {
     "id": "wp_9193",
     "wpId": 9193,
-    "name": "TJ-MU-40А Змішувальний термостатичний вузел Termojet для колектора теплої підлоги",
+    "name": "Змішувальний вузол для теплої підлоги до 200 м² Termojet TJ-MU-40A",
     "slug": "zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-40a",
     "sku": "TJ-MU-40А",
     "price": "128",

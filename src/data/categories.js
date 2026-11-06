@@ -217,7 +217,6 @@ export const CATEGORIES = [
     // (колектори з кранами TJ-R-W лишились там). SEO-шаблон: src/data/category-landing.json.
     id: 'floor-manifolds',
     slug: 'kolektor-dlya-teployi-pidlogy',
-    parent: 'kolektory-pidloha',
     icon: 'Grid3X3',
     image: '/images/kolektory/kolektor-v-05.jpg',
     name: { uk: 'Колектор для теплої підлоги', en: 'Underfloor Heating Manifold', pl: 'Rozdzielacz do ogrzewania podłogowego', fr: 'Collecteur pour plancher chauffant', de: 'Fußbodenheizungsverteiler', ro: 'Distribuitor pentru încălzire prin pardoseală' },
@@ -231,7 +230,6 @@ export const CATEGORIES = [
     // SEO-шаблон: src/data/category-landing.json.
     id: 'floor-fittings',
     slug: 'yevrokonusy-ta-bajpas',
-    parent: 'kolektory-pidloha',
     icon: 'Wrench',
     image: `${BASE}/2023/08/dsc_0519-scaled.jpg`,
     name: { uk: 'Євроконуси та байпас', en: 'Eurocones and Bypass', pl: 'Eurokonusy i bajpas', fr: 'Eurocônes et by-pass', de: 'Eurokonus und Bypass', ro: 'Euroconuri și bypass' },
@@ -242,10 +240,9 @@ export const CATEGORIES = [
   {
     // Окрема категорія під пошуковий запит «змішувальний вузол для теплої підлоги»
     // (рішення 02.10.2026): сюди перенесено вузли TJ-MU з «Системи підлогового опалення».
-    // parent — з 16.10.2026, коли сторінка отримала SEO-шаблон (хлібні крихти як у макеті).
+    // Без parent з 06.11.2026: у хлібних крихтах (і BreadcrumbList) немає «Системи підлогового опалення» (SEO).
     id: 'floor-mixing-units',
     slug: 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy',
-    parent: 'kolektory-pidloha',
     icon: 'Droplets',
     image: `${BASE}/2023/08/dsc_0524-scaled.jpg`,
     name: { uk: 'Змішувальний вузол для теплої підлоги', en: 'Underfloor Heating Mixing Unit', pl: 'Węzeł mieszający do ogrzewania podłogowego', fr: 'Groupe de mélange pour plancher chauffant', de: 'Mischeinheit für Fußbodenheizung', ro: 'Grup de amestec pentru încălzire prin pardoseală' },
@@ -255,12 +252,11 @@ export const CATEGORIES = [
   },
   {
     // Окрема категорія під ключ «колекторна шафа» (SEO, 11.10.2026): сюди перенесено
-    // 14 шаф із «Системи підлогового опалення». parent — батьківська категорія в
-    // хлібних крихтах (сторінка категорії, товару і BreadcrumbList на сервері).
+    // 14 шаф із «Системи підлогового опалення». Без parent з 06.11.2026 (SEO): у хлібних
+    // крихтах лише Каталог → Колекторна шафа (сторінка категорії, товару, BreadcrumbList).
     // Сторінка має SEO-шаблон: src/data/category-landing.json.
     id: 'manifold-cabinets',
     slug: 'shafa-kolektorna',
-    parent: 'kolektory-pidloha',
     icon: 'Box',
     image: '/images/cabinets/cabinet-int-1.jpg',
     name: { uk: 'Колекторна шафа', en: 'Manifold Cabinet', pl: 'Szafka rozdzielacza', fr: 'Coffret de collecteur', de: 'Verteilerschrank', ro: 'Cutie pentru distribuitor' },

@@ -746,7 +746,6 @@ const CATEGORY_META = {
   // Окрема категорія під ключ «колектор для теплої підлоги» (SEO, 16.10.2026): колектори
   // з витратомірами TJ-W. title/description/H1 — з SEO-шаблону (src/data/category-landing.json).
   'kolektor-dlya-teployi-pidlogy': {
-    parent: 'kolektory-pidloha',
     name: 'Колектор для теплої підлоги', desc: 'Колектори Termojet з витратомірами з нержавіючої сталі AISI 304 на 2–15 виходів для теплої підлоги',
     nameEn: 'Underfloor Heating Manifold', descEn: 'Termojet stainless steel AISI 304 manifolds with flow meters for 2–15 underfloor heating circuits',
     nameRo: 'Distribuitor pentru încălzire prin pardoseală', descRo: 'Distribuitoare Termojet din oțel inoxidabil AISI 304 cu debitmetre pentru 2–15 circuite de încălzire prin pardoseală',
@@ -754,22 +753,19 @@ const CATEGORY_META = {
   // Окрема категорія під ключі «євроконус» / «байпас для опалення» (SEO, 16.10.2026).
   // title/description/H1 — з SEO-шаблону (src/data/category-landing.json).
   'yevrokonusy-ta-bajpas': {
-    parent: 'kolektory-pidloha',
     name: 'Євроконуси та байпас', desc: 'Євроконуси Termojet 16×2.0 та 20×2.0 і байпас для колектора теплої підлоги',
     nameEn: 'Eurocones and Bypass', descEn: 'Termojet 16×2.0 and 20×2.0 eurocones and a bypass for underfloor heating manifolds',
     nameRo: 'Euroconuri și bypass', descRo: 'Euroconuri Termojet 16×2.0 și 20×2.0 și bypass pentru distribuitorul de încălzire prin pardoseală',
   },
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': {
-    parent: 'kolektory-pidloha',
     name: 'Змішувальний вузол для теплої підлоги', desc: 'Насосно-змішувальні вузли Termojet TJ-MU для колектора теплої підлоги: знижують температуру теплоносія від котла чи теплового насоса до 20–60 °C. Циркуляційний насос у комплект не входить',
     metaDesc: 'Змішувальний вузол для теплої підлоги Termojet TJ-MU: термостатичне регулювання 20–60 °C для колектора. Власне виробництво з 2002 року, доставка по Україні',
     nameEn: 'Underfloor Heating Mixing Unit', descEn: 'Termojet TJ-MU pump mixing units for underfloor heating manifolds: they lower the flow temperature from a boiler or heat pump to 20–60 °C. The circulation pump is not included',
     nameRo: 'Grup de amestec pentru încălzire prin pardoseală', descRo: 'Grupuri de pompare și amestec Termojet TJ-MU pentru colectorul de încălzire prin pardoseală: coboară temperatura agentului de la cazan sau pompa de căldură la 20–60 °C. Pompa de circulație nu este inclusă',
   },
-  // Окрема категорія під ключ «колекторна шафа» (SEO, 11.10.2026). parent — батьківська
-  // категорія в BreadcrumbList; h1/metaTitle — для uk (SEO-шаблон, src/data/category-landing.json).
+  // Окрема категорія під ключ «колекторна шафа» (SEO, 11.10.2026). Без parent з 06.11.2026 —
+  // у BreadcrumbList лише Каталог → категорія; h1/metaTitle — для uk (SEO-шаблон, src/data/category-landing.json).
   'shafa-kolektorna': {
-    parent: 'kolektory-pidloha',
     name: 'Колекторна шафа', h1: 'Колекторна шафа для теплої підлоги',
     metaTitle: 'Колекторна шафа для теплої підлоги — купити в Termojet',
     desc: 'Внутрішні (вбудовані) та зовнішні (накладні) колекторні шафи Termojet на 2–16 виходів для колектора теплої підлоги й опалення',
