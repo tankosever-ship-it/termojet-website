@@ -243,8 +243,6 @@ const { feed: merchantFeed } = require('./routes/merchant')
 for (const lg of LANGS) {
   app.get(lg === 'uk' ? '/google-merchant.xml' : `/google-merchant-${lg}.xml`, merchantFeed(lg))
 }
-// Фід для закордонних партнерів (дилери, напр. Чехія, 11.11.2026): англійською, ціни в EUR
-app.get('/products-feed-en-eur.xml', merchantFeed('en', { currency: 'EUR' }))
 
 // Завантаження прайсу. Саме посилання для розсилки — це /prays (сторінка з og-картинкою,
 // бо месенджери будують прев'ю з HTML, а .xlsx ніякого HTML не має). Звідси кнопка веде

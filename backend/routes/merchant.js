@@ -99,12 +99,8 @@ function absImg(img) {
   return img.startsWith('http') ? img : BASE + (img.startsWith('/') ? img : '/' + img)
 }
 
-// Фабрика обробника фіду для конкретної мови.
-// currency: 'UAH' — фіди Merchant Center (ціна = як на сторінці); 'EUR' — фід для закордонних
-// партнерів (/products-feed-en-eur.xml): ціни в євро — EUR-товари як у базі, UAH-товари
-// перераховано тим самим курсом НБУ +2.2%, що й навпаки на сайті; плюс додаткові фото.
-function feed(lang, { currency = 'UAH' } = {}) {
-  const EUR = currency === 'EUR'
+// Фабрика обробника фіду для конкретної мови
+function feed(lang) {
   return async (req, res) => {
     const rate = await eurRate()
     const langBase = BASE + (LANG_PREFIX[lang] || '')
@@ -120,9 +116,7 @@ function feed(lang, { currency = 'UAH' } = {}) {
       if (!amount || amount <= 0) continue
       // ціна у фіді має збігатися з ціною на сторінці — там гривні показано без копійок
       const toUah = v => ((p.currency || 'UAH') === 'UAH' ? Math.round(v) : (p.currency === 'EUR' && rate ? Math.round(v * rate) : null))
-      const toEur = v => (p.currency === 'EUR' ? Math.round(v * 100) / 100 : ((p.currency || 'UAH') === 'UAH' && rate ? Math.round(v / rate * 100) / 100 : null))
-      const conv = EUR ? toEur : toUah
-      const uah = conv(amount)
+      const uah = toUah(amount)
       if (!uah || uah <= 0) continue
 
       // Акційна ціна йде ОКРЕМИМ полем: g:price лишається роздрібною, g:sale_price —
@@ -130,7 +124,7 @@ function feed(lang, { currency = 'UAH' } = {}) {
       // побачить на посадковій сторінці меншу суму, вважатиме це розбіжністю цін
       // і зніме позицію з показу (а самою лише g:sale_price ціну задати не можна).
       const saleAmount = parseFloat(p.sale_price) || 0
-      const saleUah = saleAmount > 0 && saleAmount < amount ? conv(saleAmount) : null
+      const saleUah = saleAmount > 0 && saleAmount < amount ? toUah(saleAmount) : null
 
       // переклади з колонки i18n
       let tr = {}
@@ -142,8 +136,6 @@ function feed(lang, { currency = 'UAH' } = {}) {
       const desc = (plain(descRaw) || name).replace(/^(Опис|Description|Opis|Beschreibung)[\s:—-]+/i, '').slice(0, 4900)
       const ptype = (CAT[p.category_slug] && (CAT[p.category_slug][lang] || CAT[p.category_slug].uk)) || p.category_slug
       const gpc = GPC[p.category_slug] || GPC_DEFAULT
-      let extra = []
-      if (EUR) { try { extra = (JSON.parse(p.images || '[]') || []).map(absImg).filter(u => u && u !== img).slice(0, 10) } catch { extra = [] } }
 
       items.push(
         '    <item>\n' +
@@ -152,10 +144,9 @@ function feed(lang, { currency = 'UAH' } = {}) {
         `      <g:description>${xmlEsc(desc)}</g:description>\n` +
         `      <g:link>${xmlEsc(`${langBase}/catalog/${p.category_slug}/${p.slug}`)}</g:link>\n` +
         `      <g:image_link>${xmlEsc(img)}</g:image_link>\n` +
-        extra.map(u => `      <g:additional_image_link>${xmlEsc(u)}</g:additional_image_link>\n`).join('') +
         `      <g:availability>${p.in_stock === 1 ? 'in_stock' : 'out_of_stock'}</g:availability>\n` +
-        `      <g:price>${uah.toFixed(2)} ${currency}</g:price>\n` +
-        (saleUah && saleUah > 0 ? `      <g:sale_price>${saleUah.toFixed(2)} ${currency}</g:sale_price>\n` : '') +
+        `      <g:price>${uah.toFixed(2)} UAH</g:price>\n` +
+        (saleUah && saleUah > 0 ? `      <g:sale_price>${saleUah.toFixed(2)} UAH</g:sale_price>\n` : '') +
         '      <g:condition>new</g:condition>\n' +
         '      <g:brand>Termojet</g:brand>\n' +
         `      <g:mpn>${xmlEsc(p.sku || p.id)}</g:mpn>\n` +
@@ -171,8 +162,7 @@ function feed(lang, { currency = 'UAH' } = {}) {
       '  <channel>\n' +
       `    <title>Termojet — ${xmlEsc(lang.toUpperCase())}</title>\n` +
       `    <link>${langBase}</link>\n` +
-      (EUR ? '    <description>Termojet product feed — boiler room equipment, prices in EUR</description>\n'
-           : '    <description>Каталог обладнання Termojet для Google Shopping</description>\n') +
+      '    <description>Каталог обладнання Termojet для Google Shopping</description>\n' +
       items.join('\n') + '\n' +
       '  </channel>\n</rss>\n'
 
