@@ -171,7 +171,7 @@ const RAW = [
     image: '/images/portfolio/proj-11.jpg',
     images: ['/images/portfolio/proj-11.jpg'],
     links: [
-      { label: 'Привід-контролер A-413', url: '/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400' },
+      { label: 'Привід-контролер A-413', url: '/catalog/elektropryvody-dlya-zmishuvalnyh-klapaniv/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400' },
       { label: 'Розподільчі колектори', url: '/catalog/rozpodilchi-kolektory' },
       { label: 'Насосні групи', url: '/catalog/nasosni-hrupy' },
     ],

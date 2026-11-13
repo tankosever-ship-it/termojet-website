@@ -40,11 +40,15 @@ const CAT = {
   'termojet-box': { uk: 'Модульні системи TERMOJET BOX', en: 'TERMOJET BOX Modular Systems', pl: 'Systemy modułowe TERMOJET BOX', fr: 'Systèmes modulaires TERMOJET BOX', de: 'Modulare Systeme TERMOJET BOX', ro: 'Sisteme modulare TERMOJET BOX' },
   'termojet-mega': { uk: 'Серія Termojet Mega', en: 'Termojet Mega Series', pl: 'Seria Termojet Mega', fr: 'Série Termojet Mega', de: 'Serie Termojet Mega', ro: 'Seria Termojet Mega' },
   'nasosy': { uk: 'Насоси', en: 'Pumps', pl: 'Pompy', fr: 'Pompes', de: 'Pumpen', ro: 'Pompe' },
-  'klapany': { uk: 'Триходові, чотириходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și termostatice' },
+  'klapany': { uk: 'Триходові та чотириходові змішувальні клапани', en: '3-Way & 4-Way Mixing Valves', pl: 'Zawory mieszające 3- i 4-drożne', fr: 'Vannes mélangeuses 3 et 4 voies', de: '3- und 4-Wege-Mischventile', ro: 'Vane de amestec cu 3 și 4 căi' },
+  'elektropryvody-dlya-zmishuvalnyh-klapaniv': { uk: 'Електроприводи для змішувальних клапанів', en: 'Actuators for Mixing Valves', pl: 'Siłowniki do zaworów mieszających', fr: 'Servomoteurs pour vannes de mélange', de: 'Stellantriebe für Mischventile', ro: 'Servomotoare pentru vane de amestec' },
+  'termostatychni-tryhodovi-klapany': { uk: 'Термостатичні триходові клапани', en: 'Thermostatic 3-Way Valves', pl: 'Termostatyczne zawory 3-drożne', fr: 'Vannes thermostatiques 3 voies', de: 'Thermostatische 3-Wege-Ventile', ro: 'Vane termostatice cu 3 căi' },
+  'zonalni-klapany-z-elektropryvodom': { uk: 'Триходові зональні клапани з електроприводом', en: '3-Way Zone Valves with Actuator', pl: '3-drożne zawory strefowe z siłownikiem', fr: 'Vannes de zone 3 voies avec servomoteur', de: '3-Wege-Zonenventile mit Stellantrieb', ro: 'Vane de zonă cu 3 căi cu servomotor' },
   'balansuval-klapany': { uk: 'Статичний балансувальний клапан', en: 'Static Balancing Valve', pl: 'Statyczny zawór równoważący', fr: "Vanne d'équilibrage statique", de: 'Statisches Regulierventil', ro: 'Vană statică de echilibrare' },
   'separatory': { uk: 'Сепаратори', en: 'Separators', pl: 'Separatory', fr: 'Séparateurs', de: 'Separatoren', ro: 'Separatoare' },
   'zonalne-keruvannya': { uk: 'Термостати та зональне керування', en: 'Thermostats & Zone Control', pl: 'Termostaty i sterowanie strefowe', fr: 'Thermostats et contrôle de zone', de: 'Thermostate und Zonenregelung', ro: 'Termostate și control zonal' },
   'kolektory-pidloha': { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem', ro: 'Sistem de încălzire prin pardoseală' },
+  'kolektor-dlya-radiatornogo-opalennya': { uk: 'Колектор для радіаторного опалення', en: 'Radiator Heating Manifold', pl: 'Rozdzielacz do ogrzewania grzejnikowego', fr: 'Collecteur pour chauffage par radiateurs', de: 'Heizkörperverteiler', ro: 'Distribuitor pentru încălzire cu radiatoare' },
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': { uk: 'Змішувальний вузол для теплої підлоги', en: 'Underfloor Heating Mixing Unit', pl: 'Węzeł mieszający do ogrzewania podłogowego', fr: 'Groupe de mélange pour plancher chauffant', de: 'Mischeinheit für Fußbodenheizung', ro: 'Grup de amestec pentru încălzire prin pardoseală' },
   'yevrokonusy-ta-bajpas': { uk: 'Євроконуси та байпас', en: 'Eurocones and Bypass', pl: 'Eurokonusy i bajpas', fr: 'Eurocônes et by-pass', de: 'Eurokonus und Bypass', ro: 'Euroconuri și bypass' },
   'kolektor-dlya-teployi-pidlogy': { uk: 'Колектор для теплої підлоги', en: 'Underfloor Heating Manifold', pl: 'Rozdzielacz do ogrzewania podłogowego', fr: 'Collecteur pour plancher chauffant', de: 'Fußbodenheizungsverteiler', ro: 'Distribuitor pentru încălzire prin pardoseală' },
@@ -65,12 +69,16 @@ const GPC = {
   'termojet-mega': 133,
   'separatory': 133,
   'kolektory-pidloha': 133,
+  'kolektor-dlya-radiatornogo-opalennya': 133,                   // колектори з кранами TJ-R-W, перенесені з kolektory-pidloha 13.11.2026
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': 133,              // ті самі товари, що досі стояли в kolektory-pidloha
   'yevrokonusy-ta-bajpas': 133,                                  // євроконуси й байпас, перенесені з kolektory-pidloha 16.10.2026
   'kolektor-dlya-teployi-pidlogy': 133,                          // колектори TJ-W, перенесені з kolektory-pidloha 16.10.2026
   'shafa-kolektorna': 133,                                       // шафи, перенесені з kolektory-pidloha 11.10.2026
   'nasosy': 500096,                // Hardware > Hardware Pumps
   'klapany': 2466,                 // Hardware > Plumbing > ... > Plumbing Valves
+  'elektropryvody-dlya-zmishuvalnyh-klapaniv': 2466,   // електроприводи, перенесені з klapany 13.11.2026
+  'termostatychni-tryhodovi-klapany': 2466,            // TMV, перенесені з klapany 13.11.2026
+  'zonalni-klapany-z-elektropryvodom': 2466,           // зональні клапани, перенесені з klapany 13.11.2026
   'balansuval-klapany': 2466,
   'zonalne-keruvannya': 1897,      // Hardware > HVAC > HVAC Controls > Thermostats
   'avtomatyka': 1519,              // Hardware > HVAC > HVAC Controls

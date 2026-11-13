@@ -718,10 +718,32 @@ const CATEGORY_META = {
   // name = H1 і основа <title>; metaDesc — готовий meta description (uk), коли SEO-команда
   // дала його дослівно (ТЗ 02.10.2026), замість формули «desc. Termojet — …».
   'klapany': {
-    name: 'Триходові, чотириходові та термостатичні клапани', desc: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення',
-    metaDesc: 'Триходові, чотириходові та термостатичні клапани для систем опалення. Власне виробництво Termojet з 2002 року, доставка по Україні',
-    nameEn: '3/4-Way & Thermostatic Valves', descEn: '3- and 4-way rotary and thermostatic valves with electric actuators for heating',
-    nameRo: 'Vane cu 3/4 căi și termostatice', descRo: 'Vane rotative cu 3 și 4 căi și vane termostatice cu servomotoare electrice pentru încălzire',
+    name: 'Триходові та чотириходові змішувальні клапани', desc: 'Триходові та чотириходові поворотні змішувальні клапани Termojet DN20–DN50 для опалення і теплої підлоги',
+    metaDesc: 'Триходові та чотириходові змішувальні клапани DN20–DN50 для опалення й теплої підлоги. Власне виробництво Termojet з 2002 року, доставка по Україні',
+    nameEn: '3-Way & 4-Way Mixing Valves', descEn: 'Termojet DN20–DN50 3-way and 4-way rotary mixing valves for heating and underfloor heating',
+    nameRo: 'Vane de amestec cu 3 și 4 căi', descRo: 'Vane rotative de amestec cu 3 și 4 căi Termojet DN20–DN50 pentru încălzire și încălzire prin pardoseală',
+  },
+  // Окремі категорії з «Клапанів» (13.11.2026): електроприводи, термостатичні TMV, зональні клапани.
+  'elektropryvody-dlya-zmishuvalnyh-klapaniv': {
+    name: 'Електроприводи для змішувальних клапанів', desc: 'Електроприводи Termojet 401N, 405N, 411, 412N і 413 для триходових, чотириходових і зональних клапанів: 230 або 24 В, 3-точкове, двопозиційне та 0–10 В керування',
+    metaTitle: 'Електроприводи для змішувальних клапанів — купити в Termojet',
+    metaDesc: 'Електроприводи Termojet 401N, 405N, 411, 412N і 413 для змішувальних і зональних клапанів: 230 або 24 В, 3-точкове і 0–10 В керування. Доставка по Україні',
+    nameEn: 'Actuators for Mixing Valves', descEn: 'Termojet 401N, 405N, 411, 412N and 413 electric actuators for 3-way, 4-way and zone valves: 230 or 24 V, 3-point, on/off and 0–10 V control',
+    nameRo: 'Servomotoare pentru vane de amestec', descRo: 'Servomotoare electrice Termojet 401N, 405N, 411, 412N și 413 pentru vane cu 3 căi, cu 4 căi și de zonă: 230 sau 24 V, comandă în 3 puncte, tot-sau-nimic și 0–10 V',
+  },
+  'termostatychni-tryhodovi-klapany': {
+    name: 'Термостатичні триходові клапани', desc: 'Термостатичні триходові змішувальні клапани Termojet TMV ¾" і 1" на 20–43 °C і 35–60 °C: підтримують температуру без електроприводу, для гарячої води й опалення',
+    metaTitle: 'Термостатичні триходові клапани — купити в Termojet',
+    metaDesc: 'Термостатичні триходові клапани Termojet TMV ¾" і 1" на 20–43 і 35–60 °C: тримають температуру без електроприводу. Власне виробництво з 2002 року, доставка по Україні',
+    nameEn: 'Thermostatic 3-Way Valves', descEn: 'Termojet TMV thermostatic 3-way mixing valves, ¾" and 1", for 20–43 °C and 35–60 °C: they hold the temperature without an actuator, for hot water and heating',
+    nameRo: 'Vane termostatice cu 3 căi', descRo: 'Vane de amestec termostatice cu 3 căi Termojet TMV ¾" și 1" pentru 20–43 °C și 35–60 °C: mențin temperatura fără servomotor, pentru apă caldă și încălzire',
+  },
+  'zonalni-klapany-z-elektropryvodom': {
+    name: 'Триходові зональні клапани з електроприводом', desc: 'Триходові зональні клапани Termojet DN25 і DN32 з електроприводом 230 В для зонального керування опаленням і ГВП',
+    metaTitle: 'Триходові зональні клапани з електроприводом — купити в Termojet',
+    metaDesc: 'Триходові зональні клапани DN25 і DN32 з електроприводом 230 В для зонального керування опаленням і ГВП. Власне виробництво Termojet з 2002 року, доставка по Україні',
+    nameEn: '3-Way Zone Valves with Actuator', descEn: 'Termojet DN25 and DN32 3-way zone valves with a 230 V electric actuator for zone control of heating and DHW',
+    nameRo: 'Vane de zonă cu 3 căi cu servomotor', descRo: 'Vane de zonă cu 3 căi Termojet DN25 și DN32 cu servomotor de 230 V pentru controlul zonal al încălzirii și al apei calde menajere',
   },
   'balansuval-klapany': {
     name: 'Статичний балансувальний клапан', desc: 'Статичні балансувальні клапани для рівномірного розподілу теплоносія в системі',
@@ -738,10 +760,20 @@ const CATEGORY_META = {
     nameEn: 'Thermostats & Zone Control', descEn: 'Thermostats, programmers and switching centers for zone heating control',
     nameRo: 'Termostate și control zonal', descRo: 'Termostate, programatoare și centre de comutare pentru controlul zonal al încălzirii',
   },
+  // Хаб (13.11.2026): труба PE-RT, скоби, фольга; hub — дочірні категорії (посилання в SSR-lite)
   'kolektory-pidloha': {
-    name: 'Система підлогового опалення', desc: 'Колектори, змішувальні вузли та монтажні шафи для систем теплої підлоги',
-    nameEn: 'Underfloor Heating System', descEn: 'Manifolds, mixing units and cabinets for underfloor heating systems',
-    nameRo: 'Sistem de încălzire prin pardoseală', descRo: 'Colectoare, module de amestecare și cutii de montaj pentru sistemele de încălzire prin pardoseală',
+    name: 'Система підлогового опалення', desc: 'Труба, матеріали для монтажу та все для теплої підлоги: колектори, змішувальні вузли, шафи',
+    hub: ['kolektor-dlya-teployi-pidlogy', 'kolektor-dlya-radiatornogo-opalennya', 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy', 'shafa-kolektorna', 'yevrokonusy-ta-bajpas'],
+    nameEn: 'Underfloor Heating System', descEn: 'Pipe, installation materials and everything for underfloor heating: manifolds, mixing units, cabinets',
+    nameRo: 'Sistem de încălzire prin pardoseală', descRo: 'Țeavă, materiale de montaj și tot ce trebuie pentru încălzirea prin pardoseală: distribuitoare, grupuri de amestec, cutii',
+  },
+  // Окрема категорія (13.11.2026): колектори з кранами TJ-R-W-02..12 і комплект кранів 200085 — з kolektory-pidloha.
+  'kolektor-dlya-radiatornogo-opalennya': {
+    name: 'Колектор для радіаторного опалення', desc: 'Колектори Termojet з кранами з нержавіючої сталі на 2–12 виходів для радіаторного опалення та комплект кранів до колектора',
+    metaTitle: 'Колектор для радіаторного опалення — купити в Termojet',
+    metaDesc: 'Колектори з кранами з нержавіючої сталі на 2–12 виходів для радіаторного опалення й комплект кранів. Власне виробництво Termojet з 2002 року, доставка по Україні',
+    nameEn: 'Radiator Heating Manifold', descEn: 'Termojet stainless steel manifolds with valves for 2–12 outlets for radiator heating, plus a valve kit for the manifold',
+    nameRo: 'Distribuitor pentru încălzire cu radiatoare', descRo: 'Distribuitoare Termojet din oțel inoxidabil cu robinete pentru 2–12 ieșiri pentru încălzirea cu radiatoare și set de robinete pentru distribuitor',
   },
   // Окрема категорія під ключ «колектор для теплої підлоги» (SEO, 16.10.2026): колектори
   // з витратомірами TJ-W. title/description/H1 — з SEO-шаблону (src/data/category-landing.json).
@@ -955,10 +987,18 @@ function buildCategorySeoContent(cm, { cat, lang, products, eurRate }) {
         return `<li><a href="${base}/catalog/${encodeURIComponent(cat)}/${encodeURIComponent(p.slug)}">${esc(p.name)}</a>${pu ? ` — ${pu} ${en ? 'UAH' : 'грн'}` : ''}</li>`
       }).join('')}</ul>`
     : ''
+  // Хаб: посилання на дочірні категорії (CATEGORY_META[..].hub)
+  const hubHtml = (cm.hub || []).length
+    ? `<h2>${en ? 'Subcategories' : 'Підкатегорії'}</h2><ul>${cm.hub.filter(h => CATEGORY_META[h]).map(h => {
+        const hm = CATEGORY_META[h]
+        return `<li><a href="${base}/catalog/${encodeURIComponent(h)}">${esc(pickL(lang, hm.name, hm.nameEn, hm.nameRo))}</a></li>`
+      }).join('')}</ul>`
+    : ''
   return `<div id="seo-content">
     ${breadcrumb}
     <h1>${esc(catName)}</h1>
     <p>${esc(catDesc)}</p>
+    ${hubHtml}
     ${products && products.length ? `<h2>${en ? 'Products in this category' : 'Товари категорії'} (${products.length})</h2>${grid}` : ''}
     ${seoNav(lang)}
   </div>`
@@ -1127,6 +1167,8 @@ function sendPage(req, res, html) {
 const PRODUCT_SLUG_ALIASES = {
   // TJ-MU-40А жив на адресі, успадкованій з WP від TJ-MU-10B; нормальний slug — з 16.10.2026
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b-2': 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-40a',
+  // Вітринну трубу SPY 16×2 приховано 13.11.2026 (is_visible = 0) — 301 на трубу Termojet PE-RT 16×2
+  'truba-pidlogova-pe-rt-16x2-spy': 'truba-termojet-pe-rt-16-2-6-bar-70-c-500m',
   'gidrostrilka-gs-26-v-izolyatsiyi': 'gidrostrilka-gs-26-v-izolyacziyi',
   'k22v-125150-kolektor-v-teploizolyatsiyi-2-vhoru-1-bokovyy-1': 'k22v-125150-kolektor-v-teploizolyatsiyi-2-1-vhoru-staryy-art-sk-211-125-mini',
   'khs22vn-125-kolektor-z-gidrostrilkoyu-v-teploizolyatsiyi-2-vgoru-vniz-1-bokoviy-1': 'khs22vn-125150-kolektor-v-teploizolyatsiyi-1-vhoru-vnyz-1-bokovyy-staryy-art-sk-',

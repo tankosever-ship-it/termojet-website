@@ -290,7 +290,7 @@ Termojet системно присутній на польських галуз�
 
 **Групи з приводом-контролером A-413**
 
-Окрема лінійка з електроприводом [A-413](/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400), що автоматично тримає постійну температуру подачі. Зручно для теплої підлоги без окремого контролера.
+Окрема лінійка з електроприводом [A-413](/catalog/elektropryvody-dlya-zmishuvalnyh-klapaniv/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400), що автоматично тримає постійну температуру подачі. Зручно для теплої підлоги без окремого контролера.
 
 **Версії в EPP-ізоляції**
 
@@ -316,7 +316,7 @@ Termojet комплектує групи енергозберігаючими н
     links: [
       { label: 'Насосні групи НГ', url: '/catalog/nasosni-hrupy' },
       { label: 'Насоси APM/APE', url: '/catalog/nasosy' },
-      { label: 'Привід-контролер A-413', url: '/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400' },
+      { label: 'Привід-контролер A-413', url: '/catalog/elektropryvody-dlya-zmishuvalnyh-klapaniv/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400' },
       { label: 'Колектори теплої підлоги', url: '/catalog/kolektor-dlya-teployi-pidlogy' },
     ],
   },
@@ -653,7 +653,7 @@ Termojet комплектує групи енергозберігаючими н
 
 - Погодозалежний контролер і вуличний датчик.
 - Для багатоконтурних систем — [насосні групи](/catalog/nasosni-hrupy) зі змішувачами та сервоприводами.
-- Привід-контролер [A-413](/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400) для автоматичного підтримання температури окремого контуру.
+- Привід-контролер [A-413](/catalog/elektropryvody-dlya-zmishuvalnyh-klapaniv/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400) для автоматичного підтримання температури окремого контуру.
 
 Автоматика Termojet керує і котлом, і окремими контурами, тримаючи для теплої підлоги та радіаторів різні криві опалення. Це особливо вигідно в парі з [тепловим насосом](${HP}), для якого кожен градус зниження температури подачі — це приріст ефективності.`,
     date: '2026-04-28',
@@ -664,7 +664,7 @@ Termojet комплектує групи енергозберігаючими н
     published: true,
     links: [
       { label: 'Автоматика', url: '/catalog/avtomatyka' },
-      { label: 'Привід-контролер A-413', url: '/catalog/klapany/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400' },
+      { label: 'Привід-контролер A-413', url: '/catalog/elektropryvody-dlya-zmishuvalnyh-klapaniv/elektropryvid-keruvannya-postijnoyu-temperaturoyu-pro400' },
       { label: 'Зональне керування', url: '/catalog/zonalne-keruvannya' },
       { label: 'Як працює зональне керування опаленням', url: '/blog/drotove-zonalne-keruvannya-opalennyam' },
       { label: 'Теплові насоси', url: HP, ext: true },

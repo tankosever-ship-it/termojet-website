@@ -23,11 +23,16 @@ import { parseName } from '../utils/categoryLanding'
 // на 17–22 с. WebP q=82 дає ті самі 2320×464 за 21–66 кБ (−97%).
 const CATEGORY_BANNERS = {
   'klapany': '/banner-klapany.webp',
+  // 13.11.2026: категорії, винесені з «Клапанів», — той самий банер
+  'elektropryvody-dlya-zmishuvalnyh-klapaniv': '/banner-klapany.webp',
+  'termostatychni-tryhodovi-klapany': '/banner-klapany.webp',
+  'zonalni-klapany-z-elektropryvodom': '/banner-klapany.webp',
   'termojet-mega': '/banner-termojet-mega.webp',
   'nasosni-hrupy': '/banner-nasosni-hrupy.webp',
   'kolektory-pidloha': '/banner-kolektory-pidloha.webp',
   'shafa-kolektorna': '/banner-shafa-kolektorna.webp',
   'kolektor-dlya-teployi-pidlogy': '/banner-kolektory-pidloha.webp',
+  'kolektor-dlya-radiatornogo-opalennya': '/banner-kolektory-pidloha.webp',   // колектор з кранами (13.11.2026)
   'yevrokonusy-ta-bajpas': '/banner-kolektory-pidloha.webp',   // на банері — саме колектор з витратомірами
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': '/banner-zmishuvalnyj-vuzol-dlya-teployi-pidlogy.webp',
   'nasosy': '/banner-nasosy.webp',
@@ -83,26 +88,48 @@ const pumpConnHay = p => {
 const isFlangePump = p => /фланець|\bDN\s?\d|\bDn\s?\d/i.test(pumpConnHay(p))
 const isThreadPump = p => !isFlangePump(p) && /різьб|\bRP\b|\bRp\b|\bG\s?\d|["″'']|XPS|SPE/i.test(pumpConnHay(p))
 
+// Спільні групи фільтрів клапанів (klapany і термостатичні клапани — після поділу 13.11.2026)
+const VALVE_DN_GROUP = {
+  key: 'dn',
+  label: 'Діаметр',
+  options: [
+    { label: 'DN20 / 3/4"', test: p => /DN20/i.test(p.name) || /3\/4"|¾"/.test(p.name) },
+    { label: 'DN25 / 1"',   test: p => /DN25/i.test(p.name) || (/\b1"/.test(p.name) && !/1 1\//.test(p.name) && !/DN20/.test(p.name)) },
+    { label: 'DN32 / 1¼"',  test: p => /DN32/i.test(p.name) || /1 1\/4"/.test(p.name) },
+    { label: 'DN40 / 1½"',  test: p => /DN40/i.test(p.name) || /1 1\/2"/.test(p.name) },
+    { label: 'DN50 / 2"',   test: p => /DN50/i.test(p.name) },
+  ],
+}
+const VALVE_KVS_GROUP = {
+  key: 'kvs',
+  label: 'KVS, м³/год',
+  options: [
+    { label: 'до 3',   test: p => { const v = kvsNum(p); return v !== null && v <= 3 } },
+    { label: '3–10',   test: p => { const v = kvsNum(p); return v !== null && v > 3 && v <= 10 } },
+    { label: '10–20',  test: p => { const v = kvsNum(p); return v !== null && v > 10 && v <= 20 } },
+    { label: '20+',    test: p => { const v = kvsNum(p); return v !== null && v > 20 } },
+  ],
+}
+const VALVE_TEMP_GROUP = {
+  key: 'temprange',
+  label: 'Діапазон темп.',
+  options: [
+    { label: '20–43°C (санітарна)', test: p => /20[-–]43/i.test(p.name) },
+    { label: '35–60°C (опалення)',  test: p => /35[-–]60/i.test(p.name) },
+  ],
+}
+
 const CATEGORY_FILTERS = {
+  // Триходові й чотириходові змішувальні клапани. Термостатичні, зональні клапани й електроприводи —
+  // окремі категорії (13.11.2026)
   klapany: {
     groups: [
       {
         key: 'type',
         label: 'Тип клапана',
         options: [
-          { label: 'Триходові',       test: p => /триход|3-ход/i.test(p.name) && !/чотири/i.test(p.name) && !/електропривід/i.test(p.name) },
+          { label: 'Триходові',       test: p => /триход|3-ход/i.test(p.name) && !/чотири/i.test(p.name) },
           { label: 'Чотириходові',    test: p => /чотириход|4-ход/i.test(p.name) },
-          // Привід 412N «для зонального клапана» — це привід, а не клапан
-          { label: 'Зональний клапан',test: p => /зональн/i.test(p.name) && !/електропривід/i.test(p.name) },
-          { label: 'Електропривід',   test: p => /електропривід/i.test(p.name) },
-        ],
-      },
-      {
-        key: 'thermostat',
-        label: 'Вид',
-        options: [
-          { label: 'Термостатичний',    test: p => /термостат/i.test(p.name) },
-          { label: 'Нетермостатичний',  test: p => !/термостат/i.test(p.name) && !/електропривід/i.test(p.name) },
         ],
       },
       {
@@ -113,36 +140,14 @@ const CATEGORY_FILTERS = {
           { label: 'Зовнішня',  test: p => /зовнішн|Зовн\./i.test(p.name) },
         ],
       },
-      {
-        key: 'dn',
-        label: 'Діаметр',
-        options: [
-          { label: 'DN20 / 3/4"', test: p => /DN20/i.test(p.name) || /3\/4"|¾"/.test(p.name) },
-          { label: 'DN25 / 1"',   test: p => /DN25/i.test(p.name) || (/\b1"/.test(p.name) && !/1 1\//.test(p.name) && !/DN20/.test(p.name)) },
-          { label: 'DN32 / 1¼"',  test: p => /DN32/i.test(p.name) || /1 1\/4"/.test(p.name) },
-          { label: 'DN40 / 1½"',  test: p => /DN40/i.test(p.name) || /1 1\/2"/.test(p.name) },
-          { label: 'DN50 / 2"',   test: p => /DN50/i.test(p.name) },
-        ],
-      },
-      {
-        key: 'kvs',
-        label: 'KVS, м³/год',
-        options: [
-          { label: 'до 3',   test: p => { const v = kvsNum(p); return v !== null && v <= 3 } },
-          { label: '3–10',   test: p => { const v = kvsNum(p); return v !== null && v > 3 && v <= 10 } },
-          { label: '10–20',  test: p => { const v = kvsNum(p); return v !== null && v > 10 && v <= 20 } },
-          { label: '20+',    test: p => { const v = kvsNum(p); return v !== null && v > 20 } },
-        ],
-      },
-      {
-        key: 'temprange',
-        label: 'Діапазон темп.',
-        options: [
-          { label: '20–43°C (санітарна)', test: p => /20[-–]43/i.test(p.name) },
-          { label: '35–60°C (опалення)',  test: p => /35[-–]60/i.test(p.name) },
-        ],
-      },
+      VALVE_DN_GROUP,
+      VALVE_KVS_GROUP,
     ],
+  },
+
+  // Термостатичні триходові клапани (TMV): діаметр, Kvs і діапазон температури з назв
+  'termostatychni-tryhodovi-klapany': {
+    groups: [VALVE_DN_GROUP, VALVE_KVS_GROUP, VALVE_TEMP_GROUP],
   },
 
   'nasosni-hrupy': {
@@ -530,16 +535,21 @@ const CATEGORY_FILTERS = {
     ],
   },
 
-  'kolektory-pidloha': {
+  // Хаб «Система підлогового опалення» (труба, скоби, плівка): колектори й вузли — у дочірніх категоріях
+  // (13.11.2026), тож сайдбар не потрібен
+  'kolektory-pidloha': { noPrice: true, groups: [] },
+
+  // Колектор для радіаторного опалення (TJ-R-W, 2–12 виходів + комплект кранів): лише кількість виходів
+  'kolektor-dlya-radiatornogo-opalennya': {
     groups: [
       {
-        key: 'prodtype',
-        label: 'Тип обладнання',
+        key: 'outletrange',
+        label: 'Кількість виходів',
+        multi: true,
         options: [
-          // колектори з витратомірами — окрема категорія kolektor-dlya-teployi-pidlogy (16.10.2026)
-          { label: 'Колектор з кранами',       test: p => /кранами/i.test(p.name) },
-          // євроконуси й байпас — окрема категорія yevrokonusy-ta-bajpas (16.10.2026)
-          { label: 'Комплектуючі',             test: p => /кріплення|накидн|Труба|Скоба|Плівка/i.test(p.name) },
+          { label: '2–4 виходи',   test: p => outletsIn(p, 2, 4) },
+          { label: '5–8 виходів',  test: p => outletsIn(p, 5, 8) },
+          { label: '9–12 виходів', test: p => outletsIn(p, 9, 12) },
         ],
       },
     ],
@@ -970,6 +980,9 @@ const BADGE_PREFERRED = {
   'separatory':                 ['розмір', 'пропускна'],
   'nasosni-hrupy':              [['qmax', '10'], ['qmax', '20'], 'kvs', 'ізоляц'],
   'klapany':                    ['dn', 'kvs', 'діапазон темп', 'різьба', 'тиск', 'крутний момент', 'керування', 'напруга', 'час оберт', 'підключ'],
+  'elektropryvody-dlya-zmishuvalnyh-klapaniv': ['напруга', 'керування', 'крутний момент', 'час оберт'],
+  'termostatychni-tryhodovi-klapany': ['dn', 'kvs', 'діапазон темп', 'різьба'],
+  'zonalni-klapany-z-elektropryvodom': ['dn', 'kvs', 'напруга', 'час оберт'],
   'nasosy':                     ['діаметр', 'qmax', 'макс. продуктивн', 'hmax', 'напір', 'споживана потужн', 'потужн'],
   'termojet-box':               ['контури', 'dn', 'діаметр', ['потужність', '10'], ['потужність', '20'], 'підключ', 'привід', 'ізоляц'],
   'avtomatyka':                 ['кількість контур', 'wi-fi', 'погодозалеж', 'дисплей'],
@@ -978,6 +991,7 @@ const BADGE_PREFERRED = {
   'kolektory-z-hidrostrilkoyu': ['кількість виход', 'виходи', ['qmax', '10'], ['qmax', '20'], 'підключення котла'],
   'hidravlichni-rozdilnyky':    ['діаметр', ['qmax', '10'], ['qmax', '20'], "об'єм"],
   'kolektory-pidloha':          ['кількість виход', 'підключ', 'матеріал', 'витратомір', 'температура'],
+  'kolektor-dlya-radiatornogo-opalennya': ['кількість виход', 'підключ', 'матеріал', 'температура'],
   'balansuval-klapany':         ['dn', 'kvs', 'pn', 'функці'],
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': ['площа', 'kvs', 'температура'],
   'yevrokonusy-ta-bajpas':      ['розмір труби', 'різьба', 'матеріал'],
@@ -1477,7 +1491,7 @@ export default function CatalogPage() {
     if (sort === 'priceAsc')  list = [...list].sort((a, b) => priceInUah(a) - priceInUah(b))
     if (sort === 'priceDesc') list = [...list].sort((a, b) => priceInUah(b) - priceInUah(a))
     if (sort === 'nameAsc')   list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
-    if (sort === 'default' && categorySlug === 'kolektory-pidloha')
+    if (sort === 'default' && (categorySlug === 'kolektory-pidloha' || categorySlug === 'kolektor-dlya-radiatornogo-opalennya'))
       list = [...list].sort((a, b) => kpRank(a) - kpRank(b))
     if (sort === 'default' && categorySlug === 'separatory')
       list = [...list].sort((a, b) => sepRank(a) - sepRank(b))
@@ -1557,6 +1571,22 @@ export default function CatalogPage() {
           <p className="text-gray-600 text-[15px] leading-relaxed max-w-3xl mb-5">
             {currentCategory.desc[lang] || currentCategory.desc.uk}
           </p>
+        )}
+
+        {/* ── Хаб: плитки дочірніх категорій (currentCategory.hub) ── */}
+        {currentCategory?.hub && (
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 mb-6">
+            {currentCategory.hub.map(slug => CATEGORIES.find(c => c.slug === slug)).filter(Boolean).map(c => (
+              <LLink key={c.slug} to={`/catalog/${c.slug}`}
+                className="group flex items-start justify-between gap-2 p-4 bg-white border border-[var(--ink-200)] hover:border-[var(--accent)] transition-colors">
+                <span>
+                  <span className="block font-bold text-gray-900 group-hover:text-[var(--accent)] transition-colors">{c.name[lang] || c.name.uk}</span>
+                  <span className="block text-xs text-gray-500 mt-1">{catCounts[c.id] || 0} {t('catalog.productsWord')}</span>
+                </span>
+                <ChevronRight size={16} className="text-gray-300 group-hover:text-[var(--accent)] flex-shrink-0 mt-0.5" />
+              </LLink>
+            ))}
+          </div>
         )}
 
         {/* ── Смужка плиток-категорій (стиль Prom) — стрілки + fade + peek ── */}

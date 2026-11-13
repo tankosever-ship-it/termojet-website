@@ -13,13 +13,19 @@ export const DOCS_BY_CATEGORY = {
   'termojet-mega':            [11],           // Інструкція ГС (для ГС-31-34 та НГ-серії)
   'nasosni-hrupy':            [12, 13, 73],   // НГ-47/48/46/67 + НГ-51/52 + сертифікат НГ/BOX
   'nasosy':                   [],             // документи — лише за серією (див. DOCS_BY_NAME)
-  'klapany':                  [18, 31],       // 3-х ходові + брошура сервопривід
+  'klapany':                  [18],           // 3-х ходові крани (+ RMV-інструкція за назвою нижче)
+  // 13.11.2026: категорії, винесені з klapany. Привід — інструкція на крани й сервоприводи + брошура сервоприводу;
+  // TMV — лише власна інструкція (за назвою, DOCS_BY_NAME); зональні — ексклюзивна інструкція ABF-ZV3 (DOCS_BY_NAME)
+  'elektropryvody-dlya-zmishuvalnyh-klapaniv': [18, 31],
+  'termostatychni-tryhodovi-klapany': [],
+  'zonalni-klapany-z-elektropryvodom': [],
   'zonalne-keruvannya':       [119],          // брошура зонального керування (інструкції — за моделлю)
   'rozpodilchi-kolektory':    [14, ...KOLEKTORY_CERTS], // Колектори розподільчі
   'kolektory-z-hidrostrilkoyu': [15, ...KOLEKTORY_CERTS], // КГС
-  'kolektory-pidloha':        [16, 30],       // Однобалкові + брошура накидні гайки
-  'kolektor-dlya-teployi-pidlogy': [16, 30],
-  'yevrokonusy-ta-bajpas':    [16, 30],       // ті самі, що були в kolektory-pidloha (євроконуси, байпас)  // ті самі, що в kolektory-pidloha (колектори TJ-W)
+  'kolektory-pidloha':        [],             // хаб (труба, скоби, плівка): інструкції на колектори тут не потрібні
+  'kolektor-dlya-teployi-pidlogy': [16, 30],  // Однобалкові + брошура накидні гайки (колектори TJ-W)
+  'kolektor-dlya-radiatornogo-opalennya': [16, 30], // ті самі, що були в kolektory-pidloha (колектори TJ-R-W, комплект кранів)
+  'yevrokonusy-ta-bajpas':    [16, 30],       // ті самі, що були в kolektory-pidloha (євроконуси, байпас)
   // Вузли TJ-MU: інструкції підтягуються за назвою моделі (DOCS_BY_NAME нижче)
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy': [],
   'shafa-kolektorna':         [],

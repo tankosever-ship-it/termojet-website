@@ -130,17 +130,51 @@ export const CATEGORIES = [
     slug: 'klapany',
     icon: 'Sliders',
     image: `${BASE}/2024/04/photo_2024-04-23_21-17-36-800x800.jpg`,
-    // uk-назва = H1 сторінки категорії і основа <title> (ТЗ SEO-команди, 02.10.2026)
-    name: { uk: 'Триходові, чотириходові та термостатичні клапани', en: '3/4-Way & Thermostatic Valves', pl: 'Zawory 3/4-drożne i termostatyczne', fr: 'Vannes 3/4 voies et thermostatiques', de: '3/4-Wege- und Thermostatventile', ro: 'Vane cu 3/4 căi și vane termostatice' },
-    desc: { uk: '3- і 4-ходові поворотні та термостатичні клапани з електроприводами для опалення', en: '3- and 4-way rotary and thermostatic valves with electric actuators for heating', pl: 'Zawory 3-drożne, 4-drożne i siłowniki elektryczne', fr: 'Vannes 3 voies, 4 voies et servomoteurs électriques', de: '3-Wege-, 4-Wege-Ventile und elektrische Stellantriebe', ro: 'Vane rotative cu 3 și 4 căi și vane termostatice cu servomotoare electrice pentru încălzire' },
+    // uk-назва = H1 сторінки категорії і основа <title> (ТЗ SEO-команди, 02.10.2026).
+    // 13.11.2026: термостатичні клапани, зональні клапани та електроприводи винесено в окремі категорії.
+    name: { uk: 'Триходові та чотириходові змішувальні клапани', en: '3-Way & 4-Way Mixing Valves', pl: 'Zawory mieszające 3- i 4-drożne', fr: 'Vannes mélangeuses 3 et 4 voies', de: '3- und 4-Wege-Mischventile', ro: 'Vane de amestec cu 3 și 4 căi' },
+    desc: { uk: 'Триходові та чотириходові поворотні змішувальні клапани Termojet DN20–DN50 для опалення і теплої підлоги', en: 'Termojet DN20–DN50 3-way and 4-way rotary mixing valves for heating and underfloor heating', pl: 'Obrotowe zawory mieszające 3- i 4-drożne Termojet DN20–DN50 do ogrzewania i ogrzewania podłogowego', fr: 'Vannes mélangeuses rotatives 3 et 4 voies Termojet DN20–DN50 pour le chauffage et le plancher chauffant', de: 'Termojet Dreh-Mischventile 3- und 4-Wege DN20–DN50 für Heizung und Fußbodenheizung', ro: 'Vane rotative de amestec cu 3 și 4 căi Termojet DN20–DN50 pentru încălzire și încălzire prin pardoseală' },
     subcategories: {
-      uk: ['Триходові клапани', 'Чотириходові клапани', 'Електричні сервоприводи'],
-      en: ['3-way valves', '4-way valves', 'Electric actuators'],
-      pl: ['Zawory 3-drożne', 'Zawory 4-drożne', 'Siłowniki elektryczne'],
-      fr: ['Vannes 3 voies', 'Vannes 4 voies', 'Servomoteurs électriques'],
-      de: ['3-Wege-Ventile', '4-Wege-Ventile', 'Elektrische Stellantriebe'],
-      ro: ['Vane cu 3 căi', 'Vane cu 4 căi', 'Servomotoare electrice'],
+      uk: ['Триходові клапани', 'Чотириходові клапани'],
+      en: ['3-way valves', '4-way valves'],
+      pl: ['Zawory 3-drożne', 'Zawory 4-drożne'],
+      fr: ['Vannes 3 voies', 'Vannes 4 voies'],
+      de: ['3-Wege-Ventile', '4-Wege-Ventile'],
+      ro: ['Vane cu 3 căi', 'Vane cu 4 căi'],
     },
+    color: '#0D0D0D',
+  },
+  {
+    // Окрема категорія (13.11.2026): електроприводи 401N/405N/411/412N/413 винесено з «Клапанів».
+    id: 'valve-actuators',
+    slug: 'elektropryvody-dlya-zmishuvalnyh-klapaniv',
+    icon: 'Sliders',
+    image: `${BASE}/2023/08/1684839955239616.jpg`,
+    name: { uk: 'Електроприводи для змішувальних клапанів', en: 'Actuators for Mixing Valves', pl: 'Siłowniki do zaworów mieszających', fr: 'Servomoteurs pour vannes de mélange', de: 'Stellantriebe für Mischventile', ro: 'Servomotoare pentru vane de amestec' },
+    desc: { uk: 'Електроприводи Termojet 401N, 405N, 411, 412N і 413 для триходових, чотириходових і зональних клапанів: 230 або 24 В, 3-точкове, двопозиційне та 0–10 В керування', en: 'Termojet 401N, 405N, 411, 412N and 413 electric actuators for 3-way, 4-way and zone valves: 230 or 24 V, 3-point, on/off and 0–10 V control', pl: 'Siłowniki elektryczne Termojet 401N, 405N, 411, 412N i 413 do zaworów 3-, 4-drożnych i strefowych: 230 lub 24 V, sterowanie 3-punktowe, dwupołożeniowe i 0–10 V', fr: 'Servomoteurs électriques Termojet 401N, 405N, 411, 412N et 413 pour vannes 3 voies, 4 voies et de zone : 230 ou 24 V, commande 3 points, tout ou rien et 0–10 V', de: 'Termojet Stellantriebe 401N, 405N, 411, 412N und 413 für 3-Wege-, 4-Wege- und Zonenventile: 230 oder 24 V, 3-Punkt-, Zwei-Punkt- und 0–10-V-Regelung', ro: 'Servomotoare electrice Termojet 401N, 405N, 411, 412N și 413 pentru vane cu 3 căi, cu 4 căi și de zonă: 230 sau 24 V, comandă în 3 puncte, tot-sau-nimic și 0–10 V' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
+    color: '#0D0D0D',
+  },
+  {
+    // Окрема категорія (13.11.2026): термостатичні клапани TMV винесено з «Клапанів».
+    id: 'thermostatic-valves',
+    slug: 'termostatychni-tryhodovi-klapany',
+    icon: 'Thermometer',
+    image: `${BASE}/2023/11/dsc_0513-scaled.jpg`,
+    name: { uk: 'Термостатичні триходові клапани', en: 'Thermostatic 3-Way Valves', pl: 'Termostatyczne zawory 3-drożne', fr: 'Vannes thermostatiques 3 voies', de: 'Thermostatische 3-Wege-Ventile', ro: 'Vane termostatice cu 3 căi' },
+    desc: { uk: 'Термостатичні триходові змішувальні клапани Termojet TMV ¾" і 1" на 20–43 °C і 35–60 °C: підтримують температуру без електроприводу, для гарячої води й опалення', en: 'Termojet TMV thermostatic 3-way mixing valves, ¾" and 1", for 20–43 °C and 35–60 °C: they hold the temperature without an actuator, for hot water and heating', pl: 'Termostatyczne zawory mieszające 3-drożne Termojet TMV ¾" i 1" na 20–43 °C i 35–60 °C: utrzymują temperaturę bez siłownika, do ciepłej wody i ogrzewania', fr: 'Vannes mélangeuses thermostatiques 3 voies Termojet TMV ¾" et 1" pour 20–43 °C et 35–60 °C : elles maintiennent la température sans servomoteur, pour l\'eau chaude et le chauffage', de: 'Termojet TMV thermostatische 3-Wege-Mischventile ¾" und 1" für 20–43 °C und 35–60 °C: halten die Temperatur ohne Stellantrieb, für Warmwasser und Heizung', ro: 'Vane de amestec termostatice cu 3 căi Termojet TMV ¾" și 1" pentru 20–43 °C și 35–60 °C: mențin temperatura fără servomotor, pentru apă caldă și încălzire' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
+    color: '#0D0D0D',
+  },
+  {
+    // Окрема категорія (13.11.2026): зональні клапани 47025230/47032230 винесено з «Клапанів».
+    id: 'zone-valves',
+    slug: 'zonalni-klapany-z-elektropryvodom',
+    icon: 'Sliders',
+    image: `${BASE}/2023/08/12121321212-1.jpg`,
+    name: { uk: 'Триходові зональні клапани з електроприводом', en: '3-Way Zone Valves with Actuator', pl: '3-drożne zawory strefowe z siłownikiem', fr: 'Vannes de zone 3 voies avec servomoteur', de: '3-Wege-Zonenventile mit Stellantrieb', ro: 'Vane de zonă cu 3 căi cu servomotor' },
+    desc: { uk: 'Триходові зональні клапани Termojet DN25 і DN32 з електроприводом 230 В для зонального керування опаленням і ГВП', en: 'Termojet DN25 and DN32 3-way zone valves with a 230 V electric actuator for zone control of heating and DHW', pl: 'Zawory strefowe 3-drożne Termojet DN25 i DN32 z siłownikiem elektrycznym 230 V do strefowej regulacji ogrzewania i CWU', fr: 'Vannes de zone 3 voies Termojet DN25 et DN32 avec servomoteur 230 V pour la régulation par zones du chauffage et de l\'ECS', de: 'Termojet 3-Wege-Zonenventile DN25 und DN32 mit Stellantrieb 230 V für die Zonenregelung von Heizung und Warmwasser', ro: 'Vane de zonă cu 3 căi Termojet DN25 și DN32 cu servomotor de 230 V pentru controlul zonal al încălzirii și al apei calde menajere' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
     color: '#0D0D0D',
   },
   {
@@ -195,20 +229,35 @@ export const CATEGORIES = [
     color: '#0891b2',
   },
   {
+    // Хаб (13.11.2026): труба PE-RT, скоби, фольгована плівка; колектори, вузли, шафи й комплектуючі —
+    // у дочірніх категоріях (hub: на сторінці — плитки з посиланнями на них).
     id: 'manifolds-floor',
     slug: 'kolektory-pidloha',
     icon: 'Grid3X3',
     image: `${BASE}/2023/08/dsc_0557-800x532.jpg`,
     name: { uk: 'Система підлогового опалення', en: 'Underfloor Heating System', pl: 'System ogrzewania podłogowego', fr: 'Système de chauffage par le sol', de: 'Fußbodenheizungssystem', ro: 'Sistem de încălzire prin pardoseală' },
-    desc: { uk: 'Колектори, змішувальні вузли та монтажні шафи для систем теплої підлоги', en: 'Manifolds, mixing units and cabinets for underfloor heating systems', pl: 'Kolektory, węzły mieszające i szafy dla ogrzewania podłogowego', fr: 'Collecteurs, nœuds de mélange et armoires pour chauffage sol', de: 'Verteiler, Mischeinheiten und Schränke für Fußbodenheizung', ro: 'Colectoare, module de amestec și dulapuri pentru sistemele de încălzire prin pardoseală' },
+    desc: { uk: 'Труба, матеріали для монтажу та все для теплої підлоги: колектори, змішувальні вузли, шафи', en: 'Pipe, installation materials and everything for underfloor heating: manifolds, mixing units, cabinets', pl: 'Rura, materiały montażowe i wszystko do ogrzewania podłogowego: rozdzielacze, węzły mieszające, szafki', fr: 'Tuyau, matériaux de montage et tout pour le plancher chauffant : collecteurs, groupes de mélange, coffrets', de: 'Rohr, Montagematerial und alles für die Fußbodenheizung: Verteiler, Mischeinheiten, Verteilerschränke', ro: 'Țeavă, materiale de montaj și tot ce trebuie pentru încălzirea prin pardoseală: distribuitoare, grupuri de amestec, cutii' },
+    hub: ['kolektor-dlya-teployi-pidlogy', 'kolektor-dlya-radiatornogo-opalennya', 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy', 'shafa-kolektorna', 'yevrokonusy-ta-bajpas'],
     subcategories: {
-      uk: ['Розподільчі гребінки', 'З витратомірами', 'Змішувальні вузли', 'Шафи колекторні'],
-      en: ['Distribution manifolds', 'With flow meters', 'Mixing units', 'Manifold cabinets'],
-      pl: ['Listwy rozdzielcze', 'Z przepływomierzami', 'Węzły mieszające', 'Szafy kolektorowe'],
-      fr: ['Collecteurs de distribution', 'Avec débitmètres', 'Nœuds de mélange', 'Armoires de collecteurs'],
-      de: ['Verteilerleisten', 'Mit Durchflussmessern', 'Mischeinheiten', 'Verteilergehäuse'],
-      ro: ['Colectoare de distribuție', 'Cu debitmetre', 'Module de amestec', 'Dulapuri pentru colectoare'],
+      uk: ['Колектор для теплої підлоги', 'Колектор для радіаторного опалення', 'Змішувальний вузол', 'Колекторна шафа', 'Євроконуси та байпас'],
+      en: ['Underfloor heating manifold', 'Radiator heating manifold', 'Mixing unit', 'Manifold cabinet', 'Eurocones and bypass'],
+      pl: ['Rozdzielacz do ogrzewania podłogowego', 'Rozdzielacz do ogrzewania grzejnikowego', 'Węzeł mieszający', 'Szafka rozdzielacza', 'Eurokonusy i bajpas'],
+      fr: ['Collecteur pour plancher chauffant', 'Collecteur pour chauffage par radiateurs', 'Groupe de mélange', 'Coffret de collecteur', 'Eurocônes et by-pass'],
+      de: ['Fußbodenheizungsverteiler', 'Heizkörperverteiler', 'Mischeinheit', 'Verteilerschrank', 'Eurokonus und Bypass'],
+      ro: ['Distribuitor pentru încălzire prin pardoseală', 'Distribuitor pentru încălzire cu radiatoare', 'Grup de amestec', 'Cutie pentru distribuitor', 'Euroconuri și bypass'],
     },
+    color: '#0891b2',
+  },
+  {
+    // Окрема категорія (13.11.2026): колектори з кранами TJ-R-W-02..12 і комплект кранів 200085 —
+    // з «Системи підлогового опалення».
+    id: 'radiator-manifolds',
+    slug: 'kolektor-dlya-radiatornogo-opalennya',
+    icon: 'Grid3X3',
+    image: '/images/kolektory/kolektor-k-06.jpg',
+    name: { uk: 'Колектор для радіаторного опалення', en: 'Radiator Heating Manifold', pl: 'Rozdzielacz do ogrzewania grzejnikowego', fr: 'Collecteur pour chauffage par radiateurs', de: 'Heizkörperverteiler', ro: 'Distribuitor pentru încălzire cu radiatoare' },
+    desc: { uk: 'Колектори Termojet з кранами з нержавіючої сталі на 2–12 виходів для радіаторного опалення та комплект кранів до колектора', en: 'Termojet stainless steel manifolds with valves for 2–12 outlets for radiator heating, plus a valve kit for the manifold', pl: 'Rozdzielacze Termojet ze stali nierdzewnej z zaworami na 2–12 wyjść do ogrzewania grzejnikowego oraz zestaw zaworów do rozdzielacza', fr: 'Collecteurs Termojet en acier inoxydable avec robinets de 2 à 12 départs pour chauffage par radiateurs et kit de robinets pour collecteur', de: 'Termojet Edelstahlverteiler mit Absperrventilen für 2–12 Heizkreise zur Heizkörperheizung sowie Ventilsatz für den Verteiler', ro: 'Distribuitoare Termojet din oțel inoxidabil cu robinete pentru 2–12 ieșiri pentru încălzirea cu radiatoare și set de robinete pentru distribuitor' },
+    subcategories: { uk: [], en: [], pl: [], fr: [], de: [], ro: [] },
     color: '#0891b2',
   },
   {

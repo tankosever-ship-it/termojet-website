@@ -1,5 +1,14 @@
 # Termojet Website Redesign — Журнал змін
 
+## 2026-11-13 — розбивка «Системи підлогового опалення» і «Клапанів»
+
+- «Система підлогового опалення» (`kolektory-pidloha`) — хаб: труба PE-RT, скоби, фольга + плитки дочірніх категорій (`hub` у categories.js).
+  Нова категорія «Колектор для радіаторного опалення» (`kolektor-dlya-radiatornogo-opalennya`): TJ-R-W-02..12 і комплект кранів 200085.
+- «Клапани» (`klapany`) → «Триходові та чотириходові змішувальні клапани»; нові категорії: `elektropryvody-dlya-zmishuvalnyh-klapaniv`,
+  `termostatychni-tryhodovi-klapany`, `zonalni-klapany-z-elektropryvodom`. SEO-шаблон klapany скорочено (групи mix/four, плитки суміжних розділів).
+- Труба SPY-16X2 приховано; 301 на трубу PE-RT 520472 (PRODUCT_SLUG_ALIASES). Старі URL перенесених товарів — 301 через handleProduct.
+- Міграція прод-БД: `node backend/scripts/apply-restructure-20261113.js` (показ) → `--apply` (сама робить бекап). Після неї — перегенерувати sitemap з прод-БД.
+
 ## 2026-10-17 — ⚠️ Таню, для тебе: ціни APM-F на сайті правильні, помилка була в прайсі (Павло)
 
 Стосується відкочених 16.10 комітів `d5c292a`/`1a4c2a8` (APM-F 65/12-340 і 40/12-250 → 73 000 / 63 830 грн).
