@@ -1567,7 +1567,8 @@ export default function CatalogPage() {
       <div className="max-w-7xl mx-auto px-4 py-6">
 
         {/* ── Опис категорії (видимий + SEO body-текст) ── */}
-        {!landing && currentCategory && (currentCategory.desc[lang] || currentCategory.desc.uk) && (
+        {/* (на хабі опис стоїть нижче — під каруселлю, разом із плитками підкатегорій) */}
+        {!landing && !currentCategory?.hub && currentCategory && (currentCategory.desc[lang] || currentCategory.desc.uk) && (
           <p className="text-gray-600 text-[15px] leading-relaxed max-w-3xl mb-5">
             {currentCategory.desc[lang] || currentCategory.desc.uk}
           </p>
@@ -1577,6 +1578,11 @@ export default function CatalogPage() {
         <CategoryStrip products={products} categories={CATEGORIES} catCounts={catCounts} currentCategory={currentCategory} lang={lang} />
 
         {/* ── Хаб: плитки дочірніх категорій (currentCategory.hub) — під каруселлю категорій ── */}
+        {currentCategory?.hub && (currentCategory.desc[lang] || currentCategory.desc.uk) && (
+          <p className="text-gray-600 text-[15px] leading-relaxed max-w-3xl mt-4 mb-4">
+            {currentCategory.desc[lang] || currentCategory.desc.uk}
+          </p>
+        )}
         {currentCategory?.hub && (
           <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-4 mb-6">
             {currentCategory.hub.map(slug => CATEGORIES.find(c => c.slug === slug)).filter(Boolean).map(c => (
