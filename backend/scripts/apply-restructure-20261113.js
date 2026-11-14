@@ -13,6 +13,7 @@
  *  2. klapany → elektropryvody-dlya-zmishuvalnyh-klapaniv (5 приводів), termostatychni-tryhodovi-klapany (TMV ×6),
  *     zonalni-klapany-z-elektropryvodom (47025230, 47032230).
  *  3. Труба SPY-16X2 — is_visible = 0 (301 на трубу PE-RT 520472 — PRODUCT_SLUG_ALIASES у server.js).
+ *  3a. Фольгована плівка 84040TJ-FP-50 — фото (рулон + монтаж), якщо в адмінці не поставили інше.
  *  4. Посилання /catalog/<cat>/<slug> в описах товарів, статтях блогу й портфоліо (усі мови) — одразу на актуальну категорію.
  * Старі URL перенесених товарів віддають 301 самі (server.js → handleProduct: категорія в URL ≠ категорії товару).
  * Відгуки зберігають категорію на момент відгуку — оновлюємо для перенесених товарів.
@@ -38,6 +39,10 @@ const MOVES = {
 }
 const FROM = { 'kolektor-dlya-radiatornogo-opalennya': 'kolektory-pidloha' }   // решта — з klapany
 const HIDE = ['SPY-16X2']
+// Фото товарів без фото (14.11.2026): ставимо, лише якщо головне фото порожнє або вже наше — щоб не перетерти фото з адмінки
+const PHOTOS = {
+  '84040TJ-FP-50': ['/images/folga-termojet-rulon.jpg', '/images/folga-termojet-montazh.jpg'],
+}
 const TARGET = new Map()   // sku → нова категорія
 for (const [cat, skus] of Object.entries(MOVES)) for (const s of skus) TARGET.set(s, cat)
 
@@ -138,13 +143,25 @@ if (hasReviews && revMoves.length) {
   console.log(`\nвідгуки на перенесених товарах: ${n}`)
 }
 
+// Фото
+const photoPlan = []
+for (const [sku, imgs] of Object.entries(PHOTOS)) {
+  const r = db.prepare('SELECT id, image, images FROM products WHERE sku = ?').get(sku)
+  if (!r) { console.log(`⚠️  фото: SKU ${sku} нема в БД`); continue }
+  const want = JSON.stringify(imgs)
+  if (r.image && !imgs.includes(r.image)) { console.log(`• ${sku}: фото вже є (${r.image}) — не чіпаю`); continue }
+  if (r.image === imgs[0] && r.images === want) continue
+  photoPlan.push({ id: r.id, image: imgs[0], images: want })
+  console.log(`• ${sku}: фото → ${imgs.join(', ')}`)
+}
+
 const missing = [...TARGET.keys(), ...HIDE].filter(s => !found.has(s))
 console.log(`\nперенесено: ${stats.moved} (очікується ${TARGET.size} на чистій прод-БД), приховано: ${stats.hidden}, товарів із виправленими посиланнями: ${stats.links}, блог/портфоліо: ${extra.length}`)
 if (missing.length) console.log(`⚠️  SKU, яких нема в БД: ${missing.join(', ')}`)
 
 if (!APPLY) {
   console.log('\nЦе лише показ. Щоб записати: додай --apply')
-} else if (plan.length || extra.length) {
+} else if (plan.length || extra.length || photoPlan.length) {
   const stamp = new Date().toISOString().slice(0, 19).replace(/[:T-]/g, '')
   const bak = `${DBP}.bak-restructure-${stamp}`
   db.exec(`VACUUM INTO '${bak.replace(/'/g, "''")}'`)   // WAL-безпечний знімок
@@ -157,9 +174,10 @@ if (!APPLY) {
       const cols = Object.keys(e.sets)
       db.prepare(`UPDATE ${e.table} SET ${cols.map(c => `${c} = @${c}`).join(', ')} WHERE id = @id`).run({ ...e.sets, id: e.id })
     }
+    for (const ph of photoPlan) db.prepare('UPDATE products SET image = @image, images = @images WHERE id = @id').run(ph)
     if (hasReviews) for (const m of revMoves) db.prepare('UPDATE product_reviews SET category_slug = ? WHERE category_slug = ? AND product_slug = ?').run(m.to, m.from, m.slug)
   })()
-  console.log(`✅ оновлено ${plan.length} товарів, ${extra.length} записів блогу/портфоліо у ${DBP}`)
+  console.log(`✅ оновлено ${plan.length} товарів, фото: ${photoPlan.length}, ${extra.length} записів блогу/портфоліо у ${DBP}`)
 } else {
   console.log('\n✅ змінювати нічого')
 }

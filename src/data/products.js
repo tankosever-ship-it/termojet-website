@@ -7882,8 +7882,11 @@ export const PRODUCTS = [
     "sku": "84040TJ-FP-50",
     "price": "28",
     "categorySlug": "kolektory-pidloha",
-    "image": "",
-    "images": [],
+    "image": "/images/folga-termojet-rulon.jpg",
+    "images": [
+      "/images/folga-termojet-rulon.jpg",
+      "/images/folga-termojet-montazh.jpg"
+    ],
     "shortDesc": "Фольгована Termojet плівка з розміткою для теплої підлоги.",
     "description": "<p>Фольгована плівка Termojet з розміткою укладається поверх теплоізоляції перед монтажем контурів теплої підлоги. Металізований шар відбиває тепло вгору — до підлоги, а не в перекриття — підвищуючи ефективність системи. Нанесена сітка-розмітка дозволяє точно витримати крок укладки труби без додаткових вимірювань.</p><p>Поєднується з <a href=\"/catalog/kolektory-pidloha/truba-termojet-pe-rt-16-2-6-bar-70-c-500m\">трубою PE-RT 16×2</a> та скобами для такера — разом вони утворюють зручний комплект для швидкого і рівного монтажу контурів теплої підлоги.</p>",
     "specs": {
