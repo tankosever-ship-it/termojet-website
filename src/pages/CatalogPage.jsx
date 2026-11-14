@@ -1573,9 +1573,12 @@ export default function CatalogPage() {
           </p>
         )}
 
-        {/* ── Хаб: плитки дочірніх категорій (currentCategory.hub) ── */}
+        {/* ── Смужка плиток-категорій (стиль Prom) — стрілки + fade + peek ── */}
+        <CategoryStrip products={products} categories={CATEGORIES} catCounts={catCounts} currentCategory={currentCategory} lang={lang} />
+
+        {/* ── Хаб: плитки дочірніх категорій (currentCategory.hub) — під каруселлю категорій ── */}
         {currentCategory?.hub && (
-          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 mb-6">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-4 mb-6">
             {currentCategory.hub.map(slug => CATEGORIES.find(c => c.slug === slug)).filter(Boolean).map(c => (
               <LLink key={c.slug} to={`/catalog/${c.slug}`}
                 className="group flex items-start justify-between gap-2 p-4 bg-white border border-[var(--ink-200)] hover:border-[var(--accent)] transition-colors">
@@ -1588,9 +1591,6 @@ export default function CatalogPage() {
             ))}
           </div>
         )}
-
-        {/* ── Смужка плиток-категорій (стиль Prom) — стрілки + fade + peek ── */}
-        <CategoryStrip products={products} categories={CATEGORIES} catCounts={catCounts} currentCategory={currentCategory} lang={lang} />
 
         {landing ? (
           <div className="mt-8">
