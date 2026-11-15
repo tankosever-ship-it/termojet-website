@@ -13,7 +13,7 @@
    "title": "Змішувальні вузли Termojet MU-10B і MU-25 для теплої підлоги — як працюють, монтаж, налаштування",
    "date": "2026-11-13T00:04:21-08:00",
    "duration": 297,
-   "match": "TJ-MU-(10B|25)"
+   "match": "TJ-MU-(10B|25)|TJ-B-1"
   },
   {
    "id": "e9U0yWmvgIE",
@@ -28,7 +28,9 @@
    "date": "2026-11-13T00:04:21-08:00",
    "duration": 295,
    "cats": [
-    "kolektor-dlya-teployi-pidlogy"
+    "kolektor-dlya-teployi-pidlogy",
+    "shafa-kolektorna",
+    "yevrokonusy-ta-bajpas"
    ]
   },
   {
@@ -36,7 +38,7 @@
    "title": "Кран для розширювального бака Termojet TJ5503702401 — монтаж, обслуговування, перевірка тиску",
    "date": "2026-11-13T00:04:21-08:00",
    "duration": 206,
-   "match": "TJ5503702401"
+   "match": "TJ5503702401|СК-56"
   },
   {
    "id": "v8-BL-PCUCM",
@@ -73,7 +75,7 @@
    "title": "Termojet BOX2 і BOX3 — котельня на стіні з насосними групами НГ: вибір, монтаж, пуск",
    "date": "2026-11-02T13:32:12-08:00",
    "duration": 380,
-   "match": "BOX[23]"
+   "match": "BOX[23]|НГ-3[678]"
   },
   {
    "id": "ERhz3S2lvoQ",
@@ -111,7 +113,7 @@
    "cats": [
     "nasosni-hrupy"
    ],
-   "match": "НГ-(46|47|48)",
+   "match": "НГ-(46|47|48|51|52|67)",
    "not": "EPP BLACK"
   },
   {
@@ -150,7 +152,7 @@
    "cats": [
     "separatory"
    ],
-   "match": "TJ(T|V|VT)[67]G"
+   "match": "TJ(T|V|VT)[67]G|TJ4F|TJ7575"
   },
   {
    "id": "xmHQZzECOpo",
