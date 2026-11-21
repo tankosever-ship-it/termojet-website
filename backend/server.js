@@ -1169,6 +1169,14 @@ const PRODUCT_SLUG_ALIASES = {
   'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-10b-2': 'zmishuvalnyj-vuzol-dlya-teployi-pidlogy-tj-mu-40a',
   // Вітринну трубу SPY 16×2 приховано 13.11.2026 (is_visible = 0) — 301 на трубу Termojet PE-RT 16×2
   'truba-pidlogova-pe-rt-16x2-spy': 'truba-termojet-pe-rt-16-2-6-bar-70-c-500m',
+  // Прибрано з «Акції» 21.11.2026 (is_visible = 0): сепаратори бруду TJ-CD-DN32 і TJ-CD-DN50M → такі самі
+  // сепаратори бруду Termojet у «Сепараторах»; повітровідвідники Air Vent (аналогів нема) → категорія «Акція».
+  // Значення з «/» на початку — адреса сторінки (не slug товару).
+  'separator-brudu-tj-cd-dn32': 'sep-tjt6g32',
+  'separator-brudu-tj-cd-dn50m': 'sep-tjt6g50',
+  '41015110': '/catalog/rozprodazh',
+  '41020110': '/catalog/rozprodazh',
+  '41025110': '/catalog/rozprodazh',
   'gidrostrilka-gs-26-v-izolyatsiyi': 'gidrostrilka-gs-26-v-izolyacziyi',
   'k22v-125150-kolektor-v-teploizolyatsiyi-2-vhoru-1-bokovyy-1': 'k22v-125150-kolektor-v-teploizolyatsiyi-2-1-vhoru-staryy-art-sk-211-125-mini',
   'khs22vn-125-kolektor-z-gidrostrilkoyu-v-teploizolyatsiyi-2-vgoru-vniz-1-bokoviy-1': 'khs22vn-125150-kolektor-v-teploizolyatsiyi-1-vhoru-vnyz-1-bokovyy-staryy-art-sk-',
@@ -1184,6 +1192,7 @@ function handleProduct(lang) {
         'SELECT name, image, images, sku, price, sale_price, currency, in_stock, category_slug, specs, short_desc, description, seo_title, meta_description, i18n FROM products WHERE slug = ? AND is_visible = 1'
       ).get(slug)
       const alias = PRODUCT_SLUG_ALIASES[req.params.slug]
+      if (alias && alias.startsWith('/')) return res.redirect(301, `${LANG_PREFIX[lang] || ''}${alias}`)
       const row = findRow(alias || req.params.slug)
       if (!row) return next()
       // Канонічна адреса товару — /catalog/<його категорія>/<slug>. Інша категорія
