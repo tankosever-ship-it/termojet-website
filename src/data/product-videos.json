@@ -2,6 +2,46 @@
  "_doc": "Відео з YouTube-каналу @termojetofficial у галереї товару (ProductDetailPage) і VideoObject у JSON-LD (backend/server.js). Товар отримує відео, якщо його категорія є в cats (коли cats задано) і match — регулярний вираз без врахування регістру — знаходиться в «українська назва + артикул», а not — ні. Порядок у списку = порядок у галереї: спершу відео саме про товар, далі оглядове.",
  "videos": [
   {
+   "id": "uQomYhclYeo",
+   "title": "Термостатичні триходові клапани Termojet TMV — як працюють, вибір, монтаж і налаштування",
+   "date": "2026-11-23T08:25:40-08:00",
+   "duration": 288,
+   "cats": [
+    "termostatychni-tryhodovi-klapany"
+   ],
+   "match": "TMV\\d"
+  },
+  {
+   "id": "k2MVgODQGJo",
+   "title": "Статичні балансувальні клапани Termojet SBV DN15, DN20, DN25 — навіщо, вибір, монтаж, налаштування",
+   "date": "2026-11-23T08:28:10-08:00",
+   "duration": 250,
+   "cats": [
+    "balansuval-klapany"
+   ],
+   "match": "SBV"
+  },
+  {
+   "id": "W8SB2jmBzJk",
+   "title": "Триходові зональні клапани Termojet ABF-ZV3 з електроприводом — як працюють, монтаж, підключення",
+   "date": "2026-11-23T08:30:54-08:00",
+   "duration": 245,
+   "cats": [
+    "zonalni-klapany-z-elektropryvodom"
+   ],
+   "match": "47025230|47032230|ABF-ZV3"
+  },
+  {
+   "id": "yg4uKt_Ewow",
+   "title": "Автоматика котельні Termojet LIGHT і PROFI PLUS — огляд: контури, ГВС, OpenTherm, One, Wi-Fi RS",
+   "date": "2026-11-23T08:33:00-08:00",
+   "duration": 217,
+   "cats": [
+    "avtomatyka"
+   ],
+   "match": "903289|90185860|90184270"
+  },
+  {
    "id": "weSs_GJA1RU",
    "title": "Радіаторні колектори Termojet TJ-R-W із запірними кранами — будова, вибір, монтаж",
    "date": "2026-11-13T00:04:22-08:00",
