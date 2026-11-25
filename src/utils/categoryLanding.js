@@ -36,7 +36,11 @@ const modelHit = (p, match) => {
   return !!m && ((p.sku || '').toLowerCase().includes(m) || (p.name || '').toLowerCase().includes(m))
 }
 
-const byMatch = (list, match) => (match ? list.filter(p => (p.name || '').toLowerCase().includes(match.toLowerCase())) : list)
+// match — підрядок назви або масив підрядків (група з кількох серій: «APM-F і MEGA»)
+export const nameHit = (name, match) => [].concat(match).some(m => String(name || '').toLowerCase().includes(String(m).toLowerCase()))
+const byMatch = (list, match) => (match ? list.filter(p => nameHit(p.name, match)) : list)
+// cfg.minExclude — підрядки назв товарів, які не рахуються в «від {min}» (кабель до насосів за 3,5 €)
+const priced = (cfg, list) => (cfg.minExclude?.length ? list.filter(p => !nameHit(p.name, cfg.minExclude)) : list)
 
 // Порядок усередині групи: за номером типорозміру (№00 → №06) або кількістю виходів
 // (колектори «на 2 … на 15 виходів»), далі за назвою
@@ -64,7 +68,7 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
       .sort((a, b) => (orderRank(a) === orderRank(b) ? 0 : orderRank(a) - orderRank(b)) || rowRank(a) - rowRank(b) || sizeRank(a) - sizeRank(b) || (a.name || '').localeCompare(b.name || ''))
     const parsed = items.map(p => parseName(p.name))
     const dims = parsed.map(x => x.dims).filter(Boolean)
-    const [min, max] = minMax(items.map(p => priceUah(p, eurRate)))
+    const [min, max] = minMax(priced(cfg, items).map(p => priceUah(p, eurRate)))
     return {
       ...g, items, parsed, min, max,
       h: dims[0]?.[1], d: dims[0]?.[2],
@@ -72,7 +76,7 @@ export function buildLanding(cfg, catProducts, allProducts, eurRate, lang = 'uk'
       wmax: dims.length ? Math.max(...dims.map(x => x[0])) : null,
     }
   })
-  const [min, max] = minMax(catProducts.map(p => priceUah(p, eurRate)))
+  const [min, max] = minMax(priced(cfg, catProducts).map(p => priceUah(p, eurRate)))
 
   // Таблиця розмірів: рядок на типорозмір (№), колонка на групу
   const nums = [...new Set(groups.flatMap(g => g.parsed.map(x => x.num)).filter(Boolean))].sort()

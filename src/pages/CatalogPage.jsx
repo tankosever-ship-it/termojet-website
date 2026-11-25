@@ -219,7 +219,7 @@ const CATEGORY_FILTERS = {
         label: 'Тип',
         options: [
           { label: 'Циркуляційний насос',     test: p => /циркуляційний/i.test(p.name) },
-          { label: 'Рециркуляційний ГВС',     test: p => /рециркул/i.test(p.name) },
+          { label: 'Рециркуляційний ГВП',     test: p => /рециркул/i.test(p.name) },
           { label: 'Станція підвищення тиску',test: p => /підвищувальн/i.test(p.name) },
           { label: 'Каналізаційна установка', test: p => /каналізац/i.test(p.name) },
         ],
@@ -835,7 +835,7 @@ const FILTER_LABEL_I18N = {
   "Продуктивність, м³/год": {"en": "Flow rate, m³/h", "pl": "Wydajność, m³/h", "fr": "Débit, m³/h", "de": "Durchfluss, m³/h", "ro": "Debit, m³/h"},
   "Пряма": {"en": "Straight", "pl": "Prosta", "fr": "Droit", "de": "Gerade", "ro": "Drept"},
   "Радіатори": {"en": "Radiators", "pl": "Grzejniki", "fr": "Radiateurs", "de": "Heizkörper", "ro": "Radiatoare"},
-  "Рециркуляційний ГВС": {"en": "DHW recirculation", "pl": "Recyrkulacja CWU", "fr": "Recirculation ECS", "de": "TWW-Zirkulation", "ro": "Recirculare ACM"},
+  "Рециркуляційний ГВП": {"en": "DHW recirculation", "pl": "Recyrkulacja CWU", "fr": "Recirculation ECS", "de": "TWW-Zirkulation", "ro": "Recirculare ACM"},
   "Різьба": {"en": "Thread", "pl": "Gwint", "fr": "Filetage", "de": "Gewinde", "ro": "Filet"},
   "Різьбові": {"en": "Threaded", "pl": "Gwintowane", "fr": "Fileté", "de": "Gewindeanschluss", "ro": "Filetat"},
   "Розмір (DN)": {"en": "Size (DN)", "pl": "Rozmiar (DN)", "fr": "Taille (DN)", "de": "Größe (DN)", "ro": "Dimensiune (DN)"},

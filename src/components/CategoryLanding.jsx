@@ -341,6 +341,7 @@ export default function CategoryLanding({ cfg, lang, catProducts, shownProducts,
           {data.related.length > 0 && (
             <section className="space-y-4">
               <H2 id="related">{cfg.related.h2}</H2>
+              {cfg.related.text && <div className="space-y-3 max-w-4xl"><RichText text={cfg.related.text} /></div>}
               <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
                 {data.related.map(r => (
                   <LLink key={r.title} to={r.to}

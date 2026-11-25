@@ -457,9 +457,12 @@ function landingFill(cat, lang, products, eurRate) {
   }
   const ctx = {}
   const range = list => { const v = list.map(uah).filter(x => x > 0); return v.length ? [Math.min(...v), Math.max(...v)] : null }
-  const all = range(products); if (all) { ctx.min = all[0]; ctx.max = all[1] }
+  // match / minExclude — підрядок назви або масив підрядків (як nameHit у src/utils/categoryLanding.js)
+  const hit = (name, match) => [].concat(match || '').some(m => String(name || '').toLowerCase().includes(String(m).toLowerCase()))
+  const priced = (cfg.minExclude || []).length ? products.filter(p => !hit(p.name, cfg.minExclude)) : products
+  const all = range(priced); if (all) { ctx.min = all[0]; ctx.max = all[1] }
   for (const g of cfg.groups || []) {
-    const r = range(products.filter(p => (p.name || '').toLowerCase().includes(String(g.match || '').toLowerCase())))
+    const r = range(priced.filter(p => hit(p.name, g.match)))
     if (r) { ctx[`min:${g.key}`] = r[0]; ctx[`max:${g.key}`] = r[1] }
   }
   return s => String(s || '').replace(/\{([\w:]+)\}/g, (m, k) => (ctx[k] != null ? fmtUahLang(ctx[k], lang) : m))
